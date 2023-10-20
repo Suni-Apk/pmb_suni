@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,9 +14,33 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::prefix('template')->group(function () {
+    Route::get('/table', function () {
+        return view('layouts.template.table');
+    })->name('table');
+
+    Route::get('/dashboard', function () {
+        return view('layouts.template.dashboard');
+    })->name('dashboard');
+
+    Route::get('/billing', function () {
+        return view('layouts.template.billing');
+    })->name('billing');
+
+    Route::get('/profile', function () {
+        return view('layouts.template.profile');
+    })->name('profile');
+
+    Route::get('/rtl', function () {
+        return view('layouts.template.rtl');
+    })->name('rtl');
+
+    Route::get('/virtual-reality', function () {
+        return view('layouts.template.virtual-reality');
+    })->name('virtual-reality');
 });
+
+
 
 Auth::routes();
 

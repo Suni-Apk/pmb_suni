@@ -1,41 +1,15 @@
-<!--
-=========================================================
-* Soft UI Dashboard - v1.0.7
-=========================================================
-
-* Product Page: https://www.creative-tim.com/product/soft-ui-dashboard
-* Copyright 2023 Creative Tim (https://www.creative-tim.com)
-* Licensed under MIT (https://www.creative-tim.com/license)
-* Coded by Creative Tim
-
-=========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
--->
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <link rel="apple-touch-icon" sizes="76x76" href="../assets/img/apple-icon.png">
-  <link rel="icon" type="image/png" href="../assets/img/favicon.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="../soft-ui-dashboard-main/assets/img/apple-icon.png">
+  <link rel="icon" type="image/png" href="../soft-ui-dashboard-main/assets/img/favicon.png">
   <title>
     Soft UI Dashboard by Creative Tim
   </title>
-  <!--     Fonts and icons     -->
-  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
-  <!-- Nucleo Icons -->
-  <link href="../assets/css/nucleo-icons.css" rel="stylesheet" />
-  <link href="../assets/css/nucleo-svg.css" rel="stylesheet" />
-  <!-- Font Awesome Icons -->
-  <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
-  <link href="../assets/css/nucleo-svg.css" rel="stylesheet" />
-  <!-- CSS Files -->
-  <link id="pagestyle" href="../assets/css/soft-ui-dashboard.css?v=1.0.7" rel="stylesheet" />
-  <!-- Nepcha Analytics (nepcha.com) -->
-  <!-- Nepcha is a easy-to-use web analytics. No cookies and fully compliant with GDPR, CCPA and PECR. -->
-  <script defer data-site="YOUR_DOMAIN_HERE" src="https://api.nepcha.com/js/nepcha-analytics.js"></script>
+  @include('layouts.include')
 </head>
 
 <body class="g-sidenav-show  bg-gray-100 virtual-reality">
@@ -45,7 +19,7 @@
       <div class="container-fluid py-1 px-3">
         <nav aria-label="breadcrumb">
           <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
-            <li class="breadcrumb-item text-sm"><a class="opacity-5 text-dark" href="javascript:;">Pages</a></li>
+            <li class="breadcrumb-item text-sm"><a class="opacity-5 text-dark" href="">Pages</a></li>
             <li class="breadcrumb-item text-sm text-dark active" aria-current="page">Virtual Reality</li>
           </ol>
           <h6 class="font-weight-bolder mb-0">Virtual Reality</h6>
@@ -62,13 +36,13 @@
               <a class="btn btn-outline-primary btn-sm mb-0 me-3" target="_blank" href="https://www.creative-tim.com/builder?ref=navbar-soft-ui-dashboard">Online Builder</a>
             </li>
             <li class="nav-item d-flex align-items-center">
-              <a href="javascript:;" class="nav-link text-body font-weight-bold px-0">
+              <a href="" class="nav-link text-body font-weight-bold px-0">
                 <i class="fa fa-user me-sm-1"></i>
                 <span class="d-sm-inline d-none">Sign In</span>
               </a>
             </li>
             <li class="nav-item d-xl-none ps-3 d-flex align-items-center">
-              <a href="javascript:;" class="nav-link text-body p-0" id="iconNavbarSidenav">
+              <a href="" class="nav-link text-body p-0" id="iconNavbarSidenav">
                 <div class="sidenav-toggler-inner">
                   <i class="sidenav-toggler-line"></i>
                   <i class="sidenav-toggler-line"></i>
@@ -77,20 +51,20 @@
               </a>
             </li>
             <li class="nav-item px-3 d-flex align-items-center">
-              <a href="javascript:;" class="nav-link text-body p-0">
+              <a href="" class="nav-link text-body p-0">
                 <i class="fa fa-cog fixed-plugin-button-nav cursor-pointer"></i>
               </a>
             </li>
             <li class="nav-item dropdown pe-2 d-flex align-items-center">
-              <a href="javascript:;" class="nav-link text-body p-0" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+              <a href="" class="nav-link text-body p-0" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
                 <i class="fa fa-bell cursor-pointer"></i>
               </a>
               <ul class="dropdown-menu  dropdown-menu-end  px-2 py-3 me-sm-n4" aria-labelledby="dropdownMenuButton">
                 <li class="mb-2">
-                  <a class="dropdown-item border-radius-md" href="javascript:;">
+                  <a class="dropdown-item border-radius-md" href="">
                     <div class="d-flex py-1">
                       <div class="my-auto">
-                        <img src="../assets/img/team-2.jpg" class="avatar avatar-sm  me-3 ">
+                        <img src="../soft-ui-dashboard-main/assets/img/team-2.jpg" class="avatar avatar-sm  me-3 ">
                       </div>
                       <div class="d-flex flex-column justify-content-center">
                         <h6 class="text-sm font-weight-normal mb-1">
@@ -105,10 +79,10 @@
                   </a>
                 </li>
                 <li class="mb-2">
-                  <a class="dropdown-item border-radius-md" href="javascript:;">
+                  <a class="dropdown-item border-radius-md" href="">
                     <div class="d-flex py-1">
                       <div class="my-auto">
-                        <img src="../assets/img/small-logos/logo-spotify.svg" class="avatar avatar-sm bg-gradient-dark  me-3 ">
+                        <img src="../soft-ui-dashboard-main/assets/img/small-logos/logo-spotify.svg" class="avatar avatar-sm bg-gradient-dark  me-3 ">
                       </div>
                       <div class="d-flex flex-column justify-content-center">
                         <h6 class="text-sm font-weight-normal mb-1">
@@ -123,7 +97,7 @@
                   </a>
                 </li>
                 <li>
-                  <a class="dropdown-item border-radius-md" href="javascript:;">
+                  <a class="dropdown-item border-radius-md" href="">
                     <div class="d-flex py-1">
                       <div class="avatar avatar-sm bg-gradient-secondary  me-3  my-auto">
                         <svg width="12px" height="12px" viewBox="0 0 43 36" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -160,12 +134,12 @@
     </nav>
     <!-- End Navbar -->
   </div>
-  <div class="border-radius-xl mt-3 mx-3 position-relative" style="background-image: url('../assets/img/vr-bg.jpg') ; background-size: cover;">
+  <div class="border-radius-xl mt-3 mx-3 position-relative" style="background-image: url('../soft-ui-dashboard-main/assets/img/vr-bg.jpg') ; background-size: cover;">
     <aside class="sidenav navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-3 " id="sidenav-main">
       <div class="sidenav-header">
         <i class="fas fa-times p-3 cursor-pointer text-secondary opacity-5 position-absolute end-0 top-0 d-none d-xl-none" aria-hidden="true" id="iconSidenav"></i>
         <a class="navbar-brand m-0" href=" https://demos.creative-tim.com/soft-ui-dashboard/pages/dashboard.html " target="_blank">
-          <img src="../assets/img/logo-ct-dark.png" class="navbar-brand-img h-100" alt="main_logo">
+          <img src="../soft-ui-dashboard-main/assets/img/logo-ct-dark.png" class="navbar-brand-img h-100" alt="main_logo">
           <span class="ms-1 font-weight-bold">Soft UI Dashboard</span>
         </a>
       </div>
@@ -344,7 +318,7 @@
       </div>
       <div class="sidenav-footer mx-3 ">
         <div class="card card-background shadow-none card-background-mask-secondary" id="sidenavCard">
-          <div class="full-background" style="background-image: url('../assets/img/curved-images/white-curved.jpg')"></div>
+          <div class="full-background" style="background-image: url('../soft-ui-dashboard-main/assets/img/curved-images/white-curved.jpg')"></div>
           <div class="card-body text-start p-3 w-100">
             <div class="icon icon-shape icon-sm bg-white shadow text-center mb-3 d-flex align-items-center justify-content-center border-radius-md">
               <i class="ni ni-diamond text-dark text-gradient text-lg top-0" aria-hidden="true" id="sidenavCardIcon"></i>
@@ -364,8 +338,8 @@
         <div class="container">
           <div class="row pt-10">
             <div class="col-lg-1 col-md-1 pt-5 pt-lg-0 ms-lg-5 text-center">
-              <a href="javascript:;" class="avatar avatar-md border-0" data-bs-toggle="tooltip" data-bs-placement="left" title="My Profile">
-                <img class="border-radius-lg" alt="Image placeholder" src="../assets/img/team-1.jpg">
+              <a href="" class="avatar avatar-md border-0" data-bs-toggle="tooltip" data-bs-placement="left" title="My Profile">
+                <img class="border-radius-lg" alt="Image placeholder" src="../soft-ui-dashboard-main/assets/img/team-1.jpg">
               </a>
               <button class="btn btn-white border-radius-lg p-2 mt-2" type="button" data-bs-toggle="tooltip" data-bs-placement="left" title="Home">
                 <i class="fas fa-home p-2"></i>
@@ -384,7 +358,7 @@
                   <h6 class="text-uppercase mb-0 ms-1">Cloudy</h6>
                 </div>
                 <div class="ms-auto">
-                  <img class="w-50 float-end mt-lg-n4" src="../assets/img/small-logos/icon-sun-cloud.png" alt="image sun">
+                  <img class="w-50 float-end mt-lg-n4" src="../soft-ui-dashboard-main/assets/img/small-logos/icon-sun-cloud.png" alt="image sun">
                 </div>
               </div>
               <div class="row mt-4">
@@ -412,7 +386,7 @@
                         </h6>
                       </div>
                     </div>
-                    <a href="javascript:;" class="bg-gray-100 w-100 text-center py-1" data-bs-toggle="tooltip" data-bs-placement="top" title="Show More">
+                    <a href="" class="bg-gray-100 w-100 text-center py-1" data-bs-toggle="tooltip" data-bs-placement="top" title="Show More">
                       <i class="fas fa-chevron-down text-primary"></i>
                     </a>
                   </div>
@@ -430,7 +404,7 @@
                       <p class="text-white mb-0">Shopping</p>
                       <p class="mb-0 text-white">Meeting</p>
                     </div>
-                    <a href="javascript:;" class="w-100 text-center py-1" data-bs-toggle="tooltip" data-bs-placement="top" title="Show More">
+                    <a href="" class="w-100 text-center py-1" data-bs-toggle="tooltip" data-bs-placement="top" title="Show More">
                       <i class="fas fa-chevron-down text-white"></i>
                     </a>
                   </div>
@@ -438,7 +412,7 @@
                     <div class="card-body">
                       <div class="d-flex">
                         <p class="mb-0">Emails (21)</p>
-                        <a href="javascript:;" class="ms-auto" data-bs-toggle="tooltip" data-bs-placement="top" title="Check your emails">
+                        <a href="" class="ms-auto" data-bs-toggle="tooltip" data-bs-placement="top" title="Check your emails">
                           Check
                         </a>
                       </div>
@@ -448,7 +422,7 @@
                 <div class="col-lg-4 col-md-4 mt-4 mt-sm-0">
                   <div class="card card-background card-background-mask-primary move-on-hover align-items-start">
                     <div class="cursor-pointer">
-                      <div class="full-background" style="background-image: url('../assets/img/curved-images/curved1.jpg')"></div>
+                      <div class="full-background" style="background-image: url('../soft-ui-dashboard-main/assets/img/curved-images/curved1.jpg')"></div>
                       <div class="card-body">
                         <h5 class="text-white mb-0">Some Kind Of Blues</h5>
                         <p class="text-white text-sm">Deftones</p>
@@ -472,17 +446,17 @@
                         <p class="my-auto">Messages</p>
                         <div class="ms-auto">
                           <div class="avatar-group">
-                            <a href="javascript:;" class="avatar avatar-sm border-0 rounded-circle" data-bs-toggle="tooltip" data-bs-placement="top" title="2 New Messages">
-                              <img alt="Image placeholder" src="../assets/img/team-1.jpg">
+                            <a href="" class="avatar avatar-sm border-0 rounded-circle" data-bs-toggle="tooltip" data-bs-placement="top" title="2 New Messages">
+                              <img alt="Image placeholder" src="../soft-ui-dashboard-main/assets/img/team-1.jpg">
                             </a>
-                            <a href="javascript:;" class="avatar avatar-sm border-0 rounded-circle" data-bs-toggle="tooltip" data-bs-placement="top" title="1 New Message">
-                              <img alt="Image placeholder" src="../assets/img/team-2.jpg">
+                            <a href="" class="avatar avatar-sm border-0 rounded-circle" data-bs-toggle="tooltip" data-bs-placement="top" title="1 New Message">
+                              <img alt="Image placeholder" src="../soft-ui-dashboard-main/assets/img/team-2.jpg">
                             </a>
-                            <a href="javascript:;" class="avatar avatar-sm border-0 rounded-circle" data-bs-toggle="tooltip" data-bs-placement="top" title="13 New Messages">
-                              <img alt="Image placeholder" src="../assets/img/team-3.jpg">
+                            <a href="" class="avatar avatar-sm border-0 rounded-circle" data-bs-toggle="tooltip" data-bs-placement="top" title="13 New Messages">
+                              <img alt="Image placeholder" src="../soft-ui-dashboard-main/assets/img/team-3.jpg">
                             </a>
-                            <a href="javascript:;" class="avatar avatar-sm border-0 rounded-circle" data-bs-toggle="tooltip" data-bs-placement="top" title="7 New Messages">
-                              <img alt="Image placeholder" src="../assets/img/team-4.jpg">
+                            <a href="" class="avatar avatar-sm border-0 rounded-circle" data-bs-toggle="tooltip" data-bs-placement="top" title="7 New Messages">
+                              <img alt="Image placeholder" src="../soft-ui-dashboard-main/assets/img/team-4.jpg">
                             </a>
                           </div>
                         </div>
@@ -595,24 +569,7 @@
       </div>
     </div>
   </div>
-  <!--   Core JS Files   -->
-  <script src="../assets/js/core/popper.min.js"></script>
-  <script src="../assets/js/core/bootstrap.min.js"></script>
-  <script src="../assets/js/plugins/perfect-scrollbar.min.js"></script>
-  <script src="../assets/js/plugins/smooth-scrollbar.min.js"></script>
-  <script>
-    var win = navigator.platform.indexOf('Win') > -1;
-    if (win && document.querySelector('#sidenav-scrollbar')) {
-      var options = {
-        damping: '0.5'
-      }
-      Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
-    }
-  </script>
-  <!-- Github buttons -->
-  <script async defer src="https://buttons.github.io/buttons.js"></script>
-  <!-- Control Center for Soft Dashboard: parallax effects, scripts for the example pages etc -->
-  <script src="../assets/js/soft-ui-dashboard.min.js?v=1.0.7"></script>
+  @include('layouts.script')
 </body>
 
 </html>
