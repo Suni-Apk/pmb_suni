@@ -14,15 +14,23 @@
                             <p class="mb-0">Enter your email and password to sign in</p>
                         </div>
                         <div class="card-body">
-                            <form role="form">
+                            <form role="form" action="{{route('login.process')}}" method="POST">
+                                @csrf
+                                @method('POST')
                                 <label>No. Handphone</label>
                                 <div class="mb-3">
-                                    <input type="nomor" class="form-control" placeholder="nomor" aria-label="nomor" aria-describedby="nomor-addon">
+                                    <input type="text" name="phone" class="form-control @error('phone') is-invalid @enderror" placeholder="Masukkan Nomor" aria-label="nomor" aria-describedby="nomor-addon">
+                                    @error('phone')
+                                        <label for="" class="text-danger">{{$message}}</label>
+                                    @enderror
                                 </div>
 
                                 <label>Password</label>
                                 <div class="mb-3">
-                                    <input type="password" class="form-control" placeholder="Password" aria-label="Password" aria-describedby="password-addon">
+                                    <input type="password" name="password" class="form-control @error('password') is-invalid @enderror" placeholder="Masukkan Password" aria-label="Password" aria-describedby="password-addon">
+                                    @error('password')
+                                        <label for="" class="text-danger">{{$message}}</label>
+                                    @enderror
                                 </div>
 
                                 <div class="form-check form-switch">
@@ -31,7 +39,7 @@
                                 </div>
                                 
                                 <div class="text-center">
-                                    <button type="button" class="btn bg-gradient-info w-100 mt-4 mb-0">Sign in</button>
+                                    <button type="submit" class="btn bg-gradient-info w-100 mt-4 mb-0">Sign in</button>
                                 </div>
                             </form>
                         </div>
