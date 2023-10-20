@@ -3,7 +3,7 @@
 @section('title', 'Register')
 
 @section('content')
-<section class="min-vh-25 mb-8">
+{{-- <section class="min-vh-25 mb-8">
     <div class="page-header align-items-start min-vh-50 pt-5 pb-11 m-3 border-radius-lg" style="background-image: url('../soft-ui-dashboard-main/assets/img/curved-images/curved14.jpg');">
         <span class="mask bg-gradient-dark opacity-6"></span>
         <div class="container">
@@ -17,7 +17,7 @@
     </div>
     <div class="container">
         <div class="row mt-lg-n10 mt-md-n11 mt-n10">
-            <div class="col-xl-4 col-lg-5 col-md-7 mx-auto">
+            <div class="col-xl-6 col-lg-5 col-md-7 mx-auto">
                 <div class="card z-index-0">
                     <div class="card-header text-center pt-4">
                         <h5>Register Here</h5>
@@ -28,7 +28,7 @@
                                 <input type="text" class="form-control" placeholder="Name" aria-label="Name" aria-describedby="email-addon">
                             </div>
                             <div class="mb-3">
-                                <input type="email" class="form-control" placeholder="Email" aria-label="Email" aria-describedby="email-addon">
+                                <input type="text" class="form-control" placeholder="Enter Your Phone" aria-label="Email" aria-describedby="email-addon">
                             </div>
                             <div class="mb-3">
                                 <input type="password" class="form-control" placeholder="Password" aria-label="Password" aria-describedby="password-addon">
@@ -49,5 +49,5 @@
             </div>
         </div>
     </div>
-    </section>
+    </section> --}}
 @endsection
