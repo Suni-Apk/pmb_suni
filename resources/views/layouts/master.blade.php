@@ -10,6 +10,7 @@
     <title>SUNI Indonesia | @yield('title')</title>
     
     @include('layouts.include')
+    @stack('styles')
 </head>
 
 <body class="g-sidenav-show bg-gray-100">
@@ -32,5 +33,6 @@
     @include('layouts.custom')
 
     @include('layouts.script')
+    @stack('scripts')
 </body>
 </html>

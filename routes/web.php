@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\Auth\AuthController;
+use App\Http\Controllers\Mahasiswa\DashboardController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -13,6 +15,24 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+
+Route::get('/register',[AuthController::class,'register'])->name('register');
+
+Route::post('/register-process',[AuthController::class,'register_process'])->name('register.process');
+
+Route::get('/login',[AuthController::class,'login'])->name('login');
+
+Route::post('/login-process',[AuthController::class,'login_process'])->name('login.process');
+
+Route::get('/verify',[AuthController::class,'verify'])->name('verify');
+
+Route::post('/verify-process',[AuthController::class,'verify_otp'])->name('verify.process');
+
+
+Route::prefix('/mahasiswa')->middleware('auth')->name('mahasiswa.')->group(function(){
+    Route::get('/dashboard',[DashboardController::class,'index'])->name('dashboard');
+    Route::get('/logout',[AuthController::class,'logout'])->name('logout');
+});
 
 Route::prefix('template')->group(function () {
     Route::get('/table', function () {

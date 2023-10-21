@@ -2,6 +2,10 @@
 
 @section('title', 'table template')
 
+@push('styles')
+
+@endpush
+
 @section('content')
     <div class="row">
       <div class="col-12">
@@ -11,7 +15,7 @@
           </div>
           <div class="card-body px-0 pt-0 pb-2">
             <div class="table-responsive p-0">
-              <table class="table align-items-center mb-0">
+              <table class="table align-items-center mb-0" id="templateTable">
                 <thead>
                   <tr>
                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Nama</th>
@@ -71,3 +75,17 @@
       </div>
     </div>
 @endsection
+
+@push('scripts')
+<script>
+	const dataTableSearch = new simpleDatatables.DataTable("#templateTableNoSearch", {
+      searchable: false,
+      fixedHeight: true,
+    });
+
+	const dataTableBasic = new simpleDatatables.DataTable("#templateTable", {
+      searchable: true,
+      fixedHeight: true,
+    });
+</script>
+@endpush
