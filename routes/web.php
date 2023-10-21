@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\AuthController as AdminAuthController;
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Mahasiswa\DashboardController;
 use Illuminate\Support\Facades\Auth;
@@ -23,6 +24,16 @@ Route::post('/register-process', [AuthController::class, 'register_process'])->n
 Route::get('/login', [AuthController::class, 'login'])->name('login');
 
 Route::post('/login-process', [AuthController::class, 'login_process'])->name('login.process');
+
+Route::get('/verify',[AuthController::class,'verify'])->name('verify');
+
+Route::post('/verify-process',[AuthController::class,'verify_otp'])->name('verify.process');
+
+Route::prefix('/admin')->name('admin.')->group(function(){
+    Route::get('/dashboard',[DashboardController::class,'index'])->name('dashboard');
+    Route::get('/login',[AdminAuthController::class,'login'])->name('login');
+Route::post('/login-process',[AdminAuthController::class,'login_process'])->name('login.process');
+});
 
 
 Route::prefix('/mahasiswa')->middleware('auth')->name('mahasiswa.')->group(function () {

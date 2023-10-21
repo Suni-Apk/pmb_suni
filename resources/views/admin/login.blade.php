@@ -10,11 +10,11 @@
                 <div class="col-xl-4 col-lg-5 col-md-6 d-flex flex-column mx-auto">
                     <div class="card card-plain mt-8">
                         <div class="card-header pb-0 text-left bg-transparent">
-                            <h3 class="font-weight-bolder text-primary text-gradient">Selamat Datang Kembali</h3>
+                            <h3 class="font-weight-bolder text-info text-gradient">Selamat Datang Kembali</h3>
                             <p class="mb-0">Enter your email and password to sign in</p>
                         </div>
                         <div class="card-body">
-                            <form role="form" action="{{route('login.process')}}" method="POST">
+                            <form role="form" action="{{route('admin.login.process')}}" method="POST">
                                 @csrf
                                 @method('POST')
                                 <label>No. Handphone</label>
@@ -46,7 +46,7 @@
                         <div class="card-footer text-center pt-0 px-lg-2 px-1">
                             <p class="mb-4 text-sm mx-auto">
                                 Belum punya akun? &nbsp;
-                                <a href="" class="text-primary text-gradient font-weight-bold">Sign up</a>
+                                <a href="" class="text-info text-gradient font-weight-bold">Sign up</a>
                             </p>
                         </div>
                     </div>
