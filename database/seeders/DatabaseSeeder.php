@@ -25,5 +25,17 @@ class DatabaseSeeder extends Seeder
             'birthdate' => '2023-10-20',
             'role' => 'Admin',
         ]);
+
+        \App\Models\User::factory()->create([
+            'name' => 'Mahasiswa',
+            'email' => 'mahasiswa@example.com',
+            'password' => 'password',
+            'token' => rand(11111,9999),
+            'active' => 1,
+            'phone' => '089608494411',
+            'gender' => 'Laki-Laki',
+            'birthdate' => '2004-10-20',
+            'role' => 'Mahasiswa',
+        ]);
     }
 }
