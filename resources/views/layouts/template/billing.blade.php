@@ -8,7 +8,8 @@
     <div class="row">
         <div class="col-xl-6 mb-xl-0 mb-4">
         <div class="card bg-transparent shadow-xl">
-            <div class="overflow-hidden position-relative border-radius-xl" style="background-image: url('../assets/img/curved-images/curved14.jpg');">
+            <div class="overflow-hidden position-relative border-radius-xl" 
+                style="background-image: url('../soft-ui-dashboard-main/assets/img/curved-images/curved14.jpg');">
             <span class="mask bg-gradient-dark"></span>
             <div class="card-body position-relative z-index-1 p-3">
                 <i class="fas fa-wifi text-white p-2"></i>
@@ -25,7 +26,7 @@
                     </div>
                 </div>
                 <div class="ms-auto w-20 d-flex align-items-end justify-content-end">
-                    <img class="w-60 mt-2" src="../assets/img/logos/mastercard.png" alt="logo">
+                    <img class="w-60 mt-2" src="../soft-ui-dashboard-main/assets/img/logos/mastercard.png" alt="logo">
                 </div>
                 </div>
             </div>
