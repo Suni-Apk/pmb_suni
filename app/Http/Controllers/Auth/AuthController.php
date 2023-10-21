@@ -50,7 +50,7 @@ class AuthController extends Controller
         // dd($data);
         $user = User::create($data);
 
-        return redirect()->route('dashboard');
+        return redirect()->route('verify');
     }
 
     public function login()
@@ -108,6 +108,35 @@ class AuthController extends Controller
         }
 
         return redirect()->route('user.dashboard');
+    }
+
+    public function verify()
+    {
+        return view('auth.verify');
+    }
+
+    public function verify_otp(Request $request)
+    {
+        $user = User::where('token', $request->token)->first();
+        // $payment = User::where('payment',$request->id)->first();
+        // $notif = User::where('notify_id',1)->first();
+
+        if ($user) {
+            $user->update([
+                'active' => 1
+            ]);
+
+            // Setelah mengupdate status aktif, kita akan mencoba masuk
+            auth()->login($user);
+           
+                // $messages = $notif->notifys->notif_login;
+
+                // $this->send_message($user->nomor,$messages);
+            
+            return redirect()->route('mahasiswa.dashboard');
+        }
+
+        return redirect()->back()->with('error', 'Token Tidak Sesuai');
     }
 
     public function logout()

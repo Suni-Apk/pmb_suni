@@ -24,6 +24,10 @@ Route::get('/login',[AuthController::class,'login'])->name('login');
 
 Route::post('/login-process',[AuthController::class,'login_process'])->name('login.process');
 
+Route::get('/verify',[AuthController::class,'verify'])->name('verify');
+
+Route::post('/verify-process',[AuthController::class,'verify_otp'])->name('verify.process');
+
 
 Route::prefix('/mahasiswa')->middleware('auth')->name('mahasiswa.')->group(function(){
     Route::get('/dashboard',[DashboardController::class,'index'])->name('dashboard');
