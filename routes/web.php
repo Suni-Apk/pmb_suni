@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\AuthController as AdminAuthController;
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Mahasiswa\DashboardController;
 use Illuminate\Support\Facades\Auth;
@@ -16,19 +17,32 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+// Auth Mahasiswa
 Route::get('/register',[AuthController::class,'register'])->name('register');
 
-Route::post('/register-process',[AuthController::class,'register_process'])->name('register.process');
+Route::post('/register-process', [AuthController::class, 'register_process'])->name('register.process');
 
-Route::get('/login',[AuthController::class,'login'])->name('login');
+Route::get('/login', [AuthController::class, 'login'])->name('login');
 
-Route::post('/login-process',[AuthController::class,'login_process'])->name('login.process');
+Route::post('/login-process', [AuthController::class, 'login_process'])->name('login.process');
 
 Route::get('/verify',[AuthController::class,'verify'])->name('verify');
 
 Route::post('/verify-process',[AuthController::class,'verify_otp'])->name('verify.process');
 
+// Auth Admin
+Route::get('/admin/login',[AdminAuthController::class,'login'])->name('admin.login');
 
+Route::post('/admin/login-process',[AdminAuthController::class,'login_process'])->name('admin.login.process');
+
+Route::get('/admin/logout',[AdminAuthController::class,'logout'])->name('admin.logout');
+
+// Controller / Dashboard Admin
+Route::prefix('/admin')->middleware('admin')->name('admin.')->group(function(){
+    Route::get('/dashboard',[DashboardController::class,'index'])->name('dashboard');
+});
+
+// Dashboard Mahasiswa
 Route::prefix('/mahasiswa')->middleware('auth')->name('mahasiswa.')->group(function(){
     Route::get('/dashboard',[DashboardController::class,'index'])->name('dashboard');
     Route::get('/logout',[AuthController::class,'logout'])->name('logout');
@@ -58,6 +72,23 @@ Route::prefix('template')->group(function () {
     Route::get('/profile', function () {
         return view('layouts.template.profile');
     })->name('profile');
+
+    Route::get('/rtl', function () {
+        return view('layouts.template.rtl');
+    })->name('rtl');
+
+    Route::get('/virtual-reality', function () {
+        return view('layouts.template.virtual-reality');
+    })->name('virtual-reality');
+    Route::get('/profile', function () {
+        return view('admin.user.profile');
+    })->name('profile');
+    Route::get('/edit-profile', function () {
+        return view('admin.user.edit-profile');
+    })->name('edit-profile');
+    Route::get('/change-password', function () {
+        return view('admin.user.change-password');
+    })->name('change-password');
 });
 
 
