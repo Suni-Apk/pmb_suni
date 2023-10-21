@@ -103,7 +103,7 @@
                 <p class="mb-1 pt-2 text-bold">Built by developers</p>
                 <h5 class="font-weight-bolder">Soft UI Dashboard</h5>
                 <p class="mb-5">From colors, cards, typography to complex elements, you will find the full documentation.</p>
-                <a class="text-body text-sm font-weight-bold mb-0 icon-move-right mt-auto" href="javascript:;">
+                <a class="text-body text-sm font-weight-bold mb-0 icon-move-right mt-auto" href="">
                   Read More
                   <i class="fas fa-arrow-right text-sm ms-1" aria-hidden="true"></i>
                 </a>
@@ -128,7 +128,7 @@
           <div class="card-body position-relative z-index-1 d-flex flex-column h-100 p-3">
             <h5 class="text-white font-weight-bolder mb-4 pt-2">Work with the rockets</h5>
             <p class="text-white">Wealth creation is an evolutionarily recent positive-sum game. It is all about who take the opportunity first.</p>
-            <a class="text-white text-sm font-weight-bold mb-0 icon-move-right mt-auto" href="javascript:;">
+            <a class="text-white text-sm font-weight-bold mb-0 icon-move-right mt-auto" href="">
               Read More
               <i class="fas fa-arrow-right text-sm ms-1" aria-hidden="true"></i>
             </a>
@@ -289,9 +289,9 @@
                   <i class="fa fa-ellipsis-v text-secondary"></i>
                 </a>
                 <ul class="dropdown-menu px-2 py-3 ms-sm-n4 ms-n5" aria-labelledby="dropdownTable">
-                  <li><a class="dropdown-item border-radius-md" href="javascript:;">Action</a></li>
-                  <li><a class="dropdown-item border-radius-md" href="javascript:;">Another action</a></li>
-                  <li><a class="dropdown-item border-radius-md" href="javascript:;">Something else here</a></li>
+                  <li><a class="dropdown-item border-radius-md" href="">Action</a></li>
+                  <li><a class="dropdown-item border-radius-md" href="">Another action</a></li>
+                  <li><a class="dropdown-item border-radius-md" href="">Something else here</a></li>
                 </ul>
               </div>
             </div>
@@ -322,16 +322,16 @@
                   </td>
                   <td>
                     <div class="avatar-group mt-2">
-                      <a href="javascript:;" class="avatar avatar-xs rounded-circle" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Ryan Tompson">
+                      <a href="" class="avatar avatar-xs rounded-circle" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Ryan Tompson">
                         <img src="../soft-ui-dashboard-main/assets/img/team-1.jpg" alt="team1">
                       </a>
-                      <a href="javascript:;" class="avatar avatar-xs rounded-circle" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Romina Hadid">
+                      <a href="" class="avatar avatar-xs rounded-circle" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Romina Hadid">
                         <img src="../soft-ui-dashboard-main/assets/img/team-2.jpg" alt="team2">
                       </a>
-                      <a href="javascript:;" class="avatar avatar-xs rounded-circle" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Alexander Smith">
+                      <a href="" class="avatar avatar-xs rounded-circle" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Alexander Smith">
                         <img src="../soft-ui-dashboard-main/assets/img/team-3.jpg" alt="team3">
                       </a>
-                      <a href="javascript:;" class="avatar avatar-xs rounded-circle" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Jessica Doe">
+                      <a href="" class="avatar avatar-xs rounded-circle" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Jessica Doe">
                         <img src="../soft-ui-dashboard-main/assets/img/team-4.jpg" alt="team4">
                       </a>
                     </div>
@@ -365,10 +365,10 @@
                   </td>
                   <td>
                     <div class="avatar-group mt-2">
-                      <a href="javascript:;" class="avatar avatar-xs rounded-circle" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Romina Hadid">
+                      <a href="" class="avatar avatar-xs rounded-circle" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Romina Hadid">
                         <img src="../soft-ui-dashboard-main/assets/img/team-2.jpg" alt="team5">
                       </a>
-                      <a href="javascript:;" class="avatar avatar-xs rounded-circle" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Jessica Doe">
+                      <a href="" class="avatar avatar-xs rounded-circle" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Jessica Doe">
                         <img src="../soft-ui-dashboard-main/assets/img/team-4.jpg" alt="team6">
                       </a>
                     </div>
@@ -402,10 +402,10 @@
                   </td>
                   <td>
                     <div class="avatar-group mt-2">
-                      <a href="javascript:;" class="avatar avatar-xs rounded-circle" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Romina Hadid">
+                      <a href="" class="avatar avatar-xs rounded-circle" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Romina Hadid">
                         <img src="../soft-ui-dashboard-main/assets/img/team-3.jpg" alt="team8">
                       </a>
-                      <a href="javascript:;" class="avatar avatar-xs rounded-circle" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Jessica Doe">
+                      <a href="" class="avatar avatar-xs rounded-circle" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Jessica Doe">
                         <img src="../soft-ui-dashboard-main/assets/img/team-1.jpg" alt="team9">
                       </a>
                     </div>
@@ -439,16 +439,16 @@
                   </td>
                   <td>
                     <div class="avatar-group mt-2">
-                      <a href="javascript:;" class="avatar avatar-xs rounded-circle" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Ryan Tompson">
+                      <a href="" class="avatar avatar-xs rounded-circle" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Ryan Tompson">
                         <img src="../soft-ui-dashboard-main/assets/img/team-4.jpg" alt="user1">
                       </a>
-                      <a href="javascript:;" class="avatar avatar-xs rounded-circle" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Romina Hadid">
+                      <a href="" class="avatar avatar-xs rounded-circle" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Romina Hadid">
                         <img src="../soft-ui-dashboard-main/assets/img/team-3.jpg" alt="user2">
                       </a>
-                      <a href="javascript:;" class="avatar avatar-xs rounded-circle" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Alexander Smith">
+                      <a href="" class="avatar avatar-xs rounded-circle" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Alexander Smith">
                         <img src="../soft-ui-dashboard-main/assets/img/team-4.jpg" alt="user3">
                       </a>
-                      <a href="javascript:;" class="avatar avatar-xs rounded-circle" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Jessica Doe">
+                      <a href="" class="avatar avatar-xs rounded-circle" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Jessica Doe">
                         <img src="../soft-ui-dashboard-main/assets/img/team-1.jpg" alt="user4">
                       </a>
                     </div>
@@ -482,7 +482,7 @@
                   </td>
                   <td>
                     <div class="avatar-group mt-2">
-                      <a href="javascript:;" class="avatar avatar-xs rounded-circle" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Ryan Tompson">
+                      <a href="" class="avatar avatar-xs rounded-circle" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Ryan Tompson">
                         <img src="../soft-ui-dashboard-main/assets/img/team-4.jpg" alt="user5">
                       </a>
                     </div>
@@ -516,10 +516,10 @@
                   </td>
                   <td>
                     <div class="avatar-group mt-2">
-                      <a href="javascript:;" class="avatar avatar-xs rounded-circle" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Ryan Tompson">
+                      <a href="" class="avatar avatar-xs rounded-circle" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Ryan Tompson">
                         <img src="../soft-ui-dashboard-main/assets/img/team-1.jpg" alt="user6">
                       </a>
-                      <a href="javascript:;" class="avatar avatar-xs rounded-circle" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Jessica Doe">
+                      <a href="" class="avatar avatar-xs rounded-circle" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Jessica Doe">
                         <img src="../soft-ui-dashboard-main/assets/img/team-4.jpg" alt="user7">
                       </a>
                     </div>

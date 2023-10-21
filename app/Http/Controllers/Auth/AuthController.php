@@ -88,7 +88,7 @@ class AuthController extends Controller
         $authenticated = Auth::attempt($credentials, $request->has('remember'));
 
         if (!$authenticated){
-            return redirect()->back()->with('error', 'email atau password salah.');
+            return redirect()->route('login')->with('error', 'email atau password salah.');
         }
 
         $input = $request->all();
@@ -99,7 +99,7 @@ class AuthController extends Controller
                 return redirect()->route('mahasiswa.dashboard')->with('success','Yey Berhasil Login');
             }else{
                 return redirect()->back()->withErrors([
-                    'phone' => 'Kamu bukan Mahasiswa'
+                    'phone' => 'Kamu bukan Mahasiswa Disini'
                 ]);
             }
         }else{

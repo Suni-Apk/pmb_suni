@@ -72,4 +72,11 @@ class AuthController extends Controller
 
         return redirect()->route('user.dashboard');
     }
+
+    public function logout()
+    {
+        auth()->logout();
+
+        return view('admin.login');
+    }
 }

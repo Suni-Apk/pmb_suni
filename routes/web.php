@@ -17,6 +17,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+// Auth Mahasiswa
 Route::get('/register',[AuthController::class,'register'])->name('register');
 
 Route::post('/register-process',[AuthController::class,'register_process'])->name('register.process');
@@ -29,13 +30,19 @@ Route::get('/verify',[AuthController::class,'verify'])->name('verify');
 
 Route::post('/verify-process',[AuthController::class,'verify_otp'])->name('verify.process');
 
-Route::prefix('/admin')->name('admin.')->group(function(){
+// Auth Admin
+Route::get('/admin/login',[AdminAuthController::class,'login'])->name('admin.login');
+
+Route::post('/admin/login-process',[AdminAuthController::class,'login_process'])->name('admin.login.process');
+
+Route::get('/admin/logout',[AdminAuthController::class,'logout'])->name('admin.logout');
+
+// Controller / Dashboard Admin
+Route::prefix('/admin')->middleware('admin')->name('admin.')->group(function(){
     Route::get('/dashboard',[DashboardController::class,'index'])->name('dashboard');
-    Route::get('/login',[AdminAuthController::class,'login'])->name('login');
-Route::post('/login-process',[AdminAuthController::class,'login_process'])->name('login.process');
 });
 
-
+// Dashboard Mahasiswa
 Route::prefix('/mahasiswa')->middleware('auth')->name('mahasiswa.')->group(function(){
     Route::get('/dashboard',[DashboardController::class,'index'])->name('dashboard');
     Route::get('/logout',[AuthController::class,'logout'])->name('logout');
