@@ -71,6 +71,10 @@ Route::prefix('template')->group(function () {
         return view('layouts.template.form');
     })->name('form');
 
+    Route::get('/forgot', function () {
+        return view('layouts.template.forgot-password');
+    })->name('forgot');
+
     Route::get('/profile', function () {
         return view('layouts.template.profile');
     })->name('profile');
