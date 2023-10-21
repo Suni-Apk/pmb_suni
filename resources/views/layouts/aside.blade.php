@@ -98,7 +98,7 @@
                     </div>
                 </div>
             </li>
-            <!--Mahasiswa-->
+            <!--Mahasiswa-->adfgadfsdfgadsadrfE
             <li class="nav-item">
                 <a class="nav-link " href="{{ route('billing') }}">
                     <div
@@ -110,7 +110,7 @@
             </li>
             <!--Admin-->
             <li class="nav-item">
-                <a class="nav-link " href="{{ route('billing') }}">
+                <a class="nav-link " href="{{ route('table') }}">
                     <div
                         class="icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
                         <i class="ni ni-circle-08"></i>
