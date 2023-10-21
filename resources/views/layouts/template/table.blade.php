@@ -46,7 +46,7 @@
                       <p class="text-xs font-weight-bold mb-0">Laki Laki</p>
                       <p class="text-xs text-secondary mb-0">ADMIN</p>
                     </td>
-                    <td class="align-middle text-center text-sm">
+                    <td class="align-middle text-center text-lg">
                     <span class="badge badge-sm bg-gradient-success">AKTIF</span>
                     </td>
                     <td class="align-middle text-center">
