@@ -27,6 +27,10 @@ Route::prefix('template')->group(function () {
         return view('layouts.template.billing');
     })->name('billing');
 
+    Route::get('/form', function () {
+        return view('layouts.template.form');
+    })->name('form');
+
     Route::get('/profile', function () {
         return view('layouts.template.profile');
     })->name('profile');
