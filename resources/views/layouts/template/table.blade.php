@@ -47,18 +47,18 @@
                       <p class="text-xs font-weight-bold mb-0">Laki Laki</p>
                       <p class="text-xs text-secondary mb-0">ADMIN</p>
                     </td>
-                    <td class="align-middle text-center text-sm">
+                    <td class="align-middle text-center text-lg">
                     <span class="badge badge-sm bg-gradient-success">AKTIF</span>
                     </td>
                     <td class="align-middle text-center">
                       <span class="text-secondary text-xs font-weight-bold">23/04/18</span>
                     </td>
                     <td class="align-middle text-center"> 
-                      <a href="" class="badge badge-sm bg-gradient-primary font-weight-bold text-xs mx-2" data-toggle="tooltip" data-original-title="Edit user">
+                      <a href="" class="badge badge-sm bg-gradient-info font-weight-bold text-xs mx-2" data-toggle="tooltip" data-original-title="Edit user">
                         Detail
                       </a>
 
-                      <a href="" class="badge badge-sm bg-gradient-success font-weight-bold text-xs mx-2" data-toggle="tooltip" data-original-title="Edit user">
+                      <a href="" class="badge badge-sm bg-gradient-secondary font-weight-bold text-xs mx-2" data-toggle="tooltip" data-original-title="Edit user">
                         Ubah
                       </a>
 

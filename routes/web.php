@@ -58,14 +58,6 @@ Route::prefix('template')->group(function () {
     Route::get('/profile', function () {
         return view('layouts.template.profile');
     })->name('profile');
-
-    Route::get('/rtl', function () {
-        return view('layouts.template.rtl');
-    })->name('rtl');
-
-    Route::get('/virtual-reality', function () {
-        return view('layouts.template.virtual-reality');
-    })->name('virtual-reality');
 });
 
 
