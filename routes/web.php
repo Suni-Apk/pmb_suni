@@ -16,18 +16,18 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/register',[AuthController::class,'register'])->name('register');
+Route::get('/register', [AuthController::class, 'register'])->name('register');
 
-Route::post('/register-process',[AuthController::class,'register_process'])->name('register.process');
+Route::post('/register-process', [AuthController::class, 'register_process'])->name('register.process');
 
-Route::get('/login',[AuthController::class,'login'])->name('login');
+Route::get('/login', [AuthController::class, 'login'])->name('login');
 
-Route::post('/login-process',[AuthController::class,'login_process'])->name('login.process');
+Route::post('/login-process', [AuthController::class, 'login_process'])->name('login.process');
 
 
-Route::prefix('/mahasiswa')->middleware('auth')->name('mahasiswa.')->group(function(){
-    Route::get('/dashboard',[DashboardController::class,'index'])->name('dashboard');
-    Route::get('/logout',[AuthController::class,'logout'])->name('logout');
+Route::prefix('/mahasiswa')->middleware('auth')->name('mahasiswa.')->group(function () {
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+    Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
 });
 
 Route::prefix('template')->group(function () {
@@ -54,6 +54,15 @@ Route::prefix('template')->group(function () {
     Route::get('/virtual-reality', function () {
         return view('layouts.template.virtual-reality');
     })->name('virtual-reality');
+    Route::get('/profile', function () {
+        return view('admin.user.profile');
+    })->name('profile');
+    Route::get('/edit-profile', function () {
+        return view('admin.user.edit-profile');
+    })->name('edit-profile');
+    Route::get('/change-password', function () {
+        return view('admin.user.change-password');
+    })->name('change-password');
 });
 
 
