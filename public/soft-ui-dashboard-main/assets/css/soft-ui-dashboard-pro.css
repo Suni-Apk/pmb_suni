@@ -75,6 +75,44 @@
 
 ::-webkit-scrollbar-track
 {
+	border-radius: 7px;
+	background-color: #ebebeb;
+}
+
+::-webkit-scrollbar
+{
+	width: 9px;
+    height: 5px;
+	background-color: #F5F5F5;
+}
+
+::-webkit-scrollbar-thumb
+{
+	border-radius: 7px;
+	background-color: #c4c4c4;
+}
+
+#sidenav-collapse-main::-webkit-scrollbar-track
+{
+	border-radius: 7px;
+	background-color: #f8f9fa;
+}
+
+#sidenav-collapse-main::-webkit-scrollbar
+{
+	width: 7px;
+    height: 5px;
+	background-color: #f8f9fa;
+}
+
+#sidenav-collapse-main::-webkit-scrollbar-thumb
+{
+	border-radius: 10px;
+	background-color: #ebebeb;
+}
+
+::-webkit-scrollbar-track
+{
 	border-radius: 10px;
 	background-color: #ebebeb;
 }
@@ -108,44 +146,6 @@
 #sidenav-collapse-main::-webkit-scrollbar-thumb
 {
 	border-radius: 7px;
-	background-color: #ebebeb;
-}
-
-::-webkit-scrollbar-track
-{
-	border-radius: 10px;
-	background-color: #ebebeb;
-}
-
-::-webkit-scrollbar
-{
-	width: 9px;
-    height: 9px;
-	background-color: #F5F5F5;
-}
-
-::-webkit-scrollbar-thumb
-{
-	border-radius: 10px;
-	background-color: #c4c4c4;
-}
-
-#sidenav-collapse-main::-webkit-scrollbar-track
-{
-	border-radius: 10px;
-	background-color: #f8f9fa;
-}
-
-#sidenav-collapse-main::-webkit-scrollbar
-{
-	width: 7px;
-    height: 7px;
-	background-color: #f8f9fa;
-}
-
-#sidenav-collapse-main::-webkit-scrollbar-thumb
-{
-	border-radius: 10px;
 	background-color: #ebebeb;
 }
 

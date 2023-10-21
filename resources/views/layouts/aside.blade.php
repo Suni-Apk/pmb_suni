@@ -120,9 +120,9 @@
             <li class="nav-item">
                 <a data-bs-toggle="collapse" href="#admin" class="nav-link {{Route::is('admin.admin.*') ? 'active' : ''}}" aria-controls="admin" role="button" aria-expanded="false">
                     <div class="icon icon-sm shadow border-radius-md bg-white text-center d-flex align-items-center justify-content-center  me-2">
-                        <i class="ni ni-paper-diploma"></i>
+                        <i class="fas fa-user-cog"></i>
                     </div>
-                    <span class="nav-link-text ms-1">Admin</span>
+                    <span class="nav-link-text ms-1"> Admin </span>
                 </a>
                 <div class="collapse" id="admin">
                     <ul class="nav ms-4 ps-3">
