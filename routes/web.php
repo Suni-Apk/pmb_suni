@@ -111,4 +111,12 @@ Route::prefix('template')->group(function () {
     Route::get('/change-password', function () {
         return view('admin.user.change-password');
     })->name('change-password');
+
+    Route::get('/wizard', function () {
+        return view('layouts.template.wizard');
+    })->name('wizard');
 });
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

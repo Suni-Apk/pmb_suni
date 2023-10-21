@@ -13,8 +13,7 @@
     <div class="collapse navbar-collapse w-auto min-vh-75" id="sidenav-collapse-main">
         <ul class="navbar-nav overflow-x-hidden" id="accordionSidebar">
             <li class="nav-item">
-                <a class="nav-link {{ Route::is('admin.dashboard') ? 'active' : '' }}"
-                    href="{{ route('admin.dashboard') }}">
+                <a class="nav-link active" href="{{ route('admin.dashboard') }}">
                     <div
                         class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
                         <i class="fas fa-th-large"></i>
@@ -83,39 +82,47 @@
                 </div>
             </li>
 
-            <!-- tahun ajaran -->
+            <!-- mata kuliah -->
             <li class="nav-item">
-                <a data-bs-toggle="collapse" href="#angkatan" class="nav-link" aria-controls="angkatan" role="button" aria-expanded="false">
-                    <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center d-flex align-items-center justify-content-center  me-2">
+                <a data-bs-toggle="collapse" href="#matkul" class="nav-link" aria-controls="matkul" role="button" aria-expanded="false">
+                    <div class="icon icon-sm shadow border-radius-md bg-white text-center d-flex align-items-center justify-content-center  me-2">
                         <i class="ni ni-hat-3"></i>
                     </div>
-                    <span class="nav-link-text ms-1"> Tahun Ajaran </span>
+                    <span class="nav-link-text ms-1"> Mata Kuliah </span>
                 </a>
-                <div class="collapse" id="angkatan">
+                <div class="collapse" id="matkul">
                     <ul class="nav ms-4 ps-3">
                         <li class="nav-item ">
                             <a class="nav-link " href="">
                                 <span class="sidenav-mini-icon d-none d-xl-block"><i class="fas fa-border-all"></i></span>
-                                <span class="sidenav-normal"> Daftar Tahun Ajaran </span>
+                                <span class="sidenav-normal"> Daftar Mata Kuliah </span>
                             </a>
                         </li>
                         <li class="nav-item ">
                             <a class="nav-link " href="">
                                 <span class="sidenav-mini-icon d-none d-xl-block"><i class="fas fa-plus"></i></span>
-                                <span class="sidenav-normal"> Tambah Tahun Ajaran </span>
+                                <span class="sidenav-normal"> Tambah Mata Kuliah </span>
                             </a>
                         </li>
                     </ul>
                 </div>
             </li>
-
-            <!-- jurusan -->
+            
+            {{-- users --}}
             <li class="nav-item">
-                <a data-bs-toggle="collapse" href="#jurusan" class="nav-link" aria-controls="jurusan" role="button" aria-expanded="false">
+                <ul class="nav-link pb-0 mb-0">
+                    <span class="sidenav-mini-icon d-none d-xl-block" style="color:rgb(196, 196, 196)"><i class="fas fa-users"></i></span>
+                    <span class="sidenav-normal text-uppercase text-xs ms-2 font-weight-bolder"> users </span>
+                </ul>
+            </li>
+
+            <!-- admin -->
+            <li class="nav-item">
+                <a data-bs-toggle="collapse" href="#admin" class="nav-link" aria-controls="admin" role="button" aria-expanded="false">
                     <div class="icon icon-sm shadow border-radius-md bg-white text-center d-flex align-items-center justify-content-center  me-2">
-                        <i class="ni ni-paper-diploma"></i>
+                        <i class="fas fa-user-cog"></i>
                     </div>
-                    <span class="nav-link-text ms-1">Admin</span>
+                    <span class="nav-link-text ms-1"> Admin </span>
                 </a>
                 <div class="collapse" id="admin">
                     <ul class="nav ms-4 ps-3">
@@ -253,6 +260,17 @@
                         </li>
                     </ul>
                 </div>
+            </li>
+
+            <!-- report -->
+            <li class="nav-item">
+                <a class="nav-link " href="">
+                    <div
+                        class="icon icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
+                        <i class="fas fa-flag"></i>
+                    </div>
+                    <span class="nav-link-text ms-1">Laporan</span>
+                </a>
             </li>
 
             <!-- settings -->

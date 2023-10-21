@@ -4,6 +4,30 @@
 
 @section('content')
 <div class="row">
+	<div class="col-12 mb-4">
+		<div id="banner" class="card overflow-hidden shadow-lg">
+			<style>
+				#banner {
+					 background-image: linear-gradient(310deg,rgb(21, 109, 5) 0%,rgb(49, 190, 24) 70%);
+				}
+				#bannerInner {
+					border: 1px solid rgb(125, 245, 104);
+					border-radius: 1rem;
+					margin: .7rem;
+				}
+		  </style>
+			<div id="bannerInner" class="card-body min-vh-35 d-flex justify-content-center flex-column align-items-center text-center">
+				<div class="card-title" style="max-width: 40rem">
+					<h3 class="text-white">
+						Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ea, facilis?
+					</h3>
+				</div>
+				<div class="card-text text-light" style="max-width: 55rem">
+					Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quibusdam voluptates excepturi, consectetur nobis atque doloribus eaque corporis eveniet ad? Enim?
+				</div>
+			</div>
+		</div>
+	</div>
     <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
       <div class="card">
         <div class="card-body p-3">

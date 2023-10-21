@@ -1,6 +1,5 @@
 {{-- navbar --}}
-<nav class="navbar navbar-main navbar-fixed navbar-expand-lg px-0 mx-4 shadow-none border-radius-xl position-sticky blur shadow-blur mt-4 left-auto top-1 z-index-sticky"
-    id="navbarBlur" navbar-scroll="true">
+<nav class="navbar navbar-main navbar-fixed navbar-expand-lg px-0 mx-4 shadow-none border-radius-xl position-sticky blur shadow-blur mt-4 left-auto top-1 z-index-sticky" id="navbarBlur" navbar-scroll="true">
     <div class="container-fluid py-1 px-3">
         <span role="button" class="sidenav-toggler sidenav-toggler-inner d-xl-block d-none">
             <span class="nav-link text-white p-0">
@@ -73,7 +72,8 @@
                             </a>
                         </li>
                         <li>
-                            <a class="dropdown-item border-radius-md" href="{{ route('mahasiswa.logout') }}">
+                            <a class="dropdown-item border-radius-md" 
+                                href="{{ route('mahasiswa.logout') }}">
                                 <div class="d-flex">
                                     <p class="mb-0 fw-bold">Logout</p>
                                 </div>
