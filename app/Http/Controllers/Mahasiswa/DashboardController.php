@@ -56,4 +56,33 @@ class DashboardController extends Controller
 
         return redirect()->route('mahasiswa.profile');
     }
+
+    public function change_password()
+    {
+        return view('mahasiswa.profile.change-password');
+    }
+
+    public function change_password_process(Request $request)
+    {
+        $user = User::find(Auth::user()->id);
+        $messages = [
+            'old_password.required' => 'Password Lama Wajib Diisi',
+            'password.confirmed' => 'Password Harus Sama Dengan Password Confirmasi'
+        ];
+        $request->validate([
+            'old_password' => 'required',
+            'password' => 'required|confirmed'
+        ],$messages);
+
+        if (!Hash::check($request->old_password, $user->password)) {
+            return redirect()->back()->withErrors(['old_password' => 'Password Lama Kamu Salah'])->withInput();
+        }
+
+        $user->update([
+            'password' => Hash::make($request->password)
+        ]);
+
+        return redirect()->route('mahasiswa.profile');
+    }
+
 }
