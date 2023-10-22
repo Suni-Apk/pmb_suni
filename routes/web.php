@@ -90,6 +90,7 @@ Route::prefix('/mahasiswa')->middleware(['auth', 'mahasiswa'])->name('mahasiswa.
     Route::prefix('tagihan')->name('tagihan.')->group(function () {
         Route::get('/',[TagihanController::class,'index'])->name('index');
         Route::get('/detail/{name}',[TagihanController::class,'detail'])->name('detail');
+        Route::get('/detail-SPP/{name}',TagihanController::class, 'detail_spp')->name('detail.spp');
     });
 
     //matkul mahasiswa
@@ -135,8 +136,6 @@ Route::prefix('template')->group(function () {
     Route::get('/virtual-reality', function () {
         return view('layouts.template.virtual-reality');
     })->name('virtual-reality');
-
-
 
     // Route::get('/profile', function () {
     //     return view('admin.user.profile');
