@@ -131,7 +131,3 @@ Route::prefix('template')->group(function () {
         return view('layouts.template.wizard');
     })->name('wizard');
 });
-
-Auth::routes();
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
