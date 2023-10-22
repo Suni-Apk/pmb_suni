@@ -103,9 +103,9 @@ Route::prefix('template')->group(function () {
         return view('layouts.template.virtual-reality');
     })->name('virtual-reality');
 
-    Route::get('/profile', function () {
-        return view('admin.user.profile');
-    })->name('profile');
+    // Route::get('/profile', function () {
+    //     return view('admin.user.profile');
+    // })->name('profile');
 
     Route::get('/edit-profile', function () {
         return view('admin.user.edit-profile');
