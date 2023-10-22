@@ -112,8 +112,12 @@
                     </ul>
                 </div>
             </li>
+<<<<<<< HEAD
 
             <!-- jurusan -->
+=======
+            <!--Mahasiswa-->
+>>>>>>> 647ee97 (tes)
             <li class="nav-item">
                 <a data-bs-toggle="collapse" href="#jurusan" class="nav-link" aria-controls="jurusan" role="button" aria-expanded="false">
                     <div class="icon icon-sm shadow border-radius-md bg-white text-center d-flex align-items-center justify-content-center  me-2">
