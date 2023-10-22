@@ -94,7 +94,9 @@
                 <div class="card-body p-3">
                     <hr class="horizontal gray-light">
                     <ul class="list-group">
-                        <form action="">
+                        <form action="{{ route('admin.change_password_proses', $auth->id) }}" method="POST">
+                            @csrf
+                            @method('PUT')
                             <div class="form-group">
                                 <label for="">Current password</label>
                                 <div class="input-group">
@@ -103,14 +105,26 @@
                                     <button class="btn btn-outline-secondary mb-0" type="button" id="showOldPassword"><i
                                             class="fas fa-low-vision"></i> </button>
                                 </div>
+                                @if (Session::has('old_password2'))
+                                    <div class="text-danger">{{ Session::get('old_password2') }}</div>
+                                @endif
+                                @error('old_password')
+                                    <div class="text-danger">{{ $message }}</div>
+                                @enderror
                             </div>
                             <div class="form-group">
                                 <label for="">New password</label>
-                                <input type="password" class="form-control form-check">
+                                <input type="password" name="password" class="form-control form-check">
+                                @error('password')
+                                    <div class="text-danger">{{ $message }}</div>
+                                @enderror
                             </div>
                             <div class="form-group">
-                                <label for="">New password</label>
-                                <input type="password" class="form-control form-check">
+                                <label for="">Confirmation password</label>
+                                <input type="password" class="form-control form-check" name="password_confirmation">
+                                @error('password_confirmation')
+                                    <div class="text-danger">{{ $message }}</div>
+                                @enderror
                             </div>
                             <button class="btn btn-primary" type="submit">Change</button>
 

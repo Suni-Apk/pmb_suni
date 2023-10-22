@@ -13,7 +13,7 @@
     @stack('styles')
 </head>
 
-<body class="g-sidenav-show bg-gray-100">
+<body class="g-sidenav-show bg-gray-100 g-sidenav-hidden">
     @include('layouts.aside')
 
     <main class="main-content position-relative min-height-screen h-auto border-radius-lg">
