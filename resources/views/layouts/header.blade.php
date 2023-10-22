@@ -73,7 +73,11 @@
                             </a>
                         </li>
                         <li>
+<<<<<<< HEAD
                             <a class="dropdown-item border-radius-md" href="">
+=======
+                            <a class="dropdown-item border-radius-md" href="{{ route('logout') }}">
+>>>>>>> c36d872 (update)
                                 <div class="d-flex">
                                     <p class="mb-0 fw-bold">Logout</p>
                                 </div>
