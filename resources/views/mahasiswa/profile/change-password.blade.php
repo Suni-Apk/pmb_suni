@@ -1,17 +1,17 @@
 @extends('layouts.master')
 
-@section('title', 'Profile')
+@section('title', 'Change Password')
 
 @section('content')
     <div class="page-header min-height-300 border-radius-xl mt-4"
-        style="background-image: url('../soft-ui-dashboard-main/assets/img/curved-images/curved0.jpg'); background-position-y: 50%;">
+        style="background-image: url('/soft-ui-dashboard-main/assets/img/curved-images/curved0.jpg'); background-position-y: 50%;">
         <span class="mask bg-gradient-primary opacity-6"></span>
     </div>
     <div class="card card-body blur shadow-blur mx-4 mt-n6 overflow-hidden">
         <div class="row gx-4">
             <div class="col-auto">
                 <div class="avatar avatar-xl position-relative">
-                    <img src="../soft-ui-dashboard-main/assets/img/bruce-mars.jpg" alt="profile_image"
+                    <img src="/soft-ui-dashboard-main/assets/img/bruce-mars.jpg" alt="profile_image"
                         class="w-100 border-radius-lg shadow-sm">
                 </div>
             </div>
@@ -29,7 +29,7 @@
                 <div class="nav-wrapper position-relative end-0">
                     <ul class="nav nav-pills nav-fill bg-transparent" role="tablist">
                         <li class="nav-item">
-                            <a class="nav-link mb-0 px-0 py-1 active " data-bs-toggle="tab" href="javascript:;"
+                            <a class="nav-link mb-0 px-0 py-1 active"  href="{{route('mahasiswa.profile')}}"
                                 role="tab" aria-selected="true">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16px" height="16px"
                                     viewBox="0 0 512 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
@@ -45,7 +45,7 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link mb-0 px-0 py-1"  href="{{route('mahasiswa.change_password',Auth::user()->name)}}" role="tab"
+                            <a class="nav-link mb-0 px-0 py-1 active"  href="{{route('mahasiswa.change_password',Auth::user()->name)}}" role="tab"
                                 aria-selected="true">
                                 <svg class="text-dark" width="16px" height="16px" viewBox="0 0 40 44" version="1.1"
                                     xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -81,10 +81,10 @@
                 <div class="card-header pb-0 p-3">
                     <div class="row">
                         <div class="col-md-8 d-flex align-items-center">
-                            <h6 class="mb-0">Profile Information</h6>
+                            <h6 class="mb-0">Change password</h6>
                         </div>
                         <div class="col-md-4 text-end">
-                            <a href="{{ route('mahasiswa.edit-profile',Auth::user()->name) }}">
+                            <a href="{{ route('edit-profile') }}">
                                 <i class="fas fa-user-edit text-secondary text-sm" data-bs-toggle="tooltip"
                                     data-bs-placement="top" title="Edit Profile"></i>
                             </a>
@@ -94,30 +94,55 @@
                 <div class="card-body p-3">
                     <hr class="horizontal gray-light">
                     <ul class="list-group">
-                        <li class="list-group-item border-0 ps-0 pt-0 text-sm"><strong class="text-dark">Full
-                                Name:</strong>
-                            &nbsp; {{Auth::user()->name}}</li>
-                        <li class="list-group-item border-0 ps-0 text-sm"><strong class="text-dark">No Tlp:</strong>
-                            &nbsp;
-                            {{Auth::user()->phone}}</li>
-                        @if (Auth::user()->email == false)
-                        <li class="list-group-item border-0 ps-0 text-sm"><strong class="text-dark">Email:</strong> &nbsp;
-                            Lengkapi Email</li>
-                        @else
-                        <li class="list-group-item border-0 ps-0 text-sm"><strong class="text-dark">Email:</strong> &nbsp;
-                            {{Auth::user()->email}}</li>
-                        @endif
-                        <li class="list-group-item border-0 ps-0 text-sm"><strong class="text-dark">Tanggal Lahir:</strong>
-                            &nbsp;
-                            {{Auth::user()->birthdate}}
-                        </li>
-                        <li class="list-group-item border-0 ps-0 text-sm"><strong class="text-dark">Gender:</strong>
-                            &nbsp;
-                            {{Auth::user()->gender}}
-                        </li>
+                        <form action="{{route('mahasiswa.change_password.process')}}" method="POST">
+                            @csrf
+                            @method('PUT')
+                            <div class="form-group">
+                                <label for="">Current password</label>
+                                <div class="input-group">
+                                    <input class="form-control @error('old_password') is-invalid @enderror" type="password" id="password" name="old_password"
+                                        placeholder="****" />
+                                    <button class="btn btn-outline-secondary mb-0" type="button" id="showOldPassword"><i
+                                            class="fas fa-low-vision"></i> </button>
+                                </div>
+                                @error('old_password')
+                                    <label for="" class="text-danger">{{$message}}</label>
+                                @enderror
+                            </div>
+                            <div class="form-group">
+                                <label for="">New password</label>
+                                <input type="password" name="password" class="form-control @error('password') is-invalid @enderror">
+                                @error('password')
+                                    <label for="" class="text-danger">{{$message}}</label>
+                                @enderror
+                            </div>
+                            <div class="form-group">
+                                <label for="">New password Confirmation</label>
+                                <input type="password" name="password_confirmation" class="form-control @error('password_confirmation') is-invalid @enderror">
+                                @error('password_confirmation')
+                                    <label for="" class="text-danger">{{$message}}</label>
+                                @enderror
+                            </div>
+                            <button class="btn btn-primary" type="submit">Change</button>
+
+                        </form>
                     </ul>
                 </div>
             </div>
         </div>
     </div>
 @endsection
+@push('scripts')
+    <script>
+        const oldPasswordInput = document.getElementById('password');
+        const showOldPasswordButton = document.getElementById('showOldPassword');
+
+        showOldPasswordButton.addEventListener('click', function() {
+            if (oldPasswordInput.type === 'password') {
+                oldPasswordInput.type = 'text';
+            } else {
+                oldPasswordInput.type = 'password';
+            }
+        });
+    </script>
+@endpush
