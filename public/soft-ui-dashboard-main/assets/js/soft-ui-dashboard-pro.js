@@ -12,17 +12,17 @@
 // The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
 "use strict";
-!function() {
-    var e, t;
-    -1 < navigator.platform.indexOf("Win") && (document.getElementsByClassName("main-content")[0] && (e = document.querySelector(".main-content"),
-    new PerfectScrollbar(e)),
-    document.getElementsByClassName("sidenav")[0] && (e = document.querySelector(".sidenav"),
-    new PerfectScrollbar(e)),
-    document.getElementsByClassName("navbar-collapse")[0] && (t = document.querySelector(".navbar:not(.navbar-expand-lg) .navbar-collapse"),
-    new PerfectScrollbar(t)),
-    document.getElementsByClassName("fixed-plugin")[0]) && (t = document.querySelector(".fixed-plugin"),
-    new PerfectScrollbar(t))
-}(),
+// !function() {
+//     var e, t;
+//     -1 < navigator.platform.indexOf("Win") && (document.getElementsByClassName("main-content")[0] && (e = document.querySelector(".main-content"),
+//     new PerfectScrollbar(e)),
+//     document.getElementsByClassName("sidenav")[0] && (e = document.querySelector(".sidenav"),
+//     new PerfectScrollbar(e)),
+//     document.getElementsByClassName("navbar-collapse")[0] && (t = document.querySelector(".navbar:not(.navbar-expand-lg) .navbar-collapse"),
+//     new PerfectScrollbar(t)),
+//     document.getElementsByClassName("fixed-plugin")[0]) && (t = document.querySelector(".fixed-plugin"),
+//     new PerfectScrollbar(t))
+// }(),
 document.getElementById("navbarBlur") && navbarBlurOnScroll("navbarBlur");
 var calendarEl, today, mYear, weekday, mDay, m, d, calendar, allInputs, fixedPlugin, fixedPluginButton, fixedPluginButtonNav, fixedPluginCard, fixedPluginCloseButton, navbar, buttonNavbarFixed, popoverTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="popover"]')), popoverList = popoverTriggerList.map(function(e) {
     return new bootstrap.Popover(e)

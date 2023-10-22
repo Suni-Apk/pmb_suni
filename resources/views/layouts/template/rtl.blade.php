@@ -111,9 +111,9 @@
             </div>
             <div class="col-lg-4 me-auto ms-0 text-center">
               <div class="bg-gradient-primary border-radius-lg min-height-200">
-                <img src="../soft-ui-dashboard-main/assets/img/shapes/waves-white.svg" class="position-absolute h-100 top-0 d-md-block d-none" alt="waves">
+                <img src="/soft-ui-dashboard-main/assets/img/shapes/waves-white.svg" class="position-absolute h-100 top-0 d-md-block d-none" alt="waves">
                 <div class="position-relative pt-5 pb-4">
-                  <img class="max-width-500 w-100 position-relative z-index-2" src="../soft-ui-dashboard-main/assets/img/illustrations/rocket-white.png">
+                  <img class="max-width-500 w-100 position-relative z-index-2" src="/soft-ui-dashboard-main/assets/img/illustrations/rocket-white.png">
                 </div>
               </div>
             </div>
@@ -123,7 +123,7 @@
     </div>
     <div class="col-lg-5">
       <div class="card h-100 p-3">
-        <div class="overflow-hidden position-relative border-radius-lg bg-cover h-100" style="background-image: url('../soft-ui-dashboard-main/assets/img/ivancik.jpg');">
+        <div class="overflow-hidden position-relative border-radius-lg bg-cover h-100" style="background-image: url('/soft-ui-dashboard-main/assets/img/ivancik.jpg');">
           <span class="mask bg-gradient-dark"></span>
           <div class="card-body position-relative z-index-1 p-3 h-100">
             <div class="d-flex flex-column h-100">
@@ -314,7 +314,7 @@
                   <td>
                     <div class="d-flex px-2 py-1">
                       <div>
-                        <img src="../soft-ui-dashboard-main/assets/img/small-logos/logo-xd.svg" class="avatar avatar-sm ms-3">
+                        <img src="/soft-ui-dashboard-main/assets/img/small-logos/logo-xd.svg" class="avatar avatar-sm ms-3">
                       </div>
                       <div class="d-flex flex-column justify-content-center">
                         <h6 class="mb-0 text-sm">Soft UI XD الإصدار</h6>
@@ -324,16 +324,16 @@
                   <td>
                     <div class="avatar-group mt-2">
                       <a href="javascript:;" class="avatar avatar-xs rounded-circle" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Ryan Tompson">
-                        <img alt="Image placeholder" src="../soft-ui-dashboard-main/assets/img/team-1.jpg">
+                        <img alt="Image placeholder" src="/soft-ui-dashboard-main/assets/img/team-1.jpg">
                       </a>
                       <a href="javascript:;" class="avatar avatar-xs rounded-circle" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Romina Hadid">
-                        <img alt="Image placeholder" src="../soft-ui-dashboard-main/assets/img/team-2.jpg">
+                        <img alt="Image placeholder" src="/soft-ui-dashboard-main/assets/img/team-2.jpg">
                       </a>
                       <a href="javascript:;" class="avatar avatar-xs rounded-circle" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Alexander Smith">
-                        <img alt="Image placeholder" src="../soft-ui-dashboard-main/assets/img/team-3.jpg">
+                        <img alt="Image placeholder" src="/soft-ui-dashboard-main/assets/img/team-3.jpg">
                       </a>
                       <a href="javascript:;" class="avatar avatar-xs rounded-circle" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Jessica Doe">
-                        <img alt="Image placeholder" src="../soft-ui-dashboard-main/assets/img/team-4.jpg">
+                        <img alt="Image placeholder" src="/soft-ui-dashboard-main/assets/img/team-4.jpg">
                       </a>
                     </div>
                   </td>
@@ -357,7 +357,7 @@
                   <td>
                     <div class="d-flex px-2 py-1">
                       <div>
-                        <img src="../soft-ui-dashboard-main/assets/img/small-logos/logo-atlassian.svg" class="avatar avatar-sm ms-3">
+                        <img src="/soft-ui-dashboard-main/assets/img/small-logos/logo-atlassian.svg" class="avatar avatar-sm ms-3">
                       </div>
                       <div class="d-flex flex-column justify-content-center">
                         <h6 class="mb-0 text-sm">أضف مسار التقدم إلى التطبيق الداخلي</h6>
@@ -367,10 +367,10 @@
                   <td>
                     <div class="avatar-group mt-2">
                       <a href="javascript:;" class="avatar avatar-xs rounded-circle" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Romina Hadid">
-                        <img alt="Image placeholder" src="../soft-ui-dashboard-main/assets/img/team-2.jpg">
+                        <img alt="Image placeholder" src="/soft-ui-dashboard-main/assets/img/team-2.jpg">
                       </a>
                       <a href="javascript:;" class="avatar avatar-xs rounded-circle" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Jessica Doe">
-                        <img alt="Image placeholder" src="../soft-ui-dashboard-main/assets/img/team-4.jpg">
+                        <img alt="Image placeholder" src="/soft-ui-dashboard-main/assets/img/team-4.jpg">
                       </a>
                     </div>
                   </td>
@@ -394,7 +394,7 @@
                   <td>
                     <div class="d-flex px-2 py-1">
                       <div>
-                        <img src="../soft-ui-dashboard-main/assets/img/small-logos/logo-slack.svg" class="avatar avatar-sm ms-3">
+                        <img src="/soft-ui-dashboard-main/assets/img/small-logos/logo-slack.svg" class="avatar avatar-sm ms-3">
                       </div>
                       <div class="d-flex flex-column justify-content-center">
                         <h6 class="mb-0 text-sm">إصلاح أخطاء النظام الأساسي</h6>
@@ -404,10 +404,10 @@
                   <td>
                     <div class="avatar-group mt-2">
                       <a href="javascript:;" class="avatar avatar-xs rounded-circle" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Romina Hadid">
-                        <img alt="Image placeholder" src="../soft-ui-dashboard-main/assets/img/team-3.jpg">
+                        <img alt="Image placeholder" src="/soft-ui-dashboard-main/assets/img/team-3.jpg">
                       </a>
                       <a href="javascript:;" class="avatar avatar-xs rounded-circle" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Jessica Doe">
-                        <img alt="Image placeholder" src="../soft-ui-dashboard-main/assets/img/team-1.jpg">
+                        <img alt="Image placeholder" src="/soft-ui-dashboard-main/assets/img/team-1.jpg">
                       </a>
                     </div>
                   </td>
@@ -431,7 +431,7 @@
                   <td>
                     <div class="d-flex px-2 py-1">
                       <div>
-                        <img src="../soft-ui-dashboard-main/assets/img/small-logos/logo-spotify.svg" class="avatar avatar-sm ms-3">
+                        <img src="/soft-ui-dashboard-main/assets/img/small-logos/logo-spotify.svg" class="avatar avatar-sm ms-3">
                       </div>
                       <div class="d-flex flex-column justify-content-center">
                         <h6 class="mb-0 text-sm">إطلاق تطبيق الهاتف المحمول الخاص بنا</h6>
@@ -441,16 +441,16 @@
                   <td>
                     <div class="avatar-group mt-2">
                       <a href="javascript:;" class="avatar avatar-xs rounded-circle" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Ryan Tompson">
-                        <img alt="Image placeholder" src="../soft-ui-dashboard-main/assets/img/team-4.jpg">
+                        <img alt="Image placeholder" src="/soft-ui-dashboard-main/assets/img/team-4.jpg">
                       </a>
                       <a href="javascript:;" class="avatar avatar-xs rounded-circle" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Romina Hadid">
-                        <img alt="Image placeholder" src="../soft-ui-dashboard-main/assets/img/team-3.jpg">
+                        <img alt="Image placeholder" src="/soft-ui-dashboard-main/assets/img/team-3.jpg">
                       </a>
                       <a href="javascript:;" class="avatar avatar-xs rounded-circle" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Alexander Smith">
-                        <img alt="Image placeholder" src="../soft-ui-dashboard-main/assets/img/team-4.jpg">
+                        <img alt="Image placeholder" src="/soft-ui-dashboard-main/assets/img/team-4.jpg">
                       </a>
                       <a href="javascript:;" class="avatar avatar-xs rounded-circle" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Jessica Doe">
-                        <img alt="Image placeholder" src="../soft-ui-dashboard-main/assets/img/team-1.jpg">
+                        <img alt="Image placeholder" src="/soft-ui-dashboard-main/assets/img/team-1.jpg">
                       </a>
                     </div>
                   </td>
@@ -474,7 +474,7 @@
                   <td>
                     <div class="d-flex px-2 py-1">
                       <div>
-                        <img src="../soft-ui-dashboard-main/assets/img/small-logos/logo-jira.svg" class="avatar avatar-sm ms-3">
+                        <img src="/soft-ui-dashboard-main/assets/img/small-logos/logo-jira.svg" class="avatar avatar-sm ms-3">
                       </div>
                       <div class="d-flex flex-column justify-content-center">
                         <h6 class="mb-0 text-sm">أضف صفحة التسعير الجديدة</h6>
@@ -484,7 +484,7 @@
                   <td>
                     <div class="avatar-group mt-2">
                       <a href="javascript:;" class="avatar avatar-xs rounded-circle" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Ryan Tompson">
-                        <img alt="Image placeholder" src="../soft-ui-dashboard-main/assets/img/team-4.jpg">
+                        <img alt="Image placeholder" src="/soft-ui-dashboard-main/assets/img/team-4.jpg">
                       </a>
                     </div>
                   </td>
@@ -508,7 +508,7 @@
                   <td>
                     <div class="d-flex px-2 py-1">
                       <div>
-                        <img src="../soft-ui-dashboard-main/assets/img/small-logos/logo-invision.svg" class="avatar avatar-sm ms-3">
+                        <img src="/soft-ui-dashboard-main/assets/img/small-logos/logo-invision.svg" class="avatar avatar-sm ms-3">
                       </div>
                       <div class="d-flex flex-column justify-content-center">
                         <h6 class="mb-0 text-sm">إعادة تصميم متجر جديد على الإنترنت</h6>
@@ -518,10 +518,10 @@
                   <td>
                     <div class="avatar-group mt-2">
                       <a href="javascript:;" class="avatar avatar-xs rounded-circle" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Ryan Tompson">
-                        <img alt="Image placeholder" src="../soft-ui-dashboard-main/assets/img/team-1.jpg">
+                        <img alt="Image placeholder" src="/soft-ui-dashboard-main/assets/img/team-1.jpg">
                       </a>
                       <a href="javascript:;" class="avatar avatar-xs rounded-circle" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Jessica Doe">
-                        <img alt="Image placeholder" src="../soft-ui-dashboard-main/assets/img/team-4.jpg">
+                        <img alt="Image placeholder" src="/soft-ui-dashboard-main/assets/img/team-4.jpg">
                       </a>
                     </div>
                   </td>

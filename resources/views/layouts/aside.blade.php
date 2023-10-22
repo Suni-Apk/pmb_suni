@@ -10,23 +10,31 @@
         </a>
     </div>
     <hr class="horizontal dark mt-0">
-    <div class="collapse navbar-collapse w-auto min-vh-70" id="sidenav-collapse-main">
+    <div class="collapse navbar-collapse w-auto min-vh-75" id="sidenav-collapse-main">
         <ul class="navbar-nav overflow-x-hidden" id="accordionSidebar">
             <li class="nav-item">
                 <a class="nav-link active" href="{{ route('admin.dashboard') }}">
                     <div
-                        class="icon icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
+                        class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
                         <i class="fas fa-th-large"></i>
                     </div>
                     <span class="nav-link-text ms-1">Dashboard</span>
                 </a>
             </li>
 
-            <!-- kuliah -->
+            {{-- academy --}}
             <li class="nav-item">
-                <a data-bs-toggle="collapse" href="#university" class="nav-link" aria-controls="university" role="button" aria-expanded="false">
-                    <div class="icon icon-sm shadow border-radius-md bg-white text-center d-flex align-items-center justify-content-center  me-2">
-                        <i class="fas fa-university"></i>
+                <ul class="nav-link pb-0 mb-0">
+                    <span class="sidenav-mini-icon d-none d-xl-block"><i class="fas fa-university"></i></span>
+                    <span class="sidenav-normal text-uppercase text-xs ms-2 font-weight-bolder"> academy </span>
+                </ul>
+            </li>
+
+            <!-- tahun ajaran -->
+            <li class="nav-item">
+                <a data-bs-toggle="collapse" href="#angkatan" class="nav-link" aria-controls="angkatan" role="button" aria-expanded="false">
+                    <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center d-flex align-items-center justify-content-center  me-2">
+                        <i class="ni ni-hat-3"></i>
                     </div>
                     <span class="nav-link-text ms-1">University</span>
                     </span>

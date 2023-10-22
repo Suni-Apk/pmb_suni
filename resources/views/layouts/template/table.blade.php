@@ -32,7 +32,7 @@
                     <td>
                       <div class="d-flex px-2 py-1">
                         <div>
-                          <img src="../soft-ui-dashboard-main/assets/img/team-2.jpg" class="avatar avatar-sm me-3" alt="user1">
+                          <img src="/soft-ui-dashboard-main/assets/img/team-2.jpg" class="avatar avatar-sm me-3" alt="user1">
                         </div>
                         <div class="d-flex flex-column justify-content-center">
                           <h6 class="mb-0 text-sm">John Michael</h6>
@@ -47,22 +47,22 @@
                       <p class="text-xs font-weight-bold mb-0">Laki Laki</p>
                       <p class="text-xs text-secondary mb-0">ADMIN</p>
                     </td>
-                    <td class="align-middle text-center text-lg">
+                    <td class="align-middle text-center">
                     <span class="badge badge-sm bg-gradient-success">AKTIF</span>
                     </td>
                     <td class="align-middle text-center">
                       <span class="text-secondary text-xs font-weight-bold">23/04/18</span>
                     </td>
                     <td class="align-middle text-center"> 
-                      <a href="" class="badge badge-sm bg-gradient-info font-weight-bold text-xs mx-2" data-toggle="tooltip" data-original-title="Edit user">
+                      <a href="" class="badge badge-sm bg-gradient-info text-xxs mx-1" data-toggle="tooltip" data-original-title="detail">
                         Detail
                       </a>
 
-                      <a href="" class="badge badge-sm bg-gradient-secondary font-weight-bold text-xs mx-2" data-toggle="tooltip" data-original-title="Edit user">
+                      <a href="" class="badge badge-sm bg-gradient-secondary text-xxs mx-1" data-toggle="tooltip" data-original-title="Edit">
                         Ubah
                       </a>
 
-                      <a href="" class="badge badge-sm bg-gradient-danger font-weight-bold text-xs mx-2" data-toggle="tooltip" data-original-title="Edit user">
+                      <a href="" class="badge badge-sm bg-gradient-danger text-xxs mx-1" data-toggle="tooltip" data-original-title="hapus">
                         Hapus
                       </a>
                     </td>
