@@ -67,5 +67,6 @@ class Kernel extends HttpKernel
         'role' => \App\Http\Middleware\Role::class,
         'verify' => \App\Http\Middleware\VerifyOtp::class,
         'admin' => \App\Http\Middleware\AdminMiddleware::class,
+        'mahasiswa' => \App\Http\Middleware\MahasiswaMiddleware::class,
     ];
 }
