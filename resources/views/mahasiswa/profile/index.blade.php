@@ -45,7 +45,7 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link mb-0 px-0 py-1" data-bs-toggle="tab" href="{{route('mahasiswa.dashboard')}}" role="tab"
+                            <a class="nav-link mb-0 px-0 py-1"  href="{{route('mahasiswa.change_password',Auth::user()->name)}}" role="tab"
                                 aria-selected="true">
                                 <svg class="text-dark" width="16px" height="16px" viewBox="0 0 40 44" version="1.1"
                                     xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -100,12 +100,12 @@
                         <li class="list-group-item border-0 ps-0 text-sm"><strong class="text-dark">No Tlp:</strong>
                             &nbsp;
                             {{Auth::user()->phone}}</li>
-                        @if (Auth::user()->email = false)
-                        <li class="list-group-item border-0 ps-0 text-sm"><strong class="text-dark">Email:</strong> &nbsp;
-                            {{Auth::user()->email}}</li>
-                        @else
+                        @if (Auth::user()->email == false)
                         <li class="list-group-item border-0 ps-0 text-sm"><strong class="text-dark">Email:</strong> &nbsp;
                             Lengkapi Email</li>
+                        @else
+                        <li class="list-group-item border-0 ps-0 text-sm"><strong class="text-dark">Email:</strong> &nbsp;
+                            {{Auth::user()->email}}</li>
                         @endif
                         <li class="list-group-item border-0 ps-0 text-sm"><strong class="text-dark">Tanggal Lahir:</strong>
                             &nbsp;
