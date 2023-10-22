@@ -31,7 +31,7 @@
                     <td>
                       <div class="d-flex px-2 py-1">
                         <div>
-                          <img src="../soft-ui-dashboard-main/assets/img/team-2.jpg" class="avatar avatar-sm me-3" alt="user1">
+                          <img src="/soft-ui-dashboard-main/assets/img/team-2.jpg" class="avatar avatar-sm me-3" alt="user1">
                         </div>
                         <div class="d-flex flex-column justify-content-center">
                           <h6 class="mb-0 text-sm">John Michael</h6>
@@ -46,22 +46,22 @@
                       <p class="text-xs font-weight-bold mb-0">Laki Laki</p>
                       <p class="text-xs text-secondary mb-0">ADMIN</p>
                     </td>
-                    <td class="align-middle text-center text-lg">
+                    <td class="align-middle text-center">
                     <span class="badge badge-sm bg-gradient-success">AKTIF</span>
                     </td>
                     <td class="align-middle text-center">
                       <span class="text-secondary text-xs font-weight-bold">23/04/18</span>
                     </td>
                     <td class="align-middle text-center"> 
-                      <a href="" class="badge badge-sm bg-gradient-info font-weight-bold text-xs mx-2" data-toggle="tooltip" data-original-title="Edit user">
+                      <a href="" class="badge badge-sm bg-gradient-info text-xxs mx-1" data-toggle="tooltip" data-original-title="detail">
                         Detail
                       </a>
 
-                      <a href="" class="badge badge-sm bg-gradient-secondary font-weight-bold text-xs mx-2" data-toggle="tooltip" data-original-title="Edit user">
+                      <a href="" class="badge badge-sm bg-gradient-secondary text-xxs mx-1" data-toggle="tooltip" data-original-title="Edit">
                         Ubah
                       </a>
 
-                      <a href="" class="badge badge-sm bg-gradient-danger font-weight-bold text-xs mx-2" data-toggle="tooltip" data-original-title="Edit user">
+                      <a href="" class="badge badge-sm bg-gradient-danger text-xxs mx-1" data-toggle="tooltip" data-original-title="hapus">
                         Hapus
                       </a>
                     </td>
@@ -96,7 +96,7 @@
                     <td>
                       <div class="d-flex px-2">
                         <div>
-                          <img src="../soft-ui-dashboard-main/assets/img/small-logos/logo-spotify.svg" class="avatar avatar-sm rounded-circle me-2" alt="spotify">
+                          <img src="/soft-ui-dashboard-main/assets/img/small-logos/logo-spotify.svg" class="avatar avatar-sm rounded-circle me-2" alt="spotify">
                         </div>
                         <div class="my-auto">
                           <h6 class="mb-0 text-sm">Spotify</h6>
@@ -129,7 +129,7 @@
                     <td>
                       <div class="d-flex px-2">
                         <div>
-                          <img src="../soft-ui-dashboard-main/assets/img/small-logos/logo-invision.svg" class="avatar avatar-sm rounded-circle me-2" alt="invision">
+                          <img src="/soft-ui-dashboard-main/assets/img/small-logos/logo-invision.svg" class="avatar avatar-sm rounded-circle me-2" alt="invision">
                         </div>
                         <div class="my-auto">
                           <h6 class="mb-0 text-sm">Invision</h6>
@@ -162,7 +162,7 @@
                     <td>
                       <div class="d-flex px-2">
                         <div>
-                          <img src="../soft-ui-dashboard-main/assets/img/small-logos/logo-jira.svg" class="avatar avatar-sm rounded-circle me-2" alt="jira">
+                          <img src="/soft-ui-dashboard-main/assets/img/small-logos/logo-jira.svg" class="avatar avatar-sm rounded-circle me-2" alt="jira">
                         </div>
                         <div class="my-auto">
                           <h6 class="mb-0 text-sm">Jira</h6>
@@ -195,7 +195,7 @@
                     <td>
                       <div class="d-flex px-2">
                         <div>
-                          <img src="../soft-ui-dashboard-main/assets/img/small-logos/logo-slack.svg" class="avatar avatar-sm rounded-circle me-2" alt="slack">
+                          <img src="/soft-ui-dashboard-main/assets/img/small-logos/logo-slack.svg" class="avatar avatar-sm rounded-circle me-2" alt="slack">
                         </div>
                         <div class="my-auto">
                           <h6 class="mb-0 text-sm">Slack</h6>
@@ -228,7 +228,7 @@
                     <td>
                       <div class="d-flex px-2">
                         <div>
-                          <img src="../soft-ui-dashboard-main/assets/img/small-logos/logo-webdev.svg" class="avatar avatar-sm rounded-circle me-2" alt="webdev">
+                          <img src="/soft-ui-dashboard-main/assets/img/small-logos/logo-webdev.svg" class="avatar avatar-sm rounded-circle me-2" alt="webdev">
                         </div>
                         <div class="my-auto">
                           <h6 class="mb-0 text-sm">Webdev</h6>
@@ -261,7 +261,7 @@
                     <td>
                       <div class="d-flex px-2">
                         <div>
-                          <img src="../soft-ui-dashboard-main/assets/img/small-logos/logo-xd.svg" class="avatar avatar-sm rounded-circle me-2" alt="xd">
+                          <img src="/soft-ui-dashboard-main/assets/img/small-logos/logo-xd.svg" class="avatar avatar-sm rounded-circle me-2" alt="xd">
                         </div>
                         <div class="my-auto">
                           <h6 class="mb-0 text-sm">Adobe XD</h6>

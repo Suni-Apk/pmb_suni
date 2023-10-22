@@ -4,8 +4,8 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <link rel="apple-touch-icon" sizes="76x76" href="../soft-ui-dashboard-main/assets/img/apple-icon.png">
-  <link rel="icon" type="image/png" href="../soft-ui-dashboard-main/assets/img/favicon.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/soft-ui-dashboard-main/assets/img/apple-icon.png">
+  <link rel="icon" type="image/png" href="/soft-ui-dashboard-main/assets/img/favicon.png">
   <title>
     Soft UI Dashboard by Creative Tim
   </title>
@@ -64,7 +64,7 @@
                   <a class="dropdown-item border-radius-md" href="">
                     <div class="d-flex py-1">
                       <div class="my-auto">
-                        <img src="../soft-ui-dashboard-main/assets/img/team-2.jpg" class="avatar avatar-sm  me-3 ">
+                        <img src="/soft-ui-dashboard-main/assets/img/team-2.jpg" class="avatar avatar-sm  me-3 ">
                       </div>
                       <div class="d-flex flex-column justify-content-center">
                         <h6 class="text-sm font-weight-normal mb-1">
@@ -82,7 +82,7 @@
                   <a class="dropdown-item border-radius-md" href="">
                     <div class="d-flex py-1">
                       <div class="my-auto">
-                        <img src="../soft-ui-dashboard-main/assets/img/small-logos/logo-spotify.svg" class="avatar avatar-sm bg-gradient-dark  me-3 ">
+                        <img src="/soft-ui-dashboard-main/assets/img/small-logos/logo-spotify.svg" class="avatar avatar-sm bg-gradient-dark  me-3 ">
                       </div>
                       <div class="d-flex flex-column justify-content-center">
                         <h6 class="text-sm font-weight-normal mb-1">
@@ -134,12 +134,12 @@
     </nav>
     <!-- End Navbar -->
   </div>
-  <div class="border-radius-xl mt-3 mx-3 position-relative" style="background-image: url('../soft-ui-dashboard-main/assets/img/vr-bg.jpg') ; background-size: cover;">
+  <div class="border-radius-xl mt-3 mx-3 position-relative" style="background-image: url('/soft-ui-dashboard-main/assets/img/vr-bg.jpg') ; background-size: cover;">
     <aside class="sidenav navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-3 " id="sidenav-main">
       <div class="sidenav-header">
         <i class="fas fa-times p-3 cursor-pointer text-secondary opacity-5 position-absolute end-0 top-0 d-none d-xl-none" aria-hidden="true" id="iconSidenav"></i>
         <a class="navbar-brand m-0" href=" https://demos.creative-tim.com/soft-ui-dashboard/pages/dashboard.html " target="_blank">
-          <img src="../soft-ui-dashboard-main/assets/img/logo-ct-dark.png" class="navbar-brand-img h-100" alt="main_logo">
+          <img src="/soft-ui-dashboard-main/assets/img/logo-ct-dark.png" class="navbar-brand-img h-100" alt="main_logo">
           <span class="ms-1 font-weight-bold">Soft UI Dashboard</span>
         </a>
       </div>
@@ -147,7 +147,7 @@
       <div class="collapse navbar-collapse  w-auto " id="sidenav-collapse-main">
         <ul class="navbar-nav">
           <li class="nav-item">
-            <a class="nav-link  " href="../soft-ui-dashboard-main/pages/dashboard.html">
+            <a class="nav-link  " href="/soft-ui-dashboard-main/pages/dashboard.html">
               <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
                 <svg width="12px" height="12px" viewBox="0 0 45 40" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                   <title>shop </title>
@@ -167,7 +167,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link  " href="../soft-ui-dashboard-main/pages/tables.html">
+            <a class="nav-link  " href="/soft-ui-dashboard-main/pages/tables.html">
               <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
                 <svg width="12px" height="12px" viewBox="0 0 42 42" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                   <title>office</title>
@@ -187,7 +187,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link  " href="../soft-ui-dashboard-main/pages/billing.html">
+            <a class="nav-link  " href="/soft-ui-dashboard-main/pages/billing.html">
               <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
                 <svg width="12px" height="12px" viewBox="0 0 43 36" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                   <title>credit-card</title>
@@ -207,7 +207,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link  active" href="../soft-ui-dashboard-main/pages/virtual-reality.html">
+            <a class="nav-link  active" href="/soft-ui-dashboard-main/pages/virtual-reality.html">
               <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
                 <svg width="12px" height="12px" viewBox="0 0 42 42" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                   <title>box-3d-50</title>
@@ -228,7 +228,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link  " href="../soft-ui-dashboard-main/pages/rtl.html">
+            <a class="nav-link  " href="/soft-ui-dashboard-main/pages/rtl.html">
               <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
                 <svg width="12px" height="12px" viewBox="0 0 40 40" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                   <title>settings</title>
@@ -252,7 +252,7 @@
             <h6 class="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6">Account pages</h6>
           </li>
           <li class="nav-item">
-            <a class="nav-link  " href="../soft-ui-dashboard-main/pages/profile.html">
+            <a class="nav-link  " href="/soft-ui-dashboard-main/pages/profile.html">
               <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
                 <svg width="12px" height="12px" viewBox="0 0 46 42" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                   <title>customer-support</title>
@@ -273,7 +273,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link  " href="../soft-ui-dashboard-main/pages/sign-in.html">
+            <a class="nav-link  " href="/soft-ui-dashboard-main/pages/sign-in.html">
               <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
                 <svg width="12px" height="12px" viewBox="0 0 40 44" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                   <title>document</title>
@@ -293,7 +293,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link  " href="../soft-ui-dashboard-main/pages/sign-up.html">
+            <a class="nav-link  " href="/soft-ui-dashboard-main/pages/sign-up.html">
               <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
                 <svg width="12px" height="20px" viewBox="0 0 40 40" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                   <title>spaceship</title>
@@ -318,7 +318,7 @@
       </div>
       <div class="sidenav-footer mx-3 ">
         <div class="card card-background shadow-none card-background-mask-secondary" id="sidenavCard">
-          <div class="full-background" style="background-image: url('../soft-ui-dashboard-main/assets/img/curved-images/white-curved.jpg')"></div>
+          <div class="full-background" style="background-image: url('/soft-ui-dashboard-main/assets/img/curved-images/white-curved.jpg')"></div>
           <div class="card-body text-start p-3 w-100">
             <div class="icon icon-shape icon-sm bg-white shadow text-center mb-3 d-flex align-items-center justify-content-center border-radius-md">
               <i class="ni ni-diamond text-dark text-gradient text-lg top-0" aria-hidden="true" id="sidenavCardIcon"></i>
@@ -339,7 +339,7 @@
           <div class="row pt-10">
             <div class="col-lg-1 col-md-1 pt-5 pt-lg-0 ms-lg-5 text-center">
               <a href="" class="avatar avatar-md border-0" data-bs-toggle="tooltip" data-bs-placement="left" title="My Profile">
-                <img class="border-radius-lg" alt="Image placeholder" src="../soft-ui-dashboard-main/assets/img/team-1.jpg">
+                <img class="border-radius-lg" alt="Image placeholder" src="/soft-ui-dashboard-main/assets/img/team-1.jpg">
               </a>
               <button class="btn btn-white border-radius-lg p-2 mt-2" type="button" data-bs-toggle="tooltip" data-bs-placement="left" title="Home">
                 <i class="fas fa-home p-2"></i>
@@ -358,7 +358,7 @@
                   <h6 class="text-uppercase mb-0 ms-1">Cloudy</h6>
                 </div>
                 <div class="ms-auto">
-                  <img class="w-50 float-end mt-lg-n4" src="../soft-ui-dashboard-main/assets/img/small-logos/icon-sun-cloud.png" alt="image sun">
+                  <img class="w-50 float-end mt-lg-n4" src="/soft-ui-dashboard-main/assets/img/small-logos/icon-sun-cloud.png" alt="image sun">
                 </div>
               </div>
               <div class="row mt-4">
@@ -422,7 +422,7 @@
                 <div class="col-lg-4 col-md-4 mt-4 mt-sm-0">
                   <div class="card card-background card-background-mask-primary move-on-hover align-items-start">
                     <div class="cursor-pointer">
-                      <div class="full-background" style="background-image: url('../soft-ui-dashboard-main/assets/img/curved-images/curved1.jpg')"></div>
+                      <div class="full-background" style="background-image: url('/soft-ui-dashboard-main/assets/img/curved-images/curved1.jpg')"></div>
                       <div class="card-body">
                         <h5 class="text-white mb-0">Some Kind Of Blues</h5>
                         <p class="text-white text-sm">Deftones</p>
@@ -447,16 +447,16 @@
                         <div class="ms-auto">
                           <div class="avatar-group">
                             <a href="" class="avatar avatar-sm border-0 rounded-circle" data-bs-toggle="tooltip" data-bs-placement="top" title="2 New Messages">
-                              <img alt="Image placeholder" src="../soft-ui-dashboard-main/assets/img/team-1.jpg">
+                              <img alt="Image placeholder" src="/soft-ui-dashboard-main/assets/img/team-1.jpg">
                             </a>
                             <a href="" class="avatar avatar-sm border-0 rounded-circle" data-bs-toggle="tooltip" data-bs-placement="top" title="1 New Message">
-                              <img alt="Image placeholder" src="../soft-ui-dashboard-main/assets/img/team-2.jpg">
+                              <img alt="Image placeholder" src="/soft-ui-dashboard-main/assets/img/team-2.jpg">
                             </a>
                             <a href="" class="avatar avatar-sm border-0 rounded-circle" data-bs-toggle="tooltip" data-bs-placement="top" title="13 New Messages">
-                              <img alt="Image placeholder" src="../soft-ui-dashboard-main/assets/img/team-3.jpg">
+                              <img alt="Image placeholder" src="/soft-ui-dashboard-main/assets/img/team-3.jpg">
                             </a>
                             <a href="" class="avatar avatar-sm border-0 rounded-circle" data-bs-toggle="tooltip" data-bs-placement="top" title="7 New Messages">
-                              <img alt="Image placeholder" src="../soft-ui-dashboard-main/assets/img/team-4.jpg">
+                              <img alt="Image placeholder" src="/soft-ui-dashboard-main/assets/img/team-4.jpg">
                             </a>
                           </div>
                         </div>
