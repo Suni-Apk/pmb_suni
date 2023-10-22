@@ -44,12 +44,12 @@ Route::post('/verify-process', [AuthController::class, 'verify_otp'])->name('ver
 Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
 
 // Auth Admin
-Route::prefix('admin')->name('admin.')->group(function () {
-    Route::get('/login', [AdminAuthController::class, 'login'])->name('login');
-
-    Route::post('/login-process', [AdminAuthController::class, 'login_process'])->name('login.process');
-
-    Route::get('/logout', [AdminAuthController::class, 'logout'])->name('logout');
+Route::prefix('/admin')->name('admin.')->group(function () {
+    Route::get('/login',[AdminAuthController::class,'login'])->name('login');
+    
+    Route::post('/login-process',[AdminAuthController::class,'login_process'])->name('login.process');
+    
+    Route::get('/logout',[AdminAuthController::class,'logout'])->name('logout');
 });
 
 // Controller / Dashboard Admin
@@ -118,10 +118,6 @@ Route::prefix('template')->group(function () {
     Route::get('/forgot', function () {
         return view('layouts.template.forgot-password');
     })->name('forgot');
-
-    Route::get('/profile', function () {
-        return view('layouts.template.profile');
-    })->name('profile');
 
     Route::get('/rtl', function () {
         return view('layouts.template.rtl');

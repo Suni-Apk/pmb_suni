@@ -27,4 +27,8 @@ class DashboardController extends Controller
         return view('admin.index',compact('hijriDateday','hijriDatemonth','hijriDateyear', 'user'));
     }
 
+    public function profile()
+    {
+        return view('admin.profile.profile');
+    }
 }

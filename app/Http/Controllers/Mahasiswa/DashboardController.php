@@ -29,4 +29,31 @@ class DashboardController extends Controller
         return view('mahasiswa.index',compact('hijriDateday','hijriDatemonth','hijriDateyear', 'user'));
     }
 
+    public function profile()
+    {
+        return view('mahasiswa.profile.index');
+    }
+
+    public function edit_profile($name)
+    {
+        $mahasiswa = Auth::user();
+        return view('mahasiswa.profile.edit-profile',compact('mahasiswa'));
+    }
+
+    public function edit_profile_process(Request $request, $id)
+    {
+        $user = User::find($id);
+
+        $data = $request->validate([
+            'name' => 'required|string|min:3|max:255',
+            'phone' => "required|unique:users,phone,{$user->phone},phone",
+            'email' => "required|email|unique:users,email,{$user->email},email",
+            'gender' => 'required',
+            'birthdate' => 'required|date',
+        ]);
+
+        $user->update($data);
+
+        return redirect()->route('mahasiswa.profile');
+    }
 }
