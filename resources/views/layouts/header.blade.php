@@ -143,7 +143,7 @@
                         </a>
                     </li>
                     <li>
-                        <a class="dropdown-item border-radius-md" href="{{route('logout')}}">
+                        <a class="dropdown-item border-radius-md" href="{{route('mahasiswa.logout')}}">
                             <div class="d-flex">
                                 <p class="mb-0 fw-bold">Logout</p>
                             </div>
@@ -153,7 +153,6 @@
             </li>
         </ul>
     </div>
->>>>>>> 65afec8 (update)
     </div>
 </nav>
 <!-- End Navbar -->
