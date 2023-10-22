@@ -10,17 +10,18 @@
         </a>
     </div>
     <hr class="horizontal dark mt-0">
-    <div class="collapse navbar-collapse w-auto min-vh-75" id="sidenav-collapse-main">
-        <ul class="navbar-nav overflow-x-hidden" id="accordionSidebar">
-            <li class="nav-item">
-                <a class="nav-link active" href="{{ route('admin.dashboard') }}">
-                    <div
-                        class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
-                        <i class="fas fa-th-large"></i>
-                    </div>
-                    <span class="nav-link-text ms-1">Dashboard</span>
-                </a>
-            </li>
+    @if (Auth::user()->role == 'Admin')
+        <div class="collapse navbar-collapse w-auto min-vh-70" id="sidenav-collapse-main">
+            <ul class="navbar-nav overflow-x-hidden accordion" id="accordionSidebar">
+                <li class="nav-item">
+                    <a class="nav-link active" href="{{ route('admin.dashboard') }}">
+                        <div
+                            class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
+                            <i class="fas fa-th-large"></i>
+                        </div>
+                        <span class="nav-link-text ms-1">Dashboard</span>
+                    </a>
+                </li>
 
             {{-- academy --}}
             <li class="nav-item">
@@ -361,8 +362,9 @@
             </li>
         </ul>
     </div>
+    @endif
     <div class="sidenav-footer mx-3 nav-item">
-        <a class="btn bg-gradient-primary btn-tooltip mt-3 w-100 nav-link text-white" href="" data-bs-toggle="tooltip" data-bs-placement="right" title="Logout" data-container="body" data-animation="true">
+        <a class="btn bg-gradient-primary btn-tooltip mt-3 w-100 nav-link text-white" href="{{ route('logout') }}" data-bs-toggle="tooltip" data-bs-placement="right" title="Logout" data-container="body" data-animation="true">
             <i class="fas fa-sign-out-alt"></i>
         </a>
     </div>
