@@ -40,12 +40,21 @@ Route::get('/logout',[AuthController::class,'logout'])->name('logout');
 
 
 // Auth Admin
+<<<<<<< HEAD
 Route::prefix('admin')->name('admin')->group(function () {
     Route::get('/login',[AdminAuthController::class,'login'])->name('login');
     
     Route::post('/login-process',[AdminAuthController::class,'login_process'])->name('login.process');
     
     Route::get('/logout',[AdminAuthController::class,'logout'])->name('logout');
+=======
+Route::prefix('admin')->name('admin.')->group(function () {
+    Route::get('/login', [AdminAuthController::class, 'login'])->name('login');
+
+    Route::post('/login-process', [AdminAuthController::class, 'login_process'])->name('login.process');
+
+    Route::get('/logout', [AdminAuthController::class, 'logout'])->name('logout');
+>>>>>>> b035715 (jangan error)
 });
 
 // Controller / Dashboard Admin
@@ -59,8 +68,14 @@ Route::prefix('/admin')->middleware('admin')->name('admin.')->group(function () 
 });
 
 // Dashboard Mahasiswa
+<<<<<<< HEAD
 Route::prefix('/mahasiswa')->middleware(['auth','mahasiswa'])->name('mahasiswa.')->group(function(){
     Route::get('/dashboard',[DashboardController::class,'index'])->name('dashboard');
+=======
+Route::prefix('/mahasiswa')->middleware(['auth', 'mahasiswa'])->name('mahasiswa.')->group(function () {
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+    Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
+>>>>>>> b035715 (jangan error)
 });
 
 Route::prefix('template')->group(function () {
