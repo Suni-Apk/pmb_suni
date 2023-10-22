@@ -25,7 +25,6 @@ class DashboardController extends Controller
         $hijriDatemonth = $data['data']['hijri']['month']['ar'];
         $hijriDateyear = $data['data']['hijri']['year'];
         return view('admin.index',compact('hijriDateday','hijriDatemonth','hijriDateyear', 'user'));
-        return view('admin.index', compact('user'));
     }
 
 }
