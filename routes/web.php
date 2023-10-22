@@ -18,6 +18,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::get('/', function () {
+    return view('welcome');
+})->name('welcome');
+
 // Auth Mahasiswa
 Route::get('/register',[AuthController::class,'register'])->name('register');
 
@@ -35,11 +39,13 @@ Route::get('/logout',[AuthController::class,'logout'])->name('logout');
 
 
 // Auth Admin
-Route::get('/admin/login',[AdminAuthController::class,'login'])->name('admin.login');
-
-Route::post('/admin/login-process',[AdminAuthController::class,'login_process'])->name('admin.login.process');
-
-Route::get('/admin/logout',[AdminAuthController::class,'logout'])->name('admin.logout');
+Route::prefix('admin')->name('admin')->group(function () {
+    Route::get('/login',[AdminAuthController::class,'login'])->name('login');
+    
+    Route::post('/login-process',[AdminAuthController::class,'login_process'])->name('login.process');
+    
+    Route::get('/logout',[AdminAuthController::class,'logout'])->name('logout');
+});
 
 // Controller / Dashboard Admin
 Route::prefix('/admin')->middleware('admin')->name('admin.')->group(function(){
@@ -64,6 +70,14 @@ Route::prefix('template')->group(function () {
         return view('layouts.template.billing');
     })->name('billing');
 
+    Route::get('/form', function () {
+        return view('layouts.template.form');
+    })->name('form');
+
+    Route::get('/forgot', function () {
+        return view('layouts.template.forgot-password');
+    })->name('forgot');
+
     Route::get('/profile', function () {
         return view('layouts.template.profile');
     })->name('profile');
@@ -75,12 +89,15 @@ Route::prefix('template')->group(function () {
     Route::get('/virtual-reality', function () {
         return view('layouts.template.virtual-reality');
     })->name('virtual-reality');
+
     Route::get('/profile', function () {
         return view('admin.user.profile');
     })->name('profile');
+
     Route::get('/edit-profile', function () {
         return view('admin.user.edit-profile');
     })->name('edit-profile');
+
     Route::get('/change-password', function () {
         return view('admin.user.change-password');
     })->name('change-password');
