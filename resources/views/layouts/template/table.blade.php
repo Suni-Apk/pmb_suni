@@ -62,7 +62,7 @@
                         Detail
                       </a>
 
-                      <a href="" class="badge badge-sm bg-gradient-success font-weight-bold text-xs mx-2" data-toggle="tooltip" data-original-title="Edit user">
+                      <a href="" class="badge badge-sm bg-gradient-secondary text-xxs mx-1" data-toggle="tooltip" data-original-title="Edit">
                         Ubah
                       </a>
 
