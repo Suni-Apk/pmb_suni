@@ -20,9 +20,7 @@
     <main class="main-content position-relative min-height-screen h-auto border-radius-lg">
 
         <div class="z-3 position-relative">
-            {{-- @include('layouts.header') --}}
-            @component('layouts.header')
-            @endcomponent
+            @include('layouts.header')
         </div>
         
         {{-- @include('layouts.template') --}}
