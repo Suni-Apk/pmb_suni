@@ -4,9 +4,9 @@
         <span role="button" class="sidenav-toggler sidenav-toggler-inner d-xl-block d-none">
             <span class="nav-link text-white p-0">
                 <div class="sidenav-toggler-inner">
-                    <i class="sidenav-toggler-line bg-primary shadow"></i>
-                    <i class="sidenav-toggler-line bg-primary shadow"></i>
-                    <i class="sidenav-toggler-line bg-primary shadow"></i>
+                    <i class="sidenav-toggler-line shadow" style="background: rgb(79, 206, 56)"></i>
+                    <i class="sidenav-toggler-line shadow" style="background: rgb(63, 184, 42)"></i>
+                    <i class="sidenav-toggler-line shadow" style="background: rgb(45, 149, 27)"></i>
                 </div>
             </span>
         </span>

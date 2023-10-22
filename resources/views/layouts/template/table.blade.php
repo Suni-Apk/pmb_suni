@@ -12,7 +12,6 @@
         <div class="card mb-4">
           <div class="card-header pb-0">
             <h6>Admin table</h6>
-            <h6>Admin table</h6>
           </div>
           <div class="card-body px-0 pt-0 pb-2">
             <div class="table-responsive p-0">
@@ -23,11 +22,7 @@
                     <th class="text-uppercase text-secondary text-xxs px-2 font-weight-bolder opacity-7">Nomor Telepon</th>
                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Gender / Admin</th>
                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Nama</th>
-                    <th class="text-uppercase text-secondary text-xxs px-2 font-weight-bolder opacity-7">Nomor Telepon</th>
-                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Gender / Admin</th>
                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Status</th>
-                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Joined</th>
-                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Action</th>
                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Joined</th>
                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Action</th>
                   </tr>
@@ -48,31 +43,26 @@
                     <td class="align- text-start">
                       <span class="text-secondary text-xs font-weight-bold">08778464359</span>
                     </td>
-                    <td class="align- text-start">
-                      <span class="text-secondary text-xs font-weight-bold">08778464359</span>
-                    </td>
                     <td>
                       <p class="text-xs font-weight-bold mb-0">Laki Laki</p>
                       <p class="text-xs text-secondary mb-0">ADMIN</p>
-                      <p class="text-xs font-weight-bold mb-0">Laki Laki</p>
-                      <p class="text-xs text-secondary mb-0">ADMIN</p>
                     </td>
-                    <td class="align-middle text-center text-sm">
-                    <span class="badge badge-sm bg-gradient-success">AKTIF</span>
+                    <td class="align-middle text-center">
+                      <span class="badge text-uppercase badge-sm bg-gradient-success">AKTIF</span>
                     </td>
                     <td class="align-middle text-center">
                       <span class="text-secondary text-xs font-weight-bold">23/04/18</span>
                     </td>
                     <td class="align-middle text-center"> 
-                      <a href="" class="badge badge-sm bg-gradient-info text-xxs mx-1" data-toggle="tooltip" data-original-title="detail">
+                      <a href="" class="badge text-uppercase badge-sm bg-gradient-info text-xxs mx-1" data-toggle="tooltip" data-original-title="detail">
                         Detail
                       </a>
 
-                      <a href="" class="badge badge-sm bg-gradient-secondary text-xxs mx-1" data-toggle="tooltip" data-original-title="Edit">
+                      <a href="" class="badge badge-sm bg-gradient-success font-weight-bold text-xs mx-2" data-toggle="tooltip" data-original-title="Edit user">
                         Ubah
                       </a>
 
-                      <a href="" class="badge badge-sm bg-gradient-danger text-xxs mx-1" data-toggle="tooltip" data-original-title="hapus">
+                      <a href="" class="badge text-uppercase badge-sm bg-gradient-danger text-xxs mx-1" data-toggle="tooltip" data-original-title="hapus">
                         Hapus
                       </a>
                     </td>
