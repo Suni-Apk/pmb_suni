@@ -18,10 +18,10 @@
             <div class="col-auto my-auto">
                 <div class="h-100">
                     <h5 class="mb-1">
-                        Alec Thompson
+                        {{ $auth->name }}
                     </h5>
                     <p class="mb-0 font-weight-bold text-sm">
-                        Admin
+                        {{ $auth->role }}
                     </p>
                 </div>
             </div>
@@ -84,7 +84,7 @@
                             <h6 class="mb-0">Profile Information</h6>
                         </div>
                         <div class="col-md-4 text-end">
-                            <a href="{{ route('edit-profile') }}">
+                            <a href="{{ route('admin.profile_edit') }}">
                                 <i class="fas fa-user-edit text-secondary text-sm" data-bs-toggle="tooltip"
                                     data-bs-placement="top" title="Edit Profile"></i>
                             </a>
@@ -96,19 +96,15 @@
                     <ul class="list-group">
                         <li class="list-group-item border-0 ps-0 pt-0 text-sm"><strong class="text-dark">Full
                                 Name:</strong>
-                            &nbsp; Alec M. Thompson</li>
+                            &nbsp; {{ $auth->name }}</li>
                         <li class="list-group-item border-0 ps-0 text-sm"><strong class="text-dark">No Tlp:</strong>
                             &nbsp;
-                            08121231231</li>
+                            {{ $auth->phone }}</li>
                         <li class="list-group-item border-0 ps-0 text-sm"><strong class="text-dark">Email:</strong> &nbsp;
-                            alecthompson@mail.com</li>
-                        <li class="list-group-item border-0 ps-0 text-sm"><strong class="text-dark">Alamat:</strong>
-                            &nbsp;
-                            USA
-                        </li>
+                            {{ $auth->email }}</li>
                         <li class="list-group-item border-0 ps-0 text-sm"><strong class="text-dark">Gender:</strong>
                             &nbsp;
-                            Laki-laki
+                            {{ $auth->gender }}
                         </li>
                     </ul>
                 </div>
