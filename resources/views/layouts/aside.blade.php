@@ -82,47 +82,39 @@
                     </ul>
                 </div>
 
-            <!-- mata kuliah -->
+            <!-- tahun ajaran -->
             <li class="nav-item">
-                <a data-bs-toggle="collapse" href="#matkul" class="nav-link" aria-controls="matkul" role="button" aria-expanded="false">
-                    <div class="icon icon-sm shadow border-radius-md bg-white text-center d-flex align-items-center justify-content-center  me-2">
+                <a data-bs-toggle="collapse" href="#angkatan" class="nav-link" aria-controls="angkatan" role="button" aria-expanded="false">
+                    <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center d-flex align-items-center justify-content-center  me-2">
                         <i class="ni ni-hat-3"></i>
                     </div>
-                    <span class="nav-link-text ms-1"> Mata Kuliah </span>
+                    <span class="nav-link-text ms-1"> Tahun Ajaran </span>
                 </a>
-                <div class="collapse" id="matkul">
+                <div class="collapse" id="angkatan">
                     <ul class="nav ms-4 ps-3">
                         <li class="nav-item ">
                             <a class="nav-link " href="{{ route('admin.matkul.index') }}">
                                 <span class="sidenav-mini-icon d-none d-xl-block"><i class="fas fa-border-all"></i></span>
-                                <span class="sidenav-normal"> Daftar Mata Kuliah </span>
+                                <span class="sidenav-normal"> Daftar Tahun Ajaran </span>
                             </a>
                         </li>
                         <li class="nav-item ">
                             <a class="nav-link " href="{{ route('admin.matkul.create') }}">
                                 <span class="sidenav-mini-icon d-none d-xl-block"><i class="fas fa-plus"></i></span>
-                                <span class="sidenav-normal"> Tambah Mata Kuliah </span>
+                                <span class="sidenav-normal"> Tambah Tahun Ajaran </span>
                             </a>
                         </li>
                     </ul>
                 </div>
             </li>
-            
-            {{-- users --}}
-            <li class="nav-item">
-                <ul class="nav-link pb-0 mb-0">
-                    <span class="sidenav-mini-icon d-none d-xl-block" style="color:rgb(196, 196, 196)"><i class="fas fa-users"></i></span>
-                    <span class="sidenav-normal text-uppercase text-xs ms-2 font-weight-bolder"> users </span>
-                </ul>
-            </li>
 
-            <!-- admin -->
+            <!-- jurusan -->
             <li class="nav-item">
-                <a data-bs-toggle="collapse" href="#admin" class="nav-link" aria-controls="admin" role="button" aria-expanded="false">
+                <a data-bs-toggle="collapse" href="#jurusan" class="nav-link" aria-controls="jurusan" role="button" aria-expanded="false">
                     <div class="icon icon-sm shadow border-radius-md bg-white text-center d-flex align-items-center justify-content-center  me-2">
-                        <i class="fas fa-user-cog"></i>
+                        <i class="ni ni-paper-diploma"></i>
                     </div>
-                    <span class="nav-link-text ms-1"> Admin </span>
+                    <span class="nav-link-text ms-1">Admin</span>
                 </a>
                 <div class="collapse" id="admin">
                     <ul class="nav ms-4 ps-3">
@@ -277,7 +269,7 @@
                                 <span class="sidenav-mini-icon d-none d-xl-block"><i class="ni ni-building"></i></span>
                                 <span class="sidenav-normal"> General </span>
                             </a>
-                        </li>
+                        </li>`
                         <li class="nav-item ">
                             <a class="nav-link " href="">
                                 <span class="sidenav-mini-icon d-none d-xl-block"><i class="ni ni-bell-55"></i></span>
