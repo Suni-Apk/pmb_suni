@@ -189,31 +189,31 @@
                                 </a>
                             </li> --}}
                             <li class="nav-item ">
-                                <a class="nav-link " href="{{ route('table') }}">
+                                <a class="nav-link " >
                                     <span class="sidenav-mini-icon"><i class="fas fa-table"></i></span>
                                     <span class="sidenav-normal"> Table </span>
                                 </a>
                             </li>
                             <li class="nav-item ">
-                                <a class="nav-link " href="{{ route('profile') }}">
+                                <a class="nav-link " >
                                     <span class="sidenav-mini-icon"><i class="fas fa-user-circle"></i></span>
                                     <span class="sidenav-normal"> Profile </span>
                                 </a>
                             </li>
                             <li class="nav-item ">
-                                <a class="nav-link " href="{{ route('edit-profile') }}">
+                                <a class="nav-link " >
                                     <span class="sidenav-mini-icon"><i class="fas fa-user-circle"></i></span>
                                     <span class="sidenav-normal"> Edit Profile </span>
                                 </a>
                             </li>
                             <li class="nav-item ">
-                                <a class="nav-link " href="{{ route('form') }}">
+                                <a class="nav-link " >
                                     <span class="sidenav-mini-icon"><i class="fas fa-align-right"></i></span>
                                     <span class="sidenav-normal"> Form </span>
                                 </a>
                             </li>
                             <li class="nav-item ">
-                                <a class="nav-link " href="{{ route('billing') }}">
+                                <a class="nav-link " >
                                     <span class="sidenav-mini-icon"><i class="fas fa-money-bill"></i></span>
                                     <span class="sidenav-normal"> Billing </span>
                                 </a>
