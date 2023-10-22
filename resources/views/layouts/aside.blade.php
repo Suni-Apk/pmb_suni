@@ -280,8 +280,32 @@
                             <a class="nav-link " href="">
                                 <span class="sidenav-mini-icon d-none d-xl-block"><i class="fas fa-border-all"></i></span>
                                 <span class="sidenav-normal"> Daftar Mahasiswa </span>
-                            </a>
-                        </li>
+=======
+            </li>
+
+            <!--admin-->
+            <li class="nav-item">
+                <a class="nav-link " href="{{ route('table') }}">
+                    <div
+                        class="icon icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
+                        <i class="fas fa-user-cog"></i>
+                    </div>
+                    <span class="nav-link-text ms-1">Admin</span>
+                </a>
+            </li>
+
+            <!-- biaya -->
+            <li class="nav-item">
+                <a data-bs-toggle="collapse" href="#payment" class="nav-link " aria-controls="payment" role="button"
+                    aria-expanded="false">
+                    <div
+                        class="icon icon-sm shadow border-radius-md bg-white text-center d-flex align-items-center justify-content-center  me-2">
+                        <i class="ni ni-credit-card"></i>
+                    </div>
+                    <span class="nav-link-text ms-1">Biaya</span>
+                </a>
+                <div class="collapse " id="payment">
+                    <ul class="nav ms-4 ps-3">
                         <li class="nav-item ">
                             <a class="nav-link " href="">
                                 <span class="sidenav-mini-icon d-none d-xl-block"><i class="fas fa-plus"></i></span>
