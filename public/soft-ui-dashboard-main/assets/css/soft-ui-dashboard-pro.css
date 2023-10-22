@@ -81,10 +81,13 @@
     --bs-border-radius-xl: 1rem;
     --bs-border-radius-2xl: 1.5rem;
     --bs-border-radius-pill: 50rem;
-    --bs-link-color: #cb0c9f;
+    /* --bs-link-color: #cb0c9f;
     --bs-link-hover-color: #830866;
-    --bs-code-color: #d63384;
-    --bs-highlight-bg: #fcf8e3
+    --bs-code-color: #d63384; */
+    --bs-link-color: #47dc2b;
+    --bs-link-hover-color: #1b740c;
+    --bs-code-color: #2baf14;
+    --bs-highlight-bg: #fcf8e3;
 }
 
 ::-webkit-scrollbar-track
@@ -285,6 +288,10 @@ a,a:hover {
 
 a:hover {
     color: var(--bs-link-hover-color)
+}
+
+a.badge:hover {
+    color: #f7f7f7;
 }
 
 a:not([href]):not([class]),a:not([href]):not([class]):hover {
