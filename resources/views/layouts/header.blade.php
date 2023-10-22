@@ -1,12 +1,12 @@
 {{-- navbar --}}
 <nav class="navbar navbar-main navbar-fixed navbar-expand-lg px-0 mx-4 shadow-none border-radius-xl position-sticky blur shadow-blur mt-4 left-auto top-1 z-index-sticky" id="navbarBlur" navbar-scroll="true">
     <div class="container-fluid py-1 px-3">
-        <span class="sidenav-toggler sidenav-toggler-inner d-xl-block d-none">
-            <span role="button" class="nav-link text-white p-0">
+        <span role="button" class="sidenav-toggler sidenav-toggler-inner d-xl-block d-none">
+            <span class="nav-link text-white p-0">
                 <div class="sidenav-toggler-inner">
-                    <i class="sidenav-toggler-line bg-primary"></i>
-                    <i class="sidenav-toggler-line bg-primary"></i>
-                    <i class="sidenav-toggler-line bg-primary"></i>
+                    <i class="sidenav-toggler-line bg-primary shadow"></i>
+                    <i class="sidenav-toggler-line bg-primary shadow"></i>
+                    <i class="sidenav-toggler-line bg-primary shadow"></i>
                 </div>
             </span>
         </span>
@@ -17,7 +17,7 @@
                     <input type="text" class="form-control" placeholder="Type here...">
                 </div>
             </div> --}}
-            <ul class="navbar-nav justify-content-end">
+            <ul class="ms-md-auto navbar-nav justify-content-end">
                 <li class="nav-item d-xl-none me-4 d-flex align-items-center">
                     <span role="button" class="nav-link text-body p-0" id="iconNavbarSidenav">
                         <div class="sidenav-toggler-inner">
@@ -28,8 +28,7 @@
                     </span>
                 </li>
                 <li class="nav-item dropdown me-3 d-flex align-items-center">
-                    <a href="" class="nav-link text-body p-0" id="dropdownMenuButton" data-bs-toggle="dropdown"
-                        aria-expanded="false">
+                    <a href="" class="nav-link text-body p-0" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
                         <i class="fa fa-bell cursor-pointer"></i>
                     </a>
                     <ul class="dropdown-menu dropdown-menu-end px-2 py-3 me-sm-n4" aria-labelledby="dropdownMenuButton">
@@ -37,8 +36,7 @@
                             <a class="dropdown-item border-radius-md" href="">
                                 <div class="d-flex py-1">
                                     <div class="my-auto">
-                                        <img src="/soft-ui-dashboard-main/assets/img/team-2.jpg"
-                                            class="avatar avatar-sm  me-3 ">
+                                        <img src="/soft-ui-dashboard-main/assets/img/team-2.jpg" class="avatar avatar-sm  me-3 ">
                                     </div>
                                     <div class="d-flex flex-column justify-content-center">
                                         <h6 class="text-sm font-weight-normal mb-1">
@@ -55,8 +53,7 @@
                     </ul>
                 </li>
                 <li class="nav-item dropdown d-flex align-items-center">
-                    <span role="button" class="nav-link text-body font-weight-bold px-0" id="dropdownProfile"
-                        data-bs-toggle="dropdown" aria-expanded="false">
+                    <span role="button" class="nav-link text-body font-weight-bold px-0" id="dropdownProfile" data-bs-toggle="dropdown" aria-expanded="false">
                         <img src="/soft-ui-dashboard-main/assets/img/team-2.jpg" class="avatar avatar-sm ms-2">
                     </span>
                     <ul class="dropdown-menu dropdown-menu-end px-2 py-2 me-sm-n2" aria-labelledby="dropdownProfile">
@@ -86,8 +83,6 @@
                 </li>
             </ul>
         </div>
-<<<<<<< HEAD
-=======
         <ul class="navbar-nav justify-content-end">
             <li class="nav-item d-xl-none me-4 d-flex align-items-center">
                 <span role="button" class="nav-link text-body p-0" id="iconNavbarSidenav">
