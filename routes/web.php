@@ -35,6 +35,9 @@ Route::get('/verify',[AuthController::class,'verify'])->name('verify');
 
 Route::post('/verify-process',[AuthController::class,'verify_otp'])->name('verify.process');
 
+Route::get('/logout',[AuthController::class,'logout'])->name('logout');
+
+
 // Auth Admin
 Route::prefix('admin')->name('admin')->group(function () {
     Route::get('/login',[AdminAuthController::class,'login'])->name('login');
@@ -50,9 +53,8 @@ Route::prefix('/admin')->middleware('admin')->name('admin.')->group(function(){
 });
 
 // Dashboard Mahasiswa
-Route::prefix('/mahasiswa')->middleware('auth')->name('mahasiswa.')->group(function(){
+Route::prefix('/mahasiswa')->middleware(['auth','mahasiswa'])->name('mahasiswa.')->group(function(){
     Route::get('/dashboard',[DashboardController::class,'index'])->name('dashboard');
-    Route::get('/logout',[AuthController::class,'logout'])->name('logout');
 });
 
 Route::prefix('template')->group(function () {

@@ -28,6 +28,31 @@
                     <a data-bs-toggle="collapse" href="#university" class="nav-link" aria-controls="university" role="button" aria-expanded="false">
                         <div class="icon icon-sm shadow border-radius-md bg-white text-center d-flex align-items-center justify-content-center  me-2">
                             <i class="fas fa-university"></i>
+                            <title>credit-card</title>
+                            <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                <g transform="translate(-2169.000000, -745.000000)" fill="#FFFFFF" fill-rule="nonzero">
+                                    <g transform="translate(1716.000000, 291.000000)">
+                                        <g transform="translate(453.000000, 454.000000)">
+                                            <path class="color-background opacity-6"
+                                                d="M43,10.7482083 L43,3.58333333 C43,1.60354167 41.3964583,0 39.4166667,0 L3.58333333,0 C1.60354167,0 0,1.60354167 0,3.58333333 L0,10.7482083 L43,10.7482083 Z">
+                                            </path>
+                                            <path class="color-background"
+                                                d="M0,16.125 L0,32.25 C0,34.2297917 1.60354167,35.8333333 3.58333333,35.8333333 L39.4166667,35.8333333 C41.3964583,35.8333333 43,34.2297917 43,32.25 L43,16.125 L0,16.125 Z M19.7083333,26.875 L7.16666667,26.875 L7.16666667,23.2916667 L19.7083333,23.2916667 L19.7083333,26.875 Z M35.8333333,26.875 L28.6666667,26.875 L28.6666667,23.2916667 L35.8333333,23.2916667 L35.8333333,26.875 Z">
+                                            </path>
+                                        </g>
+                                    </g>
+                                </g>
+                            </g>
+                        </svg>
+                    </div>
+                    <span class="nav-link-text ms-1">University</span>
+                    </span>
+                    <div id="collapseOne" class="accordion-collapse collapse" data-bs-parent="#accordionSidebar">
+                        <div class="accordion-body py-1">
+                            <a href="{{ route('billing') }}" class="nav-link">
+                                <i class="fas fa-book"></i>
+                                Program Belajar
+                            </a>
                         </div>
                         <span class="nav-link-text ms-1">University</span>
                     </a>
@@ -300,123 +325,49 @@
                     <a data-bs-toggle="collapse" href="#payment" class="nav-link " aria-controls="payment" role="button" aria-expanded="false">
                         <div class="icon icon-sm shadow border-radius-md bg-white text-center d-flex align-items-center justify-content-center  me-2">
                             <i class="ni ni-credit-card"></i>
-                        </div>
-                        <span class="nav-link-text ms-1">Biaya</span>
+                            <title>credit-card</title>
+                            <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                <g transform="translate(-2169.000000, -745.000000)" fill="#FFFFFF" fill-rule="nonzero">
+                                    <g transform="translate(1716.000000, 291.000000)">
+                                        <g transform="translate(453.000000, 454.000000)">
+                                            <path class="color-background opacity-6"
+                                                d="M43,10.7482083 L43,3.58333333 C43,1.60354167 41.3964583,0 39.4166667,0 L3.58333333,0 C1.60354167,0 0,1.60354167 0,3.58333333 L0,10.7482083 L43,10.7482083 Z">
+                                            </path>
+                                            <path class="color-background"
+                                                d="M0,16.125 L0,32.25 C0,34.2297917 1.60354167,35.8333333 3.58333333,35.8333333 L39.4166667,35.8333333 C41.3964583,35.8333333 43,34.2297917 43,32.25 L43,16.125 L0,16.125 Z M19.7083333,26.875 L7.16666667,26.875 L7.16666667,23.2916667 L19.7083333,23.2916667 L19.7083333,26.875 Z M35.8333333,26.875 L28.6666667,26.875 L28.6666667,23.2916667 L35.8333333,23.2916667 L35.8333333,26.875 Z">
+                                            </path>
+                                        </g>
+                                    </g>
+                                </g>
+                            </g>
+                        </g>
+                    </g>
+                </svg>
+            </div>
+            <span class="nav-link-text ms-1">Biaya</span>
+            </span>
+            <div id="collapseTagihan" class="accordion-collapse collapse" data-bs-parent="#accordionSidebar">
+                <div class="accordion-body py-1">
+                    <a href="{{ route('billing') }}" class="nav-link">
+                        <i class="fas fa-wallet"></i>
+                        Biaya Tagihan
                     </a>
-                    <div class="collapse " id="payment">
-                        <ul class="nav ms-4 ps-3">
-                            <li class="nav-item ">
-                                <a class="nav-link " href="">
-                                    <span class="sidenav-mini-icon"><i class="fas fa-wallet"></i></span>
-                                    <span class="sidenav-normal"> Biaya Tagihan </span>
-                                </a>
-                            </li>
-                            <li class="nav-item ">
-                                <a class="nav-link " href="">
-                                    <span class="sidenav-mini-icon"><i class="ni ni-ungroup"></i></span>
-                                    <span class="sidenav-normal"> Biaya Bawaan </span>
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                </li>
-
-                <!-- transaksi -->
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ route('table') }}">
-                        <div
-                            class="icon icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
-                            <i class="fas fa-money-check-alt"></i>
-                        </div>
-                        <span class="nav-link-text ms-1">Transaction</span>
-                    </a>
-                </li>
-                
-                <!-- dokumen -->
-                <li class="nav-item">
-                    <a data-bs-toggle="collapse" href="#document" class="nav-link " aria-controls="document" role="button" aria-expanded="false">
-                        <div class="icon icon-sm shadow border-radius-md bg-white text-center d-flex align-items-center justify-content-center  me-2">
-                            <i class="fas fa-folder-open"></i>
-                        </div>
-                        <span class="nav-link-text ms-1">Document</span>
-                    </a>
-                    <div class="collapse " id="document">
-                        <ul class="nav ms-4 ps-3">
-                            <li class="nav-item ">
-                                <a class="nav-link " href="">
-                                    <span class="sidenav-mini-icon"><i class="fas fa-file-pdf"></i></span>
-                                    <span class="sidenav-normal"> All Document </span>
-                                </a>
-                            </li>
-                            <li class="nav-item ">
-                                <a class="nav-link " href="">
-                                    <span class="sidenav-mini-icon"><i class="fas fa-file-pdf"></i></span>
-                                    <span class="sidenav-normal"> RPL Document </span>
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                </li>
-                <!-- template -->
-                <li class="nav-item">
-                    <a data-bs-toggle="collapse" href="#template" class="nav-link " aria-controls="template" role="button" aria-expanded="false">
-                        <div class="icon icon-sm shadow border-radius-md bg-white text-center d-flex align-items-center justify-content-center  me-2">
-                            <i class="fas fa-tools"></i>
-                        </div>
-                        <span class="nav-link-text ms-1">Template</span>
-                    </a>
-                    <div class="collapse " id="template">
-                        <ul class="nav ms-4 ps-3">
-                            <li class="nav-item ">
-                                <a class="nav-link " href="">
-                                    <span class="sidenav-mini-icon"><i class="fas fa-key"></i></span>
-                                    <span class="sidenav-normal"> Forgot Password </span>
-                                </a>
-                            </li>
-                            <li class="nav-item ">
-                                <a class="nav-link " href="">
-                                    <span class="sidenav-mini-icon"><i class="fas fa-table"></i></span>
-                                    <span class="sidenav-normal"> Table </span>
-                                </a>
-                            </li>
-                            <li class="nav-item ">
-                                <a class="nav-link " href="">
-                                    <span class="sidenav-mini-icon"><i class="fas fa-user-circle"></i></span>
-                                    <span class="sidenav-normal"> Profile </span>
-                                </a>
-                            </li>
-                            <li class="nav-item ">
-                                <a class="nav-link " href="">
-                                    <span class="sidenav-mini-icon"><i class="fas fa-align-right"></i></span>
-                                    <span class="sidenav-normal"> Form </span>
-                                </a>
-                            </li>
-                            <li class="nav-item ">
-                                <a class="nav-link " href="">
-                                    <span class="sidenav-mini-icon"><i class="fas fa-money-bill"></i></span>
-                                    <span class="sidenav-normal"> Billing </span>
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                </li>
-
-                <!-- profile -->
-                <li class="nav-item">
-                    <a class="nav-link " href="">
-                        <div
-                            class="icon icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
-                            <i class="fas fa-user-alt"></i>
-                        </div>
-                        <span class="nav-link-text ms-1">Profile</span>
+                </div>
+            </div>
+            <div id="collapseTagihan" class="accordion-collapse collapse" data-bs-parent="#accordionSidebar">
+                <div class="accordion-body py-1">
+                    <a href="{{ route('billing') }}" class="nav-link">
+                        <i class="ni ni-ungroup"></i>
+                        Biaya Bawaan
                     </a>
                 </li>
             </ul>
         </div>
+        <div class="sidenav-footer mx-3 ">
+            <a class="btn bg-gradient-primary mt-3 w-100" href="{{route('logout')}}">
+                <i class="fa fa-user me-1"></i>
+                Logout
+            </a>
+        </div>
     @endif
-    <div class="sidenav-footer mx-3 nav-item">
-        <a class="btn bg-gradient-primary btn-tooltip mt-3 w-100 nav-link text-white" href="" data-bs-toggle="tooltip" data-bs-placement="right" title="Logout" data-container="body" data-animation="true">
-            <i class="fas fa-sign-out-alt"></i>
-        </a>
-    </div>
 </aside>
