@@ -42,6 +42,7 @@
                     </td>
                     <td class="align- text-start">
                       <span class="text-secondary text-xs font-weight-bold">08778464359</span>
+<<<<<<< HEAD
                     </td>
                     <td>
                       <p class="text-xs font-weight-bold mb-0">Laki Laki</p>
@@ -49,11 +50,21 @@
                     </td>
                     <td class="align-middle text-center">
                     <span class="badge text-uppercase badge-sm bg-gradient-success">AKTIF</span>
+=======
+                    </td>
+                    <td>
+                      <p class="text-xs font-weight-bold mb-0">Laki Laki</p>
+                      <p class="text-xs text-secondary mb-0">ADMIN</p>
+                    </td>
+                    <td class="align-middle text-center text-sm">
+                    <span class="badge badge-sm bg-gradient-success">AKTIF</span>
+>>>>>>> b035715 (jangan error)
                     </td>
                     <td class="align-middle text-center">
                       <span class="text-secondary text-xs font-weight-bold">23/04/18</span>
                     </td>
                     <td class="align-middle text-center"> 
+<<<<<<< HEAD
                       <a href="" class="badge text-uppercase badge-sm bg-gradient-info text-xxs mx-1" data-toggle="tooltip" data-original-title="detail">
                         Detail
                       </a>
@@ -63,6 +74,17 @@
                       </a>
 
                       <a href="" class="badge text-uppercase badge-sm bg-gradient-danger text-xxs mx-1" data-toggle="tooltip" data-original-title="hapus">
+=======
+                      <a href="" class="badge badge-sm bg-gradient-primary font-weight-bold text-xs mx-2" data-toggle="tooltip" data-original-title="Edit user">
+                        Detail
+                      </a>
+
+                      <a href="" class="badge badge-sm bg-gradient-success font-weight-bold text-xs mx-2" data-toggle="tooltip" data-original-title="Edit user">
+                        Ubah
+                      </a>
+
+                      <a href="" class="badge badge-sm bg-gradient-danger font-weight-bold text-xs mx-2" data-toggle="tooltip" data-original-title="Edit user">
+>>>>>>> b035715 (jangan error)
                         Hapus
                       </a>
                     </td>

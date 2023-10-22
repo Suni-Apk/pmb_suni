@@ -81,40 +81,43 @@
             </div>
         </div>
     </div>
-
-    <div class="container-fluid py-4">
-        <div class="row">
-            <div class="card h-100">
-                <div class="card-header pb-0 p-3">
-                    <div class="row">
-                        <div class="col-md-8 d-flex align-items-center">
-                            <h6 class="mb-0">Profile Information</h6>
-                        </div>
-                        <div class="col-md-4 text-end">
-                            <a href="{{ route('admin.profile_edit') }}">
-                                <i class="fas fa-user-edit text-secondary text-sm" data-bs-toggle="tooltip"
-                                    data-bs-placement="top" title="Edit Profile"></i>
-                            </a>
-                        </div>
+</div>
+<div class="container-fluid py-4">
+    <div class="row">
+        <div class="card h-100">
+            <div class="card-header pb-0 p-3">
+                <div class="row">
+                    <div class="col-md-8 d-flex align-items-center">
+                        <h6 class="mb-0">Profile Information</h6>
+                    </div>
+                    <div class="col-md-4 text-end">
+                        <a href="{{ route('edit-profile') }}">
+                            <i class="fas fa-user-edit text-secondary text-sm" data-bs-toggle="tooltip"
+                                data-bs-placement="top" title="Edit Profile"></i>
+                        </a>
                     </div>
                 </div>
-                <div class="card-body p-3">
-                    <hr class="horizontal gray-light">
-                    <ul class="list-group">
-                        <li class="list-group-item border-0 ps-0 pt-0 text-sm"><strong class="text-dark">Full
-                                Name:</strong>
-                            &nbsp; {{ $auth->name }}</li>
-                        <li class="list-group-item border-0 ps-0 text-sm"><strong class="text-dark">No Tlp:</strong>
-                            &nbsp;
-                            {{ $auth->phone }}</li>
-                        <li class="list-group-item border-0 ps-0 text-sm"><strong class="text-dark">Email:</strong> &nbsp;
-                            {{ $auth->email }}</li>
-                        <li class="list-group-item border-0 ps-0 text-sm"><strong class="text-dark">Gender:</strong>
-                            &nbsp;
-                            {{ $auth->gender }}
-                        </li>
-                    </ul>
-                </div>
+            </div>
+            <div class="card-body p-3">
+                <hr class="horizontal gray-light">
+                <ul class="list-group">
+                    <li class="list-group-item border-0 ps-0 pt-0 text-sm"><strong class="text-dark">Full
+                            Name:</strong>
+                        &nbsp; Alec M. Thompson</li>
+                    <li class="list-group-item border-0 ps-0 text-sm"><strong class="text-dark">No Tlp:</strong>
+                        &nbsp;
+                        08121231231</li>
+                    <li class="list-group-item border-0 ps-0 text-sm"><strong class="text-dark">Email:</strong> &nbsp;
+                        alecthompson@mail.com</li>
+                    <li class="list-group-item border-0 ps-0 text-sm"><strong class="text-dark">Alamat:</strong>
+                        &nbsp;
+                        USA
+                    </li>
+                    <li class="list-group-item border-0 ps-0 text-sm"><strong class="text-dark">Gender:</strong>
+                        &nbsp;
+                        Laki-laki
+                    </li>
+                </ul>
             </div>
         </div>
     </div>

@@ -34,24 +34,18 @@ Route::post('/login-process', [AuthController::class, 'login_process'])->name('l
 
 Route::get('/verify', [AuthController::class, 'verify'])->name('verify');
 
-Route::post('/verify-process', [AuthController::class, 'verify_otp'])->name('verify.process');
-
-Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
-
-
-Route::get('/logout',[AuthController::class,'logout'])->name('logout');
-
+Route::post('/verify-process',[AuthController::class,'verify_otp'])->name('verify.process');
 
 Route::get('/logout',[AuthController::class,'logout'])->name('logout');
 
 
 // Auth Admin
-Route::prefix('admin')->name('admin.')->group(function () {
-    Route::get('/login', [AdminAuthController::class, 'login'])->name('login');
-
-    Route::post('/login-process', [AdminAuthController::class, 'login_process'])->name('login.process');
-
-    Route::get('/logout', [AdminAuthController::class, 'logout'])->name('logout');
+Route::prefix('admin')->name('admin')->group(function () {
+    Route::get('/login',[AdminAuthController::class,'login'])->name('login');
+    
+    Route::post('/login-process',[AdminAuthController::class,'login_process'])->name('login.process');
+    
+    Route::get('/logout',[AdminAuthController::class,'logout'])->name('logout');
 });
 
 // Controller / Dashboard Admin
@@ -65,9 +59,8 @@ Route::prefix('/admin')->middleware('admin')->name('admin.')->group(function () 
 });
 
 // Dashboard Mahasiswa
-Route::prefix('/mahasiswa')->middleware(['auth', 'mahasiswa'])->name('mahasiswa.')->group(function () {
-    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
-    Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
+Route::prefix('/mahasiswa')->middleware(['auth','mahasiswa'])->name('mahasiswa.')->group(function(){
+    Route::get('/dashboard',[DashboardController::class,'index'])->name('dashboard');
 });
 
 Route::prefix('template')->group(function () {
@@ -102,4 +95,19 @@ Route::prefix('template')->group(function () {
     Route::get('/virtual-reality', function () {
         return view('layouts.template.virtual-reality');
     })->name('virtual-reality');
+<<<<<<< HEAD
+=======
+
+    Route::get('/profile', function () {
+        return view('admin.user.profile');
+    })->name('profile');
+
+    Route::get('/edit-profile', function () {
+        return view('admin.user.edit-profile');
+    })->name('edit-profile');
+
+    Route::get('/change-password', function () {
+        return view('admin.user.change-password');
+    })->name('change-password');
+>>>>>>> b035715 (jangan error)
 });
