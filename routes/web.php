@@ -53,7 +53,7 @@ Route::prefix('/admin')->middleware('admin')->name('admin.')->group(function(){
 });
 
 // Dashboard Mahasiswa
-Route::prefix('/mahasiswa')->middleware(['auth','mahasiswa'])->name('mahasiswa.')->group(function(){
+Route::prefix('/mahasiswa')->middleware('auth')->name('mahasiswa.')->group(function(){
     Route::get('/dashboard',[DashboardController::class,'index'])->name('dashboard');
 });
 
