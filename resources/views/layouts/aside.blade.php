@@ -80,9 +80,89 @@
                         class="icon icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
                         <i class="fas fa-user-cog"></i>
                     </div>
+<<<<<<< HEAD
                     <span class="nav-link-text ms-1">Admin</span>
                 </a>
             </li>
+=======
+                </li>
+                
+                <!-- settings -->
+                <li class="nav-item">
+                    <a data-bs-toggle="collapse" href="#settings" class="nav-link" aria-controls="settings" role="button" aria-expanded="false">
+                        <div class="icon icon-sm shadow border-radius-md bg-white text-center d-flex align-items-center justify-content-center  me-2">
+                            <i class="fas fa-cog"></i>
+                        </div>
+                        <span class="nav-link-text ms-1">Settings</span>
+                    </a>
+                    <div class="collapse " id="settings">
+                        <ul class="nav ms-4 ps-3">
+                            <li class="nav-item ">
+                                <a class="nav-link " href="">
+                                    <span class="sidenav-mini-icon"><i class="ni ni-building"></i></span>
+                                    <span class="sidenav-normal"> General </span>
+                                </a>
+                            </li>
+                            <li class="nav-item ">
+                                <a class="nav-link " href="">
+                                    <span class="sidenav-mini-icon"><i class="ni ni-bell-55"></i></span>
+                                    <span class="sidenav-normal"> Notification </span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+                
+                <!-- template -->
+                <li class="nav-item">
+                    <a data-bs-toggle="collapse" href="#template" class="nav-link " aria-controls="template" role="button" aria-expanded="false">
+                        <div class="icon icon-sm shadow border-radius-md bg-white text-center d-flex align-items-center justify-content-center  me-2">
+                            <i class="fas fa-tools"></i>
+                        </div>
+                        <span class="nav-link-text ms-1">Template</span>
+                    </a>
+                    <div class="collapse " id="template">
+                        <ul class="nav ms-4 ps-3">
+                            {{-- <li class="nav-item ">
+                                <a class="nav-link " href="{{ route('change-password') }}">
+                                    <span class="sidenav-mini-icon"><i class="fas fa-key"></i></span>
+                                    <span class="sidenav-normal"> Forgot Password </span>
+                                </a>
+                            </li> --}}
+                            <li class="nav-item ">
+                                <a class="nav-link " >
+                                    <span class="sidenav-mini-icon"><i class="fas fa-table"></i></span>
+                                    <span class="sidenav-normal"> Table </span>
+                                </a>
+                            </li>
+                            <li class="nav-item ">
+                                <a class="nav-link " >
+                                    <span class="sidenav-mini-icon"><i class="fas fa-user-circle"></i></span>
+                                    <span class="sidenav-normal"> Profile </span>
+                                </a>
+                            </li>
+                            <li class="nav-item ">
+                                <a class="nav-link " >
+                                    <span class="sidenav-mini-icon"><i class="fas fa-user-circle"></i></span>
+                                    <span class="sidenav-normal"> Edit Profile </span>
+                                </a>
+                            </li>
+                            <li class="nav-item ">
+                                <a class="nav-link " >
+                                    <span class="sidenav-mini-icon"><i class="fas fa-align-right"></i></span>
+                                    <span class="sidenav-normal"> Form </span>
+                                </a>
+                            </li>
+                            <li class="nav-item ">
+                                <a class="nav-link " >
+                                    <span class="sidenav-mini-icon"><i class="fas fa-money-bill"></i></span>
+                                    <span class="sidenav-normal"> Billing </span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+>>>>>>> 65afec8 (update)
 
             <!-- biaya -->
             <li class="nav-item">
