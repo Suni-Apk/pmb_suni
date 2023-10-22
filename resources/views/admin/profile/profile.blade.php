@@ -18,7 +18,7 @@
             <div class="col-auto my-auto">
                 <div class="h-100">
                     <h5 class="mb-1">
-                        Alec Thompson
+                        {{Auth::user()->name}}
                     </h5>
                     <p class="mb-0 font-weight-bold text-sm">
                         Admin
@@ -96,19 +96,19 @@
                     <ul class="list-group">
                         <li class="list-group-item border-0 ps-0 pt-0 text-sm"><strong class="text-dark">Full
                                 Name:</strong>
-                            &nbsp; Alec M. Thompson</li>
+                            &nbsp; {{Auth::user()->name}}</li>
                         <li class="list-group-item border-0 ps-0 text-sm"><strong class="text-dark">No Tlp:</strong>
                             &nbsp;
-                            08121231231</li>
+                            {{Auth::user()->phone}}</li>
                         <li class="list-group-item border-0 ps-0 text-sm"><strong class="text-dark">Email:</strong> &nbsp;
-                            alecthompson@mail.com</li>
-                        <li class="list-group-item border-0 ps-0 text-sm"><strong class="text-dark">Alamat:</strong>
+                            {{Auth::user()->email}}</li>
+                        <li class="list-group-item border-0 ps-0 text-sm"><strong class="text-dark">Tanggal Lahir:</strong>
                             &nbsp;
-                            USA
+                            {{Auth::user()->birthdate}}
                         </li>
                         <li class="list-group-item border-0 ps-0 text-sm"><strong class="text-dark">Gender:</strong>
                             &nbsp;
-                            Laki-laki
+                            {{Auth::user()->gender}}
                         </li>
                     </ul>
                 </div>

@@ -39,7 +39,7 @@ Route::get('/logout',[AuthController::class,'logout'])->name('logout');
 
 
 // Auth Admin
-Route::prefix('admin')->name('admin')->group(function () {
+Route::prefix('/admin')->name('admin.')->group(function () {
     Route::get('/login',[AdminAuthController::class,'login'])->name('login');
     
     Route::post('/login-process',[AdminAuthController::class,'login_process'])->name('login.process');
@@ -50,11 +50,16 @@ Route::prefix('admin')->name('admin')->group(function () {
 // Controller / Dashboard Admin
 Route::prefix('/admin')->middleware('admin')->name('admin.')->group(function(){
     Route::get('/dashboard',[AdminDashboardController::class,'index'])->name('dashboard');
+    Route::get('/profile',[AdminDashboardController::class,'profile'])->name('profile');
+    
 });
 
 // Dashboard Mahasiswa
 Route::prefix('/mahasiswa')->middleware('auth')->name('mahasiswa.')->group(function(){
     Route::get('/dashboard',[DashboardController::class,'index'])->name('dashboard');
+    Route::get('/profile',[DashboardController::class,'profile'])->name('profile');
+    Route::get('/profile/edit/{name}',[DashboardController::class,'edit_profile'])->name('edit-profile');
+    Route::put('/profile/edit/{id}/process',[DashboardController::class,'edit_profile_process'])->name('edit-profile.process');
 });
 
 Route::prefix('template')->group(function () {
@@ -77,10 +82,6 @@ Route::prefix('template')->group(function () {
     Route::get('/forgot', function () {
         return view('layouts.template.forgot-password');
     })->name('forgot');
-
-    Route::get('/profile', function () {
-        return view('layouts.template.profile');
-    })->name('profile');
 
     Route::get('/rtl', function () {
         return view('layouts.template.rtl');
