@@ -120,9 +120,9 @@
             <li class="nav-item">
                 <a data-bs-toggle="collapse" href="#admin" class="nav-link {{Route::is('admin.admin.*') ? 'active' : ''}}" aria-controls="admin" role="button" aria-expanded="false">
                     <div class="icon icon-sm shadow border-radius-md bg-white text-center d-flex align-items-center justify-content-center  me-2">
-                        <i class="fas fa-user-cog"></i>
+                        <i class="ni ni-paper-diploma"></i>
                     </div>
-                    <span class="nav-link-text ms-1"> Admin </span>
+                    <span class="nav-link-text ms-1">Admin</span>
                 </a>
                 <div class="collapse" id="admin">
                     <ul class="nav ms-4 ps-3">
@@ -690,7 +690,7 @@
                                 <span class="sidenav-mini-icon d-none d-xl-block"><i class="ni ni-building"></i></span>
                                 <span class="sidenav-normal"> General </span>
                             </a>
-                        </li>
+                        </li>`
                         <li class="nav-item ">
                             <a class="nav-link " href="">
                                 <span class="sidenav-mini-icon d-none d-xl-block"><i class="ni ni-bell-55"></i></span>
