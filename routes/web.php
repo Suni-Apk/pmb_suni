@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\AuthController as AdminAuthController;
+use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Mahasiswa\DashboardController;
 use Illuminate\Support\Facades\Auth;
@@ -42,11 +43,11 @@ Route::get('/admin/logout',[AdminAuthController::class,'logout'])->name('admin.l
 
 // Controller / Dashboard Admin
 Route::prefix('/admin')->middleware('admin')->name('admin.')->group(function(){
-    Route::get('/dashboard',[DashboardController::class,'index'])->name('dashboard');
+    Route::get('/dashboard',[AdminDashboardController::class,'index'])->name('dashboard');
 });
 
 // Dashboard Mahasiswa
-Route::prefix('/mahasiswa')->middleware(['auth','mahasiswa'])->name('mahasiswa.')->group(function(){
+Route::prefix('/mahasiswa')->middleware('auth')->name('mahasiswa.')->group(function(){
     Route::get('/dashboard',[DashboardController::class,'index'])->name('dashboard');
 });
 
@@ -84,9 +85,3 @@ Route::prefix('template')->group(function () {
         return view('admin.user.change-password');
     })->name('change-password');
 });
-
-
-
-Auth::routes();
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
