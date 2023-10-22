@@ -41,10 +41,7 @@ Route::get('/verify', [AuthController::class, 'verify'])->name('verify');
 
 Route::post('/verify-process', [AuthController::class,'verify_otp'])->name('verify.process');
 
-Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
-
-
-Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
+Route::get('/logout',[AuthController::class,'logout'])->name('logout');
 
 
 // Auth Admin
