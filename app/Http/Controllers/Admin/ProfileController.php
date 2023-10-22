@@ -19,6 +19,7 @@ class ProfileController extends Controller
     public function profile()
     {
         $auth = Auth::user();
+
         return view('admin.user.profile', compact('auth'));
     }
 
@@ -61,7 +62,7 @@ class ProfileController extends Controller
      */
     public function prosesProfile(Request $request, string $id)
     {
-        $user = User::find($id);
+        $user = User::user();
         $data = $request->validate([
             'name' => 'required|string',
             'email' => 'required|unique:users,email,' . $user->id,
@@ -77,21 +78,16 @@ class ProfileController extends Controller
     public function change_password()
     {
         $auth = Auth::user();
+
         return view('admin.user.change-password', compact('auth'));
     }
 
     public function change_password_proses(Request $request, $id)
     {
         $user = User::find($id);
-        $messages = [
-            'old_password.required' => 'Password lama wajib diisi.',
-            'password.required' => 'Password baru wajib diisi.',
-            'password.min' => 'Password baru minimal 8 karakter.',
-            'password_confirmation.same:password' => 'Password confirmation tidak sama dengan new password.',
-        ];
         $data = $request->validate([
             'old_password' => 'required',
-            'password' => 'required|confirmed|min:8',
+            'password' => 'required|confirmed',
             'password_confirmation' => 'same:password',
         ]);
         if ($request->password && $request->old_password) {
@@ -111,7 +107,6 @@ class ProfileController extends Controller
             $user->password;
             return redirect()->route('admin.change_password')->with('success', 'Berhasil mengubah password');
         }
-        // return redirect()->route('admin.change_password')->with('success', 'Berhasil mengubah password');
     }
     /**
      * Remove the specified resource from storage.
