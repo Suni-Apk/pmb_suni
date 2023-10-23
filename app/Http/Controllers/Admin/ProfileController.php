@@ -105,8 +105,7 @@ class ProfileController extends Controller
             $user->password;
             return redirect()->route('admin.change_password')->with('success', 'Berhasil mengubah password');
         }
-        // 
-       
+        // return redirect()->route('admin.change_password')->with('success', 'Berhasil mengubah password');
     }
     /**
      * Remove the specified resource from storage.
