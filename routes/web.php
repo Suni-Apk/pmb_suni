@@ -3,7 +3,6 @@
 use App\Http\Controllers\Admin\AuthController as AdminAuthController;
 use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
 use App\Http\Controllers\Admin\ProfileController;
-// use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Mahasiswa\DashboardController;
 use Illuminate\Support\Facades\Auth;
@@ -19,10 +18,6 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-
-Route::get('/', function () {
-    return view('welcome');
-})->name('welcome');
 
 Route::get('/', function () {
     return view('welcome');
@@ -67,10 +62,10 @@ Route::prefix('/admin')->middleware('admin')->name('admin.')->group(function () 
 });
 
 // Dashboard Mahasiswa
-Route::prefix('/mahasiswa')->middleware('auth')->name('mahasiswa.')->group(function(){
-    Route::get('/dashboard',[DashboardController::class,'index'])->name('dashboard');
+Route::prefix('/mahasiswa')->middleware(['auth', 'mahasiswa'])->name('mahasiswa.')->group(function () {
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
     Route::get('/profile',[DashboardController::class,'profile'])->name('profile');
-    Route::get('/profile/edit/{name}',[DashboardController::class,'edit_profile'])->name('edit-profile');
+    Route::get('/profile/edit/{name}', [DashboardController::class, 'edit_profile'])->name('edit-profile');
     Route::put('/profile/edit/{id}/process',[DashboardController::class,'edit_profile_process'])->name('edit-profile.process');
     Route::get('/profile/change_password/{name}',[DashboardController::class,'change_password'])->name('change_password');
     Route::put('/profile/change_password_process',[DashboardController::class,'change_password_process'])->name('change_password.process');
@@ -113,6 +108,14 @@ Route::prefix('template')->group(function () {
         return view('layouts.template.forgot-password');
     })->name('forgot');
 
+    Route::get('/form', function () {
+        return view('layouts.template.form');
+    })->name('form');
+
+    Route::get('/forgot', function () {
+        return view('layouts.template.forgot-password');
+    })->name('forgot');
+
     Route::get('/rtl', function () {
         return view('layouts.template.rtl');
     })->name('rtl');
@@ -122,14 +125,17 @@ Route::prefix('template')->group(function () {
     })->name('virtual-reality');
 
 
+
     Route::get('/profile', function () {
         return view('admin.user.profile');
     })->name('profile');
 
 
+
     // Route::get('/edit-profile', function () {
     //     return view('admin.profile.edit-profile');
     // })->name('edit-profile');
+
 
 
     // Route::get('/change-password', function () {
