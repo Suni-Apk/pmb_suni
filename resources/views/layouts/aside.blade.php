@@ -41,13 +41,13 @@
                 <div class="collapse" id="angkatan">
                     <ul class="nav ms-4 ps-3">
                         <li class="nav-item ">
-                            <a class="nav-link " href="">
+                            <a class="nav-link " href="{{ route('table') }}">
                                 <span class="sidenav-mini-icon d-none d-xl-block"><i class="fas fa-border-all"></i></span>
                                 <span class="sidenav-normal"> Daftar Tahun Ajaran </span>
                             </a>
                         </li>
                         <li class="nav-item ">
-                            <a class="nav-link " href="">
+                            <a class="nav-link " href="{{ route('form') }}">
                                 <span class="sidenav-mini-icon d-none d-xl-block"><i class="fas fa-plus"></i></span>
                                 <span class="sidenav-normal"> Tambah Tahun Ajaran </span>
                             </a>
@@ -67,13 +67,13 @@
                 <div class="collapse" id="jurusan">
                     <ul class="nav ms-4 ps-3">
                         <li class="nav-item ">
-                            <a class="nav-link " href="">
+                            <a class="nav-link " href="{{ route('table') }}">
                                 <span class="sidenav-mini-icon d-none d-xl-block"><i class="fas fa-border-all"></i></span>
                                 <span class="sidenav-normal"> Daftar Jurusan </span>
                             </a>
                         </li>
                         <li class="nav-item ">
-                            <a class="nav-link " href="">
+                            <a class="nav-link " href="{{ route('form') }}">
                                 <span class="sidenav-mini-icon d-none d-xl-block"><i class="fas fa-plus"></i></span>
                                 <span class="sidenav-normal"> Tambah Jurusan </span>
                             </a>
@@ -93,13 +93,13 @@
                 <div class="collapse" id="matkul">
                     <ul class="nav ms-4 ps-3">
                         <li class="nav-item ">
-                            <a class="nav-link " href="">
+                            <a class="nav-link " href="{{ route('table') }}">
                                 <span class="sidenav-mini-icon d-none d-xl-block"><i class="fas fa-border-all"></i></span>
                                 <span class="sidenav-normal"> Daftar Mata Kuliah </span>
                             </a>
                         </li>
                         <li class="nav-item ">
-                            <a class="nav-link " href="">
+                            <a class="nav-link " href="{{ route('form') }}">
                                 <span class="sidenav-mini-icon d-none d-xl-block"><i class="fas fa-plus"></i></span>
                                 <span class="sidenav-normal"> Tambah Mata Kuliah </span>
                             </a>
@@ -127,13 +127,13 @@
                 <div class="collapse" id="admin">
                     <ul class="nav ms-4 ps-3">
                         <li class="nav-item ">
-                            <a class="nav-link " href="">
+                            <a class="nav-link " href="{{ route('table') }}">
                                 <span class="sidenav-mini-icon d-none d-xl-block"><i class="fas fa-border-all"></i></span>
                                 <span class="sidenav-normal"> Daftar Admin </span>
                             </a>
                         </li>
                         <li class="nav-item ">
-                            <a class="nav-link " href="">
+                            <a class="nav-link " href="{{ route('form') }}">
                                 <span class="sidenav-mini-icon d-none d-xl-block"><i class="fas fa-plus"></i></span>
                                 <span class="sidenav-normal"> Tambah Admin </span>
                             </a>
@@ -153,13 +153,13 @@
                 <div class="collapse" id="mahasiswa">
                     <ul class="nav ms-4 ps-3">
                         <li class="nav-item ">
-                            <a class="nav-link " href="">
+                            <a class="nav-link " href="{{ route('table') }}">
                                 <span class="sidenav-mini-icon d-none d-xl-block"><i class="fas fa-border-all"></i></span>
                                 <span class="sidenav-normal"> Daftar Mahasiswa </span>
                             </a>
                         </li>
                         <li class="nav-item ">
-                            <a class="nav-link " href="">
+                            <a class="nav-link " href="{{ route('form') }}">
                                 <span class="sidenav-mini-icon d-none d-xl-block"><i class="fas fa-plus"></i></span>
                                 <span class="sidenav-normal"> Tambah Mahasiswa </span>
                             </a>
@@ -187,13 +187,13 @@
                 <div class="collapse" id="billing">
                     <ul class="nav ms-4 ps-3">
                         <li class="nav-item ">
-                            <a class="nav-link " href="">
+                            <a class="nav-link " href="{{ route('table') }}">
                                 <span class="sidenav-mini-icon d-none d-xl-block"><i class="fas fa-border-all"></i></span>
                                 <span class="sidenav-normal"> Daftar Biaya Tagihan </span>
                             </a>
                         </li>
                         <li class="nav-item ">
-                            <a class="nav-link " href="">
+                            <a class="nav-link " href="{{ route('form') }}">
                                 <span class="sidenav-mini-icon d-none d-xl-block"><i class="fas fa-plus"></i></span>
                                 <span class="sidenav-normal"> Tambah Biaya Tagihan </span>
                             </a>
@@ -290,14 +290,13 @@
             
             <!-- profile -->
             <li class="nav-item">
-                <a class="nav-link " href="">
-                    <div
-                        class="icon icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
+                <a class="nav-link " href="{{ route('admin.profile') }}">
+                    <div class="icon icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
                         <i class="fas fa-user-alt"></i>
                     </div>
                     <span class="nav-link-text ms-1">Profile</span>
                 </a>
-            </li>
+            </li>            
             
             <!-- template -->
             <li class="nav-item">
@@ -322,13 +321,13 @@
                             </a>
                         </li>
                         <li class="nav-item ">
-                            <a class="nav-link " href="{{ route('profile') }}">
+                            <a class="nav-link " href="{{ route('admin.profile') }}">
                                 <span class="sidenav-mini-icon d-none d-xl-block"><i class="fas fa-user-circle"></i></span>
                                 <span class="sidenav-normal"> Profile </span>
                             </a>
                         </li>
                         <li class="nav-item ">
-                            <a class="nav-link " href="{{ route('edit-profile') }}">
+                            <a class="nav-link " href="{{ route('admin.profile') }}">
                                 <span class="sidenav-mini-icon d-none d-xl-block"><i class="fas fa-user-circle"></i></span>
                                 <span class="sidenav-normal"> Edit Profile </span>
                             </a>

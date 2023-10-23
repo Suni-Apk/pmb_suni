@@ -16,7 +16,7 @@ class ProfileController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function profile($id)
+    public function profile()
     {
         $auth = Auth::user();
         return view('admin.user.profile', compact('auth'));
