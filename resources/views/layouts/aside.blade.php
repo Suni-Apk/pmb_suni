@@ -74,10 +74,18 @@
                             </a>
                         </li>
                         <li class="nav-item ">
+                            <a class="nav-link " href="">
+                                <span class="sidenav-mini-icon"><i class="ni ni-book-bookmark"></i></span>
+                                <span class="sidenav-normal"> Mata Kuliah </span>
+                        </li>
+                        <li class="nav-item ">
                             <a class="nav-link " href="{{ route('admin.jurusan.create') }}">
                                 <span class="sidenav-mini-icon d-none d-xl-block"><i class="fas fa-plus"></i></span>
                                 <span class="sidenav-normal"> Tambah Jurusan </span>
                             </a>
+                        </li>
+                    </ul>
+                </div>
                         </li>
                     </ul>
                 </div>

@@ -67,7 +67,11 @@ Route::prefix('/admin')->middleware('admin')->name('admin.')->group(function () 
 // Dashboard Mahasiswa
 Route::prefix('/mahasiswa')->middleware(['auth', 'mahasiswa'])->name('mahasiswa.')->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
-    Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
+    Route::get('/profile',[DashboardController::class,'profile'])->name('profile');
+    Route::get('/profile/edit/{name}', [DashboardController::class, 'edit_profile'])->name('edit-profile');
+    Route::put('/profile/edit/{id}/process',[DashboardController::class,'edit_profile_process'])->name('edit-profile.process');
+    Route::get('/profile/change_password/{name}',[DashboardController::class,'change_password'])->name('change_password');
+    Route::put('/profile/change_password_process',[DashboardController::class,'change_password_process'])->name('change_password.process');
 });
 
 Route::prefix('template')->group(function () {
