@@ -277,7 +277,7 @@
                                 <span class="sidenav-mini-icon d-none d-xl-block"><i class="ni ni-building"></i></span>
                                 <span class="sidenav-normal"> General </span>
                             </a>
-                        </li>
+                        </li>git rebase --continue
                         <li class="nav-item ">
                             <a class="nav-link " href="">
                                 <span class="sidenav-mini-icon d-none d-xl-block"><i class="ni ni-bell-55"></i></span>
