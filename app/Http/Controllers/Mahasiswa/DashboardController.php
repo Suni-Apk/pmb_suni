@@ -54,7 +54,7 @@ class DashboardController extends Controller
 
         $user->update($data);
 
-        return redirect()->route('mahasiswa.profile');
+        return redirect()->route('mahasiswa.profile')->with('success','Berhasil Mengedit Profile Anda');
     }
 
     public function change_password()
@@ -82,7 +82,7 @@ class DashboardController extends Controller
             'password' => Hash::make($request->password)
         ]);
 
-        return redirect()->route('mahasiswa.profile');
+        return redirect()->route('mahasiswa.profile')->with('success','Berhasil Mengedit Password');
     }
 
 }
