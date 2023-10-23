@@ -100,28 +100,34 @@
                             <div class="form-group">
                                 <label for="">Current password</label>
                                 <div class="input-group">
-                                    <input class="form-control" type="password" id="password" name="old_password"
-                                        placeholder="****" />
+                                    <input
+                                        class="form-control @error('old_password')
+                                        is-invalid
+                                    @enderror"
+                                        type="password" id="password" name="old_password" placeholder="****" />
                                     <button class="btn btn-outline-secondary mb-0" type="button" id="showOldPassword"><i
                                             class="fas fa-low-vision"></i> </button>
                                 </div>
-                                @if (Session::has('old_password2'))
-                                    <label for="" class="text-danger">{{ $message }}</label>
-                                @endif
                                 @error('old_password')
                                     <label class="text-danger">{{ $message }}</label>
                                 @enderror
                             </div>
                             <div class="form-group">
                                 <label for="">New password</label>
-                                <input type="password" name="password" class="form-control form-check">
+                                <input type="password" name="password"
+                                    class="form-control @error('password')
+                                    is-invalid                                @enderror form-check">
                                 @error('password')
                                     <label class="text-danger">{{ $message }}</label>
                                 @enderror
                             </div>
                             <div class="form-group">
                                 <label for="">Confirmation password</label>
-                                <input type="password" class="form-control form-check" name="password_confirmation">
+                                <input type="password"
+                                    class="form-control @error('password_confirmation')
+                                    is-invalid
+                                @enderror form-check"
+                                    name="password_confirmation">
                                 @error('password_confirmation')
                                     <label class="text-danger">{{ $message }}</label>
                                 @enderror
