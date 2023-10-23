@@ -25,7 +25,7 @@
             {{-- academy --}}
             <li class="nav-item">
                 <ul class="nav-link pb-0 mb-0">
-                    <span class="sidenav-mini-icon d-none d-xl-block"><i class="fas fa-university"></i></span>
+                    <span class="sidenav-mini-icon d-none d-xl-block" style="color:rgb(196, 196, 196)"><i class="fas fa-university"></i></span>
                     <span class="sidenav-normal text-uppercase text-xs ms-2 font-weight-bolder"> academy </span>
                 </ul>
             </li>
@@ -111,7 +111,7 @@
             {{-- users --}}
             <li class="nav-item">
                 <ul class="nav-link pb-0 mb-0">
-                    <span class="sidenav-mini-icon d-none d-xl-block"><i class="fas fa-users"></i></span>
+                    <span class="sidenav-mini-icon d-none d-xl-block" style="color:rgb(196, 196, 196)"><i class="fas fa-users"></i></span>
                     <span class="sidenav-normal text-uppercase text-xs ms-2 font-weight-bolder"> users </span>
                 </ul>
             </li>
@@ -171,7 +171,7 @@
             {{-- payment --}}
             <li class="nav-item">
                 <ul class="nav-link pb-0 mb-0">
-                    <span class="sidenav-mini-icon d-none d-xl-block"><i class="ni ni-credit-card"></i></span>
+                    <span class="sidenav-mini-icon d-none d-xl-block" style="color:rgb(196, 196, 196)"><i class="ni ni-credit-card"></i></span>
                     <span class="sidenav-normal text-uppercase text-xs ms-2 font-weight-bolder"> payment </span>
                 </ul>
             </li>
@@ -231,7 +231,7 @@
             {{-- other --}}
             <li class="nav-item">
                 <ul class="nav-link pb-0 mb-0">
-                    <span class="sidenav-mini-icon d-none d-xl-block"><i class="ni ni-credit-card"></i></span>
+                    <span class="sidenav-mini-icon d-none d-xl-block" style="color:rgb(196, 196, 196)"><i class="ni ni-credit-card"></i></span>
                     <span class="sidenav-normal text-uppercase text-xs ms-2 font-weight-bolder"> other </span>
                 </ul>
             </li>
