@@ -13,7 +13,8 @@
     <div class="collapse navbar-collapse w-auto min-vh-70" id="sidenav-collapse-main">
         <ul class="navbar-nav overflow-x-hidden" id="accordionSidebar">
             <li class="nav-item">
-                <a class="nav-link active" href="{{ route('admin.dashboard') }}">
+                <a class="nav-link {{ Route::is('admin.dashboard') ? 'active' : '' }}"
+                    href="{{ route('admin.dashboard') }}">
                     <div
                         class="icon icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
                         <i class="fas fa-th-large"></i>
@@ -30,7 +31,7 @@
                         class="icon icon-sm shadow border-radius-md bg-white text-center d-flex align-items-center justify-content-center  me-2">
                         <i class="fas fa-university"></i>
                     </div>
-                    <span class="nav-link-text ms-1">University</span>
+                    <span class="nav-link-text ms-1">Academy</span>
                 </a>
                 <div class="collapse" id="university">
                     <ul class="nav ms-4 ps-3">
@@ -249,7 +250,7 @@
                                 <span class="sidenav-mini-icon"><i class="ni ni-building"></i></span>
                                 <span class="sidenav-normal"> General </span>
                             </a>
-                        </li>
+                        </li>git rebase --continue
                         <li class="nav-item ">
                             <a class="nav-link " href="">
                                 <span class="sidenav-mini-icon"><i class="ni ni-bell-55"></i></span>
@@ -314,7 +315,8 @@
 
             <!-- profile -->
             <li class="nav-item">
-                <a class="nav-link " href="">
+                <a class="nav-link {{ Route::is('admin.profile', 'admin.profile_edit', 'admin.change_password') ? 'active' : '' }}"
+                    href="{{ route('admin.profile') }}">
                     <div
                         class="icon icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
                         <i class="fas fa-user-alt"></i>
