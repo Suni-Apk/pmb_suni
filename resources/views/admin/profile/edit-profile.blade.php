@@ -14,18 +14,37 @@
                             @method('PUT')
                             <div class="form-group">
                                 <label for="" class="form-control-label">Full name</label>
-                                <input type="text" class="form-control" name="name" id="name"
-                                    placeholder="asep kastelo" value="{{ $auth->name }}">
+                                <input type="text"
+                                    class="form-control @error('name')
+                                    is-invalid
+                                @enderror"
+                                    name="name" id="name" placeholder="asep kastelo" value="{{ $auth->name }}">
+                                @error('name')
+                                    <div class="text-danger">{{ $message }}</div>
+                                @enderror
                             </div>
                             <div class="form-group">
                                 <label for="">Email</label>
-                                <input type="email" class="form-control" name="email" id="email"
-                                    placeholder="asepKastelo@gmail.com" value="{{ $auth->email }}">
+                                <input type="email"
+                                    class="form-control @error('email')
+                                is-invalid
+                            @enderror"
+                                    name="email" id="email" placeholder="asepKastelo@gmail.com"
+                                    value="{{ $auth->email }}">
+                                @error('email')
+                                    <div class="text-danger">{{ $message }}</div>
+                                @enderror
                             </div>
                             <div class="form-group">
                                 <label for="">No Tlp</label>
-                                <input type="number" class="form-control" name="phone" id="telephone"
-                                    placeholder="08312379424" value="{{ $auth->phone }}">
+                                <input type="number"
+                                    class="form-control @error('phone')
+                                is-invalid
+                            @enderror"
+                                    name="phone" id="telephone" placeholder="08312379424" value="{{ $auth->phone }}">
+                                @error('phone')
+                                    <div class="text-danger">{{ $message }}</div>
+                                @enderror
                             </div>
                             <div class="form-group">
                                 <label for="" class="mb-3">Jenis kelamin</label>
@@ -34,13 +53,30 @@
                                         <label class="custom-control-label" for="customRadio1">Laki-laki</label>
                                         <input class="form-check-input" type="radio" name="gender" id="customRadio1"
                                             value="Laki-Laki" {{ $auth->gender == 'Laki-Laki' ? 'checked' : '' }}>
+                                        @error('gender')
+                                            <div class="text-danger">{{ $message }}</div>
+                                        @enderror
                                     </div>
                                     <div class="form-check">
                                         <label class="custom-control-label" for="customRadio2">Perempuan</label>
                                         <input class="form-check-input" type="radio" name="gender" id="customRadio2"
                                             value="Perempuan" {{ $auth->gender == 'Perempuan' ? 'checked' : '' }}>
+                                        @error('gender')
+                                            <div class="text-danger">{{ $message }}</div>
+                                        @enderror
                                     </div>
                                 </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="">Tanggal lahir</label>
+                                <input type="date"
+                                    class="form-control @error('birthdate')
+                                is-invalid
+                            @enderror"
+                                    name="birthdate" id="birthdate" placeholder="" value="{{ $auth->birthdate }}">
+                                @error('birthdate')
+                                    <div class="text-danger">{{ $message }}</div>
+                                @enderror
                             </div>
                             <div class="form-group">
                                 <button type="submit" class="btn btn-primary end-0"><i class="fas fa-edit">
