@@ -93,7 +93,8 @@ class AuthController extends Controller
 
         $input = $request->all();
 
-        auth()->attempt(array('phone' => $input['phone'], 'password' => $input['password']));
+        if(auth()->attempt(array('phone' => $input['phone'], 'password' => $input['password'])))
+        {
             if (auth()->user()->role == 'Mahasiswa') {
                 return redirect()->route('mahasiswa.dashboard')->with('success','Yey Berhasil Login');
             }else{
@@ -101,8 +102,15 @@ class AuthController extends Controller
                     'phone' => 'Kamu bukan Mahasiswa Disini'
                 ]);
             }
+        }else{
+            return redirect()->route('login')
+                ->withErrors('phone','Nomor And Password Are Wrong.');
+        }
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> b769586 (update)
         return redirect()->route('mahasiswa.dashboard');
     }
 
