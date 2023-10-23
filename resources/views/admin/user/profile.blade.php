@@ -40,7 +40,7 @@
                         <a class="nav-link mb-0 px-0 py-1 active " data-bs-toggle="tab" href="javascript:;"
                             role="tab" aria-selected="true">
                             <svg xmlns="http://www.w3.org/2000/svg" width="16px" height="16px"
-                                viewBox="0 0 512 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
+                                viewBox="0 0 512 512">
                                 <style>
                                     svg {
                                         fill: #3a4164
