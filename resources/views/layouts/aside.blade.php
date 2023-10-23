@@ -144,9 +144,8 @@
 
             <!-- mahasiswa -->
             <li class="nav-item">
-                <a data-bs-toggle="collapse" href="#mahasiswa" class="nav-link {{Route::is('admin.mahasiswa.*') ? 'active' : ''}}" aria-controls="mahasiswa" role="button" aria-expanded="false">
+                <a data-bs-toggle="collapse" href="#mahasiswa" class="nav-link" aria-controls="mahasiswa" role="button" aria-expanded="false">
                     <div class="icon icon-sm shadow border-radius-md bg-white text-center d-flex align-items-center justify-content-center  me-2">
-=======
                         </li>
                     </ul>
                 </div>
@@ -157,19 +156,20 @@
                 <a class="nav-link " href="{{ route('billing') }}">
                     <div
                         class="icon icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
->>>>>>> b035715 (jangan error)
                         <i class="fas fa-user-graduate"></i>
                     </div>
                     <span class="nav-link-text ms-1">Mahasiswa</span>
                 </a>
-<<<<<<< HEAD
                 <div class="collapse" id="mahasiswa">
                     <ul class="nav ms-4 ps-3">
                         <li class="nav-item ">
-                            <a class="nav-link {{Route::is('admin.mahasiswa.account') ? 'active' : ''}}" href="{{route('admin.mahasiswa.account')}}">
+                            <a class="nav-link " href="">
                                 <span class="sidenav-mini-icon d-none d-xl-block"><i class="fas fa-border-all"></i></span>
                                 <span class="sidenav-normal"> Daftar Mahasiswa </span>
-            </li>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
 
             <!--admin-->
             <li class="nav-item">
@@ -181,6 +181,83 @@
                     <span class="nav-link-text ms-1">Admin</span>
                 </a>
             </li>
+                
+                <!-- settings -->
+                <li class="nav-item">
+                    <a data-bs-toggle="collapse" href="#settings" class="nav-link" aria-controls="settings" role="button" aria-expanded="false">
+                        <div class="icon icon-sm shadow border-radius-md bg-white text-center d-flex align-items-center justify-content-center  me-2">
+                            <i class="fas fa-cog"></i>
+                        </div>
+                        <span class="nav-link-text ms-1">Settings</span>
+                    </a>
+                    <div class="collapse " id="settings">
+                        <ul class="nav ms-4 ps-3">
+                            <li class="nav-item ">
+                                <a class="nav-link " href="">
+                                    <span class="sidenav-mini-icon"><i class="ni ni-building"></i></span>
+                                    <span class="sidenav-normal"> General </span>
+                                </a>
+                            </li>
+                            <li class="nav-item ">
+                                <a class="nav-link " href="">
+                                    <span class="sidenav-mini-icon"><i class="ni ni-bell-55"></i></span>
+                                    <span class="sidenav-normal"> Notification </span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+                
+                <!-- template -->
+                <li class="nav-item">
+                    <a data-bs-toggle="collapse" href="#template" class="nav-link " aria-controls="template" role="button" aria-expanded="false">
+                        <div class="icon icon-sm shadow border-radius-md bg-white text-center d-flex align-items-center justify-content-center  me-2">
+                            <i class="fas fa-tools"></i>
+                        </div>
+                        <span class="nav-link-text ms-1">Template</span>
+                    </a>
+                    <div class="collapse " id="template">
+                        <ul class="nav ms-4 ps-3">
+                            {{-- <li class="nav-item ">
+                                <a class="nav-link " href="{{ route('change-password') }}">
+                                    <span class="sidenav-mini-icon"><i class="fas fa-key"></i></span>
+                                    <span class="sidenav-normal"> Forgot Password </span>
+                                </a>
+                            </li> --}}
+                            <li class="nav-item ">
+                                <a class="nav-link " >
+                                    <span class="sidenav-mini-icon"><i class="fas fa-table"></i></span>
+                                    <span class="sidenav-normal"> Table </span>
+                                </a>
+                            </li>
+                            <li class="nav-item ">
+                                <a class="nav-link " >
+                                    <span class="sidenav-mini-icon"><i class="fas fa-user-circle"></i></span>
+                                    <span class="sidenav-normal"> Profile </span>
+                                </a>
+                            </li>
+                            <li class="nav-item ">
+                                <a class="nav-link " >
+                                    <span class="sidenav-mini-icon"><i class="fas fa-user-circle"></i></span>
+                                    <span class="sidenav-normal"> Edit Profile </span>
+                                </a>
+                            </li>
+                            <li class="nav-item ">
+                                <a class="nav-link " >
+                                    <span class="sidenav-mini-icon"><i class="fas fa-align-right"></i></span>
+                                    <span class="sidenav-normal"> Form </span>
+                                </a>
+                            </li>
+                            <li class="nav-item ">
+                                <a class="nav-link " >
+                                    <span class="sidenav-mini-icon"><i class="fas fa-money-bill"></i></span>
+                                    <span class="sidenav-normal"> Billing </span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+>>>>>>> 65afec8 (update)
 
             <!-- biaya -->
             <li class="nav-item">
@@ -278,7 +355,6 @@
                     <div class="icon icon-sm shadow border-radius-md bg-white text-center d-flex align-items-center justify-content-center  me-2">
                         <i class="fas fa-folder-open"></i>
                     </div>
-<<<<<<< HEAD
                     <span class="nav-link-text ms-1"> Dokumen </span>
                 </a>
                 <div class="collapse" id="document">
@@ -287,6 +363,28 @@
                             <a class="nav-link " href="">
                                 <span class="sidenav-mini-icon d-none d-xl-block"><i class="fas fa-border-all"></i></span>
                                 <span class="sidenav-normal"> Daftar Dokumen </span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </li>
+            
+            <!-- dokumen -->
+            <li class="nav-item">
+                <a data-bs-toggle="collapse" href="#document" class="nav-link " aria-controls="document"
+                    role="button" aria-expanded="false">
+                    <div
+                        class="icon icon-sm shadow border-radius-md bg-white text-center d-flex align-items-center justify-content-center  me-2">
+                        <i class="fas fa-folder-open"></i>
+                    </div>
+                    <span class="nav-link-text ms-1">Document</span>
+                </a>
+                <div class="collapse " id="document">
+                    <ul class="nav ms-4 ps-3">
+                        <li class="nav-item ">
+                            <a class="nav-link " href="">
+                                <span class="sidenav-mini-icon"><i class="fas fa-file-pdf"></i></span>
+                                <span class="sidenav-normal"> All Document </span>
                             </a>
                         </li>
                         <li class="nav-item ">
@@ -322,33 +420,33 @@
                     </a>
                 </li>
 
-            <!-- settings -->
-            <li class="nav-item">
-                <a data-bs-toggle="collapse" href="#settings" class="nav-link" aria-controls="settings"
-                    role="button" aria-expanded="false">
-                    <div
-                        class="icon icon-sm shadow border-radius-md bg-white text-center d-flex align-items-center justify-content-center  me-2">
-                        <i class="fas fa-cog"></i>
+                <!-- settings -->
+                <li class="nav-item">
+                    <a data-bs-toggle="collapse" href="#settings" class="nav-link" aria-controls="settings"
+                        role="button" aria-expanded="false">
+                        <div
+                            class="icon icon-sm shadow border-radius-md bg-white text-center d-flex align-items-center justify-content-center  me-2">
+                            <i class="fas fa-cog"></i>
+                        </div>
+                        <span class="nav-link-text ms-1">Settings</span>
+                    </a>
+                    <div class="collapse " id="settings">
+                        <ul class="nav ms-4 ps-3">
+                            <li class="nav-item ">
+                                <a class="nav-link " href="">
+                                    <span class="sidenav-mini-icon"><i class="ni ni-building"></i></span>
+                                    <span class="sidenav-normal"> General </span>
+                                </a>
+                            </li>
+                            <li class="nav-item ">
+                                <a class="nav-link " href="">
+                                    <span class="sidenav-mini-icon"><i class="ni ni-bell-55"></i></span>
+                                    <span class="sidenav-normal"> Notification </span>
+                                </a>
+                            </li>
+                        </ul>
                     </div>
-                    <span class="nav-link-text ms-1">Settings</span>
-                </a>
-                <div class="collapse " id="settings">
-                    <ul class="nav ms-4 ps-3">
-                        <li class="nav-item ">
-                            <a class="nav-link " href="">
-                                <span class="sidenav-mini-icon"><i class="ni ni-building"></i></span>
-                                <span class="sidenav-normal"> General </span>
-                            </a>
-                        </li>
-                        <li class="nav-item ">
-                            <a class="nav-link " href="">
-                                <span class="sidenav-mini-icon"><i class="ni ni-bell-55"></i></span>
-                                <span class="sidenav-normal"> Notification </span>
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-            </li>
+                </li>
 
             <!-- template -->
             <li class="nav-item">
