@@ -171,52 +171,54 @@
                     </ul>
                 </div>
 
-            <!--admin-->
-            <li class="nav-item">
-                <a class="nav-link " href="{{ route('table') }}">
-                    <div
-                        class="icon icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
-                        <i class="fas fa-user-cog"></i>
-                    </div>
-                    <span class="nav-link-text ms-1">Admin</span>
-                </a>
-            </li>
-                
-                <!-- settings -->
+                <!--admin-->
                 <li class="nav-item">
-                    <a data-bs-toggle="collapse" href="#settings" class="nav-link" aria-controls="settings"
+                    <a class="nav-link " href="{{ route('table') }}">
+                        <div
+                            class="icon icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
+                            <i class="fas fa-user-cog"></i>
+                        </div>
+                        <span class="nav-link-text ms-1">Admin</span>
+                    </a>
+                </li>
+
+                </li>
+
+                <!-- biaya -->
+                <li class="nav-item">
+                    <a data-bs-toggle="collapse" href="#payment" class="nav-link " aria-controls="payment"
                         role="button" aria-expanded="false">
                         <div
                             class="icon icon-sm shadow border-radius-md bg-white text-center d-flex align-items-center justify-content-center  me-2">
-                            <i class="fas fa-cog"></i>
+                            <i class="ni ni-credit-card"></i>
                         </div>
-                        <span class="nav-link-text ms-1">Settings</span>
+
+                        <span class="nav-link-text ms-1">Biaya</span>
                     </a>
-                    <div class="collapse " id="settings">
+                    <div class="collapse " id="payment">
                         <ul class="nav ms-4 ps-3">
                             <li class="nav-item ">
                                 <a class="nav-link " href="">
-                                    <span class="sidenav-mini-icon"><i class="ni ni-building"></i></span>
-                                    <span class="sidenav-normal"> General </span>
+                                    <span class="sidenav-mini-icon"><i class="fas fa-wallet"></i></span>
+                                    <span class="sidenav-normal"> Biaya Tagihan </span>
                                 </a>
                             </li>
                             <li class="nav-item ">
                                 <a class="nav-link " href="">
-                                    <span class="sidenav-mini-icon"><i class="ni ni-bell-55"></i></span>
-                                    <span class="sidenav-normal"> Notification </span>
+                                    <span class="sidenav-mini-icon"><i class="ni ni-ungroup"></i></span>
+                                    <span class="sidenav-normal"> Biaya Bawaan </span>
                                 </a>
                             </li>
                         </ul>
                     </div>
                 </li>
 
-                <!-- template -->
+                <!-- transaksi -->
                 <li class="nav-item">
-                    <a data-bs-toggle="collapse" href="#template" class="nav-link " aria-controls="template"
-                        role="button" aria-expanded="false">
+                    <a class="nav-link" href="{{ route('table') }}">
                         <div
-                            class="icon icon-sm shadow border-radius-md bg-white text-center d-flex align-items-center justify-content-center  me-2">
-                            <i class="fas fa-tools"></i>
+                            class="icon icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
+                            <i class="fas fa-money-check-alt"></i>
                         </div>
                         <span class="nav-link-text ms-1">Template</span>
                     </a>
