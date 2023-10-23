@@ -10,26 +10,18 @@
         </a>
     </div>
     <hr class="horizontal dark mt-0">
-    @if (Auth::user()->role == 'Admin')
-        <div class="collapse navbar-collapse w-auto min-vh-70" id="sidenav-collapse-main">
-            <ul class="navbar-nav overflow-x-hidden" id="accordionSidebar">
-                <li class="nav-item">
-                    <a class="nav-link active" href="{{ route('admin.dashboard') }}">
-                        <div
-                            class="icon icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
-                            <i class="fas fa-th-large"></i>
-                        </div>
-                        <span class="nav-link-text ms-1">Dashboard</span>
-                    </a>
-                </li>
-
-            <!-- kuliah -->
+    <div class="collapse navbar-collapse w-auto min-vh-70" id="sidenav-collapse-main">
+        <ul class="navbar-nav overflow-x-hidden" id="accordionSidebar">
             <li class="nav-item">
-                <a data-bs-toggle="collapse" href="#university" class="nav-link" aria-controls="university"
-                    role="button" aria-expanded="false">
+                <a class="nav-link active" href="{{ route('admin.dashboard') }}">
                     <div
-                        class="icon icon-sm shadow border-radius-md bg-white text-center d-flex align-items-center justify-content-center  me-2">
-                        <i class="fas fa-university"></i>
+                        class="icon icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
+                        <i class="fas fa-th-large"></i>
+                    </div>
+                    <span class="nav-link-text ms-1">Dashboard</span>
+                </a>
+            </li>
+
             <!-- kuliah -->
             <li class="nav-item">
                 <a data-bs-toggle="collapse" href="#university" class="nav-link" aria-controls="university"
@@ -46,19 +38,7 @@
                             <a class="nav-link " href="">
                                 <span class="sidenav-mini-icon"><i class="fas fa-book"></i></span>
                                 <span class="sidenav-normal"> Program Belajar </span>
-                </a>
-                <div class="collapse" id="university">
-                    <ul class="nav ms-4 ps-3">
-                        <li class="nav-item ">
-                            <a class="nav-link " href="">
-                                <span class="sidenav-mini-icon"><i class="fas fa-book"></i></span>
-                                <span class="sidenav-normal"> Program Belajar </span>
                             </a>
-                        </li>
-                        <li class="nav-item ">
-                            <a class="nav-link " href="">
-                                <span class="sidenav-mini-icon"><i class="ni ni-hat-3"></i></span>
-                                <span class="sidenav-normal"> Tahun Akademi </span>
                         </li>
                         <li class="nav-item ">
                             <a class="nav-link " href="">
@@ -70,38 +50,22 @@
                             <a class="nav-link " href="">
                                 <span class="sidenav-mini-icon"><i class="ni ni-paper-diploma"></i></span>
                                 <span class="sidenav-normal"> Jurusan </span>
-                        </li>
-                        <li class="nav-item ">
-                            <a class="nav-link " href="">
-                                <span class="sidenav-mini-icon"><i class="ni ni-paper-diploma"></i></span>
-                                <span class="sidenav-normal"> Jurusan </span>
                             </a>
                         </li>
                         <li class="nav-item ">
                             <a class="nav-link " href="">
                                 <span class="sidenav-mini-icon"><i class="ni ni-book-bookmark"></i></span>
                                 <span class="sidenav-normal"> Mata Kuliah </span>
-                        </li>
-                        <li class="nav-item ">
-                            <a class="nav-link " href="">
-                                <span class="sidenav-mini-icon"><i class="ni ni-book-bookmark"></i></span>
-                                <span class="sidenav-normal"> Mata Kuliah </span>
                             </a>
-                        </li>
-                    </ul>
-                </div>
                         </li>
                     </ul>
                 </div>
             </li>
 
             <!--mahasiswa-->
-
-            <!--mahasiswa-->
             <li class="nav-item">
                 <a class="nav-link " href="{{ route('billing') }}">
                     <div
-                        class="icon icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
                         class="icon icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
                         <i class="fas fa-user-graduate"></i>
                     </div>
@@ -110,14 +74,9 @@
             </li>
 
             <!--admin-->
-
-            <!--admin-->
             <li class="nav-item">
                 <a class="nav-link " href="{{ route('table') }}">
-                <a class="nav-link " href="{{ route('table') }}">
                     <div
-                        class="icon icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
-                        <i class="fas fa-user-cog"></i>
                         class="icon icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
                         <i class="fas fa-user-cog"></i>
                     </div>

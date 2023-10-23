@@ -5,7 +5,7 @@
 @section('content')
     <section class="min-vh-25 mb-8">
         <div class="page-header align-items-start min-vh-50 pt-5 pb-11 m-3 border-radius-lg"
-            style="background-image: url('../soft-ui-dashboard-main/assets/img/curved-images/curved14.jpg');">
+            style="background-image: url('/soft-ui-dashboard-main/assets/img/curved-images/curved14.jpg');">
             <span class="mask bg-gradient-dark opacity-6"></span>
             <div class="container">
                 <div class="row justify-content-center">

@@ -25,6 +25,7 @@ Route::get('/', function () {
 
 // Auth Mahasiswa
 Route::get('/register', [AuthController::class, 'register'])->name('register');
+Route::get('/register', [AuthController::class, 'register'])->name('register');
 
 Route::post('/register-process', [AuthController::class, 'register_process'])->name('register.process');
 
@@ -32,6 +33,7 @@ Route::get('/login', [AuthController::class, 'login'])->name('login');
 
 Route::post('/login-process', [AuthController::class, 'login_process'])->name('login.process');
 
+Route::get('/verify', [AuthController::class, 'verify'])->name('verify');
 Route::get('/verify', [AuthController::class, 'verify'])->name('verify');
 
 Route::post('/verify-process', [AuthController::class, 'verify_otp'])->name('verify.process');
@@ -129,6 +131,8 @@ Route::prefix('template')->group(function () {
     Route::get('/profile', function () {
         return view('admin.user.profile');
     })->name('profile');
+
+
 
 
 
