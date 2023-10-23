@@ -13,7 +13,8 @@
     <div class="collapse navbar-collapse w-auto min-vh-75" id="sidenav-collapse-main">
         <ul class="navbar-nav overflow-x-hidden" id="accordionSidebar">
             <li class="nav-item">
-                <a class="nav-link active" href="{{ route('admin.dashboard') }}">
+                <a class="nav-link {{ Route::is('admin.dashboard') ? 'active' : '' }}"
+                    href="{{ route('admin.dashboard') }}">
                     <div
                         class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
                         <i class="fas fa-th-large"></i>
@@ -269,7 +270,7 @@
                                 <span class="sidenav-mini-icon d-none d-xl-block"><i class="ni ni-building"></i></span>
                                 <span class="sidenav-normal"> General </span>
                             </a>
-                        </li>`
+                        </li>
                         <li class="nav-item ">
                             <a class="nav-link " href="">
                                 <span class="sidenav-mini-icon d-none d-xl-block"><i class="ni ni-bell-55"></i></span>
