@@ -184,8 +184,10 @@
                 
                 <!-- settings -->
                 <li class="nav-item">
-                    <a data-bs-toggle="collapse" href="#settings" class="nav-link" aria-controls="settings" role="button" aria-expanded="false">
-                        <div class="icon icon-sm shadow border-radius-md bg-white text-center d-flex align-items-center justify-content-center  me-2">
+                    <a data-bs-toggle="collapse" href="#settings" class="nav-link" aria-controls="settings"
+                        role="button" aria-expanded="false">
+                        <div
+                            class="icon icon-sm shadow border-radius-md bg-white text-center d-flex align-items-center justify-content-center  me-2">
                             <i class="fas fa-cog"></i>
                         </div>
                         <span class="nav-link-text ms-1">Settings</span>
@@ -207,11 +209,13 @@
                         </ul>
                     </div>
                 </li>
-                
+
                 <!-- template -->
                 <li class="nav-item">
-                    <a data-bs-toggle="collapse" href="#template" class="nav-link " aria-controls="template" role="button" aria-expanded="false">
-                        <div class="icon icon-sm shadow border-radius-md bg-white text-center d-flex align-items-center justify-content-center  me-2">
+                    <a data-bs-toggle="collapse" href="#template" class="nav-link " aria-controls="template"
+                        role="button" aria-expanded="false">
+                        <div
+                            class="icon icon-sm shadow border-radius-md bg-white text-center d-flex align-items-center justify-content-center  me-2">
                             <i class="fas fa-tools"></i>
                         </div>
                         <span class="nav-link-text ms-1">Template</span>
@@ -225,31 +229,31 @@
                                 </a>
                             </li> --}}
                             <li class="nav-item ">
-                                <a class="nav-link " >
+                                <a class="nav-link ">
                                     <span class="sidenav-mini-icon"><i class="fas fa-table"></i></span>
                                     <span class="sidenav-normal"> Table </span>
                                 </a>
                             </li>
                             <li class="nav-item ">
-                                <a class="nav-link " >
+                                <a class="nav-link ">
                                     <span class="sidenav-mini-icon"><i class="fas fa-user-circle"></i></span>
                                     <span class="sidenav-normal"> Profile </span>
                                 </a>
                             </li>
                             <li class="nav-item ">
-                                <a class="nav-link " >
+                                <a class="nav-link ">
                                     <span class="sidenav-mini-icon"><i class="fas fa-user-circle"></i></span>
                                     <span class="sidenav-normal"> Edit Profile </span>
                                 </a>
                             </li>
                             <li class="nav-item ">
-                                <a class="nav-link " >
+                                <a class="nav-link ">
                                     <span class="sidenav-mini-icon"><i class="fas fa-align-right"></i></span>
                                     <span class="sidenav-normal"> Form </span>
                                 </a>
                             </li>
                             <li class="nav-item ">
-                                <a class="nav-link " >
+                                <a class="nav-link ">
                                     <span class="sidenav-mini-icon"><i class="fas fa-money-bill"></i></span>
                                     <span class="sidenav-normal"> Billing </span>
                                 </a>
@@ -257,7 +261,6 @@
                         </ul>
                     </div>
                 </li>
->>>>>>> 65afec8 (update)
 
             <!-- biaya -->
             <li class="nav-item">
@@ -448,6 +451,117 @@
                     </div>
                 </li>
 
+                <!-- template -->
+                <li class="nav-item">
+                    <a data-bs-toggle="collapse" href="#template" class="nav-link " aria-controls="template"
+                        role="button" aria-expanded="false">
+                        <div
+                            class="icon icon-sm shadow border-radius-md bg-white text-center d-flex align-items-center justify-content-center  me-2">
+                            <i class="fas fa-tools"></i>
+                        </div>
+                        <span class="nav-link-text ms-1">Template</span>
+                    </a>
+                    <div class="collapse " id="template">
+                        <ul class="nav ms-4 ps-3">
+                            <li class="nav-item ">
+                                <a class="nav-link " href="{{ route('forgot') }}">
+                                    <span class="sidenav-mini-icon"><i class="fas fa-key"></i></span>
+                                    <span class="sidenav-normal"> Forgot Password </span>
+                                </a>
+                            </li>
+                            <li class="nav-item ">
+                                <a class="nav-link " href="{{ route('table') }}">
+                                    <span class="sidenav-mini-icon"><i class="fas fa-table"></i></span>
+                                    <span class="sidenav-normal"> Table </span>
+                                </a>
+                            </li>
+                            <li class="nav-item ">
+                                <a class="nav-link " href="{{ route('profile') }}">
+                                    <span class="sidenav-mini-icon"><i class="fas fa-user-circle"></i></span>
+                                    <span class="sidenav-normal"> Profile </span>
+                                </a>
+                            </li>
+                            <li class="nav-item ">
+                                <a class="nav-link " href="{{ route('edit-profile') }}">
+                                    <span class="sidenav-mini-icon"><i class="fas fa-user-circle"></i></span>
+                                    <span class="sidenav-normal"> Edit Profile </span>
+                                </a>
+                            </li>
+                            <li class="nav-item ">
+                                <a class="nav-link " href="{{ route('form') }}">
+                                    <span class="sidenav-mini-icon"><i class="fas fa-align-right"></i></span>
+                                    <span class="sidenav-normal"> Form </span>
+                                </a>
+                            </li>
+                            <li class="nav-item ">
+                                <a class="nav-link " href="{{ route('billing') }}">
+                                    <span class="sidenav-mini-icon"><i class="fas fa-money-bill"></i></span>
+                                    <span class="sidenav-normal"> Billing </span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+
+                <!-- profile -->
+                <li class="nav-item">
+                    <a class="nav-link " href="">
+                        <div
+                            class="icon icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
+                            <i class="fas fa-user-alt"></i>
+                        </div>
+                        <span class="nav-link-text ms-1">Profile</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <div class="sidenav-footer mx-3 nav-item">
+            <a class="btn bg-gradient-primary btn-tooltip mt-3 w-100 nav-link text-white"
+                href="{{ route('admin.logout') }}" data-bs-toggle="tooltip" data-bs-placement="right"
+                title="Logout" data-container="body" data-animation="true">
+                <i class="fas fa-sign-out-alt"></i>
+            </a>
+        </div>
+        </li>
+    @endif
+>>>>>>> c36d872 (update)
+=======
+                                <span class="sidenav-mini-icon"><i class="fas fa-file-pdf"></i></span>
+                                <span class="sidenav-normal"> RPL Document </span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </li>
+
+            <!-- settings -->
+            <li class="nav-item">
+                <a data-bs-toggle="collapse" href="#settings" class="nav-link" aria-controls="settings"
+                    role="button" aria-expanded="false">
+                    <div
+                        class="icon icon-sm shadow border-radius-md bg-white text-center d-flex align-items-center justify-content-center  me-2">
+                        <i class="fas fa-cog"></i>
+                    </div>
+                    <span class="nav-link-text ms-1">Settings</span>
+                </a>
+                <div class="collapse " id="settings">
+                    <ul class="nav ms-4 ps-3">
+                        <li class="nav-item ">
+                            <a class="nav-link " href="">
+                                <span class="sidenav-mini-icon"><i class="ni ni-building"></i></span>
+                                <span class="sidenav-normal"> General </span>
+                            </a>
+                        </li>
+                        <li class="nav-item ">
+                            <a class="nav-link " href="">
+                                <span class="sidenav-mini-icon"><i class="ni ni-bell-55"></i></span>
+                                <span class="sidenav-normal"> Notification </span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </li>
+
             <!-- template -->
             <li class="nav-item">
                 <a data-bs-toggle="collapse" href="#template" class="nav-link " aria-controls="template"
@@ -461,8 +575,8 @@
                 <div class="collapse " id="template">
                     <ul class="nav ms-4 ps-3">
                         <li class="nav-item ">
-                            <a class="nav-link " href="{{ url('change-password') }}">
-                                <span class="sidenav-mini-icon d-none d-xl-block"><i class="fas fa-key"></i></span>
+                            <a class="nav-link " href="{{ route('change-password') }}">
+                                <span class="sidenav-mini-icon"><i class="fas fa-key"></i></span>
                                 <span class="sidenav-normal"> Forgot Password </span>
                             </a>
                         </li>
