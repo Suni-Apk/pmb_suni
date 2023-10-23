@@ -16,10 +16,9 @@ class ProfileController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function profile()
+    public function profile($id)
     {
         $auth = Auth::user();
-
         return view('admin.user.profile', compact('auth'));
     }
 
@@ -76,8 +75,6 @@ class ProfileController extends Controller
     public function change_password()
     {
         $auth = Auth::user();
-
-
         return view('admin.user.change-password', compact('auth'));
     }
 
