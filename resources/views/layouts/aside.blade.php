@@ -182,13 +182,13 @@
                 <div class="collapse" id="admin">
                     <ul class="nav ms-4 ps-3">
                         <li class="nav-item ">
-                            <a class="nav-link " href="">
+                            <a class="nav-link " href="{{ route('table') }}">
                                 <span class="sidenav-mini-icon d-none d-xl-block"><i class="fas fa-border-all"></i></span>
                                 <span class="sidenav-normal"> Daftar Admin </span>
                             </a>
                         </li>
                         <li class="nav-item ">
-                            <a class="nav-link " href="">
+                            <a class="nav-link " href="{{ route('form') }}">
                                 <span class="sidenav-mini-icon d-none d-xl-block"><i class="fas fa-plus"></i></span>
                                 <span class="sidenav-normal"> Tambah Admin </span>
                             </a>
@@ -208,13 +208,13 @@
                 <div class="collapse" id="mahasiswa">
                     <ul class="nav ms-4 ps-3">
                         <li class="nav-item ">
-                            <a class="nav-link " href="">
+                            <a class="nav-link " href="{{ route('table') }}">
                                 <span class="sidenav-mini-icon d-none d-xl-block"><i class="fas fa-border-all"></i></span>
                                 <span class="sidenav-normal"> Daftar Mahasiswa </span>
                             </a>
                         </li>
                         <li class="nav-item ">
-                            <a class="nav-link " href="">
+                            <a class="nav-link " href="{{ route('form') }}">
                                 <span class="sidenav-mini-icon d-none d-xl-block"><i class="fas fa-plus"></i></span>
                                 <span class="sidenav-normal"> Tambah Mahasiswa </span>
                             </a>
@@ -242,13 +242,13 @@
                 <div class="collapse" id="billing">
                     <ul class="nav ms-4 ps-3">
                         <li class="nav-item ">
-                            <a class="nav-link " href="">
+                            <a class="nav-link " href="{{ route('table') }}">
                                 <span class="sidenav-mini-icon d-none d-xl-block"><i class="fas fa-border-all"></i></span>
                                 <span class="sidenav-normal"> Daftar Biaya Tagihan </span>
                             </a>
                         </li>
                         <li class="nav-item ">
-                            <a class="nav-link " href="">
+                            <a class="nav-link " href="{{ route('form') }}">
                                 <span class="sidenav-mini-icon d-none d-xl-block"><i class="fas fa-plus"></i></span>
                                 <span class="sidenav-normal"> Tambah Biaya Tagihan </span>
                             </a>
