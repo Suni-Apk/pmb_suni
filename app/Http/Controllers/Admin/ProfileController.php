@@ -93,13 +93,25 @@ class ProfileController extends Controller
             'old_password' => 'required',
             'password' => 'required|confirmed|min:8',
             'password_confirmation' => 'same:password',
-        ], $messages);
-        if (!Hash::check($request->old_password, $user->password)) {
-            return redirect()->back()->withErrors(['old_password' => 'Password Lama Kamu Salah'])->withInput();
+        ]);
+        if ($request->password && $request->old_password) {
+            $data = $request->validate([
+                'old_password' => 'required',
+                'password' => 'required|confirmed',
+                'password_confirmation' => 'same:password',
+            ]);
+            if (!Hash::check($request->old_password, $user->password)) {
+                FacadesSession::flash('old_password2', "Password not match");
+                return Redirect::back();
+            }
+            $data['password'] = Hash::make($request->password);
+            $user->update($data);
+            return redirect()->route('admin.change_password')->with('success', 'Berhasil mengubah password');
+        } else {
+            $user->password;
+            return redirect()->route('admin.change_password')->with('success', 'Berhasil mengubah password');
         }
-        $data['password'] = Hash::make($request->password);
-        $user->update($data);
-        return redirect()->route('admin.change_password')->with('success', 'Berhasil mengubah password');
+        // return redirect()->route('admin.change_password')->with('success', 'Berhasil mengubah password');
     }
     /**
      * Remove the specified resource from storage.
