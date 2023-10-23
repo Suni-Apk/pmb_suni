@@ -17,13 +17,13 @@
                     <div class="collapse navbar-collapse justify-content-end" id="navigation">
                         <ul class="navbar-nav me-lg-2">
                             <li class="nav-item">
-                            <a class="nav-link me-2" href="">
+                            <a class="nav-link me-2" href="{{route('register')}}">
                                 <i class="fas fa-user-circle opacity-6 text-dark me-1"></i>
                                 Sign Up
                             </a>
                             </li>
                             <li class="nav-item">
-                            <a class="nav-link me-2" href="">
+                            <a class="nav-link me-2" href="{{route('login')}}">
                                 <i class="fas fa-key opacity-6 text-dark me-1"></i>
                                 Sign In
                             </a>

@@ -43,7 +43,7 @@
                             <a class="dropdown-item border-radius-md" href="">
                                 <div class="d-flex py-1">
                                     <div class="my-auto">
-                                        <img src="../soft-ui-dashboard-main/assets/img/team-2.jpg"
+                                        <img src="/soft-ui-dashboard-main/assets/img/team-2.jpg"
                                             class="avatar avatar-sm  me-3 ">
                                     </div>
                                     <div class="d-flex flex-column justify-content-center">
@@ -63,7 +63,7 @@
                 <li class="nav-item dropdown d-flex align-items-center">
                     <span role="button" class="nav-link text-body font-weight-bold px-0" id="dropdownProfile"
                         data-bs-toggle="dropdown" aria-expanded="false">
-                        <img src="../soft-ui-dashboard-main/assets/img/team-2.jpg" class="avatar avatar-sm ms-2">
+                        <img src="/soft-ui-dashboard-main/assets/img/team-2.jpg" class="avatar avatar-sm ms-2">
                     </span>
                     <ul class="dropdown-menu dropdown-menu-end px-2 py-2 me-sm-n2" aria-labelledby="dropdownProfile">
                         <li class="mb-1">

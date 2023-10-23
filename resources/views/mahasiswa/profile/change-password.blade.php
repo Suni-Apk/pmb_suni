@@ -84,7 +84,7 @@
                             <h6 class="mb-0">Change password</h6>
                         </div>
                         <div class="col-md-4 text-end">
-                            <a href="{{ route('edit-profile') }}">
+                            <a href="{{ route('mahasiswa.edit-profile',Auth::user()->name) }}">
                                 <i class="fas fa-user-edit text-secondary text-sm" data-bs-toggle="tooltip"
                                     data-bs-placement="top" title="Edit Profile"></i>
                             </a>

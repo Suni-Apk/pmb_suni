@@ -71,7 +71,7 @@ class ProfileController extends Controller
         ]);
 
         $user->update($data);
-        return redirect()->route('admin.profile');
+        return redirect()->route('admin.profile')->with('success','Berhasil Mengedit Profile');
     }
 
     public function change_password()
@@ -79,7 +79,7 @@ class ProfileController extends Controller
         $auth = Auth::user();
 
 
-        return view('admin.user.change-password', compact('auth'));
+        return view('admin.profile.change-password', compact('auth'));
     }
 
     public function change_password_proses(Request $request, $id)
@@ -107,6 +107,8 @@ class ProfileController extends Controller
             $user->password;
             return redirect()->route('admin.change_password')->with('success', 'Berhasil mengubah password');
         }
+        // 
+       
     }
     /**
      * Remove the specified resource from storage.
