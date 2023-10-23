@@ -105,9 +105,9 @@
                                     <button class="btn btn-outline-secondary mb-0" type="button" id="showOldPassword"><i
                                             class="fas fa-low-vision"></i> </button>
                                 </div>
-                                {{-- @if (Session::has('old_password2'))
-                                    <label for="" class="text-danger">{{$message}}</label>
-                                @endif --}}
+                                @if (Session::has('old_password2'))
+                                    <label for="" class="text-danger">{{ $message }}</label>
+                                @endif
                                 @error('old_password')
                                     <label class="text-danger">{{ $message }}</label>
                                 @enderror
