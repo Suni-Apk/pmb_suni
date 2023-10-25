@@ -10,7 +10,7 @@
         <div class="col-12">
             <div class="card mb-4">
                 <div class="card-header pb-0">
-                    <h6>Tambah Jurusan</h6>
+                    <h6>Tambah Tahun Ajaran</h6>
                 </div>
                 <div class="card-body px-0 pt-0 pb-2">
                     <div class="card">
@@ -19,8 +19,17 @@
                                 <form action="#" method="POST">
                                     @csrf
                                     <div class="form-group mb-3">
-                                        <label for="nama">Nama</label>
-                                        <input type="text" name="nama" id="nama" class="form-control">
+                                        <label for="nama">Tahun Ajaran</label>
+                                        <input type="number" name="nama" id="nama" class="form-control">
+                                    </div>
+
+                                    <div class="form-group mb-3">
+                                        <label for="nama">Mulai</label>
+                                        <input type="date" name="nama" id="nama" class="form-control">
+                                    </div>
+                                    <div class="form-group mb-3">
+                                        <label for="nama">Selesai</label>
+                                        <input type="date" name="nama" id="nama" class="form-control">
                                     </div>
 
                                     <button type="submit" class="btn btn-success">Submit</button>

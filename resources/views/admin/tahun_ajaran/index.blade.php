@@ -10,7 +10,7 @@
         <div class="col-12">
             <div class="card mb-4">
                 <div class="card-header pb-0">
-                    <h6>Tabel Mata Kuliah</h6>
+                    <h6>Tabel Tahun Ajaran</h6>
                 </div>
                 <div class="card-body px-0 pt-0 pb-2">
                     <div class="table-responsive p-0">
@@ -19,21 +19,17 @@
                                 <tr>
                                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 text-center">id</th>
                                     <th class="text-uppercase text-secondary text-xxs px-2 font-weight-bolder opacity-7">
-                                        Nama Matkul</th>
+                                        Tahun Ajaran</th>
                                     <th class="text-uppercase text-secondary text-xxs px-2 font-weight-bolder opacity-7">
-                                        Jurusan & Semester</th>
+                                        Status</th>
                                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2 text-center">
                                         Mulai</th>
                                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2 text-center">
                                         Selesai</th>
-                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2 text-center">
-                                        Tanggal</th>
-                                    <th
-                                        class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                        Created By</th>
                                     <th
                                         class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                         Action</th>
+                                    <th class="text-secondary opacity-7"></th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -42,44 +38,18 @@
                                         <span class="text-bold">1</span>
                                     </td>
                                     <td class="align-middle text-start text-sm">
-                                        <span class="text-bold">Fiqih Muamalah</span>
+                                        <span class="text-bold">2022</span>
                                     </td>
-                                    <td>
-                                        <div class="d-flex px-2 py-1">
-                                            <div class="d-flex flex-column justify-content-center">
-                                                <h6 class="mb-0 text-sm">Hukum Ekonomi Syariah</h6>
-                                                <p class="text-xs text-secondary mb-0">Semester 5</p>
-                                            </div>
-                                        </div>
+                                    <td class="align-middle text-start text-sm">
+                                        <span class="badge badge-sm bg-gradient-success">AKTIF</span>
                                     </td>
-                                    <td class="align text-center">
-                                        <span class="text-secondary text-xs font-weight-bold">06:00</span>
+                                    <td class="align-middle text-center text-sm">
+                                        <span class="text-bold">1/8/2022</span>
                                     </td>
-
-                                    <td class="align text-center">
-                                        <span class="text-secondary text-xs font-weight-bold">17:30</span>
-                                    </td>
-
-                                    <td class="align text-center">
-                                        <span class="text-secondary text-xs font-weight-bold">15/05/2023</span>
-                                    </td>
-
-                                    <td class="align text-center">
-                                        <span class="text-secondary text-xs font-weight-bold">Admin</span>
+                                    <td class="align-middle text-center text-sm">
+                                        <span class="text-bold">1/8/2022</span>
                                     </td>
                                     <td class="align-middle text-center">
-                                        <a href="#"
-                                            class="badge badge-sm bg-gradient-primary font-weight-bold text-xs mx-2"
-                                            data-toggle="tooltip" data-original-title="Edit user">
-                                            Detail
-                                        </a>
-
-                                        <a href="{{ route('admin.matkul.edit', 1) }}"
-                                            class="badge badge-sm bg-gradient-success font-weight-bold text-xs mx-2"
-                                            data-toggle="tooltip" data-original-title="Edit user">
-                                            Ubah
-                                        </a>
-
                                         <a href="#"
                                             class="badge badge-sm bg-gradient-danger font-weight-bold text-xs mx-2"
                                             data-toggle="tooltip" data-original-title="Edit user">

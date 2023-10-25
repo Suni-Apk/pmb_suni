@@ -4,14 +4,14 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-class MatkulController extends Controller
+class TahunAjaranController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        return view('admin.matkul.index');
+        return view('admin.tahun_ajaran.index');
     }
 
     /**
@@ -19,7 +19,7 @@ class MatkulController extends Controller
      */
     public function create()
     {
-        return view('admin.matkul.create');
+        return view('admin.tahun_ajaran.create');
     }
 
     /**
@@ -43,7 +43,7 @@ class MatkulController extends Controller
      */
     public function edit(string $id)
     {
-        return view('admin.matkul.edit');
+        //
     }
 
     /**
