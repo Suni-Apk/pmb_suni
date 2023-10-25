@@ -101,7 +101,7 @@
                     borderWidth: 3,
                     backgroundColor: gradientStroke1,
                     fill: true,
-                    data: [50, 40, 300, 220, 500, 250, 400, 230, 500],
+                    data: [1000, 40, 300, 220, 500, 250, 400, 230, 500],
                     maxBarThickness: 6
 
                 },
@@ -115,6 +115,18 @@
                     backgroundColor: gradientStroke2,
                     fill: true,
                     data: [30, 90, 40, 140, 290, 290, 340, 230, 400],
+                    maxBarThickness: 6
+                },
+                {
+                    label: "People",
+                    tension: 0.4,
+                    borderWidth: 0,
+                    pointRadius: 0,
+                    borderColor: "#3A416F",
+                    borderWidth: 3,
+                    backgroundColor: gradientStroke2,
+                    fill: true,
+                    data: [50, 100, 20, 120, 220, 220, 320, 220, 0],
                     maxBarThickness: 6
                 },
             ],
