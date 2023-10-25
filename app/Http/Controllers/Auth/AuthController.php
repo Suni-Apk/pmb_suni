@@ -81,10 +81,10 @@ class AuthController extends Controller
         $credentials = $request->only('phone', 'password');
         $user = User::where('phone',$credentials)->first();
 
-        // if($user->active == 0){
+        if($user->active == 0){
             
-        //     return redirect()->route('user.activication')->with('gagal','Kamu Harus Mengisi Kode OTP Yang Dikirim');
-        // }
+            return redirect()->route('verify')->with('gagal','Kamu Harus Mengisi Kode OTP Yang Dikirim');
+        }
         $authenticated = Auth::attempt($credentials, $request->has('remember'));
 
         if (!$authenticated){
