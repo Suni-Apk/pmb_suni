@@ -7,6 +7,7 @@ use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\JurusanController;
 use App\Http\Controllers\Mahasiswa\DashboardController;
 use App\Http\Controllers\MatkulController;
+use App\Http\Controllers\TahunAjaranController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -55,6 +56,7 @@ Route::prefix('/admin')->middleware('admin')->name('admin.')->group(function () 
     Route::get('/dashboard', [AdminDashboardController::class, 'index'])->name('dashboard');
     Route::get('/profile', [ProfileController::class, 'profile'])->name('profile');
     Route::get('/profile-edit', [ProfileController::class, 'editProfile'])->name('profile_edit');
+    Route::resource('/tahun_ajaran', TahunAjaranController::class);
     Route::resource('/jurusan', JurusanController::class);
     Route::resource('/matkul', MatkulController::class);
     Route::put('/profile-process/{id}', [ProfileController::class, 'prosesProfile'])->name('profile_proses');

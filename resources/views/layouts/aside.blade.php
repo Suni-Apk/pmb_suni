@@ -41,13 +41,13 @@
                 <div class="collapse" id="angkatan">
                     <ul class="nav ms-4 ps-3">
                         <li class="nav-item ">
-                            <a class="nav-link " href="{{ route('table') }}">
+                            <a class="nav-link " href="{{ route('admin.tahun_ajaran.index') }}">
                                 <span class="sidenav-mini-icon d-none d-xl-block"><i class="fas fa-border-all"></i></span>
                                 <span class="sidenav-normal"> Daftar Tahun Ajaran </span>
                             </a>
                         </li>
                         <li class="nav-item ">
-                            <a class="nav-link " href="{{ route('form') }}">
+                            <a class="nav-link " href="{{ route('admin.tahun_ajaran.create') }}">
                                 <span class="sidenav-mini-icon d-none d-xl-block"><i class="fas fa-plus"></i></span>
                                 <span class="sidenav-normal"> Tambah Tahun Ajaran </span>
                             </a>
@@ -93,13 +93,13 @@
                 <div class="collapse" id="matkul">
                     <ul class="nav ms-4 ps-3">
                         <li class="nav-item ">
-                            <a class="nav-link " href="{{ route('table') }}">
+                            <a class="nav-link " href="{{ route('admin.matkul.index') }}">
                                 <span class="sidenav-mini-icon d-none d-xl-block"><i class="fas fa-border-all"></i></span>
                                 <span class="sidenav-normal"> Daftar Mata Kuliah </span>
                             </a>
                         </li>
                         <li class="nav-item ">
-                            <a class="nav-link " href="{{ route('form') }}">
+                            <a class="nav-link " href="{{ route('admin.matkul.create') }}">
                                 <span class="sidenav-mini-icon d-none d-xl-block"><i class="fas fa-plus"></i></span>
                                 <span class="sidenav-normal"> Tambah Mata Kuliah </span>
                             </a>
