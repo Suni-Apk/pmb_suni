@@ -67,13 +67,13 @@
                 <div class="collapse" id="jurusan">
                     <ul class="nav ms-4 ps-3">
                         <li class="nav-item ">
-                            <a class="nav-link " href="{{ route('table') }}">
+                            <a class="nav-link " href="{{ route('admin.jurusan.index') }}">
                                 <span class="sidenav-mini-icon d-none d-xl-block"><i class="fas fa-border-all"></i></span>
                                 <span class="sidenav-normal"> Daftar Jurusan </span>
                             </a>
                         </li>
                         <li class="nav-item ">
-                            <a class="nav-link " href="{{ route('form') }}">
+                            <a class="nav-link " href="{{ route('admin.jurusan.create') }}">
                                 <span class="sidenav-mini-icon d-none d-xl-block"><i class="fas fa-plus"></i></span>
                                 <span class="sidenav-normal"> Tambah Jurusan </span>
                             </a>

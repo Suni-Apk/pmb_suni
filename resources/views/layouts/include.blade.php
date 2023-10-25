@@ -6,8 +6,8 @@
 <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
 
 {{-- nucloe icons --}}
-<link href="../soft-ui-dashboard-main/assets/css/nucleo-icons.css" rel="stylesheet" />
-<link href="../soft-ui-dashboard-main/assets/css/nucleo-svg.css" rel="stylesheet" />
+<link href="/soft-ui-dashboard-main/assets/css/nucleo-icons.css" rel="stylesheet" />
+<link href="/soft-ui-dashboard-main/assets/css/nucleo-svg.css" rel="stylesheet" />
 
 <!-- Font Awesome Icons -->
 <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
