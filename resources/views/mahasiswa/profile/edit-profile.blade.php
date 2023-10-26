@@ -9,7 +9,7 @@
                 <div class="card-body p-3">
                     <hr class="horizontal gray-light">
                     <ul class="list-group">
-                        <form action="{{route('mahasiswa.edit-profile.process',$mahasiswa->id)}}" method="POST">
+                        <form action="{{route('mahasiswa.profile.edit-profile.process',$mahasiswa->id)}}" method="POST">
                             @csrf
                             @method('PUT')
                             <div class="form-group">
@@ -69,7 +69,7 @@
                             <div class="form-group">
                                 <button type="submit" class="btn btn-primary end-0"><i class="fas fa-edit">
                                     </i> Edit</button>
-                                <a href="{{ route('mahasiswa.profile') }}" class="btn btn-warning"><i class="fas fa-backward"></i>
+                                <a href="{{ route('mahasiswa.profile.index') }}" class="btn btn-warning"><i class="fas fa-backward"></i>
                                     Back</a>
                             </div>
                         </form>

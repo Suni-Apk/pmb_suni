@@ -45,7 +45,7 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link mb-0 px-0 py-1"  href="{{route('mahasiswa.change_password',Auth::user()->name)}}" role="tab"
+                            <a class="nav-link mb-0 px-0 py-1"  href="{{route('mahasiswa.profile.change_password',Auth::user()->name)}}" role="tab"
                                 aria-selected="true">
                                 <svg class="text-dark" width="16px" height="16px" viewBox="0 0 40 44" version="1.1"
                                     xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -84,7 +84,7 @@
                             <h6 class="mb-0">Profile Information</h6>
                         </div>
                         <div class="col-md-4 text-end">
-                            <a href="{{ route('mahasiswa.edit-profile',Auth::user()->name) }}">
+                            <a href="{{ route('mahasiswa.profile.edit-profile',Auth::user()->name) }}">
                                 <i class="fas fa-user-edit text-secondary text-sm" data-bs-toggle="tooltip"
                                     data-bs-placement="top" title="Edit Profile"></i>
                             </a>

@@ -11,4 +11,9 @@ class TagihanController extends Controller
     {
         return view('mahasiswa.tagihan.index');
     }
+
+    public function detail($name)
+    {
+        return view('mahasiswa.tagihan.detail-tagihan');
+    }
 }
