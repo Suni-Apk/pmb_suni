@@ -11,12 +11,10 @@ class DashboardController extends Controller
     {
         return view('admin.index');
     }
-<<<<<<< HEAD
+
 
     public function profile()
     {
         return view('admin.profile.profile');
     }
-=======
->>>>>>> b769586 (update)
 }

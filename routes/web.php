@@ -1,11 +1,10 @@
 <?php
 
 use App\Http\Controllers\Admin\AuthController as AdminAuthController;
-use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
 use App\Http\Controllers\Admin\ProfileController;
-// use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Mahasiswa\DashboardController;
+use App\Http\Controllers\TagihanController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -48,22 +47,22 @@ Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
 
 
 // Auth Admin
-Route::prefix('admin')->name('admin.')->group(function () {
-    Route::get('/login', [AdminAuthController::class, 'login'])->name('login');
+Route::get('/admin/login', [AdminAuthController::class, 'login'])->name('admin.login');
 
-    Route::post('/login-process', [AdminAuthController::class, 'login_process'])->name('login.process');
+Route::post('/admin/login-process', [AdminAuthController::class, 'login_process'])->name('admin.login.process');
 
-    Route::get('/logout', [AdminAuthController::class, 'logout'])->name('logout');
-});
+Route::get('/admin/logout', [AdminAuthController::class, 'logout'])->name('admin.logout');
 
 // Controller / Dashboard Admin
 Route::prefix('/admin')->middleware('admin')->name('admin.')->group(function () {
-    Route::get('/dashboard', [AdminDashboardController::class, 'index'])->name('dashboard');
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
     Route::get('/profile', [ProfileController::class, 'profile'])->name('profile');
-    Route::get('/profile-edit', [ProfileController::class, 'editProfile'])->name('profile_edit');
+    Route::get('/profile/edit', [ProfileController::class, 'editProfile'])->name('profile_edit');
     Route::put('/profile-process/{id}', [ProfileController::class, 'prosesProfile'])->name('profile_proses');
     Route::get('/change-password', [ProfileController::class, 'change_password'])->name('change_password');
     Route::put('/change-password-proses/{id}', [ProfileController::class, 'change_password_proses'])->name('change_password_proses');
+    Route::resource('/tagihan', TagihanController::class);
+    Route::post('/next', [TagihanController::class, 'next'])->name('tagihan.next');
 });
 
 // Dashboard Mahasiswa
@@ -105,14 +104,6 @@ Route::prefix('template')->group(function () {
         return view('layouts.template.forgot-password');
     })->name('forgot');
 
-    Route::get('/form', function () {
-        return view('layouts.template.form');
-    })->name('form');
-
-    Route::get('/forgot', function () {
-        return view('layouts.template.forgot-password');
-    })->name('forgot');
-
     Route::get('/rtl', function () {
         return view('layouts.template.rtl');
     })->name('rtl');
@@ -121,16 +112,13 @@ Route::prefix('template')->group(function () {
         return view('layouts.template.virtual-reality');
     })->name('virtual-reality');
 
-
     Route::get('/profile', function () {
         return view('admin.user.profile');
     })->name('profile');
 
-
     Route::get('/edit-profile', function () {
         return view('admin.profile.edit-profile');
     })->name('edit-profile');
-
 
     Route::get('/change-password', function () {
         return view('admin.profile.change-password');
