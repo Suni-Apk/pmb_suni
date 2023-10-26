@@ -99,6 +99,14 @@ Route::prefix('template')->group(function () {
         return view('layouts.template.rtl');
     })->name('rtl');
 
+    Route::get('/pendaftaran_s1', function () {
+        return view('layouts.template.pendaftaran_s1');
+    })->name('pendaftaran_s1');
+    
+    Route::get('/pendaftaran_s1_dokumen', function () {
+        return view('layouts.template.pendaftaran_s1_dokumen');
+    })->name('pendaftaran_s1_dokumen');
+
     Route::get('/virtual-reality', function () {
         return view('layouts.template.virtual-reality');
     })->name('virtual-reality');
