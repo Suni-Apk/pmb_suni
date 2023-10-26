@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Mahasiswa;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use GuzzleHttp\Client;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -12,9 +13,11 @@ class ProfileController extends Controller
 {
     
     public function profile()
-    {
+    {   
         return view('mahasiswa.profile.index');
     }
+
+
 
     public function edit_profile($name)
     {
@@ -36,7 +39,7 @@ class ProfileController extends Controller
 
         $user->update($data);
 
-        return redirect()->route('mahasiswa.profile')->with('success','Berhasil Mengedit Profile Anda');
+        return redirect()->route('mahasiswa.profile.index')->with('success','Berhasil Mengedit Profile Anda');
     }
 
     public function change_password()
@@ -64,6 +67,6 @@ class ProfileController extends Controller
             'password' => Hash::make($request->password)
         ]);
 
-        return redirect()->route('mahasiswa.profile')->with('success','Berhasil Mengedit Password');
+        return redirect()->route('mahasiswa.profile.index')->with('success','Berhasil Mengedit Password');
     }
 }

@@ -8,67 +8,47 @@
 
 @section('content')
     <div class="row">
-      <div class="col-12">
+      <h4 class="ms-2">Jurusan Informatika</h4>
+      {{-- foreach here --}}
+      <div class="col-12 col-lg-6">
         <div class="card mb-4">
-          <div class="card-header pb-0">
-            <h6>Mata Kuliah Ananda "{{Auth::user()->name}}"</h6>
+          <div class="card-header pb-0 d-flex justify-content-between">
+            <div>
+              <h6>Semester 1</h6>
+            </div>
+            <div class="flex-row d-flex">
+              <a href="" class="btn btn-primary fs-6 p-2 px-3"><i class="fab fa-whatsapp"></i></a>
+              <a href="" class="btn btn-primary fs-6 p-2 px-3 ms-2"><i class="fas fa-file-download"></i></a>
+            </div>
           </div>
           <div class="card-body px-0 pt-0 pb-2">
             <div class="table-responsive p-0">
               <table class="table align-items-center mb-0" id="templateTable">
                 <thead>
                   <tr>
-                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Nama</th>
-                    <th class="text-uppercase text-secondary text-xxs px-2 font-weight-bolder opacity-7">Nomor Telepon</th>
-                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Gender / Admin</th>
-                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Nama</th>
-                    <th class="text-uppercase text-secondary text-xxs px-2 font-weight-bolder opacity-7">Nomor Telepon</th>
-                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Gender / Admin</th>
-                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Status</th>
-                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Joined</th>
-                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Action</th>
-                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Joined</th>
-                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Action</th>
+                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Nama Mata Kuliah</th>
+                    <th class="text-uppercase text-secondary text-xxs px-2 font-weight-bolder opacity-7">Mulai</th>
+                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Selesai</th>
+                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Tanggal</th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr>
                     <td>
                       <div class="d-flex px-2 py-1">
-                        <div>
-                          <img src="../soft-ui-dashboard-main/assets/img/team-2.jpg" class="avatar avatar-sm me-3" alt="user1">
-                        </div>
                         <div class="d-flex flex-column justify-content-center">
-                          <h6 class="mb-0 text-sm">John Michael</h6>
-                          <p class="text-xs text-secondary mb-0">john@creative-tim.com</p>
+                          <h6 class="mb-0 text-sm">Programming</h6>
                         </div>
                       </div>
                     </td>
-                    <td class="align- text-start">
-                      <span class="text-secondary text-xs font-weight-bold">08778464359</span>
+                    <td class="align-text-start">
+                      <span class="text-secondary text-xs font-weight-bold">19:20</span>
                     </td>
                     <td>
-                      <p class="text-xs font-weight-bold mb-0">Laki Laki</p>
-                      <p class="text-xs text-secondary mb-0">ADMIN</p>
+                      <p class="text-xs font-weight-bold mb-0">20:25</p>
                     </td>
-                    <td class="align-middle text-center text-sm">
-                    <span class="badge badge-sm bg-gradient-success">AKTIF</span>
-                    </td>
-                    <td class="align-middle text-center">
-                      <span class="text-secondary text-xs font-weight-bold">23/04/18</span>
-                    </td>
-                    <td class="align-middle text-center"> 
-                      <a href="" class="badge badge-sm bg-gradient-primary font-weight-bold text-xs mx-2" data-toggle="tooltip" data-original-title="Edit user">
-                        Detail
-                      </a>
-
-                      <a href="" class="badge badge-sm bg-gradient-success font-weight-bold text-xs mx-2" data-toggle="tooltip" data-original-title="Edit user">
-                        Ubah
-                      </a>
-
-                      <a href="" class="badge badge-sm bg-gradient-danger font-weight-bold text-xs mx-2" data-toggle="tooltip" data-original-title="Edit user">
-                        Hapus
-                      </a>
+                    <td class="align-text-center text-sm">
+                      <p class="text-xs font-weight-bold mb-0">17-10-2023</p>
                     </td>
                   </tr>
                 </tbody>
@@ -77,6 +57,7 @@
           </div>
         </div>
       </div>
+      {{-- end forech --}}
     </div>
 @endsection
 
