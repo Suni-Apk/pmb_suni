@@ -586,75 +586,31 @@
                 </a>
             </li>
 
-            {{-- academy --}}
-            <li class="nav-item">
-                <ul class="nav-link pb-0 mb-0">
-                    <span class="sidenav-mini-icon d-none d-xl-block" style="color:rgb(196, 196, 196)"><i class="fas fa-university"></i></span>
-                    <span class="sidenav-normal text-uppercase text-xs ms-2 font-weight-bolder"> academy </span>
-                </ul>
-            </li>
-
-
-            <!-- jurusan -->
-            <li class="nav-item">
-                <a data-bs-toggle="collapse" href="#jurusan" class="nav-link" aria-controls="jurusan" role="button" aria-expanded="false">
-                    <div class="icon icon-sm shadow border-radius-md bg-white text-center d-flex align-items-center justify-content-center  me-2">
-                        <i class="ni ni-paper-diploma"></i>
-                    </div>
-                    <span class="nav-link-text ms-1"> Jurusan </span>
-                </a>
-                <div class="collapse" id="jurusan">
-                    <ul class="nav ms-4 ps-3">
-                        <li class="nav-item ">
-                            <a class="nav-link " href="{{ route('admin.jurusan.index') }}">
-                                <span class="sidenav-mini-icon d-none d-xl-block"><i class="fas fa-border-all"></i></span>
-                                <span class="sidenav-normal"> Daftar Jurusan </span>
-                            </a>
-                        </li>
-                        <li class="nav-item ">
-                            <a class="nav-link " href="{{ route('admin.jurusan.create') }}">
-                                <span class="sidenav-mini-icon d-none d-xl-block"><i class="fas fa-plus"></i></span>
-                                <span class="sidenav-normal"> Tambah Jurusan </span>
-                            </a>
-                        </li>
+                {{-- academy --}}
+                <li class="nav-item">
+                    <ul class="nav-link pb-0 mb-0">
+                        <span class="sidenav-mini-icon d-none d-xl-block" style="color:rgb(196, 196, 196)"><i class="fas fa-university"></i></span>
+                        <span class="sidenav-normal text-uppercase text-xs ms-2 font-weight-bolder"> academy </span>
                     </ul>
-                </div>
-            </li>
+                </li>
 
-            <!-- mata kuliah -->
-            <li class="nav-item">
-                <a data-bs-toggle="collapse" href="#matkul" class="nav-link" aria-controls="matkul" role="button" aria-expanded="false">
-                    <div class="icon icon-sm shadow border-radius-md bg-white text-center d-flex align-items-center justify-content-center  me-2">
-                        <i class="ni ni-hat-3"></i>
-                    </div>
-                    <span class="nav-link-text ms-1"> Mata Kuliah </span>
-                </a>
-                <div class="collapse" id="matkul">
-                    <ul class="nav ms-4 ps-3">
-                        <li class="nav-item ">
-                            <a class="nav-link " href="{{ route('admin.matkul.index') }}">
-                                <span class="sidenav-mini-icon d-none d-xl-block"><i class="fas fa-border-all"></i></span>
-                                <span class="sidenav-normal"> Daftar Mata Kuliah </span>
-                            </a>
-                        </li>
-                        <li class="nav-item ">
-                            <a class="nav-link " href="{{ route('admin.matkul.create') }}">
-                                <span class="sidenav-mini-icon d-none d-xl-block"><i class="fas fa-plus"></i></span>
-                                <span class="sidenav-normal"> Tambah Mata Kuliah </span>
-                            </a>
-                        </li>
+                <!-- tahun ajaran -->
+                <li class="nav-item">
+                    <a href="{{route('mahasiswa.matkul')}}" class="nav-link {{ Route::is('mahasiswa.matkul') ? 'active' : '' }}" >
+                        <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center d-flex align-items-center justify-content-center  me-2">
+                            <i class="ni ni-hat-3"></i>
+                        </div>
+                        <span class="nav-link-text ms-1"> Mata Kuliah </span>
+                    </a>
+                </li>
+
+                {{-- payment --}}
+                <li class="nav-item">
+                    <ul class="nav-link pb-0 mb-0">
+                        <span class="sidenav-mini-icon d-none d-xl-block" style="color:rgb(196, 196, 196)"><i class="ni ni-credit-card"></i></span>
+                        <span class="sidenav-normal text-uppercase text-xs ms-2 font-weight-bolder"> payment </span>
                     </ul>
-                </div>
-            </li>
-
-
-            {{-- payment --}}
-            <li class="nav-item">
-                <ul class="nav-link pb-0 mb-0">
-                    <span class="sidenav-mini-icon d-none d-xl-block" style="color:rgb(196, 196, 196)"><i class="ni ni-credit-card"></i></span>
-                    <span class="sidenav-normal text-uppercase text-xs ms-2 font-weight-bolder"> payment </span>
-                </ul>
-            </li>
+                </li>
 
             <!-- billing -->
             <li class="nav-item">
