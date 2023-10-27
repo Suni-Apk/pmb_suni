@@ -22,7 +22,6 @@ class DatabaseSeeder extends Seeder
             'active' => 1,
             'phone' => '082346739790',
             'gender' => 'Laki-Laki',
-            'birthdate' => '2023-10-20',
             'role' => 'Admin',
         ]);
 
@@ -34,7 +33,6 @@ class DatabaseSeeder extends Seeder
             'active' => 1,
             'phone' => '089608494411',
             'gender' => 'Laki-Laki',
-            'birthdate' => '2004-10-20',
             'role' => 'Mahasiswa',
         ]);
     }
