@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin\AuthController as AdminAuthController;
 use App\Http\Controllers\Admin\ProfileController;
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Mahasiswa\DashboardController;
+use App\Http\Controllers\SettingController;
 use App\Http\Controllers\TagihanController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -63,10 +64,12 @@ Route::prefix('/admin')->middleware('admin')->name('admin.')->group(function () 
     Route::put('/change-password-proses/{id}', [ProfileController::class, 'change_password_proses'])->name('change_password_proses');
     Route::resource('/tagihan', TagihanController::class);
     Route::post('/next', [TagihanController::class, 'next'])->name('tagihan.next');
+    Route::get('settings/notifications', [SettingController::class, 'index'])->name('settings.notifications');
 });
 
 // Dashboard Mahasiswa
 Route::prefix('/mahasiswa')->middleware('auth', 'mahasiswa')->name('mahasiswa.')->group(function () {
+    Route::get('/program-belajar', [DashboardController::class, 'program_belajar'])->name('program_belajar');
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
     Route::get('/profile', [DashboardController::class, 'profile'])->name('profile');
     Route::get('/profile/edit/{name}', [DashboardController::class, 'edit_profile'])->name('edit-profile');

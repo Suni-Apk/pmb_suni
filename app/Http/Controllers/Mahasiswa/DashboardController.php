@@ -12,7 +12,10 @@ class DashboardController extends Controller
 {
     public function index()
     {
-        return view('mahasiswa.index');
+        $get = "https://api.aladhan.com/v1/gToH/07-12-2014";
+        $content = file_get_contents($get);
+        $result = json_decode($content);
+        return view('mahasiswa.index', compact('result'));
     }
 
     public function profile()
@@ -23,7 +26,7 @@ class DashboardController extends Controller
     public function edit_profile($name)
     {
         $mahasiswa = Auth::user();
-        return view('mahasiswa.profile.edit-profile',compact('mahasiswa'));
+        return view('mahasiswa.profile.edit-profile', compact('mahasiswa'));
     }
 
     public function edit_profile_process(Request $request, $id)
@@ -40,7 +43,7 @@ class DashboardController extends Controller
 
         $user->update($data);
 
-        return redirect()->route('mahasiswa.profile')->with('success','Berhasil Mengedit Profile Anda');
+        return redirect()->route('mahasiswa.profile')->with('success', 'Berhasil Mengedit Profile Anda');
     }
 
     public function change_password()
@@ -58,7 +61,7 @@ class DashboardController extends Controller
         $request->validate([
             'old_password' => 'required',
             'password' => 'required|confirmed'
-        ],$messages);
+        ], $messages);
 
         if (!Hash::check($request->old_password, $user->password)) {
             return redirect()->back()->withErrors(['old_password' => 'Password Lama Kamu Salah'])->withInput();
@@ -68,7 +71,11 @@ class DashboardController extends Controller
             'password' => Hash::make($request->password)
         ]);
 
-        return redirect()->route('mahasiswa.profile')->with('success','Berhasil Mengedit Password');
+        return redirect()->route('mahasiswa.profile')->with('success', 'Berhasil Mengedit Password');
     }
 
+    public function program_belajar()
+    {
+        return view('mahasiswa.program.index');
+    }
 }
