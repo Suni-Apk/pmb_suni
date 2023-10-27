@@ -6,6 +6,8 @@
 <script src="/soft-ui-dashboard-main/assets/js/plugins/chartjs.min.js"></script>
 <script src="/soft-ui-dashboard-main/assets/js/plugins/datatables.js"></script>
 <script src="/soft-ui-dashboard-main/assets/js/plugins/fullcalendar.js"></script>
+<script src="/soft-ui-dashboard-main/assets/js/plugins/wizard.js"></script>
+{{-- <script src="/soft-ui-dashboard-main/assets/js/dragula/dragula.min.js"></script> --}}
 <script>
     var ctx = document.getElementById("chart-bars").getContext("2d");
 

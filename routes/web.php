@@ -42,9 +42,6 @@ Route::post('/verify-process', [AuthController::class, 'verify_otp'])->name('ver
 Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
 
 
-Route::get('/logout',[AuthController::class,'logout'])->name('logout');
-
-
 // Auth Admin
 Route::prefix('admin')->name('admin.')->group(function () {
     Route::get('/login', [AdminAuthController::class, 'login'])->name('login');
@@ -64,25 +61,10 @@ Route::prefix('/admin')->middleware('admin')->name('admin.')->group(function () 
     Route::put('/change-password-proses/{id}', [ProfileController::class, 'change_password_proses'])->name('change_password_proses');
 });
 
-//Mahasiswa
+// Dashboard Mahasiswa
 Route::prefix('/mahasiswa')->middleware(['auth', 'mahasiswa'])->name('mahasiswa.')->group(function () {
-    // Dashboard Mahasiswa
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
-
-    //profile mahasiswa
-    Route::get('/profile',[MahasiswaProfileController::class,'profile'])->name('profile.index');
-    Route::get('/profile/edit/{name}', [MahasiswaProfileController::class, 'edit_profile'])->name('profile.edit-profile');
-    Route::put('/profile/edit/{id}/process',[MahasiswaProfileController::class,'edit_profile_process'])->name('profile.edit-profile.process');
-    Route::get('/profile/change_password/{name}',[MahasiswaProfileController::class,'change_password'])->name('profile.change_password');
-    Route::put('/profile/change_password_process',[MahasiswaProfileController::class,'change_password_process'])->name('profile.change_password.process');
-
-    //tagihan mahasiswa
-    Route::get('/tagihan',[TagihanController::class,'index'])->name('tagihan.index');
-    Route::get('/detail-tagihan/{name}',[TagihanController::class,'detail'])->name('tagihan.detail');
-
-
-    //matkul mahasiswa
-    Route::get('/matkul',[MatkulController::class,'index'])->name('matkul');
+    Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
 });
 
 Route::prefix('template')->group(function () {
@@ -138,23 +120,7 @@ Route::prefix('template')->group(function () {
         return view('layouts.template.virtual-reality');
     })->name('virtual-reality');
 
-
-
     Route::get('/profile', function () {
         return view('admin.user.profile');
     })->name('profile');
-
-
-
-
-
-    // Route::get('/edit-profile', function () {
-    //     return view('admin.profile.edit-profile');
-    // })->name('edit-profile');
-
-
-
-    // Route::get('/change-password', function () {
-    //     return view('admin.profile.change-password');
-    // })->name('change-password');
 });

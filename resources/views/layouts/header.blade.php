@@ -11,7 +11,19 @@
         </nav>
         <span class="sidenav-toggler sidenav-toggler-inner d-xl-block d-none">
             <span role="button" class="nav-link text-white p-0">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
+                <li class="breadcrumb-item text-sm"><a class="opacity-5 text-dark" href="">Pages</a></li>
+                <li class="breadcrumb-item text-sm text-dark active" aria-current="page">Dashboard</li>
+            </ol>
+            <h6 class="font-weight-bolder mb-0">Dashboard</h6>
+        </nav>
+        <span class="sidenav-toggler sidenav-toggler-inner d-xl-block d-none">
+            <span role="button" class="nav-link text-white p-0">
                 <div class="sidenav-toggler-inner">
+                    <i class="sidenav-toggler-line bg-primary"></i>
+                    <i class="sidenav-toggler-line bg-primary"></i>
+                    <i class="sidenav-toggler-line bg-primary"></i>
                     <i class="sidenav-toggler-line bg-primary"></i>
                     <i class="sidenav-toggler-line bg-primary"></i>
                     <i class="sidenav-toggler-line bg-primary"></i>
@@ -20,10 +32,13 @@
         </span>
         <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
             <div class="ms-md-auto pe-md-3 d-flex align-items-center">
+            <div class="ms-md-auto pe-md-3 d-flex align-items-center">
                 <div class="input-group">
                     <span class="input-group-text text-body"><i class="fas fa-search" aria-hidden="true"></i></span>
                     <input type="text" class="form-control" placeholder="Type here...">
                 </div>
+            </div>
+            <ul class="navbar-nav justify-content-end">
             </div>
             <ul class="navbar-nav justify-content-end">
                 <li class="nav-item d-xl-none me-4 d-flex align-items-center">
@@ -38,6 +53,8 @@
                 <li class="nav-item dropdown me-3 d-flex align-items-center">
                     <a href="" class="nav-link text-body p-0" id="dropdownMenuButton" data-bs-toggle="dropdown"
                         aria-expanded="false">
+                    <a href="" class="nav-link text-body p-0" id="dropdownMenuButton" data-bs-toggle="dropdown"
+                        aria-expanded="false">
                         <i class="fa fa-bell cursor-pointer"></i>
                     </a>
                     <ul class="dropdown-menu dropdown-menu-end px-2 py-3 me-sm-n4" aria-labelledby="dropdownMenuButton">
@@ -45,6 +62,8 @@
                             <a class="dropdown-item border-radius-md" href="">
                                 <div class="d-flex py-1">
                                     <div class="my-auto">
+                                        <img src="../soft-ui-dashboard-main/assets/img/team-2.jpg"
+                                            class="avatar avatar-sm  me-3 ">
                                         <img src="../soft-ui-dashboard-main/assets/img/team-2.jpg"
                                             class="avatar avatar-sm  me-3 ">
                                     </div>
@@ -66,6 +85,9 @@
                     <span role="button" class="nav-link text-body font-weight-bold px-0" id="dropdownProfile"
                         data-bs-toggle="dropdown" aria-expanded="false">
                         <img src="../soft-ui-dashboard-main/assets/img/team-2.jpg" class="avatar avatar-sm ms-2">
+                    <span role="button" class="nav-link text-body font-weight-bold px-0" id="dropdownProfile"
+                        data-bs-toggle="dropdown" aria-expanded="false">
+                        <img src="../soft-ui-dashboard-main/assets/img/team-2.jpg" class="avatar avatar-sm ms-2">
                     </span>
                     <ul class="dropdown-menu dropdown-menu-end px-2 py-2 me-sm-n2" aria-labelledby="dropdownProfile">
                         <li class="mb-1">
@@ -83,7 +105,7 @@
                             </a>
                         </li>
                         <li>
-                            <a class="dropdown-item border-radius-md" href="{{ route('logout') }}">
+                            <a class="dropdown-item border-radius-md" href="{{ route('mahasiswa.logout') }}">
                                 <div class="d-flex">
                                     <p class="mb-0 fw-bold">Logout</p>
                                 </div>

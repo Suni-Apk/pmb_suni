@@ -263,6 +263,17 @@
                 </div>
             </li>
 
+            <!-- report -->
+            <li class="nav-item">
+                <a class="nav-link " href="">
+                    <div
+                        class="icon icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
+                        <i class="fas fa-flag"></i>
+                    </div>
+                    <span class="nav-link-text ms-1">Laporan</span>
+                </a>
+            </li>
+
             <!-- settings -->
             <li class="nav-item">
                 <a data-bs-toggle="collapse" href="#settings" class="nav-link" aria-controls="settings" role="button" aria-expanded="false">

@@ -41,7 +41,6 @@ class AuthController extends Controller
             'name' => 'required|min:3|max:255|string',
             'phone' => 'required|min:12|max:13|unique:users,phone',
             'gender' => 'required|string',
-            'birthdate' => 'required|date',
             'password' => 'required|confirmed|min:8',
         ],$messages);
         $data['phone'] = $request->phone;
