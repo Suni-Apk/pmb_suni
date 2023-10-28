@@ -29,7 +29,7 @@
                 <div class="nav-wrapper position-relative end-0">
                     <ul class="nav nav-pills nav-fill bg-transparent" role="tablist">
                         <li class="nav-item">
-                            <a class="nav-link mb-0 px-0 py-1 active" data-bs-toggle="tab" href="{{ route('mahasiswa.profile.index') }}"
+                            <a class="nav-link mb-0 px-0 py-1" data-bs-toggle="tab" href="{{ route('mahasiswa.profile.index') }}"
                                 role="tab" aria-selected="true">
                                 
                                 <span class="ms-1">Profile</span>
