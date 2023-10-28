@@ -2,6 +2,9 @@
 
 @section('title', 'table template')
 
+@push('styles')
+@endpush
+
 @section('content')
     <div class="row">
         <div class="col-12">

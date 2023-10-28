@@ -1,11 +1,18 @@
 <?php
 
 use App\Http\Controllers\Admin\AuthController as AdminAuthController;
+use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
 use App\Http\Controllers\Admin\ProfileController;
 use App\Http\Controllers\Auth\AuthController;
+use App\Http\Controllers\JurusanController;
 use App\Http\Controllers\Mahasiswa\DashboardController;
+use App\Http\Controllers\Mahasiswa\MatkulController;
+use App\Http\Controllers\Mahasiswa\ProfileController as MahasiswaProfileController;
+use App\Http\Controllers\Mahasiswa\TagihanController;
+use App\Http\Controllers\MatkulController as ControllersMatkulController;
 use App\Http\Controllers\SettingController;
-use App\Http\Controllers\TagihanController;
+use App\Http\Controllers\TagihanController as AdminTagihanController;
+use App\Http\Controllers\TahunAjaranController;
 use App\Http\Controllers\TransactionController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -25,9 +32,6 @@ Route::get('/', function () {
     return view('welcome');
 })->name('welcome');
 
-Route::get('/', function () {
-    return view('welcome');
-})->name('welcome');
 
 // Auth Mahasiswa
 Route::get('/register', [AuthController::class, 'register'])->name('register');
@@ -47,6 +51,7 @@ Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
 
 Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
 
+Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
 
 // Auth Admin
 Route::get('/admin/login', [AdminAuthController::class, 'login'])->name('admin.login');
@@ -57,27 +62,46 @@ Route::get('/admin/logout', [AdminAuthController::class, 'logout'])->name('admin
 
 // Controller / Dashboard Admin
 Route::prefix('/admin')->middleware('admin')->name('admin.')->group(function () {
-    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+    Route::get('/dashboard', [AdminDashboardController::class, 'index'])->name('dashboard');
     Route::get('/profile', [ProfileController::class, 'profile'])->name('profile');
     Route::get('/profile/edit', [ProfileController::class, 'editProfile'])->name('profile_edit');
     Route::put('/profile-process/{id}', [ProfileController::class, 'prosesProfile'])->name('profile_proses');
     Route::get('/change-password', [ProfileController::class, 'change_password'])->name('change_password');
     Route::put('/change-password-proses/{id}', [ProfileController::class, 'change_password_proses'])->name('change_password_proses');
-    Route::resource('/tagihan', TagihanController::class);
-    Route::post('/next', [TagihanController::class, 'next'])->name('tagihan.next');
+    Route::resource('/tagihan', AdminTagihanController::class);
+    Route::post('/next', [AdminTagihanController::class, 'next'])->name('tagihan.next');
     Route::get('settings/notifications', [SettingController::class, 'index'])->name('settings.notifications');
     Route::resource('/transaction', TransactionController::class);
+    Route::resource('/tahun_ajaran', TahunAjaranController::class);
+    Route::resource('/jurusan', JurusanController::class);
+    Route::resource('/matkul', ControllersMatkulController::class);
 });
 
-// Dashboard Mahasiswa
-Route::prefix('/mahasiswa')->middleware('auth', 'mahasiswa')->name('mahasiswa.')->group(function () {
+//Mahasiswa
+Route::prefix('/mahasiswa')->middleware(['auth', 'mahasiswa'])->name('mahasiswa.')->group(function () {
     Route::get('/program-belajar', [DashboardController::class, 'program_belajar'])->name('program_belajar');
+    // Dashboard Mahasiswa
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
-    Route::get('/profile', [DashboardController::class, 'profile'])->name('profile');
-    Route::get('/profile/edit/{name}', [DashboardController::class, 'edit_profile'])->name('edit-profile');
-    Route::put('/profile/edit/{id}/process', [DashboardController::class, 'edit_profile_process'])->name('edit-profile.process');
-    Route::get('/profile/change_password/{name}', [DashboardController::class, 'change_password'])->name('change_password');
-    Route::put('/profile/change_password_process', [DashboardController::class, 'change_password_process'])->name('change_password.process');
+    //profile mahasiswa
+    Route::prefix('profile')->name('profile.')->group(function () {
+        Route::get('/', [MahasiswaProfileController::class, 'profile'])->name('index');
+        Route::get('/edit/{name}', [MahasiswaProfileController::class, 'edit_profile'])->name('edit-profile');
+        Route::put('/edit/process/{id}', [MahasiswaProfileController::class, 'edit_profile_process'])->name('edit-profile.process');
+        Route::get('/change-password/{name}', [MahasiswaProfileController::class, 'change_password'])->name('change_password');
+        Route::put('/change-password/process', [MahasiswaProfileController::class, 'change_password_process'])->name('change_password.process');
+    });
+
+    //tagihan mahasiswa
+    Route::prefix('tagihan')->name('tagihan.')->group(function () {
+        Route::get('/', [TagihanController::class, 'index'])->name('index');
+        Route::get('/detail/{name}', [TagihanController::class, 'detail'])->name('detail');
+    });
+
+    //matkul mahasiswa
+    Route::get('/matkul', [MatkulController::class, 'index'])->name('matkul');
+
+    // logout
+    Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
 });
 
 Route::prefix('template')->group(function () {
@@ -113,13 +137,21 @@ Route::prefix('template')->group(function () {
         return view('layouts.template.rtl');
     })->name('rtl');
 
+    Route::get('/pendaftaran_s1', function () {
+        return view('layouts.template.pendaftaran_s1');
+    })->name('pendaftaran_s1');
+
+    Route::get('/pendaftaran_s1_dokumen', function () {
+        return view('layouts.template.pendaftaran_s1_dokumen');
+    })->name('pendaftaran_s1_dokumen');
+
     Route::get('/virtual-reality', function () {
         return view('layouts.template.virtual-reality');
     })->name('virtual-reality');
 
-    Route::get('/profile', function () {
-        return view('admin.user.profile');
-    })->name('profile');
+    // Route::get('/profile', function () {
+    //     return view('admin.user.profile');
+    // })->name('profile');
 
     Route::get('/edit-profile', function () {
         return view('admin.profile.edit-profile');
@@ -128,4 +160,12 @@ Route::prefix('template')->group(function () {
     Route::get('/change-password', function () {
         return view('admin.profile.change-password');
     })->name('change-password');
+
+    Route::get('/wizard', function () {
+        return view('layouts.template.wizard');
+    })->name('wizard');
 });
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

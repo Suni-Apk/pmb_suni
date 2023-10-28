@@ -18,10 +18,10 @@
             <div class="col-auto my-auto">
                 <div class="h-100">
                     <h5 class="mb-1">
-                        {{Auth::user()->name}}
+                        {{ Auth::user()->name }}
                     </h5>
                     <p class="mb-0 font-weight-bold text-sm">
-                        {{Auth::user()->role}}
+                        {{ Auth::user()->role }}
                     </p>
                 </div>
             </div>
@@ -29,7 +29,7 @@
                 <div class="nav-wrapper position-relative end-0">
                     <ul class="nav nav-pills nav-fill bg-transparent" role="tablist">
                         <li class="nav-item">
-                            <a class="nav-link mb-0 px-0 py-1 active"  href="{{route('mahasiswa.profile')}}"
+                            <a class="nav-link mb-0 px-0 py-1 active" href="{{ route('mahasiswa.profile.index') }}"
                                 role="tab" aria-selected="true">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16px" height="16px"
                                     viewBox="0 0 512 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
@@ -45,7 +45,8 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link mb-0 px-0 py-1 active"  href="{{route('mahasiswa.change_password',Auth::user()->name)}}" role="tab"
+                            <a class="nav-link mb-0 px-0 py-1 active"
+                                href="{{ route('mahasiswa.profile.change_password', Auth::user()->name) }}" role="tab"
                                 aria-selected="true">
                                 <svg class="text-dark" width="16px" height="16px" viewBox="0 0 40 44" version="1.1"
                                     xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -84,7 +85,7 @@
                             <h6 class="mb-0">Change password</h6>
                         </div>
                         <div class="col-md-4 text-end">
-                            <a href="{{ route('mahasiswa.edit-profile',Auth::user()->name) }}">
+                            <a href="{{ route('mahasiswa.profile.edit-profile', Auth::user()->name) }}">
                                 <i class="fas fa-user-edit text-secondary text-sm" data-bs-toggle="tooltip"
                                     data-bs-placement="top" title="Edit Profile"></i>
                             </a>
@@ -94,33 +95,45 @@
                 <div class="card-body p-3">
                     <hr class="horizontal gray-light">
                     <ul class="list-group">
-                        <form action="{{route('mahasiswa.change_password.process')}}" method="POST">
+                        <form action="{{ route('mahasiswa.profile.change_password.process') }}" method="POST">
                             @csrf
                             @method('PUT')
                             <div class="form-group">
                                 <label for="">Current password</label>
                                 <div class="input-group">
-                                    <input class="form-control @error('old_password') is-invalid @enderror" type="password" id="password" name="old_password"
-                                        placeholder="****" />
+                                    <input class="form-control @error('old_password') is-invalid @enderror" type="password"
+                                        id="password" name="old_password" placeholder="****" />
+                                    <input
+                                        class="form-control @error('old_password')
+                                        is-invalid
+                                    @enderror"
+                                        type="password" id="password" name="old_password" placeholder="****" />
+                                    <input class="form-control @error('old_password') is-invalid @enderror" type="password"
+                                        id="password" name="old_password" placeholder="****" />
                                     <button class="btn btn-outline-secondary mb-0" type="button" id="showOldPassword"><i
                                             class="fas fa-low-vision"></i> </button>
                                 </div>
                                 @error('old_password')
-                                    <label for="" class="text-danger">{{$message}}</label>
+                                    <label class="text-danger">{{ $message }}</label>
                                 @enderror
                             </div>
                             <div class="form-group">
                                 <label for="">New password</label>
-                                <input type="password" name="password" class="form-control @error('password') is-invalid @enderror">
+                                <input type="password" name="password"
+                                    class="form-control @error('password') is-invalid @enderror">
                                 @error('password')
-                                    <label for="" class="text-danger">{{$message}}</label>
+                                    <label for="" class="text-danger">{{ $message }}</label>
                                 @enderror
                             </div>
                             <div class="form-group">
-                                <label for="">New password Confirmation</label>
-                                <input type="password" name="password_confirmation" class="form-control @error('password_confirmation') is-invalid @enderror">
+                                <label for="">Confirmation password</label>
+                                <input type="password"
+                                    class="form-control @error('password_confirmation')
+                                    is-invalid
+                                @enderror form-check"
+                                    name="password_confirmation">
                                 @error('password_confirmation')
-                                    <label for="" class="text-danger">{{$message}}</label>
+                                    <label class="text-danger">{{ $message }}</label>
                                 @enderror
                             </div>
                             <button class="btn btn-primary" type="submit">Change</button>

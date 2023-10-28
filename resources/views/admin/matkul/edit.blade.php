@@ -2,6 +2,9 @@
 
 @section('title', 'table template')
 
+@push('styles')
+@endpush
+
 @section('content')
     <div class="row">
         <div class="col-12">
@@ -19,40 +22,31 @@
                                         <label for="nama">Nama</label>
                                         <input type="text" name="nama" id="nama" class="form-control">
                                     </div>
-
                                     <div class="form-group mb-3">
-                                        <label for="password">Kata Sandi</label>
-                                        <input type="password" name="password" id="password" class="form-control">
+                                        <label for="nama">Semester</label>
+                                        <input type="text" name="nama" id="nama" class="form-control">
                                     </div>
-
                                     <div class="form-group mb-3">
-                                        <label for="email">Email</label>
-                                        <input type="email" name="email" id="email" class="form-control">
+                                        <label for="nama">Deskripsi</label>
+                                        <input type="text" name="nama" id="nama" class="form-control">
                                     </div>
-
                                     <div class="form-group mb-3">
-                                        <label for="image" class="form-label">Image</label>
-                                        <input type="file" name="image" id="image" class="form-control">
-                                        <p class="text-muted mb-0">Allowed JPG, GIF or PNG. Max size of 2Mb</p>
+                                        <label for="nama">Mulai</label>
+                                        <input type="text" name="nama" id="nama" class="form-control">
                                     </div>
-
                                     <div class="form-group mb-3">
-                                        <label for="usia">Usia</label>
-                                        <input type="number" name="usia" id="usia" class="form-control">
+                                        <label for="nama">Selesai</label>
+                                        <input type="text" name="nama" id="nama" class="form-control">
                                     </div>
-
                                     <div class="form-group mb-3">
-                                        <label for="tanggal">Tanggal</label>
-                                        <input type="date" name="tanggal" id="tanggal" class="form-control">
-                                    </div>
-
-                                    <div class="form-group mb-3">
-                                        <label for="keterangan">Keterangan</label>
-                                        <textarea name="keterangan" id="keterangan" class="form-control"></textarea>
+                                        <label for="nama">Tanggal</label>
+                                        <input type="date" name="nama" id="nama" class="form-control">
                                     </div>
 
                                     <button type="submit" class="btn btn-success">Submit</button>
-                                    <button type="submit" class="btn btn-warning text-dark">Back</button>
+                                    <a href="{{ route('admin.matkul.index') }}">
+                                        <button type="button" class="btn btn-warning text-dark">Back</button>
+                                    </a>
                                 </form>
                             </div>
                         </div>

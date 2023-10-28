@@ -9,35 +9,20 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
-class DashboardController extends Controller
+class ProfileController extends Controller
 {
-    public function index()
-    {
-        $user = Auth::user();
-        $tanggal = now()->format('d-m-Y');
-        $bulan = now()->format('m'); // Format bulan sebagai "01" untuk Januari, "02" untuk Februari, dll.
-        $tahun = now()->format('Y'); // Format tahun sebagai "2023" (misalnya).
-
-        $client = new Client();
-        $response = $client->get("http://api.aladhan.com/v1/gToH/$tanggal");
-        $data = json_decode($response->getBody(), true); // Menggunakan true untuk mendapatkan array asosiatif
-
-        // Mengambil tanggal Hijriah untuk indeks pertama (bulan ini).
-        $hijriDateday = $data['data']['hijri']['day'];
-        $hijriDatemonth = $data['data']['hijri']['month']['ar'];
-        $hijriDateyear = $data['data']['hijri']['year'];
-        return view('mahasiswa.index', compact('hijriDateday', 'hijriDatemonth', 'hijriDateyear', 'user'));
-    }
-
+    
     public function profile()
-    {
+    {   
         return view('mahasiswa.profile.index');
     }
+
+
 
     public function edit_profile($name)
     {
         $mahasiswa = Auth::user();
-        return view('mahasiswa.profile.edit-profile', compact('mahasiswa'));
+        return view('mahasiswa.profile.edit-profile',compact('mahasiswa'));
     }
 
     public function edit_profile_process(Request $request, $id)
@@ -54,7 +39,7 @@ class DashboardController extends Controller
 
         $user->update($data);
 
-        return redirect()->route('mahasiswa.profile')->with('success', 'Berhasil Mengedit Profile Anda');
+        return redirect()->route('mahasiswa.profile.index')->with('success','Berhasil Mengedit Profile Anda');
     }
 
     public function change_password()
@@ -72,7 +57,7 @@ class DashboardController extends Controller
         $request->validate([
             'old_password' => 'required',
             'password' => 'required|confirmed'
-        ], $messages);
+        ],$messages);
 
         if (!Hash::check($request->old_password, $user->password)) {
             return redirect()->back()->withErrors(['old_password' => 'Password Lama Kamu Salah'])->withInput();
@@ -82,11 +67,6 @@ class DashboardController extends Controller
             'password' => Hash::make($request->password)
         ]);
 
-        return redirect()->route('mahasiswa.profile')->with('success', 'Berhasil Mengedit Password');
-    }
-
-    public function program_belajar()
-    {
-        return view('mahasiswa.program.index');
+        return redirect()->route('mahasiswa.profile.index')->with('success','Berhasil Mengedit Password');
     }
 }

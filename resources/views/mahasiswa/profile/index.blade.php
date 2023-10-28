@@ -11,17 +11,16 @@
         <div class="row gx-4">
             <div class="col-auto">
                 <div class="avatar avatar-xl position-relative">
-                    <img src="../soft-ui-dashboard-main/assets/img/bruce-mars.jpg" alt="profile_image"
-                        class="w-100 border-radius-lg shadow-sm">
+                    <img src="/soft-ui-dashboard-main/assets/img/bruce-mars.jpg" alt="profile_image">
                 </div>
             </div>
             <div class="col-auto my-auto">
                 <div class="h-100">
                     <h5 class="mb-1">
-                        {{Auth::user()->name}}
+                        {{ Auth::user()->name }}
                     </h5>
                     <p class="mb-0 font-weight-bold text-sm">
-                        {{Auth::user()->role}}
+                        {{ Auth::user()->role }}
                     </p>
                 </div>
             </div>
@@ -45,7 +44,8 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link mb-0 px-0 py-1"  href="{{route('mahasiswa.change_password',Auth::user()->name)}}" role="tab"
+                            <a class="nav-link mb-0 px-0 py-1"
+                                href="{{ route('mahasiswa.profile.change_password', Auth::user()->name) }}" role="tab"
                                 aria-selected="true">
                                 <svg class="text-dark" width="16px" height="16px" viewBox="0 0 40 44" version="1.1"
                                     xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -84,7 +84,7 @@
                             <h6 class="mb-0">Profile Information</h6>
                         </div>
                         <div class="col-md-4 text-end">
-                            <a href="{{ route('mahasiswa.edit-profile',Auth::user()->name) }}">
+                            <a href="{{ route('mahasiswa.profile.edit-profile', Auth::user()->name) }}">
                                 <i class="fas fa-user-edit text-secondary text-sm" data-bs-toggle="tooltip"
                                     data-bs-placement="top" title="Edit Profile"></i>
                             </a>
@@ -96,24 +96,26 @@
                     <ul class="list-group">
                         <li class="list-group-item border-0 ps-0 pt-0 text-sm"><strong class="text-dark">Full
                                 Name:</strong>
-                            &nbsp; {{Auth::user()->name}}</li>
+                            &nbsp; {{ Auth::user()->name }}</li>
                         <li class="list-group-item border-0 ps-0 text-sm"><strong class="text-dark">No Tlp:</strong>
                             &nbsp;
-                            {{Auth::user()->phone}}</li>
+                            {{ Auth::user()->phone }}</li>
                         @if (Auth::user()->email == false)
-                        <li class="list-group-item border-0 ps-0 text-sm"><strong class="text-dark">Email:</strong> &nbsp;
-                            Lengkapi Email</li>
+                            <li class="list-group-item border-0 ps-0 text-sm"><strong class="text-dark">Email:</strong>
+                                &nbsp;
+                                Lengkapi Email</li>
                         @else
-                        <li class="list-group-item border-0 ps-0 text-sm"><strong class="text-dark">Email:</strong> &nbsp;
-                            {{Auth::user()->email}}</li>
+                            <li class="list-group-item border-0 ps-0 text-sm"><strong class="text-dark">Email:</strong>
+                                &nbsp;
+                                {{ Auth::user()->email }}</li>
                         @endif
                         <li class="list-group-item border-0 ps-0 text-sm"><strong class="text-dark">Tanggal Lahir:</strong>
                             &nbsp;
-                            {{Auth::user()->birthdate}}
+                            {{ Auth::user()->birthdate }}
                         </li>
                         <li class="list-group-item border-0 ps-0 text-sm"><strong class="text-dark">Gender:</strong>
                             &nbsp;
-                            {{Auth::user()->gender}}
+                            {{ Auth::user()->gender }}
                         </li>
                     </ul>
                 </div>
@@ -122,7 +124,7 @@
     </div>
 @endsection
 @push('scripts')
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     @if (session('success'))
         <script>
             Swal.fire(
