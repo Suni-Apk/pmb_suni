@@ -1,25 +1,3 @@
-/*!
-
-=========================================================
-* Soft UI Dashboard Pro - v1.1.1
-=========================================================
-
-* Product Page: https://www.creative-tim.com/product/soft-ui-dashboard-pro
-* Copyright 2023 Creative Tim (https://www.creative-tim.com)
-
-* Coded by www.creative-tim.com
-
-=========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-
-*/
-@charset "UTF-8"; /*!
-   * Bootstrap  v5.2.3 (https://getbootstrap.com/)
-   * Copyright 2011-2022 The Bootstrap Authors
-   * Copyright 2011-2022 Twitter, Inc.
-   * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
-   */
 :root {
     --bs-blue: #63b3ed;
     --bs-indigo: #596cff;
@@ -118,7 +96,7 @@
 #sidenav-collapse-main::-webkit-scrollbar
 {
 	width: 7px;
-    height: 7px;
+	height: 7px;
 	background-color: #f8f9fa;
 }
 
