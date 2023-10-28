@@ -8,10 +8,33 @@
 
 @section('content')
     <div class="row">
-        <div class="col-12">
-        <div class="card mb-4">
-            <div class="card-header pb-0">
-            <h6>Pembayaran Daftar Ulang</h6>
+
+        {{-- INI ADALAH CARD BUAT TAGIHAN DAFTAR ULANG CICIL --}}
+
+        <div class="col-12 text-center mb-4">
+         <div class="card">
+          <h3 class="mt-3">Tagihan</h3>
+          <h5 class="text-secondary font-weight-normal">Daftar Ulang Nyicil</h5>
+          <div class="multisteps-form">
+            <div class="row">
+              <div class="col-12 col-lg-8 mx-auto mb-5">
+                <div class="multisteps-form__progress">
+                  <button class="multisteps-form__progress-btn js-active" type="button" title="Cicil Pertama">
+                    <span>Cicil Pertama</span>
+                  </button>
+                  <button class="multisteps-form__progress-btn" type="button" title="Cicil Kedua">
+                    <span>Cicil Kedua</span>
+                  </button>
+                  <button class="multisteps-form__progress-btn" type="button" title="Cicil Ketiga">
+                    <span>Cicil Ketiga</span>
+                  </button>
+                </div>
+              </div>
+              <div class="col-12 col-lg-8 mx-auto">
+                <button class="btn btn-primary">
+                  Bayar
+                </button>
+              </div>
             </div>
             <div class="card-body px-0 pt-0 pb-2">
                 <div class="table-responsive p-0">
@@ -136,7 +159,12 @@
                       <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Nama</th>
                       <th class="text-uppercase text-secondary text-xxs px-2 font-weight-bolder opacity-7">Nomor Telepon</th>
                       <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Gender / Admin</th>
+                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Nama</th>
+                      <th class="text-uppercase text-secondary text-xxs px-2 font-weight-bolder opacity-7">Nomor Telepon</th>
+                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Gender / Admin</th>
                       <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Status</th>
+                      <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Joined</th>
+                      <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Action</th>
                       <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Joined</th>
                       <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Action</th>
                     </tr>
@@ -144,14 +172,17 @@
                   <tbody>
                     <tr>
                       <td>
-                        <div class="px-2 py-1">
+                        <div class="d-flex px-2 py-1">
                           <div class="d-flex flex-column justify-content-center">
                             <h6 class="mb-0 text-sm">John Michael</h6>
                             <p class="text-xs text-secondary mb-0">john@creative-tim.com</p>
                           </div>
                         </div>
                       </td>
-                      <td class="align-">
+                      <td class="align- text-start">
+                        <span class="text-secondary text-xs font-weight-bold">08778464359</span>
+                      </td>
+                      <td class="align- text-start">
                         <span class="text-secondary text-xs font-weight-bold">08778464359</span>
                       </td>
                       <td>
@@ -165,15 +196,15 @@
                         <span class="text-secondary text-xs font-weight-bold">23/04/18</span>
                       </td>
                       <td class="align-middle text-center"> 
-                        <a href="" class="badge badge-sm bg-gradient-info font-weight-bold text-xxs" data-toggle="tooltip" data-original-title="Edit user">
+                        <a href="" class="badge badge-sm bg-gradient-primary font-weight-bold text-xs mx-2" data-toggle="tooltip" data-original-title="Edit user">
                           Detail
                         </a>
   
-                        <a href="" class="badge badge-sm bg-gradient-secondary font-weight-bold text-xxs mx-1" data-toggle="tooltip" data-original-title="Edit user">
+                        <a href="" class="badge badge-sm bg-gradient-success font-weight-bold text-xs mx-2" data-toggle="tooltip" data-original-title="Edit user">
                           Ubah
                         </a>
   
-                        <a href="" class="badge badge-sm bg-gradient-danger font-weight-bold text-xxs" data-toggle="tooltip" data-original-title="Edit user">
+                        <a href="" class="badge badge-sm bg-gradient-danger font-weight-bold text-xs mx-2" data-toggle="tooltip" data-original-title="Edit user">
                           Hapus
                         </a>
                       </td>

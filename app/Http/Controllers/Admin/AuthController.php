@@ -48,6 +48,9 @@ class AuthController extends Controller
             
         //     return redirect()->route('user.activication')->with('gagal','Kamu Harus Mengisi Kode OTP Yang Dikirim');
         // }
+        if($user->status == 'off'){
+            return redirect()->route('admin.login')->withErrors(['phone' => 'Akun Anda Di Non Aktifkan']);
+        }
         $authenticated = Auth::attempt($credentials, $request->has('remember'));
 
         if (!$authenticated){
