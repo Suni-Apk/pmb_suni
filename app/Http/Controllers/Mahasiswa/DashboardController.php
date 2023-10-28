@@ -25,7 +25,8 @@ class DashboardController extends Controller
         $hijriDateday = $data['data']['hijri']['day'];
         $hijriDatemonth = $data['data']['hijri']['month']['ar'];
         $hijriDateyear = $data['data']['hijri']['year'];
-        return view('mahasiswa.index',compact('hijriDateday','hijriDatemonth','hijriDateyear'));
+        $user = Auth::user();
+        return view('mahasiswa.index',compact('hijriDateday','hijriDatemonth','hijriDateyear', 'user'));
     }
 
 }

@@ -4,7 +4,7 @@
 
 @section('content')
 <div class="row">
-	<div class="col-12 mb-4">
+	{{-- <div class="col-12 mb-4">
 		<div id="banner" class="card overflow-hidden shadow-lg">
 			<style>
 				#banner {
@@ -27,7 +27,30 @@
 				</div>
 			</div>
 		</div>
-	</div>
+	</div> --}}
+  <div class="col-lg-12 mb-4">
+    <div class="card">
+      <div class="card-body p-3">
+        <div class="row">
+          <div class="col-lg-6">
+            <div class="">
+              <p class="font-weight-bold mt-5 fs-4 p-5">
+                Selamat Datang <span class="font-weight-bolder text-capitalize">{{ $user->name }}</span>!
+              </p>
+            </div>
+          </div>
+          <div class="col-lg-5 ms-auto text-center mt-5 mt-lg-0">
+            <div class="">
+              <img src="/soft-ui-dashboard-main/assets/img/shapes/waves-white.svg" class="position-absolute h-100 w-50 top-0 d-lg-block d-none" alt="waves">
+              <div class="position-relative pe-4 h-100">
+                <img class="w-50 float-end position-relative z-index-2" src="/soft-ui-dashboard-main/assets/img/Learning-bro.png" alt="rocket">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
     <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
       <div class="card">
         <div class="card-body p-3">

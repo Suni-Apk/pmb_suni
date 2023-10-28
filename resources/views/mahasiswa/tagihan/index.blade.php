@@ -21,12 +21,7 @@
                           <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Nama</th>
                           <th class="text-uppercase text-secondary text-xxs px-2 font-weight-bolder opacity-7">Nomor Telepon</th>
                           <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Gender / Admin</th>
-                          <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Nama</th>
-                          <th class="text-uppercase text-secondary text-xxs px-2 font-weight-bolder opacity-7">Nomor Telepon</th>
-                          <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Gender / Admin</th>
                           <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Status</th>
-                          <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Joined</th>
-                          <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Action</th>
                           <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Joined</th>
                           <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Action</th>
                         </tr>
@@ -44,10 +39,7 @@
                               </div>
                             </div>
                           </td>
-                          <td class="align- text-start">
-                            <span class="text-secondary text-xs font-weight-bold">08778464359</span>
-                          </td>
-                          <td class="align- text-start">
+                          <td class="">
                             <span class="text-secondary text-xs font-weight-bold">08778464359</span>
                           </td>
                           <td>
@@ -61,15 +53,15 @@
                             <span class="text-secondary text-xs font-weight-bold">23/04/18</span>
                           </td>
                           <td class="align-middle text-center"> 
-                            <a href="" class="badge badge-sm bg-gradient-primary font-weight-bold text-xs mx-2" data-toggle="tooltip" data-original-title="Edit user">
+                            <a href="" class="badge badge-sm bg-gradient-info font-weight-bold text-xxs" data-toggle="tooltip" data-original-title="Edit user">
                               Detail
                             </a>
       
-                            <a href="" class="badge badge-sm bg-gradient-success font-weight-bold text-xs mx-2" data-toggle="tooltip" data-original-title="Edit user">
+                            <a href="" class="badge badge-sm bg-gradient-secondary font-weight-bold text-xxs mx-1" data-toggle="tooltip" data-original-title="Edit user">
                               Ubah
                             </a>
       
-                            <a href="" class="badge badge-sm bg-gradient-danger font-weight-bold text-xs mx-2" data-toggle="tooltip" data-original-title="Edit user">
+                            <a href="" class="badge badge-sm bg-gradient-danger font-weight-bold text-xxs" data-toggle="tooltip" data-original-title="Edit user">
                               Hapus
                             </a>
                           </td>
@@ -92,6 +84,7 @@
               <table class="table align-items-center mb-0" id="templateTable">
                 <thead>
                   <tr>
+                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 width-32-px">ID</th>
                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Nama Tagihan</th>
                     <th class="text-uppercase text-secondary text-xxs px-2 font-weight-bolder opacity-7">Jenis Tagihan</th>
                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Angkatan</th>
@@ -102,21 +95,22 @@
                 <tbody>
                   <tr>
                     <td>
-                      <div class="d-flex px-2 py-1">
-                          <h6 class="mb-0 text-sm text-center">SPP</h6>
-                      </div>
+                        <h6 class="text-secondary mb-0 text-sm text-center">#1</h6>
                     </td>
-                    <td class="align- text-start">
+                    <td class="">
+                        <h6 class="text-xs font-weight-bold mb-0 text-capitalize">SPP</h6>
+                    </td>
+                    <td class="">
                       <span class="text-secondary text-xs font-weight-bold">Routine</span>
                     </td>
-                    <td class="align- text-start">
+                    <td class="">
                       <span class="text-secondary text-xs font-weight-bold">2023</span>
                     </td>
                     <td>
                       <p class="text-xs font-weight-bold mb-0">Informatika</p>
                     </td>
-                    <td>
-                      <a href="{{route('mahasiswa.tagihan.detail',Auth::user()->name)}}" class="badge badge-sm bg-gradient-primary font-weight-bold text-xs mx-2" data-toggle="tooltip" data-original-title="Edit user">
+                    <td class="">
+                      <a href="{{route('mahasiswa.tagihan.detail',Auth::user()->name)}}" class="badge badge-sm bg-gradient-primary font-weight-bold text-xxs" data-toggle="tooltip" data-original-title="detail">
                         Detail
                       </a>
                     </td>
@@ -142,12 +136,7 @@
                       <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Nama</th>
                       <th class="text-uppercase text-secondary text-xxs px-2 font-weight-bolder opacity-7">Nomor Telepon</th>
                       <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Gender / Admin</th>
-                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Nama</th>
-                      <th class="text-uppercase text-secondary text-xxs px-2 font-weight-bolder opacity-7">Nomor Telepon</th>
-                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Gender / Admin</th>
                       <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Status</th>
-                      <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Joined</th>
-                      <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Action</th>
                       <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Joined</th>
                       <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Action</th>
                     </tr>
@@ -155,17 +144,14 @@
                   <tbody>
                     <tr>
                       <td>
-                        <div class="d-flex px-2 py-1">
+                        <div class="px-2 py-1">
                           <div class="d-flex flex-column justify-content-center">
                             <h6 class="mb-0 text-sm">John Michael</h6>
                             <p class="text-xs text-secondary mb-0">john@creative-tim.com</p>
                           </div>
                         </div>
                       </td>
-                      <td class="align- text-start">
-                        <span class="text-secondary text-xs font-weight-bold">08778464359</span>
-                      </td>
-                      <td class="align- text-start">
+                      <td class="align-">
                         <span class="text-secondary text-xs font-weight-bold">08778464359</span>
                       </td>
                       <td>
@@ -179,15 +165,15 @@
                         <span class="text-secondary text-xs font-weight-bold">23/04/18</span>
                       </td>
                       <td class="align-middle text-center"> 
-                        <a href="" class="badge badge-sm bg-gradient-primary font-weight-bold text-xs mx-2" data-toggle="tooltip" data-original-title="Edit user">
+                        <a href="" class="badge badge-sm bg-gradient-info font-weight-bold text-xxs" data-toggle="tooltip" data-original-title="Edit user">
                           Detail
                         </a>
   
-                        <a href="" class="badge badge-sm bg-gradient-success font-weight-bold text-xs mx-2" data-toggle="tooltip" data-original-title="Edit user">
+                        <a href="" class="badge badge-sm bg-gradient-secondary font-weight-bold text-xxs mx-1" data-toggle="tooltip" data-original-title="Edit user">
                           Ubah
                         </a>
   
-                        <a href="" class="badge badge-sm bg-gradient-danger font-weight-bold text-xs mx-2" data-toggle="tooltip" data-original-title="Edit user">
+                        <a href="" class="badge badge-sm bg-gradient-danger font-weight-bold text-xxs" data-toggle="tooltip" data-original-title="Edit user">
                           Hapus
                         </a>
                       </td>
@@ -204,12 +190,7 @@
 
 @push('scripts')
 <script>
-	const dataTableSearch = new simpleDatatables.DataTable("#templateTableNoSearch", {
-      searchable: false,
-      fixedHeight: true,
-    });
-
-	const dataTableBasic = new simpleDatatables.DataTable("#templateTable", {
+	const dataTableSearch = new simpleDatatables.DataTable("#searchable1", {
       searchable: true,
       fixedHeight: true,
     });

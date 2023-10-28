@@ -17,8 +17,12 @@
               <h6>Semester 1</h6>
             </div>
             <div class="flex-row d-flex">
-              <a href="" class="btn btn-primary fs-6 p-2 px-3"><i class="fab fa-whatsapp"></i></a>
-              <a href="" class="btn btn-primary fs-6 p-2 px-3 ms-2"><i class="fas fa-file-download"></i></a>
+              <a href="" class="btn btn-primary fs-6 p-2 px-3">
+                <i class="fab fa-whatsapp"></i>
+              </a>
+              <a href="" class="btn btn-secondary fs-6 p-2 px-3 ms-2">
+                <i class="fas fa-file-download"></i>
+              </a>
             </div>
           </div>
           <div class="card-body px-0 pt-0 pb-2">
@@ -60,17 +64,3 @@
       {{-- end forech --}}
     </div>
 @endsection
-
-@push('scripts')
-<script>
-	const dataTableSearch = new simpleDatatables.DataTable("#templateTableNoSearch", {
-      searchable: false,
-      fixedHeight: true,
-    });
-
-	const dataTableBasic = new simpleDatatables.DataTable("#templateTable", {
-      searchable: true,
-      fixedHeight: true,
-    });
-</script>
-@endpush

@@ -11,13 +11,13 @@
             <div class="row flex-column justify-content-center">
                 <div class="col-9 col-lg-6 text-center mx-auto mb-2 mt-5">
                     <img src="/soft-ui-dashboard-main/assets/img/logo-ct.png" class="my-5" alt="" width="100">
-                    <h4 class="text-white mt-4">Selamat Datang!</h4>
-                    <h1 class="text-white lh-1">Di website Pendaftaran Suni Indonesia</h1>
+                    <h4 class="text-white mt-4">Selamat Datang di,</h4>
+                    <h1 class="text-white lh-1">Website Pendaftaran Suni Indonesia</h1>
                 </div>
                 <div class="col-9 col-lg-5 mx-auto d-flex justify-content-center gap-3 mt-4">
-                    <a href="" class="btn bg-gradient-secondary" 
-                    data-bs-toggle="tooltip" data-bs-placement="left" title="Sudah punya akun?">Login</a>
-                    <a href="" class="btn bg-gradient-primary"
+                    <a href="{{ route('login') }}" class="btn btn-outline-secondary" 
+                    data-bs-toggle="tooltip" data-bs-placement="left" title="Sudah punya akun?">Masuk</a>
+                    <a href="{{ route('register') }}" class="btn bg-gradient-secondary"
                     data-bs-toggle="tooltip" data-bs-placement="right" title="Belum mendaftar?">Daftar</a>
                 </div>
             </div>
