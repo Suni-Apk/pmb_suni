@@ -17,6 +17,11 @@ class TagihanController extends Controller
         return view('mahasiswa.tagihan.detail-tagihan');
     }
 
+    public function payment_spp($name)
+    {
+        return view('mahasiswa.tagihan.pilih-pembayaran');
+    }
+
     public function detail_tidak_routine($name)
     {
         return view('mahasiswa.tagihan.detail-tagihan-tidak-routine');

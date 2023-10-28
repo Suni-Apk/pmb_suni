@@ -302,7 +302,7 @@
             
             <!-- profile -->
             <li class="nav-item">
-                <a class="nav-link " href="">
+                <a class="nav-link " href="{{route('admin.profile')}}">
                     <div
                         class="icon icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
                         <i class="fas fa-user-alt"></i>
