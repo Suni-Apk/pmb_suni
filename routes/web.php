@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\AccountController;
 use App\Http\Controllers\Admin\AuthController as AdminAuthController;
 use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
 use App\Http\Controllers\Admin\ProfileController;
@@ -57,6 +58,26 @@ Route::prefix('admin')->name('admin.')->group(function () {
 // Controller / Dashboard Admin
 Route::prefix('/admin')->middleware('admin')->name('admin.')->group(function () {
     Route::get('/dashboard', [AdminDashboardController::class, 'index'])->name('dashboard');
+
+    //account menu
+    Route::get('/account/admin',[AccountController::class,'admin'])->name('admin.account');
+    Route::get('/create/account/admin',[AccountController::class,'admin_create'])->name('admin.create');
+    Route::post('/create/account/admin/process',[AccountController::class,'admin_create_process'])->name('admin.create.process');
+    Route::get('/edit/account/admin/{id}',[AccountController::class,'admin_edit'])->name('admin.edit');
+    Route::put('/edit/account/admin/process/{id}',[AccountController::class,'admin_edit_process'])->name('admin.edit.process');
+    Route::put('/change_status/admin/{id}',[AccountController::class,'admin_status'])->name('admin.status');
+
+
+
+    Route::get('/account/mahasiswa',[AccountController::class,'mahasiswa'])->name('mahasiswa.account');
+    Route::get('/create/account/mahasiswa',[AccountController::class,'mahasiswa_create'])->name('mahasiswa.create');
+    Route::post('/create/account/mahasiswa/process',[AccountController::class,'mahasiswa_create_process'])->name('mahasiswa.create.process');
+    Route::get('/edit/account/mahasiswa/{id}',[AccountController::class,'mahasiswa_edit'])->name('mahasiswa.edit');
+    Route::put('/edit/account/mahasiswa/process/{id}',[AccountController::class,'mahasiswa_edit_process'])->name('mahasiswa.edit.process');
+    Route::put('/change_status/mahasiswa/{id}',[AccountController::class,'mahasiswa_status'])->name('mahasiswa.status');
+
+
+    //Profile Admin
     Route::get('/profile', [ProfileController::class, 'profile'])->name('profile');
     Route::get('/profile-edit', [ProfileController::class, 'editProfile'])->name('profile_edit');
     Route::put('/profile-process/{id}', [ProfileController::class, 'prosesProfile'])->name('profile_proses');
@@ -78,7 +99,8 @@ Route::prefix('/mahasiswa')->middleware(['auth', 'mahasiswa'])->name('mahasiswa.
 
     //tagihan mahasiswa
     Route::get('/tagihan',[TagihanController::class,'index'])->name('tagihan.index');
-    Route::get('/detail-tagihan/{name}',[TagihanController::class,'detail'])->name('tagihan.detail');
+    Route::get('/detail-tagihan-spp/{name}',[TagihanController::class,'detail_spp'])->name('tagihan.detail.spp');
+    Route::get('/detail-tagihan/{name}',[TagihanController::class,'detail_tidak_routine'])->name('tagihan.detail.tidak.routine');
 
 
     //matkul mahasiswa
@@ -144,7 +166,9 @@ Route::prefix('template')->group(function () {
         return view('admin.user.profile');
     })->name('profile');
 
-
+    Route::get('/wizard',function(){
+        return view('layouts.template.wizard');
+    });
 
 
 

@@ -119,7 +119,7 @@
 
             <!-- admin -->
             <li class="nav-item">
-                <a data-bs-toggle="collapse" href="#admin" class="nav-link" aria-controls="admin" role="button" aria-expanded="false">
+                <a data-bs-toggle="collapse" href="#admin" class="nav-link {{Route::is('admin.admin.*') ? 'active' : ''}}" aria-controls="admin" role="button" aria-expanded="false">
                     <div class="icon icon-sm shadow border-radius-md bg-white text-center d-flex align-items-center justify-content-center  me-2">
                         <i class="fas fa-user-cog"></i>
                     </div>
@@ -128,13 +128,13 @@
                 <div class="collapse" id="admin">
                     <ul class="nav ms-4 ps-3">
                         <li class="nav-item ">
-                            <a class="nav-link " href="">
+                            <a class="nav-link {{Route::is('admin.admin.account') ? 'active' : ''}}" href="{{route('admin.admin.account')}}">
                                 <span class="sidenav-mini-icon d-none d-xl-block"><i class="fas fa-border-all"></i></span>
                                 <span class="sidenav-normal"> Daftar Admin </span>
                             </a>
                         </li>
                         <li class="nav-item ">
-                            <a class="nav-link " href="">
+                            <a class="nav-link {{Route::is('admin.admin.create') ? 'active' : ''}}" href="{{route('admin.admin.create')}}">
                                 <span class="sidenav-mini-icon d-none d-xl-block"><i class="fas fa-plus"></i></span>
                                 <span class="sidenav-normal"> Tambah Admin </span>
                             </a>
@@ -145,7 +145,7 @@
 
             <!-- mahasiswa -->
             <li class="nav-item">
-                <a data-bs-toggle="collapse" href="#mahasiswa" class="nav-link" aria-controls="mahasiswa" role="button" aria-expanded="false">
+                <a data-bs-toggle="collapse" href="#mahasiswa" class="nav-link {{Route::is('admin.mahasiswa.*') ? 'active' : ''}}" aria-controls="mahasiswa" role="button" aria-expanded="false">
                     <div class="icon icon-sm shadow border-radius-md bg-white text-center d-flex align-items-center justify-content-center  me-2">
                         <i class="fas fa-user-graduate"></i>
                     </div>
@@ -154,13 +154,13 @@
                 <div class="collapse" id="mahasiswa">
                     <ul class="nav ms-4 ps-3">
                         <li class="nav-item ">
-                            <a class="nav-link " href="">
+                            <a class="nav-link {{Route::is('admin.mahasiswa.account') ? 'active' : ''}}" href="{{route('admin.mahasiswa.account')}}">
                                 <span class="sidenav-mini-icon d-none d-xl-block"><i class="fas fa-border-all"></i></span>
                                 <span class="sidenav-normal"> Daftar Mahasiswa </span>
                             </a>
                         </li>
                         <li class="nav-item ">
-                            <a class="nav-link " href="">
+                            <a class="nav-link {{Route::is('admin.mahasiswa.create') ? 'active' : ''}}" href="{{route('admin.mahasiswa.create')}}">
                                 <span class="sidenav-mini-icon d-none d-xl-block"><i class="fas fa-plus"></i></span>
                                 <span class="sidenav-normal"> Tambah Mahasiswa </span>
                             </a>

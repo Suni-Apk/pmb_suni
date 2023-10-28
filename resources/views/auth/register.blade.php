@@ -48,6 +48,16 @@
                                                 <label for="" class="text-danger">{{ $message }}</label>
                                             @enderror
                                         </div>
+                                        <div class="mb-3">
+                                            <label for="" class="form-label">Password <strong
+                                                    class="text-danger">*</strong></label>
+                                            <input type="password" name="password"
+                                                class="form-control @error('password') is-invalid @enderror"
+                                                placeholder="Password">
+                                            @error('password')
+                                                <label for="" class="text-danger">{{ $message }}</label>
+                                            @enderror
+                                        </div>
                                         <div class="form-check form-check-info text-left">
                                             <input class="form-check-input" type="checkbox" value="" id="checkBill"
                                                 checked>
@@ -58,6 +68,16 @@
                                         </div>
                                     </div>
                                     <div class="col-6">
+                                        <div class="mb-3">
+                                            <label for="" class="form-label">Email <strong
+                                                    class="text-danger">*</strong></label>
+                                            <input type="text" name="email"
+                                                class="form-control @error('email') is-invalid @enderror"
+                                                placeholder="Enter Your Phone">
+                                            @error('email')
+                                                <label for="" class="text-danger">{{ $message }}</label>
+                                            @enderror
+                                        </div>
                                         <div class="mb-3">
                                             <label for="gender" class="form-label">Gender / Jenis Kelamin <strong
                                                     class="text-danger">*</strong></label>
@@ -71,29 +91,16 @@
                                                 <label for="" class="text-danger">{{ $message }}</label>
                                             @enderror
                                         </div>
-                                        <div class="col-12 d-flex">
-                                            <div class="mb-3">
-                                                <label for="" class="form-label">Password <strong
-                                                        class="text-danger">*</strong></label>
-                                                <input type="password" name="password"
-                                                    class="form-control @error('password') is-invalid @enderror"
-                                                    placeholder="Password">
-                                                @error('password')
-                                                    <label for="" class="text-danger">{{ $message }}</label>
-                                                @enderror
-                                            </div>
-                                            <div class="mb-3">
-                                                <label for="birthdate" class="form-label">Ulangi Password <strong
-                                                        class="text-danger">*</strong></label>
-                                                <input type="password" name="password_confirmation"
-                                                    class="form-control @error('password_confirmation') is-invalid @enderror"
-                                                    placeholder="Password" aria-label="Password">
-                                                @error('password_confirmation')
-                                                    <label for="" class="text-danger">{{ $message }}</label>
-                                                @enderror
-                                            </div>
+                                        <div class="mb-3">
+                                            <label for="birthdate" class="form-label">Ulangi Password <strong
+                                                    class="text-danger">*</strong></label>
+                                            <input type="password" name="password_confirmation"
+                                                class="form-control @error('password_confirmation') is-invalid @enderror"
+                                                placeholder="Password" aria-label="Password">
+                                            @error('password_confirmation')
+                                                <label for="" class="text-danger">{{ $message }}</label>
+                                            @enderror
                                         </div>
-                                        
                                     </div>
                                 </div>
                                 <div class="text-center">
