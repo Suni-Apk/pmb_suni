@@ -3,14 +3,14 @@
 @section('title', 'profile template')
 
 @section('content')
-<div class="page-header min-height-300 border-radius-xl mt-4" style="background-image: url('../soft-ui-dashboard-main/assets/img/curved-images/curved0.jpg'); background-position-y: 50%;">
+<div class="page-header min-height-300 border-radius-xl mt-4" style="background-image: url('/soft-ui-dashboard-main/assets/img/curved-images/curved0.jpg'); background-position-y: 50%;">
     <span class="mask bg-gradient-primary opacity-6"></span>
 </div>
 <div class="card card-body blur shadow-blur mx-4 mt-n6 overflow-hidden">
     <div class="row gx-4">
     <div class="col-auto">
         <div class="avatar avatar-xl position-relative">
-        <img src="../soft-ui-dashboard-main/assets/img/bruce-mars.jpg" alt="profile_image" class="w-100 border-radius-lg shadow-sm">
+        <img src="/soft-ui-dashboard-main/assets/img/bruce-mars.jpg" alt="profile_image" class="w-100 border-radius-lg shadow-sm">
         </div>
     </div>
     <div class="col-auto my-auto">
@@ -193,7 +193,7 @@
             <ul class="list-group">
                 <li class="list-group-item border-0 d-flex align-items-center px-0 mb-2">
                 <div class="avatar me-3">
-                    <img src="../soft-ui-dashboard-main/assets/img/kal-visuals-square.jpg" alt="kal" class="border-radius-lg shadow">
+                    <img src="/soft-ui-dashboard-main/assets/img/kal-visuals-square.jpg" alt="kal" class="border-radius-lg shadow">
                 </div>
                 <div class="d-flex align-items-start flex-column justify-content-center">
                     <h6 class="mb-0 text-sm">Sophie B.</h6>
@@ -203,7 +203,7 @@
                 </li>
                 <li class="list-group-item border-0 d-flex align-items-center px-0 mb-2">
                 <div class="avatar me-3">
-                    <img src="../soft-ui-dashboard-main/assets/img/marie.jpg" alt="kal" class="border-radius-lg shadow">
+                    <img src="/soft-ui-dashboard-main/assets/img/marie.jpg" alt="kal" class="border-radius-lg shadow">
                 </div>
                 <div class="d-flex align-items-start flex-column justify-content-center">
                     <h6 class="mb-0 text-sm">Anne Marie</h6>
@@ -213,7 +213,7 @@
                 </li>
                 <li class="list-group-item border-0 d-flex align-items-center px-0 mb-2">
                 <div class="avatar me-3">
-                    <img src="../soft-ui-dashboard-main/assets/img/ivana-square.jpg" alt="kal" class="border-radius-lg shadow">
+                    <img src="/soft-ui-dashboard-main/assets/img/ivana-square.jpg" alt="kal" class="border-radius-lg shadow">
                 </div>
                 <div class="d-flex align-items-start flex-column justify-content-center">
                     <h6 class="mb-0 text-sm">Ivanna</h6>
@@ -223,7 +223,7 @@
                 </li>
                 <li class="list-group-item border-0 d-flex align-items-center px-0 mb-2">
                 <div class="avatar me-3">
-                    <img src="../soft-ui-dashboard-main/assets/img/team-4.jpg" alt="kal" class="border-radius-lg shadow">
+                    <img src="/soft-ui-dashboard-main/assets/img/team-4.jpg" alt="kal" class="border-radius-lg shadow">
                 </div>
                 <div class="d-flex align-items-start flex-column justify-content-center">
                     <h6 class="mb-0 text-sm">Peterson</h6>
@@ -233,7 +233,7 @@
                 </li>
                 <li class="list-group-item border-0 d-flex align-items-center px-0">
                 <div class="avatar me-3">
-                    <img src="../soft-ui-dashboard-main/assets/img/team-3.jpg" alt="kal" class="border-radius-lg shadow">
+                    <img src="/soft-ui-dashboard-main/assets/img/team-3.jpg" alt="kal" class="border-radius-lg shadow">
                 </div>
                 <div class="d-flex align-items-start flex-column justify-content-center">
                     <h6 class="mb-0 text-sm">Nick Daniel</h6>
@@ -257,7 +257,7 @@
                 <div class="card card-blog card-plain">
                     <div class="position-relative">
                     <a class="d-block shadow-xl border-radius-xl">
-                        <img src="../soft-ui-dashboard-main/assets/img/home-decor-1.jpg" alt="img-blur-shadow" class="img-fluid shadow border-radius-xl">
+                        <img src="/soft-ui-dashboard-main/assets/img/home-decor-1.jpg" alt="img-blur-shadow" class="img-fluid shadow border-radius-xl">
                     </a>
                     </div>
                     <div class="card-body px-1 pb-0">
@@ -274,16 +274,16 @@
                         <button type="button" class="btn btn-outline-primary btn-sm mb-0">View Project</button>
                         <div class="avatar-group mt-2">
                         <a href="javascript:;" class="avatar avatar-xs rounded-circle" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Elena Morison">
-                            <img alt="Image placeholder" src="../soft-ui-dashboard-main/assets/img/team-1.jpg">
+                            <img alt="Image placeholder" src="/soft-ui-dashboard-main/assets/img/team-1.jpg">
                         </a>
                         <a href="javascript:;" class="avatar avatar-xs rounded-circle" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Ryan Milly">
-                            <img alt="Image placeholder" src="../soft-ui-dashboard-main/assets/img/team-2.jpg">
+                            <img alt="Image placeholder" src="/soft-ui-dashboard-main/assets/img/team-2.jpg">
                         </a>
                         <a href="javascript:;" class="avatar avatar-xs rounded-circle" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Nick Daniel">
-                            <img alt="Image placeholder" src="../soft-ui-dashboard-main/assets/img/team-3.jpg">
+                            <img alt="Image placeholder" src="/soft-ui-dashboard-main/assets/img/team-3.jpg">
                         </a>
                         <a href="javascript:;" class="avatar avatar-xs rounded-circle" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Peterson">
-                            <img alt="Image placeholder" src="../soft-ui-dashboard-main/assets/img/team-4.jpg">
+                            <img alt="Image placeholder" src="/soft-ui-dashboard-main/assets/img/team-4.jpg">
                         </a>
                         </div>
                     </div>
@@ -294,7 +294,7 @@
                 <div class="card card-blog card-plain">
                     <div class="position-relative">
                     <a class="d-block shadow-xl border-radius-xl">
-                        <img src="../soft-ui-dashboard-main/assets/img/home-decor-2.jpg" alt="img-blur-shadow" class="img-fluid shadow border-radius-lg">
+                        <img src="/soft-ui-dashboard-main/assets/img/home-decor-2.jpg" alt="img-blur-shadow" class="img-fluid shadow border-radius-lg">
                     </a>
                     </div>
                     <div class="card-body px-1 pb-0">
@@ -311,16 +311,16 @@
                         <button type="button" class="btn btn-outline-primary btn-sm mb-0">View Project</button>
                         <div class="avatar-group mt-2">
                         <a href="javascript:;" class="avatar avatar-xs rounded-circle" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Nick Daniel">
-                            <img alt="Image placeholder" src="../soft-ui-dashboard-main/assets/img/team-3.jpg">
+                            <img alt="Image placeholder" src="/soft-ui-dashboard-main/assets/img/team-3.jpg">
                         </a>
                         <a href="javascript:;" class="avatar avatar-xs rounded-circle" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Peterson">
-                            <img alt="Image placeholder" src="../soft-ui-dashboard-main/assets/img/team-4.jpg">
+                            <img alt="Image placeholder" src="/soft-ui-dashboard-main/assets/img/team-4.jpg">
                         </a>
                         <a href="javascript:;" class="avatar avatar-xs rounded-circle" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Elena Morison">
-                            <img alt="Image placeholder" src="../soft-ui-dashboard-main/assets/img/team-1.jpg">
+                            <img alt="Image placeholder" src="/soft-ui-dashboard-main/assets/img/team-1.jpg">
                         </a>
                         <a href="javascript:;" class="avatar avatar-xs rounded-circle" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Ryan Milly">
-                            <img alt="Image placeholder" src="../soft-ui-dashboard-main/assets/img/team-2.jpg">
+                            <img alt="Image placeholder" src="/soft-ui-dashboard-main/assets/img/team-2.jpg">
                         </a>
                         </div>
                     </div>
@@ -331,7 +331,7 @@
                 <div class="card card-blog card-plain">
                     <div class="position-relative">
                     <a class="d-block shadow-xl border-radius-xl">
-                        <img src="../soft-ui-dashboard-main/assets/img/home-decor-3.jpg" alt="img-blur-shadow" class="img-fluid shadow border-radius-xl">
+                        <img src="/soft-ui-dashboard-main/assets/img/home-decor-3.jpg" alt="img-blur-shadow" class="img-fluid shadow border-radius-xl">
                     </a>
                     </div>
                     <div class="card-body px-1 pb-0">
@@ -348,16 +348,16 @@
                         <button type="button" class="btn btn-outline-primary btn-sm mb-0">View Project</button>
                         <div class="avatar-group mt-2">
                         <a href="javascript:;" class="avatar avatar-xs rounded-circle" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Peterson">
-                            <img alt="Image placeholder" src="../soft-ui-dashboard-main/assets/img/team-4.jpg">
+                            <img alt="Image placeholder" src="/soft-ui-dashboard-main/assets/img/team-4.jpg">
                         </a>
                         <a href="javascript:;" class="avatar avatar-xs rounded-circle" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Nick Daniel">
-                            <img alt="Image placeholder" src="../soft-ui-dashboard-main/assets/img/team-3.jpg">
+                            <img alt="Image placeholder" src="/soft-ui-dashboard-main/assets/img/team-3.jpg">
                         </a>
                         <a href="javascript:;" class="avatar avatar-xs rounded-circle" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Ryan Milly">
-                            <img alt="Image placeholder" src="../soft-ui-dashboard-main/assets/img/team-2.jpg">
+                            <img alt="Image placeholder" src="/soft-ui-dashboard-main/assets/img/team-2.jpg">
                         </a>
                         <a href="javascript:;" class="avatar avatar-xs rounded-circle" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Elena Morison">
-                            <img alt="Image placeholder" src="../soft-ui-dashboard-main/assets/img/team-1.jpg">
+                            <img alt="Image placeholder" src="/soft-ui-dashboard-main/assets/img/team-1.jpg">
                         </a>
                         </div>
                     </div>

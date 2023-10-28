@@ -4,14 +4,14 @@
 
 @section('content')
     <div class="page-header min-height-300 border-radius-xl mt-4"
-        style="background-image: url('../soft-ui-dashboard-main/assets/img/curved-images/curved0.jpg'); background-position-y: 50%;">
+        style="background-image: url('/soft-ui-dashboard-main/assets/img/curved-images/curved0.jpg'); background-position-y: 50%;">
         <span class="mask bg-gradient-primary opacity-6"></span>
     </div>
     <div class="card card-body blur shadow-blur mx-4 mt-n6 overflow-hidden">
         <div class="row gx-4">
             <div class="col-auto">
                 <div class="avatar avatar-xl position-relative">
-                    <img src="../soft-ui-dashboard-main/assets/img/bruce-mars.jpg" alt="profile_image"
+                    <img src="/soft-ui-dashboard-main/assets/img/bruce-mars.jpg" alt="profile_image"
                         class="w-100 border-radius-lg shadow-sm">
                 </div>
             </div>
@@ -46,7 +46,7 @@
                         </li>
                         <li class="nav-item">
                             <a class="nav-link mb-0 px-0 py-1 active" data-bs-toggle="tab"
-                                href="{{ route('change-password') }}" role="tab" aria-selected="false">
+                                href="{{ route('admin.change_password') }}" role="tab" aria-selected="false">
                                 <svg class="text-dark" width="16px" height="16px" viewBox="0 0 40 44" version="1.1"
                                     xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                                     <title>document</title>
@@ -84,7 +84,7 @@
                             <h6 class="mb-0">Change password</h6>
                         </div>
                         <div class="col-md-4 text-end">
-                            <a href="{{ route('edit-profile') }}">
+                            <a href="{{ route('admin.profile_edit') }}">
                                 <i class="fas fa-user-edit text-secondary text-sm" data-bs-toggle="tooltip"
                                     data-bs-placement="top" title="Edit Profile"></i>
                             </a>
@@ -94,23 +94,43 @@
                 <div class="card-body p-3">
                     <hr class="horizontal gray-light">
                     <ul class="list-group">
-                        <form action="">
+                        <form action="{{ route('admin.change_password_proses', $auth->id) }}" method="POST">
+                            @csrf
+                            @method('PUT')
                             <div class="form-group">
                                 <label for="">Current password</label>
                                 <div class="input-group">
-                                    <input class="form-control" type="password" id="password" name="old_password"
-                                        placeholder="****" />
+                                    <input
+                                        class="form-control @error('old_password')
+                                        is-invalid
+                                    @enderror"
+                                        type="password" id="password" name="old_password" placeholder="****" />
                                     <button class="btn btn-outline-secondary mb-0" type="button" id="showOldPassword"><i
                                             class="fas fa-low-vision"></i> </button>
                                 </div>
+                                @error('old_password')
+                                    <label class="text-danger">{{ $message }}</label>
+                                @enderror
                             </div>
                             <div class="form-group">
                                 <label for="">New password</label>
-                                <input type="password" class="form-control form-check">
+                                <input type="password" name="password"
+                                    class="form-control @error('password')
+                                    is-invalid                                @enderror form-check">
+                                @error('password')
+                                    <label class="text-danger">{{ $message }}</label>
+                                @enderror
                             </div>
                             <div class="form-group">
-                                <label for="">New password</label>
-                                <input type="password" class="form-control form-check">
+                                <label for="">Confirmation password</label>
+                                <input type="password"
+                                    class="form-control @error('password_confirmation')
+                                    is-invalid
+                                @enderror form-check"
+                                    name="password_confirmation">
+                                @error('password_confirmation')
+                                    <label class="text-danger">{{ $message }}</label>
+                                @enderror
                             </div>
                             <button class="btn btn-primary" type="submit">Change</button>
 
