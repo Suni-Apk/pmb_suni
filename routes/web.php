@@ -2,7 +2,10 @@
 
 use App\Http\Controllers\Admin\AuthController as AdminAuthController;
 use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
+<<<<<<< HEAD
 use App\Http\Controllers\Admin\ProfileController;
+=======
+>>>>>>> 6c40de9e1c25ab6d1c6ed5b77e49c88fe213217b
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\JurusanController;
 use App\Http\Controllers\Mahasiswa\DashboardController;
@@ -49,7 +52,15 @@ Route::prefix('admin')->name('admin.')->group(function () {
 
     Route::post('/login-process', [AdminAuthController::class, 'login_process'])->name('login.process');
 
+<<<<<<< HEAD
     Route::get('/logout', [AdminAuthController::class, 'logout'])->name('logout');
+=======
+Route::get('/admin/logout',[AdminAuthController::class,'logout'])->name('admin.logout');
+
+// Controller / Dashboard Admin
+Route::prefix('/admin')->middleware('admin')->name('admin.')->group(function(){
+    Route::get('/dashboard',[AdminDashboardController::class,'index'])->name('dashboard');
+>>>>>>> 6c40de9e1c25ab6d1c6ed5b77e49c88fe213217b
 });
 
 // Controller / Dashboard Admin
@@ -145,7 +156,10 @@ Route::prefix('template')->group(function () {
         return view('layouts.template.wizard');
     })->name('wizard');
 });
+<<<<<<< HEAD
 
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+=======
+>>>>>>> 6c40de9e1c25ab6d1c6ed5b77e49c88fe213217b
