@@ -82,9 +82,7 @@ Route::prefix('/admin')->middleware('admin')->name('admin.')->group(function () 
     Route::resource('/tahun_ajaran', TahunAjaranController::class);
     Route::resource('/jurusan', JurusanController::class);
     Route::resource('/matkul', MatkulController::class);
-    Route::put('/profile-process/{id}', [ProfileController::class, 'prosesProfile'])->name('profile_proses');
-    Route::get('/change-password', [ProfileController::class, 'change_password'])->name('change_password');
-    Route::put('/change-password-proses/{id}', [ProfileController::class, 'change_password_proses'])->name('change_password_proses');
+    
 });
 
 //Mahasiswa
@@ -104,8 +102,8 @@ Route::prefix('/mahasiswa')->middleware(['auth', 'mahasiswa'])->name('mahasiswa.
     //tagihan mahasiswa
     Route::prefix('tagihan')->name('tagihan.')->group(function () {
         Route::get('/',[TagihanController::class,'index'])->name('index');
-        Route::get('/detail-spp/{name}',TagihanController::class,'detail_spp')->name('detail.spp');
         Route::get('/detail/{name}',[TagihanController::class,'detail_tidak_routine'])->name('detail.tidak.routine');
+        Route::get('/detail-spp/{name}',[TagihanController::class,'detail_spp'])->name('detail.spp');
     });
 
     //matkul mahasiswa

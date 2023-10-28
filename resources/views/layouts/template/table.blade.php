@@ -42,12 +42,7 @@
                     <td class="align- text-start">
                       <span class="text-secondary text-xs font-weight-bold">08778464359</span>
                     </td>
-                    <td class="align- text-start">
-                      <span class="text-secondary text-xs font-weight-bold">08778464359</span>
-                    </td>
                     <td>
-                      <p class="text-xs font-weight-bold mb-0">Laki Laki</p>
-                      <p class="text-xs text-secondary mb-0">ADMIN</p>
                       <p class="text-xs font-weight-bold mb-0">Laki Laki</p>
                       <p class="text-xs text-secondary mb-0">ADMIN</p>
                     </td>
