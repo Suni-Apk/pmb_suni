@@ -5546,8 +5546,7 @@ textarea.form-control,textarea.form-control-lg,textarea.form-control-sm {
     --bs-list-group-disabled-color: #6c757d;
     --bs-list-group-disabled-bg: #fff;
     --bs-list-group-active-color: #fff;
-    /* --bs-list-group-active-bg: #cb0c9f;
-    --bs-list-group-active-border-color: #cb0c9f; */
+    
     --bs-list-group-active-bg: #91f6af;
     --bs-list-group-active-border-color: #91f6af;
     display: flex;
