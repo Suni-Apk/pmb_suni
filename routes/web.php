@@ -6,6 +6,7 @@ use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Mahasiswa\DashboardController;
 use App\Http\Controllers\SettingController;
 use App\Http\Controllers\TagihanController;
+use App\Http\Controllers\TransactionController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -65,6 +66,7 @@ Route::prefix('/admin')->middleware('admin')->name('admin.')->group(function () 
     Route::resource('/tagihan', TagihanController::class);
     Route::post('/next', [TagihanController::class, 'next'])->name('tagihan.next');
     Route::get('settings/notifications', [SettingController::class, 'index'])->name('settings.notifications');
+    Route::resource('/transaction', TransactionController::class);
 });
 
 // Dashboard Mahasiswa

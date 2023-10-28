@@ -25,6 +25,8 @@
                 <form action="{{ route('admin.tagihan.store') }}" method="POST">
                     @csrf
                     @method('POST')
+                    <input type="hidden" name="jenis_tagihan" value="{{ $jenis_tagihan }}">
+
                     <div class="table-responsive mb-3">
                         <table class="table">
                             <thead>
@@ -102,8 +104,8 @@
                     </ul>
 
                     <div class="form-group">
-                        <button type="submit" class="btn btn-primary end-0"><i class="fas fa-edit">
-                            </i> Edit</button>
+                        <button type="submit" class="btn btn-primary end-0"><i class="fas fa-plus">
+                            </i> Tambah</button>
                         <a href="{{ route('admin.tagihan.index') }}" class="btn btn-warning"><i
                                 class="fas fa-backward"></i>
                             Back</a>
@@ -124,61 +126,64 @@
         </nav>
         <div class="card h-100 mt-4">
             <div class="card-body p-3">
-                <ul class="list-group">
+                <form action="{{ route('admin.tagihan.store') }}" method="POST">
                     @csrf
                     @method('POST')
-                    <div class="form-group">
-                        <label for="" class="form-control-label">Nama biaya</label>
-                        <input type="text"
-                            class="form-control @error('name')
+                    <input type="hidden" name="jenis_tagihan" value="{{ $jenis_tagihan }}">
+                    <ul class="list-group">
+                        <div class="form-group">
+                            <label for="" class="form-control-label">Nama biaya</label>
+                            <input type="text"
+                                class="form-control @error('name')
                                 is-invalid
                             @enderror"
-                            name="name" id="name" placeholder="Spp Tahun 2022">
-                        @error('name')
-                            <div class="text-danger">{{ $message }}</div>
-                        @enderror
-                    </div>
-                    <div class="form-group">
-                        <label for="" class="form-control-label">Harga</label>
-                        <input type="text"
-                            class="form-control @error('name')
+                                name="name" id="name" placeholder="Spp Tahun 2022">
+                            @error('name')
+                                <div class="text-danger">{{ $message }}</div>
+                            @enderror
+                        </div>
+                        <div class="form-group">
+                            <label for="" class="form-control-label">Harga</label>
+                            <input type="text"
+                                class="form-control @error('name')
                                 is-invalid
                             @enderror"
-                            name="name" id="amount" placeholder="Spp Tahun 2022">
-                        @error('name')
-                            <div class="text-danger">{{ $message }}</div>
-                        @enderror
-                    </div>
-                    <div class="form-group">
-                        <label for="">Angkatan</label>
-                        <select name="" id="" class="form-select">
-                            <option selected>-- Pilih Angkatan --</option>
-                            <option value="">2022 / 2023</option>
-                            <option value="">2024 / 2025</option>
-                            <option value="">2026 / 2027</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="id_jurusans">Jurusan</label>
-                        <select name="" id="" class="form-select">
-                            <option selected>-- Pilih Jurusan --</option>
-                            <option value="">Bahasa Arab</option>
-                            <option value="">Ilmu Fiqih</option>
-                            <option value="">Tafsir</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                    </div>
-                    <div class="form-group">
-                    </div>
-                </ul>
+                                name="name" id="amount" placeholder="Spp Tahun 2022">
+                            @error('name')
+                                <div class="text-danger">{{ $message }}</div>
+                            @enderror
+                        </div>
+                        <div class="form-group">
+                            <label for="">Angkatan</label>
+                            <select name="" id="" class="form-select">
+                                <option selected>-- Pilih Angkatan --</option>
+                                <option value="">2022 / 2023</option>
+                                <option value="">2024 / 2025</option>
+                                <option value="">2026 / 2027</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="id_jurusans">Jurusan</label>
+                            <select name="" id="" class="form-select">
+                                <option selected>-- Pilih Jurusan --</option>
+                                <option value="">Bahasa Arab</option>
+                                <option value="">Ilmu Fiqih</option>
+                                <option value="">Tafsir</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                        </div>
+                        <div class="form-group">
+                        </div>
+                    </ul>
 
-                <div class="form-group">
-                    <button type="submit" class="btn btn-primary end-0"><i class="fas fa-edit">
-                        </i> Edit</button>
-                    <a href="{{ route('admin.tagihan.index') }}" class="btn btn-warning"><i class="fas fa-backward"></i>
-                        Back</a>
-                </div>
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-primary end-0"><i class="fas fa-plus">
+                            </i> Tambah</button>
+                        <a href="{{ route('admin.tagihan.index') }}" class="btn btn-warning"><i
+                                class="fas fa-backward"></i>
+                            Back</a>
+                    </div>
                 </form>
             </div>
         </div>
@@ -194,50 +199,54 @@
         </nav>
         <div class="card h-100 mt-4">
             <div class="card-body p-3">
-                <ul class="list-group">
+                <form action="{{ route('admin.tagihan.store') }}" method="POST">
                     @csrf
                     @method('POST')
-                    <div class="form-group">
-                        <label for="" class="form-control-label">Harga</label>
-                        <input type="text"
-                            class="form-control @error('name')
+                    <input type="hidden" name="jenis_tagihan" value="{{ $jenis_tagihan }}">
+
+                    <ul class="list-group">
+                        <div class="form-group">
+                            <label for="" class="form-control-label">Harga</label>
+                            <input type="text"
+                                class="form-control @error('name')
                         is-invalid
                     @enderror"
-                            name="name" id="amount" placeholder="Spp Tahun 2022">
-                        @error('name')
-                            <div class="text-danger">{{ $message }}</div>
-                        @enderror
-                    </div>
-                    <div class="form-group">
-                        <label for="">Angkatan</label>
-                        <select name="" id="" class="form-select">
-                            <option selected>-- Pilih Angkatan --</option>
-                            <option value="">2022 / 2023</option>
-                            <option value="">2024 / 2025</option>
-                            <option value="">2026 / 2027</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="id_jurusans">Jurusan</label>
-                        <select name="" id="" class="form-select">
-                            <option selected>-- Pilih Jurusan --</option>
-                            <option value="">Bahasa Arab</option>
-                            <option value="">Ilmu Fiqih</option>
-                            <option value="">Tafsir</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                    </div>
-                    <div class="form-group">
-                    </div>
-                </ul>
+                                name="name" id="amount" placeholder="Spp Tahun 2022">
+                            @error('name')
+                                <div class="text-danger">{{ $message }}</div>
+                            @enderror
+                        </div>
+                        <div class="form-group">
+                            <label for="">Angkatan</label>
+                            <select name="" id="" class="form-select">
+                                <option selected>-- Pilih Angkatan --</option>
+                                <option value="">2022 / 2023</option>
+                                <option value="">2024 / 2025</option>
+                                <option value="">2026 / 2027</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="id_jurusans">Jurusan</label>
+                            <select name="" id="" class="form-select">
+                                <option selected>-- Pilih Jurusan --</option>
+                                <option value="">Bahasa Arab</option>
+                                <option value="">Ilmu Fiqih</option>
+                                <option value="">Tafsir</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                        </div>
+                        <div class="form-group">
+                        </div>
+                    </ul>
 
-                <div class="form-group">
-                    <button type="submit" class="btn btn-primary end-0"><i class="fas fa-edit">
-                        </i> Edit</button>
-                    <a href="{{ route('admin.tagihan.index') }}" class="btn btn-warning"><i class="fas fa-backward"></i>
-                        Back</a>
-                </div>
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-primary end-0"><i class="fas fa-plus">
+                            </i> Tambah</button>
+                        <a href="{{ route('admin.tagihan.index') }}" class="btn btn-warning"><i
+                                class="fas fa-backward"></i>
+                            Back</a>
+                    </div>
                 </form>
             </div>
         </div>
