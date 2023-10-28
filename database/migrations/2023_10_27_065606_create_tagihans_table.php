@@ -13,11 +13,7 @@ return new class extends Migration
     {
         Schema::create('tagihans', function (Blueprint $table) {
             $table->id();
-            $table->string('nama_biaya');
-            $table->string('jenis_biaya');
-            $table->enum('program_belajar', ['S1', 'BAHASA ARAB']);
-            $table->foreignId('id_angkatans');
-            $table->foreignId('id_jurusans');
+            $table->foreignId('id_biayas');
             $table->date('start_date');
             $table->date('end_date');
             $table->string('mounth');

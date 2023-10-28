@@ -10,11 +10,7 @@ class Tagihan extends Model
     use HasFactory;
 
     protected $fillable = [
-        "nama_biaya",
-        "jenis_biaya",
-        "program_belajar",
-        "id_angkatans",
-        "id_jurusans",
+        "id_biayas",
         "start_date",
         "end_date",
         "mounth",

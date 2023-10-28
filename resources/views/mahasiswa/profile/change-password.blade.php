@@ -103,13 +103,6 @@
                                 <div class="input-group">
                                     <input class="form-control @error('old_password') is-invalid @enderror" type="password"
                                         id="password" name="old_password" placeholder="****" />
-                                    <input
-                                        class="form-control @error('old_password')
-                                        is-invalid
-                                    @enderror"
-                                        type="password" id="password" name="old_password" placeholder="****" />
-                                    <input class="form-control @error('old_password') is-invalid @enderror" type="password"
-                                        id="password" name="old_password" placeholder="****" />
                                     <button class="btn btn-outline-secondary mb-0" type="button" id="showOldPassword"><i
                                             class="fas fa-low-vision"></i> </button>
                                 </div>

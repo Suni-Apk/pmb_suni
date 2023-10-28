@@ -11,13 +11,12 @@
     </div>
     <hr class="horizontal dark mt-0">
     @if (Auth::user()->role == 'Admin')
-        <div class="collapse navbar-collapse w-auto min-vh-70" id="sidenav-collapse-main">
+        <div class="collapse navbar-collapse w-auto min-vh-75" id="sidenav-collapse-main">
             <ul class="navbar-nav overflow-x-hidden" id="accordionSidebar">
                 <li class="nav-item">
-                    <a class="nav-link {{ Route::is('admin.dashboard') ? 'active' : '' }}"
-                        href="{{ route('admin.dashboard') }}">
+                    <a class="nav-link active" href="{{ route('admin.dashboard') }}">
                         <div
-                            class="icon icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
+                            class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
                             <i class="fas fa-th-large"></i>
                         </div>
                         <span class="nav-link-text ms-1">Dashboard</span>
@@ -46,14 +45,14 @@
                     <div class="collapse" id="angkatan">
                         <ul class="nav ms-4 ps-3">
                             <li class="nav-item ">
-                                <a class="nav-link " href="{{ route('admin.tahun_ajaran.index') }}">
+                                <a class="nav-link " href="">
                                     <span class="sidenav-mini-icon d-none d-xl-block"><i
                                             class="fas fa-border-all"></i></span>
                                     <span class="sidenav-normal"> Daftar Tahun Ajaran </span>
                                 </a>
                             </li>
                             <li class="nav-item ">
-                                <a class="nav-link " href="{{ route('admin.tahun_ajaran.create') }}">
+                                <a class="nav-link " href="">
                                     <span class="sidenav-mini-icon d-none d-xl-block"><i class="fas fa-plus"></i></span>
                                     <span class="sidenav-normal"> Tambah Tahun Ajaran </span>
                                 </a>
@@ -75,22 +74,23 @@
                     <div class="collapse" id="jurusan">
                         <ul class="nav ms-4 ps-3">
                             <li class="nav-item ">
-                                <a class="nav-link " href="{{ route('admin.jurusan.index') }}">
+                                <a class="nav-link " href="">
                                     <span class="sidenav-mini-icon d-none d-xl-block"><i
                                             class="fas fa-border-all"></i></span>
                                     <span class="sidenav-normal"> Daftar Jurusan </span>
                                 </a>
                             </li>
                             <li class="nav-item ">
-                                <a class="nav-link " href="{{ route('admin.jurusan.create') }}">
+                                <a class="nav-link " href="">
                                     <span class="sidenav-mini-icon d-none d-xl-block"><i class="fas fa-plus"></i></span>
                                     <span class="sidenav-normal"> Tambah Jurusan </span>
                                 </a>
                             </li>
                         </ul>
                     </div>
+                </li>
 
-                    <!-- mata kuliah -->
+                <!-- mata kuliah -->
                 <li class="nav-item">
                     <a data-bs-toggle="collapse" href="#matkul" class="nav-link" aria-controls="matkul" role="button"
                         aria-expanded="false">
@@ -103,14 +103,14 @@
                     <div class="collapse" id="matkul">
                         <ul class="nav ms-4 ps-3">
                             <li class="nav-item ">
-                                <a class="nav-link " href="{{ route('admin.matkul.index') }}">
+                                <a class="nav-link " href="">
                                     <span class="sidenav-mini-icon d-none d-xl-block"><i
                                             class="fas fa-border-all"></i></span>
                                     <span class="sidenav-normal"> Daftar Mata Kuliah </span>
                                 </a>
                             </li>
                             <li class="nav-item ">
-                                <a class="nav-link " href="{{ route('admin.matkul.create') }}">
+                                <a class="nav-link " href="">
                                     <span class="sidenav-mini-icon d-none d-xl-block"><i
                                             class="fas fa-plus"></i></span>
                                     <span class="sidenav-normal"> Tambah Mata Kuliah </span>
@@ -131,7 +131,8 @@
 
                 <!-- admin -->
                 <li class="nav-item">
-                    <a data-bs-toggle="collapse" href="#admin" class="nav-link" aria-controls="admin"
+                    <a data-bs-toggle="collapse" href="#admin"
+                        class="nav-link {{ Route::is('admin.admin.*') ? 'active' : '' }}" aria-controls="admin"
                         role="button" aria-expanded="false">
                         <div
                             class="icon icon-sm shadow border-radius-md bg-white text-center d-flex align-items-center justify-content-center  me-2">
@@ -142,14 +143,16 @@
                     <div class="collapse" id="admin">
                         <ul class="nav ms-4 ps-3">
                             <li class="nav-item ">
-                                <a class="nav-link " href="{{ route('table') }}">
+                                <a class="nav-link {{ Route::is('admin.admin.account') ? 'active' : '' }}"
+                                    href="{{ route('admin.admin.account') }}">
                                     <span class="sidenav-mini-icon d-none d-xl-block"><i
                                             class="fas fa-border-all"></i></span>
                                     <span class="sidenav-normal"> Daftar Admin </span>
                                 </a>
                             </li>
                             <li class="nav-item ">
-                                <a class="nav-link " href="{{ route('form') }}">
+                                <a class="nav-link {{ Route::is('admin.admin.create') ? 'active' : '' }}"
+                                    href="{{ route('admin.admin.create') }}">
                                     <span class="sidenav-mini-icon d-none d-xl-block"><i
                                             class="fas fa-plus"></i></span>
                                     <span class="sidenav-normal"> Tambah Admin </span>
@@ -161,8 +164,9 @@
 
                 <!-- mahasiswa -->
                 <li class="nav-item">
-                    <a data-bs-toggle="collapse" href="#mahasiswa" class="nav-link" aria-controls="mahasiswa"
-                        role="button" aria-expanded="false">
+                    <a data-bs-toggle="collapse" href="#mahasiswa"
+                        class="nav-link {{ Route::is('admin.mahasiswa.*') ? 'active' : '' }}"
+                        aria-controls="mahasiswa" role="button" aria-expanded="false">
                         <div
                             class="icon icon-sm shadow border-radius-md bg-white text-center d-flex align-items-center justify-content-center  me-2">
                             <i class="fas fa-user-graduate"></i>
@@ -172,14 +176,16 @@
                     <div class="collapse" id="mahasiswa">
                         <ul class="nav ms-4 ps-3">
                             <li class="nav-item ">
-                                <a class="nav-link " href="{{ route('table') }}">
+                                <a class="nav-link {{ Route::is('admin.mahasiswa.account') ? 'active' : '' }}"
+                                    href="{{ route('admin.mahasiswa.account') }}">
                                     <span class="sidenav-mini-icon d-none d-xl-block"><i
                                             class="fas fa-border-all"></i></span>
                                     <span class="sidenav-normal"> Daftar Mahasiswa </span>
                                 </a>
                             </li>
                             <li class="nav-item ">
-                                <a class="nav-link " href="{{ route('form') }}">
+                                <a class="nav-link {{ Route::is('admin.mahasiswa.create') ? 'active' : '' }}"
+                                    href="{{ route('admin.mahasiswa.create') }}">
                                     <span class="sidenav-mini-icon d-none d-xl-block"><i
                                             class="fas fa-plus"></i></span>
                                     <span class="sidenav-normal"> Tambah Mahasiswa </span>
@@ -211,14 +217,14 @@
                     <div class="collapse" id="billing">
                         <ul class="nav ms-4 ps-3">
                             <li class="nav-item ">
-                                <a class="nav-link " href="{{ route('table') }}">
+                                <a class="nav-link " href="">
                                     <span class="sidenav-mini-icon d-none d-xl-block"><i
                                             class="fas fa-border-all"></i></span>
                                     <span class="sidenav-normal"> Daftar Biaya Tagihan </span>
                                 </a>
                             </li>
                             <li class="nav-item ">
-                                <a class="nav-link " href="{{ route('form') }}">
+                                <a class="nav-link " href="">
                                     <span class="sidenav-mini-icon d-none d-xl-block"><i
                                             class="fas fa-plus"></i></span>
                                     <span class="sidenav-normal"> Tambah Biaya Tagihan </span>
@@ -362,36 +368,37 @@
                     <div class="collapse " id="template">
                         <ul class="nav ms-4 ps-3">
                             <li class="nav-item ">
-                                <a class="nav-link " href="{{ route('change-password') }}">
+                                <a class="nav-link " href="{{ url('change-password') }}">
                                     <span class="sidenav-mini-icon d-none d-xl-block"><i
                                             class="fas fa-key"></i></span>
                                     <span class="sidenav-normal"> Forgot Password </span>
                                 </a>
                             </li>
                             <li class="nav-item ">
-                                <a class="nav-link " href="{{ route('table') }}">
+                                <a class="nav-link " href="{{ url('table') }}">
                                     <span class="sidenav-mini-icon d-none d-xl-block"><i
                                             class="fas fa-table"></i></span>
                                     <span class="sidenav-normal"> Table </span>
                                 </a>
                             </li>
                             <li class="nav-item ">
-                                <a class="nav-link " href="{{ route('admin.profile') }}">
+                                <a class="nav-link " href="{{ url('profile') }}">
                                     <span class="sidenav-mini-icon d-none d-xl-block"><i
                                             class="fas fa-user-circle"></i></span>
                                     <span class="sidenav-normal"> Profile </span>
                                 </a>
                             </li>
                             <li class="nav-item ">
-                                <a class="nav-link " href="{{ route('admin.profile') }}">
+                                <a class="nav-link " href="{{ url('edit-profile') }}">
                                     <span class="sidenav-mini-icon d-none d-xl-block"><i
                                             class="fas fa-user-circle"></i></span>
                                     <span class="sidenav-normal"> Edit Profile </span>
                                 </a>
                             </li>
                             <li class="nav-item ">
-                                <a class="nav-link " href="{{ route('form') }}">
-                                    <span class="sidenav-mini-icon"><i class="fas fa-align-right"></i></span>
+                                <a class="nav-link " href="{{ url('form') }}">
+                                    <span class="sidenav-mini-icon d-none d-xl-block"><i
+                                            class="fas fa-align-right"></i></span>
                                     <span class="sidenav-normal"> Form </span>
                                 </a>
                             </li>
@@ -406,6 +413,13 @@
                     </div>
                 </li>
             </ul>
+        </div>
+        <div class="sidenav-footer mx-3 nav-item">
+            <a href="{{ route('logout') }}"
+                class="btn bg-gradient-primary btn-tooltip mt-3 w-100 nav-link text-white" data-bs-toggle="tooltip"
+                data-bs-placement="right" title="Logout" data-container="body" data-animation="true">
+                <i class="fas fa-sign-out-alt"></i>
+            </a>
         </div>
     @else
         <div class="collapse navbar-collapse w-auto min-vh-75" id="sidenav-collapse-main">
@@ -484,14 +498,13 @@
                         <span class="nav-link-text ms-1">Profile</span>
                     </a>
                 </li>
-            </ul>
+        </div>
+        <div class="sidenav-footer mx-3 nav-item">
+            <a class="btn bg-gradient-primary btn-tooltip mt-3 w-100 nav-link text-white"
+                href="{{ route('logout') }}" data-bs-toggle="tooltip" data-bs-placement="right" title="Logout"
+                data-container="body" data-animation="true">
+                <i class="fas fa-sign-out-alt"></i>
+            </a>
         </div>
     @endif
-    <div class="sidenav-footer mx-3 nav-item">
-        <a href="{{ route('logout') }}" class="btn bg-gradient-primary btn-tooltip mt-3 w-100 nav-link text-white"
-            data-bs-toggle="tooltip" data-bs-placement="right" title="Logout" data-container="body"
-            data-animation="true">
-            <i class="fas fa-sign-out-alt"></i>
-        </a>
-    </div>
 </aside>

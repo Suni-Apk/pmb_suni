@@ -40,15 +40,15 @@ class AuthController extends Controller
         $data = $request->validate([
             'name' => 'required|min:3|max:255|string',
             'phone' => 'required|min:12|max:13|unique:users,phone',
+            'email' => 'required|email|unique:users,email',
             'gender' => 'required|string',
-            'birthdate' => 'required|date',
             'password' => 'required|confirmed|min:8',
         ], $messages);
         $data['phone'] = $request->phone;
         $data['role'] = 'Mahasiswa';
         $data['token'] = rand(111111, 999999);
         // dd($data);
-        $user = User::create($data);
+        User::create($data);
 
         return redirect()->route('verify');
     }
@@ -81,10 +81,13 @@ class AuthController extends Controller
         $credentials = $request->only('phone', 'password');
         $user = User::where('phone', $credentials)->first();
 
-        // if($user->active == 0){
+        if($user->active == 0){
+            
+            return redirect()->route('verify')->with('gagal','Kamu Harus Mengisi Kode OTP Yang Dikirim');
+        }elseif($user->status == 'off'){
+            return redirect()->route('login')->withErrors(['phone' => 'Nomor Kamu Di NonAktifkan']);
+        }
 
-        //     return redirect()->route('user.activication')->with('gagal','Kamu Harus Mengisi Kode OTP Yang Dikirim');
-        // }
         $authenticated = Auth::attempt($credentials, $request->has('remember'));
 
         if (!$authenticated) {
@@ -94,13 +97,13 @@ class AuthController extends Controller
         $input = $request->all();
 
         auth()->attempt(array('phone' => $input['phone'], 'password' => $input['password']));
-        if (auth()->user()->role == 'Mahasiswa') {
-            return redirect()->route('mahasiswa.dashboard')->with('success', 'Yey Berhasil Login');
-        } else {
-            return redirect()->back()->withErrors([
-                'phone' => 'Kamu bukan Mahasiswa Disini'
-            ]);
-        }
+            if (auth()->user()->role == 'Mahasiswa') {
+                return redirect()->route('mahasiswa.dashboard')->with('success','Yey Berhasil Login');
+            }else{
+                return redirect()->back()->withErrors([
+                    'phone' => 'Kamu bukan Mahasiswa Disini'
+                ]);
+            }
 
 
         return redirect()->route('mahasiswa.dashboard');
@@ -119,7 +122,7 @@ class AuthController extends Controller
 
         if ($user) {
             $user->update([
-                'active' => 1
+                'active' => 1,
             ]);
 
             // Setelah mengupdate status aktif, kita akan mencoba masuk
