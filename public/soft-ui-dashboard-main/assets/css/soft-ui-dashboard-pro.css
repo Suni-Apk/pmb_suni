@@ -1,19 +1,4 @@
-/*!
 
-=========================================================
-* Soft UI Dashboard Pro - v1.1.1
-=========================================================
-
-* Product Page: https://www.creative-tim.com/product/soft-ui-dashboard-pro
-* Copyright 2023 Creative Tim (https://www.creative-tim.com)
-
-* Coded by www.creative-tim.com
-
-=========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-
-*/
 @charset "UTF-8"; /*!
    * Bootstrap  v5.2.3 (https://getbootstrap.com/)
    * Copyright 2011-2022 The Bootstrap Authors
@@ -42,7 +27,7 @@
     --bs-gray-700: #495057;
     --bs-gray-800: #343a40;
     --bs-gray-900: #212529;
-    /* --bs-primary: #cb0c9f; */
+
     --bs-primary: #47dc2b;
     --bs-secondary: #8392ab;
     --bs-success: #82d616;
@@ -81,9 +66,7 @@
     --bs-border-radius-xl: 1rem;
     --bs-border-radius-2xl: 1.5rem;
     --bs-border-radius-pill: 50rem;
-    /* --bs-link-color: #cb0c9f;
-    --bs-link-hover-color: #830866;
-    --bs-code-color: #d63384; */
+    
     --bs-link-color: #47dc2b;
     --bs-link-hover-color: #1b740c;
     --bs-code-color: #2baf14;
@@ -3395,23 +3378,6 @@ textarea.form-control,textarea.form-control-lg,textarea.form-control-sm {
     opacity: var(--bs-btn-disabled-opacity)
 }
 
-/* .btn-primary {
-    --bs-btn-color: #fff;
-    --bs-btn-bg: #cb0c9f;
-    --bs-btn-border-color: #cb0c9f;
-    --bs-btn-hover-color: #fff;
-    --bs-btn-hover-bg: #ad0a87;
-    --bs-btn-hover-border-color: #a20a7f;
-    --bs-btn-focus-shadow-rgb: 211,48,173;
-    --bs-btn-active-color: #fff;
-    --bs-btn-active-bg: #a20a7f;
-    --bs-btn-active-border-color: #980977;
-    --bs-btn-active-shadow: none;
-    --bs-btn-disabled-color: #fff;
-    --bs-btn-disabled-bg: #cb0c9f;
-    --bs-btn-disabled-border-color: #cb0c9f
-} */
-
 .btn-primary {
     --bs-btn-color: #fff;
     --bs-btn-bg: #47dc2b;
@@ -3564,23 +3530,6 @@ textarea.form-control,textarea.form-control-lg,textarea.form-control-sm {
     --bs-btn-disabled-bg: #fff;
     --bs-btn-disabled-border-color: #fff
 }
-
-/* .btn-outline-primary {
-    --bs-btn-color: #cb0c9f;
-    --bs-btn-border-color: #cb0c9f;
-    --bs-btn-hover-color: #fff;
-    --bs-btn-hover-bg: #cb0c9f;
-    --bs-btn-hover-border-color: #cb0c9f;
-    --bs-btn-focus-shadow-rgb: 203,12,159;
-    --bs-btn-active-color: #fff;
-    --bs-btn-active-bg: #cb0c9f;
-    --bs-btn-active-border-color: #cb0c9f;
-    --bs-btn-active-shadow: none;
-    --bs-btn-disabled-color: #cb0c9f;
-    --bs-btn-disabled-bg: transparent;
-    --bs-btn-disabled-border-color: #cb0c9f;
-    --bs-gradient: none
-} */
 
 .btn-outline-primary {
     --bs-btn-color: #47dc2b;
@@ -5559,8 +5508,7 @@ textarea.form-control,textarea.form-control-lg,textarea.form-control-sm {
     --bs-list-group-disabled-color: #6c757d;
     --bs-list-group-disabled-bg: #fff;
     --bs-list-group-active-color: #fff;
-    /* --bs-list-group-active-bg: #cb0c9f;
-    --bs-list-group-active-border-color: #cb0c9f; */
+    
     --bs-list-group-active-bg: #91f6af;
     --bs-list-group-active-border-color: #91f6af;
     display: flex;
@@ -7534,11 +7482,6 @@ textarea.form-control,textarea.form-control-lg,textarea.form-control-sm {
     clear: both;
     content: ""
 }
-
-/* .text-bg-primary {
-    color: #fff!important;
-    background-color: RGBA(203,12,159,var(--bs-bg-opacity,1))!important
-} */
 
 .text-bg-primary {
     color: #fff!important;
@@ -19626,23 +19569,6 @@ textarea.form-control,textarea.form-control-lg,textarea.form-control-sm {
     }
 }
 
-/*!
-
-=========================================================
-* Soft UI Dashboard Pro - v1.1.1
-=========================================================
-
-* Product Page: https://www.creative-tim.com/product/soft-ui-dashboard-pro
-* Copyright 2023 Creative Tim (https://www.creative-tim.com)
-* Licensed under MIT (site.license)
-
-* Coded by www.creative-tim.com
-
-=========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-
-*/
 .alert-primary {
     background-image: linear-gradient(310deg,#7928ca,#d6006c)
 }
@@ -19915,28 +19841,14 @@ textarea.form-control,textarea.form-control-lg,textarea.form-control-sm {
     transform: translateX(-5px)
 }
 
-/* .btn-primary:hover,.btn.bg-gradient-primary:hover {
-    background-color: #cb0c9f;
-    border-color: #cb0c9f
-} */
-
 .btn-primary:hover,.btn.bg-gradient-primary:hover {
     background: rgba(71,220,43,1);
     border-color: rgba(71,220,43,1);
 }
 
-/* .btn-primary .btn.bg-outline-primary,.btn.bg-gradient-primary .btn.bg-outline-primary {
-    border: 1px solid #cb0c9f
-} */
-
 .btn-primary .btn.bg-outline-primary,.btn.bg-gradient-primary .btn.bg-outline-primary {
     border: 1px solid rgb(71,220,43)
 }
-
-/* .btn-primary:not(:disabled):not(.disabled).active,.btn-primary:not(:disabled):not(.disabled):active,.btn.bg-gradient-primary:not(:disabled):not(.disabled).active,.btn.bg-gradient-primary:not(:disabled):not(.disabled):active,.show>.btn-primary.dropdown-toggle,.show>.btn.bg-gradient-primary.dropdown-toggle {
-    color: color-yiq(#cb0c9f);
-    background-color: #cb0c9f
-} */
 
 .btn-primary:not(:disabled):not(.disabled).active,.btn-primary:not(:disabled):not(.disabled):active,.btn.bg-gradient-primary:not(:disabled):not(.disabled).active,.btn.bg-gradient-primary:not(:disabled):not(.disabled):active,.show>.btn-primary.dropdown-toggle,.show>.btn.bg-gradient-primary.dropdown-toggle {
     color: color-yiq(rgb(71,220,43));
@@ -20764,12 +20676,6 @@ textarea.form-control,textarea.form-control-lg,textarea.form-control-sm {
     border: 1px solid transparent
 }
 
-/* .fixed-plugin .btn.bg-gradient-primary:not(:disabled):not(.disabled):not(.active) {
-    background-color: transparent;
-    background-image: none;
-    border: 1px solid #cb0c9f;
-    color: #cb0c9f
-} */
 
 .fixed-plugin .btn.bg-gradient-primary:not(:disabled):not(.disabled):not(.active) {
     background-color: transparent;
@@ -20987,10 +20893,6 @@ textarea.form-control,textarea.form-control-lg,textarea.form-control-sm {
     transition: opacity .3 ease
 }
 
-/* .bg-gradient-primary {
-    background-image: linear-gradient(310deg,#7928ca,#ff0080)
-} */
-
 .bg-gradient-primary {
     background-image: linear-gradient(310deg,rgb(45,149,27),rgb(71,220,43))
 }
@@ -21022,10 +20924,6 @@ textarea.form-control,textarea.form-control-lg,textarea.form-control-sm {
 .bg-gradient-dark {
     background-image: linear-gradient(310deg,#141727,#3a416f)
 }
-
-/* .bg-gradient-faded-primary {
-    background-image: radial-gradient(370px circle at 80% 50%,rgba(203,12,159,.6) 0,#9b0979 100%)
-} */
 
 .bg-gradient-faded-primary {
     background-image: radial-gradient(370px circle at 80% 50%,rgb(45,149,27) 0,rgba(71,220,43,.6) 100%)
@@ -21062,10 +20960,6 @@ textarea.form-control,textarea.form-control-lg,textarea.form-control-sm {
 .bg-gradient-faded-white {
     background-image: radial-gradient(370px circle at 80% 50%,hsla(0,0%,100%,.6) 0,#e6e6e6 100%)
 }
-
-/* .bg-gradient-faded-primary-vertical {
-    background-image: radial-gradient(200px circle at 50% 70%,rgba(203,12,159,.3) 0,#cb0c9f 100%)
-} */
 
 .bg-gradient-faded-primary-vertical {
     background-image: radial-gradient(200px circle at 50% 70%,rgba(45,149,27,.3) 0,rgb(71,220,43) 100%)
@@ -21321,10 +21215,6 @@ svg.text-dark .color-background {
     -webkit-backdrop-filter: saturate(200%) blur(30px);
     backdrop-filter: saturate(200%) blur(30px)
 }
-
-/* .blur-section.blur-gradient-primary {
-    background-image: linear-gradient(310deg,rgba(121,40,202,.95),rgba(255,0,128,.95))
-} */
 
 .blur-section.blur-gradient-primary {
     background-image: linear-gradient(310deg,rgba(45,149,27,.95),rgba(71,220,43,.95))
@@ -22394,10 +22284,6 @@ html {
     }
 }
 
-/* .sidenav[data-color=primary] .navbar-nav>.nav-item>.nav-link.active .icon {
-    background-image: linear-gradient(310deg,#cb0c9f,#cb0c9f)
-} */
-
 .sidenav[data-color=primary] .navbar-nav>.nav-item>.nav-link.active .icon {
     background-image: linear-gradient(310deg,rgb(71,220,43),rgb(45,149,27))
 }
@@ -22540,10 +22426,6 @@ html {
     color: #344767;
     background-color: #fff
 }
-
-/* .navbar-vertical .navbar-nav>.nav-item .nav-link.active .icon {
-    background-image: linear-gradient(310deg,#cb0c9f,#cb0c9f)
-} */
 
 .navbar-vertical .navbar-nav>.nav-item .nav-link.active .icon {
     background-image: linear-gradient(310deg,rgb(71,220,43),rgb(71,220,43))
@@ -22866,11 +22748,6 @@ html {
     color: #fff
 }
 
-/* .nav.nav-pills.nav-pills-primary .moving-tab .nav-link.active {
-    background: #7928ca;
-    color: #7928ca
-} */
-
 .nav.nav-pills.nav-pills-primary .moving-tab .nav-link.active {
     background: rgb(71,220,43);
     color: rgb(71,220,43)
@@ -23000,12 +22877,6 @@ html {
     height: 30px;
     line-height: 30px
 }
-
-/* .pagination.pagination-primary .page-item.active>.page-link,.pagination.pagination-primary .page-item.active>.page-link:focus,.pagination.pagination-primary .page-item.active>.page-link:hover {
-    background-image: linear-gradient(310deg,#7928ca,#ff0080);
-    border: none;
-    color: #fff
-} */
 
 .pagination.pagination-primary .page-item.active>.page-link,.pagination.pagination-primary .page-item.active>.page-link:focus,.pagination.pagination-primary .page-item.active>.page-link:hover {
     background-image: linear-gradient(310deg,rgb(71,220,43),#ff0080);
@@ -23991,10 +23862,6 @@ p {
     z-index: 1
 }
 
-/* .text-gradient.text-primary {
-    background-image: linear-gradient(310deg,#7928ca,#ff0080)
-} */
-
 .text-gradient.text-primary {
     background-image: linear-gradient(310deg,rgb(45,149,27),rgb(71,220,43))
 }
@@ -24139,10 +24006,6 @@ p {
 .accordion .accordion-body {
     color: #344767
 }
-
-/* .bg-primary-soft {
-    background: rgba(121,40,202,.03)
-} */
 
 .bg-primary-soft {
     background: rgba(71,220,43,.03)
@@ -24343,21 +24206,10 @@ p {
     margin-right: .5rem
 }
 
-/* .badge-primary {
-    color: #a3017e;
-    background-color: #f883dd
-} */
-
 .badge-primary {
     color: #a3017e;
     background-color: rgb(45,149,27)
 }
-
-/* .badge-primary[href]:focus,.badge-primary[href]:hover {
-    color: color-yiq(#cb0c9f);
-    text-decoration: none;
-    background-color: #910972
-} */
 
 .badge-primary[href]:focus,.badge-primary[href]:hover {
     color: color-yiq(rgb(71,220,43));
@@ -24835,10 +24687,6 @@ body.dark-version {
     left: 0;
     border-radius: .25rem
 }
-
-/* .checklist-item-primary:before,.checklist-item:before {
-    background-color: #cb0c9f
-} */
 
 .checklist-item-primary:before,.checklist-item:before {
     background-color: rgb(45,149,27)
@@ -26031,10 +25879,6 @@ span.flatpickr-weekday {
     border-radius: 3px
 }
 
-/* .noUi-connect {
-    background-image: linear-gradient(310deg,#7928ca,#ff0080)
-} */
-
 .noUi-connect {
     background-image: linear-gradient(310deg,rgb(71,220,43),#ff0080)
 }
@@ -26381,11 +26225,6 @@ pre[class*=language-] {
     }
 }
 
-/*!
- * Glide.js v3.4.1
- * (c) 2013-2020 Jędrzej Chałubek <jedrzej.chalubek@gmail.com> (http://jedrzejchalubek.com/)
- * Released under the MIT License.
- */
 .glide {
     position: relative;
     width: 100%;
@@ -26775,11 +26614,6 @@ pre[class*=language-] {
     word-wrap: normal
 }
 
-/*!
-FullCalendar v5.6.0
-Docs & License: https://fullcalendar.io/
-(c) 2020 Adam Shaw
-*/
 .fc-not-allowed,.fc-not-allowed .fc-event {
     cursor: not-allowed
 }
@@ -28097,11 +27931,6 @@ a.fc-event,a.fc-event:hover {
     color: inherit
 }
 
-/*!
-FullCalendar v5.6.0
-Docs & License: https://fullcalendar.io/
-(c) 2020 Adam Shaw
-*/
 .fc-scrollgrid,.fc-theme-standard .fc-scrollgrid {
     border: none
 }
@@ -28180,10 +28009,6 @@ Docs & License: https://fullcalendar.io/
     border-radius: .35rem
 }
 
-/*!
-Simple-DataTables
-Github: https://github.com/fiduswriter/Simple-DataTables
-*/
 .dataTable-wrapper.no-header .dataTable-container {
     border-top: 1px solid #d9d9d9
 }
@@ -28333,10 +28158,6 @@ Github: https://github.com/fiduswriter/Simple-DataTables
     display: table
 }
 
-/*!
-Simple-DataTables
-Github: https://github.com/fiduswriter/Simple-DataTables
-*/
 .dataTable-wrapper .dataTable-top {
     padding: 1.5rem
 }
@@ -28410,15 +28231,6 @@ Github: https://github.com/fiduswriter/Simple-DataTables
     background: #e9ecef
 }
 
-/* .dataTable-wrapper .dataTable-bottom .dataTable-pagination .dataTable-pagination-list .active a {
-    background: transparent;
-    background-image: linear-gradient(310deg,#7928ca,#ff0080);
-    box-shadow: 0 3px 5px -1px rgba(0,0,0,.09),0 2px 3px -1px rgba(0,0,0,.07);
-    color: #fff;
-    border: none;
-    border-radius: 50%!important
-} */
-
 .dataTable-wrapper .dataTable-bottom .dataTable-pagination .dataTable-pagination-list .active a {
     background: transparent;
     background-image: linear-gradient(310deg,rgb(45,149,27),rgb(71,220,43));
@@ -28427,10 +28239,6 @@ Github: https://github.com/fiduswriter/Simple-DataTables
     border: none;
     border-radius: 50%!important
 }
-
-/* .dataTable-wrapper .dataTable-bottom .dataTable-pagination .dataTable-pagination-list .active a:hover {
-    background-image: linear-gradient(310deg,#7928ca,#ff0080)
-} */
 
 .dataTable-wrapper .dataTable-bottom .dataTable-pagination .dataTable-pagination-list .active a:hover {
     background-image: linear-gradient(310deg,rgb(45,149,27),rgb(71,220,43));
@@ -30232,11 +30040,6 @@ body.swal2-toast-shown .swal2-container.swal2-bottom-end,body.swal2-toast-shown 
     border-bottom: 6px solid #be2626
 }
 
-/*!
-* Highlight.js 10.7.2 (00233d63)
-* License: BSD-3-Clause
-* Copyright (c) 2006-2021, Ivan Sagalaev
- */
 .hljs {
     display: block;
     overflow-x: auto;
@@ -30293,12 +30096,6 @@ body.swal2-toast-shown .swal2-container.swal2-bottom-end,body.swal2-toast-shown 
     font-weight: 700
 }
 
-/*!
- * Quill Editor v1.3.6
- * https://quilljs.com/
- * Copyright (c) 2014, Jason Chen
- * Copyright (c) 2013, salesforce.com
- */
 .ql-container {
     box-sizing: border-box;
     font-family: Helvetica,Arial,sans-serif;
