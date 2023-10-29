@@ -334,7 +334,7 @@
                                 </a>
                             </li>
                             <li class="nav-item ">
-                                <a class="nav-link " href="">
+                                <a class="nav-link " href="{{route('admin.settings.notifications')}}">
                                     <span class="sidenav-mini-icon d-none d-xl-block"><i
                                             class="ni ni-bell-55"></i></span>
                                     <span class="sidenav-normal"> Notifikasi </span>

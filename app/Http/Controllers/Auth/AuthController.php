@@ -3,13 +3,16 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\Notify;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
+use App\Traits\Fonnte;
 
 class AuthController extends Controller
 {
+    use Fonnte;
     public function register()
     {
         return view('auth.register');
@@ -30,8 +33,8 @@ class AuthController extends Controller
             'name.min:3' => 'Nama Anda Minimal 3 Huruf!!',
             'name.max:255' => 'Nama Anda Kepanjangan',
             'phone.required' => 'Nomor Whatshapp Wajib Diisi',
-            'phone.min:12' => 'Nomor Whatshapp Minimal 12 Angka!!',
-            'phone.max:13' => 'Nomor Whatshapp Maksimal 13 Angka!!',
+            'phone.min' => 'Nomor Whatshapp Minimal 12 Angka!!',
+            'phone.max' => 'Nomor Whatshapp Maksimal 13 Angka!!',
             'gender.required' => 'Gender Wajib Diisi',
             'password.required' => 'Password Wajib Diisi',
             'password.confirmed' => 'Password Harus Sama',
@@ -39,7 +42,7 @@ class AuthController extends Controller
         ];
         $data = $request->validate([
             'name' => 'required|min:3|max:255|string',
-            'phone' => 'required|min:12|max:13|unique:users,phone',
+            'phone' => 'required|min:11|max:13|unique:users,phone',
             'email' => 'required|email|unique:users,email',
             'gender' => 'required|string',
             'password' => 'required|confirmed|min:8',
@@ -48,7 +51,11 @@ class AuthController extends Controller
         $data['role'] = 'Mahasiswa';
         $data['token'] = rand(111111, 999999);
         // dd($data);
-        User::create($data);
+        $user = User::create($data);
+        $notif = Notify::where('id',1)->first();
+        $messages =  $notif->notif_otp . ' ' . $user->token;
+        
+        $this->send_message($user->phone, $messages);
 
         return redirect()->route('verify');
     }
@@ -104,7 +111,6 @@ class AuthController extends Controller
                     'phone' => 'Kamu bukan Mahasiswa Disini'
                 ]);
             }
-
 
         return redirect()->route('mahasiswa.dashboard');
     }

@@ -11,6 +11,7 @@ use App\Http\Controllers\Mahasiswa\MatkulController;
 use App\Http\Controllers\Mahasiswa\ProfileController as MahasiswaProfileController;
 use App\Http\Controllers\Mahasiswa\TagihanController;
 use App\Http\Controllers\MatkulController as ControllersMatkulController;
+use App\Http\Controllers\NotifyController;
 use App\Http\Controllers\SettingController;
 use App\Http\Controllers\TagihanController as AdminTagihanController;
 use App\Http\Controllers\TahunAjaranController;
@@ -65,7 +66,11 @@ Route::prefix('/admin')->middleware('admin')->name('admin.')->group(function () 
     Route::get('/dashboard', [AdminDashboardController::class, 'index'])->name('dashboard');
     Route::resource('/tagihan', AdminTagihanController::class);
     Route::post('/next', [AdminTagihanController::class, 'next'])->name('tagihan.next');
+
+    //notifikasi setting
     Route::get('settings/notifications', [SettingController::class, 'index'])->name('settings.notifications');
+    Route::put('/setting/notifications/process/{id}',[SettingController::class,'notify_edit'])->name('settings.notification.process');
+
     Route::resource('/transaction', TransactionController::class);
     Route::resource('/tahun_ajaran', TahunAjaranController::class);
     Route::resource('/jurusan', JurusanController::class);
@@ -77,13 +82,14 @@ Route::prefix('/admin')->middleware('admin')->name('admin.')->group(function () 
     Route::put('/change-password-proses/{id}', [ProfileController::class, 'change_password_proses'])->name('change_password_proses');
 
     //account menu
+    //admin
     Route::get('/account/admin', [AccountController::class, 'admin'])->name('admin.account');
     Route::get('/create/account/admin', [AccountController::class, 'admin_create'])->name('admin.create');
     Route::post('/create/account/admin/process', [AccountController::class, 'admin_create_process'])->name('admin.create.process');
     Route::get('/edit/account/admin/{id}', [AccountController::class, 'admin_edit'])->name('admin.edit');
     Route::put('/edit/account/admin/process/{id}', [AccountController::class, 'admin_edit_process'])->name('admin.edit.process');
     Route::put('/change_status/admin/{id}', [AccountController::class, 'admin_status'])->name('admin.status');
-
+    //mahasiswa
     Route::get('/account/mahasiswa', [AccountController::class, 'mahasiswa'])->name('mahasiswa.account');
     Route::get('/create/account/mahasiswa', [AccountController::class, 'mahasiswa_create'])->name('mahasiswa.create');
     Route::post('/create/account/mahasiswa/process', [AccountController::class, 'mahasiswa_create_process'])->name('mahasiswa.create.process');
@@ -188,7 +194,3 @@ Route::prefix('template')->group(function () {
         return view('layouts.template.wizard');
     })->name('wizard');
 });
-
-Auth::routes();
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
