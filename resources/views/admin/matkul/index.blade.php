@@ -67,24 +67,22 @@
                                     <td class="align text-center">
                                         <span class="text-secondary text-xs font-weight-bold">Admin</span>
                                     </td>
-                                    <td class="align-middle text-center">
-                                        <a href="#"
-                                            class="badge badge-sm bg-gradient-primary font-weight-bold text-xs mx-2"
-                                            data-toggle="tooltip" data-original-title="Edit user">
-                                            Detail
+                                    <td class="d-flex align-items-center justify-content-center">
+                                        <a href="{{ route('admin.matkul.show' , 1) }}" class="btn btn-sm bg-gradient-success font-weight-bold text-xs mx-2 mt-3">
+                                            <i class="fas fa-eye fs-6"></i>
                                         </a>
-
-                                        <a href="{{ route('admin.matkul.edit', 1) }}"
-                                            class="badge badge-sm bg-gradient-success font-weight-bold text-xs mx-2"
-                                            data-toggle="tooltip" data-original-title="Edit user">
-                                            Ubah
+                                    
+                                        <a href="{{ route('admin.matkul.edit', 1) }}" class="btn btn-sm bg-gradient-secondary font-weight-bold text-xs mx-2 mt-3">
+                                            <i class="fas fa-edit fs-6"></i>
                                         </a>
-
-                                        <a href="#"
-                                            class="badge badge-sm bg-gradient-danger font-weight-bold text-xs mx-2"
-                                            data-toggle="tooltip" data-original-title="Edit user">
-                                            Hapus
-                                        </a>
+                                    
+                                        <form action="#" method="POST">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="btn btn-sm bg-gradient-danger font-weight-bold text-xs mx-2 show_confirm mt-3">
+                                                <i class="fa fa-trash fs-6"></i>
+                                            </button>
+                                        </form>
                                     </td>
                                 </tr>
                             </tbody>

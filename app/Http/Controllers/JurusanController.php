@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Jurusan;
+use App\Models\TahunAjaran;
 use Illuminate\Http\Request;
 
 class JurusanController extends Controller
@@ -11,7 +13,8 @@ class JurusanController extends Controller
      */
     public function index()
     {
-        return view('admin.jurusan.index');
+        $jurusan = Jurusan::all();
+        return view('admin.jurusan.index', compact('jurusan'));
     }
 
     /**
@@ -19,7 +22,8 @@ class JurusanController extends Controller
      */
     public function create()
     {
-        return view('admin.jurusan.create');
+        $tahun_ajaran = TahunAjaran::all();
+        return view('admin.jurusan.create', compact('tahun_ajaran'));
     }
 
     /**
@@ -27,7 +31,13 @@ class JurusanController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->validate([
+            'id_tahun_ajarans' => 'required',
+            'name' => 'required',
+            'code' => 'required'
+        ]);
+        Jurusan::create($data);
+        return redirect()->route('admin.jurusan.index')->with('success', "Jurusan Berhasil Di Buat!!");
     }
 
     /**
@@ -35,7 +45,7 @@ class JurusanController extends Controller
      */
     public function show(string $id)
     {
-        
+        return view('admin.jurusan.detail');
     }
 
     /**
@@ -43,7 +53,8 @@ class JurusanController extends Controller
      */
     public function edit(string $id)
     {
-        return view('admin.jurusan.edit');
+        $tahun_ajaran = TahunAjaran::all();
+        return view('admin.jurusan.edit', compact('tahun_ajaran'));
     }
 
     /**
@@ -59,6 +70,8 @@ class JurusanController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $jurusan = Jurusan::findOrFail($id);
+        $jurusan->delete();
+        return redirect()->route('admin.jurusan.index');
     }
 }
