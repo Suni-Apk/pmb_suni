@@ -68,7 +68,7 @@
                                         <span class="text-secondary text-xs font-weight-bold">Admin</span>
                                     </td>
                                     <td class="align-middle text-center">
-                                        <a href="#"
+                                        <a href="{{route('admin.matkul.show',1)}}"
                                             class="badge badge-sm bg-gradient-primary font-weight-bold text-xs mx-2"
                                             data-toggle="tooltip" data-original-title="Edit user">
                                             Detail

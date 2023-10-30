@@ -75,6 +75,7 @@ Route::prefix('/admin')->middleware('admin')->name('admin.')->group(function () 
     Route::resource('/tahun_ajaran', TahunAjaranController::class);
     Route::resource('/jurusan', JurusanController::class);
     Route::resource('/matkul', ControllersMatkulController::class);
+    
     Route::get('/profile', [ProfileController::class, 'profile'])->name('profile');
     Route::get('/edit-profile', [ProfileController::class, 'editProfile'])->name('profile_edit');
     Route::put('/profile-process/{id}', [ProfileController::class, 'prosesProfile'])->name('profile_proses');
