@@ -173,7 +173,7 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td class="align-middle text-xs font-weight-bold">3</td>
+                                    <td class="align-middle text-xs font-weight-bold">4</td>
                                     <td class="align-middle text-secondary text-xs font-weight-bold">
                                         Tagihan Tingkatan
                                     </td>

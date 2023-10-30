@@ -238,7 +238,7 @@
                 </li>
                 <li class="breadcrumb-item text-sm text-dark active" aria-current="page">Transactions</li>
             </ol>
-            <h6 class="font-weight-bolder mb-0">Detail Tagihan Jas</h6>
+            <h6 class="font-weight-bolder mb-0">Detail Transaction</h6>
         </nav>
         <div class="card h-100 mt-4">
             <div class="card-body p-3">
