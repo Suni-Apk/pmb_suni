@@ -15,9 +15,11 @@
                     <h1 class="text-white lh-1">Website Pendaftaran Suni Indonesia</h1>
                 </div>
                 <div class="col-9 col-lg-5 mx-auto d-flex justify-content-center gap-3 mt-4">
-                    <a href="{{ route('register') }}" class="btn bg-gradient-secondary"
-                    data-bs-toggle="tooltip" data-bs-placement="left" title="Belum mendaftar?">Daftar</a>
-                    <a href="#inform" class="btn btn-outline-secondary" 
+                    @if (!Auth::user())
+                        <a href="{{ route('register') }}" class="btn bg-gradient-secondary"
+                        data-bs-toggle="tooltip" data-bs-placement="left" title="Belum mendaftar?">Daftar</a>
+                    @endif
+                    <a href="#informasi" class="btn btn-outline-secondary" 
                     data-bs-toggle="tooltip" data-bs-placement="right" title="Butuh informasi?">Selengkapnya</a>
                 </div>
             </div>
@@ -25,13 +27,13 @@
     </div>
     <div class="container py-5">
         <div class="row flex-column justify-content-center align-items-start w-100">
-            <div class="col-12">
+            <div class="col-12" id="informasi">
                 <div class="list-group list-group-horizontal" id="list-tab" role="tablist">
                     <a id="list-sarjana-list" data-bs-toggle="list" href="#list-sarjana" role="tab" aria-controls="list-sarjana"
-                        class="list-group-item list-group-item-action active" 
+                        class="list-group-item list-group-item-action border-0 shadow text-center active" 
                     >Program Belajar S1</a>
                     <a id="list-kursus-list" data-bs-toggle="list" href="#list-kursus" role="tab" aria-controls="list-kursus"
-                    class="list-group-item list-group-item-action" 
+                    class="list-group-item list-group-item-action border-0 shadow text-center" 
                     >Program Kursus Bahasa Arab</a>
                 </div>
             </div>

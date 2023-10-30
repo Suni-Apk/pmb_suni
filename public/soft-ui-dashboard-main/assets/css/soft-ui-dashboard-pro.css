@@ -5547,8 +5547,11 @@ textarea.form-control,textarea.form-control-lg,textarea.form-control-sm {
     --bs-list-group-disabled-bg: #fff;
     --bs-list-group-active-color: #fff;
     
-    --bs-list-group-active-bg: #28ba53;
-    --bs-list-group-active-border-color: #28ba53;
+    /* --bs-list-group-active-bg: #28ba53;
+    --bs-list-group-active-border-color: #28ba53; */
+    
+    --bs-list-group-active-bg: #314067;
+    --bs-list-group-active-border-color: #314067;
     display: flex;
     flex-direction: column;
     padding-left: 0;

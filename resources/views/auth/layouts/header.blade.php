@@ -16,6 +16,21 @@
                     </button>
                     <div class="collapse navbar-collapse justify-content-end" id="navigation">
                         <ul class="navbar-nav me-lg-2">
+                            @if (Auth::user())
+                                @if (Auth::user()->role == 'Admin')
+                                    <li class="nav-item">
+                                        <a class="btn bg-gradient-secondary mb-0 me-2 rounded-pill letter-spacing-1" href="{{route('admin.dashboard')}}">
+                                            Dashboard
+                                        </a>
+                                    </li>
+                                @else
+                                    <li class="nav-item">
+                                        <a class="btn bg-gradient-secondary mb-0 me-2 rounded-pill letter-spacing-1" href="{{route('mahasiswa.dashboard')}}">
+                                            Dashboard
+                                        </a>
+                                    </li>
+                                @endif
+                            @else
                             <li class="nav-item">
                                 <a class="nav-link me-2" href="{{route('register')}}">
                                     <i class="fas fa-user-circle opacity-6 text-dark me-1"></i>
@@ -28,6 +43,7 @@
                                     Masuk
                                 </a>
                             </li>
+                            @endif
                         </ul>
                     </div>
                 </div>
