@@ -23,6 +23,7 @@ class DatabaseSeeder extends Seeder
             'phone' => '082346739790',
             'gender' => 'Laki-Laki',
             'role' => 'Admin',
+            'status' => 'on'
         ]);
 
         \App\Models\User::factory()->create([
@@ -34,6 +35,7 @@ class DatabaseSeeder extends Seeder
             'phone' => '089608494411',
             'gender' => 'Laki-Laki',
             'role' => 'Mahasiswa',
+            'status' => 'on'
         ]);
     }
 }

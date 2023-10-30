@@ -47,6 +47,12 @@
           </div>
         </div>
       </div>
+      <div class="row">
+        <div class="col-12 d-flex">
+          <a class="btn border border-secondary col-6">Transfer Bank</a>
+          <a class="btn border border-primary col-6 ms-2">Pembayaran Online</a>
+        </div>
+      </div>
     </div>
     </div>
 @endsection

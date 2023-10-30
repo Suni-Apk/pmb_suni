@@ -42,12 +42,11 @@ class AuthController extends Controller
             'phone' => 'required|min:12|max:13|unique:users,phone',
             'email' => 'required|email|unique:users,email',
             'gender' => 'required|string',
-            'birthdate' => 'required|date',
             'password' => 'required|confirmed|min:8',
-        ],$messages);
+        ], $messages);
         $data['phone'] = $request->phone;
         $data['role'] = 'Mahasiswa';
-        $data['token'] = rand(111111,999999);
+        $data['token'] = rand(111111, 999999);
         // dd($data);
         User::create($data);
 
@@ -73,14 +72,14 @@ class AuthController extends Controller
         $request->validate([
             'phone' => 'required|exists:users,phone',
             'password' => 'required'
-        ],$messages);
+        ], $messages);
         $infologin = [
             'phone' => $phone,
             'password' => $request->password
         ];
 
         $credentials = $request->only('phone', 'password');
-        $user = User::where('phone',$credentials)->first();
+        $user = User::where('phone', $credentials)->first();
 
         if($user->active == 0){
             
@@ -91,7 +90,7 @@ class AuthController extends Controller
 
         $authenticated = Auth::attempt($credentials, $request->has('remember'));
 
-        if (!$authenticated){
+        if (!$authenticated) {
             return redirect()->route('login')->with('error', 'email atau password salah.');
         }
 
@@ -129,11 +128,11 @@ class AuthController extends Controller
 
             // Setelah mengupdate status aktif, kita akan mencoba masuk
             auth()->login($user);
-           
-                // $messages = $notif->notifys->notif_login;
 
-                // $this->send_message($user->nomor,$messages);
-            
+            // $messages = $notif->notifys->notif_login;
+
+            // $this->send_message($user->nomor,$messages);
+
             return redirect()->route('mahasiswa.dashboard');
         }
 

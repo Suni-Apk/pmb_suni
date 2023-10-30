@@ -12,11 +12,11 @@ class AccountController extends Controller
 {
     public function admin()
     {
-         // Dapatkan admin yang sedang login saat ini
+        // Dapatkan admin yang sedang login saat ini
         $currentAdmin = Auth::user();
 
         // Dapatkan semua admin kecuali admin yang sedang login
-        $admin = User::where('role', 'Admin')->get();
+        $admin = User::where('role', 'Admin')->where('id', '!=', $currentAdmin->id)->get();
 
         return view('admin.account.admin.index', compact('admin'));
     }
@@ -50,29 +50,29 @@ class AccountController extends Controller
             'email' => 'required|email|unique:users,email',
             'gender' => 'required',
             'password' => 'required|min:8|confirmed'
-        ],$messages);
+        ], $messages);
         $data['active'] = 1;
-        $data['token'] = rand(1111111,999999);
+        $data['token'] = rand(1111111, 999999);
         $data['role'] = 'Admin';
 
         User::create($data);
 
-        return redirect()->route('admin.admin.index')->with('success','Berhasil Menambahkan Akun Admin');
+        return redirect()->route('admin.admin.account')->with('success', 'Berhasil Menambahkan Akun Admin');
     }
 
     public function admin_edit($id)
     {
-        $user = User::where('id',$id)->firstOrFail();
+        $user = User::where('id', $id)->firstOrFail();
 
         if (!$user) {
             // Pengguna tidak ditemukan, lakukan sesuatu seperti me-redirect atau menampilkan pesan kesalahan.
-            return redirect()->route('admin.admin.index')->with('error', 'Pengguna tidak ditemukan');
+            return redirect()->route('admin.admin.account')->with('error', 'Pengguna tidak ditemukan');
         }
 
         return view('admin.account.admin.edit', compact('user'));
     }
 
-    public function admin_edit_process(Request $request,$id)
+    public function admin_edit_process(Request $request, $id)
     {
         $user = User::find($id);
 
@@ -95,25 +95,25 @@ class AccountController extends Controller
 
         $user->update($data);
 
-        return redirect()->route('admin.admin.index')->with('success','Berhasil Mengedit Account Admin');
+        return redirect()->route('admin.admin.account')->with('success', 'Berhasil Mengedit Account Admin');
     }
 
-    public function admin_status(Request $request,$id)
+    public function admin_status(Request $request, $id)
     {
-        $user = User::where('role','Admin')->find($id);
+        $user = User::where('role', 'Admin')->find($id);
         $data = $request->validate([
             'status' => ''
         ]);
         // dd($request->all());
         $user->update($data);
-        return redirect()->route('admin.admin.index')->with('success','Berhasil Memperbarui Status Akun');
+        return redirect()->route('admin.admin.account')->with('success', 'Berhasil Memperbarui Status Akun');
     }
 
 
     public function mahasiswa()
     {
-        $mahasiswa = User::where('role','Mahasiswa')->get();
-        return view('admin.account.mahasiswa.index',compact('mahasiswa'));
+        $mahasiswa = User::where('role', 'Mahasiswa')->get();
+        return view('admin.account.mahasiswa.index', compact('mahasiswa'));
     }
 
     public function mahasiswa_create()
@@ -145,29 +145,29 @@ class AccountController extends Controller
             'email' => 'required|email|unique:users,email',
             'gender' => 'required',
             'password' => 'required|min:8|confirmed'
-        ],$messages);
+        ], $messages);
         $data['active'] = 1;
-        $data['token'] = rand(1111111,999999);
+        $data['token'] = rand(1111111, 999999);
         $data['role'] = 'Mahasiswa';
 
         User::create($data);
 
-        return redirect()->route('admin.mahasiswa.index')->with('success','Berhasil Menambahkan Akun Mahasiswa');
+        return redirect()->route('admin.mahasiswa.account')->with('success', 'Berhasil Menambahkan Akun Mahasiswa');
     }
 
     public function mahasiswa_edit($id)
     {
-        $user = User::where('id',$id)->firstOrFail();
+        $user = User::where('id', $id)->firstOrFail();
 
         if (!$user) {
             // Pengguna tidak ditemukan, lakukan sesuatu seperti me-redirect atau menampilkan pesan kesalahan.
-            return redirect()->route('admin.mahasiswa.index')->with('error', 'Pengguna tidak ditemukan');
+            return redirect()->route('admin.mahasiswa.account')->with('error', 'Pengguna tidak ditemukan');
         }
 
         return view('admin.account.mahasiswa.edit', compact('user'));
     }
 
-    public function mahasiswa_edit_process(Request $request,$id)
+    public function mahasiswa_edit_process(Request $request, $id)
     {
         $user = User::find($id);
 
@@ -190,21 +190,33 @@ class AccountController extends Controller
 
         $user->update($data);
 
-        return redirect()->route('admin.mahasiswa.index')->with('success','Berhasil Mengedit Account Mahasiswa');
+        return redirect()->route('admin.mahasiswa.account')->with('success', 'Berhasil Mengedit Account Mahasiswa');
     }
 
-    public function mahasiswa_status(Request $request,$id)
+    public function mahasiswa_status(Request $request, $id)
     {
-        $user = User::where('role','Mahasiswa')->find($id);
+        $user = User::where('role', 'Mahasiswa')->find($id);
         $data = $request->validate([
             'status' => ''
         ]);
         // dd($request->all());
         $user->update($data);
-        if($user->status == 'on'){
-            return redirect()->route('admin.mahasiswa.index')->with('success','Berhasil Mengaktifkan Akun');
-        }else{
-            return redirect()->route('admin.mahasiswa.index')->with('success','Berhasil Menonaktifkan Akun');
+        if ($user->status == 'on') {
+            return redirect()->route('admin.mahasiswa.account')->with('success', 'Berhasil Mengaktifkan Akun');
+        } else {
+            return redirect()->route('admin.mahasiswa.account')->with('success', 'Berhasil Menonaktifkan Akun');
         }
+    }
+    public function mahasiswa_detail($id)
+    {
+        $mahasiswa = User::where('role', 'Mahasiswa')->find($id);
+
+        return view('admin.account.mahasiswa.detail', compact('mahasiswa'));
+    }
+    public function mahasiswa_bayar(Request $request)
+    {
+        $jenis = $request->jenis_tagihan;
+        $id = $request->id;
+        return view('admin.account.mahasiswa.bayar', compact('jenis', 'id'));
     }
 }

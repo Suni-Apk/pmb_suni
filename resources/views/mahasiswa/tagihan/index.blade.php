@@ -79,7 +79,7 @@
               <table class="table align-items-center mb-0" id="templateTable">
                 <thead>
                   <tr>
-                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 width-32-px">ID</th>
+                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">ID</th>
                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Nama Tagihan</th>
                     <th class="text-uppercase text-secondary text-xxs px-2 font-weight-bolder opacity-7">Jenis Tagihan</th>
                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Angkatan</th>
@@ -90,22 +90,26 @@
                 <tbody>
                   <tr>
                     <td>
-                        <h6 class="text-secondary mb-0 text-sm text-center">#1</h6>
+                      <div class="d-flex px-2 py-1">
+                          <h6 class="mb-0 text-sm text-center">1</h6>
+                      </div>
                     </td>
-                    <td class="">
-                        <h6 class="text-xs font-weight-bold mb-0 text-capitalize">SPP</h6>
+                    <td>
+                      <div class="d-flex px-2 py-1">
+                          <h6 class="mb-0 text-sm text-center">SPP</h6>
+                      </div>
                     </td>
-                    <td class="">
+                    <td class="align- text-start">
                       <span class="text-secondary text-xs font-weight-bold">Routine</span>
                     </td>
-                    <td class="">
+                    <td class="align- text-start">
                       <span class="text-secondary text-xs font-weight-bold">2023</span>
                     </td>
                     <td>
                       <p class="text-xs font-weight-bold mb-0">Informatika</p>
                     </td>
-                    <td class="">
-                      <a href="{{route('mahasiswa.tagihan.detail',Auth::user()->name)}}" class="badge badge-sm bg-gradient-primary font-weight-bold text-xxs" data-toggle="tooltip" data-original-title="detail">
+                    <td>
+                      <a href="{{route('mahasiswa.tagihan.detail.spp',Auth::user()->name)}}" class="badge badge-sm bg-gradient-primary font-weight-bold text-xs mx-2" data-toggle="tooltip" data-original-title="Edit user">
                         Detail
                       </a>
                     </td>
@@ -172,7 +176,12 @@
 
 @push('scripts')
 <script>
-	const dataTableSearch = new simpleDatatables.DataTable("#searchable1", {
+	const dataTableSearch = new simpleDatatables.DataTable("#templateTableNoSearch", {
+      searchable: false,
+      fixedHeight: true,
+    });
+
+	const dataTableBasic = new simpleDatatables.DataTable("#templateTable", {
       searchable: true,
       fixedHeight: true,
     });

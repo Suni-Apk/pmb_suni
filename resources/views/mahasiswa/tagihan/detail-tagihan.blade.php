@@ -52,6 +52,11 @@
             </div>
           </div>
         </div>
+        <div class="row">
+          <div class="col-12">
+            <a href="{{route('mahasiswa.tagihan.payment.spp',Auth::user()->name)}}" class="btn border border-secondary col-12">Pilih Pembayaran</a>
+          </div>
+        </div>
       </div>
     </div>
     </div>

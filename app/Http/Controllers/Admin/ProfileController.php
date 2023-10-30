@@ -19,7 +19,8 @@ class ProfileController extends Controller
     public function profile()
     {
         $auth = Auth::user();
-        return view('admin.user.profile', compact('auth'));
+
+        return view('admin.profile.profile', compact('auth'));
     }
 
     /**
@@ -53,7 +54,7 @@ class ProfileController extends Controller
     {
         $auth = Auth::user();
 
-        return view('admin.user.edit-profile', compact('auth'));
+        return view('admin.profile.edit-profile', compact('auth'));
     }
 
     /**
@@ -77,7 +78,9 @@ class ProfileController extends Controller
     public function change_password()
     {
         $auth = Auth::user();
-        return view('admin.user.change-password', compact('auth'));
+
+
+        return view('admin.profile.change-password', compact('auth'));
     }
 
     public function change_password_proses(Request $request, $id)
