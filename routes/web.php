@@ -5,9 +5,11 @@ use App\Http\Controllers\Admin\AuthController as AdminAuthController;
 use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
 use App\Http\Controllers\Admin\ProfileController;
 use App\Http\Controllers\Auth\AuthController;
+use App\Http\Controllers\DocumentController;
 use App\Http\Controllers\JurusanController;
 use App\Http\Controllers\Mahasiswa\DashboardController;
 use App\Http\Controllers\Mahasiswa\MatkulController;
+use App\Http\Controllers\MatkulController as AdminMatkulController;
 use App\Http\Controllers\Mahasiswa\ProfileController as MahasiswaProfileController;
 use App\Http\Controllers\Mahasiswa\TagihanController;
 use App\Http\Controllers\TahunAjaranController;
@@ -31,26 +33,18 @@ Route::get('/', function () {
 
 // Auth Mahasiswa
 Route::get('/register', [AuthController::class, 'register'])->name('register');
-
 Route::post('/register-process', [AuthController::class, 'register_process'])->name('register.process');
-
 Route::get('/login', [AuthController::class, 'login'])->name('login');
-
 Route::post('/login-process', [AuthController::class, 'login_process'])->name('login.process');
-
 Route::get('/verify', [AuthController::class, 'verify'])->name('verify');
-
 Route::post('/verify-process', [AuthController::class, 'verify_otp'])->name('verify.process');
-
 Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
 
 // Auth Admin
-Route::prefix('/admin')->name('admin.')->group(function () {
-    Route::get('/login',[AdminAuthController::class,'login'])->name('login');
-    
-    Route::post('/login-process',[AdminAuthController::class,'login_process'])->name('login.process');
-    
-    Route::get('/logout',[AdminAuthController::class,'logout'])->name('logout');
+Route::prefix('admin')->name('admin.')->group(function () {
+    Route::get('/login', [AdminAuthController::class, 'login'])->name('login');
+    Route::post('/login-process', [AdminAuthController::class, 'login_process'])->name('login.process');
+    Route::get('/logout', [AdminAuthController::class, 'logout'])->name('logout');
 });
 
 // Controller / Dashboard Admin
@@ -58,34 +52,38 @@ Route::prefix('/admin')->middleware('admin')->name('admin.')->group(function () 
 
     Route::get('/dashboard', [AdminDashboardController::class, 'index'])->name('dashboard');
 
-    //account menu
-    Route::get('/account/admin',[AccountController::class,'admin'])->name('admin.account');
-    Route::get('/create/account/admin',[AccountController::class,'admin_create'])->name('admin.create');
-    Route::post('/create/account/admin/process',[AccountController::class,'admin_create_process'])->name('admin.create.process');
-    Route::get('/edit/account/admin/{id}',[AccountController::class,'admin_edit'])->name('admin.edit');
-    Route::put('/edit/account/admin/process/{id}',[AccountController::class,'admin_edit_process'])->name('admin.edit.process');
-    Route::put('/change_status/admin/{id}',[AccountController::class,'admin_status'])->name('admin.status');
+    // data admin
+    Route::prefix('users/account')->name('admin.')->group(function () {
+        Route::get('/',[AccountController::class,'admin'])->name('index');
+        Route::get('/create',[AccountController::class,'admin_create'])->name('create');
+        Route::post('/create/process',[AccountController::class,'admin_create_process'])->name('create.process');
+        Route::get('/edit/{id}',[AccountController::class,'admin_edit'])->name('edit');
+        Route::put('/edit/process/{id}',[AccountController::class,'admin_edit_process'])->name('edit.process');
+        Route::put('/change-status/{id}',[AccountController::class,'admin_status'])->name('status');
+    });
 
+    // data mahasiswa
+    Route::prefix('mahasiswa/account')->name('mahasiswa.')->group(function () {
+        Route::get('/',[AccountController::class,'mahasiswa'])->name('index');
+        Route::get('/create',[AccountController::class,'mahasiswa_create'])->name('create');
+        Route::post('/create/process',[AccountController::class,'mahasiswa_create_process'])->name('create.process');
+        Route::get('/edit/{id}',[AccountController::class,'mahasiswa_edit'])->name('edit');
+        Route::put('/edit/process/{id}',[AccountController::class,'mahasiswa_edit_process'])->name('edit.process');
+        Route::put('/change-status/{id}',[AccountController::class,'mahasiswa_status'])->name('status');
+    });
 
-
-    Route::get('/account/mahasiswa',[AccountController::class,'mahasiswa'])->name('mahasiswa.account');
-    Route::get('/create/account/mahasiswa',[AccountController::class,'mahasiswa_create'])->name('mahasiswa.create');
-    Route::post('/create/account/mahasiswa/process',[AccountController::class,'mahasiswa_create_process'])->name('mahasiswa.create.process');
-    Route::get('/edit/account/mahasiswa/{id}',[AccountController::class,'mahasiswa_edit'])->name('mahasiswa.edit');
-    Route::put('/edit/account/mahasiswa/process/{id}',[AccountController::class,'mahasiswa_edit_process'])->name('mahasiswa.edit.process');
-    Route::put('/change_status/mahasiswa/{id}',[AccountController::class,'mahasiswa_status'])->name('mahasiswa.status');
-
-
-    //Profile Admin
+    // profil admin
     Route::get('/profile', [ProfileController::class, 'profile'])->name('profile');
     Route::get('/profile-edit', [ProfileController::class, 'editProfile'])->name('profile_edit');
-    Route::resource('/tahun_ajaran', TahunAjaranController::class);
+
+    // resource management
+    Route::resource('/tahun-ajaran', TahunAjaranController::class);
     Route::resource('/jurusan', JurusanController::class);
-    Route::resource('/matkul', MatkulController::class);
-    
+    Route::resource('/matkul', AdminMatkulController::class);
+    Route::resource('/dokumen', DocumentController::class);
 });
 
-//Mahasiswa
+// mahasiswa
 Route::prefix('/mahasiswa')->middleware(['auth', 'mahasiswa'])->name('mahasiswa.')->group(function () {
     // Dashboard Mahasiswa
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
@@ -138,11 +136,11 @@ Route::prefix('template')->group(function () {
         return view('layouts.template.rtl');
     })->name('rtl');
 
-    Route::get('/pendaftaran_s1', function () {
+    Route::get('/pendaftaran-s1', function () {
         return view('layouts.template.pendaftaran_s1');
     })->name('pendaftaran_s1');
     
-    Route::get('/pendaftaran_s1_dokumen', function () {
+    Route::get('/pendaftaran-s1-dokumen', function () {
         return view('layouts.template.pendaftaran_s1_dokumen');
     })->name('pendaftaran_s1_dokumen');
 
