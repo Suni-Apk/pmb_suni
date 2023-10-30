@@ -25,25 +25,6 @@
                     </p>
                 </div>
             </div>
-<<<<<<< HEAD
-        </div>
-        <div class="col-lg-4 col-md-6 my-sm-auto ms-sm-auto me-sm-0 mx-auto mt-3">
-            <div class="nav-wrapper position-relative end-0">
-                <ul class="nav nav-pills nav-fill bg-transparent" role="tablist">
-                    <li class="nav-item">
-                        <a class="nav-link mb-0 px-0 py-1 " data-bs-toggle="tab" href=""
-                            role="tab" aria-selected="true">
-                            <span class="ms-1">Profile</span>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link mb-0 px-0 py-1 " data-bs-toggle="tab" href="" role="tab"
-                            aria-selected="true">
-                            <span class="ms-1">Change password</span>
-                        </a>
-                    </li>
-                </ul>
-=======
             <div class="col-lg-4 col-md-6 my-sm-auto ms-sm-auto me-sm-0 mx-auto mt-3">
                 <div class="nav-wrapper position-relative end-0">
                     <ul class="nav nav-pills nav-fill bg-transparent" role="tablist">
@@ -90,7 +71,6 @@
                         </li>
                     </ul>
                 </div>
->>>>>>> c4726097635cf58d49e25bb58ca229943e5a3df9
             </div>
         </div>
     </div>

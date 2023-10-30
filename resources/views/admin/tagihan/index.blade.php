@@ -8,9 +8,18 @@
 @section('content')
     <div class="row">
         <div class="col-12">
-            <div class="card mb-4">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
+                    <li class="breadcrumb-item text-sm"><a class="opacity-5 text-dark"
+                            href="{{ route('dashboard') }}">Pages</a>
+                    </li>
+                    <li class="breadcrumb-item text-sm text-dark active" aria-current="page">Transactions</li>
+                </ol>
+                <h6 class="font-weight-bolder mb-0">Semua Data Tagihan</h6>
+            </nav>
+            <div class="card mb-4 mt-4">
                 <div class="card-header pb-0 d-flex justify-content-between">
-                    <h6>Admin table</h6>
+                    <h6>Tagihan table</h6>
                     <!-- Button trigger modal -->
                     <button type="button" class="btn bg-gradient-primary py-2 px-3 text-xs" data-bs-toggle="modal"
                         data-bs-target="#exampleModal">
@@ -35,19 +44,23 @@
                                         <div class="form-check mb-3">
                                             <input class="form-check-input" type="radio" name="jenis_tagihan"
                                                 id="jenis_tagihan" value="Routine">
-                                            <label class="custom-control-label" for="customRadio1">Routine</label>
+                                            <label class="custom-control-label" for="customRadio1">Spp</label>
                                         </div>
                                         <div class="form-check mb-3">
                                             <input class="form-check-input" type="radio" name="jenis_tagihan"
                                                 id="customRadio1" value="Tidakroutine">
-                                            <label class="custom-control-label" for="customRadio1">Tidak Routine</label>
+                                            <label class="custom-control-label" for="customRadio1">Biaya Lain</label>
                                         </div>
                                         <div class="form-check mb-3">
                                             <input class="form-check-input" type="radio" name="jenis_tagihan"
                                                 id="customRadio1" value="DaftarUlang">
                                             <label class="custom-control-label" for="customRadio1">Daftar Ulang</label>
                                         </div>
-
+                                        <div class="form-check mb-3">
+                                            <input class="form-check-input" type="radio" name="jenis_tagihan"
+                                                id="customRadio1" value="Tingkatan">
+                                            <label class="custom-control-label" for="customRadio1">Tingkatan</label>
+                                        </div>
                                     </div>
                                     <div class="modal-footer">
                                         {{-- <button type="button" class="btn bg-gradient-secondary"
@@ -104,7 +117,7 @@
                                         23/04/18
                                     </td>
                                     <td class="align-middle  text-secondary text-xs font-weight-bold">
-                                        Tidak routine
+                                        <strong>Biaya lain</strong>
 
                                     </td>
                                     <td class="align-middle text-center">
@@ -146,8 +159,7 @@
                                         23/04/18
                                     </td>
                                     <td class="align-middle  text-secondary text-xs font-weight-bold">
-                                        Routine
-
+                                        <strong>Spp</strong>
                                     </td>
                                     <td class="align-middle text-center">
                                         <a href="{{ route('admin.tagihan.show', 'Routine') }}"
@@ -188,11 +200,51 @@
                                         23/04/18
                                     </td>
                                     <td class="align-middle  text-secondary text-xs font-weight-bold">
-                                        Daftar ulang
-
+                                        <strong>Daftar Ulang</strong>
                                     </td>
                                     <td class="align-middle text-center">
                                         <a href="{{ route('admin.tagihan.show', 'DaftarUlang') }}"
+                                            class="badge text-uppercase badge-sm bg-gradient-info text-xxs mx-1"
+                                            data-toggle="tooltip" data-original-title="detail">
+                                            Detail
+                                        </a>
+
+                                        <a href=""
+                                            class="badge text-uppercase badge-sm bg-gradient-secondary text-xxs mx-1"
+                                            data-toggle="tooltip" data-original-title="Edit">
+                                            Ubah
+                                        </a>
+
+                                        <a href=""
+                                            class="badge text-uppercase badge-sm bg-gradient-danger text-xxs mx-1"
+                                            data-toggle="tooltip" data-original-title="hapus">
+                                            Hapus
+                                        </a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="align-middle text-xs font-weight-bold">4</td>
+                                    <td class="align-middle text-secondary text-xs font-weight-bold">
+                                        Tingkatan 2023
+                                    </td>
+                                    <td class="align-middle  text-secondary text-xs font-weight-bold">
+                                        2022/2023
+                                    </td>
+                                    <td class="align-middle  text-secondary text-xs font-weight-bold">
+                                        -
+
+                                    </td>
+                                    <td class="align-middle text-secondary text-xs font-weight-bold">
+                                        Rp 2.550.000
+                                    </td>
+                                    <td class="align-middle  text-secondary text-xs font-weight-bold">
+                                        23/04/18
+                                    </td>
+                                    <td class="align-middle  text-secondary text-xs font-weight-bold">
+                                        <strong>Tingkatan</strong>
+                                    </td>
+                                    <td class="align-middle text-center">
+                                        <a href="{{ route('admin.tagihan.show', 'Tingkatan') }}"
                                             class="badge text-uppercase badge-sm bg-gradient-info text-xxs mx-1"
                                             data-toggle="tooltip" data-original-title="detail">
                                             Detail

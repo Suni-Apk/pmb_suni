@@ -90,6 +90,8 @@ Route::prefix('/admin')->middleware('admin')->name('admin.')->group(function () 
     Route::get('/edit/account/mahasiswa/{id}', [AccountController::class, 'mahasiswa_edit'])->name('mahasiswa.edit');
     Route::put('/edit/account/mahasiswa/process/{id}', [AccountController::class, 'mahasiswa_edit_process'])->name('mahasiswa.edit.process');
     Route::put('/change_status/mahasiswa/{id}', [AccountController::class, 'mahasiswa_status'])->name('mahasiswa.status');
+    Route::get('/detail/account/mahasiswa/{id}', [AccountController::class, 'mahasiswa_detail'])->name('mahasiswa.show');
+    Route::post('/bayar/account/mahasiswa', [AccountController::class, 'mahasiswa_bayar'])->name('mahasiswa.bayar');
 });
 
 // Dashboard Mahasiswa
