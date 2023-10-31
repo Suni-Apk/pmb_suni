@@ -96,7 +96,7 @@ Route::prefix('/admin')->middleware('admin')->name('admin.')->group(function () 
     Route::post('/next', [AdminTagihanController::class, 'next'])->name('tagihan.next');
     
     //data settings
-    Route::prefix('settings')->name('settings')->group(function () {
+    Route::prefix('settings')->name('settings.')->group(function () {
         Route::get('/', [SettingController::class, 'index'])->name('general');
         Route::get('/notifikasi', [SettingController::class, 'notify_index'])->name('notifications');
         Route::put('/notifikasi/process/{id}',[SettingController::class,'notify_edit'])->name('notifications.process');
