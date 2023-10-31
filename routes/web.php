@@ -125,7 +125,7 @@ Route::prefix('/mahasiswa')->middleware(['auth', 'mahasiswa'])->name('mahasiswa.
     Route::prefix('tagihan')->name('tagihan.')->group(function () {
         Route::get('/',[TagihanController::class,'index'])->name('index');
         Route::get('/detail/{name}',[TagihanController::class,'detail_tidak_routine'])->name('detail.tidak.routine');
-        Route::get('/detail-tagihan-spp/{name}',[TagihanController::class,'detail_spp'])->name('detail.spp');
+        Route::get('/detail-spp/{name}',[TagihanController::class,'detail_spp'])->name('detail.spp');
         Route::get('/payment-spp/{name}', [TagihanController::class, 'payment_spp'])->name('payment.spp');
     });
     

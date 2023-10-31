@@ -160,7 +160,7 @@
                       <p class="text-xs font-weight-bold mb-0">Informatika</p>
                     </td>
                     <td>
-                      <a href="{{route('mahasiswa.tagihan.detail',Auth::user()->name)}}" class="badge badge-sm bg-gradient-primary font-weight-bold text-xxs" data-toggle="tooltip" data-original-title="Edit user">
+                      <a href="{{route('mahasiswa.tagihan.detail.tidak.routine',Auth::user()->name)}}" class="badge badge-sm bg-gradient-primary font-weight-bold text-xxs" data-toggle="tooltip" data-original-title="Edit user">
                         Detail
                       </a>
                     </td>
