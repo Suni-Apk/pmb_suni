@@ -89,7 +89,7 @@ Route::prefix('/admin')->middleware('admin')->name('admin.')->group(function () 
     // resources management
     Route::resource('/matkul', ControllersMatkulController::class);
     Route::resource('/jurusan', JurusanController::class);
-    Route::resource('/transaction', TransactionController::class);
+    Route::resource('/transaksi', TransactionController::class);
     Route::resource('/tahun-ajaran', TahunAjaranController::class);
     Route::resource('/tagihan', AdminTagihanController::class);
     Route::resource('/dokumen', DocumentController::class);

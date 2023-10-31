@@ -8,20 +8,11 @@
 @section('content')
     <div class="row">
         <div class="col-12">
-            <nav aria-label="breadcrumb">
-                <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
-                    <li class="breadcrumb-item text-sm"><a class="opacity-5 text-dark"
-                            href="{{ route('dashboard') }}">Pages</a>
-                    </li>
-                    <li class="breadcrumb-item text-sm text-dark active" aria-current="page">Transactions</li>
-                </ol>
-                <h6 class="font-weight-bolder mb-0">Semua Data Tagihan</h6>
-            </nav>
-            <div class="card mb-4 mt-4">
+            <div class="card mb-4">
                 <div class="card-header pb-0 d-flex justify-content-between">
-                    <h6>Tagihan table</h6>
+                    <h6>Daftar Tagihan</h6>
                     <!-- Button trigger modal -->
-                    <button type="button" class="btn bg-gradient-primary py-2 px-3 text-xs" data-bs-toggle="modal"
+                    <button type="button" class="btn bg-gradient-primary" data-bs-toggle="modal"
                         data-bs-target="#exampleModal">
                         <i class="fas fa-plus me-1"></i> Tambah tagihan
                     </button>
@@ -43,30 +34,29 @@
                                     <div class="modal-body">
                                         <div class="form-check mb-3">
                                             <input class="form-check-input" type="radio" name="jenis_tagihan"
-                                                id="jenis_tagihan" value="Routine">
+                                                id="jenis_tagihan" value="rutin">
                                             <label class="custom-control-label" for="customRadio1">Spp</label>
                                         </div>
                                         <div class="form-check mb-3">
                                             <input class="form-check-input" type="radio" name="jenis_tagihan"
-                                                id="customRadio1" value="Tidakroutine">
+                                                id="customRadio1" value="tidak-rutin">
                                             <label class="custom-control-label" for="customRadio1">Biaya Lain</label>
                                         </div>
                                         <div class="form-check mb-3">
                                             <input class="form-check-input" type="radio" name="jenis_tagihan"
-                                                id="customRadio1" value="DaftarUlang">
+                                                id="customRadio1" value="daftar-ulang">
                                             <label class="custom-control-label" for="customRadio1">Daftar Ulang</label>
                                         </div>
                                         <div class="form-check mb-3">
                                             <input class="form-check-input" type="radio" name="jenis_tagihan"
-                                                id="customRadio1" value="Tingkatan">
+                                                id="customRadio1" value="tingkatan">
                                             <label class="custom-control-label" for="customRadio1">Tingkatan</label>
                                         </div>
                                     </div>
                                     <div class="modal-footer">
-                                        {{-- <button type="button" class="btn bg-gradient-secondary"
-                                            data-bs-dismiss="modal">Close</button> --}}
-                                        <button class="btn bg-gradient-primary" type="submit">Lanjut <i
-                                                class="fas fa-arrow-circle-right ms-1"></i></button>
+                                        <button class="btn bg-gradient-primary" type="submit">
+                                            Lanjut <i class="fas fa-arrow-circle-right ms-1"></i>
+                                        </button>
                                     </div>
                                 </form>
                             </div>
@@ -78,23 +68,31 @@
                         <table class="table align-items-center mb-0" id="templateTable">
                             <thead>
                                 <tr>
-                                    <th>No</th>
-                                    <th class=" text-uppercase text-secondary text-xxs font-weight-bolder opacity-8">
-                                        Nama
-                                        Tagihan</th>
-                                    <th class="text-uppercase text-secondary text-xxs px-2 font-weight-bolder opacity-8">
-                                        Tahun / Angkatan</th>
-                                    <th class=" text-uppercase text-secondary text-xxs font-weight-bolder opacity-8">
-                                        Jurusan / Prodi</th>
                                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-8">
-                                        Total Harga</th>
+                                        Id
+                                    </th>
+                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-8">
+                                        Nama Tagihan
+                                    </th>
+                                    <th class="text-uppercase text-secondary text-xxs px-2 font-weight-bolder opacity-8">
+                                        Angkatan
+                                    </th>
                                     <th class=" text-uppercase text-secondary text-xxs font-weight-bolder opacity-8">
-                                        Created</th>
+                                        Jurusan
+                                    </th>
+                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-8">
+                                        Total Harga
+                                    </th>
                                     <th class=" text-uppercase text-secondary text-xxs font-weight-bolder opacity-8">
-                                        Jenis tagihan</th>
+                                        Created at
+                                    </th>
+                                    <th class=" text-uppercase text-secondary text-xxs font-weight-bolder opacity-8">
+                                        Jenis tagihan
+                                    </th>
                                     <th
                                         class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                        Action</th>
+                                        Action
+                                    </th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -121,8 +119,8 @@
 
                                     </td>
                                     <td class="align-middle text-center">
-                                        <a href="{{ route('admin.tagihan.show', 'Tidakroutine') }}"
-                                            class="badge text-uppercase badge-sm bg-gradient-info text-xxs mx-1"
+                                        <a href="{{ route('admin.tagihan.show', 'tidak-rutin') }}"
+                                            class="badge text-uppercase badge-sm bg-gradient-info text-xxs"
                                             data-toggle="tooltip" data-original-title="detail">
                                             Detail
                                         </a>
@@ -134,7 +132,7 @@
                                         </a>
 
                                         <a href=""
-                                            class="badge text-uppercase badge-sm bg-gradient-danger text-xxs mx-1"
+                                            class="badge text-uppercase badge-sm bg-gradient-danger text-xxs"
                                             data-toggle="tooltip" data-original-title="hapus">
                                             Hapus
                                         </a>
@@ -162,8 +160,8 @@
                                         <strong>Spp</strong>
                                     </td>
                                     <td class="align-middle text-center">
-                                        <a href="{{ route('admin.tagihan.show', 'Routine') }}"
-                                            class="badge text-uppercase badge-sm bg-gradient-info text-xxs mx-1"
+                                        <a href="{{ route('admin.tagihan.show', 'rutin') }}"
+                                            class="badge text-uppercase badge-sm bg-gradient-info text-xxs"
                                             data-toggle="tooltip" data-original-title="detail">
                                             Detail
                                         </a>
@@ -175,7 +173,7 @@
                                         </a>
 
                                         <a href=""
-                                            class="badge text-uppercase badge-sm bg-gradient-danger text-xxs mx-1"
+                                            class="badge text-uppercase badge-sm bg-gradient-danger text-xxs"
                                             data-toggle="tooltip" data-original-title="hapus">
                                             Hapus
                                         </a>
@@ -203,8 +201,8 @@
                                         <strong>Daftar Ulang</strong>
                                     </td>
                                     <td class="align-middle text-center">
-                                        <a href="{{ route('admin.tagihan.show', 'DaftarUlang') }}"
-                                            class="badge text-uppercase badge-sm bg-gradient-info text-xxs mx-1"
+                                        <a href="{{ route('admin.tagihan.show', 'daftar-ulang') }}"
+                                            class="badge text-uppercase badge-sm bg-gradient-info text-xxs"
                                             data-toggle="tooltip" data-original-title="detail">
                                             Detail
                                         </a>
@@ -216,7 +214,7 @@
                                         </a>
 
                                         <a href=""
-                                            class="badge text-uppercase badge-sm bg-gradient-danger text-xxs mx-1"
+                                            class="badge text-uppercase badge-sm bg-gradient-danger text-xxs"
                                             data-toggle="tooltip" data-original-title="hapus">
                                             Hapus
                                         </a>
@@ -244,8 +242,8 @@
                                         <strong>Tingkatan</strong>
                                     </td>
                                     <td class="align-middle text-center">
-                                        <a href="{{ route('admin.tagihan.show', 'Tingkatan') }}"
-                                            class="badge text-uppercase badge-sm bg-gradient-info text-xxs mx-1"
+                                        <a href="{{ route('admin.tagihan.show', 'tingkatan') }}"
+                                            class="badge text-uppercase badge-sm bg-gradient-info text-xxs"
                                             data-toggle="tooltip" data-original-title="detail">
                                             Detail
                                         </a>
@@ -257,7 +255,7 @@
                                         </a>
 
                                         <a href=""
-                                            class="badge text-uppercase badge-sm bg-gradient-danger text-xxs mx-1"
+                                            class="badge text-uppercase badge-sm bg-gradient-danger text-xxs"
                                             data-toggle="tooltip" data-original-title="hapus">
                                             Hapus
                                         </a>
