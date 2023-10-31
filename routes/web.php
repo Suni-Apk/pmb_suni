@@ -90,7 +90,7 @@ Route::prefix('/admin')->middleware('admin')->name('admin.')->group(function () 
     Route::resource('/matkul', ControllersMatkulController::class);
     Route::resource('/jurusan', JurusanController::class);
     Route::resource('/transaction', TransactionController::class);
-    Route::resource('/tahun_ajaran', TahunAjaranController::class);
+    Route::resource('/tahun-ajaran', TahunAjaranController::class);
     Route::resource('/tagihan', AdminTagihanController::class);
     Route::resource('/dokumen', DocumentController::class);
     Route::post('/next', [AdminTagihanController::class, 'next'])->name('tagihan.next');
