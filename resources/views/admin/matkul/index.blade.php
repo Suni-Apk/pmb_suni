@@ -53,15 +53,15 @@
                                         <span class="text-secondary text-xs font-weight-bold">Admin</span>
                                     </td>
                                     <td class="align-middle text-center">
-                                        <a href="#"
-                                            class="badge badge-sm bg-gradient-info font-weight-bold text-xxs"
+                                        <a href="{{route('admin.matkul.show',1)}}"
+                                            class="badge badge-sm bg-gradient-primary font-weight-bold text-xs mx-2"
                                             data-toggle="tooltip" data-original-title="detail">
                                             Detail
                                         </a>
 
                                         <a href="{{ route('admin.matkul.edit', 1) }}"
                                             class="badge badge-sm bg-gradient-secondary font-weight-bold text-xxs mx-1"
-                                            data-toggle="tooltip" data-original-title="Edit">
+                                            data-toggle="tooltip" data-original-title="edit">
                                             Ubah
                                         </a>
 

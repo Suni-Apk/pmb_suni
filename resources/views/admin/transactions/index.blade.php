@@ -8,18 +8,52 @@
 @section('content')
     <div class="row">
         <div class="col-12">
-            <nav aria-label="breadcrumb">
-                <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
-                    <li class="breadcrumb-item text-sm"><a class="opacity-5 text-dark"
-                            href="{{ route('dashboard') }}">Pages</a>
-                    </li>
-                    <li class="breadcrumb-item text-sm text-dark active" aria-current="page">Transaction</li>
-                </ol>
-                <h6 class="font-weight-bolder mb-0">Transaction</h6>
-            </nav>
-            <div class="card mb-4 mt-4">
-                <div class="card-header pb-0">
-                    <h6>Transactions table</h6>
+            <div class="card mb-4">
+                <div class="card-header pb-0 d-flex justify-content-between">
+                    <h6>Transaksi table</h6>
+                    <!-- Button trigger modal -->
+                    <!-- Modal -->
+                    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+                        aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">Pilih Jenis Tagihan</h5>
+                                    <button type="button" class="btn-close text-dark" data-bs-dismiss="modal"
+                                        aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <form action="{{ route('admin.tagihan.next') }}" method="POST">
+                                    @csrf
+                                    <div class="modal-body">
+                                        <div class="form-check mb-3">
+                                            <input class="form-check-input" type="radio" name="jenis_tagihan"
+                                                id="jenis_tagihan" value="Routine">
+                                            <label class="custom-control-label" for="customRadio1">Routine</label>
+                                        </div>
+                                        <div class="form-check mb-3">
+                                            <input class="form-check-input" type="radio" name="jenis_tagihan"
+                                                id="customRadio1" value="Tidakroutine">
+                                            <label class="custom-control-label" for="customRadio1">Tidak Routine</label>
+                                        </div>
+                                        <div class="form-check mb-3">
+                                            <input class="form-check-input" type="radio" name="jenis_tagihan"
+                                                id="customRadio1" value="DaftarUlang">
+                                            <label class="custom-control-label" for="customRadio1">Daftar Ulang</label>
+                                        </div>
+
+                                    </div>
+                                    <div class="modal-footer">
+                                        {{-- <button type="button" class="btn bg-gradient-secondary"
+                                            data-bs-dismiss="modal">Close</button> --}}
+                                        <button class="btn bg-gradient-primary" type="submit">Lanjut <i
+                                                class="fas fa-arrow-circle-right ms-1"></i></button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <div class="card-body px-0 pt-0 pb-2">
                     <div class="table-responsive p-0">
@@ -51,7 +85,9 @@
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td class="align-middle text-xs font-weight-bold">1</td>
+                                    <td class="align-middle text-xs font-weight-bold">
+                                        1
+                                    </td>
                                     <td class="align-middle text-secondary text-xs font-weight-bold">
                                         Tagihan jas
                                     </td>
@@ -93,7 +129,9 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td class="align-middle text-xs font-weight-bold">2</td>
+                                    <td class="align-middle text-xs font-weight-bold">
+                                        2
+                                    </td>
                                     <td class="align-middle text-secondary text-xs font-weight-bold">
                                         Spp 2022/2023
                                     </td>
@@ -135,7 +173,9 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td class="align-middle text-xs font-weight-bold">3</td>
+                                    <td class="align-middle text-xs font-weight-bold">
+                                        3
+                                    </td>
                                     <td class="align-middle text-secondary text-xs font-weight-bold">
                                         Daftar Ulang 2022/2023
                                     </td>
@@ -173,7 +213,9 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td class="align-middle text-xs font-weight-bold">4</td>
+                                    <td class="align-middle text-xs font-weight-bold">
+                                        4
+                                    </td>
                                     <td class="align-middle text-secondary text-xs font-weight-bold">
                                         Tagihan Tingkatan
                                     </td>

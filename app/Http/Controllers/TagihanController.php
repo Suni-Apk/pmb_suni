@@ -11,7 +11,6 @@ class TagihanController extends Controller
      */
     public function index()
     {
-
         return view('admin.tagihan.index');
     }
 
@@ -20,6 +19,7 @@ class TagihanController extends Controller
      */
     public function create(Request $request)
     {
+
     }
 
     public function next(Request $request)

@@ -182,8 +182,7 @@
 
                 <!-- billing -->
                 <li class="nav-item ">
-                    <a data-bs-toggle="collapse" href="#billing"
-                        class="nav-link {{ Route::is('admin.tagihan.*') ? 'active' : '' }}" aria-controls="billing"
+                    <a data-bs-toggle="collapse" href="#billing" class="nav-link {{ Route::is('admin.tagihan.*') ? 'active' : '' }}" aria-controls="billing"
                         role="button" aria-expanded="false">
                         <div
                             class="icon icon-sm shadow border-radius-md bg-white text-center d-flex align-items-center justify-content-center  me-2">
@@ -191,13 +190,20 @@
                         </div>
                         <span class="nav-link-text ms-1"> Biaya Tagihan </span>
                     </a>
-                    <div class="collapse" id="billing">
+                    <div class="collapse {{ Route::is('admin.tagihan.*') ? 'show' : '' }}" id="billing">
                         <ul class="nav ms-4 ps-3">
-                            <li class="nav-item {{ Route::is('admin.tagihan.*') ? 'active' : '' }}">
-                                <a class="nav-link" href="{{ route('admin.tagihan.index') }}">
+                            <li class="nav-item">
+                                <a class="nav-link {{ Route::is('admin.tagihan.index') ? 'active' : '' }}" href="{{ route('admin.tagihan.index') }}">
                                     <span class="sidenav-mini-icon d-none d-xl-block"><i
                                             class="fas fa-border-all"></i></span>
                                     <span class="sidenav-normal"> Daftar Biaya Tagihan </span>
+                                </a>
+                            </li>
+                            <li class="nav-item ">
+                                <a class="nav-link " href="">
+                                    <span class="sidenav-mini-icon d-none d-xl-block"><i
+                                            class="fas fa-plus"></i></span>
+                                    <span class="sidenav-normal"> Tambah Biaya Tagihan </span>
                                 </a>
                             </li>
                         </ul>
@@ -206,7 +212,7 @@
 
                 <!-- transaction -->
                 <li class="nav-item">
-                    <a data-bs-toggle="collapse" href="#transaction" class="nav-link" aria-controls="transaction"
+                    <a data-bs-toggle="collapse" href="#transaction" class="nav-link {{ Route::is('admin.transaction.*') ? 'active' : '' }}" aria-controls="transaction"
                         role="button" aria-expanded="false">
                         <div
                             class="icon icon-sm shadow border-radius-md bg-white text-center d-flex align-items-center justify-content-center  me-2">
@@ -214,17 +220,17 @@
                         </div>
                         <span class="nav-link-text ms-1"> Transaksi </span>
                     </a>
-                    <div class="collapse" id="transaction">
+                    <div class="collapse {{ Route::is('admin.transaction.*') ? 'show' : '' }}" id="transaction">
                         <ul class="nav ms-4 ps-3">
                             <li class="nav-item ">
-                                <a class="nav-link " href="">
+                                <a class="nav-link {{ Route::is('admin.transaction.index') ? 'active' : '' }}" href="{{ route('admin.transaction.index') }}">
                                     <span class="sidenav-mini-icon d-none d-xl-block"><i
                                             class="fas fa-border-all"></i></span>
                                     <span class="sidenav-normal"> Daftar Transaksi </span>
                                 </a>
                             </li>
                             <li class="nav-item ">
-                                <a class="nav-link " href="">
+                                <a class="nav-link {{ Route::is('admin.transaction.create') ? 'active' : '' }}" href="{{ route('admin.transaction.create') }}">
                                     <span class="sidenav-mini-icon d-none d-xl-block"><i
                                             class="fas fa-plus"></i></span>
                                     <span class="sidenav-normal"> Tambah Transaksi </span>
@@ -303,9 +309,9 @@
                                 </a>
                             </li>
                             <li class="nav-item ">
-                                <a class="nav-link " href="">
+                                <a class="nav-link {{ Route::is('admin.settings.notifications') ? 'active' : '' }}" href="{{ route('admin.settings.notifications') }}">
                                     <span class="sidenav-mini-icon"><i class="ni ni-bell-55"></i></span>
-                                    <span class="sidenav-normal"> Notification </span>
+                                    <span class="sidenav-normal"> Notifikasi </span>
                                 </a>
                             </li>
                         </ul>
