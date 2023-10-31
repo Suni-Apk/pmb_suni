@@ -21,11 +21,11 @@ class User extends Authenticatable
         'name',
         'phone',
         'gender',
-        'birthdate',
         'active',
         'token',
         'role',
         'email',
+        'status',
         'password',
     ];
 

@@ -69,6 +69,16 @@
                                     </div>
                                     <div class="col-6">
                                         <div class="mb-3">
+                                            <label for="" class="form-label">Email <strong
+                                                    class="text-danger">*</strong></label>
+                                            <input type="text" name="email"
+                                                class="form-control @error('email') is-invalid @enderror"
+                                                placeholder="Enter Your Phone">
+                                            @error('email')
+                                                <label for="" class="text-danger">{{ $message }}</label>
+                                            @enderror
+                                        </div>
+                                        <div class="mb-3">
                                             <label for="gender" class="form-label">Gender / Jenis Kelamin <strong
                                                     class="text-danger">*</strong></label>
                                             <select name="gender" id="gender"
@@ -78,16 +88,6 @@
                                                 <option value="Perempuan">Perempuan</option>
                                             </select>
                                             @error('gender')
-                                                <label for="" class="text-danger">{{ $message }}</label>
-                                            @enderror
-                                        </div>
-                                        <div class="mb-3">
-                                            <label for="birthdate" class="form-label">Tanggal Lahir <strong
-                                                    class="text-danger">*</strong></label>
-                                            <input type="date" name="birthdate" id="birthdate"
-                                                class="form-control @error('birthdate') is-invalid @enderror"
-                                                placeholder="Enter Your Phone">
-                                            @error('birthdate')
                                                 <label for="" class="text-danger">{{ $message }}</label>
                                             @enderror
                                         </div>

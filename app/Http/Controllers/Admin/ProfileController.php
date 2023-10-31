@@ -19,7 +19,8 @@ class ProfileController extends Controller
     public function profile()
     {
         $auth = Auth::user();
-        return view('admin.user.profile', compact('auth'));
+
+        return view('admin.profile.profile', compact('auth'));
     }
 
     /**
@@ -53,7 +54,7 @@ class ProfileController extends Controller
     {
         $auth = Auth::user();
 
-        return view('admin.user.edit-profile', compact('auth'));
+        return view('admin.profile.edit-profile', compact('auth'));
     }
 
     /**
@@ -70,14 +71,16 @@ class ProfileController extends Controller
             'birthdate' => 'required'
         ]);
 
-        User::find($id)->update($data);
-        return redirect()->route('admin.edit-profile');
+        $user->update($data);
+        return redirect()->route('admin.profile')->with('success','Berhasil Mengedit Profile');
     }
 
     public function change_password()
     {
         $auth = Auth::user();
-        return view('admin.user.change-password', compact('auth'));
+
+
+        return view('admin.profile.change-password', compact('auth'));
     }
 
     public function change_password_proses(Request $request, $id)
@@ -93,25 +96,13 @@ class ProfileController extends Controller
             'old_password' => 'required',
             'password' => 'required|confirmed|min:8',
             'password_confirmation' => 'same:password',
-        ]);
-        if ($request->password && $request->old_password) {
-            $data = $request->validate([
-                'old_password' => 'required',
-                'password' => 'required|confirmed',
-                'password_confirmation' => 'same:password',
-            ]);
-            if (!Hash::check($request->old_password, $user->password)) {
-                FacadesSession::flash('old_password2', "Password not match");
-                return Redirect::back();
-            }
-            $data['password'] = Hash::make($request->password);
-            $user->update($data);
-            return redirect()->route('admin.change_password')->with('success', 'Berhasil mengubah password');
-        } else {
-            $user->password;
-            return redirect()->route('admin.change_password')->with('success', 'Berhasil mengubah password');
+        ], $messages);
+        if (!Hash::check($request->old_password, $user->password)) {
+            return redirect()->back()->withErrors(['old_password' => 'Password Lama Kamu Salah'])->withInput();
         }
-        // return redirect()->route('admin.change_password')->with('success', 'Berhasil mengubah password');
+        $data['password'] = Hash::make($request->password);
+        $user->update($data);
+        return redirect()->route('admin.change_password')->with('success', 'Berhasil mengubah password');
     }
     /**
      * Remove the specified resource from storage.

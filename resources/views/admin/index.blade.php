@@ -63,7 +63,7 @@
               <div class="">
                 <img src="/soft-ui-dashboard-main/assets/img/shapes/waves-white.svg" class="position-absolute h-100 w-50 top-0 d-lg-block d-none" alt="waves">
                 <div class="position-relative d-flex align-items-center justify-content-center h-100">
-                  <img class="w-100 position-relative z-index-2 pt-4" src="/soft-ui-dashboard-main/assets/img/Learning-bro.png" alt="rocket">
+                  <img class="w-100 position-relative z-index-2 pt-4" src="https://suniindonesia.com/wp-content/uploads/2022/07/LOGO-2-2@2x.png" alt="rocket">
                 </div>
               </div>
             </div>
