@@ -79,18 +79,18 @@
                             <thead>
                                 <tr>
                                     <th>No</th>
-                                    <th class=" text-uppercase text-secondary text-xxs font-weight-bolder opacity-8">
+                                    <th class=" text-uppercase text-secondary text-xs font-weight-bolder opacity-8">
                                         Nama
                                         Tagihan</th>
-                                    <th class="text-uppercase text-secondary text-xxs px-2 font-weight-bolder opacity-8">
+                                    <th class="text-uppercase text-secondary text-xs px-2 font-weight-bolder opacity-8">
                                         Tahun / Angkatan</th>
-                                    <th class=" text-uppercase text-secondary text-xxs font-weight-bolder opacity-8">
+                                    <th class=" text-uppercase text-secondary text-xs font-weight-bolder opacity-8">
                                         Jurusan / Prodi</th>
-                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-8">
+                                    <th class="text-uppercase text-secondary text-xs font-weight-bolder opacity-8">
                                         Total Harga</th>
-                                    <th class=" text-uppercase text-secondary text-xxs font-weight-bolder opacity-8">
+                                    <th class=" text-uppercase text-secondary text-xs font-weight-bolder opacity-8">
                                         Created</th>
-                                    <th class=" text-uppercase text-secondary text-xxs font-weight-bolder opacity-8">
+                                    <th class=" text-uppercase text-secondary text-xs font-weight-bolder opacity-8">
                                         Jenis tagihan</th>
                                     <th
                                         class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
@@ -127,7 +127,7 @@
                                             Detail
                                         </a>
 
-                                        <a href=""
+                                        <a href="{{ route('admin.tagihan.edit', 'Tidakroutine') }}"
                                             class="badge text-uppercase badge-sm bg-gradient-secondary text-xxs mx-1"
                                             data-toggle="tooltip" data-original-title="Edit">
                                             Ubah
@@ -168,7 +168,7 @@
                                             Detail
                                         </a>
 
-                                        <a href=""
+                                        <a href="{{ Route('admin.tagihan.edit', 'Routine') }}"
                                             class="badge text-uppercase badge-sm bg-gradient-secondary text-xxs mx-1"
                                             data-toggle="tooltip" data-original-title="Edit">
                                             Ubah
@@ -209,7 +209,7 @@
                                             Detail
                                         </a>
 
-                                        <a href=""
+                                        <a href="{{ route('admin.tagihan.edit', 'DaftarUlang') }}"
                                             class="badge text-uppercase badge-sm bg-gradient-secondary text-xxs mx-1"
                                             data-toggle="tooltip" data-original-title="Edit">
                                             Ubah
@@ -250,7 +250,7 @@
                                             Detail
                                         </a>
 
-                                        <a href=""
+                                        <a href="{{ route('admin.tagihan.edit', 'Tingkatan') }}"
                                             class="badge text-uppercase badge-sm bg-gradient-secondary text-xxs mx-1"
                                             data-toggle="tooltip" data-original-title="Edit">
                                             Ubah

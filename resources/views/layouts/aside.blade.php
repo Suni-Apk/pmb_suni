@@ -241,17 +241,10 @@
                     <div class="collapse" id="transaction">
                         <ul class="nav ms-4 ps-3">
                             <li class="nav-item ">
-                                <a class="nav-link " href="">
+                                <a class="nav-link " href="{{ route('admin.transaction.index') }}">
                                     <span class="sidenav-mini-icon d-none d-xl-block"><i
                                             class="fas fa-border-all"></i></span>
                                     <span class="sidenav-normal"> Daftar Transaksi </span>
-                                </a>
-                            </li>
-                            <li class="nav-item ">
-                                <a class="nav-link " href="">
-                                    <span class="sidenav-mini-icon d-none d-xl-block"><i
-                                            class="fas fa-plus"></i></span>
-                                    <span class="sidenav-normal"> Tambah Transaksi </span>
                                 </a>
                             </li>
                         </ul>

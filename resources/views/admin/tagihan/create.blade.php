@@ -25,7 +25,7 @@
                 <form action="{{ route('admin.tagihan.store') }}" method="POST">
                     @csrf
                     @method('POST')
-                    <input type="hidden" name="jenis_tagihan" value="{{ $jenis_tagihan }}">
+                    <input type="hidden" name="nama_biaya" value="Spp Tahun ">
 
                     <div class="table-responsive mb-3">
                         <table class="table">
@@ -41,7 +41,7 @@
                                 <tr>
                                     <td class="align-items-middle text-center">1</td>
                                     <td class="align-items-middle text-center">Agustus</td>
-                                    <td><input type="text" placeholder="200.000" class="form-control hasil"></td>
+                                    <td><input type="text" placeholder="200.000" class="form-control hasil rupiah"></td>
                                     <td><input type="date" class="form-control" value="{{ date('Y') }}-08-30"></td>
                                 </tr>
                                 <tr>
@@ -135,8 +135,8 @@
                             <label for="" class="form-control-label">Nama biaya</label>
                             <input type="text"
                                 class="form-control @error('name')
-                                is-invalid
-                            @enderror"
+                            is-invalid
+                        @enderror"
                                 name="name" id="name" placeholder="Spp Tahun 2022">
                             @error('name')
                                 <div class="text-danger">{{ $message }}</div>
@@ -146,10 +146,21 @@
                             <label for="" class="form-control-label">Harga</label>
                             <input type="text"
                                 class="form-control @error('name')
-                                is-invalid
-                            @enderror"
+                            is-invalid
+                        @enderror"
                                 name="name" id="amount" placeholder="Spp Tahun 2022">
                             @error('name')
+                                <div class="text-danger">{{ $message }}</div>
+                            @enderror
+                        </div>
+                        <div class="form-group">
+                            <label for="" class="form-control-label">Tanggal Tenggat</label>
+                            <input type="date"
+                                class="form-control @error('name')
+                            is-invalid
+                        @enderror"
+                                name="end_date" id="amount" value="{{ date('Y-m-d') }}">
+                            @error('end_date')
                                 <div class="text-danger">{{ $message }}</div>
                             @enderror
                         </div>
@@ -163,15 +174,22 @@
                             </select>
                         </div>
                         <div class="form-group">
-                            <label for="id_jurusans">Jurusan</label>
-                            <select name="" id="" class="form-select">
-                                <option selected>-- Pilih Jurusan --</option>
+                            <label for="jurusans">Program Belajar</label>
+                            <select name="" id="" class="form-select" id="program"
+                                onchange="enableProgram(this)">
+                                <option value=""selected>-- Pilih Program belajar --</option>
+                                <option value="S1">S1</option>
+                                <option value="Bahasa Arab">Bahasa Arab</option>
+                            </select>
+                        </div>
+                        <div class="form-group d-none" id="jurusans">
+                            <label for="jurusans">Jurusan</label>
+                            <select name="" class="form-select">
+                                <option value="" selected>-- Pilih Jurusan --</option>
                                 <option value="">Bahasa Arab</option>
                                 <option value="">Ilmu Fiqih</option>
                                 <option value="">Tafsir</option>
                             </select>
-                        </div>
-                        <div class="form-group">
                         </div>
                         <div class="form-group">
                         </div>
@@ -213,6 +231,17 @@
                     @enderror"
                                 name="name" id="amount" placeholder="Spp Tahun 2022">
                             @error('name')
+                                <div class="text-danger">{{ $message }}</div>
+                            @enderror
+                        </div>
+                        <div class="form-group">
+                            <label for="" class="form-control-label">Tanggal Tenggat</label>
+                            <input type="date"
+                                class="form-control @error('name')
+                                is-invalid
+                            @enderror"
+                                name="end_date" id="amount" value="{{ date('Y-m-d') }}">
+                            @error('end_date')
                                 <div class="text-danger">{{ $message }}</div>
                             @enderror
                         </div>
@@ -339,6 +368,7 @@
     <script type="text/javascript">
         document.getElementById("tombol_form").addEventListener("click", tampilkan_nilai_form);
 
+
         function tampilkan_nilai_form() {
             event.preventDefault();
             var nilai_form = document.getElementById("input_form").value;
@@ -348,5 +378,24 @@
                 hasil[i].value = nilai_form;
             }
         }
+    </script>
+    <script type="text/javascript">
+        const program = document.getElementById('program');
+        program.dispatchEvent(new Event('change'));
+
+        function enableProgram(program) {
+            if (program.value == "S1") {
+                document.getElementById("jurusans").classList.remove('d-none');
+            } else if (program.value == "Bahasa Arab") {
+                document.getElementById("jurusans").classList.add('d-none');
+            } else {
+                document.getElementById("jurusans").classList.remove('d-none');
+            }
+        }
+    </script>
+    <script>
+        $('.rupiah').mask("#.##0", {
+            reverse: true
+        });
     </script>
 @endpush

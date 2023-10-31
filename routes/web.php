@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin\AccountController;
 use App\Http\Controllers\Admin\AuthController as AdminAuthController;
 use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
 use App\Http\Controllers\Admin\ProfileController;
+use App\Http\Controllers\AdministrasiController;
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\JurusanController;
 use App\Http\Controllers\Mahasiswa\DashboardController;
@@ -92,6 +93,9 @@ Route::prefix('/admin')->middleware('admin')->name('admin.')->group(function () 
     Route::put('/change_status/mahasiswa/{id}', [AccountController::class, 'mahasiswa_status'])->name('mahasiswa.status');
     Route::get('/detail/account/mahasiswa/{id}', [AccountController::class, 'mahasiswa_detail'])->name('mahasiswa.show');
     Route::post('/bayar/account/mahasiswa', [AccountController::class, 'mahasiswa_bayar'])->name('mahasiswa.bayar');
+
+    //setting admin
+    Route::get('/administrasi', [AdministrasiController::class, 'administrasi'])->name('administrasi');
 });
 
 // Dashboard Mahasiswa

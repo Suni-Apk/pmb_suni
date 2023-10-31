@@ -53,7 +53,7 @@ class TagihanController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        return view('admin.tagihan.edit', compact('id'));
     }
 
     /**

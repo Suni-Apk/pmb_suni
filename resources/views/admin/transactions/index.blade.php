@@ -23,29 +23,29 @@
                 </div>
                 <div class="card-body px-0 pt-0 pb-2">
                     <div class="table-responsive p-0">
-                        <table class="table align-items-center mb-0" id="templateTable">
+                        <table class="table mb-0" id="templateTable">
                             <thead>
                                 <tr>
-                                    <th class="text-uppercase text-secondary text-xs font-weight-bolder opacity-10">
+                                    <th class="text-uppercase text-secondary text-xs font-weight-bolder opacity-9">
                                         No
                                     </th>
-                                    <th class=" text-uppercase text-secondary text-xs  font-weight-bolder opacity-10">
+                                    <th class=" text-uppercase text-secondary text-xs  font-weight-bolder opacity-9">
                                         Nama
                                         Tagihan</th>
-                                    <th class="text-uppercase text-secondary text-xs font-weight-bolder opacity-10">
-                                        Tanggal Pembayaran</th>
-                                    <th class=" text-uppercase text-secondary text-xs font-weight-bolder opacity-10">
+                                    <th class="text-uppercase text-secondary text-xs font-weight-bolder opacity-9">
+                                        Tanggal Bayar</th>
+                                    <th class=" text-uppercase text-secondary text-xs font-weight-bolder opacity-9">
                                         Pembayar</th>
-                                    <th class="text-uppercase text-secondary text-xs font-weight-bolder opacity-10">
+                                    <th class="text-uppercase text-secondary text-xs font-weight-bolder opacity-9">
                                         Total Pembayaran</th>
-                                    <th class=" text-uppercase text-secondary text-xs font-weight-bolder opacity-10">
+                                    <th class=" text-uppercase text-secondary text-xs font-weight-bolder opacity-9">
                                         Status</th>
-                                    <th class=" text-uppercase text-secondary text-xs font-weight-bolder opacity-10">
+                                    <th class=" text-uppercase text-secondary text-xs font-weight-bolder opacity-9">
                                         Jenis tagihan</th>
-                                    <th class=" text-uppercase text-secondary text-xs font-weight-bolder opacity-10">
+                                    <th class=" text-uppercase text-secondary text-xs font-weight-bolder opacity-9">
                                         Jenis Pembayaran</th>
                                     <th
-                                        class="text-center text-uppercase text-secondary text-xs font-weight-bolder opacity-10">
+                                        class="text-center text-uppercase text-secondary text-xs font-weight-bolder opacity-9">
                                         Action</th>
                                 </tr>
                             </thead>
@@ -86,7 +86,8 @@
 
 
                                         <a href=""
-                                            class="badge text-uppercase badge-sm bg-gradient-danger text-xxs mx-1"
+                                            class="badge text-uppercase
+                                            badge-sm bg-gradient-danger text-xxs mx-1"
                                             data-toggle="tooltip" data-original-title="hapus">
                                             Hapus
                                         </a>
