@@ -13,8 +13,16 @@ class MahasiswaMiddleware
      *
      * @param  \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response)  $next
      */
-    public function handle(Request $request, Closure $next): Response
+    // MahasiswaMiddleware.php
+    public function handle($request, Closure $next)
     {
-        return $next($request);
+        if (auth()->check() && auth()->user()->role === 'Mahasiswa') {
+            return $next($request);
+        }
+
+        return redirect()->back()->withErrors([
+            'phone' => 'Kamu bukan Mahasiswa'
+        ]);
     }
+
 }

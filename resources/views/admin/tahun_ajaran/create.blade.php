@@ -16,20 +16,20 @@
                     <div class="card">
                         <div class="card-body">
                             <div class="table-responsive text-nowrap">
-                                <form action="{{ route('admin.tahun_ajaran.store') }}" method="POST">
+                                <form action="#" method="POST">
                                     @csrf
                                     <div class="form-group mb-3">
-                                        <label for="year">Tahun Ajaran</label>
-                                        <input type="number" name="year" id="year" class="form-control">
+                                        <label for="nama">Tahun Ajaran</label>
+                                        <input type="number" name="nama" id="nama" class="form-control">
                                     </div>
 
                                     <div class="form-group mb-3">
-                                        <label for="start_at">Mulai</label>
-                                        <input type="date" name="start_at" id="start_at" class="form-control">
+                                        <label for="nama">Mulai</label>
+                                        <input type="date" name="nama" id="nama" class="form-control">
                                     </div>
                                     <div class="form-group mb-3">
-                                        <label for="end_at">Selesai</label>
-                                        <input type="date" name="end_at" id="end_at" class="form-control">
+                                        <label for="nama">Selesai</label>
+                                        <input type="date" name="nama" id="nama" class="form-control">
                                     </div>
 
                                     <button type="submit" class="btn btn-success">Submit</button>

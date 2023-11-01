@@ -12,7 +12,7 @@
     
                     <div class="fw-normal text-muted mb-4">
                         Enter the verification code we sent to
-                    </div>  
+                    </div>
     
                     <div class="d-flex align-items-center justify-content-center fw-bold mb-4">
                         <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="currentColor" class="bi bi-asterisk" viewBox="0 0 16 16">
