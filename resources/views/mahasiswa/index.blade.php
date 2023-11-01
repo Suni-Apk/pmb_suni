@@ -680,3 +680,15 @@
         </div>
     </div>
 @endsection
+@push('scripts')
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    @if (session('success'))
+        <script>
+            Swal.fire(
+                "{{ session('success') }}", // Menggunakan session('success') untuk mengambil pesan
+                'You clicked the button!',
+                'success'
+            )
+        </script>
+    @endif
+@endpush

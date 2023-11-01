@@ -102,10 +102,18 @@ class AuthController extends Controller
         }
 
         $input = $request->all();
-
+        $users = Auth::user();
         auth()->attempt(array('phone' => $input['phone'], 'password' => $input['password']));
             if (auth()->user()->role == 'Mahasiswa') {
-                return redirect()->route('mahasiswa.dashboard')->with('success','Yey Berhasil Login');
+                if(!Auth::user()->biodata && !Auth::user()->document){
+                    return redirect()->route('mahasiswa.dashboard')->with('success','Silahkan Mengisi Biodata Dan Dokument Terlebih Dahulu');
+                }elseif(Auth::user()->biodata && !Auth::user()->document){
+                    return redirect()->route('mahasiswa.dashboard')->with('success','Silahkan Mengisi Dokument Terlebih Dahulu');
+                }elseif(!Auth::user()->biodata && Auth::user()->document){
+                    return redirect()->route('mahasiswa.dashboard')->with('success','Silahkan Mengisi Biodata Terlebih Dahulu');
+                }else{
+                    return redirect()->route('mahasiswa.dashboard')->with('success','Halo Selamat Datang');
+                }
             }else{
                 return redirect()->back()->withErrors([
                     'phone' => 'Kamu bukan Mahasiswa Disini'

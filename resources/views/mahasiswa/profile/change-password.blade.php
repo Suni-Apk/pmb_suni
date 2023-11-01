@@ -11,8 +11,15 @@
         <div class="row gx-4">
             <div class="col-auto">
                 <div class="avatar avatar-xl position-relative">
-                    <img src="/soft-ui-dashboard-main/assets/img/bruce-mars.jpg" alt="profile_image"
+                    <img src="
+                    @if (!Auth::user()->biodata->image)
+                    /soft-ui-dashboard-main/assets/img/no-profile.png
+                    @else
+                        {{ asset('storage/' . Auth::user()->biodata->image)}}
+                    @endif
+                    " alt="profile_image"
                         class="w-100 border-radius-lg shadow-sm">
+                        
                 </div>
             </div>
             <div class="col-auto my-auto">

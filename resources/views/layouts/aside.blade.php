@@ -435,48 +435,97 @@
                     </a>
                 </li>
 
-                {{-- academy --}}
-                <li class="nav-item">
-                    <ul class="nav-link pb-0 mb-0">
-                        <span class="sidenav-mini-icon d-none d-xl-block" style="color:rgb(196, 196, 196)"><i
-                                class="fas fa-university"></i></span>
-                        <span class="sidenav-normal text-uppercase text-xs ms-2 font-weight-bolder"> academy </span>
-                    </ul>
-                </li>
+                @if (!Auth::user()->biodata && !Auth::user()->document)
+                    <!-- biodata -->
+                    <li class="nav-item">
+                        <a class="nav-link {{ Route::is('mahasiswa.pendaftaran.s1') ? 'active' : '' }}"
+                            href="{{ route('mahasiswa.pendaftaran.s1') }}">
+                            <div
+                                class="icon icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
+                                <i class="fas fa-user-shield"></i>
+                            </div>
+                            <span class="nav-link-text ms-1">Isi Biodata</span>
+                        </a>
+                    </li>
+                    <!-- dcoment -->
+                    <li class="nav-item">
+                        <a class="nav-link {{ Route::is('mahasiswa.pendaftaran.document') ? 'active' : '' }}"
+                            href="{{ route('mahasiswa.pendaftaran.document') }}">
+                            <div
+                                class="icon icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
+                                <i class="fas fa-folder"></i>
+                            </div>
+                            <span class="nav-link-text ms-1">Isi Document</span>
+                        </a>
+                    </li>
+                @elseif (Auth::user()->biodata && !Auth::user()->document)
+                    <!-- dcoment -->
+                    <li class="nav-item">
+                        <a class="nav-link {{ Route::is('mahasiswa.pendaftaran.document') ? 'active' : '' }}"
+                            href="{{ route('mahasiswa.pendaftaran.document') }}">
+                            <div
+                                class="icon icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
+                                <i class="fas fa-folder"></i>
+                            </div>
+                            <span class="nav-link-text ms-1">Isi Document</span>
+                        </a>
+                    </li>
+                @elseif(!Auth::user()->biodata && Auth::user()->document)
+                    <!-- biodata -->
+                    <li class="nav-item">
+                        <a class="nav-link {{ Route::is('mahasiswa.pendaftaran.s1') ? 'active' : '' }}"
+                            href="{{ route('mahasiswa.pendaftaran.s1') }}">
+                            <div
+                                class="icon icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
+                                <i class="fas fa-user-shield"></i>
+                            </div>
+                            <span class="nav-link-text ms-1">Isi Biodata</span>
+                        </a>
+                    </li>
+                @else
+                    {{-- academy --}}
+                    <li class="nav-item">
+                        <ul class="nav-link pb-0 mb-0">
+                            <span class="sidenav-mini-icon d-none d-xl-block" style="color:rgb(196, 196, 196)"><i
+                                    class="fas fa-university"></i></span>
+                            <span class="sidenav-normal text-uppercase text-xs ms-2 font-weight-bolder"> academy </span>
+                        </ul>
+                    </li>
 
-                <!-- tahun ajaran -->
-                <li class="nav-item">
-                    <a href="{{ route('mahasiswa.matkul') }}"
-                        class="nav-link {{ Route::is('mahasiswa.matkul') ? 'active' : '' }}">
-                        <div
-                            class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center d-flex align-items-center justify-content-center  me-2">
-                            <i class="ni ni-hat-3"></i>
-                        </div>
-                        <span class="nav-link-text ms-1"> Mata Kuliah </span>
-                    </a>
-                </li>
+                    <!-- tahun ajaran -->
+                    <li class="nav-item">
+                        <a href="{{ route('mahasiswa.matkul') }}"
+                            class="nav-link {{ Route::is('mahasiswa.matkul') ? 'active' : '' }}">
+                            <div
+                                class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center d-flex align-items-center justify-content-center  me-2">
+                                <i class="ni ni-hat-3"></i>
+                            </div>
+                            <span class="nav-link-text ms-1"> Mata Kuliah </span>
+                        </a>
+                    </li>
 
-                {{-- payment --}}
-                <li class="nav-item">
-                    <ul class="nav-link pb-0 mb-0">
-                        <span class="sidenav-mini-icon d-none d-xl-block" style="color:rgb(196, 196, 196)"><i
-                                class="ni ni-credit-card"></i></span>
-                        <span class="sidenav-normal text-uppercase text-xs ms-2 font-weight-bolder"> payment </span>
-                    </ul>
-                </li>
+                    {{-- payment --}}
+                    <li class="nav-item">
+                        <ul class="nav-link pb-0 mb-0">
+                            <span class="sidenav-mini-icon d-none d-xl-block" style="color:rgb(196, 196, 196)"><i
+                                    class="ni ni-credit-card"></i></span>
+                            <span class="sidenav-normal text-uppercase text-xs ms-2 font-weight-bolder"> payment </span>
+                        </ul>
+                    </li>
 
-                <!-- billing -->
-                <li class="nav-item">
-                    <a href="{{ route('mahasiswa.tagihan.index') }}"
-                        class="nav-link {{ Route::is('mahasiswa.tagihan.*') ? 'active' : '' }}"
-                        aria-controls="billing" role="button" aria-expanded="false">
-                        <div
-                            class="icon icon-sm shadow border-radius-md bg-white text-center d-flex align-items-center justify-content-center  me-2">
-                            <i class="fas fa-wallet"></i>
-                        </div>
-                        <span class="nav-link-text ms-1"> Tagihan </span>
-                    </a>
-                </li>
+                    <!-- billing -->
+                    <li class="nav-item">
+                        <a href="{{ route('mahasiswa.tagihan.index') }}"
+                            class="nav-link {{ Route::is('mahasiswa.tagihan.*') ? 'active' : '' }}"
+                            aria-controls="billing" role="button" aria-expanded="false">
+                            <div
+                                class="icon icon-sm shadow border-radius-md bg-white text-center d-flex align-items-center justify-content-center  me-2">
+                                <i class="fas fa-wallet"></i>
+                            </div>
+                            <span class="nav-link-text ms-1"> Tagihan </span>
+                        </a>
+                    </li>
+                @endif
 
                 {{-- other --}}
                 <li class="nav-item">
