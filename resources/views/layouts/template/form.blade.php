@@ -50,8 +50,14 @@
                                         <label for="keterangan">Keterangan</label>
                                         <textarea name="keterangan" id="keterangan" class="form-control"></textarea>
                                     </div>
+<<<<<<< HEAD
                                     
                                     <button type="submit" class="btn btn-primary">Submit</button>
+=======
+
+                                    <button type="submit" class="btn btn-success">Submit</button>
+                                    <button type="submit" class="btn btn-warning text-dark">Back</button>
+>>>>>>> 46e3398b5282bba2241af524ee2f88c8839a5162
                                 </form>
                             </div>
                         </div>

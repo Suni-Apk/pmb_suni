@@ -11,13 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('tagihans', function (Blueprint $table) {
+        Schema::create('tahun_ajarans', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('id_biayas');
-            $table->date('start_date')->nullable();
-            $table->date('end_date');
-            $table->string('mounth')->nullable();
-            $table->integer('amount');
+            $table->string('year');
+            $table->string('status')->default('active');
+            $table->string('start_at');
+            $table->string('end_at');
             $table->timestamps();
         });
     }
@@ -27,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('tagihans');
+        Schema::dropIfExists('tahun_ajarans');
     }
 };

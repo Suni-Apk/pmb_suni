@@ -65,12 +65,12 @@
                                             </g>
                                         </g>
                                     </g>
-                                </svg>
-                                <span class="ms-1">Change password</span>
-                            </a>
-                        </li>
-                    </ul>
-                </div>
+                                </g>
+                            </svg>
+                            <span class="ms-1">Change password</span>
+                        </a>
+                    </li>
+                </ul>
             </div>
         </div>
     </div>

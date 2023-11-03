@@ -35,7 +35,7 @@ class MatkulController extends Controller
      */
     public function show(string $id)
     {
-        //
+        return view('admin.matkul.detail');
     }
 
     /**

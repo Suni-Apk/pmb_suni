@@ -105,6 +105,7 @@
 
 ::-webkit-scrollbar-thumb
 {
+<<<<<<< HEAD
 	border-radius: 7px;
 	background-color: #c4c4c4;
 }
@@ -143,6 +144,8 @@
 
 ::-webkit-scrollbar-thumb
 {
+=======
+>>>>>>> 46e3398b5282bba2241af524ee2f88c8839a5162
 	border-radius: 10px;
 	background-color: #c4c4c4;
 }
