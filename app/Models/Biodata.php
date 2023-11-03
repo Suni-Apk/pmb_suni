@@ -11,6 +11,8 @@ class Biodata extends Model
 
     protected $fillable = [
         'user_id',
+        'jurusan_id',
+        'program_belajar',
         'image',
         'birthdate',
         'birthplace',
@@ -18,11 +20,18 @@ class Biodata extends Model
         'kota',
         'kecamatan',
         'address',
+        'profesi',
+        'baca_quran',
         'last_graduate'
     ];
 
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function jurusan()
+    {
+        return $this->belongsTo(Jurusan::class);
     }
 }

@@ -435,7 +435,7 @@
                     </a>
                 </li>
 
-                @if (!Auth::user()->biodata && !Auth::user()->document)
+                @if (!$biodata && !Auth::user()->document)
                     <!-- biodata -->
                     <li class="nav-item">
                         <a class="nav-link {{ Route::is('mahasiswa.pendaftaran.s1') ? 'active' : '' }}"
@@ -458,7 +458,7 @@
                             <span class="nav-link-text ms-1">Isi Document</span>
                         </a>
                     </li>
-                @elseif (Auth::user()->biodata && !Auth::user()->document)
+                @elseif ($biodata && !Auth::user()->document)
                     <!-- dcoment -->
                     <li class="nav-item">
                         <a class="nav-link {{ Route::is('mahasiswa.pendaftaran.document') ? 'active' : '' }}"
@@ -470,7 +470,7 @@
                             <span class="nav-link-text ms-1">Isi Document</span>
                         </a>
                     </li>
-                @elseif(!Auth::user()->biodata && Auth::user()->document)
+                @elseif(!$biodata && Auth::user()->document)
                     <!-- biodata -->
                     <li class="nav-item">
                         <a class="nav-link {{ Route::is('mahasiswa.pendaftaran.s1') ? 'active' : '' }}"

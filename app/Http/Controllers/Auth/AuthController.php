@@ -105,15 +105,16 @@ class AuthController extends Controller
         $users = Auth::user();
         auth()->attempt(array('phone' => $input['phone'], 'password' => $input['password']));
             if (auth()->user()->role == 'Mahasiswa') {
-                if(!Auth::user()->biodata && !Auth::user()->document){
-                    return redirect()->route('mahasiswa.dashboard')->with('success','Silahkan Mengisi Biodata Dan Dokument Terlebih Dahulu');
-                }elseif(Auth::user()->biodata && !Auth::user()->document){
-                    return redirect()->route('mahasiswa.dashboard')->with('success','Silahkan Mengisi Dokument Terlebih Dahulu');
-                }elseif(!Auth::user()->biodata && Auth::user()->document){
-                    return redirect()->route('mahasiswa.dashboard')->with('success','Silahkan Mengisi Biodata Terlebih Dahulu');
-                }else{
-                    return redirect()->route('mahasiswa.dashboard')->with('success','Halo Selamat Datang');
-                }
+                return redirect()->route('program.program_belajar');
+                // if(!Auth::user()->biodata && !Auth::user()->document){
+                //     return redirect()->route('mahasiswa.dashboard')->with('success','Silahkan Mengisi Biodata Dan Dokument Terlebih Dahulu');
+                // }elseif(Auth::user()->biodata && !Auth::user()->document){
+                //     return redirect()->route('mahasiswa.dashboard')->with('success','Silahkan Mengisi Dokument Terlebih Dahulu');
+                // }elseif(!Auth::user()->biodata && Auth::user()->document){
+                //     return redirect()->route('mahasiswa.dashboard')->with('success','Silahkan Mengisi Biodata Terlebih Dahulu');
+                // }else{
+                //     return redirect()->route('mahasiswa.dashboard')->with('success','Halo Selamat Datang');
+                // }
             }else{
                 return redirect()->back()->withErrors([
                     'phone' => 'Kamu bukan Mahasiswa Disini'
@@ -146,10 +147,25 @@ class AuthController extends Controller
 
             // $this->send_message($user->nomor,$messages);
 
-            return redirect()->route('mahasiswa.dashboard');
+            return redirect()->route('program.program_belajar');
         }
 
         return redirect()->back()->with('error', 'Token Tidak Sesuai');
+    }
+
+    public function switch_program()
+    {
+        $user = Auth::user();
+        return view('mahasiswa.program.index',compact('user'));
+    }
+
+    public function switch(Request $request)
+    {
+        if($request->program == 'S1'){
+            return redirect()->route('mahasiswa.dashboard')->with('success','Berhasil Masuk Ke Dashboard S1');
+        }else{
+            return redirect()->route('kursus.dashboard')->with('success','Berhasil Masuk Ke Dashboard Kursus');
+        }
     }
 
     public function logout()

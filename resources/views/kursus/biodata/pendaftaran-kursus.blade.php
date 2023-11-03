@@ -1,4 +1,4 @@
-@extends('layouts.master')
+@extends('kursus.layouts.parent')
 
 @section('title', 'table template')
 
@@ -13,7 +13,7 @@
                     <div class="card">
                         <div class="card-body">
                             <div class="table-responsive text-nowrap">
-                                <form action="{{route('mahasiswa.pendaftaran.s1.process')}}" method="POST" enctype="multipart/form-data">
+                                <form action="{{route('kursus.pendaftaran.kursus.process')}}" method="POST" enctype="multipart/form-data">
                                     @csrf
                                     @method('POST')
                                     <div class="form-group mb-3">
@@ -23,13 +23,20 @@
                                     </div>
 
                                     <div class="form-group mb-3">
-                                        <label for="alamat">Pilih Jurusan</label>
-                                        <select name="jurusan_id" class="form-control">
-                                            <option value="" disabled selected>Pilih Jurusan</option>
-                                            @foreach ($jurusan as $index => $item)
-                                                <option value="{{$item->id}}">{{$item->name}}</option>
-                                            @endforeach
-                                        </select>
+                                        <label for="profesi">Profesi</label>
+                                        <input type="text" name="profesi" id="profesi" class="form-control">
+                                    </div>
+
+                                    <div class="form-group mb-3">
+                                        <label for="">Bisa Baca Al-Qur'an?</label>
+                                        <div class="d-block">
+                                            <input type="radio" name="baca_quran" id="bisa" class="form-radio" value="Bisa">
+                                            <label for="bisa">Bisa</label>
+                                        </div>
+                                        <div class="d-block">
+                                            <input type="radio" name="baca_quran" id="tidakBisa" class="form-radio" value="Tidak Bisa">
+                                            <label for="tidakBisa">Tidak Bisa</label>
+                                        </div>
                                     </div>
 
                                     <div class="form-group mb-3">
@@ -61,11 +68,6 @@
                                     <div class="form-group mb-3">
                                         <label for="address">Jalan Dan Kode Pos</label>
                                         <textarea name="address" id="address" class="form-control"></textarea>
-                                    </div>
-
-                                    <div class="form-group mb-3">
-                                        <label for="last_graduate">Pendidikan Terakhir</label>
-                                        <input type="text" name="last_graduate" id="last_graduate" class="form-control">
                                     </div>
 
                                     <button type="submit" class="btn btn-success">Submit</button>

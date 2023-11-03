@@ -13,7 +13,9 @@ return new class extends Migration
     {
         Schema::create('biodatas', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('jurusan_id')->nullable();
             $table->foreignId('user_id');
+            $table->string('program_belajar');
             $table->string('image');
             $table->date('birthdate');
             $table->string('birthplace');
@@ -21,7 +23,9 @@ return new class extends Migration
             $table->string('kota');
             $table->string('kecamatan');
             $table->text('address');
-            $table->string('last_graduate');
+            $table->string('baca_quran')->nullable();
+            $table->string('profesi')->nullable();
+            $table->string('last_graduate')->nullable();
             $table->timestamps();
         });
     }

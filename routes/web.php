@@ -6,6 +6,11 @@ use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
 use App\Http\Controllers\Admin\ProfileController;
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\JurusanController;
+use App\Http\Controllers\Kursus\BiodataController as KursusBiodataController;
+use App\Http\Controllers\Kursus\DashboardController as KursusDashboardController;
+use App\Http\Controllers\Kursus\MataPelajaranController;
+use App\Http\Controllers\Kursus\ProfileController as KursusProfileController;
+use App\Http\Controllers\Kursus\TagihanController as KursusTagihanController;
 use App\Http\Controllers\Mahasiswa\BiodataController;
 use App\Http\Controllers\Mahasiswa\DashboardController;
 use App\Http\Controllers\Mahasiswa\DocumentController;
@@ -54,6 +59,11 @@ Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
 
 Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
 
+Route::prefix('/switch')->middleware(['auth'])->name('program.')->group(function(){
+    Route::get('/program-belajar', [AuthController::class,'switch_program'])->name('program_belajar');
+    Route::get('/program-belajar/switch',[AuthController::class,'switch'])->name('program_belajar.switch');
+});
+
 // Auth Admin
 Route::prefix('admin')->name('admin.')->group(function () {
     Route::get('/login', [AdminAuthController::class, 'login'])->name('login');
@@ -101,11 +111,37 @@ Route::prefix('/admin')->middleware('admin')->name('admin.')->group(function () 
     Route::put('/change_status/mahasiswa/{id}', [AccountController::class, 'mahasiswa_status'])->name('mahasiswa.status');
 });
 
+Route::prefix('/kursus')->middleware(['auth'])->name('kursus.')->group(function(){
+    Route::get('/dashboard', [KursusDashboardController::class, 'kursus'])->name('dashboard');
+
+    //biodata
+    Route::get('/biodata',[KursusBiodataController::class,'pendaftaran_kursus'])->name('pendaftaran.kursus');
+    Route::post('/biodata/process',[KursusBiodataController::class,'pendaftaran_kursus_process'])->name('pendaftaran.kursus.process');
+
+    //edit biodata
+    Route::get('/edit-biodata/{id}',[KursusProfileController::class,'edit_biodata'])->name('pendaftaran.s1.edit');
+    Route::put('/edit-biodata/process/{id}',[KursusProfileController::class,'edit_biodata_process'])->name('pendaftaran.s1.edit.process');
+
+    //mata pelajaran
+    Route::get('/matkul', [MataPelajaranController::class, 'index'])->name('matkul');
+
+    //tagihan kursus
+    Route::get('/tagihan', [KursusTagihanController::class, 'index'])->name('tagihan.index');
+    Route::get('/detail-tagihan-spp/{name}', [KursusTagihanController::class, 'detail_spp'])->name('tagihan.detail.spp');
+    Route::get('/payment-spp/{name}', [KursusTagihanController::class, 'payment_spp'])->name('tagihan.payment.spp');
+    Route::get('/detail-tagihan/{name}', [KursusTagihanController::class, 'detail_tidak_routine'])->name('tagihan.detail.tidak.routine');
+
+    //kursus profile
+    Route::get('/profile', [KursusProfileController::class, 'profile'])->name('profile.index');
+    Route::get('/profile/edit/{name}', [KursusProfileController::class, 'edit_profile'])->name('profile.edit-profile');
+    Route::put('/profile/edit/{id}/process', [KursusProfileController::class, 'edit_profile_process'])->name('profile.edit-profile.process');
+    Route::get('/profile/change_password/{name}', [KursusProfileController::class, 'change_password'])->name('profile.change_password');
+    Route::put('/profile/change_password_process', [KursusProfileController::class, 'change_password_process'])->name('profile.change_password.process');
+});
+
 // Dashboard Mahasiswa
 Route::prefix('/mahasiswa')->middleware(['auth', 'mahasiswa'])->name('mahasiswa.')->group(function () {
-    //program belajar
-    Route::get('/program-belajar', [DashboardController::class, 'program_belajar'])->name('program_belajar');
-
+    
     //biodata
     Route::get('/biodata',[BiodataController::class,'pendaftaran_s1'])->name('pendaftaran.s1');
     Route::post('/biodata/process',[BiodataController::class,'pendaftaran_s1_process'])->name('pendaftaran.s1.process');

@@ -1,5 +1,5 @@
 {{-- navbar --}}
-@if (Route::is('mahasiswa.program_belajar'))
+@if (Route::is('kursus.program_belajar'))
 @else
     <nav class="navbar navbar-main navbar-fixed navbar-expand-lg px-0 mx-4 shadow-none border-radius-xl position-sticky blur shadow-blur mt-4 left-auto top-1 z-index-sticky"
         id="navbarBlur" navbar-scroll="true">
@@ -56,10 +56,13 @@
                         <span role="button" class="nav-link text-body font-weight-bold px-0" id="dropdownProfile"
                             data-bs-toggle="dropdown" aria-expanded="false">
                             <img src="@if (!Auth::user()->biodata)
-                            /soft-ui-dashboard-main/assets/img/no-profile.png
+                                /soft-ui-dashboard-main/assets/img/no-profile.png
+                            @elseif(Auth::user()->biodata->program_belajar == 'KURSUS')
+                                {{ asset('storage/' . Auth::user()->biodata->image) }}
                             @else
-                                {{ asset('storage/' . Auth::user()->biodata->image)}}
-                            @endif" class="avatar avatar-sm ms-2">
+                                /soft-ui-dashboard-main/assets/img/no-profile.png
+                            @endif" alt="" class="avatar avatar-sm ms-2">
+
                         </span>
                         <ul class="dropdown-menu dropdown-menu-end px-2 py-2 me-sm-n2"
                             aria-labelledby="dropdownProfile">

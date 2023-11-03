@@ -1,4 +1,4 @@
-@extends('layouts.master')
+@extends('kursus.layouts.parent')
 
 @section('title', 'table template')
 
@@ -13,33 +13,41 @@
                     <div class="card">
                         <div class="card-body">
                             <div class="table-responsive text-nowrap">
-                                <form action="{{route('mahasiswa.pendaftaran.s1.process')}}" method="POST" enctype="multipart/form-data">
+                                <form action="{{route('kursus.pendaftaran.s1.edit.process',$user->id)}}" method="POST" enctype="multipart/form-data">
                                     @csrf
-                                    @method('POST')
+                                    @method('PUT')
                                     <div class="form-group mb-3">
                                         <label for="image" class="form-label">Image</label>
+                                        <img src="{{asset('storage/'.$biodata->image)}}" alt="" class="w-25 h-25 d-block">
                                         <input type="file" name="image" id="image" class="form-control">
                                         <p class="text-muted mb-0">Allowed JPG, GIF or PNG. Max size of 2Mb</p>
                                     </div>
 
                                     <div class="form-group mb-3">
-                                        <label for="alamat">Pilih Jurusan</label>
-                                        <select name="jurusan_id" class="form-control">
-                                            <option value="" disabled selected>Pilih Jurusan</option>
-                                            @foreach ($jurusan as $index => $item)
-                                                <option value="{{$item->id}}">{{$item->name}}</option>
-                                            @endforeach
-                                        </select>
+                                        <label for="profesi">Profesi</label>
+                                        <input type="text" name="profesi" id="profesi" class="form-control" value="{{$biodata->profesi}}">
+                                    </div>
+
+                                    <div class="form-group mb-3">
+                                        <label for="">Bisa Baca Al-Qur'an?</label>
+                                        <div class="d-block">
+                                            <input type="radio" name="baca_quran" id="bisa" class="form-radio" {{$biodata->baca_quran == 'Bisa' ? 'checked' : ''}} value="Bisa">
+                                            <label for="bisa">Bisa</label>
+                                        </div>
+                                        <div class="d-block">
+                                            <input type="radio" name="baca_quran" id="tidakBisa" class="form-radio" {{$biodata->baca_quran == 'Tidak Bisa' ? 'checked' : ''}} value="Tidak Bisa">
+                                            <label for="tidakBisa">Tidak Bisa</label>
+                                        </div>
                                     </div>
 
                                     <div class="form-group mb-3">
                                         <label for="birthdate">Tanggal Lahir</label>
-                                        <input type="date" name="birthdate" id="birthdate" class="form-control">
+                                        <input type="date" name="birthdate" id="birthdate" class="form-control" value="{{$biodata->birthdate}}">
                                     </div>
 
                                     <div class="form-group mb-3">
                                         <label for="birthplace">Tempat Lahir</label>
-                                        <input type="text" name="birthplace" id="birthplace" class="form-control" placeholder="Masukkan Tempat Lahir Anda">
+                                        <input type="text" name="birthplace" id="birthplace" class="form-control" value="{{$biodata->birthplace}}" placeholder="Masukkan Tempat Lahir Anda">
                                     </div>
 
                                     <div class="form-group mb-3">
@@ -60,12 +68,7 @@
 
                                     <div class="form-group mb-3">
                                         <label for="address">Jalan Dan Kode Pos</label>
-                                        <textarea name="address" id="address" class="form-control"></textarea>
-                                    </div>
-
-                                    <div class="form-group mb-3">
-                                        <label for="last_graduate">Pendidikan Terakhir</label>
-                                        <input type="text" name="last_graduate" id="last_graduate" class="form-control">
+                                        <textarea name="address" id="address"  class="form-control">{{$biodata->address}}</textarea>
                                     </div>
 
                                     <button type="submit" class="btn btn-success">Submit</button>
@@ -75,6 +78,12 @@
                         </div>
                     </div>
                 </div>
+                <script>
+                    var loadFile = function(event){
+                        var outputs = document.getElementById('output');
+                        outputs.src = URL.createObjectURL(event.target.files[0]);
+                    }
+                  </script>
                 <script>
                     fetch(`https://kanglerian.github.io/api-wilayah-indonesia/api/provinces.json`)
                         .then(response => response.json())

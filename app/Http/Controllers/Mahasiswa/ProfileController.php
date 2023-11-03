@@ -17,7 +17,7 @@ class ProfileController extends Controller
     {   
         $userId = Auth::user()->id;
         $user = Auth::user();
-        $biodata = Biodata::where('user_id',$userId)->first();
+        $biodata = Biodata::where('program_belajar','S1')->where('user_id',Auth::user()->id)->first();
         return view('mahasiswa.profile.index',compact('biodata','user'));
     }
 
@@ -26,7 +26,8 @@ class ProfileController extends Controller
     public function edit_profile($name)
     {
         $mahasiswa = Auth::user();
-        return view('mahasiswa.profile.edit-profile',compact('mahasiswa'));
+        $biodata = Biodata::where('program_belajar','S1')->where('user_id',Auth::user()->id)->first();
+        return view('mahasiswa.profile.edit-profile',compact('mahasiswa','biodata'));
     }
 
     public function edit_profile_process(Request $request, $id)
@@ -48,7 +49,8 @@ class ProfileController extends Controller
 
     public function change_password()
     {
-        return view('mahasiswa.profile.change-password');
+        $biodata = Biodata::where('program_belajar','S1')->where('user_id',Auth::user()->id)->first();
+        return view('mahasiswa.profile.change-password',compact('biodata'));
     }
 
     public function change_password_process(Request $request)
@@ -77,7 +79,8 @@ class ProfileController extends Controller
     public function edit_biodata($id)
     {
         $user = User::where('id',$id)->first();
-        return view('mahasiswa.profile.edit-biodata',compact('user'));
+        $biodata = Biodata::where('program_belajar','S1')->where('user_id',Auth::user()->id)->first();
+        return view('mahasiswa.profile.edit-biodata',compact('user','biodata'));
     }
 
     public function edit_biodata_process(Request $request,$id)
@@ -109,7 +112,8 @@ class ProfileController extends Controller
     public function edit_document($id)
     {
         $user = User::where('id',$id)->first();
-        return view('mahasiswa.profile.edit-document',compact('user'));
+        $biodata = Biodata::where('program_belajar','S1')->where('user_id',Auth::user()->id)->first();
+        return view('mahasiswa.profile.edit-document',compact('user','biodata'));
     }
 
     public function edit_document_process(Request $request,$id)

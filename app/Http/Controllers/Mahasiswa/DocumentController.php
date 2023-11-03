@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Mahasiswa;
 
 use App\Http\Controllers\Controller;
+use App\Models\Biodata;
 use App\Models\Document;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -12,7 +13,8 @@ class DocumentController extends Controller
 {
     public function document()
     {
-        return view('mahasiswa.document.document-s1');
+        $biodata = Biodata::where('program_belajar','S1')->where('user_id',Auth::user()->id)->first();
+        return view('mahasiswa.document.document-s1',compact('biodata'));
     }
 
     public function document_process(Request $request)
