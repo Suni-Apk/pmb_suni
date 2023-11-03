@@ -20,58 +20,41 @@
                                 <tr>
                                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 text-center">No</th>
                                     <th class="text-uppercase text-secondary text-xxs px-2 font-weight-bolder opacity-7">Nama Matkul</th>
-                                    <th class="text-uppercase text-secondary text-xxs px-2 font-weight-bolder opacity-7">Jurusan / Semester</th>
-                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2 text-center">Jadwal</th>
-                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2 text-center">Tanggal</th>
                                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Created By</th>
                                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Aksi</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td class="align-middle text-center text-sm">
-                                        <span class="text-bold">1</span>
-                                    </td>
-                                    <td class="text-sm">
-                                        <span class="text-bold">Fiqih Muamalah</span>
-                                    </td>
-                                    <td>
-                                        <div class="d-flex px-2 py-1">
-                                            <div class="d-flex flex-column justify-content-center">
-                                                <h6 class="mb-0 text-xs">Hukum Ekonomi Syariah</h6>
-                                                <p class="text-xxs text-uppercase text-secondary mb-0">Semester 5</p>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td class="align text-center">
-                                        <span class="text-secondary text-xs font-weight-bold">06:00 - 12:30</span>
-                                    </td>
-                                    <td class="align text-center">
-                                        <span class="text-secondary text-xs font-weight-bold">15/05/2023</span>
-                                    </td>
-                                    <td class="align text-center">
-                                        <span class="text-secondary text-xs font-weight-bold">Admin</span>
-                                    </td>
-                                    <td class="align-middle text-center">
-                                        <a href="{{route('admin.matkul.show',1)}}"
-                                            class="badge badge-sm bg-gradient-primary font-weight-bold text-xs mx-2"
-                                            data-toggle="tooltip" data-original-title="detail">
-                                            Detail
-                                        </a>
-
-                                        <a href="{{ route('admin.matkul.edit', 1) }}"
-                                            class="badge badge-sm bg-gradient-secondary font-weight-bold text-xxs mx-1"
-                                            data-toggle="tooltip" data-original-title="edit">
-                                            Ubah
-                                        </a>
-
-                                        <a href="{{ route('admin.matkul.destroy', 1) }}"
-                                            class="badge badge-sm bg-gradient-danger font-weight-bold text-xxs"
-                                            data-toggle="tooltip" data-original-title="hapus">
-                                            Hapus
-                                        </a>
-                                    </td>
-                                </tr>
+                                @foreach ($matkuls as $index => $item)
+                                    <tr>
+                                        <td class="align-middle text-center text-sm">
+                                            <span class="text-bold">{{ $index + 1 }}</span>
+                                        </td>
+                                        <td class="text-sm">
+                                            <span class="text-bold">{{ $item->nama_matkuls }}</span>
+                                        </td>
+                                        <td class="align text-center">
+                                            <span class="text-secondary text-xs font-weight-bold">Admin</span>
+                                        </td>
+                                        <td class="d-flex align-items-center justify-content-center">
+                                            <a href="{{ route('admin.matkul.show' , $item->id) }}" class="btn btn-sm bg-gradient-success font-weight-bold text-xs mx-2 mt-3">
+                                                <strong>Detail</strong>
+                                            </a>
+        
+                                            <a href="{{ route('admin.matkul.edit', 1) }}" class="btn btn-sm bg-gradient-secondary font-weight-bold text-xs mx-2 mt-3">
+                                                <strong>Edit</strong>
+                                            </a>
+        
+                                        <form action="{{ route('admin.matkul.destroy', $item->id) }}" method="POST">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit" class="btn btn-sm bg-gradient-danger font-weight-bold text-xs mx-2 show_confirm mt-3">
+                                                    <strong>Hapus</strong>
+                                                </button>
+                                            </form>
+                                        </td>
+                                    </tr>
+                                @endforeach
                             </tbody>
                         </table>
                     </div>

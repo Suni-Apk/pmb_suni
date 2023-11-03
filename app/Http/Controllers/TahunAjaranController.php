@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\TahunAjaran;
 use Illuminate\Http\Request;
 
 class TahunAjaranController extends Controller
@@ -11,7 +12,8 @@ class TahunAjaranController extends Controller
      */
     public function index()
     {
-        return view('admin.tahun_ajaran.index');
+        $tahun_ajaran = TahunAjaran::all();
+        return view('admin.tahun_ajaran.index', compact('tahun_ajaran'));
     }
 
     /**
@@ -27,7 +29,13 @@ class TahunAjaranController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->validate([
+            'year' => 'required',
+            'start_at' => 'required',
+            'end_at' => 'required',
+        ]);
+        TahunAjaran::create($data);
+        return redirect()->route('admin.tahun_ajaran.index')->with('success', "Tahun Ajaran Berhasil Di Buat!!");
     }
 
     /**
@@ -59,6 +67,8 @@ class TahunAjaranController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $tahun_ajaran = TahunAjaran::findOrFail($id);
+        $tahun_ajaran->delete();
+        return redirect()->route('admin.tahun_ajaran.index');
     }
 }
