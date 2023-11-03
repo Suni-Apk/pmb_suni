@@ -2525,7 +2525,7 @@ progress {
 }
 
 .form-control::placeholder {
-    color: #adb5bd;
+    color: #787e84;
     opacity: 1
 }
 
@@ -20580,6 +20580,18 @@ textarea.form-control,textarea.form-control-lg,textarea.form-control-sm {
 
 .oblique .oblique-image {
     transform: skewX(10deg)
+}
+
+.oblique-reverse {
+    transform: skewX(10deg);
+    overflow: hidden;
+    width: 60%;
+    right: -10rem;
+    border-bottom-left-radius: .75rem
+}
+
+.oblique-reverse .oblique-image {
+    transform: skewX(-10deg)
 }
 
 .fixed-plugin .fixed-plugin-button {

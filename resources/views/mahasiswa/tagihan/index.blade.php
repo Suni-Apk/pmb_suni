@@ -8,9 +8,7 @@
 
 @section('content')
     <div class="row">
-
         {{-- INI ADALAH CARD BUAT TAGIHAN DAFTAR ULANG CICIL --}}
-
         <div class="col-12 text-center mb-4">
          <div class="card">
           <h3 class="mt-3">Tagihan</h3>
@@ -31,7 +29,7 @@
                 </div>
               </div>
               <div class="col-12 col-lg-8 mx-auto">
-                <button class="btn btn-primary">
+                <button class="btn bg-gradient-primary">
                   Bayar
                 </button>
               </div>
@@ -171,7 +169,6 @@
           </div>
       </div>
     </div>
-    
 @endsection
 
 @push('scripts')

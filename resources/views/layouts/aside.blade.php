@@ -275,6 +275,34 @@
                     </div>
                 </li>
 
+                <!-- link -->
+                <li class="nav-item">
+                    <a data-bs-toggle="collapse" href="#link" class="nav-link " aria-controls="link" role="button" aria-expanded="false">
+                        <div class="icon icon-sm shadow border-radius-md bg-white text-center d-flex align-items-center justify-content-center me-2">
+                            <i class="fas fa-link"></i>
+                        </div>
+                        <span class="nav-link-text ms-1"> Link </span>
+                    </a>
+                    <div class="collapse " id="link">
+                        <ul class="nav ms-4 ps-3">
+                            <li class="nav-item ">
+                                <a class="nav-link " href="">
+                                    <span class="sidenav-mini-icon d-none d-xl-block">
+                                        <img src="/soft-ui-dashboard-main/assets/img/icon-zoom.svg" width="14px">
+                                    </span>
+                                    <span class="sidenav-normal"> Link Zoom </span>
+                                </a>
+                            </li>
+                            <li class="nav-item ">
+                                <a class="nav-link " href="">
+                                    <span class="sidenav-mini-icon d-none d-xl-block"><i class="fab fa-whatsapp"></i></span>
+                                    <span class="sidenav-normal"> Link Whatsapp </span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+
                 <!-- report -->
                 <li class="nav-item">
                     <a class="nav-link " href="">
@@ -283,6 +311,16 @@
                             <i class="fas fa-flag"></i>
                         </div>
                         <span class="nav-link-text ms-1">Laporan</span>
+                    </a>
+                </li>
+
+                <!-- profile -->
+                <li class="nav-item">
+                    <a class="nav-link {{ Route::is('admin.profile') ? 'active' : '' }}" href="{{ route('admin.profile') }}">
+                        <div class="icon icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
+                            <i class="fas fa-user-alt"></i>
+                        </div>
+                        <span class="nav-link-text ms-1">Profile</span>
                     </a>
                 </li>
 
@@ -312,16 +350,6 @@
                             </li>
                         </ul>
                     </div>
-                </li>
-
-                <!-- profile -->
-                <li class="nav-item">
-                    <a class="nav-link {{ Route::is('admin.profile') ? 'active' : '' }}" href="{{ route('admin.profile') }}">
-                        <div class="icon icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
-                            <i class="fas fa-user-alt"></i>
-                        </div>
-                        <span class="nav-link-text ms-1">Profile</span>
-                    </a>
                 </li>
 
                 <!-- template -->
