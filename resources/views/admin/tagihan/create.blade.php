@@ -179,8 +179,8 @@
                                 id="program_belajar" onchange="enableProgram(this)">
                                 <option disabled selected>-- Pilih Program belajar --</option>
                                 <option value="S1" {{ old('program_belajar') == 'S1' ? 'selected' : '' }}>S1</option>
-                                <option value="Bahasa Arab"
-                                    {{ old('program_belajar') == 'Bahasa Arab' ? 'selected' : '' }}>Bahasa
+                                <option value="Kursus" {{ old('program_belajar') == 'Kursus' ? 'selected' : '' }}>
+                                    Bahasa
                                     Arab</option>
                             </select>
                             @error('program_belajar')

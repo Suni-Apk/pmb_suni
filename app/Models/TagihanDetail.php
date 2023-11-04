@@ -15,6 +15,7 @@ class TagihanDetail extends Model
         "id_users",
         "amount",
         "start_date",
+        "status",
         "end_date",
         "before_end",
     ];

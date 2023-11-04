@@ -3,13 +3,16 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\Notify;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
+use App\Traits\Fonnte;
 
 class AuthController extends Controller
 {
+    use Fonnte;
     public function register()
     {
         return view('auth.register');
@@ -30,8 +33,8 @@ class AuthController extends Controller
             'name.min:3' => 'Nama Anda Minimal 3 Huruf!!',
             'name.max:255' => 'Nama Anda Kepanjangan',
             'phone.required' => 'Nomor Whatshapp Wajib Diisi',
-            'phone.min:12' => 'Nomor Whatshapp Minimal 12 Angka!!',
-            'phone.max:13' => 'Nomor Whatshapp Maksimal 13 Angka!!',
+            'phone.min' => 'Nomor Whatshapp Minimal 12 Angka!!',
+            'phone.max' => 'Nomor Whatshapp Maksimal 13 Angka!!',
             'gender.required' => 'Gender Wajib Diisi',
             'password.required' => 'Password Wajib Diisi',
             'password.confirmed' => 'Password Harus Sama',
@@ -39,7 +42,7 @@ class AuthController extends Controller
         ];
         $data = $request->validate([
             'name' => 'required|min:3|max:255|string',
-            'phone' => 'required|min:12|max:13|unique:users,phone',
+            'phone' => 'required|min:11|max:13|unique:users,phone',
             'email' => 'required|email|unique:users,email',
             'gender' => 'required|string',
             'password' => 'required|confirmed|min:8',
@@ -48,7 +51,11 @@ class AuthController extends Controller
         $data['role'] = 'Mahasiswa';
         $data['token'] = rand(111111, 999999);
         // dd($data);
-        User::create($data);
+        $user = User::create($data);
+        $notif = Notify::where('id',1)->first();
+        $messages =  $notif->notif_otp . ' ' . $user->token;
+        
+        $this->send_message($user->phone, $messages);
 
         return redirect()->route('verify');
     }
@@ -95,16 +102,24 @@ class AuthController extends Controller
         }
 
         $input = $request->all();
-
+        $users = Auth::user();
         auth()->attempt(array('phone' => $input['phone'], 'password' => $input['password']));
             if (auth()->user()->role == 'Mahasiswa') {
-                return redirect()->route('mahasiswa.dashboard')->with('success','Yey Berhasil Login');
+                return redirect()->route('program.program_belajar');
+                // if(!Auth::user()->biodata && !Auth::user()->document){
+                //     return redirect()->route('mahasiswa.dashboard')->with('success','Silahkan Mengisi Biodata Dan Dokument Terlebih Dahulu');
+                // }elseif(Auth::user()->biodata && !Auth::user()->document){
+                //     return redirect()->route('mahasiswa.dashboard')->with('success','Silahkan Mengisi Dokument Terlebih Dahulu');
+                // }elseif(!Auth::user()->biodata && Auth::user()->document){
+                //     return redirect()->route('mahasiswa.dashboard')->with('success','Silahkan Mengisi Biodata Terlebih Dahulu');
+                // }else{
+                //     return redirect()->route('mahasiswa.dashboard')->with('success','Halo Selamat Datang');
+                // }
             }else{
                 return redirect()->back()->withErrors([
                     'phone' => 'Kamu bukan Mahasiswa Disini'
                 ]);
             }
-
 
         return redirect()->route('mahasiswa.dashboard');
     }
@@ -132,10 +147,25 @@ class AuthController extends Controller
 
             // $this->send_message($user->nomor,$messages);
 
-            return redirect()->route('mahasiswa.dashboard');
+            return redirect()->route('program.program_belajar');
         }
 
         return redirect()->back()->with('error', 'Token Tidak Sesuai');
+    }
+
+    public function switch_program()
+    {
+        $user = Auth::user();
+        return view('mahasiswa.program.index',compact('user'));
+    }
+
+    public function switch(Request $request)
+    {
+        if($request->program == 'S1'){
+            return redirect()->route('mahasiswa.dashboard')->with('success','Berhasil Masuk Ke Dashboard S1');
+        }else{
+            return redirect()->route('kursus.dashboard')->with('success','Berhasil Masuk Ke Dashboard Kursus');
+        }
     }
 
     public function logout()

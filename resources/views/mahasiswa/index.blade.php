@@ -295,6 +295,7 @@
       </div>
     </div>
   </div>
+<<<<<<< HEAD
   <div class="row my-4">
     <div class="col-lg-8 col-md-6 mb-md-0 mb-4">
       <div class="card">
@@ -891,6 +892,9 @@
             </div>
         </div>
     </div>
+=======
+  
+>>>>>>> 47bc6f05a93c7cec9a855e75b2132e90b72c9e75
     <div class="row my-4">
         <div class="col-lg-8 col-md-6 mb-md-0 mb-4">
             <div class="card">
@@ -1275,3 +1279,15 @@
         </div>
     </div>
 @endsection
+@push('scripts')
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    @if (session('success'))
+        <script>
+            Swal.fire(
+                "{{ session('success') }}", // Menggunakan session('success') untuk mengambil pesan
+                'You clicked the button!',
+                'success'
+            )
+        </script>
+    @endif
+@endpush

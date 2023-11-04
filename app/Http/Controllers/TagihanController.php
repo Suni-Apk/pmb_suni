@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Biaya;
+use App\Models\Biodata;
 use App\Models\Jurusan;
 use App\Models\Tagihan;
+use App\Models\TagihanDetail;
 use App\Models\TahunAjaran;
 use Illuminate\Http\Request;
 
@@ -76,6 +78,18 @@ class TagihanController extends Controller
                     'amount' => $amount,
                     'end_date' => $dateEnd[$key],
                 ]);
+
+                $mahasiswa = Biodata::where('program_belajar', $biaya->program_belajar)->get();
+
+                foreach ($mahasiswa as $index => $value) {
+                    TagihanDetail::create([
+                        'id_tagihans' => $tagihanCreate->id,
+                        'id_users' => $value->user->id,
+                        'end_date' => $dateEnd[$key],
+                        'amount' => $amount,
+                        'status' => 'BELUM',
+                    ]);
+                }
             }
             return redirect()->route('admin.tagihan.index')->with('success', 'Berhasil Membuat tagihan ' . $biaya->nama_biaya);
         } else if ($request->jenis_biaya == 'Tidakroutine') {
@@ -118,6 +132,17 @@ class TagihanController extends Controller
                 'amount' => $replace_amount,
                 'end_date' => $dateEnd,
             ]);
+            $mahasiswa = Biodata::where('jurusan_id', $biaya->id_jurusans)->where('program_belajar', $biaya->program_belajar)->get();
+
+            foreach ($mahasiswa as $index => $value) {
+                TagihanDetail::create([
+                    'id_tagihans' => $tagihanCreate->id,
+                    'id_users' => $value->user->id,
+                    'end_date' => $dateEnd,
+                    'amount' => $replace_amount,
+                    'status' => 'BELUM',
+                ]);
+            }
             return redirect()->route('admin.tagihan.index')->with('success', 'Berhasil Membuat tagihan ' . $biaya->nama_biaya);
         } else if ($request->jenis_biaya == 'DaftarUlang') {
             $data = $request->validate([
@@ -156,7 +181,7 @@ class TagihanController extends Controller
                 'id_angkatans' => $data['id_angkatans'],
                 'jenis_biaya' => 'Tingkatan',
                 'nama_biaya' => 'Tagihan Tingkatan Tahun ' . $tahunAjaran->year,
-                'program_belajar' => 'Bahasa Arab',
+                'program_belajar' => 'Kursus',
             ]);
             $tagihan = $request->validate([
                 'end_date.*' => 'required',

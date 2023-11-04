@@ -4,6 +4,7 @@
 
 @section('content')
 <<<<<<< HEAD
+<<<<<<< HEAD
 <div class="page-header min-height-300 border-radius-xl mt-4" style="background-image: url('/soft-ui-dashboard-main/assets/img/curved-images/curved0.jpg'); background-position-y: 50%;">
 =======
 <nav aria-label="breadcrumb">
@@ -15,6 +16,9 @@
 </nav>
 <div class="page-header min-height-300 border-radius-xl mt-4" style="background-image: url('../soft-ui-dashboard-main/assets/img/curved-images/curved0.jpg'); background-position-y: 50%;">
 >>>>>>> 46e3398b5282bba2241af524ee2f88c8839a5162
+=======
+<div class="page-header min-height-300 border-radius-xl mt-4" style="background-image: url('/soft-ui-dashboard-main/assets/img/curved-images/curved0.jpg'); background-position-y: 50%;">
+>>>>>>> 47bc6f05a93c7cec9a855e75b2132e90b72c9e75
     <span class="mask bg-gradient-primary opacity-6"></span>
 </div>
 <div class="card card-body blur shadow-blur mx-4 mt-n6 overflow-hidden">

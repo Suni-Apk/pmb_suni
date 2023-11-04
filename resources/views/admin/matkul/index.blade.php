@@ -17,16 +17,21 @@
                         <table class="table align-items-center mb-0" id="templateTable">
                             <thead>
                                 <tr>
-                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 text-center">id</th>
+                                    <th
+                                        class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 text-center">
+                                        id</th>
                                     <th class="text-uppercase text-secondary text-xxs px-2 font-weight-bolder opacity-7">
                                         Nama Matkul</th>
                                     <th class="text-uppercase text-secondary text-xxs px-2 font-weight-bolder opacity-7">
                                         Jurusan & Semester</th>
-                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2 text-center">
+                                    <th
+                                        class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2 text-center">
                                         Mulai</th>
-                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2 text-center">
+                                    <th
+                                        class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2 text-center">
                                         Selesai</th>
-                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2 text-center">
+                                    <th
+                                        class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2 text-center">
                                         Tanggal</th>
                                     <th
                                         class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
@@ -68,18 +73,21 @@
                                         <span class="text-secondary text-xs font-weight-bold">Admin</span>
                                     </td>
                                     <td class="d-flex align-items-center justify-content-center">
-                                        <a href="{{ route('admin.matkul.show' , 1) }}" class="btn btn-sm bg-gradient-success font-weight-bold text-xs mx-2 mt-3">
+                                        <a href="{{ route('admin.matkul.show', 1) }}"
+                                            class="btn btn-sm bg-gradient-success font-weight-bold text-xs mx-2 mt-3">
                                             <i class="fas fa-eye fs-6"></i>
                                         </a>
-                                    
-                                        <a href="{{ route('admin.matkul.edit', 1) }}" class="btn btn-sm bg-gradient-secondary font-weight-bold text-xs mx-2 mt-3">
+
+                                        <a href="{{ route('admin.matkul.edit', 1) }}"
+                                            class="btn btn-sm bg-gradient-secondary font-weight-bold text-xs mx-2 mt-3">
                                             <i class="fas fa-edit fs-6"></i>
                                         </a>
-                                    
+
                                         <form action="#" method="POST">
                                             @csrf
                                             @method('DELETE')
-                                            <button type="submit" class="btn btn-sm bg-gradient-danger font-weight-bold text-xs mx-2 show_confirm mt-3">
+                                            <button type="submit"
+                                                class="btn btn-sm bg-gradient-danger font-weight-bold text-xs mx-2 show_confirm mt-3">
                                                 <i class="fa fa-trash fs-6 show_confirm"></i>
                                             </button>
                                         </form>
@@ -106,9 +114,6 @@
             fixedHeight: true,
         });
     </script>
-<<<<<<< HEAD
-@endpush
-=======
     <script src="sweetalert2.all.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"
@@ -157,5 +162,3 @@
         });
     </script>
 @endpush
-
->>>>>>> 46e3398b5282bba2241af524ee2f88c8839a5162

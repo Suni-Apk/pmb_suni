@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Mahasiswa;
 
 use App\Http\Controllers\Controller;
+use App\Models\Biodata;
 use App\Models\User;
 use GuzzleHttp\Client;
 use Illuminate\Http\Request;
@@ -25,11 +26,8 @@ class DashboardController extends Controller
         $hijriDateday = $data['data']['hijri']['day'];
         $hijriDatemonth = $data['data']['hijri']['month']['ar'];
         $hijriDateyear = $data['data']['hijri']['year'];
-        return view('mahasiswa.index',compact('hijriDateday','hijriDatemonth','hijriDateyear'));
-    }
-
-    public function program_belajar()
-    {
-        return view('mahasiswa.program.index');
+        $user = Auth::user();
+        $biodata = Biodata::where('program_belajar','S1')->where('user_id',$user->id)->first();
+        return view('mahasiswa.index',compact('hijriDateday','hijriDatemonth','hijriDateyear','user','biodata'));
     }
 }
