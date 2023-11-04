@@ -192,7 +192,8 @@ class TagihanController extends Controller
         $biaya = Biaya::find($id);
         $tagihan = Tagihan::where('id_biayas', $biaya->id)->get();
         $tagihans = Tagihan::where('id_biayas', $biaya->id)->first();
-        return view('admin.tagihan.detail', compact('id', 'biaya', 'tagihan', 'tagihans'));
+        $total = Tagihan::where('id_biayas', $biaya->id)->sum('amount');
+        return view('admin.tagihan.detail', compact('id', 'biaya', 'tagihan', 'tagihans', 'total'));
     }
 
     /**
@@ -229,6 +230,7 @@ class TagihanController extends Controller
                     'amount' => $replace_amount[$key],
                 ]);
             }
+            return redirect()->back()->with('success', 'Berhasil mengupdate data ' . $biaya->nama_biaya);
         } else if ($request->jenis_biaya == 'Tidakroutine') {
             $data  = $request->validate([
                 'end_date' => 'required|date_format:Y-m-d',
@@ -247,6 +249,7 @@ class TagihanController extends Controller
                 'end_date' => $dateEnd,
                 'amount' => $replace_amount,
             ]);
+            return redirect()->back()->with('success', 'Berhasil mengupdate data ' . $biaya->nama_biaya);
         } else if ($request->jenis_biaya == 'Tingkatan') {
             $data  = $request->validate([
                 'end_date.*' => 'required|date_format:Y-m-d',
@@ -263,6 +266,7 @@ class TagihanController extends Controller
                     'amount' => $replace_amount[$key],
                 ]);
             }
+            return redirect()->back()->with('success', 'Berhasil mengupdate data ' . $biaya->nama_biaya);
         } else if ($request->jenis_biaya == 'DaftarUlang') {
             $data  = $request->validate([
                 'end_date' => 'required|date_format:Y-m-d',

@@ -115,7 +115,7 @@
                                             <strong>{{ $biayas->program_belajar }}</strong>
                                         </td>
                                         <td class="align-middle  text-secondary text-xs font-weight-bold">
-                                            {{ \Carbon\Carbon::parse($biayas->created_at)->format('d/m/y H:i:s') }}
+                                            {{ \Carbon\Carbon::parse($biayas->created_at)->format('d/m/Y H:i:s') }}
                                         </td>
                                         <td class="align-middle  text-secondary text-xs font-weight-bold">
                                             <strong>{{ $biayas->jenis_biaya }}</strong>

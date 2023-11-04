@@ -111,6 +111,11 @@
                                         <strong>{{ $biaya->program_belajar }}</strong>
                                     </td>
                                 </tr>
+                                <tr>
+                                    <td class="text-sm">Total :
+                                        <strong>Rp  {{ number_format($total, 0, '', '.') }}</strong>
+                                    </td>
+                                </tr>
                             </tbody>
                         </table>
                     </div>
