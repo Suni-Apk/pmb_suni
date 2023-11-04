@@ -29,4 +29,9 @@ class Jurusan extends Model
     {
         return $this->hasMany(Matkuls::class);
     }
+
+    public function biodatas()
+    {
+        return $this->hasMany(Biodata::class);
+    }
 }

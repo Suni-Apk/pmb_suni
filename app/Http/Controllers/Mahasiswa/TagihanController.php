@@ -3,26 +3,37 @@
 namespace App\Http\Controllers\Mahasiswa;
 
 use App\Http\Controllers\Controller;
+use App\Models\Biodata;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class TagihanController extends Controller
 {
     public function index()
     {
-        return view('mahasiswa.tagihan.index');
+        $biodata = Biodata::where('program_belajar','S1')->where('user_id',Auth::user()->id)->first();
+        return view('mahasiswa.tagihan.index',compact('biodata'));
     }
 
+    public function detail($name)
+    {
+        $biodata = Biodata::where('program_belajar','S1')->where('user_id',Auth::user()->id)->first();
+        return view('mahasiswa.tagihan.detail-tagihan',compact('biodata'));
+    }
     public function detail_spp($name)
     {
-        return view('mahasiswa.tagihan.detail-tagihan');
+        $biodata = Biodata::where('program_belajar','S1')->where('user_id',Auth::user()->id)->first();
+        return view('mahasiswa.tagihan.detail-tagihan',compact('biodata'));
     }
     public function payment_spp($name)
     {
-        return view('mahasiswa.tagihan.pilih-pembayaran');
+        $biodata = Biodata::where('program_belajar','S1')->where('user_id',Auth::user()->id)->first();
+        return view('mahasiswa.tagihan.pilih-pembayaran',compact('biodata'));
     }
 
     public function detail_tidak_routine($name)
     {
-        return view('mahasiswa.tagihan.detail-tagihan-tidak-routine');
+        $biodata = Biodata::where('program_belajar','S1')->where('user_id',Auth::user()->id)->first();
+        return view('mahasiswa.tagihan.detail-tagihan-tidak-routine',compact('biodata'));
     }
 }

@@ -16,4 +16,9 @@ class Tagihan extends Model
         "mounth",
         "amount",
     ];
+
+    public function biayas()
+    {
+        return $this->belongsTo(Biaya::class, 'id_biayas');
+    }
 }

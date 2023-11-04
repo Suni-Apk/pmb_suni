@@ -14,7 +14,7 @@
             Schema::create('biayas', function (Blueprint $table) {
                 $table->id();
                 $table->foreignId('id_angkatans');
-                $table->foreignId('id_jurusans');
+                $table->foreignId('id_jurusans')->nullable();
                 $table->string('nama_biaya');
                 $table->string('jenis_biaya');
                 $table->enum('program_belajar', ['S1', 'BAHASA ARAB']);

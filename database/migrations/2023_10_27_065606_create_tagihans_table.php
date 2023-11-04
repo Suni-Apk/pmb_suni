@@ -14,9 +14,9 @@ return new class extends Migration
         Schema::create('tagihans', function (Blueprint $table) {
             $table->id();
             $table->foreignId('id_biayas');
-            $table->date('start_date');
+            $table->date('start_date')->nullable();
             $table->date('end_date');
-            $table->string('mounth');
+            $table->string('mounth')->nullable();
             $table->integer('amount');
             $table->timestamps();
         });

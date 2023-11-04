@@ -1,10 +1,3 @@
-
-@charset "UTF-8"; /*!
-   * Bootstrap  v5.2.3 (https://getbootstrap.com/)
-   * Copyright 2011-2022 The Bootstrap Authors
-   * Copyright 2011-2022 Twitter, Inc.
-   * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
-   */
 :root {
     --bs-blue: #63b3ed;
     --bs-indigo: #596cff;
@@ -75,82 +68,6 @@
 
 ::-webkit-scrollbar-track
 {
-	border-radius: 7px;
-	background-color: #ebebeb;
-}
-
-::-webkit-scrollbar
-{
-	width: 9px;
-    height: 5px;
-	background-color: #F5F5F5;
-}
-
-::-webkit-scrollbar-thumb
-{
-	border-radius: 7px;
-	background-color: #c4c4c4;
-}
-
-#sidenav-collapse-main::-webkit-scrollbar-track
-{
-	border-radius: 7px;
-	background-color: #f8f9fa;
-}
-
-#sidenav-collapse-main::-webkit-scrollbar
-{
-	width: 7px;
-    height: 5px;
-	background-color: #f8f9fa;
-}
-
-#sidenav-collapse-main::-webkit-scrollbar-thumb
-{
-	border-radius: 10px;
-	background-color: #ebebeb;
-}
-
-::-webkit-scrollbar-track
-{
-	border-radius: 10px;
-	background-color: #ebebeb;
-}
-
-::-webkit-scrollbar
-{
-	width: 9px;
-    height: 9px;
-	background-color: #F5F5F5;
-}
-
-::-webkit-scrollbar-thumb
-{
-	border-radius: 7px;
-	background-color: #c4c4c4;
-}
-
-#sidenav-collapse-main::-webkit-scrollbar-track
-{
-	border-radius: 7px;
-	background-color: #f8f9fa;
-}
-
-#sidenav-collapse-main::-webkit-scrollbar
-{
-	width: 7px;
-    height: 5px;
-	background-color: #f8f9fa;
-}
-
-#sidenav-collapse-main::-webkit-scrollbar-thumb
-{
-	border-radius: 7px;
-	background-color: #ebebeb;
-}
-
-::-webkit-scrollbar-track
-{
 	border-radius: 10px;
 	background-color: #ebebeb;
 }
@@ -177,7 +94,7 @@
 #sidenav-collapse-main::-webkit-scrollbar
 {
 	width: 7px;
-    height: 7px;
+	height: 7px;
 	background-color: #f8f9fa;
 }
 
@@ -2608,7 +2525,7 @@ progress {
 }
 
 .form-control::placeholder {
-    color: #adb5bd;
+    color: #787e84;
     opacity: 1
 }
 
@@ -5546,10 +5463,7 @@ textarea.form-control,textarea.form-control-lg,textarea.form-control-sm {
     --bs-list-group-disabled-color: #6c757d;
     --bs-list-group-disabled-bg: #fff;
     --bs-list-group-active-color: #fff;
-    
-    /* --bs-list-group-active-bg: #28ba53;
-    --bs-list-group-active-border-color: #28ba53; */
-    
+  
     --bs-list-group-active-bg: #314067;
     --bs-list-group-active-border-color: #314067;
     display: flex;
@@ -20666,6 +20580,18 @@ textarea.form-control,textarea.form-control-lg,textarea.form-control-sm {
 
 .oblique .oblique-image {
     transform: skewX(10deg)
+}
+
+.oblique-reverse {
+    transform: skewX(10deg);
+    overflow: hidden;
+    width: 60%;
+    right: -10rem;
+    border-bottom-left-radius: .75rem
+}
+
+.oblique-reverse .oblique-image {
+    transform: skewX(-10deg)
 }
 
 .fixed-plugin .fixed-plugin-button {

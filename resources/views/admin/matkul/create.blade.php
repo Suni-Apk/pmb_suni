@@ -23,7 +23,7 @@
                                     <div class="form-group mb-3">
                                         <label for="id_jurusans">Jurusan</label>
                                         <select name="id_jurusans" id="id_jurusans" class="form-control" required>
-                                            <option disabled selected>-----------</option>
+                                            <option hidden selected>-----------</option>
                                             @foreach ($jurusan as $item)
                                                 <option value="{{ $item->id }}">{{ $item->name }}</option> 
                                             @endforeach
@@ -32,7 +32,7 @@
                                     <div class="form-group mb-3">
                                         <label for="id_semesters">Semester</label>
                                         <select name="id_semesters" id="id_semesters" class="form-control" required>
-                                            <option disabled selected>-----------</option>
+                                            <option hidden selected>-----------</option>
                                             <!-- Pilihan semester akan diisi melalui JavaScript -->
                                         </select>
                                     </div>                                    

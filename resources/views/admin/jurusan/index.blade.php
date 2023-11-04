@@ -13,71 +13,60 @@
                     <h6>Daftar Jurusan</h6>
                     <a href="{{ route('admin.jurusan.create') }}" class="btn bg-gradient-primary float-end">Tambah + </a>
                 </div>
-                <div class="card-body px-0 pt-0 pb-2">
-                    <div class="table-responsive p-0">
-                        <table class="table align-items-center mb-0" id="table">
-                            <thead>
-                                <tr>
-                                    <th
-                                        class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                        No</th>
-                                    <th
-                                        class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                        Tahun Ajaran</th>
-                                    <th
-                                        class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                        Jurusan</th>
-                                    <th
-                                        class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                        Code</th>
-                                    <th
-                                        class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                        Action</th>
-                                    <th class="text-secondary opacity-7"></th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach ($jurusan as $index => $jurusans)
-                                    <tr>
-                                        <td class="align-middle text-center text-sm">
-                                            <span class="text-bold">{{ $index + 1 }}</span>
-                                        </td>
-                                        <td class="align-middle text-center text-sm">
-                                            <span class="text-bold">{{ $jurusans->tahunAjaran->year }}</span>
-                                        </td>
-                                        <td class="align-middle text-center text-sm">
-                                            <span class="text-bold">{{ $jurusans->name }}</span>
-                                        </td>
-                                        <td class="align-middle text-center text-sm">
-                                            <span class="text-bold">{{ $jurusans->code }}</span>
-                                        </td>
-                                        <td class="d-flex align-items-center justify-content-center">
-                                            <a href="{{ route('admin.jurusan.show', $jurusans->id) }}"
-                                                class="btn btn-sm bg-gradient-success font-weight-bold text-xs mx-2 mt-3">
-                                                Detail
-                                            </a>
+              <div class="card-body px-0 pt-0 pb-2">
+                <div class="table-responsive p-0">
+                  <table class="table align-items-center mb-0" id="table">
+                    <thead>
+                      <tr>
+                        <th class="text-uppercase text-center text-secondary text-xxs font-weight-bolder opacity-7" style="width: 25px">No</th>
+                        <th class="text-uppercase text-start text-secondary text-xxs font-weight-bolder opacity-7">Nama</th>
+                        <th class="text-uppercase text-start text-secondary text-xxs font-weight-bolder opacity-7">Tahun Ajaran</th>
+                        <th class="text-uppercase text-start text-secondary text-xxs font-weight-bolder opacity-7">Kode</th>
+                        <th class="text-uppercase text-center text-secondary text-xxs font-weight-bolder opacity-7">Aksi</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      @foreach ($jurusan as $index => $jurusans)
+                        <tr>
+                            <td class="text-center">
+                                <h6 class="mb-0 text-sm">{{ $index + 1 }}</h6>
+                            </td>
+                            <td class="text-center text-sm">
+                                <span class="text-bold">{{ $jurusans->name }}</span>
+                            </td>
+                            <td class="text-center text-sm">
+                                <span class="">{{ $jurusans->tahunAjaran->year }}</span>
+                            </td>
+                            <td class="text-center text-sm">
+                                <span class="">{{ $jurusans->code }}</span>
+                            </td>
+                            <td class="d-flex align-items-center justify-content-center">
+                                <a href="{{ route('admin.jurusan.show', $jurusans->id) }}"
+                                    class="badge badge-sm bg-gradient-success font-weight-bolder text-xxs" data-toggle="tooltip" data-original-title="detail">
+                                    Detail
+                                </a>
 
-                                            <a href="{{ route('admin.jurusan.edit', $jurusans->id) }}"
-                                                class="btn btn-sm bg-gradient-secondary font-weight-bold text-xs mx-2 mt-3">
-                                                Edit
-                                            </a>
+                                <a href="{{ route('admin.jurusan.edit', $jurusans->id) }}"
+                                    class="badge badge-sm bg-gradient-secondary font-weight-bolder text-xxs mx-1" data-toggle="tooltip" data-original-title="edit">
+                                    Edit
+                                </a>
 
-                                            <form action="{{ route('admin.jurusan.destroy', $jurusans->id) }}"
-                                                method="POST">
-                                                @csrf
-                                                @method('DELETE')
-                                                <button type="submit"
-                                                    class="btn btn-sm bg-gradient-danger font-weight-bold text-xs mx-2 show_confirm mt-3">
-                                                    Hapus
-                                                </button>
-                                            </form>
-                                        </td>
-                                    </tr>
-                                @endforeach
-                            </tbody>
-                        </table>
-                    </div>
+                                <form action="{{ route('admin.jurusan.destroy', $jurusans->id) }}"
+                                    method="POST">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit"
+                                        class="badge badge-sm bg-gradient-danger font-weight-bolder text-xxs show_confirm" data-toggle="tooltip" data-original-title="hapus">
+                                        Hapus
+                                    </button>
+                                </form>
+                            </td>
+                        </tr>
+                      @endforeach
+                    </tbody>
+                  </table>
                 </div>
+              </div>
             </div>
         </div>
     </div>

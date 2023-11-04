@@ -19,9 +19,9 @@
                                 <form action="{{ route('admin.jurusan.store') }}" method="POST">
                                     @csrf
                                     <div class="form-group mb-3">
-                                        <label for="id_tahun_ajarans">Tahun Ajaran / Angkatan</label>
+                                        <label for="id_tahun_ajarans">Tahun Ajaran</label>
                                         <select name="id_tahun_ajarans" id="id_tahun_ajarans" class="form-control" required>
-                                            <option disabled selected>-----------</option>
+                                            <option hidden selected>-----------</option>
                                             @foreach ($tahun_ajaran as $item)
                                                 <option value="{{ $item->id }}">{{ $item->year }}</option>
                                             @endforeach
@@ -40,9 +40,10 @@
                                     </div>
 
                                     <div class="form-group mb-3">
-                                        <label for="name">Code / Singkatan</label>
+                                        <label for="code">Code</label>
+                                        <small class="text-info" style="font-size: 10px">Bisa diisi dengan singkatan/inisial jurusan</small>
                                         <input type="text" name="code" id="code" class="form-control" required>
-                                        @error('name')
+                                        @error('code')
                                             <div class="text-danger">{{ $message }}</div>
                                         @enderror
                                     </div>

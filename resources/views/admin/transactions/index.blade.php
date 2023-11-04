@@ -10,8 +10,13 @@
         <div class="col-12">
             <div class="card mb-4">
                 <div class="card-header pb-0 d-flex justify-content-between">
-                    <h6>Transaksi table</h6>
+                    <h6>Daftar Transaksi</h6>
                     <!-- Button trigger modal -->
+                    <button type="button" class="btn bg-gradient-primary" data-bs-toggle="modal"
+                        data-bs-target="#exampleModal">
+                        <i class="fas fa-plus me-1"></i> Buat Transaksi
+                    </button>
+
                     <!-- Modal -->
                     <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
                         aria-hidden="true">
@@ -29,24 +34,22 @@
                                     <div class="modal-body">
                                         <div class="form-check mb-3">
                                             <input class="form-check-input" type="radio" name="jenis_tagihan"
-                                                id="jenis_tagihan" value="Routine">
+                                                id="jenis_tagihan" value="rutin">
                                             <label class="custom-control-label" for="customRadio1">Routine</label>
                                         </div>
                                         <div class="form-check mb-3">
                                             <input class="form-check-input" type="radio" name="jenis_tagihan"
-                                                id="customRadio1" value="Tidakroutine">
+                                                id="customRadio1" value="tidak-rutin">
                                             <label class="custom-control-label" for="customRadio1">Tidak Routine</label>
                                         </div>
                                         <div class="form-check mb-3">
                                             <input class="form-check-input" type="radio" name="jenis_tagihan"
-                                                id="customRadio1" value="DaftarUlang">
+                                                id="customRadio1" value="daftar-ulang">
                                             <label class="custom-control-label" for="customRadio1">Daftar Ulang</label>
                                         </div>
 
                                     </div>
                                     <div class="modal-footer">
-                                        {{-- <button type="button" class="btn bg-gradient-secondary"
-                                            data-bs-dismiss="modal">Close</button> --}}
                                         <button class="btn bg-gradient-primary" type="submit">Lanjut <i
                                                 class="fas fa-arrow-circle-right ms-1"></i></button>
                                     </div>
@@ -57,30 +60,34 @@
                 </div>
                 <div class="card-body px-0 pt-0 pb-2">
                     <div class="table-responsive p-0">
-                        <table class="table align-items-center mb-0" id="templateTable">
+                        <table class="table mb-0" id="templateTable">
                             <thead>
                                 <tr>
-                                    <th class="text-uppercase text-secondary text-xs font-weight-bolder opacity-10">
-                                        No
+                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                        ID
                                     </th>
-                                    <th class=" text-uppercase text-secondary text-xs  font-weight-bolder opacity-10">
-                                        Nama
-                                        Tagihan</th>
-                                    <th class="text-uppercase text-secondary text-xs font-weight-bolder opacity-10">
-                                        Tanggal Pembayaran</th>
-                                    <th class=" text-uppercase text-secondary text-xs font-weight-bolder opacity-10">
-                                        Pembayar</th>
-                                    <th class="text-uppercase text-secondary text-xs font-weight-bolder opacity-10">
-                                        Total Pembayaran</th>
-                                    <th class=" text-uppercase text-secondary text-xs font-weight-bolder opacity-10">
-                                        Status</th>
-                                    <th class=" text-uppercase text-secondary text-xs font-weight-bolder opacity-10">
-                                        Jenis tagihan</th>
-                                    <th class=" text-uppercase text-secondary text-xs font-weight-bolder opacity-10">
-                                        Jenis Pembayaran</th>
+                                    <th class=" text-uppercase text-secondary text-xxs  font-weight-bolder opacity-7">
+                                        Nama Tagihan
+                                    </th>
+                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                        Tanggal Pembayaran
+                                    </th>
+                                    <th class=" text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                        Pembayar
+                                    </th>
+                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                        Total Pembayaran
+                                    </th>
+                                    <th class=" text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                        Status
+                                    </th>
+                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                        Jenis Tagihan / Pembayaran
+                                    </th>
                                     <th
-                                        class="text-center text-uppercase text-secondary text-xs font-weight-bolder opacity-10">
-                                        Action</th>
+                                        class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                        Aksi
+                                    </th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -99,30 +106,23 @@
 
                                     </td>
                                     <td class="align-middle text-secondary text-xs font-weight-bold">
-                                        Rp 200.000
+                                        Rp. 200.000,-
                                     </td>
                                     <td class="align-middle  text-secondary font-weight-bold">
                                         <span class="badge text-uppercase badge-sm bg-gradient-success">SUCCESS</span>
-
                                     </td>
-                                    <td class="align-middle  text-secondary text-xs font-weight-bold">
-                                        Tidak routine
-
-                                    </td>
-                                    <td class="align-middle text-secondary text-xs font-weight-bold">
-                                        Cash
+                                    <td>
+                                      <p class="text-xs font-weight-bold mb-0">Tidak Rutin</p>
+                                      <p class="text-xs text-uppercase text-secondary mb-0">CASH</p>
                                     </td>
                                     <td class="align-middle text-center">
-                                        <a href="{{ route('admin.transaction.show', 'Tidakroutine') }}"
+                                        <a href="{{ route('admin.transaksi.show', 'tidak-rutin') }}"
                                             class="badge text-uppercase badge-sm bg-gradient-info text-xxs mx-1"
                                             data-toggle="tooltip" data-original-title="detail">
                                             Detail
                                         </a>
-
-
-
                                         <a href=""
-                                            class="badge text-uppercase badge-sm bg-gradient-danger text-xxs mx-1"
+                                            class="badge text-uppercase badge-sm bg-gradient-danger text-xxs"
                                             data-toggle="tooltip" data-original-title="hapus">
                                             Hapus
                                         </a>
@@ -143,30 +143,23 @@
 
                                     </td>
                                     <td class="align-middle text-secondary text-xs font-weight-bold">
-                                        Rp 200.000
+                                        Rp. 200.000,-
                                     </td>
                                     <td class="align-middle  text-secondary font-weight-bold">
                                         <span class="badge text-uppercase badge-sm bg-gradient-warning">PENDING</span>
-
                                     </td>
-                                    <td class="align-middle  text-secondary text-xs font-weight-bold">
-                                        Routine
-
-                                    </td>
-                                    <td class="align-middle text-secondary text-xs font-weight-bold">
-                                        Cash
+                                    <td>
+                                      <p class="text-xs font-weight-bold mb-0">Rutin</p>
+                                      <p class="text-xs text-uppercase text-secondary mb-0">CASH</p>
                                     </td>
                                     <td class="align-middle text-center">
-                                        <a href="{{ route('admin.transaction.show', 'Routine') }}"
+                                        <a href="{{ route('admin.transaksi.show', 'rutin') }}"
                                             class="badge text-uppercase badge-sm bg-gradient-info text-xxs mx-1"
                                             data-toggle="tooltip" data-original-title="detail">
                                             Detail
                                         </a>
-
-
-
                                         <a href=""
-                                            class="badge text-uppercase badge-sm bg-gradient-danger text-xxs mx-1"
+                                            class="badge text-uppercase badge-sm bg-gradient-danger text-xxs"
                                             data-toggle="tooltip" data-original-title="hapus">
                                             Hapus
                                         </a>
@@ -187,26 +180,23 @@
 
                                     </td>
                                     <td class="align-middle text-secondary text-xs font-weight-bold">
-                                        Rp 200.000
+                                        Rp. 200.000,-
                                     </td>
                                     <td class="align-middle  text-secondary font-weight-bold">
                                         <span class="badge text-uppercase badge-sm bg-gradient-danger">EXPIRED</span>
                                     </td>
-                                    <td class="align-middle  text-secondary text-xs font-weight-bold">
-                                        Daftar ulang
-
-                                    </td>
-                                    <td class="align-middle text-secondary text-xs font-weight-bold">
-                                        Cicil
+                                    <td>
+                                      <p class="text-xs font-weight-bold mb-0">Daftar Ulang</p>
+                                      <p class="text-xs text-uppercase text-secondary mb-0">CASH</p>
                                     </td>
                                     <td class="align-middle text-center">
-                                        <a href="{{ route('admin.transaction.show', 'DaftarUlang') }}"
+                                        <a href="{{ route('admin.transaksi.show', 'daftar-ulang') }}"
                                             class="badge text-uppercase badge-sm bg-gradient-info text-xxs mx-1"
                                             data-toggle="tooltip" data-original-title="detail">
                                             Detail
                                         </a>
                                         <a href=""
-                                            class="badge text-uppercase badge-sm bg-gradient-danger text-xxs mx-1"
+                                            class="badge text-uppercase badge-sm bg-gradient-danger text-xxs"
                                             data-toggle="tooltip" data-original-title="hapus">
                                             Hapus
                                         </a>
@@ -232,21 +222,18 @@
                                     <td class="align-middle  text-secondary font-weight-bold">
                                         <span class="badge text-uppercase badge-sm bg-gradient-danger">EXPIRED</span>
                                     </td>
-                                    <td class="align-middle  text-secondary text-xs font-weight-bold">
-                                        Tingkatan
-
-                                    </td>
-                                    <td class="align-middle text-secondary text-xs font-weight-bold">
-                                        Cash
+                                    <td>
+                                      <p class="text-xs font-weight-bold mb-0">Tingkatan</p>
+                                      <p class="text-xs text-uppercase text-secondary mb-0">CASH</p>
                                     </td>
                                     <td class="align-middle text-center">
-                                        <a href="{{ route('admin.transaction.show', 'Tingkatan') }}"
+                                        <a href="{{ route('admin.transaksi.show', 'tingkatan') }}"
                                             class="badge text-uppercase badge-sm bg-gradient-info text-xxs mx-1"
                                             data-toggle="tooltip" data-original-title="detail">
                                             Detail
                                         </a>
                                         <a href=""
-                                            class="badge text-uppercase badge-sm bg-gradient-danger text-xxs mx-1"
+                                            class="badge text-uppercase badge-sm bg-gradient-danger text-xxs"
                                             data-toggle="tooltip" data-original-title="hapus">
                                             Hapus
                                         </a>

@@ -23,38 +23,38 @@
                                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-3">Mulai</th>
                                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-3">Selesai</th>
                                     <th class="text-uppercase text-secondary text-xxs px-2 font-weight-bolder opacity-7 text-center">Status</th>
-                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Action</th>
+                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Aksi</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($tahun_ajaran as $index => $tahunAjarans)
-                                    <tr>
-                                        <td class="align-middle text-center text-sm">
-                                            <span class="text-bold">{{ $index + 1 }}</span>
-                                        </td>
-                                        <td class="align-middle text-start text-sm">
-                                            <span class="text-bold">{{ $tahunAjarans->year }}</span>
-                                        </td>
-                                        <td class="text-sm">
-                                            <span class="text-bold">{{ \Carbon\Carbon::parse($tahunAjarans->start_at)->format('d F') }}</span>
-                                        </td>
-                                        <td class="text-sm">
-                                            <span class="text-bold">{{ \Carbon\Carbon::parse($tahunAjarans->end_at)->format('d F') }}</span>
-                                        </td>                                        
-                                        <td class="align-middle text-center">
-                                            <span class="badge badge-sm bg-gradient-success">AKTIF</span>
-                                        </td>
-                                        <td class="align-middle text-center">
-                                            <form action="{{ route('admin.tahun_ajaran.destroy',$tahunAjarans->id) }}" method="POST">
-                                                @csrf
-                                                @method('DELETE')
-                                                <button type="submit" class="btn btn-sm bg-gradient-danger font-weight-bold text-xs mx-2 show_confirm mt-3">
-                                                    <strong>Hapus</strong>
-                                                </button>
-                                            </form>
-                                        </td>
-                                    </tr>
-                                @endforeach
+                                @foreach ($tahun_ajaran as $index => $angkatans)
+                                <tr>
+                                    <td class="align-middle text-center text-sm">
+                                        <span class="text-bold">{{ $index + 1 }}</span>
+                                    </td>
+                                    <td class="align-middle text-start text-sm">
+                                        <span class="text-bold">{{ $angkatans->year }}</span>
+                                    </td>
+                                    <td class="text-sm">
+                                        <span class="text-bold">{{ \Carbon\Carbon::parse($tahunAjarans->start_at)->format('d F') }}</span>
+                                    </td>
+                                    <td class="text-sm">
+                                        <span class="text-bold">{{ \Carbon\Carbon::parse($tahunAjarans->end_at)->format('d F') }}</span>
+                                    </td>
+                                    <td class="align-middle text-center">
+                                        <span class="text-uppercase badge badge-sm bg-gradient-success">{{ $angkatans->status }}</span>
+                                    </td>
+                                    <td class="align-middle text-center">
+                                        <form action="{{ route('admin.tahun-ajaran.destroy',$angkatans->id) }}" method="POST">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" style="letter-spacing: .02rem"
+                                                class="badge badge-sm bg-gradient-danger font-weight-bolder text-xxs mx-2 show_confirm" data-toggle="tooltip" data-original-title="Hapus">
+                                                Hapus
+                                            </button>
+                                        </form>
+                                    </td>
+                                </tr>
                             </tbody>
                         </table>
                     </div>
@@ -85,9 +85,11 @@
         @if (Session::has('success'))
             toastr.success("{{ Session::get('success') }}")
         @endif
+
         @if (Session::has('delete'))
             toastr.success("{{ Session::get('success') }}")
         @endif
+
         @if (Session::has('pesan'))
             toastr.error('{{ Session::get('pesan') }}')
         @endif

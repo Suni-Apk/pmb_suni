@@ -1,5 +1,5 @@
 <aside
-    class="sidenav navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-3 overflow-x-hidden"
+    class="sidenav navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-3 overflow-hidden"
     id="sidenav-main">
     <div class="sidenav-header position-sticky">
         <i class="fas fa-times p-3 cursor-pointer text-secondary opacity-5 position-absolute end-0 top-0 d-none d-xl-none"
@@ -14,7 +14,7 @@
         <div class="collapse navbar-collapse w-auto min-vh-75" id="sidenav-collapse-main">
             <ul class="navbar-nav overflow-x-hidden" id="accordionSidebar">
                 <li class="nav-item">
-                    <a class="nav-link {{ Route::is('admin.dashboard.*') ? 'active' : '' }}" href="{{ route('admin.dashboard') }}">
+                    <a class="nav-link {{ Route::is('admin.dashboard') ? 'active' : '' }}" href="{{ route('admin.dashboard') }}">
                         <div
                             class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
                             <i class="fas fa-th-large"></i>
@@ -212,7 +212,7 @@
 
                 <!-- transaction -->
                 <li class="nav-item">
-                    <a data-bs-toggle="collapse" href="#transaction" class="nav-link {{ Route::is('admin.transaction.*') ? 'active' : '' }}" aria-controls="transaction"
+                    <a data-bs-toggle="collapse" href="#transaction" class="nav-link {{ Route::is('admin.transaksi.*') ? 'active' : '' }}" aria-controls="transaction"
                         role="button" aria-expanded="false">
                         <div
                             class="icon icon-sm shadow border-radius-md bg-white text-center d-flex align-items-center justify-content-center  me-2">
@@ -220,17 +220,17 @@
                         </div>
                         <span class="nav-link-text ms-1"> Transaksi </span>
                     </a>
-                    <div class="collapse {{ Route::is('admin.transaction.*') ? 'show' : '' }}" id="transaction">
+                    <div class="collapse {{ Route::is('admin.transaksi.*') ? 'show' : '' }}" id="transaction">
                         <ul class="nav ms-4 ps-3">
                             <li class="nav-item ">
-                                <a class="nav-link {{ Route::is('admin.transaction.index') ? 'active' : '' }}" href="{{ route('admin.transaction.index') }}">
+                                <a class="nav-link {{ Route::is('admin.transaksi.index') ? 'active' : '' }}" href="{{ route('admin.transaksi.index') }}">
                                     <span class="sidenav-mini-icon d-none d-xl-block"><i
                                             class="fas fa-border-all"></i></span>
                                     <span class="sidenav-normal"> Daftar Transaksi </span>
                                 </a>
                             </li>
                             <li class="nav-item ">
-                                <a class="nav-link {{ Route::is('admin.transaction.create') ? 'active' : '' }}" href="{{ route('admin.transaction.create') }}">
+                                <a class="nav-link {{ Route::is('admin.transaksi.create') ? 'active' : '' }}" href="{{ route('admin.transaksi.create') }}">
                                     <span class="sidenav-mini-icon d-none d-xl-block"><i
                                             class="fas fa-plus"></i></span>
                                     <span class="sidenav-normal"> Tambah Transaksi </span>
@@ -257,7 +257,7 @@
                         </div>
                         <span class="nav-link-text ms-1"> Dokumen </span>
                     </a>
-                    {{-- <div class="collapse {{ Route::is('admin.dokumen.*') ? 'show' : '' }}" id="document">
+                    <div class="collapse {{ Route::is('admin.dokumen.*') ? 'show' : '' }}" id="document">
                         <ul class="nav ms-4 ps-3">
                             <li class="nav-item ">
                                 <a class="nav-link {{ Route::is('admin.dokumen.index') ? 'active' : '' }}" href="{{ route('admin.dokumen.index') }}">
@@ -272,7 +272,35 @@
                                 </a>
                             </li>
                         </ul>
-                    </div> --}}
+                    </div>
+                </li>
+
+                <!-- link -->
+                <li class="nav-item">
+                    <a data-bs-toggle="collapse" href="#link" class="nav-link " aria-controls="link" role="button" aria-expanded="false">
+                        <div class="icon icon-sm shadow border-radius-md bg-white text-center d-flex align-items-center justify-content-center me-2">
+                            <i class="fas fa-link"></i>
+                        </div>
+                        <span class="nav-link-text ms-1"> Link </span>
+                    </a>
+                    <div class="collapse " id="link">
+                        <ul class="nav ms-4 ps-3">
+                            <li class="nav-item ">
+                                <a class="nav-link " href="">
+                                    <span class="sidenav-mini-icon d-none d-xl-block">
+                                        <img src="/soft-ui-dashboard-main/assets/img/icon-zoom.svg" width="14px">
+                                    </span>
+                                    <span class="sidenav-normal"> Link Zoom </span>
+                                </a>
+                            </li>
+                            <li class="nav-item ">
+                                <a class="nav-link " href="">
+                                    <span class="sidenav-mini-icon d-none d-xl-block"><i class="fab fa-whatsapp"></i></span>
+                                    <span class="sidenav-normal"> Link Whatsapp </span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
                 </li>
 
                 <!-- report -->
@@ -286,12 +314,18 @@
                     </a>
                 </li>
 
+                <!-- profile -->
+                <li class="nav-item">
+                    <a class="nav-link {{ Route::is('admin.profile') ? 'active' : '' }}" href="{{ route('admin.profile') }}">
+                        <div class="icon icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
+                            <i class="fas fa-user-alt"></i>
+                        </div>
+                        <span class="nav-link-text ms-1">Profile</span>
+                    </a>
+                </li>
+
                 <!-- settings -->
                 <li class="nav-item">
-                    <a data-bs-toggle="collapse" href="#settings" class="nav-link" aria-controls="settings"
-                        role="button" aria-expanded="false">
-                        <div
-                            class="icon icon-sm shadow border-radius-md bg-white text-center d-flex align-items-center justify-content-center  me-2">
                     <a data-bs-toggle="collapse" href="#settings" class="nav-link" aria-controls="settings"
                         role="button" aria-expanded="false">
                         <div
@@ -309,23 +343,13 @@
                                 </a>
                             </li>
                             <li class="nav-item ">
-                                {{-- <a class="nav-link {{ Route::is('admin.settings.notifications') ? 'active' : '' }}" href="{{ route('admin.settings.notifications') }}">
+                                <a class="nav-link {{ Route::is('admin.settings.notifications') ? 'active' : '' }}" href="{{ route('admin.settings.notifications') }}">
                                     <span class="sidenav-mini-icon"><i class="ni ni-bell-55"></i></span>
                                     <span class="sidenav-normal"> Notifikasi </span>
-                                </a> --}}
+                                </a>
                             </li>
                         </ul>
                     </div>
-                </li>
-
-                <!-- profile -->
-                <li class="nav-item">
-                    <a class="nav-link {{ Route::is('admin.profile') ? 'active' : '' }}" href="{{ route('admin.profile') }}">
-                        <div class="icon icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
-                            <i class="fas fa-user-alt"></i>
-                        </div>
-                        <span class="nav-link-text ms-1">Profile</span>
-                    </a>
                 </li>
 
                 <!-- template -->
@@ -377,17 +401,6 @@
                         </ul>
                     </div>
                 </li>
-
-                <!-- profile -->
-                <li class="nav-item">
-                    <a class="nav-link " href="">
-                        <div
-                            class="icon icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
-                            <i class="fas fa-user-alt"></i>
-                        </div>
-                        <span class="nav-link-text ms-1">Profile</span>
-                    </a>
-                </li>
             </ul>
         </div>
         <div class="sidenav-footer mx-3 nav-item">
@@ -410,48 +423,97 @@
                     </a>
                 </li>
 
-                {{-- academy --}}
-                <li class="nav-item">
-                    <ul class="nav-link pb-0 mb-0">
-                        <span class="sidenav-mini-icon d-none d-xl-block" style="color:rgb(196, 196, 196)"><i
-                                class="fas fa-university"></i></span>
-                        <span class="sidenav-normal text-uppercase text-xs ms-2 font-weight-bolder"> academy </span>
-                    </ul>
-                </li>
+                @if (!$biodata && !Auth::user()->document)
+                    <!-- biodata -->
+                    <li class="nav-item">
+                        <a class="nav-link {{ Route::is('mahasiswa.pendaftaran.s1') ? 'active' : '' }}"
+                            href="{{ route('mahasiswa.pendaftaran.s1') }}">
+                            <div
+                                class="icon icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
+                                <i class="fas fa-user-shield"></i>
+                            </div>
+                            <span class="nav-link-text ms-1">Isi Biodata</span>
+                        </a>
+                    </li>
+                    <!-- dcoment -->
+                    <li class="nav-item">
+                        <a class="nav-link {{ Route::is('mahasiswa.pendaftaran.document') ? 'active' : '' }}"
+                            href="{{ route('mahasiswa.pendaftaran.document') }}">
+                            <div
+                                class="icon icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
+                                <i class="fas fa-folder"></i>
+                            </div>
+                            <span class="nav-link-text ms-1">Isi Document</span>
+                        </a>
+                    </li>
+                @elseif ($biodata && !Auth::user()->document)
+                    <!-- dcoment -->
+                    <li class="nav-item">
+                        <a class="nav-link {{ Route::is('mahasiswa.pendaftaran.document') ? 'active' : '' }}"
+                            href="{{ route('mahasiswa.pendaftaran.document') }}">
+                            <div
+                                class="icon icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
+                                <i class="fas fa-folder"></i>
+                            </div>
+                            <span class="nav-link-text ms-1">Isi Document</span>
+                        </a>
+                    </li>
+                @elseif(!$biodata && Auth::user()->document)
+                    <!-- biodata -->
+                    <li class="nav-item">
+                        <a class="nav-link {{ Route::is('mahasiswa.pendaftaran.s1') ? 'active' : '' }}"
+                            href="{{ route('mahasiswa.pendaftaran.s1') }}">
+                            <div
+                                class="icon icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
+                                <i class="fas fa-user-shield"></i>
+                            </div>
+                            <span class="nav-link-text ms-1">Isi Biodata</span>
+                        </a>
+                    </li>
+                @else
+                    {{-- academy --}}
+                    <li class="nav-item">
+                        <ul class="nav-link pb-0 mb-0">
+                            <span class="sidenav-mini-icon d-none d-xl-block" style="color:rgb(196, 196, 196)"><i
+                                    class="fas fa-university"></i></span>
+                            <span class="sidenav-normal text-uppercase text-xs ms-2 font-weight-bolder"> academy </span>
+                        </ul>
+                    </li>
 
-                <!-- tahun ajaran -->
-                <li class="nav-item">
-                    <a href="{{ route('mahasiswa.matkul') }}"
-                        class="nav-link {{ Route::is('mahasiswa.matkul') ? 'active' : '' }}">
-                        <div
-                            class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center d-flex align-items-center justify-content-center  me-2">
-                            <i class="ni ni-hat-3"></i>
-                        </div>
-                        <span class="nav-link-text ms-1"> Mata Kuliah </span>
-                    </a>
-                </li>
+                    <!-- tahun ajaran -->
+                    <li class="nav-item">
+                        <a href="{{ route('mahasiswa.matkul') }}"
+                            class="nav-link {{ Route::is('mahasiswa.matkul') ? 'active' : '' }}">
+                            <div
+                                class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center d-flex align-items-center justify-content-center  me-2">
+                                <i class="ni ni-hat-3"></i>
+                            </div>
+                            <span class="nav-link-text ms-1"> Mata Kuliah </span>
+                        </a>
+                    </li>
 
-                {{-- payment --}}
-                <li class="nav-item">
-                    <ul class="nav-link pb-0 mb-0">
-                        <span class="sidenav-mini-icon d-none d-xl-block" style="color:rgb(196, 196, 196)"><i
-                                class="ni ni-credit-card"></i></span>
-                        <span class="sidenav-normal text-uppercase text-xs ms-2 font-weight-bolder"> payment </span>
-                    </ul>
-                </li>
+                    {{-- payment --}}
+                    <li class="nav-item">
+                        <ul class="nav-link pb-0 mb-0">
+                            <span class="sidenav-mini-icon d-none d-xl-block" style="color:rgb(196, 196, 196)"><i
+                                    class="ni ni-credit-card"></i></span>
+                            <span class="sidenav-normal text-uppercase text-xs ms-2 font-weight-bolder"> payment </span>
+                        </ul>
+                    </li>
 
-                <!-- billing -->
-                <li class="nav-item">
-                    <a href="{{ route('mahasiswa.tagihan.index') }}"
-                        class="nav-link {{ Route::is('mahasiswa.tagihan.*') ? 'active' : '' }}"
-                        aria-controls="billing" role="button" aria-expanded="false">
-                        <div
-                            class="icon icon-sm shadow border-radius-md bg-white text-center d-flex align-items-center justify-content-center  me-2">
-                            <i class="fas fa-wallet"></i>
-                        </div>
-                        <span class="nav-link-text ms-1"> Tagihan </span>
-                    </a>
-                </li>
+                    <!-- billing -->
+                    <li class="nav-item">
+                        <a href="{{ route('mahasiswa.tagihan.index') }}"
+                            class="nav-link {{ Route::is('mahasiswa.tagihan.*') ? 'active' : '' }}"
+                            aria-controls="billing" role="button" aria-expanded="false">
+                            <div
+                                class="icon icon-sm shadow border-radius-md bg-white text-center d-flex align-items-center justify-content-center  me-2">
+                                <i class="fas fa-wallet"></i>
+                            </div>
+                            <span class="nav-link-text ms-1"> Tagihan </span>
+                        </a>
+                    </li>
+                @endif
 
                 {{-- other --}}
                 <li class="nav-item">

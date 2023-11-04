@@ -4,14 +4,14 @@
 
 @section('content')
 
-    @if ($id == 'Routine')
+    @if ($biaya->jenis_biaya == 'Routine')
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
                 <li class="breadcrumb-item text-sm"><a class="opacity-5 text-dark" href="{{ route('dashboard') }}">Pages</a>
                 </li>
                 <li class="breadcrumb-item text-sm text-dark active" aria-current="page">Tagihan</li>
             </ol>
-            <h6 class="font-weight-bolder mb-0">Detail Tagihan Spp</h6>
+            <h6 class="font-weight-bolder mb-0">Detail Tagihan {{ $biaya->nama_biaya }}</h6>
         </nav>
         <div class="card h-100 mt-4">
             <div class="card-body p-3">
@@ -26,13 +26,21 @@
                             </thead>
                             <tbody class="table-border-bottom-0">
                                 <tr>
-                                    <td class="text-sm">Nama Tagihan : <strong>Spp Tahun 2022 / 2023</strong></td>
+                                    <td class="text-sm">Nama Tagihan : <strong>{{ $biaya->nama_biaya }}</strong></td>
                                 </tr>
                                 <tr>
-                                    <td class="text-sm">Untuk Angkatan : <strong>2022 / 2023</strong></td>
+                                    <td class="text-sm">Untuk Angkatan : <strong>{{ $biaya->tahunAjaran->year }}</strong>
+                                    </td>
                                 </tr>
                                 <tr>
-                                    <td class="text-sm">Untuk Jurusan / Prodi : <strong>Bahasa Arab</strong></td>
+                                    <td class="text-sm">Untuk Jurusan / Prodi :
+                                        <strong>{{ $biaya->jurusans->name }}</strong>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="text-sm">Untuk Program Belajar :
+                                        <strong>{{ $biaya->program_belajar }}</strong>
+                                    </td>
                                 </tr>
                             </tbody>
                         </table>
@@ -50,49 +58,15 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td class="">1</td>
-                                    <td class="">Agustus</td>
-                                    <td class="">Rp 200.000</td>
-                                    <td class="">30 Agustus 2023</td>
-                                </tr>
-                                <tr>
-                                    <td class="">2</td>
-                                    <td class="">September</td>
-                                    <td class="">Rp 200.000</td>
-                                    <td class="">30 September 2023</td>
-                                </tr>
-                                <tr>
-                                    <td class="">3</td>
-                                    <td class="">Oktober</td>
-                                    <td class="">Rp 200.000</td>
-
-                                    <td class="">30 Oktober 2023</td>
-
-                                </tr>
-                                <tr>
-                                    <td class="">4</td>
-                                    <td class="">November</td>
-                                    <td class="">Rp 200.000</td>
-
-                                    <td class="">30 November 2023</td>
-
-                                </tr>
-                                <tr>
-                                    <td class="">5</td>
-                                    <td class="">Desember</td>
-                                    <td class="">Rp 200.000</td>
-
-                                    <td class="">30 Desember 2023</td>
-
-                                </tr>
-                                <tr>
-                                    <td class="">6</td>
-                                    <td class="">Januari</td>
-                                    <td class="">Rp 200.000</td>
-
-                                    <td class="">30 Januari 2023</td>
-                                </tr>
+                                @foreach ($tagihan as $key => $value)
+                                    <tr>
+                                        <td class="">{{ $key + 1 }}</td>
+                                        <td class="">{{ $value->mounth }}</td>
+                                        <td class="">Rp {{ number_format($value->amount, 0, '', '.') }}</td>
+                                        <td class="">{{ Carbon\Carbon::parse($value->end_date)->format('d F Y') }}
+                                        </td>
+                                    </tr>
+                                @endforeach
                             </tbody>
                         </table>
                     </div>
@@ -103,14 +77,15 @@
 
         </div>
     @endif
-    @if ($id == 'Tingkatan')
+    @if ($biaya->jenis_biaya == 'Tingkatan')
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
-                <li class="breadcrumb-item text-sm"><a class="opacity-5 text-dark" href="{{ route('dashboard') }}">Pages</a>
+                <li class="breadcrumb-item text-sm"><a class="opacity-5 text-dark"
+                        href="{{ route('dashboard') }}">Pages</a>
                 </li>
                 <li class="breadcrumb-item text-sm text-dark active" aria-current="page">Tagihan</li>
             </ol>
-            <h6 class="font-weight-bolder mb-0">Detail Tagihan Tingkatan 2022</h6>
+            <h6 class="font-weight-bolder mb-0">Detail {{ $biaya->nama_biaya }}</h6>
         </nav>
         <div class="card h-100 mt-4">
             <div class="card-body p-3">
@@ -125,10 +100,16 @@
                             </thead>
                             <tbody class="table-border-bottom-0">
                                 <tr>
-                                    <td class="text-sm">Nama Tagihan : <strong>Tingkatan</strong></td>
+                                    <td class="text-sm">Nama Tagihan : <strong>{{ $biaya->nama_biaya }}</strong></td>
                                 </tr>
                                 <tr>
-                                    <td class="text-sm">Untuk Angkatan : <strong>2022 / 2023</strong></td>
+                                    <td class="text-sm">Untuk Angkatan : <strong>{{ $biaya->tahunAjaran->year }}</strong>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="text-sm">Untuk Program Belajar :
+                                        <strong>{{ $biaya->program_belajar }}</strong>
+                                    </td>
                                 </tr>
                             </tbody>
                         </table>
@@ -146,26 +127,15 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td class="">1</td>
-                                    <td class="">Mubtadi'</td>
-                                    <td class="">Rp 200.000</td>
-                                    <td class="">30 Agustus 2023</td>
-                                </tr>
-                                <tr>
-                                    <td class="">2</td>
-                                    <td class="">Muttawassith</td>
-                                    <td class="">Rp 200.000</td>
-                                    <td class="">30 September 2023</td>
-                                </tr>
-                                <tr>
-                                    <td class="">3</td>
-                                    <td class="">Mutaqaddim</td>
-                                    <td class="">Rp 200.000</td>
-
-                                    <td class="">30 Oktober 2023</td>
-
-                                </tr>
+                                @foreach ($tagihan as $key => $value)
+                                    <tr>
+                                        <td class="">{{ $key + 1 }}</td>
+                                        <td class="">{{ $value->mounth }}</td>
+                                        <td class="">Rp {{ number_format($value->amount, 0, '', '.') }}</td>
+                                        <td class="">{{ Carbon\Carbon::parse($value->end_date)->format('d F Y') }}
+                                        </td>
+                                    </tr>
+                                @endforeach
                             </tbody>
                         </table>
                     </div>
@@ -176,10 +146,11 @@
 
         </div>
     @endif
-    @if ($id == 'Tidakroutine')
+    @if ($biaya->jenis_biaya == 'Tidakroutine')
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
-                <li class="breadcrumb-item text-sm"><a class="opacity-5 text-dark" href="{{ route('dashboard') }}">Pages</a>
+                <li class="breadcrumb-item text-sm"><a class="opacity-5 text-dark"
+                        href="{{ route('dashboard') }}">Pages</a>
                 </li>
                 <li class="breadcrumb-item text-sm text-dark active" aria-current="page">Tagihan</li>
             </ol>
@@ -198,19 +169,35 @@
                             </thead>
                             <tbody class="table-border">
                                 <tr>
-                                    <td class="text-sm">Nama Tagihan : <strong>Tagihan Kelas</strong></td>
+                                    <td class="text-sm">Nama Tagihan : <strong>{{ $biaya->nama_biaya }}</strong></td>
                                 </tr>
                                 <tr>
-                                    <td class="text-sm">Total Harga : <strong>Rp 200.000</strong></td>
+                                    <td class="text-sm">Total Harga : <strong>Rp
+                                            {{ number_format($tagihans->amount, 0, '', '.') }}</strong>
+                                    </td>
                                 </tr>
                                 <tr>
-                                    <td class="text-sm">Untuk Angkatan : <strong>2022 / 2023</strong></td>
+                                    <td class="text-sm">Untuk Angkatan : <strong>{{ $biaya->tahunAjaran->year }}</strong>
+                                    </td>
+                                </tr>
+                                @if ($biaya->program_belajar == 'S1')
+                                    <tr>
+                                        <td class="text-sm">Untuk Jurusan / Prodi :
+                                            <strong>{{ $biaya->jurusans->name }}</strong>
+                                        </td>
+
+                                    </tr>
+                                @endif
+
+                                <tr>
+                                    <td class="text-sm">Tenggat Tagihan :
+                                        <strong>{{ Carbon\Carbon::parse($tagihans->end_date)->format('d F Y') }}</strong>
+                                    </td>
                                 </tr>
                                 <tr>
-                                    <td class="text-sm">Untuk Jurusan / Prodi : <strong>Bahasa Arab</strong></td>
-                                </tr>
-                                <tr>
-                                    <td class="text-sm">Tenggat Tagihan : <strong>23 Juni 2023</strong></td>
+                                    <td class="text-sm">Progam belajar :
+                                        <strong>{{ $biaya->program_belajar }}</strong>
+                                    </td>
                                 </tr>
                             </tbody>
                         </table>
@@ -221,7 +208,7 @@
             </div>
         </div>
     @endif
-    @if ($id == 'DaftarUlang')
+    @if ($biaya->jenis_biaya == 'DaftarUlang')
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
                 <li class="breadcrumb-item text-sm"><a class="opacity-5 text-dark"
@@ -244,22 +231,29 @@
                             </thead>
                             <tbody class="table-border">
                                 <tr>
-                                    <td class="text-sm">Nama Tagihan : <strong>Tagihan Daftar Ulang</strong></td>
+                                    <td class="text-sm">Nama Tagihan : <strong>{{ $biaya->nama_biaya }}</strong></td>
                                 </tr>
                                 <tr>
-                                    <td class="text-sm">Total Harga : <strong>Rp 200.000</strong></td>
+                                    <td class="text-sm">Total Harga : <strong>Rp
+                                            {{ number_format($tagihans->amount, 0, '', '.') }}</strong></td>
                                 </tr>
                                 <tr>
-                                    <td class="text-sm">Total Harga Percicilan 3x : <strong>Rp 66.666</strong></td>
+                                    <td class="text-sm">Total Harga Percicilan 3x : <strong>Rp
+                                            {{ number_format($tagihans->amount / 3, 0, '', '.') }}</strong></td>
                                 </tr>
-                                <tr>
-                                    <td class="text-sm">Untuk Angkatan : <strong>2022 / 2023</strong></td>
-                                </tr>
-                                <tr>
-                                    <td class="text-sm">Untuk Jurusan / Prodi : <strong>Bahasa Arab</strong></td>
-                                </tr>
+
                                 <tr>
                                     <td class="text-sm">Tenggat Tagihan : <strong>23 Juni 2023</strong></td>
+                                </tr>
+                                <tr>
+                                    <td class="text-sm">Untuk Angkatan :
+                                        <strong>{{ $biaya->tahunAjaran->year }}</strong>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="text-sm">Program Belajar :
+                                        <strong>{{ $biaya->program_belajar }}</strong>
+                                    </td>
                                 </tr>
                             </tbody>
                         </table>
