@@ -1,18 +1,16 @@
 <?php
 
-namespace App\Http\Controllers\Mahasiswa;
+namespace App\Http\Controllers\Kursus;
 
 use App\Http\Controllers\Controller;
 use App\Models\Biodata;
-use App\Models\User;
 use GuzzleHttp\Client;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Hash;
 
 class DashboardController extends Controller
 {
-    public function index()
+    public function kursus()
     {
         $tanggal = now()->format('d-m-Y');
         $bulan = now()->format('m'); // Format bulan sebagai "01" untuk Januari, "02" untuk Februari, dll.
@@ -27,7 +25,7 @@ class DashboardController extends Controller
         $hijriDatemonth = $data['data']['hijri']['month']['ar'];
         $hijriDateyear = $data['data']['hijri']['year'];
         $user = Auth::user();
-        $biodata = Biodata::where('program_belajar','S1')->where('user_id',$user->id)->first();
-        return view('mahasiswa.index',compact('hijriDateday','hijriDatemonth','hijriDateyear','user','biodata'));
+        $biodata = Biodata::where('program_belajar','KURSUS')->where('user_id',$user->id)->first();
+        return view('kursus.index',compact('hijriDateday','hijriDatemonth','hijriDateyear','user','biodata'));
     }
 }

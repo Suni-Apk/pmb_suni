@@ -1,4 +1,4 @@
-@extends('layouts.master')
+@extends('kursus.layouts.parent')
 
 @section('title', 'Change Password')
 

@@ -1,4 +1,4 @@
-@extends('layouts.master')
+@extends('kursus.layouts.parent')
 
 @section('title', 'Profile')
 
@@ -12,8 +12,10 @@
             <div class="col-auto">
                 <div class="avatar avatar-xl position-relative">
                     <img src="
-                    @if (!Auth::user()->biodata)
+                    @if (!Auth::user()->biodata->program_belajar == 'KURSUS')
                     /soft-ui-dashboard-main/assets/img/no-profile.png
+                    @elseif(!$biodata)
+                        /soft-ui-dashboard-main/assets/img/no-profile.png
                     @else
                         {{ asset('storage/' . $biodata['image'])}}
                     @endif
@@ -91,7 +93,7 @@
                                 <h6 class="mb-0">Profile Information</h6>
                             </div>
                             <div class="col-md-4 text-end">
-                                <a href="{{ route('mahasiswa.profile.edit-profile', Auth::user()->name) }}">
+                                <a href="{{ route('kursus.profile.edit-profile', Auth::user()->name) }}">
                                     <i class="fas fa-user-edit text-secondary text-sm" data-bs-toggle="tooltip"
                                         data-bs-placement="top" title="Edit Profile"></i>
                                 </a>
@@ -136,11 +138,11 @@
                             <div class="col-md-8 d-flex align-items-center">
                                 <h6 class="mb-0">Biodata Information</h6>
                             </div>
-                            @if (!$user->biodata)
+                            @if (!$biodata)
                                 
                             @else
                                 <div class="col-md-4 text-end">
-                                    <a href="{{ route('mahasiswa.pendaftaran.s1.edit',$user->id) }}">
+                                    <a href="{{ route('kursus.pendaftaran.s1.edit',$user->id) }}">
                                         <i class="fas fa-user-edit text-secondary text-sm" data-bs-toggle="tooltip"
                                             data-bs-placement="top" title="Edit Biodata"></i>
                                     </a>
@@ -148,7 +150,7 @@
                             @endif
                         </div>
                     </div>
-                    @if (!$user->biodata)
+                    @if (!$biodata)
                         <div class="d-flex align-items-center justify-content-center mt-5">
                             <a href="" class="btn btn-danger mt-4">Silahkan Lengkapi Biodata</a>
                         </div>
@@ -156,6 +158,15 @@
                         <div class="card-body p-3">
                             <hr class="horizontal gray-light">
                             <ul class="list-group">
+                                <li class="list-group-item border-0 ps-0 pt-0 text-sm"><strong class="text-dark">
+                                    Program Belajar :</strong>
+                                    &nbsp; {{ $biodata->program_belajar }}</li>
+                                <li class="list-group-item border-0 ps-0 pt-0 text-sm"><strong class="text-dark">
+                                    Profesi :</strong>
+                                    &nbsp; {{ $biodata->profesi }}</li>
+                                <li class="list-group-item border-0 ps-0 pt-0 text-sm"><strong class="text-dark">
+                                        Bisa Baca Al-Qur'an? :</strong>
+                                    &nbsp; {{ $biodata->baca_quran }}</li>
                                 <li class="list-group-item border-0 ps-0 pt-0 text-sm"><strong class="text-dark">
                                         Tanggal Lahir :</strong>
                                     &nbsp; {{ $biodata->birthdate }}</li>
@@ -176,100 +187,6 @@
                             </ul>
                         </div>
                     @endif
-                </div>
-            </div>
-            <div class="col-12 col-sm-12 mt-3">
-                <div class="card h-100 mt-2">
-                    <div class="card-header pb-0 p-3">
-                        <div class="row">
-                            <div class="col-md-8 d-flex align-items-center">
-                                <h6 class="mb-0">Document Information</h6>
-                            </div>
-                            @if (!$user->document)
-                                
-                            @else
-                                <div class="col-md-4 text-end">
-                                    <a href="{{ route('mahasiswa.pendaftaran.document.edit',$user->id) }}">
-                                        <i class="fas fa-user-edit text-secondary text-sm" data-bs-toggle="tooltip"
-                                            data-bs-placement="top" title="Edit Biodata"></i>
-                                    </a>
-                                </div>
-                            @endif
-                        </div>
-                    </div>
-                    <div class="card-body p-3">
-                        <hr class="horizontal gray-light">
-                        {{-- <a href="" class="btn btn-primary fs-6 p-2 px-3">
-                            <i class="fab fa-whatsapp"></i>
-                        </a>
-                        <a href="" class="btn btn-secondary fs-6 p-2 px-3 ms-2">
-                            <i class="fas fa-file-download"></i>
-                        </a> --}}
-                        <div class="row">
-                            @if (!$user->document)
-                                <div class="d-flex align-items-center justify-content-center">
-                                    <a href="" class="btn btn-danger">Silahkan Lengkapi Dokumen Anda</a>
-                                </div>
-                            @else
-                                <div class="col-12 col-sm-3">
-                                    <div class="mb-2">
-                                        <label for="">Document KTP</label>
-                                        <div class="d-flex">
-                                            <a href="{{ asset('storage/' . $user->document->ktp) }}" target="_blank" class="btn btn-primary">
-                                                <i class="fas fa-eye"></i>
-                                            </a>
-                                            <a href="{{route('mahasiswa.pendaftaran.document.ijazah',$user->id)}}" class="btn btn-secondary ms-2">
-                                                <i class="fas fa-file-download"></i>
-                                            </a>
-                                        </div>
-                                    <input type="text" value="{{$user->document->ktp}}" class="form-control rounded-4" disabled>
-                                    </div>
-                                </div>
-                                <div class="col-12 col-sm-3">
-                                    <div class="mb-2">
-                                        <label for="">Document KK</label>
-                                        <div class="d-flex">
-                                            <a href="{{ asset('storage/' . $user->document->kk) }}" target="_blank" class="btn btn-primary">
-                                                <i class="fas fa-eye"></i>
-                                            </a>
-                                            <a href="{{route('mahasiswa.pendaftaran.document.kk',$user->id)}}" class="btn btn-secondary ms-2">
-                                                <i class="fas fa-file-download"></i>
-                                            </a>
-                                        </div>
-                                    <input type="text" value="{{$user->document->kk}}" class="form-control rounded-4" disabled>
-                                    </div>
-                                </div>
-                                <div class="col-12 col-sm-3">
-                                    <div class="mb-2">
-                                        <label for="">Document IJAZAH</label>
-                                        <div class="d-flex">
-                                            <a href="{{ asset('storage/' . $user->document->ijazah) }}" target="_blank" class="btn btn-primary">
-                                                <i class="fas fa-eye"></i>
-                                            </a>
-                                            <a href="{{route('mahasiswa.pendaftaran.document.ijazah',$user->id)}}" class="btn btn-secondary ms-2">
-                                                <i class="fas fa-file-download"></i>
-                                            </a>
-                                        </div>
-                                    <input type="text" value="{{$user->document->ijazah}}" class="form-control rounded-4" disabled>
-                                    </div>
-                                </div>
-                                <div class="col-12 col-sm-3">
-                                    <div class="mb-2">
-                                        <label for="">Document Transkrip Nilai</label>
-                                        <div class="d-flex">
-                                            <a href="{{ asset('storage/' . $user->document->transkrip_nilai) }}" target="_blank" class="btn btn-primary">
-                                                <i class="fas fa-eye"></i>
-                                            </a>
-                                            <a href="{{route('mahasiswa.pendaftaran.document.transkrip_nilai',$user->id)}}" class="btn btn-secondary ms-2">
-                                                <i class="fas fa-file-download"></i>
-                                            </a>
-                                        </div>
-                                    <input type="text" value="{{$user->document->transkrip_nilai}}" class="form-control rounded-4" disabled>
-                                    </div>
-                                </div>
-                            @endif
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>

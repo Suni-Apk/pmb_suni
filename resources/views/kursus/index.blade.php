@@ -1,6 +1,6 @@
-@extends('layouts.master')
+@extends('kursus.layouts.parent')
 
-@section('title', 'Dashboard')
+@section('title', 'Dashboard Kursus')
 
 @section('content')
 <div class="row">
