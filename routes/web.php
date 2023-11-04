@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin\AccountController;
 use App\Http\Controllers\Admin\AuthController as AdminAuthController;
 use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
 use App\Http\Controllers\Admin\ProfileController;
+use App\Http\Controllers\AdministrasiController;
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\DocumentController;
 use App\Http\Controllers\JurusanController;
@@ -94,6 +95,9 @@ Route::prefix('/admin')->middleware('admin')->name('admin.')->group(function () 
     Route::resource('/tagihan', AdminTagihanController::class);
     Route::resource('/dokumen', DocumentController::class);
     Route::post('/next', [AdminTagihanController::class, 'next'])->name('tagihan.next');
+
+    // settings administrasi
+    Route::get('/administrasi', [AdministrasiController::class, 'administrasi'])->name('administrasi');
     
     //data settings
     Route::prefix('settings')->name('settings.')->group(function () {
@@ -176,14 +180,6 @@ Route::prefix('template')->group(function () {
     })->name('profile');
 
 
-    // Route::get('/edit-profile', function () {
-    //     return view('admin.profile.edit-profile');
-    // })->name('edit-profile');
-
-
-    // Route::get('/change-password', function () {
-    //     return view('admin.profile.change-password');
-    // })->name('change-password');
     Route::get('/change-password', function () {
         return view('admin.profile.change-password');
     })->name('change-password');

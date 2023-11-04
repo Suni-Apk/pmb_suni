@@ -29,8 +29,7 @@
                                         <span aria-hidden="true">&times;</span>
                                     </button>
                                 </div>
-                                <form action="{{ route('admin.tagihan.next') }}" method="POST">
-                                    @csrf
+                                <form action="{{ route('admin.tagihan.next') }}" method="GET">
                                     <div class="modal-body">
                                         <div class="form-check mb-3">
                                             <input class="form-check-input" type="radio" name="jenis_tagihan"
@@ -77,190 +76,73 @@
                                     <th class="text-uppercase text-secondary text-xxs px-2 font-weight-bolder opacity-8">
                                         Angkatan
                                     </th>
-                                    <th class=" text-uppercase text-secondary text-xxs font-weight-bolder opacity-8">
+                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-8">
                                         Jurusan
                                     </th>
                                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-8">
-                                        Total Harga
+                                        Program Belajar
                                     </th>
-                                    <th class=" text-uppercase text-secondary text-xxs font-weight-bolder opacity-8">
+                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-8">
                                         Created at
                                     </th>
-                                    <th class=" text-uppercase text-secondary text-xxs font-weight-bolder opacity-8">
+                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-8">
                                         Jenis tagihan
                                     </th>
                                     <th
                                         class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                        Action
+                                        Aksi
                                     </th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td class="align-middle text-xs font-weight-bold">1</td>
-                                    <td class="align-middle  text-secondary text-xs font-weight-bold">
-                                        Tagihan jas
-                                    </td>
-                                    <td class="align-middle  text-secondary text-xs font-weight-bold">
-                                        2022/2023
-                                    </td>
-                                    <td class="align-middle  text-secondary text-xs font-weight-bold">
-                                        Ilmu Fiqih
+                                @foreach ($biaya as $key => $biayas)
+                                    <tr>
+                                        <td class="align-middle text-xs font-weight-bold">{{ $key + 1 }}</td>
+                                        <td class="align-middle  text-secondary text-xs font-weight-bold">
+                                            <strong>{{ $biayas->nama_biaya }}</strong>
+                                        </td>
+                                        <td class="align-middle  text-secondary text-xs font-weight-bold">
+                                            {{ $biayas->tahunAjaran->year }}
+                                        </td>
 
-                                    </td>
-                                    <td class="align-middle text-secondary text-xs font-weight-bold">
-                                        Rp 200.000
-                                    </td>
-                                    <td class="align-middle  text-secondary text-xs font-weight-bold">
-                                        23/04/18
-                                    </td>
-                                    <td class="align-middle  text-secondary text-xs font-weight-bold">
-                                        <strong>Biaya lain</strong>
+                                        <td class="align-middle  text-secondary text-xs font-weight-bold">
+                                            {{ $biayas->jurusans->name ?? 'Tidak Ada Jurusan' }}
+                                        </td>
+                                        <td class="align-middle  text-secondary text-xs font-weight-bold">
+                                            <strong>{{ $biayas->program_belajar }}</strong>
+                                        </td>
+                                        <td class="align-middle  text-secondary text-xs font-weight-bold">
+                                            {{ \Carbon\Carbon::parse($biayas->created_at)->format('d/m/y H:i:s') }}
+                                        </td>
+                                        <td class="align-middle  text-secondary text-xs font-weight-bold">
+                                            <strong>{{ $biayas->jenis_biaya }}</strong>
 
                                     </td>
                                     <td class="align-middle text-center">
-                                        <a href="{{ route('admin.tagihan.show', 'tidak-rutin') }}"
-                                            class="badge text-uppercase badge-sm bg-gradient-info text-xxs"
+                                        <a href="{{ route('admin.tagihan.show', $biayas->id) }}"
+                                            class="badge text-uppercase badge-sm bg-gradient-info text-xxs mx-1"
                                             data-toggle="tooltip" data-original-title="detail">
                                             Detail
                                         </a>
 
-                                        <a href=""
-                                            class="badge text-uppercase badge-sm bg-gradient-secondary text-xxs mx-1"
-                                            data-toggle="tooltip" data-original-title="Edit">
-                                            Ubah
-                                        </a>
-
-                                        <a href=""
-                                            class="badge text-uppercase badge-sm bg-gradient-danger text-xxs"
-                                            data-toggle="tooltip" data-original-title="hapus">
-                                            Hapus
-                                        </a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="align-middle text-xs font-weight-bold">2</td>
-                                    <td class="align-middle text-secondary text-xs font-weight-bold">
-                                        Spp 2022/2023
-                                    </td>
-                                    <td class="align-middle  text-secondary text-xs font-weight-bold">
-                                        2022/2023
-                                    </td>
-                                    <td class="align-middle  text-secondary text-xs font-weight-bold">
-                                        Ilmu Fiqih
-
-                                    </td>
-                                    <td class="align-middle text-secondary text-xs font-weight-bold">
-                                        Rp 200.000
-                                    </td>
-                                    <td class="align-middle  text-secondary text-xs font-weight-bold">
-                                        23/04/18
-                                    </td>
-                                    <td class="align-middle  text-secondary text-xs font-weight-bold">
-                                        <strong>Spp</strong>
-                                    </td>
-                                    <td class="align-middle text-center">
-                                        <a href="{{ route('admin.tagihan.show', 'rutin') }}"
-                                            class="badge text-uppercase badge-sm bg-gradient-info text-xxs"
-                                            data-toggle="tooltip" data-original-title="detail">
-                                            Detail
-                                        </a>
-
-                                        <a href=""
-                                            class="badge text-uppercase badge-sm bg-gradient-secondary text-xxs mx-1"
-                                            data-toggle="tooltip" data-original-title="Edit">
-                                            Ubah
-                                        </a>
-
-                                        <a href=""
-                                            class="badge text-uppercase badge-sm bg-gradient-danger text-xxs"
-                                            data-toggle="tooltip" data-original-title="hapus">
-                                            Hapus
-                                        </a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="align-middle text-xs font-weight-bold">3</td>
-                                    <td class="align-middle text-secondary text-xs font-weight-bold">
-                                        Daftar Ulang 2022/2023
-                                    </td>
-                                    <td class="align-middle  text-secondary text-xs font-weight-bold">
-                                        2022/2023
-                                    </td>
-                                    <td class="align-middle  text-secondary text-xs font-weight-bold">
-                                        Ilmu Fiqih
-
-                                    </td>
-                                    <td class="align-middle text-secondary text-xs font-weight-bold">
-                                        Rp 200.000
-                                    </td>
-                                    <td class="align-middle  text-secondary text-xs font-weight-bold">
-                                        23/04/18
-                                    </td>
-                                    <td class="align-middle  text-secondary text-xs font-weight-bold">
-                                        <strong>Daftar Ulang</strong>
-                                    </td>
-                                    <td class="align-middle text-center">
-                                        <a href="{{ route('admin.tagihan.show', 'daftar-ulang') }}"
-                                            class="badge text-uppercase badge-sm bg-gradient-info text-xxs"
-                                            data-toggle="tooltip" data-original-title="detail">
-                                            Detail
-                                        </a>
-
-                                        <a href=""
-                                            class="badge text-uppercase badge-sm bg-gradient-secondary text-xxs mx-1"
-                                            data-toggle="tooltip" data-original-title="Edit">
-                                            Ubah
-                                        </a>
-
-                                        <a href=""
-                                            class="badge text-uppercase badge-sm bg-gradient-danger text-xxs"
-                                            data-toggle="tooltip" data-original-title="hapus">
-                                            Hapus
-                                        </a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="align-middle text-xs font-weight-bold">4</td>
-                                    <td class="align-middle text-secondary text-xs font-weight-bold">
-                                        Tingkatan 2023
-                                    </td>
-                                    <td class="align-middle  text-secondary text-xs font-weight-bold">
-                                        2022/2023
-                                    </td>
-                                    <td class="align-middle  text-secondary text-xs font-weight-bold">
-                                        -
-
-                                    </td>
-                                    <td class="align-middle text-secondary text-xs font-weight-bold">
-                                        Rp 2.550.000
-                                    </td>
-                                    <td class="align-middle  text-secondary text-xs font-weight-bold">
-                                        23/04/18
-                                    </td>
-                                    <td class="align-middle  text-secondary text-xs font-weight-bold">
-                                        <strong>Tingkatan</strong>
-                                    </td>
-                                    <td class="align-middle text-center">
-                                        <a href="{{ route('admin.tagihan.show', 'tingkatan') }}"
-                                            class="badge text-uppercase badge-sm bg-gradient-info text-xxs"
-                                            data-toggle="tooltip" data-original-title="detail">
-                                            Detail
-                                        </a>
-
-                                        <a href=""
-                                            class="badge text-uppercase badge-sm bg-gradient-secondary text-xxs mx-1"
-                                            data-toggle="tooltip" data-original-title="Edit">
-                                            Ubah
-                                        </a>
-
-                                        <a href=""
-                                            class="badge text-uppercase badge-sm bg-gradient-danger text-xxs"
-                                            data-toggle="tooltip" data-original-title="hapus">
-                                            Hapus
-                                        </a>
-                                    </td>
-                                </tr>
+                                            <a href="{{ route('admin.tagihan.edit', $biayas->id) }}"
+                                                class="badge text-uppercase badge-sm bg-gradient-secondary text-xxs mx-1"
+                                                data-toggle="tooltip" data-original-title="Edit">
+                                                Ubah
+                                            </a>
+                                            <form action="{{ route('admin.tagihan.destroy', $biayas->id) }}"
+                                                method="POST" class="d-inline">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button
+                                                    class="badge border-0 text-uppercase badge-sm bg-gradient-danger text-xxs mx-1"
+                                                    data-toggle="tooltip" data-original-title="hapus" type="submit">
+                                                    Hapus
+                                                </button>
+                                            </form>
+                                        </td>
+                                    </tr>
+                                @endforeach
                             </tbody>
                         </table>
                     </div>
@@ -271,6 +153,28 @@
 @endsection
 
 @push('scripts')
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+        integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"
+        integrity="sha512-VEd+nq25CkR676O+pLBnDW09R7VQX9Mdiij052gVCp5yVH3jGtH70Ho/UUv4mJDsEdTvqRCFZg0NKGiojGnUCw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css"
+        integrity="sha512-3pIirOrwegjM6erE5gPSwkUzO+3cTjpnV9lexlNZqvupR64iZBnOOTiiLPb9M36zpMScbmUNIcHUqKD47M719g=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script>
+        @if (Session::has('success'))
+            toastr.success("{{ Session::get('success') }}")
+        @endif
+
+        @if (Session::has('delete'))
+            toastr.success("{{ Session::get('success') }}")
+        @endif
+
+        @if (Session::has('pesan'))
+            toastr.error('{{ Session::get('pesan') }}')
+        @endif
+    </script>
     <script>
         const dataTableBasic = new simpleDatatables.DataTable("#templateTable", {
             searchable: true,

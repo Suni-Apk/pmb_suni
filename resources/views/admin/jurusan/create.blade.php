@@ -16,11 +16,36 @@
                     <div class="card">
                         <div class="card-body">
                             <div class="table-responsive text-nowrap">
-                                <form action="#" method="POST">
+                                <form action="{{ route('admin.jurusan.store') }}" method="POST">
                                     @csrf
                                     <div class="form-group mb-3">
-                                        <label for="nama">Nama</label>
-                                        <input type="text" name="nama" id="nama" class="form-control">
+                                        <label for="id_tahun_ajarans">Tahun Ajaran</label>
+                                        <select name="id_tahun_ajarans" id="id_tahun_ajarans" class="form-control" required>
+                                            <option hidden selected>-----------</option>
+                                            @foreach ($tahun_ajaran as $item)
+                                                <option value="{{ $item->id }}">{{ $item->year }}</option>
+                                            @endforeach
+                                        </select>
+                                        @error('id_tahun_ajarans')
+                                            <div class="text-danger">{{ $message }}</div>
+                                        @enderror
+                                    </div>
+
+                                    <div class="form-group mb-3">
+                                        <label for="name">Nama</label>
+                                        <input type="text" name="name" id="name" class="form-control" required>
+                                        @error('name')
+                                            <div class="text-danger">{{ $message }}</div>
+                                        @enderror
+                                    </div>
+
+                                    <div class="form-group mb-3">
+                                        <label for="name">Code</label>
+                                        <small class="text-info" style="font-size: 10px">Bisa diisi dengan singkatan/inisial jurusan</small>
+                                        <input type="text" name="code" id="code" class="form-control" required>
+                                        @error('name')
+                                            <div class="text-danger">{{ $message }}</div>
+                                        @enderror
                                     </div>
 
                                     <button type="submit" class="btn btn-success">Submit</button>

@@ -65,11 +65,14 @@
                                             Ubah
                                         </a>
 
-                                        <a href="{{ route('admin.matkul.destroy', 1) }}"
-                                            class="badge badge-sm bg-gradient-danger font-weight-bold text-xxs"
+                                        <form action="#" method="POST">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="badge badge-sm bg-gradient-danger font-weight-bold text-xxs show_confirm"
                                             data-toggle="tooltip" data-original-title="hapus">
-                                            Hapus
-                                        </a>
+                                                Hapus
+                                            </button>
+                                        </form>
                                     </td>
                                 </tr>
                             </tbody>
@@ -136,4 +139,3 @@
         });
     </script>
 @endpush
-
