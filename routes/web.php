@@ -123,7 +123,7 @@ Route::prefix('/kursus')->middleware(['auth'])->name('kursus.')->group(function(
     Route::put('/edit-biodata/process/{id}',[KursusProfileController::class,'edit_biodata_process'])->name('pendaftaran.s1.edit.process');
 
     //mata pelajaran
-    Route::get('/matkul', [MataPelajaranController::class, 'index'])->name('matkul');
+    Route::get('/mata-pelajaran', [MataPelajaranController::class, 'index'])->name('matkul');
 
     //tagihan kursus
     Route::get('/tagihan', [KursusTagihanController::class, 'index'])->name('tagihan.index');
