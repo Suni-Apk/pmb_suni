@@ -9,12 +9,12 @@ use Illuminate\Support\Facades\Auth;
 
 class DashboardController extends Controller
 {
-    public function index()
-    {
-        $user = Auth::user();
-        $tanggal = now()->format('d-m-Y');
-        $bulan = now()->format('m'); // Format bulan sebagai "01" untuk Januari, "02" untuk Februari, dll.
-        $tahun = now()->format('Y'); // Format tahun sebagai "2023" (misalnya).
+        public function index()
+        {
+                $user = Auth::user();
+                $tanggal = now()->format('d-m-Y');
+                $bulan = now()->format('m'); // Format bulan sebagai "01" untuk Januari, "02" untuk Februari, dll.
+                $tahun = now()->format('Y'); // Format tahun sebagai "2023" (misalnya).
 
         $client = new Client();
         $response = $client->get("http://api.aladhan.com/v1/gToH/$tanggal");

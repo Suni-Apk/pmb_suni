@@ -13,7 +13,8 @@
                     <div class="card">
                         <div class="card-body">
                             <div class="table-responsive text-nowrap">
-                                <form action="{{route('mahasiswa.pendaftaran.s1.process')}}" method="POST" enctype="multipart/form-data">
+                                <form action="{{ route('mahasiswa.pendaftaran.s1.process') }}" method="POST"
+                                    enctype="multipart/form-data">
                                     @csrf
                                     @method('POST')
                                     <div class="form-group mb-3">
@@ -27,7 +28,8 @@
                                         <select name="jurusan_id" class="form-control">
                                             <option value="" disabled selected>Pilih Jurusan</option>
                                             @foreach ($jurusan as $index => $item)
-                                                <option value="{{$item->id}}">{{$item->name}}</option>
+                                                <option value="{{ $item->id }}">{{ $item->name }}
+                                                </option>
                                             @endforeach
                                         </select>
                                     </div>
@@ -39,7 +41,8 @@
 
                                     <div class="form-group mb-3">
                                         <label for="birthplace">Tempat Lahir</label>
-                                        <input type="text" name="birthplace" id="birthplace" class="form-control" placeholder="Masukkan Tempat Lahir Anda">
+                                        <input type="text" name="birthplace" id="birthplace" class="form-control"
+                                            placeholder="Masukkan Tempat Lahir Anda">
                                     </div>
 
                                     <div class="form-group mb-3">

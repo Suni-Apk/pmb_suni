@@ -2,6 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Biaya;
+use App\Models\Biodata;
+use App\Models\Jurusan;
+use App\Models\Tagihan;
+use App\Models\TagihanDetail;
+use App\Models\TahunAjaran;
 use Illuminate\Http\Request;
 
 class TagihanController extends Controller
@@ -11,33 +17,195 @@ class TagihanController extends Controller
      */
     public function index()
     {
+        $biaya = Biaya::with('tagihan')->get();
 
-        return view('admin.tagihan.index');
+
+        return view('admin.tagihan.index', compact('biaya'));
     }
 
     /**
      * Show the form for creating a new resource.
      */
-    public function create(Request $request)
+    public function create()
     {
     }
 
     public function next(Request $request)
     {
+        $data = $request->validate([
+            'jenis_tagihan' => 'required'
+        ]);
         $jenis_tagihan = $request->jenis_tagihan;
-
-        if ($jenis_tagihan) {
-            return view('admin.tagihan.create', compact('jenis_tagihan'));
-        } else {
-            return redirect()->back();
-        }
+        $tahunAjaran = TahunAjaran::all();
+        $jurusanGrouped = Jurusan::with('tahunAjaran')->get()->groupBy('id_tahun_ajarans');
+        $jurusans = Jurusan::with('tahunAjaran')->first();
+        return view('admin.tagihan.create', compact('jenis_tagihan', 'tahunAjaran', 'jurusanGrouped', 'jurusans'));
     }
     /**
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
     {
-        //
+
+        if ($request->jenis_biaya == 'Routine') {
+            $biayas = $request->validate([
+                'id_angkatans' => 'required',
+                'id_jurusans' => 'nullable',
+                'jenis_biaya' => 'required',
+            ]);
+            $tahunAjaran = TahunAjaran::where('id', $biayas['id_angkatans'])->first();
+            $biaya = Biaya::create([
+                'id_angkatans' => $biayas['id_angkatans'],
+                'id_jurusans' => $biayas['id_jurusans'],
+                'jenis_biaya' => $biayas['jenis_biaya'],
+                'nama_biaya' => 'Tagihan Spp tahun ' . $tahunAjaran->year,
+                'program_belajar' => 'S1',
+            ]);
+            $tagihan = $request->validate([
+                'end_date.*' => 'required',
+                'mounth.*' => 'nullable',
+                'amount.*' => 'required|string|min:6',
+                'status' => 'nullable',
+            ]);
+            $dateEnd = request()->input('end_date');
+            $mounth = request()->input('mounth');
+            $replace_amount = str_replace('.', '', $tagihan['amount']);
+
+            foreach ($replace_amount as $key => $amount) {
+                $tagihanCreate = Tagihan::create([
+                    'id_biayas' => $biaya->id,
+                    'mounth' => $mounth[$key],
+                    'amount' => $amount,
+                    'end_date' => $dateEnd[$key],
+                ]);
+
+                $mahasiswa = Biodata::where('program_belajar', $biaya->program_belajar)->get();
+
+                foreach ($mahasiswa as $index => $value) {
+                    TagihanDetail::create([
+                        'id_tagihans' => $tagihanCreate->id,
+                        'id_users' => $value->user->id,
+                        'end_date' => $dateEnd[$key],
+                        'amount' => $amount,
+                        'status' => 'BELUM',
+                    ]);
+                }
+            }
+            return redirect()->route('admin.tagihan.index')->with('success', 'Berhasil Membuat tagihan ' . $biaya->nama_biaya);
+        } else if ($request->jenis_biaya == 'Tidakroutine') {
+            if ($request->program_belajar == 'S1') {
+                $data = $request->validate([
+                    'id_angkatans' => 'required',
+                    'id_jurusans' => 'required',
+                    'jenis_biaya' => 'required',
+                    'nama_biaya' => 'required',
+                    'program_belajar' => 'required',
+                ]);
+            }
+            $data = $request->validate([
+                'id_angkatans' => 'required',
+                'id_jurusans' => 'nullable',
+                'jenis_biaya' => 'required',
+                'nama_biaya' => 'required',
+                'program_belajar' => 'required',
+            ]);
+
+            $biaya = Biaya::create([
+                'id_angkatans' => $data['id_angkatans'],
+                'id_jurusans' => $request->id_jurusans,
+                'jenis_biaya' => 'Tidakroutine',
+                'nama_biaya' => $data['nama_biaya'],
+                'program_belajar' => $data['program_belajar'],
+            ]);
+            $tagihan = $request->validate([
+                'end_date' => 'required',
+                'mounth' => 'nullable',
+                'amount' => 'required|string|min:6',
+                'status' => 'nullable',
+            ]);
+            $dateEnd = $tagihan['end_date'];
+            $mounth = $request->mounth;
+            $replace_amount = str_replace('.', '', $tagihan['amount']);
+
+            $tagihanCreate = Tagihan::create([
+                'id_biayas' => $biaya->id,
+                'amount' => $replace_amount,
+                'end_date' => $dateEnd,
+            ]);
+            $mahasiswa = Biodata::where('jurusan_id', $biaya->id_jurusans)->where('program_belajar', $biaya->program_belajar)->get();
+
+            foreach ($mahasiswa as $index => $value) {
+                TagihanDetail::create([
+                    'id_tagihans' => $tagihanCreate->id,
+                    'id_users' => $value->user->id,
+                    'end_date' => $dateEnd,
+                    'amount' => $replace_amount,
+                    'status' => 'BELUM',
+                ]);
+            }
+            return redirect()->route('admin.tagihan.index')->with('success', 'Berhasil Membuat tagihan ' . $biaya->nama_biaya);
+        } else if ($request->jenis_biaya == 'DaftarUlang') {
+            $data = $request->validate([
+                'id_angkatans' => 'required',
+                'jenis_biaya' => 'required',
+            ]);
+            $tahunAjaran = TahunAjaran::where('id', $data['id_angkatans'])->first();
+            $biaya = Biaya::create([
+                'id_angkatans' => $data['id_angkatans'],
+                'jenis_biaya' => 'DaftarUlang',
+                'nama_biaya' => 'Tagihan Daftar Ulang ' . $tahunAjaran->year,
+                'program_belajar' => 'S1',
+            ]);
+            $tagihan = $request->validate([
+                'end_date' => 'required',
+                'mounth' => 'nullable',
+                'amount' => 'required|string|min:6',
+                'status' => 'nullable',
+            ]);
+            $dateEnd = $tagihan['end_date'];
+            // $mounth = $tagihan['mounth'];
+            $replace_amount = str_replace('.', '', $tagihan['amount']);
+            $tagihanCreate = Tagihan::create([
+                'id_biayas' => $biaya->id,
+                'amount' => $replace_amount,
+                'end_date' => $dateEnd,
+            ]);
+            return redirect()->route('admin.tagihan.index')->with('success', 'Berhasil Membuat tagihan ' . $biaya->nama_biaya);
+        } else if ($request->jenis_biaya == 'Tingkatan') {
+            $data = $request->validate([
+                'id_angkatans' => 'required',
+                'jenis_biaya' => 'required',
+            ]);
+            $tahunAjaran = TahunAjaran::where('id', $data['id_angkatans'])->first();
+            $biaya = Biaya::create([
+                'id_angkatans' => $data['id_angkatans'],
+                'jenis_biaya' => 'Tingkatan',
+                'nama_biaya' => 'Tagihan Tingkatan Tahun ' . $tahunAjaran->year,
+                'program_belajar' => 'Kursus',
+            ]);
+            $tagihan = $request->validate([
+                'end_date.*' => 'required',
+                'mounth.*' => 'required',
+                'amount.*' => 'required|string|min:6',
+                'status.*' => 'nullable',
+            ]);
+            $dateEnd = request()->input('end_date');
+
+            $mounth = request()->input('mounth');
+            $replace_amount = str_replace('.', '', $tagihan['amount']);
+
+            foreach ($replace_amount as $key => $amount) {
+                $tagihanCreate = Tagihan::create([
+                    'id_biayas' => $biaya->id,
+                    'amount' => $amount,
+                    'end_date' => $dateEnd[$key],
+                    'mounth' => $mounth[$key],
+                ]);
+            }
+            return redirect()->route('admin.tagihan.index')->with('success', 'Berhasil Membuat tagihan ' . $biaya->nama_biaya);
+        } else {
+            return redirect()->back();
+        }
     }
 
     /**
@@ -45,7 +213,12 @@ class TagihanController extends Controller
      */
     public function show($id)
     {
-        return view('admin.tagihan.detail', compact('id'));
+
+        $biaya = Biaya::find($id);
+        $tagihan = Tagihan::where('id_biayas', $biaya->id)->get();
+        $tagihans = Tagihan::where('id_biayas', $biaya->id)->first();
+        $total = Tagihan::where('id_biayas', $biaya->id)->sum('amount');
+        return view('admin.tagihan.detail', compact('id', 'biaya', 'tagihan', 'tagihans', 'total'));
     }
 
     /**
@@ -53,7 +226,11 @@ class TagihanController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $biaya = Biaya::find($id);
+        $tagihan = Tagihan::where('id_biayas', $biaya->id)->get();
+        $tagihans = Tagihan::where('id_biayas', $biaya->id)->first();
+
+        return view('admin.tagihan.edit', compact('biaya', 'tagihan', 'tagihans'));
     }
 
     /**
@@ -61,14 +238,91 @@ class TagihanController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $biaya = Biaya::find($id);
+        if ($request->jenis_biaya == 'Routine') {
+            $data  = $request->validate([
+                'end_date.*' => 'required|date_format:Y-m-d',
+                'amount.*' => 'required|string|min:5',
+                'status.*' => 'nullable',
+            ]);
+            $dateEnd = request()->input('end_date');
+            $replace_amount = str_replace('.', '', request()->input('amount'));
+            $tagihan = Tagihan::where('id_biayas', '=', $biaya->id)->get();
+            foreach ($tagihan as $key => $tagihans) {
+                $tagihan = Tagihan::where('id', '=', $tagihans->id);
+                $tagihan->update([
+                    'end_date' => $dateEnd[$key],
+                    'amount' => $replace_amount[$key],
+                ]);
+            }
+            return redirect()->back()->with('success', 'Berhasil mengupdate data ' . $biaya->nama_biaya);
+        } else if ($request->jenis_biaya == 'Tidakroutine') {
+            $data  = $request->validate([
+                'end_date' => 'required|date_format:Y-m-d',
+                'amount' => 'required|string|min:6',
+                'status' => 'nullable',
+                'nama_biaya' => 'required'
+            ]);
+            $biaya->update([
+                'nama_biaya' => $data['nama_biaya'],
+            ]);
+            $dateEnd = request()->input('end_date');
+            $replace_amount = str_replace('.', '', request()->input('amount'));
+            $tagihan = Tagihan::where('id_biayas', '=', $biaya->id)->first();
+            $tagihans = Tagihan::where('id', '=', $tagihan->id);
+            $tagihans->update([
+                'end_date' => $dateEnd,
+                'amount' => $replace_amount,
+            ]);
+            return redirect()->back()->with('success', 'Berhasil mengupdate data ' . $biaya->nama_biaya);
+        } else if ($request->jenis_biaya == 'Tingkatan') {
+            $data  = $request->validate([
+                'end_date.*' => 'required|date_format:Y-m-d',
+                'amount.*' => 'required|string|min:6',
+                'status.*' => 'nullable',
+            ]);
+            $dateEnd = request()->input('end_date');
+            $replace_amount = str_replace('.', '', request()->input('amount'));
+            $tagihan = Tagihan::where('id_biayas', '=', $biaya->id)->get();
+            foreach ($tagihan as $key => $tagihans) {
+                $tagihan = Tagihan::where('id', '=', $tagihans->id);
+                $tagihan->update([
+                    'end_date' => $dateEnd[$key],
+                    'amount' => $replace_amount[$key],
+                ]);
+            }
+            return redirect()->back()->with('success', 'Berhasil mengupdate data ' . $biaya->nama_biaya);
+        } else if ($request->jenis_biaya == 'DaftarUlang') {
+            $data  = $request->validate([
+                'end_date' => 'required|date_format:Y-m-d',
+                'amount' => 'required|string|min:6',
+            ]);
+            $dateEnd = request()->input('end_date');
+            $replace_amount = str_replace('.', '', request()->input('amount'));
+            $tagihan = Tagihan::where('id_biayas', '=', $biaya->id)->first();
+            $tagihans = Tagihan::where('id', '=', $tagihan->id);
+            $tagihans->update([
+                'end_date' => $dateEnd,
+                'amount' => $replace_amount,
+            ]);
+
+            return redirect()->back()->with('success', 'Berhasil mengupdate data ' . $biaya->nama_biaya);
+        }
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy($id)
     {
         //
+
+        $biaya = Biaya::find($id);
+        $tagihan = Tagihan::where('id_biayas', $id);
+        $tagihanGet = Tagihan::where('id_biayas', $id)->get();
+
+        $tagihan->delete();
+        $biaya->delete();
+        return redirect()->route('admin.tagihan.index')->with('success', 'Berhasil Menghapus tagihan ' . $biaya->nama_biaya);
     }
 }

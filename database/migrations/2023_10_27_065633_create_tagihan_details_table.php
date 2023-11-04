@@ -18,7 +18,7 @@ return new class extends Migration
             $table->foreignId('id_users');
             $table->string('status');
             $table->integer('amount');
-            $table->date('start_date');
+            $table->date('start_date')->nullable();
             $table->date('end_date');
             $table->date('before_end')->nullable();
             $table->timestamps();

@@ -8,83 +8,51 @@
 @section('content')
     <div class="row">
         <div class="col-12">
-            <div class="card mb-4">
-                <div class="card-header pb-0 d-flex justify-content-between">
-                    <h6>Transaksi table</h6>
-                    <!-- Button trigger modal -->
-                    <!-- Modal -->
-                    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-                        aria-hidden="true">
-                        <div class="modal-dialog modal-dialog-centered" role="document">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="exampleModalLabel">Pilih Jenis Tagihan</h5>
-                                    <button type="button" class="btn-close text-dark" data-bs-dismiss="modal"
-                                        aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                </div>
-                                <form action="{{ route('admin.tagihan.next') }}" method="POST">
-                                    @csrf
-                                    <div class="modal-body">
-                                        <div class="form-check mb-3">
-                                            <input class="form-check-input" type="radio" name="jenis_tagihan"
-                                                id="jenis_tagihan" value="Routine">
-                                            <label class="custom-control-label" for="customRadio1">Routine</label>
-                                        </div>
-                                        <div class="form-check mb-3">
-                                            <input class="form-check-input" type="radio" name="jenis_tagihan"
-                                                id="customRadio1" value="Tidakroutine">
-                                            <label class="custom-control-label" for="customRadio1">Tidak Routine</label>
-                                        </div>
-                                        <div class="form-check mb-3">
-                                            <input class="form-check-input" type="radio" name="jenis_tagihan"
-                                                id="customRadio1" value="DaftarUlang">
-                                            <label class="custom-control-label" for="customRadio1">Daftar Ulang</label>
-                                        </div>
-
-                                    </div>
-                                    <div class="modal-footer">
-                                        {{-- <button type="button" class="btn bg-gradient-secondary"
-                                            data-bs-dismiss="modal">Close</button> --}}
-                                        <button class="btn bg-gradient-primary" type="submit">Lanjut <i
-                                                class="fas fa-arrow-circle-right ms-1"></i></button>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
+                    <li class="breadcrumb-item text-sm"><a class="opacity-5 text-dark"
+                            href="{{ route('dashboard') }}">Pages</a>
+                    </li>
+                    <li class="breadcrumb-item text-sm text-dark active" aria-current="page">Transaction</li>
+                </ol>
+                <h6 class="font-weight-bolder mb-0">Transaction</h6>
+            </nav>
+            <div class="card mb-4 mt-4">
+                <div class="card-header pb-0">
+                    <h6>Transactions table</h6>
                 </div>
                 <div class="card-body px-0 pt-0 pb-2">
                     <div class="table-responsive p-0">
-                        <table class="table align-items-center mb-0" id="templateTable">
+                        <table class="table mb-0" id="templateTable">
                             <thead>
                                 <tr>
-                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-8">No</th>
-                                    <th class=" text-uppercase text-secondary text-xxs font-weight-bolder opacity-8">
+                                    <th class="text-uppercase text-secondary text-xs font-weight-bolder opacity-9">
+                                        No
+                                    </th>
+                                    <th class=" text-uppercase text-secondary text-xs  font-weight-bolder opacity-9">
                                         Nama
                                         Tagihan</th>
-                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-8">
-                                        Tanggal Pembayaran</th>
-                                    <th class=" text-uppercase text-secondary text-xxs font-weight-bolder opacity-8">
+                                    <th class="text-uppercase text-secondary text-xs font-weight-bolder opacity-9">
+                                        Tanggal Bayar</th>
+                                    <th class=" text-uppercase text-secondary text-xs font-weight-bolder opacity-9">
                                         Pembayar</th>
-                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-8">
+                                    <th class="text-uppercase text-secondary text-xs font-weight-bolder opacity-9">
                                         Total Pembayaran</th>
-                                    <th class=" text-uppercase text-secondary text-xxs font-weight-bolder opacity-8">
+                                    <th class=" text-uppercase text-secondary text-xs font-weight-bolder opacity-9">
                                         Status</th>
-                                    <th class=" text-uppercase text-secondary text-xxs font-weight-bolder opacity-8">
+                                    <th class=" text-uppercase text-secondary text-xs font-weight-bolder opacity-9">
                                         Jenis tagihan</th>
-                                    <th class=" text-uppercase text-secondary text-xxs font-weight-bolder opacity-8">
+                                    <th class=" text-uppercase text-secondary text-xs font-weight-bolder opacity-9">
                                         Jenis Pembayaran</th>
                                     <th
-                                        class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                        class="text-center text-uppercase text-secondary text-xs font-weight-bolder opacity-9">
                                         Action</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td class="align-middle text-xxs font-weight-bold">1</td>
-                                    <td class="align-middle  text-secondary text-xs font-weight-bold">
+                                    <td class="align-middle text-xs font-weight-bold">1</td>
+                                    <td class="align-middle text-secondary text-xs font-weight-bold">
                                         Tagihan jas
                                     </td>
                                     <td class="align-middle  text-secondary text-xs font-weight-bold">
@@ -118,7 +86,8 @@
 
 
                                         <a href=""
-                                            class="badge text-uppercase badge-sm bg-gradient-danger text-xxs mx-1"
+                                            class="badge text-uppercase
+                                            badge-sm bg-gradient-danger text-xxs mx-1"
                                             data-toggle="tooltip" data-original-title="hapus">
                                             Hapus
                                         </a>
@@ -197,9 +166,44 @@
                                             data-toggle="tooltip" data-original-title="detail">
                                             Detail
                                         </a>
+                                        <a href=""
+                                            class="badge text-uppercase badge-sm bg-gradient-danger text-xxs mx-1"
+                                            data-toggle="tooltip" data-original-title="hapus">
+                                            Hapus
+                                        </a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="align-middle text-xs font-weight-bold">4</td>
+                                    <td class="align-middle text-secondary text-xs font-weight-bold">
+                                        Tagihan Tingkatan
+                                    </td>
+                                    <td class="align-middle  text-secondary text-xs font-weight-bold">
+                                        30 January 2050
+                                    </td>
+                                    <td class="align-middle  text-secondary text-xs font-weight-bold">
+                                        Bambang Jenoko
 
+                                    </td>
+                                    <td class="align-middle text-secondary text-xs font-weight-bold">
+                                        Rp 850.000
+                                    </td>
+                                    <td class="align-middle  text-secondary font-weight-bold">
+                                        <span class="badge text-uppercase badge-sm bg-gradient-danger">EXPIRED</span>
+                                    </td>
+                                    <td class="align-middle  text-secondary text-xs font-weight-bold">
+                                        Tingkatan
 
-
+                                    </td>
+                                    <td class="align-middle text-secondary text-xs font-weight-bold">
+                                        Cash
+                                    </td>
+                                    <td class="align-middle text-center">
+                                        <a href="{{ route('admin.transaction.show', 'Tingkatan') }}"
+                                            class="badge text-uppercase badge-sm bg-gradient-info text-xxs mx-1"
+                                            data-toggle="tooltip" data-original-title="detail">
+                                            Detail
+                                        </a>
                                         <a href=""
                                             class="badge text-uppercase badge-sm bg-gradient-danger text-xxs mx-1"
                                             data-toggle="tooltip" data-original-title="hapus">

@@ -28,8 +28,17 @@
                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Status</th>
                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Joined</th>
                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Action</th>
+<<<<<<< HEAD
+<<<<<<< HEAD
                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Joined</th>
                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Action</th>
+=======
+                    <th class="text-secondary opacity-7"></th>
+>>>>>>> 46e3398b5282bba2241af524ee2f88c8839a5162
+=======
+                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Joined</th>
+                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Action</th>
+>>>>>>> 47bc6f05a93c7cec9a855e75b2132e90b72c9e75
                   </tr>
                 </thead>
                 <tbody>
@@ -58,6 +67,13 @@
                       <p class="text-xs text-secondary mb-0">ADMIN</p>
                     </td>
                     <td class="align-middle text-center text-sm">
+<<<<<<< HEAD
+<<<<<<< HEAD
+                    <td class="align-middle text-center text-sm">
+=======
+>>>>>>> 46e3398b5282bba2241af524ee2f88c8839a5162
+=======
+>>>>>>> 47bc6f05a93c7cec9a855e75b2132e90b72c9e75
                     <span class="badge badge-sm bg-gradient-success">AKTIF</span>
                     </td>
                     <td class="align-middle text-center">
@@ -65,10 +81,24 @@
                     </td>
                     <td class="align-middle text-center"> 
                       <a href="" class="badge badge-sm bg-gradient-primary font-weight-bold text-xs mx-2" data-toggle="tooltip" data-original-title="Edit user">
+<<<<<<< HEAD
+<<<<<<< HEAD
+                      <a href="" class="badge badge-sm bg-gradient-primary font-weight-bold text-xs mx-2" data-toggle="tooltip" data-original-title="Edit user">
+=======
+>>>>>>> 46e3398b5282bba2241af524ee2f88c8839a5162
+=======
+>>>>>>> 47bc6f05a93c7cec9a855e75b2132e90b72c9e75
                         Detail
                       </a>
 
                       <a href="" class="badge badge-sm bg-gradient-success font-weight-bold text-xs mx-2" data-toggle="tooltip" data-original-title="Edit user">
+<<<<<<< HEAD
+<<<<<<< HEAD
+                      <a href="" class="badge badge-sm bg-gradient-success font-weight-bold text-xs mx-2" data-toggle="tooltip" data-original-title="Edit user">
+=======
+>>>>>>> 46e3398b5282bba2241af524ee2f88c8839a5162
+=======
+>>>>>>> 47bc6f05a93c7cec9a855e75b2132e90b72c9e75
                         Ubah
                       </a>
 

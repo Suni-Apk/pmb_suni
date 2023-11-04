@@ -205,8 +205,9 @@
                 </li>
 
                 <!-- billing -->
-                <li class="nav-item">
-                    <a data-bs-toggle="collapse" href="#billing" class="nav-link" aria-controls="billing"
+                <li class="nav-item ">
+                    <a data-bs-toggle="collapse" href="#billing"
+                        class="nav-link {{ Route::is('admin.tagihan.*') ? 'active' : '' }}" aria-controls="billing"
                         role="button" aria-expanded="false">
                         <div
                             class="icon icon-sm shadow border-radius-md bg-white text-center d-flex align-items-center justify-content-center  me-2">
@@ -216,18 +217,11 @@
                     </a>
                     <div class="collapse" id="billing">
                         <ul class="nav ms-4 ps-3">
-                            <li class="nav-item ">
-                                <a class="nav-link " href="">
+                            <li class="nav-item {{ Route::is('admin.tagihan.*') ? 'active' : '' }}">
+                                <a class="nav-link" href="{{ route('admin.tagihan.index') }}">
                                     <span class="sidenav-mini-icon d-none d-xl-block"><i
                                             class="fas fa-border-all"></i></span>
                                     <span class="sidenav-normal"> Daftar Biaya Tagihan </span>
-                                </a>
-                            </li>
-                            <li class="nav-item ">
-                                <a class="nav-link " href="">
-                                    <span class="sidenav-mini-icon d-none d-xl-block"><i
-                                            class="fas fa-plus"></i></span>
-                                    <span class="sidenav-normal"> Tambah Biaya Tagihan </span>
                                 </a>
                             </li>
                         </ul>
@@ -247,17 +241,10 @@
                     <div class="collapse" id="transaction">
                         <ul class="nav ms-4 ps-3">
                             <li class="nav-item ">
-                                <a class="nav-link " href="">
+                                <a class="nav-link " href="{{ route('admin.transaction.index') }}">
                                     <span class="sidenav-mini-icon d-none d-xl-block"><i
                                             class="fas fa-border-all"></i></span>
                                     <span class="sidenav-normal"> Daftar Transaksi </span>
-                                </a>
-                            </li>
-                            <li class="nav-item ">
-                                <a class="nav-link " href="">
-                                    <span class="sidenav-mini-icon d-none d-xl-block"><i
-                                            class="fas fa-plus"></i></span>
-                                    <span class="sidenav-normal"> Tambah Transaksi </span>
                                 </a>
                             </li>
                         </ul>

@@ -1,15 +1,21 @@
+@php
+    $biodata = App\Models\Biodata::where('program_belajar', 'S1')
+        ->where('user_id', Auth::user()->id)
+        ->first();
+@endphp
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="icon" type="image/png" href="/soft-ui-dashboard-main/assets/img/favicon.png">
-    
+
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>SUNI Indonesia | @yield('title')</title>
-    
+
     @include('layouts.include')
     @stack('styles')
 </head>
@@ -24,7 +30,7 @@
             @component('layouts.header')
             @endcomponent
         </div>
-        
+
         {{-- @include('layouts.template') --}}
         <div class="z-1 position-relative">
             <div class="container-fluid py-4">
@@ -39,4 +45,5 @@
     @include('layouts.script')
     @stack('scripts')
 </body>
+
 </html>

@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin\AccountController;
 use App\Http\Controllers\Admin\AuthController as AdminAuthController;
 use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
 use App\Http\Controllers\Admin\ProfileController;
+use App\Http\Controllers\AdministrasiController;
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\JurusanController;
 use App\Http\Controllers\Kursus\BiodataController as KursusBiodataController;
@@ -23,6 +24,7 @@ use App\Http\Controllers\SettingController;
 use App\Http\Controllers\TagihanController as AdminTagihanController;
 use App\Http\Controllers\TahunAjaranController;
 use App\Http\Controllers\TransactionController;
+use App\Http\Controllers\MatkulController as AdminMatkulController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -77,9 +79,8 @@ Route::prefix('admin')->name('admin.')->group(function () {
 Route::prefix('/admin')->middleware('admin')->name('admin.')->group(function () {
     Route::get('/dashboard', [AdminDashboardController::class, 'index'])->name('dashboard');
     Route::resource('/tagihan', AdminTagihanController::class);
-    Route::post('/next', [AdminTagihanController::class, 'next'])->name('tagihan.next');
-
-    //notifikasi setting
+    Route::get('/next', [AdminTagihanController::class, 'next'])->name('tagihan.next');
+    // Route::post('/process', [AdminTagihanController::class, 'process'])->name('tagihan.process');
     Route::get('settings/notifications', [SettingController::class, 'index'])->name('settings.notifications');
     Route::put('/setting/notifications/process/{id}',[SettingController::class,'notify_edit'])->name('settings.notification.process');
 
@@ -90,6 +91,9 @@ Route::prefix('/admin')->middleware('admin')->name('admin.')->group(function () 
     
     Route::get('/profile', [ProfileController::class, 'profile'])->name('profile');
     Route::get('/edit-profile', [ProfileController::class, 'editProfile'])->name('profile_edit');
+    Route::resource('/tahun_ajaran', TahunAjaranController::class);
+    Route::resource('/jurusan', JurusanController::class);
+    Route::resource('/matkul', AdminMatkulController::class);
     Route::put('/profile-process/{id}', [ProfileController::class, 'prosesProfile'])->name('profile_proses');
     Route::get('/change-password', [ProfileController::class, 'change_password'])->name('change_password');
     Route::put('/change-password-proses/{id}', [ProfileController::class, 'change_password_proses'])->name('change_password_proses');
@@ -109,6 +113,11 @@ Route::prefix('/admin')->middleware('admin')->name('admin.')->group(function () 
     Route::get('/edit/account/mahasiswa/{id}', [AccountController::class, 'mahasiswa_edit'])->name('mahasiswa.edit');
     Route::put('/edit/account/mahasiswa/process/{id}', [AccountController::class, 'mahasiswa_edit_process'])->name('mahasiswa.edit.process');
     Route::put('/change_status/mahasiswa/{id}', [AccountController::class, 'mahasiswa_status'])->name('mahasiswa.status');
+    Route::get('/detail/account/mahasiswa/{id}', [AccountController::class, 'mahasiswa_detail'])->name('mahasiswa.show');
+    Route::post('/bayar/account/mahasiswa', [AccountController::class, 'mahasiswa_bayar'])->name('mahasiswa.bayar');
+
+    //setting admin
+    Route::get('/administrasi', [AdministrasiController::class, 'administrasi'])->name('administrasi');
 });
 
 Route::prefix('/kursus')->middleware(['auth'])->name('kursus.')->group(function(){

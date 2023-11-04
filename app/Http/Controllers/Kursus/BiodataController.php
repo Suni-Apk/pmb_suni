@@ -13,8 +13,7 @@ class BiodataController extends Controller
     public function pendaftaran_kursus()
     {
         $jurusan = Jurusan::get();
-        $biodata = Biodata::where('program_belajar','KURSUS')->where('user_id',Auth::user()->id)->first();
-        return view('kursus.biodata.pendaftaran-kursus',compact('jurusan','biodata'));
+        return view('kursus.biodata.pendaftaran-kursus', compact('jurusan'));
     }
 
     public function pendaftaran_kursus_process(Request $request)
@@ -33,11 +32,11 @@ class BiodataController extends Controller
         ]);
         $data['program_belajar'] = "KURSUS";
         $data['user_id'] = $user;
-        $image = $request->file('image')->store('assets' , 'public');
+        $image = $request->file('image')->store('assets', 'public');
         $data['image'] = $image;
 
         Biodata::create($data);
 
-        return redirect()->route('kursus.dashboard')->with('success','Kamu Telah melengkapi Biodata Silahkan Lengkapi Dokument');
+        return redirect()->route('kursus.dashboard')->with('success', 'Kamu Telah melengkapi Biodata Silahkan Lengkapi Dokument');
     }
 }

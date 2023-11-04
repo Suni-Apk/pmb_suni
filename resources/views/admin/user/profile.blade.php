@@ -25,31 +25,12 @@
                     </p>
                 </div>
             </div>
-<<<<<<< HEAD
-        </div>
-        <div class="col-lg-4 col-md-6 my-sm-auto ms-sm-auto me-sm-0 mx-auto mt-3">
-            <div class="nav-wrapper position-relative end-0">
-                <ul class="nav nav-pills nav-fill bg-transparent" role="tablist">
-                    <li class="nav-item">
-                        <a class="nav-link mb-0 px-0 py-1 " data-bs-toggle="tab" href=""
-                            role="tab" aria-selected="true">
-                            <span class="ms-1">Profile</span>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link mb-0 px-0 py-1 " data-bs-toggle="tab" href="" role="tab"
-                            aria-selected="true">
-                            <span class="ms-1">Change password</span>
-                        </a>
-                    </li>
-                </ul>
-=======
             <div class="col-lg-4 col-md-6 my-sm-auto ms-sm-auto me-sm-0 mx-auto mt-3">
                 <div class="nav-wrapper position-relative end-0">
                     <ul class="nav nav-pills nav-fill bg-transparent" role="tablist">
                         <li class="nav-item">
-                            <a class="nav-link mb-0 px-0 py-1 active " data-bs-toggle="tab" href=""
-                                role="tab" aria-selected="true">
+                            <a class="nav-link mb-0 px-0 py-1 active " data-bs-toggle="tab" href="" role="tab"
+                                aria-selected="true">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16px" height="16px"
                                     viewBox="0 0 512 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
                                     <style>
@@ -84,51 +65,51 @@
                                             </g>
                                         </g>
                                     </g>
+                                    </g>
                                 </svg>
                                 <span class="ms-1">Change password</span>
                             </a>
                         </li>
                     </ul>
                 </div>
->>>>>>> c4726097635cf58d49e25bb58ca229943e5a3df9
             </div>
         </div>
-    </div>
 
-    <div class="container-fluid py-4">
-        <div class="row">
-            <div class="card h-100">
-                <div class="card-header pb-0 p-3">
-                    <div class="row">
-                        <div class="col-md-8 d-flex align-items-center">
-                            <h6 class="mb-0">Profile Information</h6>
-                        </div>
-                        <div class="col-md-4 text-end">
-                            <a href="{{ route('admin.profile_edit') }}">
-                                <i class="fas fa-user-edit text-secondary text-sm" data-bs-toggle="tooltip"
-                                    data-bs-placement="top" title="Edit Profile"></i>
-                            </a>
+        <div class="container-fluid py-4">
+            <div class="row">
+                <div class="card h-100">
+                    <div class="card-header pb-0 p-3">
+                        <div class="row">
+                            <div class="col-md-8 d-flex align-items-center">
+                                <h6 class="mb-0">Profile Information</h6>
+                            </div>
+                            <div class="col-md-4 text-end">
+                                <a href="{{ route('admin.profile_edit') }}">
+                                    <i class="fas fa-user-edit text-secondary text-sm" data-bs-toggle="tooltip"
+                                        data-bs-placement="top" title="Edit Profile"></i>
+                                </a>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="card-body p-3">
-                    <hr class="horizontal gray-light">
-                    <ul class="list-group">
-                        <li class="list-group-item border-0 ps-0 pt-0 text-sm"><strong class="text-dark">Full
-                                Name:</strong>
-                            &nbsp; {{ $auth->name }}</li>
-                        <li class="list-group-item border-0 ps-0 text-sm"><strong class="text-dark">No Tlp:</strong>
-                            &nbsp;
-                            {{ $auth->phone }}</li>
-                        <li class="list-group-item border-0 ps-0 text-sm"><strong class="text-dark">Email:</strong> &nbsp;
-                            {{ $auth->email }}</li>
-                        <li class="list-group-item border-0 ps-0 text-sm"><strong class="text-dark">Gender:</strong>
-                            &nbsp;
-                            {{ $auth->gender }}
-                        </li>
-                    </ul>
+                    <div class="card-body p-3">
+                        <hr class="horizontal gray-light">
+                        <ul class="list-group">
+                            <li class="list-group-item border-0 ps-0 pt-0 text-sm"><strong class="text-dark">Full
+                                    Name:</strong>
+                                &nbsp; {{ $auth->name }}</li>
+                            <li class="list-group-item border-0 ps-0 text-sm"><strong class="text-dark">No Tlp:</strong>
+                                &nbsp;
+                                {{ $auth->phone }}</li>
+                            <li class="list-group-item border-0 ps-0 text-sm"><strong class="text-dark">Email:</strong>
+                                &nbsp;
+                                {{ $auth->email }}</li>
+                            <li class="list-group-item border-0 ps-0 text-sm"><strong class="text-dark">Gender:</strong>
+                                &nbsp;
+                                {{ $auth->gender }}
+                            </li>
+                        </ul>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-@endsection
+    @endsection

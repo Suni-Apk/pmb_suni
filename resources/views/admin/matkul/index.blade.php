@@ -17,16 +17,21 @@
                         <table class="table align-items-center mb-0" id="templateTable">
                             <thead>
                                 <tr>
-                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 text-center">id</th>
+                                    <th
+                                        class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 text-center">
+                                        id</th>
                                     <th class="text-uppercase text-secondary text-xxs px-2 font-weight-bolder opacity-7">
                                         Nama Matkul</th>
                                     <th class="text-uppercase text-secondary text-xxs px-2 font-weight-bolder opacity-7">
                                         Jurusan & Semester</th>
-                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2 text-center">
+                                    <th
+                                        class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2 text-center">
                                         Mulai</th>
-                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2 text-center">
+                                    <th
+                                        class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2 text-center">
                                         Selesai</th>
-                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2 text-center">
+                                    <th
+                                        class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2 text-center">
                                         Tanggal</th>
                                     <th
                                         class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
@@ -67,24 +72,25 @@
                                     <td class="align text-center">
                                         <span class="text-secondary text-xs font-weight-bold">Admin</span>
                                     </td>
-                                    <td class="align-middle text-center">
-                                        <a href="{{route('admin.matkul.show',1)}}"
-                                            class="badge badge-sm bg-gradient-primary font-weight-bold text-xs mx-2"
-                                            data-toggle="tooltip" data-original-title="Edit user">
-                                            Detail
+                                    <td class="d-flex align-items-center justify-content-center">
+                                        <a href="{{ route('admin.matkul.show', 1) }}"
+                                            class="btn btn-sm bg-gradient-success font-weight-bold text-xs mx-2 mt-3">
+                                            <i class="fas fa-eye fs-6"></i>
                                         </a>
 
                                         <a href="{{ route('admin.matkul.edit', 1) }}"
-                                            class="badge badge-sm bg-gradient-success font-weight-bold text-xs mx-2"
-                                            data-toggle="tooltip" data-original-title="Edit user">
-                                            Ubah
+                                            class="btn btn-sm bg-gradient-secondary font-weight-bold text-xs mx-2 mt-3">
+                                            <i class="fas fa-edit fs-6"></i>
                                         </a>
 
-                                        <a href="#"
-                                            class="badge badge-sm bg-gradient-danger font-weight-bold text-xs mx-2"
-                                            data-toggle="tooltip" data-original-title="Edit user">
-                                            Hapus
-                                        </a>
+                                        <form action="#" method="POST">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit"
+                                                class="btn btn-sm bg-gradient-danger font-weight-bold text-xs mx-2 show_confirm mt-3">
+                                                <i class="fa fa-trash fs-6 show_confirm"></i>
+                                            </button>
+                                        </form>
                                     </td>
                                 </tr>
                             </tbody>
@@ -106,6 +112,53 @@
         const dataTableBasic = new simpleDatatables.DataTable("#templateTable", {
             searchable: true,
             fixedHeight: true,
+        });
+    </script>
+    <script src="sweetalert2.all.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+        integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"
+        integrity="sha512-VEd+nq25CkR676O+pLBnDW09R7VQX9Mdiij052gVCp5yVH3jGtH70Ho/UUv4mJDsEdTvqRCFZg0NKGiojGnUCw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css"
+        integrity="sha512-3pIirOrwegjM6erE5gPSwkUzO+3cTjpnV9lexlNZqvupR64iZBnOOTiiLPb9M36zpMScbmUNIcHUqKD47M719g=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script>
+        @if (Session::has('success'))
+            toastr.success("{{ Session::get('success') }}")
+        @endif
+
+        @if (Session::has('delete'))
+            toastr.success("{{ Session::get('success') }}")
+        @endif
+
+        @if (Session::has('pesan'))
+            toastr.error('{{ Session::get('pesan') }}')
+        @endif
+    </script>
+    <script type="text/javascript">
+        $('.show_confirm').click(function(event) {
+            var form = $(this).closest("form");
+            event.preventDefault();
+            Swal.fire({
+                title: 'Yakin?',
+                text: "Kamu Akan Menghapus Mata Kuliah!!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Iya,  Hapus!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    form.submit();
+                    Swal.fire(
+                        'Terhapus!',
+                        'Kamu telah menghapus Mata Kuliah!!.',
+                        'success'
+                    )
+                }
+            });
         });
     </script>
 @endpush
