@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Mahasiswa;
 
 use App\Http\Controllers\Controller;
 use App\Models\Biodata;
+use App\Models\TahunAjaran;
 use App\Models\User;
 use GuzzleHttp\Client;
 use Illuminate\Http\Request;
@@ -85,24 +86,36 @@ class ProfileController extends Controller
 
     public function edit_biodata_process(Request $request,$id)
     {
-        $user = Biodata::where('user_id',$id);
+        $user = Biodata::where('user_id',$id)->first();
         $userId = User::find($id);
+        $angkatan = TahunAjaran::where('status','Active')->first();
         $data = $request->validate([
             'user_id' => $userId,
             'birthdate' => 'required|date',
             'birthplace' => 'required',
-            'provinsi' => 'required',
-            'kota' => 'required',
-            'kecamatan' => 'required',
             'address' => 'required',
             'last_graduate' => 'required'
         ]);
+        $data['angkatan_id'] = $angkatan->id;
         if ($request->hasFile('image')) {
             $image = $request->file('image')->store('assets', 'public');
             $data['image'] = $image;
         } else {
             // Access the 'image' property from the user model instance.
             $userId->biodata->image;
+        }
+
+         // Cek jika pengguna mengisi provinsi, kota, dan kecamatan
+        if ($request->has('provinsi') && $request->has('kota') && $request->has('kecamatan')) {
+            // Jika pengguna mengisi, gunakan data yang mereka masukkan
+            $data['provinsi'] = $request->input('provinsi');
+            $data['kota'] = $request->input('kota');
+            $data['kecamatan'] = $request->input('kecamatan');
+        } else {
+            // Jika pengguna tidak mengisi, gunakan data yang sudah ada di database
+            $data['provinsi'] = $user->provinsi;
+            $data['kota'] = $user->kota;
+            $data['kecamatan'] = $user->kecamatan;
         }
 
         $user->update($data);

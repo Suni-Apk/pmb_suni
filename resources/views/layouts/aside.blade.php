@@ -1,3 +1,8 @@
+@php
+    $biodata = App\Models\Biodata::where('program_belajar', 'S1')
+        ->where('user_id', Auth::user()->id)
+        ->first();
+@endphp
 <aside
     class="sidenav navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-3 overflow-x-hidden"
     id="sidenav-main">

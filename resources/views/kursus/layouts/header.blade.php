@@ -1,3 +1,8 @@
+@php
+    $biodata = App\Models\Biodata::where('program_belajar', 'KURSUS')
+        ->where('user_id', Auth::user()->id)
+        ->first();
+@endphp
 {{-- navbar --}}
 @if (Route::is('kursus.program_belajar'))
 @else
@@ -57,8 +62,8 @@
                             data-bs-toggle="dropdown" aria-expanded="false">
                             <img src="@if (!Auth::user()->biodata)
                                 /soft-ui-dashboard-main/assets/img/no-profile.png
-                            @elseif(Auth::user()->biodata->program_belajar == 'KURSUS')
-                                {{ asset('storage/' . Auth::user()->biodata->image) }}
+                            @elseif($biodata)
+                                {{ asset('storage/' . $biodata->image) }}
                             @else
                                 /soft-ui-dashboard-main/assets/img/no-profile.png
                             @endif" alt="" class="avatar avatar-sm ms-2">

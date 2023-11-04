@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Kursus;
 use App\Http\Controllers\Controller;
 use App\Models\Biodata;
 use App\Models\Jurusan;
+use App\Models\TahunAjaran;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -19,7 +20,7 @@ class BiodataController extends Controller
     public function pendaftaran_kursus_process(Request $request)
     {
         $user = Auth::user()->id;
-
+        $angkatan = TahunAjaran::where('status','Active')->first();
         $data = $request->validate([
             'profesi' => 'required|string',
             'baca_quran' => 'required|string',
@@ -30,6 +31,7 @@ class BiodataController extends Controller
             'kecamatan' => 'required',
             'address' => 'required',
         ]);
+        $data['angkatan_id'] = $angkatan->id;
         $data['program_belajar'] = "KURSUS";
         $data['user_id'] = $user;
         $image = $request->file('image')->store('assets', 'public');
