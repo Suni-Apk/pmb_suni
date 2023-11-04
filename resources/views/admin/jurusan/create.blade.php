@@ -40,10 +40,10 @@
                                     </div>
 
                                     <div class="form-group mb-3">
-                                        <label for="name">Code</label>
+                                        <label for="code">Code</label>
                                         <small class="text-info" style="font-size: 10px">Bisa diisi dengan singkatan/inisial jurusan</small>
                                         <input type="text" name="code" id="code" class="form-control" required>
-                                        @error('name')
+                                        @error('code')
                                             <div class="text-danger">{{ $message }}</div>
                                         @enderror
                                     </div>
@@ -52,7 +52,7 @@
                                     <a href="{{ route('admin.jurusan.index') }}">
                                         <button type="button" class="btn btn-warning text-dark">Back</button>
                                     </a>
-                                </form>
+                                </form
                             </div>
                         </div>
                     </div>

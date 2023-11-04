@@ -11,7 +11,7 @@
             <div class="card mb-4">
                 <div class="card-header pb-0 d-flex justify-content-between">
                     <h6>Daftar Tahun Ajaran</h6>
-                    <a href="{{route('admin.tahun-ajaran.create')}}" class="btn bg-gradient-primary float-end">Tambah + </a>
+                    <a href="{{route('admin.tahun_ajaran.create')}}" class="btn bg-gradient-primary float-end">Tambah + </a>
                 </div>
                 <div class="card-body px-0 pt-0 pb-2">
                     <div class="table-responsive p-0">
@@ -36,10 +36,10 @@
                                         <span class="text-bold">{{ $angkatans->year }}</span>
                                     </td>
                                     <td class="text-sm">
-                                        <span class="text-bold"> {{ strftime('%d %B %Y', strtotime($angkatans->start_at)) }}</span>
+                                        <span class="text-bold">{{ \Carbon\Carbon::parse($tahunAjarans->start_at)->format('d F') }}</span>
                                     </td>
                                     <td class="text-sm">
-                                        <span class="text-bold"> {{ strftime('%d %B %Y', strtotime($angkatans->end_at)) }}</span>
+                                        <span class="text-bold">{{ \Carbon\Carbon::parse($tahunAjarans->end_at)->format('d F') }}</span>
                                     </td>
                                     <td class="align-middle text-center">
                                         <span class="text-uppercase badge badge-sm bg-gradient-success">{{ $angkatans->status }}</span>

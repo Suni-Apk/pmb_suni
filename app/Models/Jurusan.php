@@ -20,6 +20,16 @@ class Jurusan extends Model
         return $this->belongsTo(TahunAjaran::class, 'id_tahun_ajarans');
     }
 
+    public function semesters()
+    {
+        return $this->hasMany(Semester::class);
+    }
+
+    public function matkuls()
+    {
+        return $this->hasMany(Matkuls::class);
+    }
+
     public function biodatas()
     {
         return $this->hasMany(Biodata::class);

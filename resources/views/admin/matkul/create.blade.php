@@ -17,32 +17,40 @@
                                 <form action="{{ route('admin.matkul.store') }}" method="POST">
                                     @csrf
                                     <div class="form-group mb-3">
-                                        <label for="nama">Nama</label>
-                                        <input type="text" name="nama" id="nama" class="form-control">
+                                        <label for="nama_matkuls">Nama</label>
+                                        <input type="text" name="nama_matkuls" id="nama_matkuls" class="form-control">
                                     </div>
                                     <div class="form-group mb-3">
-                                        <label for="nama">Nama Dosen Pengajar</label>
-                                        <input type="text" name="dosen" id="dosen" class="form-control">
+                                        <label for="id_jurusans">Jurusan</label>
+                                        <select name="id_jurusans" id="id_jurusans" class="form-control" required>
+                                            <option hidden selected>-----------</option>
+                                            @foreach ($jurusan as $item)
+                                                <option value="{{ $item->id }}">{{ $item->name }}</option> 
+                                            @endforeach
+                                        </select>
                                     </div>
                                     <div class="form-group mb-3">
-                                        <label for="nama">Semester</label>
-                                        <input type="text" name="nama" id="nama" class="form-control">
+                                        <label for="id_semesters">Semester</label>
+                                        <select name="id_semesters" id="id_semesters" class="form-control" required>
+                                            <option hidden selected>-----------</option>
+                                            <!-- Pilihan semester akan diisi melalui JavaScript -->
+                                        </select>
+                                    </div>                                    
+                                    <div class="form-group mb-3">
+                                        <label for="nama_dosen">Dosen Pengajar</label>
+                                        <input type="text" name="nama_dosen" id="nama_dosen" class="form-control">
                                     </div>
                                     <div class="form-group mb-3">
-                                        <label for="nama">Deskripsi</label>
-                                        <input type="text" name="nama" id="nama" class="form-control">
+                                        <label for="mulai">Mulai</label>
+                                        <input type="time" name="mulai" id="mulai" class="form-control">
                                     </div>
                                     <div class="form-group mb-3">
-                                        <label for="nama">Mulai</label>
-                                        <input type="time" name="nama" id="nama" class="form-control">
+                                        <label for="selesai">Selesai</label>
+                                        <input type="time" name="selesai" id="selesai" class="form-control">
                                     </div>
                                     <div class="form-group mb-3">
-                                        <label for="nama">Selesai</label>
-                                        <input type="time" name="nama" id="nama" class="form-control">
-                                    </div>
-                                    <div class="form-group mb-3">
-                                        <label for="nama">Tanggal</label>
-                                        <input type="date" name="nama" id="nama" class="form-control">
+                                        <label for="tanggal">Tanggal</label>
+                                        <input type="date" name="tanggal" id="tanggal" class="form-control">
                                     </div>
 
                                     <button type="submit" class="btn btn-success">Submit</button>
@@ -57,4 +65,25 @@
             </div>
         </div>
     </div>
+    <script>
+        const jurusanSelect = document.getElementById('id_jurusans');
+        const semesterSelect = document.getElementById('id_semesters');
+        
+        const jurusanSemesterMap = @json($semesterGrouped);
+        
+        jurusanSelect.addEventListener('change', () => {
+            const selectedJurusanId = jurusanSelect.value;
+            const semesterOptions = jurusanSemesterMap[selectedJurusanId] || [];
+        
+            semesterSelect.innerHTML = '';
+        
+            semesterOptions.forEach(semester => {
+                const option = document.createElement('option');
+                option.value = semester.id;
+                option.textContent = semester.name;
+                semesterSelect.appendChild(option);
+            });
+        });
+    </script>
+    
 @endsection

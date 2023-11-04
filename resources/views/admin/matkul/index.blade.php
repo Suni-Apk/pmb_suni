@@ -23,49 +23,46 @@
                                     <th class="text-uppercase text-secondary text-xxs px-2 font-weight-bolder opacity-7">Jurusan / Semester</th>
                                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2 text-center">Jadwal</th>
                                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2 text-center">Tanggal</th>
-                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Created By</th>
                                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Aksi</th>
                                 </tr>
                             </thead>
                             <tbody>
+                                @foreach ($matkuls as $index => $item)
                                 <tr>
                                     <td class="align-middle text-center text-sm">
-                                        <span class="text-bold">1</span>
+                                        <span class="text-bold">{{ $index + 1 }}</span>
                                     </td>
                                     <td class="text-sm">
-                                        <span class="text-bold">Fiqih Muamalah</span>
+                                        <span class="text-bold">{{ $item->nama_matkuls }}</span>
                                     </td>
                                     <td>
                                         <div class="d-flex px-2 py-1">
                                             <div class="d-flex flex-column justify-content-center">
-                                                <h6 class="mb-0 text-xs">Hukum Ekonomi Syariah</h6>
-                                                <p class="text-xxs text-uppercase text-secondary mb-0">Semester 5</p>
+                                                <h6 class="mb-0 text-xs">{{ $item->jurusan->name }}</h6>
+                                                <p class="text-xxs text-uppercase text-secondary mb-0">{{ $item->semesters->name }}</p>
                                             </div>
                                         </div>
                                     </td>
                                     <td class="align text-center">
-                                        <span class="text-secondary text-xs font-weight-bold">06:00 - 12:30</span>
+                                        <span class="text-secondary text-xs font-weight-bold">{{ $item->mulai }} - {{ $item->selesai }}</span>
                                     </td>
                                     <td class="align text-center">
-                                        <span class="text-secondary text-xs font-weight-bold">15/05/2023</span>
-                                    </td>
-                                    <td class="align text-center">
-                                        <span class="text-secondary text-xs font-weight-bold">Admin</span>
+                                        <span class="text-secondary text-xs font-weight-bold">{{ $item->tanggal->format('d/m/Y') }}</span>
                                     </td>
                                     <td class="align-middle text-center">
-                                        <a href="{{route('admin.matkul.show',1)}}"
+                                        <a href="{{route('admin.matkul.show', $item->id)}}"
                                             class="badge badge-sm bg-gradient-primary font-weight-bold text-xs mx-2"
                                             data-toggle="tooltip" data-original-title="detail">
                                             Detail
                                         </a>
 
-                                        <a href="{{ route('admin.matkul.edit', 1) }}"
+                                        <a href="{{ route('admin.matkul.edit', $item->id) }}"
                                             class="badge badge-sm bg-gradient-secondary font-weight-bold text-xxs mx-1"
                                             data-toggle="tooltip" data-original-title="edit">
-                                            Ubah
+                                            Edit
                                         </a>
 
-                                        <form action="#" method="POST">
+                                        <form action="{{ route('admin.matkul.destroy', $item->id) }}" method="POST">
                                             @csrf
                                             @method('DELETE')
                                             <button type="submit" class="badge badge-sm bg-gradient-danger font-weight-bold text-xxs show_confirm"

@@ -12,7 +12,6 @@ class TahunAjaranController extends Controller
      */
     public function index()
     {
-        
         $tahun_ajaran = TahunAjaran::all();
         return view('admin.tahun_ajaran.index', compact('tahun_ajaran'));
     }
@@ -68,8 +67,8 @@ class TahunAjaranController extends Controller
      */
     public function destroy(string $id)
     {
-        $data = TahunAjaran::findOrFail($id);
-        $data->delete();
+        $tahun_ajaran = TahunAjaran::findOrFail($id);
+        $tahun_ajaran->delete();
         return redirect()->route('admin.tahun_ajaran.index');
     }
 }

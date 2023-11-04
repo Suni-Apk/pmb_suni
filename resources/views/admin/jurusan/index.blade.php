@@ -11,7 +11,7 @@
             <div class="card mb-4">
                 <div class="card-header pb-0 d-flex justify-content-between">
                     <h6>Daftar Jurusan</h6>
-                    <a href="{{route('admin.jurusan.create')}}" class="btn bg-gradient-primary float-end">Tambah + </a>
+                    <a href="{{ route('admin.jurusan.create') }}" class="btn bg-gradient-primary float-end">Tambah + </a>
                 </div>
               <div class="card-body px-0 pt-0 pb-2">
                 <div class="table-responsive p-0">
@@ -68,7 +68,7 @@
                 </div>
               </div>
             </div>
-          </div>
+        </div>
     </div>
 @endsection
 
@@ -93,7 +93,9 @@
         @if (Session::has('success'))
             toastr.success("{{ Session::get('success') }}")
         @endif
-
+        @if (Session::has('delete'))
+            toastr.success("{{ Session::get('success') }}")
+        @endif
         @if (Session::has('pesan'))
             toastr.error('{{ Session::get('pesan') }}')
         @endif
@@ -104,7 +106,7 @@
             event.preventDefault();
             Swal.fire({
                 title: 'Yakin?',
-                text: "Kamu Akan Menghapus Jurusan!!",
+                text: "Kamu Akan Menghapus Tahun Ajaran!!",
                 icon: 'warning',
                 showCancelButton: true,
                 confirmButtonColor: '#3085d6',
@@ -115,7 +117,7 @@
                     form.submit();
                     Swal.fire(
                         'Terhapus!',
-                        'Kamu telah menghapus Jurusan!!.',
+                        'Kamu telah menghapus Tahun Ajaran!!.',
                         'success'
                     )
                 }
