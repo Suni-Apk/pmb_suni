@@ -2,9 +2,6 @@
 
 @section('title', 'Matkul')
 
-@push('styles')
-@endpush
-
 @section('content')
     <div class="row">
         <h4 class="ms-2">{{ $jurusan->name }}</h4>
