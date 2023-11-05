@@ -98,7 +98,7 @@ class AuthController extends Controller
         $authenticated = Auth::attempt($credentials, $request->has('remember'));
 
         if (!$authenticated) {
-            return redirect()->route('login')->with('error', 'email atau password salah.');
+            return redirect()->route('login')->with('error', 'Nomor Hp atau password salah.');
         }
 
         $input = $request->all();

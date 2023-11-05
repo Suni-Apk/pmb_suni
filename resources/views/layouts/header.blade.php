@@ -1,4 +1,9 @@
 {{-- navbar --}}
+@php
+    $biodata = App\Models\Biodata::where('program_belajar', 'S1')
+        ->where('user_id', Auth::user()->id)
+        ->first();
+@endphp
 @if (Route::is('mahasiswa.program_belajar'))
 @else
     <nav class="navbar navbar-main navbar-fixed navbar-expand-lg px-0 mx-4 shadow-none border-radius-xl position-sticky blur shadow-blur mt-4 left-auto top-1 z-index-sticky"
@@ -58,7 +63,7 @@
                             <img src="@if (!Auth::user()->biodata)
                             /soft-ui-dashboard-main/assets/img/no-profile.png
                             @else
-                                {{ asset('storage/' . Auth::user()->biodata->image)}}
+                                {{ asset('storage/' . $biodata->image)}}
                             @endif" class="avatar avatar-sm ms-2">
                         </span>
                         <ul class="dropdown-menu dropdown-menu-end px-2 py-2 me-sm-n2"

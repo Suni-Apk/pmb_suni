@@ -18,7 +18,7 @@
                                     @method('PUT')
                                     <div class="form-group mb-3">
                                         <label for="image" class="form-label">Image</label>
-                                        <img src="{{ asset('storage/' . $user->biodata['image'])}}" alt="" id="output" class="d-block w-25 h-25">
+                                        <img src="{{ asset('storage/' . $biodata['image'])}}" alt="" id="output" class="d-block w-25 h-25">
                                         <input type="file" name="image" id="image" class="form-control" onchange="loadFile(event)">
                                         <p class="text-muted mb-0">Allowed JPG, GIF or PNG. Max size of 2Mb</p>
                                     </div>
