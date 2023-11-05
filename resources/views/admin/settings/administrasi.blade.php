@@ -16,14 +16,24 @@
             <h5 class="text-bold">Silahkan Sesuaikan Biaya administrasi </h5>
         </div>
         <div class="card-body">
-            <form action="">
+            <form action="{{ route('admin.administrasi.proses', $administrasi->id) }}" method="POST">
+                @csrf
+                @method('PUT')
                 <div class="form-group">
                     <label for="" class="">Masukkan Harga Adminstrasi <span
                             class="text-danger">*</span></label>
-                    <input type="text" class="form-control mb-3" placeholder="Rp.200.000" value="200.000">
+                    <input type="text" class="form-control mb-3" id="rupiah" name="amount" placeholder="Rp.200.000"
+                        value="{{ $administrasi->amount }}">
                     <button class="btn btn-primary py-2 px-3" type="submit">Update</button>
                 </div>
             </form>
         </div>
     </div>
 @endsection
+@push('scripts')
+    <script>
+        $('#rupiah').mask("#.##0", {
+            reverse: true
+        });
+    </script>
+@endpush

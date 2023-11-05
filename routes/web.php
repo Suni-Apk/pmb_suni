@@ -61,9 +61,9 @@ Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
 
 Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
 
-Route::prefix('/switch')->middleware(['auth'])->name('program.')->group(function(){
-    Route::get('/program-belajar', [AuthController::class,'switch_program'])->name('program_belajar');
-    Route::get('/program-belajar/switch',[AuthController::class,'switch'])->name('program_belajar.switch');
+Route::prefix('/switch')->middleware(['auth'])->name('program.')->group(function () {
+    Route::get('/program-belajar', [AuthController::class, 'switch_program'])->name('program_belajar');
+    Route::get('/program-belajar/switch', [AuthController::class, 'switch'])->name('program_belajar.switch');
 });
 
 // Auth Admin
@@ -82,13 +82,13 @@ Route::prefix('/admin')->middleware('admin')->name('admin.')->group(function () 
     Route::get('/next', [AdminTagihanController::class, 'next'])->name('tagihan.next');
     // Route::post('/process', [AdminTagihanController::class, 'process'])->name('tagihan.process');
     Route::get('settings/notifications', [SettingController::class, 'index'])->name('settings.notifications');
-    Route::put('/setting/notifications/process/{id}',[SettingController::class,'notify_edit'])->name('settings.notification.process');
+    Route::put('/setting/notifications/process/{id}', [SettingController::class, 'notify_edit'])->name('settings.notification.process');
 
     Route::resource('/transaction', TransactionController::class);
     Route::resource('/tahun_ajaran', TahunAjaranController::class);
     Route::resource('/jurusan', JurusanController::class);
     Route::resource('/matkul', ControllersMatkulController::class);
-    
+
     Route::get('/profile', [ProfileController::class, 'profile'])->name('profile');
     Route::get('/edit-profile', [ProfileController::class, 'editProfile'])->name('profile_edit');
     Route::resource('/tahun_ajaran', TahunAjaranController::class);
@@ -117,19 +117,20 @@ Route::prefix('/admin')->middleware('admin')->name('admin.')->group(function () 
     Route::post('/bayar/account/mahasiswa', [AccountController::class, 'mahasiswa_bayar'])->name('mahasiswa.bayar');
 
     //setting admin
-    Route::get('/administrasi', [AdministrasiController::class, 'administrasi'])->name('administrasi');
+    Route::get('/administrasi', [AdministrasiController::class, 'administrasi'])->name('administrasi.administrasi');
+    Route::put('/administrasi/{id}', [AdministrasiController::class, 'AdministrasiProses'])->name('administrasi.proses');
 });
 
-Route::prefix('/kursus')->middleware(['auth'])->name('kursus.')->group(function(){
+Route::prefix('/kursus')->middleware(['auth'])->name('kursus.')->group(function () {
     Route::get('/dashboard', [KursusDashboardController::class, 'kursus'])->name('dashboard');
 
     //biodata
-    Route::get('/biodata',[KursusBiodataController::class,'pendaftaran_kursus'])->name('pendaftaran.kursus');
-    Route::post('/biodata/process',[KursusBiodataController::class,'pendaftaran_kursus_process'])->name('pendaftaran.kursus.process');
+    Route::get('/biodata', [KursusBiodataController::class, 'pendaftaran_kursus'])->name('pendaftaran.kursus');
+    Route::post('/biodata/process', [KursusBiodataController::class, 'pendaftaran_kursus_process'])->name('pendaftaran.kursus.process');
 
     //edit biodata
-    Route::get('/edit-biodata/{id}',[KursusProfileController::class,'edit_biodata'])->name('pendaftaran.s1.edit');
-    Route::put('/edit-biodata/process/{id}',[KursusProfileController::class,'edit_biodata_process'])->name('pendaftaran.s1.edit.process');
+    Route::get('/edit-biodata/{id}', [KursusProfileController::class, 'edit_biodata'])->name('pendaftaran.s1.edit');
+    Route::put('/edit-biodata/process/{id}', [KursusProfileController::class, 'edit_biodata_process'])->name('pendaftaran.s1.edit.process');
 
     //mata pelajaran
     Route::get('/matkul', [MataPelajaranController::class, 'index'])->name('matkul');
@@ -150,26 +151,26 @@ Route::prefix('/kursus')->middleware(['auth'])->name('kursus.')->group(function(
 
 // Dashboard Mahasiswa
 Route::prefix('/mahasiswa')->middleware(['auth', 'mahasiswa'])->name('mahasiswa.')->group(function () {
-    
+
     //biodata
-    Route::get('/biodata',[BiodataController::class,'pendaftaran_s1'])->name('pendaftaran.s1');
-    Route::post('/biodata/process',[BiodataController::class,'pendaftaran_s1_process'])->name('pendaftaran.s1.process');
+    Route::get('/biodata', [BiodataController::class, 'pendaftaran_s1'])->name('pendaftaran.s1');
+    Route::post('/biodata/process', [BiodataController::class, 'pendaftaran_s1_process'])->name('pendaftaran.s1.process');
 
     //edit biodata
-    Route::get('/edit-biodata/{id}',[MahasiswaProfileController::class,'edit_biodata'])->name('pendaftaran.s1.edit');
-    Route::put('/edit-biodata/process/{id}',[MahasiswaProfileController::class,'edit_biodata_process'])->name('pendaftaran.s1.edit.process');
+    Route::get('/edit-biodata/{id}', [MahasiswaProfileController::class, 'edit_biodata'])->name('pendaftaran.s1.edit');
+    Route::put('/edit-biodata/process/{id}', [MahasiswaProfileController::class, 'edit_biodata_process'])->name('pendaftaran.s1.edit.process');
 
     //document
-    Route::get('/document',[DocumentController::class,'document'])->name('pendaftaran.document');
-    Route::post('/document/process',[DocumentController::class,'document_process'])->name('pendaftaran.document.process');
-    Route::get('/document/private-ktp/{id}',[DocumentController::class,'download_pdf_ktp'])->name('pendaftaran.document.ktp');
-    Route::get('/document/private-kk/{id}',[DocumentController::class,'download_pdf_kk'])->name('pendaftaran.document.kk');
-    Route::get('/document/private-ijazah/{id}',[DocumentController::class,'download_pdf_ijazah'])->name('pendaftaran.document.ijazah');
-    Route::get('/document/private-transkrip/{id}',[DocumentController::class,'download_pdf_transkrip_nilai'])->name('pendaftaran.document.transkrip_nilai');
+    Route::get('/document', [DocumentController::class, 'document'])->name('pendaftaran.document');
+    Route::post('/document/process', [DocumentController::class, 'document_process'])->name('pendaftaran.document.process');
+    Route::get('/document/private-ktp/{id}', [DocumentController::class, 'download_pdf_ktp'])->name('pendaftaran.document.ktp');
+    Route::get('/document/private-kk/{id}', [DocumentController::class, 'download_pdf_kk'])->name('pendaftaran.document.kk');
+    Route::get('/document/private-ijazah/{id}', [DocumentController::class, 'download_pdf_ijazah'])->name('pendaftaran.document.ijazah');
+    Route::get('/document/private-transkrip/{id}', [DocumentController::class, 'download_pdf_transkrip_nilai'])->name('pendaftaran.document.transkrip_nilai');
 
     //edit document
-    Route::get('/edit-document/{id}',[MahasiswaProfileController::class,'edit_document'])->name('pendaftaran.document.edit');
-    Route::put('/edit-document/process/{id}',[MahasiswaProfileController::class,'edit_document_process'])->name('pendaftaran.document.edit.process');
+    Route::get('/edit-document/{id}', [MahasiswaProfileController::class, 'edit_document'])->name('pendaftaran.document.edit');
+    Route::put('/edit-document/process/{id}', [MahasiswaProfileController::class, 'edit_document_process'])->name('pendaftaran.document.edit.process');
 
     //profile
     Route::get('/profile', [MahasiswaProfileController::class, 'profile'])->name('profile.index');

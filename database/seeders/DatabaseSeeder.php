@@ -43,6 +43,7 @@ class DatabaseSeeder extends Seeder
         $this->call([
             NotifySeeder::class,
             TahunAjaranSeeder::class,
+            AdministrasiSeeder::class
         ]);
     }
 }
