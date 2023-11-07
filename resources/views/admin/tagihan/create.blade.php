@@ -88,17 +88,9 @@
                         is-invalid
                     @enderror">
                             <option selected>-- Pilih Angkatan --</option>
-                            @foreach ($tahunAjaran as $angkatan)
+                            @foreach ($tahunAjaran as $key => $angkatan)
                                 <option value="{{ $angkatan->id }}">{{ $angkatan->year }}</option>
                             @endforeach
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="id_jurusans">Jurusan</label>
-                        <select name="id_jurusans" id="id_jurusans"
-                            class="form-select  @error('id_jurusans.*')
-                        is-invalid
-                    @enderror">
                         </select>
                     </div>
 
@@ -180,8 +172,7 @@
                                 <option disabled selected>-- Pilih Program belajar --</option>
                                 <option value="S1" {{ old('program_belajar') == 'S1' ? 'selected' : '' }}>S1</option>
                                 <option value="Kursus" {{ old('program_belajar') == 'Kursus' ? 'selected' : '' }}>
-                                    Bahasa
-                                    Arab</option>
+                                    Kursus</option>
                             </select>
                             @error('program_belajar')
                                 <div id="validationServer03Feedback" class="invalid-feedback">
@@ -455,7 +446,7 @@
                 document.getElementById("angkatans").classList.remove('d-none');
                 document.getElementById("jurusans").classList.remove('d-none');
                 document.getElementById("id_jurusans").setAttribute('name', 'id_jurusans');
-            } else if (program.value == "Bahasa Arab") {
+            } else if (program.value == "Kursus") {
                 document.getElementById("angkatans").classList.remove('d-none');
                 document.getElementById("jurusans").classList.add('d-none');
                 document.getElementById("id_jurusans").removeAttribute('name');

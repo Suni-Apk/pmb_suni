@@ -13,14 +13,15 @@ class BiodataController extends Controller
 {
     public function pendaftaran_s1()
     {
-        $jurusan = Jurusan::get();
+        $tahunAjaran = TahunAjaran::where('status', 'Active')->first();
+        $jurusan = Jurusan::where('id_tahun_ajarans', $tahunAjaran->id)->get();
         return view('mahasiswa.biodata.pendaftaran-s1', compact('jurusan'));
     }
 
     public function pendaftaran_s1_process(Request $request)
     {
         $user = Auth::user()->id;
-        $angkatan = TahunAjaran::where('status','Active')->first();
+        $angkatan = TahunAjaran::where('status', 'Active')->first();
         $data = $request->validate([
             'birthdate' => 'required|date',
             'birthplace' => 'required',

@@ -33,7 +33,7 @@
                             <div class="modal-content">
                                 <div class="modal-header">
                                     <h5 class="modal-title" id="exampleModalLabel">Pilih Jenis Tagihan</h5>
-                                    <button type="button" class="btn-close text-dark" data-bs-dismiss="modal"
+                                    <button type="button" class="btn-close text-danger" data-bs-dismiss="modal"
                                         aria-label="Close">
                                         <span aria-hidden="true">&times;</span>
                                     </button>
@@ -92,7 +92,7 @@
                                     <th class=" text-uppercase text-secondary text-xs font-weight-bolder opacity-8">
                                         Jenis tagihan</th>
                                     <th
-                                        class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                        class="text-center text-uppercase text-secondary text-xs font-weight-bolder opacity-8">
                                         Action</th>
                                 </tr>
                             </thead>
@@ -167,6 +167,23 @@
         crossorigin="anonymous" referrerpolicy="no-referrer" />
     <script>
         @if (Session::has('success'))
+            toastr.options = {
+                "closeButton": true,
+                "debug": false,
+                "newestOnTop": false,
+                "progressBar": false,
+                "positionClass": "toast-top-right",
+                "preventDuplicates": false,
+                "onclick": null,
+                "showDuration": "300",
+                "hideDuration": "1000",
+                "timeOut": "5000",
+                "extendedTimeOut": "1000",
+                "showEasing": "swing",
+                "hideEasing": "linear",
+                "showMethod": "fadeIn",
+                "hideMethod": "fadeOut"
+            }
             toastr.success("{{ Session::get('success') }}")
         @endif
 

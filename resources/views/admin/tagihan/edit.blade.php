@@ -13,7 +13,7 @@
             </ol>
             <h6 class="font-weight-bolder mb-0">Edit Tagihan Spp
                 {{ $biaya->tahunAjaran->year ? '>> Tahun ajaran ' . $biaya->tahunAjaran->year : '' }}
-                {{ $biaya->jurusans->name ? '>> Jurusan ' . $biaya->jurusans->name : '' }}
+                {{ $biaya->jurusans->name ?? '' ? '>> Jurusan ' . $biaya->jurusans->name : '' }}
                 {{ $biaya->program_belajar ? '>> Program belajar ' . $biaya->program_belajar : '' }}
         </nav>
         <div class="card h-100 mt-4">
@@ -319,6 +319,23 @@
         crossorigin="anonymous" referrerpolicy="no-referrer" />
     <script>
         @if (Session::has('success'))
+            toastr.options = {
+                "closeButton": true,
+                "debug": false,
+                "newestOnTop": false,
+                "progressBar": false,
+                "positionClass": "toast-top-right",
+                "preventDuplicates": false,
+                "onclick": null,
+                "showDuration": "300",
+                "hideDuration": "1000",
+                "timeOut": "5000",
+                "extendedTimeOut": "1000",
+                "showEasing": "swing",
+                "hideEasing": "linear",
+                "showMethod": "fadeIn",
+                "hideMethod": "fadeOut"
+            }
             toastr.success("{{ Session::get('success') }}")
         @endif
 
