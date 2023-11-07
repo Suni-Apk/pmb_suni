@@ -21,4 +21,8 @@ class Tagihan extends Model
     {
         return $this->belongsTo(Biaya::class, 'id_biayas');
     }
+    public function tagihanDetails()
+    {
+        return $this->hasMany(Tagihan::class);
+    }
 }

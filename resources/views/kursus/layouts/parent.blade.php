@@ -1,3 +1,8 @@
+@php
+    $biodata = App\Models\Biodata::where('program_belajar', 'KURSUS')
+        ->where('user_id', Auth::user()->id)
+        ->first();
+@endphp
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>

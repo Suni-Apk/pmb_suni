@@ -3,6 +3,9 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Biaya;
+use App\Models\Biodata;
+use App\Models\TagihanDetail;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -210,8 +213,11 @@ class AccountController extends Controller
     public function mahasiswa_detail($id)
     {
         $mahasiswa = User::where('role', 'Mahasiswa')->find($id);
+        $biodata = Biodata::where('user_id', $mahasiswa->id)->get();
+        $biaya = Biaya::get();
+        $biayaAll = Biaya::all();
 
-        return view('admin.account.mahasiswa.detail', compact('mahasiswa'));
+        return view('admin.account.mahasiswa.detail', compact('biodata', 'mahasiswa', 'biaya', 'biayaAll'));
     }
     public function mahasiswa_bayar(Request $request)
     {

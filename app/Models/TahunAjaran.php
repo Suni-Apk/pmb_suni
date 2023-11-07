@@ -20,4 +20,9 @@ class TahunAjaran extends Model
     {
         return $this->hasMany(Jurusan::class);
     }
+
+    public function biodatas()
+    {
+        return $this->hasMany(Biodata::class);
+    }
 }

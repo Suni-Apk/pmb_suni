@@ -19,9 +19,12 @@ class Biaya extends Model
 
     public function tagihan()
     {
-        return $this->hasMany(Tagihan::class, 'id_biayas');
+        return $this->hasMany(Tagihan::class);
     }
-
+    public function tagihanDetail()
+    {
+        return $this->hasMany(TagihanDetail::class, 'id_biayas');
+    }
     public function tahunAjaran()
     {
         return $this->belongsTo(TahunAjaran::class, 'id_angkatans');

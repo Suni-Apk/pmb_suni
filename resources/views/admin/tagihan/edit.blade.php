@@ -13,7 +13,7 @@
             </ol>
             <h6 class="font-weight-bolder mb-0">Edit Tagihan Spp
                 {{ $biaya->tahunAjaran->year ? '>> Tahun ajaran ' . $biaya->tahunAjaran->year : '' }}
-                {{ $biaya->jurusans->name ? '>> Jurusan ' . $biaya->jurusans->name : '' }}
+                {{ $biaya->jurusans->name ?? '' ? '>> Jurusan ' . $biaya->jurusans->name : '' }}
                 {{ $biaya->program_belajar ? '>> Program belajar ' . $biaya->program_belajar : '' }}
         </nav>
         <div class="card h-100 mt-4">

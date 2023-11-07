@@ -77,6 +77,9 @@ Route::prefix('admin')->name('admin.')->group(function () {
 
 // Controller / Dashboard Admin
 Route::prefix('/admin')->middleware('admin')->name('admin.')->group(function () {
+    Route::get('/', function () {
+        return view('admin.notfound');
+    })->name('notfound');
     Route::get('/dashboard', [AdminDashboardController::class, 'index'])->name('dashboard');
     Route::resource('/tagihan', AdminTagihanController::class);
     Route::get('/next', [AdminTagihanController::class, 'next'])->name('tagihan.next');
@@ -115,7 +118,7 @@ Route::prefix('/admin')->middleware('admin')->name('admin.')->group(function () 
     Route::put('/change_status/mahasiswa/{id}', [AccountController::class, 'mahasiswa_status'])->name('mahasiswa.status');
     Route::get('/detail/account/mahasiswa/{id}', [AccountController::class, 'mahasiswa_detail'])->name('mahasiswa.show');
     Route::post('/bayar/account/mahasiswa', [AccountController::class, 'mahasiswa_bayar'])->name('mahasiswa.bayar');
-
+    Route::get('/account/mahasiswa/program/{id}', [AccountController::class, 'mahasiswa_program'])->name('mahasiswa.program');
     //setting admin
     Route::get('/administrasi', [AdministrasiController::class, 'administrasi'])->name('administrasi.administrasi');
     Route::put('/administrasi/{id}', [AdministrasiController::class, 'AdministrasiProses'])->name('administrasi.proses');
@@ -133,7 +136,7 @@ Route::prefix('/kursus')->middleware(['auth'])->name('kursus.')->group(function 
     Route::put('/edit-biodata/process/{id}', [KursusProfileController::class, 'edit_biodata_process'])->name('pendaftaran.s1.edit.process');
 
     //mata pelajaran
-    Route::get('/matkul', [MataPelajaranController::class, 'index'])->name('matkul');
+    Route::get('/mata-pelajaran', [MataPelajaranController::class, 'index'])->name('matkul');
 
     //tagihan kursus
     Route::get('/tagihan', [KursusTagihanController::class, 'index'])->name('tagihan.index');

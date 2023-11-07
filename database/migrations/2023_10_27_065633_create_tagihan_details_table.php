@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('tagihan_details', function (Blueprint $table) {
             $table->id();
             $table->foreignId('id_tagihans');
+            $table->foreignId('id_biayas');
             $table->foreignId('id_transactions')->nullable();
             $table->foreignId('id_users');
             $table->string('status');
