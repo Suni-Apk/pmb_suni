@@ -3,8 +3,11 @@
 namespace App\Http\Controllers\Mahasiswa;
 
 use App\Http\Controllers\Controller;
+use App\Models\Biaya;
 use App\Models\Biodata;
 use App\Models\Jurusan;
+use App\Models\Tagihan;
+use App\Models\TagihanDetail;
 use App\Models\TahunAjaran;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -38,8 +41,39 @@ class BiodataController extends Controller
         $image = $request->file('image')->store('assets', 'public');
         $data['image'] = $image;
 
-        Biodata::create($data);
+        $biodata = Biodata::create($data);
 
+        $biaya = Biaya::all();
+
+        foreach ($biaya as $key => $biayas) {
+            if ($biayas->id_angkatans == $biodata->angkatan_id && $biayas->id_jurusans == $biodata->jurusan_id && $biayas->program_belajar == $biodata->program_belajar) {
+                $tagihan = Tagihan::where('id_biayas', $biayas->id)->get();
+
+                foreach ($tagihan as $key => $tagihans) {
+                    $tagihanDetail = TagihanDetail::create([
+                        'id_biayas' => $biayas->id,
+                        'id_tagihans' => $tagihans->id,
+                        'id_users' => $biodata->user->id,
+                        'end_date' => $tagihans->end_date,
+                        'amount' => $tagihans->amount,
+                        'status' => 'BELUM',
+                    ]);
+                }
+            } else if ($biayas->id_angkatans == $biodata->angkatan_id && $biayas->program_belajar == $biodata->program_belajar) {
+                $tagihan = Tagihan::where('id_biayas', $biayas->id)->get();
+
+                foreach ($tagihan as $key => $tagihans) {
+                    $tagihanDetail = TagihanDetail::create([
+                        'id_biayas' => $biayas->id,
+                        'id_tagihans' => $tagihans->id,
+                        'id_users' => $biodata->user->id,
+                        'end_date' => $tagihans->end_date,
+                        'amount' => $tagihans->amount,
+                        'status' => 'BELUM',
+                    ]);
+                }
+            }
+        }
         return redirect()->route('mahasiswa.pendaftaran.document')->with('success', 'Kamu Telah melengkapi Biodata Silahkan Lengkapi Dokument');
     }
 }

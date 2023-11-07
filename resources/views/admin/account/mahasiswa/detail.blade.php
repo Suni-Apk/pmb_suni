@@ -51,7 +51,7 @@
                 @if ($biodatas->program_belajar === 'S1')
                     <div class="card mb-4">
                         <div class="card-header">
-                            <h4>Tagihan Program S1</h4>
+                            <h4>Tagihan Program S1 <span class="text-danger">*</span></h4>
                         </div>
                         <div class="card-body">
 
@@ -321,7 +321,7 @@
     @if ($biodatas->program_belajar == 'KURSUS')
         <div class="card mb-4">
             <div class="card-header">
-                <h4>Tagihan Program Kursus</h4>
+                <h4>Tagihan Program Kursus <span class="text-danger">*</span></h4>
             </div>
             <div class="card-body">
                 <div class="shadow-sm mb-3">
