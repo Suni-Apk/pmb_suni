@@ -4,7 +4,7 @@
     <div class="sidenav-header position-sticky">
         <i class="fas fa-times p-3 cursor-pointer text-secondary opacity-5 position-absolute end-0 top-0 d-none d-xl-none"
             aria-hidden="true" id="iconSidenav"></i>
-        <a class="navbar-brand m-0" href="">
+        <a class="navbar-brand m-0" href="{{ route('welcome') }}">
             <img src="/soft-ui-dashboard-main/assets/img/logo-ct-dark.png" class="navbar-brand-img h-100" alt="main_logo">
             <span class="ms-1 font-weight-bold">PMB SUNI Indonesia</span>
         </a>
@@ -34,22 +34,22 @@
 
                 <!-- tahun ajaran -->
                 <li class="nav-item">
-                    <a data-bs-toggle="collapse" href="#angkatan" class="nav-link {{ Route::is('admin.tahun_ajaran.*') ? 'active' : '' }}" aria-controls="angkatan" role="button" aria-expanded="false">
+                    <a data-bs-toggle="collapse" href="#angkatan" class="nav-link {{ Route::is('admin.tahun-ajaran.*') ? 'active' : '' }}" aria-controls="angkatan" role="button" aria-expanded="false">
                         <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center d-flex align-items-center justify-content-center  me-2">
                             <i class="ni ni-hat-3"></i>
                         </div>
                         <span class="nav-link-text ms-1"> Tahun Ajaran </span>
                     </a>
-                    <div class="collapse {{ Route::is('admin.tahun_ajaran.*') ? 'show' : '' }}" id="angkatan">
+                    <div class="collapse {{ Route::is('admin.tahun-ajaran.*') ? 'show' : '' }}" id="angkatan">
                         <ul class="nav ms-4 ps-3">
-                            <li class="nav-item ">
-                                <a class="nav-link {{ Route::is('admin.tahun_ajaran.index') ? 'active' : '' }} " href="{{ route('admin.tahun_ajaran.index') }}">
+                        <li class="nav-item ">
+                                <a class="nav-link {{ Route::is('admin.tahun-ajaran.index') ? 'active' : '' }} " href="{{ route('admin.tahun-ajaran.index') }}">
                                     <span class="sidenav-mini-icon d-none d-xl-block"><i class="fas fa-border-all"></i></span>
                                     <span class="sidenav-normal"> Daftar Tahun Ajaran </span>
                                 </a>
                             </li>
                             <li class="nav-item ">
-                                <a class="nav-link {{ Route::is('admin.tahun_ajaran.create') ? 'active' : '' }} " href="{{ route('admin.tahun_ajaran.create') }}">
+                                <a class="nav-link {{ Route::is('admin.tahun-ajaran.create') ? 'active' : '' }} " href="{{ route('admin.tahun-ajaran.create') }}">
                                     <span class="sidenav-mini-icon d-none d-xl-block"><i class="fas fa-plus"></i></span>
                                     <span class="sidenav-normal"> Tambah Tahun Ajaran </span>
                                 </a>
@@ -435,7 +435,7 @@
                             <span class="nav-link-text ms-1">Isi Biodata</span>
                         </a>
                     </li>
-                    <!-- dcoment -->
+                    <!-- document -->
                     <li class="nav-item">
                         <a class="nav-link {{ Route::is('mahasiswa.pendaftaran.document') ? 'active' : '' }}"
                             href="{{ route('mahasiswa.pendaftaran.document') }}">
@@ -443,7 +443,7 @@
                                 class="icon icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
                                 <i class="fas fa-folder"></i>
                             </div>
-                            <span class="nav-link-text ms-1">Isi Document</span>
+                            <span class="nav-link-text ms-1">Upload Dokumen</span>
                         </a>
                     </li>
                 @elseif ($biodata && !Auth::user()->document)
@@ -455,7 +455,7 @@
                                 class="icon icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
                                 <i class="fas fa-folder"></i>
                             </div>
-                            <span class="nav-link-text ms-1">Isi Document</span>
+                            <span class="nav-link-text ms-1">Upload Dokumen</span>
                         </a>
                     </li>
                 @elseif(!$biodata && Auth::user()->document)
@@ -480,7 +480,7 @@
                         </ul>
                     </li>
 
-                    <!-- tahun ajaran -->
+                    <!-- matkul -->
                     <li class="nav-item">
                         <a href="{{ route('mahasiswa.matkul') }}"
                             class="nav-link {{ Route::is('mahasiswa.matkul') ? 'active' : '' }}">

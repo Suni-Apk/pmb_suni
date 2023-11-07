@@ -24,10 +24,11 @@ class DashboardController extends Controller
 
         // Mengambil tanggal Hijriah untuk indeks pertama (bulan ini).
         $hijriDateday = $data['data']['hijri']['day'];
+        $hijriDatedayArabic = $data['data']['hijri']['weekday']['ar'];
         $hijriDatemonth = $data['data']['hijri']['month']['ar'];
         $hijriDateyear = $data['data']['hijri']['year'];
         $user = Auth::user();
         $biodata = Biodata::where('program_belajar','S1')->where('user_id',$user->id)->first();
-        return view('mahasiswa.index',compact('hijriDateday','hijriDatemonth','hijriDateyear','user','biodata'));
+        return view('mahasiswa.index',compact('hijriDateday','hijriDatedayArabic','hijriDatemonth','hijriDateyear', 'user', 'biodata'));
     }
 }

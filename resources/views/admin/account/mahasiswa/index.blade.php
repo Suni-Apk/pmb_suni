@@ -57,23 +57,25 @@
                                 Detail
                             </a>
 
-                            <a style="letter-spacing: .02rem" href="{{route('admin.admin.edit',$item->id)}}" class="badge badge-sm bg-gradient-secondary font-weight-bolder text-xxs mx-1" data-toggle="tooltip" data-original-title="edit">
+                            <a style="letter-spacing: .02rem" href="{{route('admin.mahasiswa.edit',$item->id)}}" class="badge badge-sm bg-gradient-secondary font-weight-bolder text-xxs mx-1" data-toggle="tooltip" data-original-title="edit">
                                 Ubah
                             </a>
 
-                            <a style="letter-spacing: .02rem" href="" class="badge badge-sm bg-gradient-danger font-weight-bolder text-xxs" data-toggle="tooltip" data-original-title="edit">
+                            <a style="letter-spacing: .02rem" href="" class="badge badge-sm bg-gradient-danger font-weight-bolder text-xxs" data-toggle="tooltip" data-original-title="hapus">
                                 Hapus
                             </a>
 
-                            <form action="{{route('admin.admin.status',$item->id)}}" method="POST" class="d-inline">
+                            <form action="{{route('admin.mahasiswa.status',$item->id)}}" method="POST" class="d-inline">
                               @csrf
                               @method('PUT')
                               @if ($item->status == 'on')
-                                <button name="status" value="off" class="badge badge-sm bg-gradient-danger font-weight-bold text-xs mx-2  border-0" type="submit">
+                                <input type="hidden" name="status" value="off">
+                                <button class="badge badge-sm bg-red font-weight-bolder text-xxs ms-1 border-0" type="submit">
                                   OFF
                                 </button>
                               @elseif($item->status == 'off')
-                                <button name="status" value="on" class="badge badge-sm bg-gradient-primary font-weight-bold text-xs mx-2  border-0" type="submit">
+                                <input type="hidden" name="status" value="on">
+                                <button class="badge badge-sm bg-teal font-weight-bolder text-xxs ms-1 border-0" type="submit">
                                   ON
                                 </button>
                               @endif

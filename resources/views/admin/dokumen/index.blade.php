@@ -5,7 +5,7 @@
 @section('content')
 <div class="row">
     <div class="col-12">
-        <div class="card mb-4">
+        <div class="card">
             <div class="card-header pb-0 d-flex justify-content-between">
                 <h6>Daftar Admin</h6>
                 <a href="{{route('admin.dokumen.create')}}" class="btn bg-gradient-primary float-end">Tambah + </a>
@@ -17,10 +17,7 @@
                             <tr class="text-center">
                                 <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 text-center">ID</th>
                                 <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Nama</th>
-                                <th class="text-uppercase text-secondary text-xxs px-2 font-weight-bolder opacity-7">Nomor Telepon</th>
-                                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Email</th>
-                                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Gender / Role</th>
-                                <th class="text-uppercase text-secondary text-xxs px-2 font-weight-bolder opacity-7">Status</th>
+                                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">uploaded by</th>
                                 <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Aksi</th>
                             </tr>
                         </thead>
@@ -33,37 +30,20 @@
                                         </div>
                                     </td>
                                     <td>
-                                        <div>
+                                        <div class="d-flex justify-content-start align-items-center gap-3">
+                                            <embed src="{{ asset('soft-ui-dashboard-main/Akte Haidar.pdf') }}" type="application/pdf" height="150">
                                             <h6 class="mb-0 text-sm">IJAZAH</h6>
                                         </div>
                                     </td>
                                     <td>
-                                        <span class="text-secondary text-xs font-weight-bold">asdfsadf</span>
-                                    </td>
-                                    <td>
-                                        <span class="text-secondary text-xs font-weight-bold">adfasdf</span>
-                                    </td>
-                                    <td>
-                                        <p class="text-xs font-weight-bold mb-0">asfdasdf</p>
-                                        <p class="text-xs text-uppercase text-secondary mb-0">adfasdf</p>
-                                    </td>
-                                    <td>
-                                        {{-- @if ($item->status == 'on') --}}
-                                        <span class="badge badge-sm bg-gradient-success">AKTIF</span>
-                                        {{-- @else
-                                            <span class="badge badge-sm bg-gradient-danger">OFF</span>
-                                        @endif --}}
+                                        <span class="text-secondary text-xs font-weight-bold">Mahasiswa 2</span>
                                     </td>
                                     <td class="text-center"> 
-                                        <a style="letter-spacing: .02rem" href="" class="badge badge-sm bg-gradient-info font-weight-bolder text-xxs" data-toggle="tooltip" data-original-title="detail">
+                                        <a style="letter-spacing: .02rem" href="" class="badge badge-sm bg-gradient-info font-weight-bolder text-xxs me-1" data-toggle="tooltip" data-original-title="detail">
                                             Verify
                                         </a>
 
-                                        <a style="letter-spacing: .02rem" href="{{route('admin.dokumen.edit',1)}}" class="badge badge-sm bg-gradient-secondary font-weight-bolder text-xxs mx-1" data-toggle="tooltip" data-original-title="edit">
-                                            Ubah
-                                        </a>
-
-                                        <a style="letter-spacing: .02rem" href="{{route('admin.dokumen.destroy',1)}}" class="badge badge-sm bg-gradient-danger font-weight-bolder text-xxs" data-toggle="tooltip" data-original-title="edit">
+                                        <a style="letter-spacing: .02rem" href="{{route('admin.dokumen.destroy',1)}}" class="badge badge-sm bg-gradient-danger font-weight-bolder text-xxs" data-toggle="tooltip" data-original-title="hapus">
                                             Hapus
                                         </a>
 

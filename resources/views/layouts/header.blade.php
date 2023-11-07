@@ -60,14 +60,15 @@
                             <li class="mb-1">
                                 <span class="dropdown-item border-radius-md">
                                     <div class="d-flex">
-                                        <p class="mb-0">Admin</p>
+                                        <p class="mb-0 text-capitalize">{{ Auth::user()->name }}</p>
                                     </div>
                                 </span>
                             </li>
                             <li class="mb-1">
-                                <a class="dropdown-item border-radius-md" href="">
+                                <a class="dropdown-item border-radius-md" 
+                                href="{{ Auth::user()->role == 'Admin' ? route('admin.profile') : route('mahasiswa.profile.index') }}">
                                     <div class="d-flex">
-                                        <p class="mb-0">Account Settings</p>
+                                        <p class="mb-0">Profile Settings</p>
                                     </div>
                                 </a>
                             </li>

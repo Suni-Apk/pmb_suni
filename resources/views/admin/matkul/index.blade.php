@@ -2,9 +2,6 @@
 
 @section('title', 'table template')
 
-@push('styles')
-@endpush
-
 @section('content')
     <div class="row">
         <div class="col-12">
@@ -51,7 +48,7 @@
                                     </td>
                                     <td class="align-middle text-center">
                                         <a href="{{route('admin.matkul.show', $item->id)}}"
-                                            class="badge badge-sm bg-gradient-primary font-weight-bold text-xs mx-2"
+                                            class="badge badge-sm bg-gradient-info font-weight-bold text-xxs"
                                             data-toggle="tooltip" data-original-title="detail">
                                             Detail
                                         </a>
@@ -72,6 +69,7 @@
                                         </form>
                                     </td>
                                 </tr>
+                                @endforeach
                             </tbody>
                         </table>
                     </div>

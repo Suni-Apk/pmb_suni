@@ -24,30 +24,31 @@
                             <div class="modal-content">
                                 <div class="modal-header">
                                     <h5 class="modal-title" id="exampleModalLabel">Pilih Jenis Tagihan</h5>
-                                    <button type="button" class="btn-close text-dark" data-bs-dismiss="modal"
-                                        aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
+                                    <button type="button" class="btn-close border rounded-circle p-1 fs-3 lh-1 text-dark" data-bs-dismiss="modal" aria-label="Close">&times;</button>
                                 </div>
                                 <form action="{{ route('admin.tagihan.next') }}" method="POST">
                                     @csrf
                                     <div class="modal-body">
                                         <div class="form-check mb-3">
                                             <input class="form-check-input" type="radio" name="jenis_tagihan"
-                                                id="jenis_tagihan" value="rutin">
-                                            <label class="custom-control-label" for="customRadio1">Routine</label>
+                                                id="spp" value="rutin">
+                                            <label class="custom-control-label" for="spp">Spp</label>
                                         </div>
                                         <div class="form-check mb-3">
                                             <input class="form-check-input" type="radio" name="jenis_tagihan"
-                                                id="customRadio1" value="tidak-rutin">
-                                            <label class="custom-control-label" for="customRadio1">Tidak Routine</label>
+                                                id="biaya_lain" value="tidak-rutin">
+                                            <label class="custom-control-label" for="biaya_lain">Biaya Lain</label>
                                         </div>
                                         <div class="form-check mb-3">
                                             <input class="form-check-input" type="radio" name="jenis_tagihan"
-                                                id="customRadio1" value="daftar-ulang">
-                                            <label class="custom-control-label" for="customRadio1">Daftar Ulang</label>
+                                                id="daftar_ulang" value="daftar-ulang">
+                                            <label class="custom-control-label" for="daftar_ulang">Daftar Ulang</label>
                                         </div>
-
+                                        <div class="form-check mb-3">
+                                            <input class="form-check-input" type="radio" name="jenis_tagihan"
+                                                id="tingkatan" value="tingkatan">
+                                            <label class="custom-control-label" for="tingkatan">Tingkatan</label>
+                                        </div>
                                     </div>
                                     <div class="modal-footer">
                                         <button class="btn bg-gradient-primary" type="submit">Lanjut <i

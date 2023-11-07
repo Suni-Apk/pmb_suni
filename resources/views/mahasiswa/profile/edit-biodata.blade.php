@@ -60,7 +60,7 @@
                                     </div>
 
                                     <button type="submit" class="btn btn-success">Submit</button>
-                                    <button type="reset" class="btn btn-warning text-dark">Reset</button>
+                                    <button type="reset" class="btn btn-warning">Reset</button>
                                 </form>
                             </div>
                         </div>

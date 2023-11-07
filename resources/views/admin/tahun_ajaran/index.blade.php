@@ -1,9 +1,6 @@
 @extends('layouts.master')
 
-@section('title', 'table template')
-
-@push('styles')
-@endpush
+@section('title', 'Tahun Ajaran')
 
 @section('content')
     <div class="row">
@@ -11,7 +8,7 @@
             <div class="card mb-4">
                 <div class="card-header pb-0 d-flex justify-content-between">
                     <h6>Daftar Tahun Ajaran</h6>
-                    <a href="{{route('admin.tahun_ajaran.create')}}" class="btn bg-gradient-primary float-end">Tambah + </a>
+                    <a href="{{route('admin.tahun-ajaran.create')}}" class="btn bg-gradient-primary float-end">Tambah + </a>
                 </div>
                 <div class="card-body px-0 pt-0 pb-2">
                     <div class="table-responsive p-0">
@@ -36,10 +33,10 @@
                                         <span class="text-bold">{{ $angkatans->year }}</span>
                                     </td>
                                     <td class="text-sm">
-                                        <span class="text-bold">{{ \Carbon\Carbon::parse($tahunAjarans->start_at)->format('d F') }}</span>
+                                        <span class="text-bold">{{ \Carbon\Carbon::parse($angkatans->start_at)->format('d F') }}</span>
                                     </td>
                                     <td class="text-sm">
-                                        <span class="text-bold">{{ \Carbon\Carbon::parse($tahunAjarans->end_at)->format('d F') }}</span>
+                                        <span class="text-bold">{{ \Carbon\Carbon::parse($angkatans->end_at)->format('d F') }}</span>
                                     </td>
                                     <td class="align-middle text-center">
                                         <span class="text-uppercase badge badge-sm bg-gradient-success">{{ $angkatans->status }}</span>
@@ -49,12 +46,13 @@
                                             @csrf
                                             @method('DELETE')
                                             <button type="submit" style="letter-spacing: .02rem"
-                                                class="badge badge-sm bg-gradient-danger font-weight-bolder text-xxs mx-2 show_confirm" data-toggle="tooltip" data-original-title="Hapus">
+                                                class="badge badge-sm bg-gradient-danger font-weight-bolder text-xxs mx-2 show_confirm border-0" data-toggle="tooltip" data-original-title="Hapus">
                                                 Hapus
                                             </button>
                                         </form>
                                     </td>
                                 </tr>
+                                @endforeach
                             </tbody>
                         </table>
                     </div>
@@ -71,7 +69,6 @@
             fixedHeight: true,
         });
     </script>
-    <script src="sweetalert2.all.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"
         integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
@@ -83,15 +80,15 @@
         crossorigin="anonymous" referrerpolicy="no-referrer" />
     <script>
         @if (Session::has('success'))
-            toastr.success("{{ Session::get('success') }}")
+            toastr.success('{{ Session::get("success") }}')
         @endif
 
         @if (Session::has('delete'))
-            toastr.success("{{ Session::get('success') }}")
+            toastr.success('{{ Session::get("success") }}')
         @endif
 
         @if (Session::has('pesan'))
-            toastr.error('{{ Session::get('pesan') }}')
+            toastr.error('{{ Session::get("pesan") }}')
         @endif
     </script>
     <script type="text/javascript">

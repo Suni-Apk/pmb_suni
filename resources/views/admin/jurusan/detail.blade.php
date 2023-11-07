@@ -13,7 +13,7 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title">Tambah Mata Kuliah</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        <button type="button" class="btn-close border rounded-circle p-1 fs-3 lh-1 text-dark" data-bs-dismiss="modal" aria-label="Close">&times;</button>
                     </div>
                     <div class="modal-body">
                         <form action="{{ route('admin.matkul.store') }}" method="POST">
@@ -57,7 +57,7 @@
 
                             <button type="submit" class="btn btn-success">Submit</button>
                             <a href="{{ route('admin.jurusan.show', $jurusan->id) }}">
-                                <button type="button" class="btn btn-warning text-dark">Back</button>
+                                <button type="button" class="btn btn-warning">Back</button>
                             </a>
                         </form>
                     </div>

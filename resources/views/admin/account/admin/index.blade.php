@@ -65,20 +65,20 @@
                               @csrf
                               @method('PUT')
                               @if ($item->status == 'on')
-                                <button name="status" value="off" class="badge badge-sm bg-gradient-danger font-weight-bold text-xs mx-2  border-0" type="submit">
+                                <input type="hidden" name="off">
+                                <button class="badge badge-sm bg-red font-weight-bolder text-xxs ms-1 border-0" type="submit">
                                   OFF
                                 </button>
                               @elseif($item->status == 'off')
-                                <button name="status" value="on" class="badge badge-sm bg-gradient-primary font-weight-bold text-xs mx-2  border-0" type="submit">
+                              <input type="hidden" name="off">
+                                <button class="badge badge-sm bg-teal font-weight-bolder text-xxs ms-1 border-0" type="submit">
                                   ON
                                 </button>
                               @endif
                             </form>
                         </td>
                     </tr>
-                  @empty
-                      
-                  @endforelse
+                  @endforeach
                 </tbody>
               </table>
             </div>

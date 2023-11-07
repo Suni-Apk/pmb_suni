@@ -18,7 +18,7 @@
                                 <div class="form-group">
                                     <label for="" class="">Pesan Notifikasi OTP</label>
                                     <textarea class="form-control mb-3" name="notif_otp">{{$notif->notif_otp}}</textarea>
-                                    <button class="btn btn-primary py-2 px-3" type="submit">Submit</button>
+                                    <button class="btn btn-primary" type="submit">Submit</button>
                                 </div>
                                 {{-- <div class="form-group">
                                     <label for="" class="">Pesan Notifikasi sebelum waktu tagihan</label>
