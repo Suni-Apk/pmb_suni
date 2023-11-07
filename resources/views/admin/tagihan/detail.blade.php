@@ -33,11 +33,6 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td class="text-sm">Untuk Jurusan / Prodi :
-                                        <strong>{{ $biaya->jurusans->name }}</strong>
-                                    </td>
-                                </tr>
-                                <tr>
                                     <td class="text-sm">Untuk Program Belajar :
                                         <strong>{{ $biaya->program_belajar }}</strong>
                                     </td>
@@ -63,7 +58,8 @@
                                         <td class="">{{ $key + 1 }}</td>
                                         <td class="">{{ $value->mounth }}</td>
                                         <td class="">Rp {{ number_format($value->amount, 0, '', '.') }}</td>
-                                        <td class="">{{ Carbon\Carbon::parse($value->end_date)->format('d F Y') }}
+                                        <td class="">
+                                            {{ Carbon\Carbon::parse($value->end_date)->format('d F Y') }}
                                         </td>
                                     </tr>
                                 @endforeach
@@ -109,6 +105,11 @@
                                 <tr>
                                     <td class="text-sm">Untuk Program Belajar :
                                         <strong>{{ $biaya->program_belajar }}</strong>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="text-sm">Total :
+                                        <strong>Rp {{ number_format($total, 0, '', '.') }}</strong>
                                     </td>
                                 </tr>
                             </tbody>

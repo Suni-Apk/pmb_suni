@@ -1,3 +1,8 @@
+@php
+    $biodata = App\Models\Biodata::where('program_belajar', 'S1')
+        ->where('user_id', Auth::user()->id)
+        ->first();
+@endphp
 <aside
     class="sidenav navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-3 overflow-hidden"
     id="sidenav-main">
@@ -326,7 +331,7 @@
 
                 <!-- settings -->
                 <li class="nav-item">
-                    <a data-bs-toggle="collapse" href="#settings" class="nav-link" aria-controls="settings"
+                    <a data-bs-toggle="collapse" href="#settings" class="nav-link {{ Route::is('admin.administrasi') || Route::is('admin.settings.*') ? 'active' : '' }}" aria-controls="settings"
                         role="button" aria-expanded="false">
                         <div
                             class="icon icon-sm shadow border-radius-md bg-white text-center d-flex align-items-center justify-content-center  me-2">
@@ -334,12 +339,18 @@
                         </div>
                         <span class="nav-link-text ms-1">Settings</span>
                     </a>
-                    <div class="collapse " id="settings">
+                    <div class="collapse {{ Route::is('admin.administrasi') || Route::is('admin.settings.*') ? 'show' : '' }}" id="settings">
                         <ul class="nav ms-4 ps-3">
                             <li class="nav-item ">
-                                <a class="nav-link " href="">
+                                <a class="nav-link {{ Route::is('admin.settings.general') ? 'active' : '' }}" href="{{ route('admin.settings.general') }}">
                                     <span class="sidenav-mini-icon"><i class="ni ni-building"></i></span>
                                     <span class="sidenav-normal"> General </span>
+                                </a>
+                            </li>
+                            <li class="nav-item ">
+                                <a class="nav-link {{ Route::is('admin.administrasi') ? 'active' : '' }}" href="{{ route('admin.administrasi') }}">
+                                    <span class="sidenav-mini-icon"><i class="ni ni-bell-55"></i></span>
+                                    <span class="sidenav-normal"> Administrasi </span>
                                 </a>
                             </li>
                             <li class="nav-item ">

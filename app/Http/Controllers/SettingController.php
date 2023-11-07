@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Notify;
+use App\Models\General;
 use Illuminate\Http\Request;
+use App\Models\DescProgramBelajar;
 
 class SettingController extends Controller
 {
@@ -11,13 +13,26 @@ class SettingController extends Controller
 
     public function index()
     {
-        
+        $general = General::first();
+        $descPro = DescProgramBelajar::first();
+
+        return view('admin.settings.index', compact('general', 'descPro'));
+    }
+
+    public function general_edit(Request $request, $id)
+    {
+        $general = General::find($id);
+    }
+
+    public function desc_edit(Request $request, $id)
+    {
+        $descPro = DescProgramBelajar::find($id);
     }
 
     public function notify_index()
     {
-        $notif = Notify::where('id',1)->first();
-        return view('admin.settings.index',compact('notif'));
+        $notif = Notify::first();
+        return view('admin.settings.notify',compact('notif'));
     }
 
     public function notify_edit(Request $request,$id)

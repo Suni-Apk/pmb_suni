@@ -74,20 +74,19 @@ class JurusanController extends Controller
         return view('admin.jurusan.edit', compact('tahun_ajaran'));
     }
 
-        /**
-         * Update the specified resource in storage.
-         */
-        public function update(Request $request, string $id)
-        {
-                //
-        }
+    /**
+     * Update the specified resource in storage.
+     */
+    public function update(Request $request, string $id)
+    {
+        //
+    }
 
     /**
      * Remove the specified resource from storage.
      */
     public function destroy(string $id)
     {
-        //
         $jurusan = Jurusan::findOrFail($id);
         $jurusan->delete();
         return redirect()->route('admin.jurusan.index');

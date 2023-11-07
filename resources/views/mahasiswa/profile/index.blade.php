@@ -1,7 +1,6 @@
 @extends('layouts.master')
 
 @section('title', 'Profile')
-
 @section('content')
     <div class="page-header min-height-300 border-radius-xl mt-4"
         style="background-image: url('../soft-ui-dashboard-main/assets/img/curved-images/curved0.jpg'); background-position-y: 50%;">
@@ -15,7 +14,7 @@
                     @if (!Auth::user()->biodata)
                     /soft-ui-dashboard-main/assets/img/no-profile.png
                     @else
-                        {{ asset('storage/' . $biodata['image'])}}
+                        {{ asset('storage/' . $biodata->image)}}
                     @endif
                     " alt="profile_image">
                 </div>
@@ -126,6 +125,9 @@
                         <div class="card-body p-3">
                             <hr class="horizontal gray-light">
                             <ul class="list-group">
+                                <li class="list-group-item border-0 ps-0 pt-0 text-sm"><strong class="text-dark">
+                                    Angkatan :</strong>
+                                    &nbsp; {{ $biodata->angkatan->year }}</li>
                                 <li class="list-group-item border-0 ps-0 pt-0 text-sm"><strong class="text-dark">
                                         Tanggal Lahir :</strong>
                                     &nbsp; {{ $biodata->birthdate }}</li>

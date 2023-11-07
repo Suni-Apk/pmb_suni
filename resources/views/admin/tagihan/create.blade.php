@@ -88,17 +88,9 @@
                         is-invalid
                     @enderror">
                             <option selected>-- Pilih Angkatan --</option>
-                            @foreach ($tahunAjaran as $angkatan)
+                            @foreach ($tahunAjaran as $key => $angkatan)
                                 <option value="{{ $angkatan->id }}">{{ $angkatan->year }}</option>
                             @endforeach
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="id_jurusans">Jurusan</label>
-                        <select name="id_jurusans" id="id_jurusans"
-                            class="form-select  @error('id_jurusans.*')
-                        is-invalid
-                    @enderror">
                         </select>
                     </div>
 
@@ -179,9 +171,8 @@
                                 id="program_belajar" onchange="enableProgram(this)">
                                 <option disabled selected>-- Pilih Program belajar --</option>
                                 <option value="S1" {{ old('program_belajar') == 'S1' ? 'selected' : '' }}>S1</option>
-                                <option value="Bahasa Arab"
-                                    {{ old('program_belajar') == 'Bahasa Arab' ? 'selected' : '' }}>Bahasa
-                                    Arab</option>
+                                <option value="Kursus" {{ old('program_belajar') == 'Kursus' ? 'selected' : '' }}>
+                                    Kursus</option>
                             </select>
                             @error('program_belajar')
                                 <div id="validationServer03Feedback" class="invalid-feedback">
@@ -395,10 +386,10 @@
 
         const jurusanGrouped = @json($jurusanGrouped);
         const jurusans = @json($jurusans);
-
         angkatanSelect.addEventListener('change', () => {
             const angkatanId = angkatanSelect.value;
             const jurusanOptions = jurusanGrouped[angkatanId] || [];
+
             if (jurusanGrouped[angkatanId]) {
                 jurusanSelect.innerHTML = '<option value="">Pilih Jurusan</option>';
             } else {
@@ -412,7 +403,23 @@
                 option.textContent = jurusan.name;
                 jurusanSelect.appendChild(option);
             });
-            updateKelasOptions();
+        });
+        angkatanSelect.dispatchEvent(new Event('change'));
+        const angkatanId = angkatanSelect.value;
+        const jurusanOptions = jurusanGrouped[angkatanId] || [];
+
+        if (jurusanGrouped[angkatanId]) {
+            jurusanSelect.innerHTML = '<option value="">Pilih Jurusan</option>';
+        } else {
+            jurusanSelect.innerHTML =
+                '<option value="">Data Jurusan Kosong : Pilih tahun ajaran terlebih dahulu !</option>';
+        }
+
+        jurusanOptions.forEach(jurusan => {
+            const option = document.createElement('option');
+            option.value = jurusan.id;
+            option.textContent = jurusan.name;
+            jurusanSelect.appendChild(option);
         });
     </script>
     <script type="text/javascript">
@@ -439,7 +446,7 @@
                 document.getElementById("angkatans").classList.remove('d-none');
                 document.getElementById("jurusans").classList.remove('d-none');
                 document.getElementById("id_jurusans").setAttribute('name', 'id_jurusans');
-            } else if (program.value == "Bahasa Arab") {
+            } else if (program.value == "Kursus") {
                 document.getElementById("angkatans").classList.remove('d-none');
                 document.getElementById("jurusans").classList.add('d-none');
                 document.getElementById("id_jurusans").removeAttribute('name');

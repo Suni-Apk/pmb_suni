@@ -126,110 +126,110 @@
 @section('content')
 	<div class="row">
 
-			<div class="col-xl-3 col-lg-4 col-sm-6 col-12 mb-4">
-				<div class="card card-stats mb-xl-0">
-					<div class="card-body p-4">
-						<div class="row align-items-center">
-							<div class="col">
-								<h6 class="card-title text-uppercase text-muted mb-0">Total User</h6>
-								<span class="h2 lh-1 font-weight-bold mb-0">123.400</span>
-							</div>
-							<div class="col-auto">
-								<div class="icon icon-shape bg-danger text-white rounded-circle shadow text-center">
-									<i class="fas fa-users"></i>
-								</div>
+		<div class="col-xl-3 col-lg-4 col-sm-6 col-12 mb-4">
+			<div class="card card-stats mb-xl-0">
+				<div class="card-body p-4">
+					<div class="row align-items-center">
+						<div class="col">
+							<h6 class="card-title text-uppercase text-muted mb-0">Total User</h6>
+							<span class="h2 lh-1 font-weight-bold mb-0">123.400</span>
+						</div>
+						<div class="col-auto">
+							<div class="icon icon-shape bg-danger text-white rounded-circle shadow text-center">
+								<i class="fas fa-users"></i>
 							</div>
 						</div>
 					</div>
 				</div>
 			</div>
-			<div class="col-xl-3 col-lg-4 col-sm-6 col-12 mb-4">
-				<div class="card card-stats mb-xl-0">
-					<div class="card-body p-4">
-						<div class="row align-items-center">
-							<div class="col">
-								<h6 class="card-title text-uppercase text-muted mb-0">Admin</h6>
-								<span class="h2 lh-1 font-weight-bold mb-0">12.000</span>
-							</div>
-							<div class="col-auto">
-								<div class="icon icon-shape bg-orange text-white rounded-circle shadow text-center">
-									<i class="fas fa-user-cog"></i>
-								</div>
+		</div>
+		<div class="col-xl-3 col-lg-4 col-sm-6 col-12 mb-4">
+			<div class="card card-stats mb-xl-0">
+				<div class="card-body p-4">
+					<div class="row align-items-center">
+						<div class="col">
+							<h6 class="card-title text-uppercase text-muted mb-0">Admin</h6>
+							<span class="h2 lh-1 font-weight-bold mb-0">12.000</span>
+						</div>
+						<div class="col-auto">
+							<div class="icon icon-shape bg-orange text-white rounded-circle shadow text-center">
+								<i class="fas fa-user-cog"></i>
 							</div>
 						</div>
 					</div>
 				</div>
 			</div>
-			<div class="col-xl-3 col-lg-4 col-sm-6 col-12 mb-4">
-				<div class="card card-stats mb-xl-0">
-					<div class="card-body p-4">
-						<div class="row align-items-center">
-							<div class="col">
-								<h6 class="card-title text-uppercase text-muted mb-0">Mahasiswa</h6>
-								<span class="h2 lh-1 font-weight-bold mb-0">111.400</span>
-							</div>
-							<div class="col-auto">
-								<div class="icon icon-shape bg-warning text-white rounded-circle shadow text-center">
-									<i class="fas fa-user"></i>
-								</div>
+		</div>
+		<div class="col-xl-3 col-lg-4 col-sm-6 col-12 mb-4">
+			<div class="card card-stats mb-xl-0">
+				<div class="card-body p-4">
+					<div class="row align-items-center">
+						<div class="col">
+							<h6 class="card-title text-uppercase text-muted mb-0">Mahasiswa</h6>
+							<span class="h2 lh-1 font-weight-bold mb-0">111.400</span>
+						</div>
+						<div class="col-auto">
+							<div class="icon icon-shape bg-warning text-white rounded-circle shadow text-center">
+								<i class="fas fa-user"></i>
 							</div>
 						</div>
 					</div>
 				</div>
 			</div>
-			<div class="col-xl-3 col-lg-4 col-sm-6 col-12 mb-4">
-				<div class="card card-stats mb-xl-0">
-					<div class="card-body p-4">
-						<div class="row align-items-center">
-							<div class="col">
-								<h6 class="card-title text-uppercase text-muted mb-0">Mata Kuliah</h6>
-								<span class="h2 lh-1 font-weight-bold mb-0">123</span>
-							</div>
-							<div class="col-auto">
-								<div class="icon icon-shape bg-green text-white rounded-circle shadow text-center">
-									<i class="ni ni-hat-3"></i>
-								</div>
+		</div>
+		<div class="col-xl-3 col-lg-4 col-sm-6 col-12 mb-4">
+			<div class="card card-stats mb-xl-0">
+				<div class="card-body p-4">
+					<div class="row align-items-center">
+						<div class="col">
+							<h6 class="card-title text-uppercase text-muted mb-0">Mata Kuliah</h6>
+							<span class="h2 lh-1 font-weight-bold mb-0">123</span>
+						</div>
+						<div class="col-auto">
+							<div class="icon icon-shape bg-green text-white rounded-circle shadow text-center">
+								<i class="ni ni-hat-3"></i>
 							</div>
 						</div>
 					</div>
 				</div>
 			</div>
-			<div class="col-xl-3 col-lg-4 col-sm-6 col-12 mb-4">
-				<div class="card card-stats mb-xl-0">
-					<div class="card-body p-4">
-						<div class="row align-items-center">
-							<div class="col">
-								<h6 class="card-title text-uppercase text-muted mb-0">Jurusan</h6>
-								<span class="h2 lh-1 font-weight-bold mb-0">4</span>
-							</div>
-							<div class="col-auto">
-								<div class="icon icon-shape bg-teal text-white rounded-circle shadow text-center">
-									<i class="ni ni-paper-diploma"></i>
-								</div>
+		</div>
+		<div class="col-xl-3 col-lg-4 col-sm-6 col-12 mb-4">
+			<div class="card card-stats mb-xl-0">
+				<div class="card-body p-4">
+					<div class="row align-items-center">
+						<div class="col">
+							<h6 class="card-title text-uppercase text-muted mb-0">Jurusan</h6>
+							<span class="h2 lh-1 font-weight-bold mb-0">4</span>
+						</div>
+						<div class="col-auto">
+							<div class="icon icon-shape bg-teal text-white rounded-circle shadow text-center">
+								<i class="ni ni-paper-diploma"></i>
 							</div>
 						</div>
 					</div>
 				</div>
 			</div>
-			<div class="col mb-4">
-				<div class="card card-stats mb-xl-0">
-					<div class="card-body p-4">
-						<div class="row align-items-center">
-							<div class="col">
-								<h6 class="card-title text-uppercase text-muted mb-0">Pemasukan</h6>
-								<span class="h2 lh-1 font-weight-bold mb-0">
-									134.000 <small class="fs-5 font-weight-normal">rupiah</small>
-								</span>
-							</div>
-							<div class="col-auto">
-								<div class="icon icon-shape bg-cyan text-white rounded-circle shadow text-center">
-									<i class="fas fa-money-check-alt"></i>
-								</div>
+		</div>
+		<div class="col-12 col-sm-6 mb-4">
+			<div class="card card-stats mb-xl-0">
+				<div class="card-body p-4">
+					<div class="row align-items-center">
+						<div class="col">
+							<h6 class="card-title text-uppercase text-muted mb-0">Pemasukan</h6>
+							<span class="h2 lh-1 font-weight-bold mb-0">
+								134.000 <small class="fs-5 font-weight-normal">rupiah</small>
+							</span>
+						</div>
+						<div class="col-auto">
+							<div class="icon icon-shape bg-cyan text-white rounded-circle shadow text-center">
+								<i class="fas fa-money-check-alt"></i>
 							</div>
 						</div>
 					</div>
 				</div>
 			</div>
+		</div>
 
 	</div>
 	<div class="row">

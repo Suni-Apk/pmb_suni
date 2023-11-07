@@ -67,8 +67,8 @@ class TahunAjaranController extends Controller
      */
     public function destroy(string $id)
     {
-        $tahun_ajaran = TahunAjaran::findOrFail($id);
-        $tahun_ajaran->delete();
+        $data = TahunAjaran::findOrFail($id);
+        $data->delete();
         return redirect()->route('admin.tahun_ajaran.index');
     }
 }

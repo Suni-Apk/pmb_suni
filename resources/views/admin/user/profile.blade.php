@@ -7,6 +7,7 @@
         style="background-image: url('/soft-ui-dashboard-main/assets/img/curved-images/curved0.jpg'); background-position-y: 50%;">
         <span class="mask bg-gradient-primary opacity-6"></span>
     </div>
+    
     <div class="card card-body blur shadow-blur mx-4 mt-n6 overflow-hidden">
         <div class="row gx-4">
             <div class="col-auto">
@@ -71,7 +72,8 @@
                         <li class="list-group-item border-0 ps-0 text-sm"><strong class="text-dark">No Tlp:</strong>
                             &nbsp;
                             {{ $auth->phone }}</li>
-                        <li class="list-group-item border-0 ps-0 text-sm"><strong class="text-dark">Email:</strong> &nbsp;
+                        <li class="list-group-item border-0 ps-0 text-sm"><strong class="text-dark">Email:</strong>
+                            &nbsp;
                             {{ $auth->email }}</li>
                         <li class="list-group-item border-0 ps-0 text-sm"><strong class="text-dark">Gender:</strong>
                             &nbsp;
@@ -82,4 +84,4 @@
             </div>
         </div>
     </div>
-@endsection
+    @endsection

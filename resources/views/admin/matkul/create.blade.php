@@ -2,7 +2,6 @@
 
 @section('title', 'table template')
 
-
 @section('content')
     <div class="row">
         <div class="col-12">

@@ -11,11 +11,22 @@ class TagihanDetail extends Model
 
     protected $fillable = [
         "id_tagihans",
+        "id_biayas",
         "id_transactions",
         "id_users",
         "amount",
         "start_date",
+        "status",
         "end_date",
         "before_end",
     ];
+
+    public function tagihans()
+    {
+        return $this->belongsTo(Tagihan::class, 'id_tagihans');
+    }
+    public function biayasDetail()
+    {
+        return $this->belongsTo(Biaya::class, 'id_biayas');
+    }
 }

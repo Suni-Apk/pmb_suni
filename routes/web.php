@@ -24,7 +24,6 @@ use App\Http\Controllers\SettingController;
 use App\Http\Controllers\TagihanController as AdminTagihanController;
 use App\Http\Controllers\TahunAjaranController;
 use App\Http\Controllers\TransactionController;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -52,9 +51,9 @@ Route::get('/verify', [AuthController::class, 'verify'])->name('verify');
 Route::post('/verify-process', [AuthController::class, 'verify_otp'])->name('verify.process');
 Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
 
-Route::prefix('/switch')->middleware(['auth'])->name('program.')->group(function(){
-    Route::get('/program-belajar', [AuthController::class,'switch_program'])->name('program_belajar');
-    Route::get('/program-belajar/switch',[AuthController::class,'switch'])->name('program_belajar.switch');
+Route::prefix('/switch')->middleware(['auth'])->name('program.')->group(function () {
+    Route::get('/program-belajar', [AuthController::class, 'switch_program'])->name('program_belajar');
+    Route::get('/program-belajar/switch', [AuthController::class, 'switch'])->name('program_belajar.switch');
 });
 
 // Auth Admin
@@ -66,6 +65,9 @@ Route::prefix('admin')->name('admin.')->group(function () {
 
 // Controller / Dashboard Admin
 Route::prefix('/admin')->middleware('admin')->name('admin.')->group(function () {
+    Route::get('/', function () {
+        return view('admin.notfound');
+    })->name('notfound');
     Route::get('/dashboard', [AdminDashboardController::class, 'index'])->name('dashboard');
 
     // profile
@@ -97,6 +99,7 @@ Route::prefix('/admin')->middleware('admin')->name('admin.')->group(function () 
         Route::put('/change-status/{id}',[AccountController::class,'mahasiswa_status'])->name('status');
         Route::get('/detail/{id}', [AccountController::class, 'mahasiswa_detail'])->name('show');
         Route::post('/bayar', [AccountController::class, 'mahasiswa_bayar'])->name('bayar');
+        Route::get('/program/{id}', [AccountController::class, 'mahasiswa_program'])->name('program');
     });
 
     // resources management
@@ -108,18 +111,24 @@ Route::prefix('/admin')->middleware('admin')->name('admin.')->group(function () 
     Route::resource('/dokumen', AdminDocumentController::class);
     Route::post('/next', [AdminTagihanController::class, 'next'])->name('tagihan.next');
 
-    // settings administrasi
-    Route::get('/administrasi', [AdministrasiController::class, 'administrasi'])->name('administrasi');
     
     //data settings
-    Route::prefix('settings')->name('settings.')->group(function () {
-        Route::get('/', [SettingController::class, 'index'])->name('general');
-        Route::get('/notifikasi', [SettingController::class, 'notify_index'])->name('notifications');
-        Route::put('/notifikasi/process/{id}',[SettingController::class,'notify_edit'])->name('notifications.process');
+    Route::prefix('settings')->group(function () {
+        Route::get('/administrasi', [AdministrasiController::class, 'administrasi'])->name('administrasi');
+        Route::put('/administrasi/{id}', [AdministrasiController::class, 'AdministrasiProses'])->name('administrasi.proses');
+
+        Route::prefix('')->name('settings.')->group(function () {
+            Route::get('/', [SettingController::class, 'index'])->name('general');
+            Route::put('/edit/{id}', [SettingController::class, 'general_edit'])->name('general.edit');
+            Route::put('/desc/edit/{id}', [SettingController::class, 'desc_edit'])->name('desc.edit');
+            
+            Route::get('/notifikasi', [SettingController::class, 'notify_index'])->name('notifications');
+            Route::put('/notifikasi/process/{id}',[SettingController::class,'notify_edit'])->name('notifications.process');
+        });
     });
 });
 
-Route::prefix('/kursus')->middleware(['auth'])->name('kursus.')->group(function(){
+Route::prefix('/kursus')->middleware(['auth'])->name('kursus.')->group(function () {
     Route::get('/dashboard', [KursusDashboardController::class, 'kursus'])->name('dashboard');
 
     //biodata
@@ -131,7 +140,7 @@ Route::prefix('/kursus')->middleware(['auth'])->name('kursus.')->group(function(
     });
 
     //mata pelajaran
-    Route::get('/matkul', [MataPelajaranController::class, 'index'])->name('matkul');
+    Route::get('/mata-pelajaran', [MataPelajaranController::class, 'index'])->name('matkul');
 
     //tagihan kursus
     Route::prefix('/tagihan')->name('tagihan.')->group(function () {

@@ -38,13 +38,13 @@
                     <ul class="nav nav-fill bg-transparent" role="tablist">
                         <li class="nav-item">
                             <a class="nav-link text-dark mb-0 px-0 py-1" 
-                                href="{{ route('admin.profile.index') }}" role="tab">
+                                href="{{ route('admin.profile') }}" role="tab">
                                 <span class="ms-1">Profile</span>
                             </a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link text-dark mb-0 px-0 py-1"
-                                href="{{ route('admin.profile.change_password') }}" role="tab">
+                                href="{{ route('admin.change_password', Auth::user()->name) }}" role="tab">
                                 <span class="ms-1">Change password</span>
                             </a>
                         </li>

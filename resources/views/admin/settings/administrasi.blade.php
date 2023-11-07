@@ -1,29 +1,34 @@
 @extends('layouts.master')
 
-
 @section('title', 'Settings Biaya Admin')
-@section('content')
 
-    <nav aria-label="breadcrumb">
-        <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
-            <li class="breadcrumb-item text-sm"><a class="opacity-5 text-dark" href="{{ route('dashboard') }}">Pages</a></li>
-            <li class="breadcrumb-item text-sm text-dark active" aria-current="page">Settings</li>
-        </ol>
-        <h6 class="font-weight-bolder mb-0">Setting Biaya Administrasi</h6>
-    </nav>
-    <div class="card h-100 mt-4">
+@section('content')
+    <div class="card">
         <div class="card-header">
             <h5 class="text-bold">Silahkan Sesuaikan Biaya administrasi </h5>
         </div>
-        <div class="card-body">
-            <form action="">
-                <div class="form-group">
-                    <label for="" class="">Masukkan Harga Adminstrasi <span
-                            class="text-danger">*</span></label>
-                    <input type="text" class="form-control mb-3" placeholder="Rp.200.000" value="200.000">
-                    <button class="btn btn-primary py-2 px-3" type="submit">Update</button>
-                </div>
-            </form>
+        <div class="card-body pt-0">
+            @foreach ($administrasi as $item)
+                <form action="{{ route('admin.administrasi.proses', $item->id) }}" method="POST">
+                    @csrf
+                    @method('PUT')
+                    <div class="form-group">
+                        <label for="" class="">Masukkan Harga Adminstrasi Program {{ $item->program_belajar }}<span class="text-danger">*</span></label>
+                        <div class="input-group mb-4">
+                            <span class="input-group-text text-bolder">Rp. </span>
+                            <input type="number" class="form-control" id="input" name="amount" placeholder="200.000" value="{{ $item->amount }}">
+                        </div>
+                        <button class="btn btn-primary py-2 px-3" type="submit">Update</button>
+                    </div>
+                </form>
+            @endforeach
         </div>
     </div>
 @endsection
+@push('scripts')
+    <script>
+        $('.form-control').mask("#.##0", {
+            reverse: true
+        });
+    </script>
+@endpush
