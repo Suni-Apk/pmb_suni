@@ -14,7 +14,7 @@ class NotifySeeder extends Seeder
     public function run(): void
     {
         $notify = [
-            'notif_otp' => 'Di Coba Gesy'
+            'notif_otp' => 'Ucu funky remixxxxx'
         ];
         Notify::create($notify);
     }

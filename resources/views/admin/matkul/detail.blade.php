@@ -18,7 +18,7 @@
 <div class="card card-body blur shadow-blur mx-4 mt-n6 overflow-hidden">
     <div class="row gx-4">
         <div class="d-flex text-center justify-content-center fs-3 font-weight-bold">
-            Fiqih Muamalah
+            {{ $matkuls->nama_matkuls }}
         </div>
     </div>
 
@@ -27,7 +27,7 @@
                 <div class="card-body p-3">
                     <hr class="horizontal gray-light">
                     <ul class="list-group">
-                        <li class="list-group-item border-0 ps-0 pt-0 text-sm"><strong class="text-dark fs-5">Nama Dosen: Pak Madinah</strong>
+                        <li class="list-group-item border-0 ps-0 pt-0 text-sm"><strong class="text-dark fs-5">Nama Dosen: {{ $matkuls->nama_dosen }}</strong>
                             &nbsp; </li>
                             <table class="table table-bordered mt-3">
                                 <thead class="bg-gradient-success">
@@ -42,19 +42,35 @@
                                     <tbody>
                                                 <tr>
                                                     <td>
-                                                            Hukum Ekonomi Syariah
+                                                            {{ $matkuls->jurusan->name }}
                                                     </td>                                                                                                                                               
                                                     <td>
-                                                            5
+                                                            @if ($matkuls->id_semesters)
+                                                                {{ $matkuls->id_semesters }}
+                                                            @else
+                                                                -
+                                                            @endif
                                                     </td>
                                                     <td>
-                                                        06:00
+                                                        @if ($matkuls->start_at)
+                                                                {{ $matkuls->start_at }}
+                                                            @else
+                                                                -
+                                                            @endif
                                                     </td>
                                                     <td>
-                                                        17:30
+                                                        @if ($matkuls->end_at)
+                                                                {{ $matkuls->end_at }}
+                                                            @else
+                                                                -
+                                                            @endif
                                                     </td>
                                                     <td>
-                                                        15/05/2023	
+                                                        @if ($matkuls->tanggal)
+                                                                {{ $matkuls->tanggal }}
+                                                            @else
+                                                                -
+                                                            @endif
                                                     </td>                                  
                                                 </tr>
                                     </tbody>

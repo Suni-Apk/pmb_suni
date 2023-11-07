@@ -4,7 +4,6 @@ namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
-use App\Models\TahunAjaran;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -43,7 +42,9 @@ class DatabaseSeeder extends Seeder
         $this->call([
             NotifySeeder::class,
             TahunAjaranSeeder::class,
-            AdministrasiSeeder::class
+            AdministrasiSeeder::class,
+            GeneralSeeder::class,
+            DescProgramBelajarSeeder::class,
         ]);
     }
 }

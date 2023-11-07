@@ -8,10 +8,8 @@
 
 @section('content')
     <div class="row">
-
         {{-- INI ADALAH CARD BUAT TAGIHAN DAFTAR ULANG CICIL --}}
-
-        {{-- <div class="col-12 text-center mb-4">
+        <div class="col-12 text-center mb-4">
          <div class="card">
           <h3 class="mt-3">Tagihan</h3>
           <h5 class="text-secondary font-weight-normal">Daftar Ulang Nyicil</h5>
@@ -31,14 +29,14 @@
                 </div>
               </div>
               <div class="col-12 col-lg-8 mx-auto">
-                <button class="btn btn-primary">
+                <button class="btn bg-gradient-primary">
                   Bayar
                 </button>
               </div>
             </div>
           </div>
          </div>
-        </div> --}}
+        </div>
 
         {{-- END TAGIHAN CICIL --}}
         
@@ -59,7 +57,7 @@
                  </div>
                </div>
                <div class="col-12 col-lg-8 mx-auto">
-                 <button class="btn btn-primary">
+                 <button class="btn bg-gradient-primary">
                    Bayar
                  </button>
                </div>
@@ -79,6 +77,7 @@
               <table class="table align-items-center mb-0" id="templateTable">
                 <thead>
                   <tr>
+                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">ID</th>
                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Nama Tagihan</th>
                     <th class="text-uppercase text-secondary text-xxs px-2 font-weight-bolder opacity-7">Jenis Tagihan</th>
                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Angkatan</th>
@@ -88,6 +87,11 @@
                 </thead>
                 <tbody>
                   <tr>
+                    <td>
+                      <div class="d-flex px-2 py-1">
+                          <h6 class="mb-0 text-sm text-center">1</h6>
+                      </div>
+                    </td>
                     <td>
                       <div class="d-flex px-2 py-1">
                           <h6 class="mb-0 text-sm text-center">SPP</h6>
@@ -126,6 +130,7 @@
               <table class="table align-items-center mb-0" id="templateTable">
                 <thead>
                   <tr>
+                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 width-32-px">ID</th>
                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Nama Tagihan</th>
                     <th class="text-uppercase text-secondary text-xxs px-2 font-weight-bolder opacity-7">Jenis Tagihan</th>
                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Angkatan</th>
@@ -135,6 +140,9 @@
                 </thead>
                 <tbody>
                   <tr>
+                    <td>
+                        <h6 class="text-secondary mb-0 text-sm text-center">#1</h6>
+                    </td>
                     <td>
                       <div class="d-flex px-2 py-1">
                           <h6 class="mb-0 text-sm text-center">KKN</h6>
@@ -150,7 +158,7 @@
                       <p class="text-xs font-weight-bold mb-0">Informatika</p>
                     </td>
                     <td>
-                      <a href="{{route('mahasiswa.tagihan.detail.tidak.routine',Auth::user()->name)}}" class="badge badge-sm bg-gradient-primary font-weight-bold text-xs mx-2" data-toggle="tooltip" data-original-title="Edit user">
+                      <a href="{{route('mahasiswa.tagihan.detail.tidak.routine',Auth::user()->name)}}" class="badge badge-sm bg-gradient-primary font-weight-bold text-xxs" data-toggle="tooltip" data-original-title="Edit user">
                         Detail
                       </a>
                     </td>
@@ -161,7 +169,6 @@
           </div>
       </div>
     </div>
-    
 @endsection
 
 @push('scripts')

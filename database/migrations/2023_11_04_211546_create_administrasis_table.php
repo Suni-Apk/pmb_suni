@@ -13,9 +13,11 @@ return new class extends Migration
     {
         Schema::create('administrasis', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('amount');
-            $table->string('nama_biaya');
+
+            $table->string('program_belajar');
+            $table->string('amount');
             $table->string('id_tahunAjaran');
+
             $table->timestamps();
         });
     }

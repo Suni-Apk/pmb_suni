@@ -19,9 +19,9 @@
                                 <form action="{{ route('admin.jurusan.update', 1) }}" method="POST">
                                     @csrf
                                     <div class="form-group mb-3">
-                                        <label for="id_tahun_ajarans">Tahun Ajaran / Angkatan</label>
+                                        <label for="id_tahun_ajarans">Tahun Ajaran</label>
                                         <select name="id_tahun_ajarans" id="id_tahun_ajarans" class="form-control" required>
-                                            <option disabled selected>-----------</option>
+                                            <option hidden selected>-----------</option>
                                             @foreach ($tahun_ajaran as $item)
                                                 <option value="{{ $item->id }}" {{ old('id_tahun_ajarans') == $item->id ? 'selected' : '' }}>{{ $item->year }}</option>
                                             @endforeach
@@ -40,7 +40,8 @@
                                     </div>
                                     
                                     <div class="form-group mb-3">
-                                        <label for="code">Code / Singkatan</label>
+                                        <label for="code">Code</label>
+                                        <small class="text-info" style="font-size: 10px">bisa diisi dengan singkatan/inisial jurusan</small>
                                         <input type="text" name="code" id="code" value="{{ old('code') }}" class="form-control" required>
                                         @error('code') 
                                             <div class="text-danger">{{ $message }}</div>
@@ -48,7 +49,7 @@
                                     </div>                                    
                                     <button type="submit" class="btn btn-success">Submit</button>
                                     <a href="{{ route('admin.jurusan.index') }}">
-                                        <button type="button" class="btn btn-warning text-dark">Back</button>
+                                        <button type="button" class="btn btn-warning">Back</button>
                                     </a>
                                 </form>                                
                             </div>

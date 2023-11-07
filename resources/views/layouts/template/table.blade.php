@@ -22,23 +22,9 @@
                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Nama</th>
                     <th class="text-uppercase text-secondary text-xxs px-2 font-weight-bolder opacity-7">Nomor Telepon</th>
                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Gender / Admin</th>
-                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Nama</th>
-                    <th class="text-uppercase text-secondary text-xxs px-2 font-weight-bolder opacity-7">Nomor Telepon</th>
-                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Gender / Admin</th>
                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Status</th>
                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Joined</th>
                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Action</th>
-<<<<<<< HEAD
-<<<<<<< HEAD
-                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Joined</th>
-                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Action</th>
-=======
-                    <th class="text-secondary opacity-7"></th>
->>>>>>> 46e3398b5282bba2241af524ee2f88c8839a5162
-=======
-                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Joined</th>
-                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Action</th>
->>>>>>> 47bc6f05a93c7cec9a855e75b2132e90b72c9e75
                   </tr>
                 </thead>
                 <tbody>
@@ -57,52 +43,26 @@
                     <td class="align- text-start">
                       <span class="text-secondary text-xs font-weight-bold">08778464359</span>
                     </td>
-                    <td class="align- text-start">
-                      <span class="text-secondary text-xs font-weight-bold">08778464359</span>
-                    </td>
                     <td>
                       <p class="text-xs font-weight-bold mb-0">Laki Laki</p>
                       <p class="text-xs text-secondary mb-0">ADMIN</p>
-                      <p class="text-xs font-weight-bold mb-0">Laki Laki</p>
-                      <p class="text-xs text-secondary mb-0">ADMIN</p>
                     </td>
-                    <td class="align-middle text-center text-sm">
-<<<<<<< HEAD
-<<<<<<< HEAD
-                    <td class="align-middle text-center text-sm">
-=======
->>>>>>> 46e3398b5282bba2241af524ee2f88c8839a5162
-=======
->>>>>>> 47bc6f05a93c7cec9a855e75b2132e90b72c9e75
-                    <span class="badge badge-sm bg-gradient-success">AKTIF</span>
+                    <td class="align-middle text-center">
+                      <span class="badge text-uppercase badge-sm bg-gradient-success">AKTIF</span>
                     </td>
                     <td class="align-middle text-center">
                       <span class="text-secondary text-xs font-weight-bold">23/04/18</span>
                     </td>
                     <td class="align-middle text-center"> 
-                      <a href="" class="badge badge-sm bg-gradient-primary font-weight-bold text-xs mx-2" data-toggle="tooltip" data-original-title="Edit user">
-<<<<<<< HEAD
-<<<<<<< HEAD
-                      <a href="" class="badge badge-sm bg-gradient-primary font-weight-bold text-xs mx-2" data-toggle="tooltip" data-original-title="Edit user">
-=======
->>>>>>> 46e3398b5282bba2241af524ee2f88c8839a5162
-=======
->>>>>>> 47bc6f05a93c7cec9a855e75b2132e90b72c9e75
+                      <a href="" class="badge text-uppercase badge-sm bg-gradient-info text-xxs mx-1" data-toggle="tooltip" data-original-title="detail">
                         Detail
                       </a>
 
-                      <a href="" class="badge badge-sm bg-gradient-success font-weight-bold text-xs mx-2" data-toggle="tooltip" data-original-title="Edit user">
-<<<<<<< HEAD
-<<<<<<< HEAD
-                      <a href="" class="badge badge-sm bg-gradient-success font-weight-bold text-xs mx-2" data-toggle="tooltip" data-original-title="Edit user">
-=======
->>>>>>> 46e3398b5282bba2241af524ee2f88c8839a5162
-=======
->>>>>>> 47bc6f05a93c7cec9a855e75b2132e90b72c9e75
+                      <a href="" class="badge badge-sm bg-gradient-success font-weight-bold text-xs mx-2" data-toggle="tooltip" data-original-title="edit">
                         Ubah
                       </a>
 
-                      <a href="" class="badge badge-sm bg-gradient-danger font-weight-bold text-xs mx-2" data-toggle="tooltip" data-original-title="Edit user">
+                      <a href="" class="badge text-uppercase badge-sm bg-gradient-danger text-xxs mx-1" data-toggle="tooltip" data-original-title="hapus">
                         Hapus
                       </a>
                     </td>

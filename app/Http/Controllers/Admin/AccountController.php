@@ -60,7 +60,7 @@ class AccountController extends Controller
 
         User::create($data);
 
-        return redirect()->route('admin.admin.account')->with('success', 'Berhasil Menambahkan Akun Admin');
+        return redirect()->route('admin.admin.index')->with('success', 'Berhasil Menambahkan Akun Admin');
     }
 
     public function admin_edit($id)
@@ -69,7 +69,7 @@ class AccountController extends Controller
 
         if (!$user) {
             // Pengguna tidak ditemukan, lakukan sesuatu seperti me-redirect atau menampilkan pesan kesalahan.
-            return redirect()->route('admin.admin.account')->with('error', 'Pengguna tidak ditemukan');
+            return redirect()->route('admin.admin.index')->with('error', 'Pengguna tidak ditemukan');
         }
 
         return view('admin.account.admin.edit', compact('user'));
@@ -98,7 +98,7 @@ class AccountController extends Controller
 
         $user->update($data);
 
-        return redirect()->route('admin.admin.account')->with('success', 'Berhasil Mengedit Account Admin');
+        return redirect()->route('admin.admin.index')->with('success', 'Berhasil Mengedit Account Admin');
     }
 
     public function admin_status(Request $request, $id)
@@ -107,9 +107,10 @@ class AccountController extends Controller
         $data = $request->validate([
             'status' => ''
         ]);
-        // dd($request->all());
+        
+        // dd($request);
         $user->update($data);
-        return redirect()->route('admin.admin.account')->with('success', 'Berhasil Memperbarui Status Akun');
+        return redirect()->route('admin.admin.index')->with('success', 'Berhasil Memperbarui Status Akun');
     }
 
 
@@ -155,7 +156,7 @@ class AccountController extends Controller
 
         User::create($data);
 
-        return redirect()->route('admin.mahasiswa.account')->with('success', 'Berhasil Menambahkan Akun Mahasiswa');
+        return redirect()->route('admin.mahasiswa.index')->with('success', 'Berhasil Menambahkan Akun Mahasiswa');
     }
 
     public function mahasiswa_edit($id)
@@ -164,7 +165,7 @@ class AccountController extends Controller
 
         if (!$user) {
             // Pengguna tidak ditemukan, lakukan sesuatu seperti me-redirect atau menampilkan pesan kesalahan.
-            return redirect()->route('admin.mahasiswa.account')->with('error', 'Pengguna tidak ditemukan');
+            return redirect()->route('admin.mahasiswa.index')->with('error', 'Pengguna tidak ditemukan');
         }
 
         return view('admin.account.mahasiswa.edit', compact('user'));
@@ -193,7 +194,7 @@ class AccountController extends Controller
 
         $user->update($data);
 
-        return redirect()->route('admin.mahasiswa.account')->with('success', 'Berhasil Mengedit Account Mahasiswa');
+        return redirect()->route('admin.mahasiswa.index')->with('success', 'Berhasil Mengedit Account Mahasiswa');
     }
 
     public function mahasiswa_status(Request $request, $id)
@@ -202,12 +203,12 @@ class AccountController extends Controller
         $data = $request->validate([
             'status' => ''
         ]);
-        // dd($request->all());
+        
         $user->update($data);
         if ($user->status == 'on') {
-            return redirect()->route('admin.mahasiswa.account')->with('success', 'Berhasil Mengaktifkan Akun');
+            return redirect()->route('admin.mahasiswa.index')->with('success', 'Berhasil Mengaktifkan Akun');
         } else {
-            return redirect()->route('admin.mahasiswa.account')->with('success', 'Berhasil Menonaktifkan Akun');
+            return redirect()->route('admin.mahasiswa.index')->with('success', 'Berhasil Menonaktifkan Akun');
         }
     }
     public function mahasiswa_detail($id)
