@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('tagihan_detail_id')->nullable();
             $table->foreignId('user_id');
+            $table->string('program_belajar');
             $table->string('status');
             $table->string('total');
             $table->text('payment_link');

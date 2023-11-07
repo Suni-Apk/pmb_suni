@@ -18,6 +18,7 @@ use App\Http\Controllers\Mahasiswa\DocumentController;
 use App\Http\Controllers\Mahasiswa\MatkulController;
 use App\Http\Controllers\Mahasiswa\ProfileController as MahasiswaProfileController;
 use App\Http\Controllers\Mahasiswa\TagihanController;
+use App\Http\Controllers\Mahasiswa\TransaksiController;
 use App\Http\Controllers\MatkulController as ControllersMatkulController;
 use App\Http\Controllers\NotifyController;
 use App\Http\Controllers\SettingController;
@@ -154,6 +155,9 @@ Route::prefix('/kursus')->middleware(['auth'])->name('kursus.')->group(function 
 
 // Dashboard Mahasiswa
 Route::prefix('/mahasiswa')->middleware(['auth', 'mahasiswa'])->name('mahasiswa.')->group(function () {
+
+    //bayar administrasi
+    Route::get('/administrasi',[TransaksiController::class,'administrasi'])->name('administrasi');
 
     //biodata
     Route::get('/biodata', [BiodataController::class, 'pendaftaran_s1'])->name('pendaftaran.s1');
