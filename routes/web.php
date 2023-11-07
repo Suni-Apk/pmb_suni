@@ -154,7 +154,7 @@ Route::prefix('/kursus')->middleware(['auth'])->name('kursus.')->group(function 
 });
 
 // Dashboard Mahasiswa
-Route::prefix('/mahasiswa')->middleware(['auth', 'mahasiswa'])->name('mahasiswa.')->group(function () {
+Route::prefix('/mahasiswa')->middleware(['auth', 'mahasiswa','s1'])->name('mahasiswa.')->group(function () {
 
     //bayar administrasi
     Route::get('/administrasi',[TransaksiController::class,'administrasi'])->name('administrasi');
