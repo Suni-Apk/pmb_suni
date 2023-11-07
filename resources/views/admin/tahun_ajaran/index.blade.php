@@ -28,33 +28,33 @@
                             </thead>
                             <tbody>
                                 @foreach ($tahun_ajaran as $index => $angkatans)
-                                <tr>
-                                    <td class="align-middle text-center text-sm">
-                                        <span class="text-bold">{{ $index + 1 }}</span>
-                                    </td>
-                                    <td class="align-middle text-start text-sm">
-                                        <span class="text-bold">{{ $angkatans->year }}</span>
-                                    </td>
-                                    <td class="text-sm">
-                                        <span class="text-bold">{{ \Carbon\Carbon::parse($tahunAjarans->start_at)->format('d F') }}</span>
-                                    </td>
-                                    <td class="text-sm">
-                                        <span class="text-bold">{{ \Carbon\Carbon::parse($tahunAjarans->end_at)->format('d F') }}</span>
-                                    </td>
-                                    <td class="align-middle text-center">
-                                        <span class="text-uppercase badge badge-sm bg-gradient-success">{{ $angkatans->status }}</span>
-                                    </td>
-                                    <td class="align-middle text-center">
-                                        <form action="{{ route('admin.tahun-ajaran.destroy',$angkatans->id) }}" method="POST">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="submit" style="letter-spacing: .02rem"
-                                                class="badge badge-sm bg-gradient-danger font-weight-bolder text-xxs mx-2 show_confirm" data-toggle="tooltip" data-original-title="Hapus">
-                                                Hapus
-                                            </button>
-                                        </form>
-                                    </td>
-                                </tr>
+                                    <tr>
+                                        <td class="align-middle text-center text-sm">
+                                            <span class="text-bold">{{ $index + 1 }}</span>
+                                        </td>
+                                        <td class="align-middle text-start text-sm">
+                                            <span class="text-bold">{{ $angkatans->year }}</span>
+                                        </td>
+                                        <td class="text-sm">
+                                            <span class="text-bold">{{ \Carbon\Carbon::parse($angkatans->start_at)->format('d F') }}</span>
+                                        </td>
+                                        <td class="text-sm">
+                                            <span class="text-bold">{{ \Carbon\Carbon::parse($angkatans->end_at)->format('d F') }}</span>
+                                        </td>
+                                        <td class="align-middle text-center">
+                                            <span class="text-uppercase badge badge-sm bg-gradient-success">{{ $angkatans->status }}</span>
+                                        </td>
+                                        <td class="align-middle text-center">
+                                            <form action="{{ route('admin.tahun_ajaran.destroy',$angkatans->id) }}" method="POST">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit" class="btn btn-sm bg-gradient-danger font-weight-bold text-xs mx-2 show_confirm mt-3">
+                                                    <strong>Hapus</strong>
+                                                </button>
+                                            </form>
+                                        </td>
+                                    </tr>
+                                @endforeach
                             </tbody>
                         </table>
                     </div>

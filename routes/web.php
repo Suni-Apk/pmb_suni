@@ -13,6 +13,7 @@ use App\Http\Controllers\Kursus\DashboardController as KursusDashboardController
 use App\Http\Controllers\Kursus\MataPelajaranController;
 use App\Http\Controllers\Kursus\ProfileController as KursusProfileController;
 use App\Http\Controllers\Kursus\TagihanController as KursusTagihanController;
+use App\Http\Controllers\LinkController;
 use App\Http\Controllers\Mahasiswa\BiodataController;
 use App\Http\Controllers\Mahasiswa\DashboardController;
 use App\Http\Controllers\Mahasiswa\DocumentController;
@@ -99,11 +100,20 @@ Route::prefix('/admin')->middleware('admin')->name('admin.')->group(function () 
         Route::post('/bayar', [AccountController::class, 'mahasiswa_bayar'])->name('bayar');
     });
 
+    Route::prefix('link/whatsapp')->name('link_whatsapp.')->group( function(){
+        Route::get('/', [LinkController::class, 'whatsapp'])->name('index');
+        Route::get('/create', [LinkController::class, 'whatsapp_create'])->name('create');
+        Route::post('/create/process', [LinkController::class, 'whatsapp_create_process'])->name('create.process');
+        Route::get('/edit/{id}', [LinkController::class, 'whatsapp_edit'])->name('edit');
+        Route::put('/edit/process/{id}', [LinkController::class, 'whatsapp_edit_process'])->name('edit.process');
+    });
+    // Route::get('/link/whatsapp', [LinkController::class, 'index_whatsapp'])->name('admin.link_whatsapp.index');
+
     // resources management
     Route::resource('/matkul', ControllersMatkulController::class);
     Route::resource('/jurusan', JurusanController::class);
     Route::resource('/transaksi', TransactionController::class);
-    Route::resource('/tahun-ajaran', TahunAjaranController::class);
+    Route::resource('/tahun_ajaran', TahunAjaranController::class);
     Route::resource('/tagihan', AdminTagihanController::class);
     Route::resource('/dokumen', AdminDocumentController::class);
     Route::post('/next', [AdminTagihanController::class, 'next'])->name('tagihan.next');

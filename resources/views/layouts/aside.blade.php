@@ -210,30 +210,30 @@
                     </div>
                 </li>
 
-                <!-- transaction -->
+                <!-- transaksi -->
                 <li class="nav-item">
-                    <a data-bs-toggle="collapse" href="#transaction" class="nav-link {{ Route::is('admin.transaksi.*') ? 'active' : '' }}" aria-controls="transaction"
+                    <a data-bs-toggle="collapse" href="#transaksi" class="nav-link {{ Route::is('admin.transaksi.*') ? 'active' : '' }}" aria-controls="transaksi"
                         role="button" aria-expanded="false">
                         <div
                             class="icon icon-sm shadow border-radius-md bg-white text-center d-flex align-items-center justify-content-center  me-2">
                             <i class="fas fa-money-check-alt"></i>
                         </div>
-                        <span class="nav-link-text ms-1"> Transaksi </span>
+                        <span class="nav-link-text ms-1">Data Transaksi</span>
                     </a>
-                    <div class="collapse {{ Route::is('admin.transaksi.*') ? 'show' : '' }}" id="transaction">
+                    <div class="collapse {{ Route::is('admin.transaksi.*') ? 'show' : '' }}" id="transaksi">
                         <ul class="nav ms-4 ps-3">
                             <li class="nav-item ">
                                 <a class="nav-link {{ Route::is('admin.transaksi.index') ? 'active' : '' }}" href="{{ route('admin.transaksi.index') }}">
                                     <span class="sidenav-mini-icon d-none d-xl-block"><i
                                             class="fas fa-border-all"></i></span>
-                                    <span class="sidenav-normal"> Daftar Transaksi </span>
+                                    <span class="sidenav-normal"> Daftar transaksi </span>
                                 </a>
                             </li>
                             <li class="nav-item ">
                                 <a class="nav-link {{ Route::is('admin.transaksi.create') ? 'active' : '' }}" href="{{ route('admin.transaksi.create') }}">
                                     <span class="sidenav-mini-icon d-none d-xl-block"><i
                                             class="fas fa-plus"></i></span>
-                                    <span class="sidenav-normal"> Tambah Transaksi </span>
+                                    <span class="sidenav-normal"> Tambah transaksi </span>
                                 </a>
                             </li>
                         </ul>
@@ -277,7 +277,7 @@
 
                 <!-- link -->
                 <li class="nav-item">
-                    <a data-bs-toggle="collapse" href="#link" class="nav-link " aria-controls="link" role="button" aria-expanded="false">
+                    <a data-bs-toggle="collapse" href="#link" class="nav-link {{ Route::is('admin.link_whatsapp.*') ? 'active' : '' }}" aria-controls="link" role="button" aria-expanded="false">
                         <div class="icon icon-sm shadow border-radius-md bg-white text-center d-flex align-items-center justify-content-center me-2">
                             <i class="fas fa-link"></i>
                         </div>
@@ -286,7 +286,7 @@
                     <div class="collapse " id="link">
                         <ul class="nav ms-4 ps-3">
                             <li class="nav-item ">
-                                <a class="nav-link " href="">
+                                <a class="nav-link" href="">
                                     <span class="sidenav-mini-icon d-none d-xl-block">
                                         <img src="/soft-ui-dashboard-main/assets/img/icon-zoom.svg" width="14px">
                                     </span>
@@ -294,7 +294,7 @@
                                 </a>
                             </li>
                             <li class="nav-item ">
-                                <a class="nav-link " href="">
+                                <a class="nav-link {{ Route::is('admin.link_whatsapp.index') ? 'active' : '' }} " href="{{ route('admin.link_whatsapp.index') }}">
                                     <span class="sidenav-mini-icon d-none d-xl-block"><i class="fab fa-whatsapp"></i></span>
                                     <span class="sidenav-normal"> Link Whatsapp </span>
                                 </a>

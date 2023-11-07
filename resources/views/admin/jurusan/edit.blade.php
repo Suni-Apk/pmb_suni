@@ -23,7 +23,7 @@
                                         <select name="id_tahun_ajarans" id="id_tahun_ajarans" class="form-control" required>
                                             <option hidden selected>-----------</option>
                                             @foreach ($tahun_ajaran as $item)
-                                                <option value="{{ $item->id }}" {{ old('id_tahun_ajarans') == $item->id ? 'selected' : '' }}>{{ $item->year }}</option>
+                                                <option value="{{ $item->id }}" {{ old('id_tahun_ajarans', $jurusan->id_tahun_ajarans) == $item->id ? 'selected' : '' }}>{{ $item->year }}</option>
                                             @endforeach
                                         </select>
                                         @error('id_tahun_ajarans')
@@ -33,7 +33,7 @@
                                     
                                     <div class="form-group mb-3">
                                         <label for="name">Nama</label>
-                                        <input type="text" name="name" id="name" value="{{ old('name') }}" class="form-control" required>
+                                        <input type="text" name="name" id="name" value="{{ old('name', $jurusan->name) }}" class="form-control" required>
                                         @error('name')
                                             <div class="text-danger">{{ $message }}</div>
                                         @enderror
@@ -42,7 +42,7 @@
                                     <div class="form-group mb-3">
                                         <label for="code">Code</label>
                                         <small class="text-info" style="font-size: 10px">bisa diisi dengan singkatan/inisial jurusan</small>
-                                        <input type="text" name="code" id="code" value="{{ old('code') }}" class="form-control" required>
+                                        <input type="text" name="code" id="code" value="{{ old('code', $jurusan->code) }}" class="form-control" required>
                                         @error('code') 
                                             <div class="text-danger">{{ $message }}</div>
                                         @enderror

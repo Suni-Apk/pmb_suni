@@ -18,8 +18,8 @@
                     </button>
 
                     <!-- Modal -->
-                    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-                        aria-hidden="true">
+                    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
+                        aria-labelledby="exampleModalLabel" aria-hidden="true">
                         <div class="modal-dialog modal-dialog-centered" role="document">
                             <div class="modal-content">
                                 <div class="modal-header">
@@ -112,17 +112,17 @@
                                         <span class="badge text-uppercase badge-sm bg-gradient-success">SUCCESS</span>
                                     </td>
                                     <td>
-                                      <p class="text-xs font-weight-bold mb-0">Tidak Rutin</p>
-                                      <p class="text-xs text-uppercase text-secondary mb-0">CASH</p>
+                                        <p class="text-xs font-weight-bold mb-0">Tidak Rutin</p>
+                                        <p class="text-xs text-uppercase text-secondary mb-0">CASH</p>
                                     </td>
                                     <td class="align-middle text-center">
-                                        <a href="{{ route('admin.transaksi.show', 'tidak-rutin') }}"
-                                            class="badge text-uppercase badge-sm bg-gradient-info text-xxs mx-1"
+                                        <a href="{{ route('admin.transaksi.show', 'tingkatan') }}"
+                                            class="btn btn-sm bg-gradient-info font-weight-bold text-xs mx-2 show_confirm mt-3"
                                             data-toggle="tooltip" data-original-title="detail">
                                             Detail
                                         </a>
                                         <a href=""
-                                            class="badge text-uppercase badge-sm bg-gradient-danger text-xxs"
+                                            class="btn btn-sm bg-gradient-danger font-weight-bold text-xs show_confirm mt-3"
                                             data-toggle="tooltip" data-original-title="hapus">
                                             Hapus
                                         </a>
@@ -149,17 +149,17 @@
                                         <span class="badge text-uppercase badge-sm bg-gradient-warning">PENDING</span>
                                     </td>
                                     <td>
-                                      <p class="text-xs font-weight-bold mb-0">Rutin</p>
-                                      <p class="text-xs text-uppercase text-secondary mb-0">CASH</p>
+                                        <p class="text-xs font-weight-bold mb-0">Rutin</p>
+                                        <p class="text-xs text-uppercase text-secondary mb-0">CASH</p>
                                     </td>
                                     <td class="align-middle text-center">
-                                        <a href="{{ route('admin.transaksi.show', 'rutin') }}"
-                                            class="badge text-uppercase badge-sm bg-gradient-info text-xxs mx-1"
+                                        <a href="{{ route('admin.transaksi.show', 'tingkatan') }}"
+                                            class="btn btn-sm bg-gradient-info font-weight-bold text-xs mx-2 show_confirm mt-3"
                                             data-toggle="tooltip" data-original-title="detail">
                                             Detail
                                         </a>
                                         <a href=""
-                                            class="badge text-uppercase badge-sm bg-gradient-danger text-xxs"
+                                            class="btn btn-sm bg-gradient-danger font-weight-bold text-xs show_confirm mt-3"
                                             data-toggle="tooltip" data-original-title="hapus">
                                             Hapus
                                         </a>
@@ -186,17 +186,17 @@
                                         <span class="badge text-uppercase badge-sm bg-gradient-danger">EXPIRED</span>
                                     </td>
                                     <td>
-                                      <p class="text-xs font-weight-bold mb-0">Daftar Ulang</p>
-                                      <p class="text-xs text-uppercase text-secondary mb-0">CASH</p>
+                                        <p class="text-xs font-weight-bold mb-0">Daftar Ulang</p>
+                                        <p class="text-xs text-uppercase text-secondary mb-0">CASH</p>
                                     </td>
                                     <td class="align-middle text-center">
-                                        <a href="{{ route('admin.transaksi.show', 'daftar-ulang') }}"
-                                            class="badge text-uppercase badge-sm bg-gradient-info text-xxs mx-1"
+                                        <a href="{{ route('admin.transaksi.show', 'tingkatan') }}"
+                                            class="btn btn-sm bg-gradient-info font-weight-bold text-xs mx-2 show_confirm mt-3"
                                             data-toggle="tooltip" data-original-title="detail">
                                             Detail
                                         </a>
                                         <a href=""
-                                            class="badge text-uppercase badge-sm bg-gradient-danger text-xxs"
+                                            class="btn btn-sm bg-gradient-danger font-weight-bold text-xs show_confirm mt-3"
                                             data-toggle="tooltip" data-original-title="hapus">
                                             Hapus
                                         </a>
@@ -223,17 +223,17 @@
                                         <span class="badge text-uppercase badge-sm bg-gradient-danger">EXPIRED</span>
                                     </td>
                                     <td>
-                                      <p class="text-xs font-weight-bold mb-0">Tingkatan</p>
-                                      <p class="text-xs text-uppercase text-secondary mb-0">CASH</p>
+                                        <p class="text-xs font-weight-bold mb-0">Tingkatan</p>
+                                        <p class="text-xs text-uppercase text-secondary mb-0">CASH</p>
                                     </td>
                                     <td class="align-middle text-center">
                                         <a href="{{ route('admin.transaksi.show', 'tingkatan') }}"
-                                            class="badge text-uppercase badge-sm bg-gradient-info text-xxs mx-1"
+                                            class="btn btn-sm bg-gradient-info font-weight-bold text-xs mx-2 show_confirm mt-3"
                                             data-toggle="tooltip" data-original-title="detail">
                                             Detail
                                         </a>
                                         <a href=""
-                                            class="badge text-uppercase badge-sm bg-gradient-danger text-xxs"
+                                            class="btn btn-sm bg-gradient-danger font-weight-bold text-xs show_confirm mt-3"
                                             data-toggle="tooltip" data-original-title="hapus">
                                             Hapus
                                         </a>
@@ -253,6 +253,33 @@
         const dataTableBasic = new simpleDatatables.DataTable("#templateTable", {
             searchable: true,
             fixedHeight: true,
+        });
+    </script>
+    <script src="sweetalert2.all.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <script type="text/javascript">
+        $('.show_confirm').click(function(event) {
+            var form = $(this).closest("form");
+            event.preventDefault();
+            Swal.fire({
+                title: 'Yakin?',
+                text: "Kamu Akan Menghapus Data Transaksi!!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Iya,  Hapus!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    form.submit();
+                    Swal.fire(
+                        'Terhapus!',
+                        'Kamu telah menghapus Data Transaksi!!.',
+                        'success'
+                    )
+                }
+            });
         });
     </script>
 @endpush
