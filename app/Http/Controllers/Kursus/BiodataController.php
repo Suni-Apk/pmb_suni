@@ -3,8 +3,11 @@
 namespace App\Http\Controllers\Kursus;
 
 use App\Http\Controllers\Controller;
+use App\Models\Biaya;
 use App\Models\Biodata;
 use App\Models\Jurusan;
+use App\Models\Tagihan;
+use App\Models\TagihanDetail;
 use App\Models\TahunAjaran;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -20,7 +23,7 @@ class BiodataController extends Controller
     public function pendaftaran_kursus_process(Request $request)
     {
         $user = Auth::user()->id;
-        $angkatan = TahunAjaran::where('status','Active')->first();
+        $angkatan = TahunAjaran::where('status', 'Active')->first();
         $data = $request->validate([
             'profesi' => 'required|string',
             'baca_quran' => 'required|string',
@@ -37,7 +40,26 @@ class BiodataController extends Controller
         $image = $request->file('image')->store('assets', 'public');
         $data['image'] = $image;
 
-        Biodata::create($data);
+        $biodata = Biodata::create($data);
+
+        $biaya = Biaya::all();
+
+        foreach ($biaya as $key => $biayas) {
+            if ($biayas->id_angkatans == $biodata->angkatan_id  && $biayas->program_belajar == $biodata->program_belajar) {
+                $tagihan = Tagihan::where('id_biayas', $biayas->id)->get();
+
+                foreach ($tagihan as $key => $tagihans) {
+                    $tagihanDetail = TagihanDetail::create([
+                        'id_biayas' => $biayas->id,
+                        'id_tagihans' => $tagihans->id,
+                        'id_users' => $biodata->user->id,
+                        'end_date' => $tagihans->end_date,
+                        'amount' => $tagihans->amount,
+                        'status' => 'BELUM',
+                    ]);
+                }
+            }
+        }
 
         return redirect()->route('kursus.dashboard')->with('success', 'Kamu Telah melengkapi Biodata Silahkan Lengkapi Dokument');
     }
