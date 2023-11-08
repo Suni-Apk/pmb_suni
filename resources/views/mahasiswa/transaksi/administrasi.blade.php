@@ -8,7 +8,7 @@
             <div class="col-12 col-sm-12">
                 <div class="card border border-lg shadow-lg">
                     <div class="card-header">
-                       <h4 class="text-center">Pembayaran Administrasi {{$administrasiS1->link}}</h4>
+                       <h4 class="text-center">Pembayaran Administrasi {{$adminstrasiS1->link}}</h4>
                     </div>
                     <div class="card-body d-flex align-items-center justify-content-center">
                         <div class="row">

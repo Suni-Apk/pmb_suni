@@ -163,7 +163,7 @@ class AuthController extends Controller
         return view('mahasiswa.program.index',compact('user'));
     }
 
-    public function switch(Request $request)
+    public function switch(Request $request,$id)
     {
         $user = Auth::user();
         $biodataS1 = Biodata::where('user_id',$user->id)->where('program_belajar','S1')->first();
@@ -173,7 +173,16 @@ class AuthController extends Controller
         if($request->program == 'S1'){
             if(!$transaksiS1){
             $adminstrasiS1 = Administrasi::where('program_belajar','S1')->first();
-            return redirect()->route('mahasiswa.administrasi',compact('adminstrasiS1'));
+            // return redirect()->route('mahasiswa.administrasi');
+            $createPayment = json_decode(json_encode($this->redirect_payment($id)),true);
+            $transaksi = Transaksi::create([
+                'user_id' => $user->id,
+                'program_belajar' => 'S1',
+                'status' => 'pending',
+                'total' => $adminstrasiS1->amount,
+                'payment_link' => ''
+            ]);
+            return view('mahasiswa.transaksi.administrasi',compact('adminstrasiS1'));
             }elseif($transaksiS1->status == 'pending'){
                 $adminstrasiS1Pending = Transaksi::where('program_belajar','S1')->where('user_id',$user->id)->where('status','pending')->latest()->first();
                 return Redirect::to($adminstrasiS1Pending->link);
