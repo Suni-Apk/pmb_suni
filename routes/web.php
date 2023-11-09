@@ -1,32 +1,28 @@
 <?php
 
-use App\Http\Controllers\Admin\AccountController;
 use App\Http\Controllers\Admin\AuthController as AdminAuthController;
 use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
 use App\Http\Controllers\Admin\ProfileController;
-use App\Http\Controllers\AdministrasiController;
 use App\Http\Controllers\Auth\AuthController;
+use App\Http\Controllers\DocumentController as AdminDocumentController;
 use App\Http\Controllers\JurusanController;
 use App\Http\Controllers\Kursus\BiodataController as KursusBiodataController;
 use App\Http\Controllers\Kursus\DashboardController as KursusDashboardController;
 use App\Http\Controllers\Kursus\MataPelajaranController;
 use App\Http\Controllers\Kursus\ProfileController as KursusProfileController;
 use App\Http\Controllers\Kursus\TagihanController as KursusTagihanController;
+use App\Http\Controllers\LinkController;
 use App\Http\Controllers\Mahasiswa\BiodataController;
 use App\Http\Controllers\Mahasiswa\DashboardController;
 use App\Http\Controllers\Mahasiswa\DocumentController;
 use App\Http\Controllers\Mahasiswa\MatkulController;
 use App\Http\Controllers\Mahasiswa\ProfileController as MahasiswaProfileController;
 use App\Http\Controllers\Mahasiswa\TagihanController;
-use App\Http\Controllers\Mahasiswa\TransaksiController;
 use App\Http\Controllers\MatkulController as ControllersMatkulController;
-use App\Http\Controllers\NotifyController;
 use App\Http\Controllers\SettingController;
 use App\Http\Controllers\TagihanController as AdminTagihanController;
 use App\Http\Controllers\TahunAjaranController;
 use App\Http\Controllers\TransactionController;
-use App\Http\Controllers\MatkulController as AdminMatkulController;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -43,7 +39,6 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 })->name('welcome');
-
 
 // Auth Mahasiswa
 Route::get('/register', [AuthController::class, 'register'])->name('register');
@@ -62,10 +57,6 @@ Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
 
 Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
 
-Route::prefix('/switch')->middleware(['auth'])->name('program.')->group(function () {
-    Route::get('/program-belajar', [AuthController::class, 'switch_program'])->name('program_belajar');
-    Route::get('/program-belajar/switch', [AuthController::class, 'switch'])->name('program_belajar.switch');
-});
 
 // Auth Admin
 Route::prefix('admin')->name('admin.')->group(function () {
@@ -234,6 +225,26 @@ Route::prefix('template')->group(function () {
         return view('layouts.template.forgot-password');
     })->name('forgot');
 
+    Route::get('/form', function () {
+        return view('layouts.template.form');
+    })->name('form');
+
+    Route::get('/forgot', function () {
+        return view('layouts.template.forgot-password');
+    })->name('forgot');
+
+    Route::get('/form', function () {
+        return view('layouts.template.form');
+    })->name('form');
+
+    Route::get('/forgot', function () {
+        return view('layouts.template.forgot-password');
+    })->name('forgot');
+
+    Route::get('/profile', function () {
+        return view('layouts.template.profile');
+    })->name('profile');
+
     Route::get('/rtl', function () {
         return view('layouts.template.rtl');
     })->name('rtl');
@@ -250,10 +261,17 @@ Route::prefix('template')->group(function () {
         return view('layouts.template.virtual-reality');
     })->name('virtual-reality');
 
-
     Route::get('/profile', function () {
         return view('admin.user.profile');
     })->name('profile');
+
+    Route::get('/edit-profile', function () {
+        return view('admin.user.edit-profile');
+    })->name('edit-profile');
+
+    Route::get('/edit-profile', function () {
+        return view('admin.profile.edit-profile');
+    })->name('edit-profile');
 
 
     Route::get('/edit-profile', function () {
@@ -267,8 +285,7 @@ Route::prefix('template')->group(function () {
     Route::get('/change-password', function () {
         return view('admin.profile.change-password');
     })->name('change-password');
-
-    Route::get('/wizard', function () {
-        return view('layouts.template.wizard');
-    })->name('wizard');
+    Route::get('/change-password', function () {
+        return view('admin.user.change-password');
+    })->name('change-password');
 });
