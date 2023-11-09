@@ -54,13 +54,10 @@
     </a>
     
     <div class="error-section w-100 min-vh-80 shadow-xl row ms-0 justify-content-center align-items-center bg-light rounded-4">
-        <div class="col-10 col-md-4 mb-0 mt-4 mt-md-0">
-            <h1 class="text-dark"><span>4</span><span>0</span><span>4</span></h1>
-            <h2 class="text-dark">Oops! Page not found</h2>
-            <p class="mb-0 text-secondary">Halaman yang anda cari tidak dapat ditemukan</p>
-        </div>
-        <div class="col-12 col-md-4 mb-4 mb-md-0">
-            <img src="/soft-ui-dashboard-main/assets/img/404-2.svg" alt="" class="img-fluid">
+        <div class="col-10 text-center col-md-4">
+            <h1 class="text-dark"><span>4</span><span>1</span><span>9</span></h1>
+            <h2 class="text-dark">Oops! Page is Expired</h2>
+            <p class="mb-0 text-secondary">Halaman yang anda cari sudah kadaluarsa</p>
         </div>
     </div>
 

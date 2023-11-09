@@ -1,13 +1,154 @@
 @extends('layouts.master')
 
-@section('title', 'Matkul')
+@section('title', 'Jurusan')
 
-@push('styles')
+@push('scripts')
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+        integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"
+        integrity="sha512-VEd+nq25CkR676O+pLBnDW09R7VQX9Mdiij052gVCp5yVH3jGtH70Ho/UUv4mJDsEdTvqRCFZg0NKGiojGnUCw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css"
+        integrity="sha512-3pIirOrwegjM6erE5gPSwkUzO+3cTjpnV9lexlNZqvupR64iZBnOOTiiLPb9M36zpMScbmUNIcHUqKD47M719g=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script>
+        @if (Session::has('success'))
+            toastr.success("{{ Session::get('success') }}")
+        @endif
+
+        @if (Session::has('delete'))
+            toastr.success("{{ Session::get('success') }}")
+        @endif
+
+        @if (Session::has('pesan'))
+            toastr.error('{{ Session::get('pesan') }}')
+        @endif
+    </script>
+    <script>
+        const jurusanSelect = document.getElementById('id_jurusans');
+        const semesterSelect = document.getElementById('id_semesters');
+
+        const jurusanSemesterMap = @json($semesterGrouped);
+
+        jurusanSelect.addEventListener('change', () => {
+            const selectedJurusanId = jurusanSelect.value;
+            const semesterOptions = jurusanSemesterMap[selectedJurusanId] || [];
+
+            semesterSelect.innerHTML = '';
+
+            semesterOptions.forEach(semester => {
+                const option = document.createElement('option');
+                option.value = semester.id;
+                option.textContent = semester.name;
+                semesterSelect.appendChild(option);
+            });
+        });
+    </script>
 @endpush
 
 @section('content')
     <div class="row">
         <h4 class="ms-2">{{ $jurusan->name }}</h4>
+
+        
+        {{-- <div class="col-12">
+            <div class="card mb-4">
+                <div class="card-header pb-0">
+                    <h6>Tambah Link</h6>
+                </div>
+                <div class="card-body">
+                    <div>
+                        <div >
+                            <div class="table-responsive text-nowrap">
+                                <form action="{{ route('admin.link.create.process') }}" method="POST">
+                                    @csrf
+                                    <div class="form-group mb-3">
+                                        <label for="name">Nama</label>
+                                        <small class="text-danger" style="font-size: 12px">*</small>
+                                        <input type="text" name="name" id="name" class="form-control" placeholder="Masukkan Nama linknya Disini">
+                                    </div>
+                                    <div class="form-group mb-3">
+                                        <label for="url">URL Link</label>
+                                        <small class="text-danger" style="font-size: 12px">*</small>
+                                        <input type="url" name="url" id="url" class="form-control" placeholder="Masukkan URL linknya Disini">
+                                    </div>
+                                    <div class="form-group mb-3">
+                                        <label>Tipe Link</label>
+                                        <small class="text-danger" style="font-size: 12px">*</small>
+                                        <div class="form-check">
+                                            <input type="radio" name="type" id="Whatsapp" class="form-check-input" value="Whatsapp">
+                                            <label class="form-check-label" for="Whatsapp">Whatsapp</label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input type="radio" name="type" id="Zoom" class="form-check-input" value="Zoom">
+                                            <label class="form-check-label" for="Zoom">Zoom</label>
+                                        </div>
+                                    </div>
+                                    <div class="form-group mb-3">
+                                        <label>Gender</label>
+                                        <small class="text-danger" style="font-size: 12px">*</small>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="gender" id="ikhwan"
+                                                value="ikhwan">
+                                            <label class="form-check-label" for="ikhwan">
+                                                Ikhwan
+                                            </label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="gender" id="akhwat"
+                                                value="akhwat">
+                                            <label class="form-check-label" for="akhwat">
+                                                Akhwat
+                                            </label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="gender" id="all"
+                                                value="all">
+                                            <label class="form-check-label" for="all">
+                                                Semua (ditujukan untuk seluruh mahasiswa)
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="form-group mb-4">
+                                        <label for="id_tahun_ajarans">Tahun Ajaran</label>
+                                        <small class="text-danger" style="font-size: 12px">(opsional)</small>
+                                        <select name="id_tahun_ajarans" id="id_tahun_ajarans" class="form-select" required>
+                                            <option disabled selected>-----------</option>
+                                            @foreach ($tahun_ajaran as $item)
+                                                <option value="{{ $item->id }}">{{ $item->year }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                    {{-- <div class="form-group mb-3">
+                                        <label for="id_jurusans">Jurusan</label>
+                                        <select name="id_jurusans" id="id_jurusans" class="form-select" required>
+                                            <option disabled selected>-----------</option>
+                                        </select>
+                                    </div>
+                                    {{-- <div class="form-group border mt-4 py-2 px-4 rounded-3">
+                                        <small class="text-dark" style="font-size: 13px;">
+                                            <b>NOTE :</b>
+                                            <ul>
+                                                <li>Opsi Tahun Ajaran boleh dikosongi, dengan syarat opsi jurusan dipilih</li>
+                                                <li>Opsi Jurusan boleh dikosongi, dengan syarat opsi tahun ajaran dipilih</li>
+                                                <li>Opsi Tahun Ajaran dan Jurusan bisa dipilih keduanya</li>
+                                            </ul>
+                                        </small>
+                                    </div>
+
+                                    <button type="submit" class="btn btn-success">Submit</button>
+                                    <a href="{{ route('admin.jurusan.index') }}">
+                                        <button type="button" class="btn btn-warning">Back</button>
+                                    </a>
+                                </form>                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div> --}}
+
         <div class="modal fade" id="myModal">
             <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content">
@@ -125,50 +266,7 @@
                 </div>
             </div>
         @endforeach
-        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-        <script src="https://code.jquery.com/jquery-3.7.1.min.js"
-            integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"
-            integrity="sha512-VEd+nq25CkR676O+pLBnDW09R7VQX9Mdiij052gVCp5yVH3jGtH70Ho/UUv4mJDsEdTvqRCFZg0NKGiojGnUCw=="
-            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css"
-            integrity="sha512-3pIirOrwegjM6erE5gPSwkUzO+3cTjpnV9lexlNZqvupR64iZBnOOTiiLPb9M36zpMScbmUNIcHUqKD47M719g=="
-            crossorigin="anonymous" referrerpolicy="no-referrer" />
-        <script>
-            @if (Session::has('success'))
-                toastr.success("{{ Session::get('success') }}")
-            @endif
-
-            @if (Session::has('delete'))
-                toastr.success("{{ Session::get('success') }}")
-            @endif
-
-            @if (Session::has('pesan'))
-                toastr.error('{{ Session::get('pesan') }}')
-            @endif
-        </script>
-        <script>
-            const jurusanSelect = document.getElementById('id_jurusans');
-            const semesterSelect = document.getElementById('id_semesters');
-
-            const jurusanSemesterMap = @json($semesterGrouped);
-
-            jurusanSelect.addEventListener('change', () => {
-                const selectedJurusanId = jurusanSelect.value;
-                const semesterOptions = jurusanSemesterMap[selectedJurusanId] || [];
-
-                semesterSelect.innerHTML = '';
-
-                semesterOptions.forEach(semester => {
-                    const option = document.createElement('option');
-                    option.value = semester.id;
-                    option.textContent = semester.name;
-                    semesterSelect.appendChild(option);
-                });
-            });
-        </script>
     </div>
-
 
     </div>
 @endsection

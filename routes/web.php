@@ -256,14 +256,14 @@ Route::prefix('template')->group(function () {
     })->name('profile');
 
 
-    // Route::get('/edit-profile', function () {
-    //     return view('admin.profile.edit-profile');
-    // })->name('edit-profile');
+    Route::get('/edit-profile', function () {
+        return view('admin.profile.edit-profile');
+    })->name('edit-profile');
 
 
-    // Route::get('/change-password', function () {
-    //     return view('admin.profile.change-password');
-    // })->name('change-password');
+    Route::get('/change-password', function () {
+        return view('admin.profile.change-password');
+    })->name('change-password');
     Route::get('/change-password', function () {
         return view('admin.profile.change-password');
     })->name('change-password');
