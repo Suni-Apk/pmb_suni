@@ -6,10 +6,10 @@
 @endpush
 
 @section('content')
+<div class="card-header pb-0">
     <div class="row">
         <div class="col-12">
             <div class="card mb-4">
-                <div class="card-header pb-0">
                     <h6>Tambah Tahun Ajaran</h6>
                 </div>
                 <div class="card-body px-0 pt-0 pb-2">

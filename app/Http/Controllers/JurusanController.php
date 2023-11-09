@@ -70,8 +70,9 @@ class JurusanController extends Controller
      */
     public function edit(string $id)
     {
+        $jurusan = Jurusan::find($id);
         $tahun_ajaran = TahunAjaran::all();
-        return view('admin.jurusan.edit', compact('tahun_ajaran'));
+        return view('admin.jurusan.edit', compact('tahun_ajaran', 'jurusan'));
     }
 
     /**

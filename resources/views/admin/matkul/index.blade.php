@@ -53,11 +53,9 @@
                                             Detail
                                         </a>
 
-                                        <a href="{{ route('admin.matkul.edit', $item->id) }}"
-                                            class="badge badge-sm bg-gradient-secondary font-weight-bold text-xxs mx-1"
-                                            data-toggle="tooltip" data-original-title="edit">
-                                            Edit
-                                        </a>
+                                            <a href="{{ route('admin.matkul.edit', 1) }}" class="btn btn-sm bg-gradient-secondary font-weight-bold text-xs mx-2 mt-3">
+                                                <strong>Edit</strong>
+                                            </a>
 
                                         <form action="{{ route('admin.matkul.destroy', $item->id) }}" method="POST">
                                             @csrf

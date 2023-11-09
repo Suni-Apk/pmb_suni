@@ -73,7 +73,7 @@
                             </div>
                             <div class="form-group">
                                 <button type="submit" class="btn btn-primary end-0">Create</button>
-                                <a href="{{ route('admin.admin.account') }}" class="btn btn-warning"><i class="fas fa-backward"></i>
+                                <a href="{{ route('admin.admin.index') }}" class="btn btn-warning"><i class="fas fa-backward"></i>
                                     Back</a>
                             </div>
                         </form>
