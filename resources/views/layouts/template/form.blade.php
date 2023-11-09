@@ -51,8 +51,9 @@
                                         <textarea name="keterangan" id="keterangan" class="form-control"></textarea>
                                     </div>
                                     
-                                    <button type="submit" class="btn btn-primary">Submit</button>
+                                    <button type="submit" class="btn btn-success">Submit</button>
                                     <a href="" class="btn btn-warning">Back</a>
+                                    <button type="submit" class="btn btn-warning text-dark">Back</button>
                                 </form>
                             </div>
                         </div>
