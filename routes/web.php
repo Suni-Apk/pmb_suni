@@ -117,11 +117,18 @@ Route::prefix('/admin')->middleware('admin')->name('admin.')->group(function () 
         Route::put('/edit/process/{id}', [LinkController::class, 'zoom_edit_process'])->name('edit.process');
     });
 
+    Route::prefix('tahun_ajaran')->name('tahun_ajaran.')->group( function(){
+        Route::get('/', [TahunAjaranController::class, 'index'])->name('index');
+        Route::get('/create', [TahunAjaranController::class, 'create'])->name('create');
+        Route::get('/create/process', [TahunAjaranController::class, 'store'])->name('create.process');
+        Route::post('/active/{id}', [TahunAjaranController::class, 'active'])->name('active');
+        Route::delete('/tahun_ajaran/{id}', [TahunAjaranController::class, 'destroy'])->name('destroy');
+    });
     // resources management
     Route::resource('/matkul', ControllersMatkulController::class);
     Route::resource('/jurusan', JurusanController::class);
     Route::resource('/transaksi', TransactionController::class);
-    Route::resource('/tahun_ajaran', TahunAjaranController::class);
+    // Route::resource('/tahun_ajaran', TahunAjaranController::class);
     Route::resource('/tagihan', AdminTagihanController::class);
     Route::resource('/dokumen', AdminDocumentController::class);
     Route::post('/next', [AdminTagihanController::class, 'next'])->name('tagihan.next');

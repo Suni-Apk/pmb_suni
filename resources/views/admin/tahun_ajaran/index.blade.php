@@ -42,9 +42,26 @@
                                             <span class="text-bold">{{ \Carbon\Carbon::parse($angkatans->end_at)->format('d F') }}</span>
                                         </td>
                                         <td class="align-middle text-center">
-                                            <span class="text-uppercase badge badge-sm bg-gradient-success">{{ $angkatans->status }}</span>
+                                            @if ($angkatans->status == 'nonActive')
+                                                <span class="text-uppercase badge badge-sm bg-gradient-danger">{{ $angkatans->status }}</span>
+                                            @else
+                                                <span class="text-uppercase badge badge-sm bg-gradient-success">{{ $angkatans->status }}</span>
+                                            @endif
                                         </td>
-                                        <td class="align-middle text-center">
+                                        <td class="d-flex align-items-center justify-content-center">                   
+                                            <form action="{{ route('admin.tahun_ajaran.active',$angkatans->id) }}" method="POST">
+                                                @csrf
+                                                @if($angkatans->status == 'nonActive')
+                                                    <button type="submit" class="btn btn-sm bg-gradient-success font-weight-bold text-xs mx-2 mt-3">
+                                                        <strong>On</strong>
+                                                    </button>
+                                                @else
+                                                    <button type="submit" class="btn btn-sm bg-gradient-secondary font-weight-bold text-xs mx-2 mt-3">
+                                                        <strong>Off</strong>
+                                                    </button>
+                                                @endif
+                                            </form>
+
                                             <form action="{{ route('admin.tahun_ajaran.destroy',$angkatans->id) }}" method="POST">
                                                 @csrf
                                                 @method('DELETE')

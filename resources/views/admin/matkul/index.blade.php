@@ -44,7 +44,7 @@
                                             </div>
                                         </td>
                                         <td class="align text-center">
-                                            <span class="text-secondary text-xs font-weight-bold">{{ $item->mulai }} - {{ $item->selesai }}</span>
+                                            <span class="text-secondary text-xs font-weight-bold">{{ $item->mulai }} <strong>WIB</strong> - {{ $item->selesai }} <strong>WIB</strong> </span>
                                         </td>
                                         <td class="align text-center">
                                             <span class="text-secondary text-xs font-weight-bold">{{ $item->tanggal }}</span>
