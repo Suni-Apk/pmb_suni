@@ -100,13 +100,13 @@ Route::prefix('/admin')->middleware('admin')->name('admin.')->group(function () 
         Route::get('/program/{id}', [AccountController::class, 'mahasiswa_program'])->name('program');
     });
 
-    Route::prefix('link/whatsapp')->name('link_whatsapp.')->group( function(){
-        Route::get('/', [LinkController::class, 'whatsapp'])->name('index');
-        Route::get('/create', [LinkController::class, 'whatsapp_create'])->name('create');
-        Route::post('/create/process', [LinkController::class, 'whatsapp_create_process'])->name('create.process');
-        Route::get('/edit/{id}', [LinkController::class, 'whatsapp_edit'])->name('edit');
-        Route::put('/edit/process/{id}', [LinkController::class, 'whatsapp_edit_process'])->name('edit.process');
-    });
+    // Route::prefix('link/whatsapp')->name('link_whatsapp.')->group( function(){
+    //     Route::get('/', [LinkController::class, 'whatsapp'])->name('index');
+    //     Route::get('/create', [LinkController::class, 'whatsapp_create'])->name('create');
+    //     Route::post('/create/process', [LinkController::class, 'whatsapp_create_process'])->name('create.process');
+    //     Route::get('/edit/{id}', [LinkController::class, 'whatsapp_edit'])->name('edit');
+    //     Route::put('/edit/process/{id}', [LinkController::class, 'whatsapp_edit_process'])->name('edit.process');
+    // });
 
     Route::prefix('link')->name('link.')->group(function () {
         Route::get('/whatsapp', [LinkController::class, 'whatsapp'])->name('whatsapp');
@@ -121,8 +121,8 @@ Route::prefix('/admin')->middleware('admin')->name('admin.')->group(function () 
     Route::resource('/jurusan', JurusanController::class);
     Route::resource('/transaksi', TransactionController::class);
     Route::resource('/tahun-ajaran', TahunAjaranController::class);
-    Route::resource('/tagihan', AdminTagihanController::class);
     Route::resource('/dokumen', AdminDocumentController::class);
+    Route::resource('/tagihan', AdminTagihanController::class);
     Route::post('/next', [AdminTagihanController::class, 'next'])->name('tagihan.next');
 
     

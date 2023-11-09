@@ -22,7 +22,7 @@
         @endif
 
         @if (Session::has('pesan'))
-            toastr.error('{{ Session::get('pesan') }}')
+            toastr.error("{{ Session::get('pesan') }}")
         @endif
     </script>
     <script>

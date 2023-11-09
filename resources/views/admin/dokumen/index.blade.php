@@ -7,7 +7,7 @@
     <div class="col-12">
         <div class="card">
             <div class="card-header pb-0 d-flex justify-content-between">
-                <h6>Daftar Admin</h6>
+                <h6>Daftar Dokumen</h6>
                 <a href="{{route('admin.dokumen.create')}}" class="btn bg-gradient-primary float-end">Tambah + </a>
             </div>
             <div class="card-body px-0 pt-0 pb-2">
