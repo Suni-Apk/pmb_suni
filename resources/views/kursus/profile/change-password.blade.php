@@ -12,7 +12,7 @@
             <div class="col-auto">
                 <div class="avatar avatar-xl position-relative">
                     <img src="
-                    @if (!Auth::user()->biodata->image)
+                    @if (!Auth::user()->biodata)
                     /soft-ui-dashboard-main/assets/img/no-profile.png
                     @else
                         {{ asset('storage/' . Auth::user()->biodata->image)}}

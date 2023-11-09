@@ -163,25 +163,25 @@ class AuthController extends Controller
         return view('mahasiswa.program.index',compact('user'));
     }
 
-    public function switch(Request $request,$id)
+    public function switch(Request $request)
     {
         $user = Auth::user();
         $biodataS1 = Biodata::where('user_id',$user->id)->where('program_belajar','S1')->first();
         $biodataKursus = Biodata::where('user_id',$user->id)->where('program_belajar','KURSUS')->first();
-        $transaksiS1 = Transaksi::where('user_id',$user->id)->where('program_belajar','S1')->where('jenis_tagihan','Administrasi')->where('status','pending')->first();
+        $transaksiS1 = Transaksi::where('user_id',$user->id)->where('program_belajar','S1')->where('jenis_tagihan','Administrasi')->first();
         $transaksiKursus = Transaksi::where('user_id',$user->id)->where('program_belajar','KURSUS')->where('jenis_tagihan','Administrasi')->first();
         if($request->program == 'S1'){
             if(!$transaksiS1){
             $adminstrasiS1 = Administrasi::where('program_belajar','S1')->first();
             // return redirect()->route('mahasiswa.administrasi');
-            $createPayment = json_decode(json_encode($this->redirect_payment($id)),true);
-            $transaksi = Transaksi::create([
-                'user_id' => $user->id,
-                'program_belajar' => 'S1',
-                'status' => 'pending',
-                'total' => $adminstrasiS1->amount,
-                'payment_link' => ''
-            ]);
+            
+            // $transaksi = Transaksi::create([
+            //     'user_id' => $user->id,
+            //     'program_belajar' => 'S1',
+            //     'status' => 'pending',
+            //     'total' => '10000',
+            //     'payment_link' => 'https://discord.com/channels/@me'
+            // ]);
             return view('mahasiswa.transaksi.administrasi',compact('adminstrasiS1'));
             }elseif($transaksiS1->status == 'pending'){
                 $adminstrasiS1Pending = Transaksi::where('program_belajar','S1')->where('user_id',$user->id)->where('status','pending')->latest()->first();
@@ -199,10 +199,10 @@ class AuthController extends Controller
             if(!$transaksiKursus){
                 $adminstrasiKursus = Administrasi::where('program_belajar','KURSUS')->first();
                 return redirect()->route('kursus.transaksi.administrasi',compact('adminstrasiKursus'));
-            }elseif($transaksiKursus){
+            }elseif($transaksiKursus->status == 'pending'){
                 $adminstrasiKursusPending = Transaksi::where('program_belajar','KURSUS')->where('user_id',$user->id)->where('status','pending')->latest()->first();
                 return Redirect::to($adminstrasiKursusPending->link);
-            }else{
+            }elseif($transaksiKursus->status == 'berhasil'){
                 if(!$biodataKursus){
                     return redirect()->route('kursus.dashboard')->with('success','Silahkan Melengkapi Biodata Anda');
                 }else{

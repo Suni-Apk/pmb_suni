@@ -347,7 +347,7 @@
                 <span class="text-green font-weight-normal" style="font-family: 'Rubik', sans-serif;">{{ $hijriDatemonth }}</span>
             </h5>
             <h5 class="w-100 mb-0 text-center lh-1 text-green font-weight-light" style="font-family: 'Rubik', sans-serif;">
-                {{ $hijriDatedayArabic }}
+                {{-- {{ $hijriDatedayArabic }} --}}
             </h5>
             <p class="text-white w-100 mb-0 text-center">
                 {{ $hijriDateyear }} Hijriyah
