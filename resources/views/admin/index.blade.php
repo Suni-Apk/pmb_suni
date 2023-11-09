@@ -252,7 +252,7 @@
 		</div>
 			<div class="col-12 mb-4 gy-3 g-lg-3 d-md-none row mx-auto">
 				<div class="col-3 col-md-2 text-center">
-					<a href="{{ route('admin.tahun-ajaran.index') }}" class="icon icon-shape p-0 bg-primary shadow text-center border-radius-md cursor-pointer"
+					<a href="{{ route('admin.tahun_ajaran.index') }}" class="icon icon-shape p-0 bg-primary shadow text-center border-radius-md cursor-pointer"
 						data-bs-toggle="tooltip" data-bs-placement="top" title="Tahun Ajaran">
 						<i class="ni ni-archive-2 text-lg opacity-10" aria-hidden="true"></i>
 					</a>
@@ -273,14 +273,14 @@
 					<span class="d-block mt-2" style="font-size: 13px;">Mata Kuliah</span>
 				</div>
 				<div class="col-3 col-md-2 text-center">
-					<a href="{{ route('admin.admin.index') }}" class="icon icon-shape p-0 bg-cyan shadow text-center border-radius-md cursor-pointer"
+					<a href="" class="icon icon-shape p-0 bg-cyan shadow text-center border-radius-md cursor-pointer"
 						data-bs-toggle="tooltip" data-bs-placement="top" title="Admin">
 						<i class="fas fa-user-cog text-lg opacity-10" aria-hidden="true"></i>
 					</a>
 					<span class="d-block mt-2" style="font-size: 13px;">Admin</span>
 				</div>
 				<div class="col-3 col-md-2 text-center">
-					<a href="{{ route('admin.mahasiswa.index') }}" class="icon icon-shape p-0 bg-blue shadow text-center border-radius-md cursor-pointer"
+					<a href="{{ route('admin.mahasiswa.account') }}" class="icon icon-shape p-0 bg-blue shadow text-center border-radius-md cursor-pointer"
 						data-bs-toggle="tooltip" data-bs-placement="top" title="Mahasiswa">
 						<i class="fas fa-user-graduate text-lg opacity-10" aria-hidden="true"></i>
 					</a>
@@ -294,14 +294,14 @@
 					<span class="d-block mt-2" style="font-size: 13px;">Tagihan</span>
 				</div>
 				<div class="col-3 col-md-2 text-center">
-					<a href="{{ route('admin.transaksi.index') }}" class="icon icon-shape p-0 bg-purple shadow text-center border-radius-md cursor-pointer"
+					<a href="{{ route('admin.transaction.index') }}" class="icon icon-shape p-0 bg-purple shadow text-center border-radius-md cursor-pointer"
 						data-bs-toggle="tooltip" data-bs-placement="top" title="Transaksi">
 						<i class="fas fa-money-check-alt text-lg opacity-10" aria-hidden="true"></i>
 					</a>
 					<span class="d-block mt-2" style="font-size: 13px;">Transaksi</span>
 				</div>
 				<div class="col-3 col-md-2 text-center">
-					<a href="{{ route('admin.dokumen.index') }}" class="icon icon-shape p-0 bg-pink shadow text-center border-radius-md cursor-pointer"
+					<a href="{{ route('admin.document.index') }}" class="icon icon-shape p-0 bg-pink shadow text-center border-radius-md cursor-pointer"
 						data-bs-toggle="tooltip" data-bs-placement="top" title="Dokumen">
 						<i class="fas fa-folder-open text-lg opacity-10" aria-hidden="true"></i>
 					</a>
