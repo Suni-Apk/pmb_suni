@@ -4,8 +4,8 @@
 
 @section('content')
     <div class="row">
-        <div class="col-12">
-            @if (!isset($mahasiswa->biodata) == true)
+        @if (!isset($mahasiswa->biodata) == true)
+            <div class="col-12">
                 <div class="card mb-4">
                     <div class="card-header">
                     </div>
@@ -46,12 +46,13 @@
                         </div>
                     </div>
                 </div>
-            @endif
-            @foreach ($biodata as $biodatas)
-                @if ($biodatas->program_belajar === 'S1')
+        @endif
+        @foreach ($biodata as $biodatas)
+            @if ($biodatas->program_belajar === 'S1')
+                <div class="col-12">
                     <div class="card mb-4">
                         <div class="card-header">
-                            <h4>Tagihan Program S1</h4>
+                            <h4>Tagihan Program S1 <span class="text-danger">*</span></h4>
                         </div>
                         <div class="card-body">
 
@@ -317,11 +318,14 @@
                         @break
                     @endif
                 @endforeach
-    @endif
-    @if ($biodatas->program_belajar == 'KURSUS')
+            </div>
+        </div>
+@endif
+@if ($biodatas->program_belajar == 'KURSUS')
+    <div class="col-12">
         <div class="card mb-4">
             <div class="card-header">
-                <h4>Tagihan Program Kursus</h4>
+                <h4>Tagihan Program Kursus <span class="text-danger">*</span></h4>
             </div>
             <div class="card-body">
                 <div class="shadow-sm mb-3">
@@ -398,33 +402,35 @@
                                             @foreach ($biaya as $index => $biayas)
                                                 @if ($biayas->jenis_biaya == 'Tingkatan' && $biayas->id_angkatans == $biodatas->angkatan_id)
                                                     @foreach ($biayas->tagihanDetail as $key => $tagihans)
-                                                        <tr>
-                                                            <td class="text-sm">{{ $no++ }}
-                                                            </td>
-                                                            <td class="text-sm">
-                                                                {{ $biayas->nama_biaya }}
-                                                            </td>
-                                                            <td class="text-sm">
-                                                                {{ \Carbon\Carbon::parse($tagihans->end_date)->format('d F Y') }}
-                                                            </td>
-                                                            <td class="text-sm">
-                                                                <span
-                                                                    class="badge badge-sm bg-gradient-danger">{{ $tagihans->status }}</span>
+                                                        @if ($tagihans->id_users == $mahasiswa->id)
+                                                            <tr>
+                                                                <td class="text-sm">{{ $no++ }}
+                                                                </td>
+                                                                <td class="text-sm">
+                                                                    {{ $biayas->nama_biaya }}
+                                                                </td>
+                                                                <td class="text-sm">
+                                                                    {{ \Carbon\Carbon::parse($tagihans->end_date)->format('d F Y') }}
+                                                                </td>
+                                                                <td class="text-sm">
+                                                                    <span
+                                                                        class="badge badge-sm bg-gradient-danger">{{ $tagihans->status }}</span>
 
-                                                            </td>
-                                                            <td class="text-sm">
-                                                                {{ $tagihans->tagihans->mounth }}
-                                                            </td>
-                                                            <td class="text-sm">Rp
-                                                                {{ number_format($tagihans->amount, 0, '', '.') }}
-                                                            </td>
-                                                            <td><input type="checkbox" name="jenis_tagihan"
-                                                                    id=""
-                                                                    value="{{ $tagihans->id }}"
-                                                                    class="">
-                                                            </td>
+                                                                </td>
+                                                                <td class="text-sm">
+                                                                    {{ $tagihans->tagihans->mounth }}
+                                                                </td>
+                                                                <td class="text-sm">Rp
+                                                                    {{ number_format($tagihans->amount, 0, '', '.') }}
+                                                                </td>
+                                                                <td><input type="checkbox"
+                                                                        name="jenis_tagihan" id=""
+                                                                        value="{{ $tagihans->id }}"
+                                                                        class="">
+                                                                </td>
 
-                                                        </tr>
+                                                            </tr>
+                                                        @endif
                                                     @endforeach
                                                 @endif
                                             @endforeach
@@ -510,6 +516,4 @@
 @endif
 @endforeach
 
-</div>
-</div>
 @endsection
