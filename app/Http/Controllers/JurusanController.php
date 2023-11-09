@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Jurusan;
+use App\Models\Link;
 use App\Models\Matkuls;
 use App\Models\Semester;
 use App\Models\TahunAjaran;
@@ -62,7 +63,9 @@ class JurusanController extends Controller
         $jurusanAll = Jurusan::all();
         $semester = Semester::where('id_jurusans', $id)->get();
         $semesterGrouped = Semester::with('jurusan')->get()->groupBy('id_jurusans');
-        return view('admin.jurusan.detail',compact('semester', 'jurusan', 'matkuls', 'jurusanAll', 'semesterGrouped')); 
+        $tahun_ajaran = TahunAjaran::get();
+        $links = Link::get();
+        return view('admin.jurusan.detail',compact('semester', 'jurusan', 'matkuls', 'jurusanAll', 'semesterGrouped', 'links', 'tahun_ajaran')); 
     }
 
     /**

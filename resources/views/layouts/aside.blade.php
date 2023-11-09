@@ -282,7 +282,7 @@
 
                 <!-- link -->
                 <li class="nav-item">
-                    <a data-bs-toggle="collapse" href="#link" class="nav-link {{ Route::is('admin.link_whatsapp.*') ? 'active' : '' }}" aria-controls="link" role="button" aria-expanded="false">
+                    <a data-bs-toggle="collapse" href="#link" class="nav-link " aria-controls="link" role="button" aria-expanded="false">
                         <div class="icon icon-sm shadow border-radius-md bg-white text-center d-flex align-items-center justify-content-center me-2">
                             <i class="fas fa-link"></i>
                         </div>
@@ -299,7 +299,7 @@
                                 </a>
                             </li>
                             <li class="nav-item ">
-                                <a class="nav-link {{ Route::is('admin.link_whatsapp.index') ? 'active' : '' }} " href="{{ route('admin.link_whatsapp.index') }}">
+                                <a class="nav-link " href="">
                                     <span class="sidenav-mini-icon d-none d-xl-block"><i class="fab fa-whatsapp"></i></span>
                                     <span class="sidenav-normal"> Link Whatsapp </span>
                                 </a>
