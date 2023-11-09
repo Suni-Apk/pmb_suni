@@ -65,9 +65,6 @@ Route::prefix('admin')->name('admin.')->group(function () {
 
 // Controller / Dashboard Admin
 Route::prefix('/admin')->middleware('admin')->name('admin.')->group(function () {
-    Route::get('/', function () {
-        return view('admin.notfound');
-    })->name('notfound');
     Route::get('/dashboard', [AdminDashboardController::class, 'index'])->name('dashboard');
 
     // profile

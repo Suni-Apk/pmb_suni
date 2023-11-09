@@ -9976,7 +9976,7 @@ textarea.form-control,textarea.form-control-lg,textarea.form-control-sm {
 .text-pink { color: var(--bs-pink) }
 
 .text-primary {
-    color: #cb0c9f!important
+    color: #47dc2b!important
 }
 
 .text-secondary {
@@ -10184,6 +10184,10 @@ textarea.form-control,textarea.form-control-lg,textarea.form-control-sm {
 
 .rounded-3 {
     border-radius: .75rem!important
+}
+
+.rounded-4 {
+    border-radius: 1rem!important
 }
 
 .avatar.rounded-circle img,.rounded-circle {
@@ -19849,7 +19853,7 @@ textarea.form-control,textarea.form-control-lg,textarea.form-control-sm {
     background-color: transparent;
     opacity: .75;
     box-shadow: none;
-    color: #cb0c9f
+    color: #47dc2b
 }
 
 .btn-secondary:hover,.btn.bg-gradient-secondary:hover {
