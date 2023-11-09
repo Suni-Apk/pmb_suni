@@ -16,8 +16,9 @@
                     <div class="card">
                         <div class="card-body">
                             <div class="table-responsive text-nowrap">
-                                <form action="{{ route('admin.jurusan.update', 1) }}" method="POST">
+                                <form action="{{ route('admin.jurusan.update', $jurusan->id) }}" method="POST">
                                     @csrf
+                                    @method('PUT')
                                     <div class="form-group mb-3">
                                         <label for="id_tahun_ajarans">Tahun Ajaran</label>
                                         <select name="id_tahun_ajarans" id="id_tahun_ajarans" class="form-control" required>

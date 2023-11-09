@@ -107,7 +107,15 @@ Route::prefix('/admin')->middleware('admin')->name('admin.')->group(function () 
         Route::get('/edit/{id}', [LinkController::class, 'whatsapp_edit'])->name('edit');
         Route::put('/edit/process/{id}', [LinkController::class, 'whatsapp_edit_process'])->name('edit.process');
     });
-    // Route::get('/link/whatsapp', [LinkController::class, 'index_whatsapp'])->name('admin.link_whatsapp.index');
+
+
+    Route::prefix('link/zoom')->name('link_zoom.')->group( function(){
+        Route::get('/', [LinkController::class, 'zoom'])->name('index');
+        Route::get('/create', [LinkController::class, 'zoom_create'])->name('create');
+        Route::post('/create/process', [LinkController::class, 'zoom_create_process'])->name('create.process');
+        Route::get('/edit/{id}', [LinkController::class, 'zoom_edit'])->name('edit');
+        Route::put('/edit/process/{id}', [LinkController::class, 'zoom_edit_process'])->name('edit.process');
+    });
 
     // resources management
     Route::resource('/matkul', ControllersMatkulController::class);

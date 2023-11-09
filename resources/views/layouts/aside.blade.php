@@ -283,10 +283,10 @@
                         </div>
                         <span class="nav-link-text ms-1"> Link </span>
                     </a>
-                    <div class="collapse " id="link">
+                    <div class="collapse " id="link">   
                         <ul class="nav ms-4 ps-3">
                             <li class="nav-item ">
-                                <a class="nav-link" href="">
+                                <a class="nav-link {{ Route::is('admin.link_zoom.index') ? 'active' : '' }} " href="{{ route('admin.link_zoom.index') }}">
                                     <span class="sidenav-mini-icon d-none d-xl-block">
                                         <img src="/soft-ui-dashboard-main/assets/img/icon-zoom.svg" width="14px">
                                     </span>
