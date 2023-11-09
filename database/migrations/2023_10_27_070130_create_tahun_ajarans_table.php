@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('tahun_ajarans', function (Blueprint $table) {
             $table->id();
             $table->string('year');
-            $table->string('status')->default('active');
+            $table->enum('status', ['Active', 'nonActive'])->default('Active');
             $table->string('start_at');
             $table->string('end_at');
             $table->timestamps();

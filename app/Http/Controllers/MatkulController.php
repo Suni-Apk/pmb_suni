@@ -81,7 +81,7 @@ class MatkulController extends Controller
             'selesai' => 'required',
             'tanggal' => 'required'
         ]);
-        dd($data);
+        // dd($data);
         $matkuls->update($data);
         return redirect()->route('admin.matkul.index')->with('success', "Mata Kuliah Berhasil Di Edit!!");
     }

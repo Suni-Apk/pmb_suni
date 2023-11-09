@@ -20,7 +20,7 @@
                                     @csrf
                                     @method('PUT')
                                     <div class="form-group mb-3">
-                                        <label for="nama_matkuls">nama_matkuls</label>
+                                        <label for="nama_matkuls">Nama Mata Kuliah</label>
                                         <input type="text" name="nama_matkuls" id="nama_matkuls" class="form-control" value="{{ old('name', $matkuls->nama_matkuls) }}">
                                     </div>
                                     <div class="form-group mb-3">
