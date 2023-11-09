@@ -10,8 +10,8 @@
         <div class="col-12">
             <div class="card mb-4">
                 <div class="card-header pb-0 d-flex justify-content-between">
-                    <h6>Daftar Link</h6>
-                    <a href="#" class="btn bg-gradient-primary float-end">Tambah + </a>
+                    <h6>Daftar Link Zoom</h6>
+                    <a href="{{ route('admin.link_zoom.create') }}" class="btn bg-gradient-primary float-end">Tambah + </a>
                 </div>
                 <div class="card-body px-0 pt-0 pb-2">
                     <div class="table-responsive p-0">
@@ -21,41 +21,36 @@
                                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 text-center">No</th>
                                     <th class="text-uppercase text-secondary text-xxs px-2 font-weight-bolder opacity-7">Nama Link</th>
                                     <th class="text-uppercase text-secondary text-xxs px-2 font-weight-bolder opacity-7">Url</th>
-                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2 text-center">Tahun Ajaran</th>
-                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2 text-center">Jurusan</th>
-                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2 text-center">Type</th>
+                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2 text-center">Tahun Ajaran /Jurusan</th>
                                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2 text-center">Gender</th>
                                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Aksi</th>
                                 </tr>
                             </thead>
                             <tbody>
+                                @foreach ($link as $index => $links)
                                     <tr>
                                         <td class="align-middle text-center text-sm">
-                                            <span class="text-bold">1</span>
+                                            <span class="text-bold">{{ $index + 1 }}</span>
                                         </td>
                                         <td class="text-sm">
-                                            <span class="text-bold"></span>
+                                            <span class="text-bold">{{ $links->name }}</span>
+                                        </td>
+                                        <td class="text-sm">
+                                            <span class="text-bold">{{ $links->url }}</span>
                                         </td>
                                         <td>
                                             <div class="d-flex">
                                                 <div class="d-flex flex-column justify-content-center">
-                                                    <h6 class="mb-0 text-xs"></h6>
-                                                    <p class="text-xxs text-uppercase text-secondary mb-0"></p>
+                                                    <h6 class="mb-0 text-xs">{{ $links->tahunAjaran->year }}</h6>
+                                                    <p class="text-xxs text-uppercase text-secondary mb-0">{{ $links->jurusan->name }}</p>
                                                 </div>
                                             </div>
                                         </td>
                                         <td class="align text-center">
-                                            <span class="text-secondary text-xs font-weight-bold"></span>
-                                        </td>
-                                        <td class="align text-center">
-                                            <span class="text-secondary text-xs font-weight-bold"></span>
+                                            <span class="text-secondary text-xs font-weight-bold">{{ $links->gender }}</span>
                                         </td>
                                         <td class="d-flex align-items-center justify-content-center">
-                                            <a href="#" class="btn btn-sm bg-gradient-success font-weight-bold text-xs mx-2 mt-3">
-                                                <strong>Detail</strong>
-                                            </a>
-
-                                            <a href="#" class="btn btn-sm bg-gradient-secondary font-weight-bold text-xs mx-2 mt-3">
+                                            <a href="{{ route('admin.link_zoom.edit', $links->id) }}" class="btn btn-sm bg-gradient-secondary font-weight-bold text-xs mx-2 mt-3">
                                                 <strong>Edit</strong>
                                             </a>
 
@@ -114,7 +109,7 @@
             event.preventDefault();
             Swal.fire({
                 title: 'Yakin?',
-                text: "Kamu Akan Menghapus Mata Kuliah!!",
+                text: "Kamu Akan Menghapus Links!!",
                 icon: 'warning',
                 showCancelButton: true,
                 confirmButtonColor: '#3085d6',
@@ -125,7 +120,7 @@
                     form.submit();
                     Swal.fire(
                         'Terhapus!',
-                        'Kamu telah menghapus Mata Kuliah!!.',
+                        'Kamu telah menghapus Links!!.',
                         'success'
                     )
                 }

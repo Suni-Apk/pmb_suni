@@ -25,7 +25,7 @@ class MatkulController extends Controller
     {   
         $jurusan = Jurusan::all();
         $semesterGrouped = Semester::with('jurusan')->get()->groupBy('id_jurusans');
-        return view('admin.matkul.create' , compact('jurusan', 'semesterGrouped'));
+        return view('admin.matkul.create' ,compact('jurusan', 'semesterGrouped'));
     }
 
     /**
@@ -60,7 +60,10 @@ class MatkulController extends Controller
      */
     public function edit(string $id)
     {
-        return view('admin.matkul.edit');
+        $matkuls = Matkuls::findOrFail($id);
+        $jurusan = Jurusan::all();
+        $semesterGrouped = Semester::with('jurusan')->get()->groupBy('id_jurusans');
+        return view('admin.matkul.edit', compact('matkuls', 'jurusan', 'semesterGrouped'));
     }
 
     /**
@@ -68,7 +71,19 @@ class MatkulController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $matkuls = Matkuls::findOrFail($id);
+        $data = $request->validate([
+            'id_jurusans' => 'required',   
+            'id_semesters' => 'required',
+            'nama_matkuls' => 'required|min:3',
+            'nama_dosen' => 'required|min:3', 
+            'mulai' => 'required',
+            'selesai' => 'required',
+            'tanggal' => 'required'
+        ]);
+        dd($data);
+        $matkuls->update($data);
+        return redirect()->route('admin.matkul.index')->with('success', "Mata Kuliah Berhasil Di Edit!!");
     }
 
     /**
