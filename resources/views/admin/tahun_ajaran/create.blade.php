@@ -16,7 +16,7 @@
                     <div class="card">
                         <div class="card-body">
                             <div class="table-responsive text-nowrap">
-                                <form action="{{ route('admin.tahun_ajaran.store') }}" method="POST">
+                                <form action="{{ route('admin.tahun_ajaran.create.process') }}" method="POST">
                                     @csrf
                                     <div class="form-group mb-3">
                                         <label for="year">Tahun Ajaran</label>
