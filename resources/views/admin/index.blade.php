@@ -252,7 +252,7 @@
 		</div>
 			<div class="col-12 mb-4 gy-3 g-lg-3 d-md-none row mx-auto">
 				<div class="col-3 col-md-2 text-center">
-					<a href="{{ route('admin.tahun-ajaran.index') }}" class="icon icon-shape p-0 bg-primary shadow text-center border-radius-md cursor-pointer"
+					<a href="{{ route('admin.tahun_ajaran.index') }}" class="icon icon-shape p-0 bg-primary shadow text-center border-radius-md cursor-pointer"
 						data-bs-toggle="tooltip" data-bs-placement="top" title="Tahun Ajaran">
 						<i class="ni ni-archive-2 text-lg opacity-10" aria-hidden="true"></i>
 					</a>

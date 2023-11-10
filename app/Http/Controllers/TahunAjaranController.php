@@ -36,7 +36,7 @@ class TahunAjaranController extends Controller
             'end_at' => 'required',
         ]);
         TahunAjaran::create($data);
-        return redirect()->route('admin.tahun-ajaran.index')->with('success', "Tahun Ajaran Berhasil Di Buat!!");
+        return redirect()->route('admin.tahun_ajaran.index')->with('success', "Tahun Ajaran Berhasil Di Buat!!");
     }
 
                                                                 
@@ -79,6 +79,6 @@ class TahunAjaranController extends Controller
     {
         $data = TahunAjaran::findOrFail($id);
         $data->delete();
-        return redirect()->route('admin.tahun-ajaran.index');
+        return redirect()->route('admin.tahun_ajaran.index');
     }
 }

@@ -100,20 +100,29 @@ Route::prefix('/admin')->middleware('admin')->name('admin.')->group(function () 
         Route::get('/program/{id}', [AccountController::class, 'mahasiswa_program'])->name('program');
     });
 
-    // Route::prefix('link/whatsapp')->name('link_whatsapp.')->group( function(){
-    //     Route::get('/', [LinkController::class, 'whatsapp'])->name('index');
-    //     Route::get('/create', [LinkController::class, 'whatsapp_create'])->name('create');
-    //     Route::post('/create/process', [LinkController::class, 'whatsapp_create_process'])->name('create.process');
-    //     Route::get('/edit/{id}', [LinkController::class, 'whatsapp_edit'])->name('edit');
-    //     Route::put('/edit/process/{id}', [LinkController::class, 'whatsapp_edit_process'])->name('edit.process');
+    // Route::prefix('link')->name('link.')->group(function () {
+    //     Route::get('/whatsapp', [LinkController::class, 'whatsapp'])->name('whatsapp');
+    //     Route::get('/zoom', [LinkController::class, 'zoom'])->name('zoom');
+    //     Route::put('/create/process', [LinkController::class, 'store'])->name('create.process');
+    //     Route::put('/{type}/edit/process', [LinkController::class, 'edit'])->name('edit.process');
+    //     Route::delete('/delete/{id}', [LinkController::class,'destroy'])->name('destroy');
     // });
 
-    Route::prefix('link')->name('link.')->group(function () {
-        Route::get('/whatsapp', [LinkController::class, 'whatsapp'])->name('whatsapp');
-        Route::get('/zoom', [LinkController::class, 'zoom'])->name('zoom');
-        Route::put('/create/process', [LinkController::class, 'store'])->name('create.process');
-        Route::put('/{type}/edit/process', [LinkController::class, 'edit'])->name('edit.process');
-        Route::delete('/delete/{id}', [LinkController::class,'destroy'])->name('destroy');
+    Route::prefix('link/whatsapp')->name('link_whatsapp.')->group( function(){
+        Route::get('/', [LinkController::class, 'whatsapp'])->name('index');
+        Route::get('/create', [LinkController::class, 'whatsapp_create'])->name('create');
+        Route::post('/create/process', [LinkController::class, 'whatsapp_create_process'])->name('create.process');
+        Route::get('/edit/{id}', [LinkController::class, 'whatsapp_edit'])->name('edit');
+        Route::put('/edit/process/{id}', [LinkController::class, 'whatsapp_edit_process'])->name('edit.process');
+    });
+
+
+    Route::prefix('link/zoom')->name('link_zoom.')->group( function(){
+        Route::get('/', [LinkController::class, 'zoom'])->name('index');
+        Route::get('/create', [LinkController::class, 'zoom_create'])->name('create');
+        Route::post('/create/process', [LinkController::class, 'zoom_create_process'])->name('create.process');
+        Route::get('/edit/{id}', [LinkController::class, 'zoom_edit'])->name('edit');
+        Route::put('/edit/process/{id}', [LinkController::class, 'zoom_edit_process'])->name('edit.process');
     });
 
     Route::prefix('tahun_ajaran')->name('tahun_ajaran.')->group( function(){
