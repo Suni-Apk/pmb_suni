@@ -119,7 +119,7 @@ Route::prefix('/admin')->middleware('admin')->name('admin.')->group(function () 
     Route::prefix('tahun_ajaran')->name('tahun_ajaran.')->group( function(){
         Route::get('/', [TahunAjaranController::class, 'index'])->name('index');
         Route::get('/create', [TahunAjaranController::class, 'create'])->name('create');
-        Route::get('/create/process', [TahunAjaranController::class, 'store'])->name('create.process');
+        Route::post('/create/process', [TahunAjaranController::class, 'store'])->name('create.process');
         Route::post('/active/{id}', [TahunAjaranController::class, 'active'])->name('active');
         Route::delete('/tahun_ajaran/{id}', [TahunAjaranController::class, 'destroy'])->name('destroy');
     });
