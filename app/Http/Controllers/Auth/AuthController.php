@@ -3,12 +3,16 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\Administrasi;
+use App\Models\Biodata;
 use App\Models\Notify;
+use App\Models\Transaksi;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 use App\Traits\Fonnte;
+use Illuminate\Support\Facades\Redirect;
 
 class AuthController extends Controller
 {
@@ -98,7 +102,7 @@ class AuthController extends Controller
         $authenticated = Auth::attempt($credentials, $request->has('remember'));
 
         if (!$authenticated) {
-            return redirect()->route('login')->with('error', 'email atau password salah.');
+            return redirect()->route('login')->with('error', 'Nomor Hp atau password salah.');
         }
 
         $input = $request->all();
@@ -161,10 +165,50 @@ class AuthController extends Controller
 
     public function switch(Request $request)
     {
+        $user = Auth::user();
+        $biodataS1 = Biodata::where('user_id',$user->id)->where('program_belajar','S1')->first();
+        $biodataKursus = Biodata::where('user_id',$user->id)->where('program_belajar','KURSUS')->first();
+        $transaksiS1 = Transaksi::where('user_id',$user->id)->where('program_belajar','S1')->where('jenis_tagihan','Administrasi')->first();
+        $transaksiKursus = Transaksi::where('user_id',$user->id)->where('program_belajar','KURSUS')->where('jenis_tagihan','Administrasi')->first();
         if($request->program == 'S1'){
-            return redirect()->route('mahasiswa.dashboard')->with('success','Berhasil Masuk Ke Dashboard S1');
+            if(!$transaksiS1){
+            $adminstrasiS1 = Administrasi::where('program_belajar','S1')->first();
+            // return redirect()->route('mahasiswa.administrasi');
+            
+            // $transaksi = Transaksi::create([
+            //     'user_id' => $user->id,
+            //     'program_belajar' => 'S1',
+            //     'status' => 'pending',
+            //     'total' => '10000',
+            //     'payment_link' => 'https://discord.com/channels/@me'
+            // ]);
+            return view('mahasiswa.transaksi.administrasi',compact('adminstrasiS1'));
+            }elseif($transaksiS1->status == 'pending'){
+                $adminstrasiS1Pending = Transaksi::where('program_belajar','S1')->where('user_id',$user->id)->where('status','pending')->latest()->first();
+                return Redirect::to($adminstrasiS1Pending->link);
+            }elseif($transaksiS1->status == 'berhasil'){
+                if(!$biodataS1 && !$user->document){
+                    return redirect()->route('mahasiswa.dashboard')->with('success','Silahkan Lengkapi Biodata Dan Document Anda');
+                }elseif($biodataS1 && !$user->document){
+                    return redirect()->route('mahasiswa.dashboard')->with('success','Silahkan Lengakpi Document Anda');
+                }else{
+                    return redirect()->route('mahasiswa.dashboard')->with("success','Selamat Datang Di Dashboard S1 . $user->name");
+                }
+            }
         }else{
-            return redirect()->route('kursus.dashboard')->with('success','Berhasil Masuk Ke Dashboard Kursus');
+            if(!$transaksiKursus){
+                $adminstrasiKursus = Administrasi::where('program_belajar','KURSUS')->first();
+                return redirect()->route('kursus.transaksi.administrasi',compact('adminstrasiKursus'));
+            }elseif($transaksiKursus->status == 'pending'){
+                $adminstrasiKursusPending = Transaksi::where('program_belajar','KURSUS')->where('user_id',$user->id)->where('status','pending')->latest()->first();
+                return Redirect::to($adminstrasiKursusPending->link);
+            }elseif($transaksiKursus->status == 'berhasil'){
+                if(!$biodataKursus){
+                    return redirect()->route('kursus.dashboard')->with('success','Silahkan Melengkapi Biodata Anda');
+                }else{
+                    return redirect()->route('kursus.dashboard')->with("success','Selamat Datang Di Dashboard S1 . $user->name");
+                }
+            }
         }
     }
 

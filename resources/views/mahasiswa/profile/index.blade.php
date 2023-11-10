@@ -1,6 +1,11 @@
 @extends('layouts.master')
-
+@php
+    $biodataS1 = App\Models\Biodata::where('program_belajar', 'S1')
+        ->where('user_id', Auth::user()->id)
+        ->first();
+@endphp
 @section('title', 'Profile')
+
 @section('content')
     <div class="page-header min-height-300 border-radius-xl mt-4"
         style="background-image: url('../soft-ui-dashboard-main/assets/img/curved-images/curved0.jpg'); background-position-y: 50%;">
@@ -14,7 +19,7 @@
                     @if (!Auth::user()->biodata)
                     /soft-ui-dashboard-main/assets/img/no-profile.png
                     @else
-                        {{ asset('storage/' . $biodata->image)}}
+                        {{ asset('storage/' . $biodataS1->image)}}
                     @endif
                     " alt="profile_image">
                 </div>
