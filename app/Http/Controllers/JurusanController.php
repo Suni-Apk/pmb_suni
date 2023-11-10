@@ -18,6 +18,7 @@ class JurusanController extends Controller
     {
         $jurusan = Jurusan::all();
         return view('admin.jurusan.index', compact('jurusan')); 
+        return view('admin.jurusan.index', compact('jurusan')); 
     }
 
 
