@@ -1,28 +1,4 @@
-// =========================================================
-// Soft UI Dashboard Pro - v1.1.1
-// =========================================================
-
-// Product Page: https://www.creative-tim.com/product/soft-ui-dashboard-pro
-// Copyright 2023 Creative Tim (https://www.creative-tim.com)
-
-// Coded by www.creative-tim.com
-
-// =========================================================
-
-// The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-
 "use strict";
-// !function() {
-//     var e, t;
-//     -1 < navigator.platform.indexOf("Win") && (document.getElementsByClassName("main-content")[0] && (e = document.querySelector(".main-content"),
-//     new PerfectScrollbar(e)),
-//     document.getElementsByClassName("sidenav")[0] && (e = document.querySelector(".sidenav"),
-//     new PerfectScrollbar(e)),
-//     document.getElementsByClassName("navbar-collapse")[0] && (t = document.querySelector(".navbar:not(.navbar-expand-lg) .navbar-collapse"),
-//     new PerfectScrollbar(t)),
-//     document.getElementsByClassName("fixed-plugin")[0]) && (t = document.querySelector(".fixed-plugin"),
-//     new PerfectScrollbar(t))
-// }(),
 document.getElementById("navbarBlur") && navbarBlurOnScroll("navbarBlur");
 var calendarEl, today, mYear, weekday, mDay, m, d, calendar, allInputs, fixedPlugin, fixedPluginButton, fixedPluginButtonNav, fixedPluginCard, fixedPluginCloseButton, navbar, buttonNavbarFixed, popoverTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="popover"]')), popoverList = popoverTriggerList.map(function(e) {
     return new bootstrap.Popover(e)

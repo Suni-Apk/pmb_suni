@@ -10,8 +10,8 @@ class Administrasi extends Model
     use HasFactory;
 
     protected $fillable = [
-        'amount',
-        'nama_biaya',
+        'amount_s1',
+        'amount_kursus',
         'id_tahunAjaran',
     ];
     public function tahunAjaran()

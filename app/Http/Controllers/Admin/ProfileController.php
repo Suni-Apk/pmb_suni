@@ -71,8 +71,8 @@ class ProfileController extends Controller
             'birthdate' => 'required'
         ]);
 
-        User::find($id)->update($data);
-        return redirect()->route('admin.profile_edit');
+        $user->update($data);
+        return redirect()->route('admin.profile')->with('success','Berhasil Mengedit Profile');
     }
 
     public function change_password()

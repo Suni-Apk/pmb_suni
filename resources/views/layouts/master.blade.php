@@ -20,15 +20,13 @@
     @stack('styles')
 </head>
 
-<body class="g-sidenav-show bg-gray-100 g-sidenav-hidden">
+<body class="g-sidenav-show bg-gray-100 overflow-x-hidden">
     @include('layouts.aside')
 
     <main class="main-content position-relative min-height-screen h-auto border-radius-lg">
 
         <div class="z-3 position-relative">
-            {{-- @include('layouts.header') --}}
-            @component('layouts.header')
-            @endcomponent
+            @include('layouts.header')
         </div>
 
         {{-- @include('layouts.template') --}}
@@ -40,7 +38,7 @@
         </div>
     </main>
 
-    @include('layouts.custom')
+    {{-- @include('layouts.custom') --}}
 
     @include('layouts.script')
     @stack('scripts')

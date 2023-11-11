@@ -9,65 +9,65 @@
     <div class="row">
         <div class="col-12">
             <div class="card mb-4">
-                <div class="card-header pb-0">
-                    <h6>Jurusan table</h6>
+                <div class="card-header pb-0 d-flex justify-content-between">
+                    <h6>Daftar Jurusan</h6>
+                    <a href="{{ route('admin.jurusan.create') }}" class="btn bg-gradient-primary float-end">Tambah + </a>
                 </div>
                 <div class="card-body px-0 pt-0 pb-2">
                     <div class="table-responsive p-0">
-                        <table class="table align-items-center mb-0" id="templateTable">
+                        <table class="table align-items-center mb-0" id="table">
                             <thead>
                                 <tr>
+                                    <th class="text-uppercase text-center text-secondary text-xxs font-weight-bolder opacity-7"
+                                        style="width: 25px">No</th>
                                     <th
-                                        class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                        No</th>
+                                        class="text-uppercase text-start text-secondary text-xxs font-weight-bolder opacity-7">
+                                        Nama</th>
                                     <th
-                                        class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                        class="text-uppercase text-start text-secondary text-xxs font-weight-bolder opacity-7">
                                         Tahun Ajaran</th>
                                     <th
-                                        class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                        Jurusan</th>
+                                        class="text-uppercase text-start text-secondary text-xxs font-weight-bolder opacity-7">
+                                        Kode</th>
                                     <th
-                                        class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                        Code</th>
-                                    <th
-                                        class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                        Action</th>
-                                    <th class="text-secondary opacity-7"></th>
+                                        class="text-uppercase text-center text-secondary text-xxs font-weight-bolder opacity-7">
+                                        Aksi</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @foreach ($jurusan as $index => $jurusans)
                                     <tr>
-                                        <td class="align-middle text-center text-sm">
-                                            <span class="text-bold">{{ $index + 1 }}</span>
+                                        <td class="text-center">
+                                            <h6 class="mb-0 text-sm">{{ $index + 1 }}</h6>
                                         </td>
-                                        <td class="align-middle text-center text-sm">
-                                            <span class="text-bold">{{ $jurusans->tahunAjaran->year }}</span>
-                                        </td>
-                                        <td class="align-middle text-center text-sm">
+                                        <td class="text-sm">
                                             <span class="text-bold">{{ $jurusans->name }}</span>
                                         </td>
-                                        <td class="align-middle text-center text-sm">
-                                            <span class="text-bold">{{ $jurusans->code }}</span>
+                                        <td class=" text-sm">
+                                            <span class="">{{ $jurusans->tahunAjaran->year }}</span>
+                                        </td>
+                                        <td class=" text-sm">
+                                            <span class="">{{ $jurusans->code }}</span>
                                         </td>
                                         <td class="d-flex align-items-center justify-content-center">
                                             <a href="{{ route('admin.jurusan.show', $jurusans->id) }}"
-                                                class="btn btn-sm bg-gradient-success font-weight-bold text-xs mx-2 mt-3">
-                                                <i class="fas fa-eye fs-6"></i>
+                                                class="btn btn-sm bg-gradient-success font-weight-bold text-xs mx-2 mt-3"
+                                                data-toggle="tooltip" data-original-title="detail">
+                                                Detail
                                             </a>
 
                                             <a href="{{ route('admin.jurusan.edit', $jurusans->id) }}"
-                                                class="btn btn-sm bg-gradient-secondary font-weight-bold text-xs mx-2 mt-3">
-                                                <i class="fas fa-edit fs-6"></i>
+                                                class="btn btn-sm bg-gradient-secondary font-weight-bold text-xs mx-2 mt-3"
+                                                data-toggle="tooltip" data-original-title="edit">
+                                                Edit
                                             </a>
 
                                             <form action="{{ route('admin.jurusan.destroy', $jurusans->id) }}"
                                                 method="POST">
                                                 @csrf
                                                 @method('DELETE')
-                                                <button type="submit"
-                                                    class="btn btn-sm bg-gradient-danger font-weight-bold text-xs mx-2 show_confirm mt-3">
-                                                    <i class="fa fa-trash fs-6"></i>
+                                                <button type="submit" class="btn btn-sm bg-gradient-danger font-weight-bold text-xs mx-2 show_confirm mt-3">
+                                                    <strong>Hapus</strong>
                                                 </button>
                                             </form>
                                         </td>
@@ -84,17 +84,11 @@
 
 @push('scripts')
     <script>
-        const dataTableSearch = new simpleDatatables.DataTable("#templateTableNoSearch", {
-            searchable: false,
-            fixedHeight: true,
-        });
-
-        const dataTableBasic = new simpleDatatables.DataTable("#templateTable", {
+        const dataTableBasic = new simpleDatatables.DataTable("#table", {
             searchable: true,
             fixedHeight: true,
         });
     </script>
-    <script src="sweetalert2.all.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"
         integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
@@ -125,7 +119,9 @@
                 }
             toastr.success("{{ Session::get('success') }}")
         @endif
-
+        @if (Session::has('delete'))
+            toastr.success("{{ Session::get('success') }}")
+        @endif
         @if (Session::has('pesan'))
             toast.options = {
                 "closeButton": true,
@@ -153,7 +149,7 @@
             event.preventDefault();
             Swal.fire({
                 title: 'Yakin?',
-                text: "Kamu Akan Menghapus Jurusan!!",
+                text: "Kamu Akan Menghapus Tahun Ajaran!!",
                 icon: 'warning',
                 showCancelButton: true,
                 confirmButtonColor: '#3085d6',
@@ -164,7 +160,7 @@
                     form.submit();
                     Swal.fire(
                         'Terhapus!',
-                        'Kamu telah menghapus Jurusan!!.',
+                        'Kamu telah menghapus Tahun Ajaran!!.',
                         'success'
                     )
                 }

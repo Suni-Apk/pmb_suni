@@ -3,39 +3,24 @@
 @section('title', 'profile template')
 
 @section('content')
-<<<<<<< HEAD
-<<<<<<< HEAD
 <div class="page-header min-height-300 border-radius-xl mt-4" style="background-image: url('/soft-ui-dashboard-main/assets/img/curved-images/curved0.jpg'); background-position-y: 50%;">
-=======
-<nav aria-label="breadcrumb">
-    <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
-        <li class="breadcrumb-item text-sm"><a class="opacity-5 text-dark" href="{{ route('dashboard') }}">Pages</a></li>
-        <li class="breadcrumb-item text-sm text-dark active" aria-current="page">Profile</li>
-    </ol>
-    <h6 class="font-weight-bolder mb-0">Profile</h6>
-</nav>
-<div class="page-header min-height-300 border-radius-xl mt-4" style="background-image: url('../soft-ui-dashboard-main/assets/img/curved-images/curved0.jpg'); background-position-y: 50%;">
->>>>>>> 46e3398b5282bba2241af524ee2f88c8839a5162
-=======
-<div class="page-header min-height-300 border-radius-xl mt-4" style="background-image: url('/soft-ui-dashboard-main/assets/img/curved-images/curved0.jpg'); background-position-y: 50%;">
->>>>>>> 47bc6f05a93c7cec9a855e75b2132e90b72c9e75
     <span class="mask bg-gradient-primary opacity-6"></span>
 </div>
 <div class="card card-body blur shadow-blur mx-4 mt-n6 overflow-hidden">
     <div class="row gx-4">
     <div class="col-auto">
         <div class="avatar avatar-xl position-relative">
-        <img src="/soft-ui-dashboard-main/assets/img/bruce-mars.jpg" alt="profile_image" class="w-100 border-radius-lg shadow-sm">
+            <img src="/soft-ui-dashboard-main/assets/img/bruce-mars.jpg" alt="profile_image" class="w-100 border-radius-lg shadow-sm">
         </div>
     </div>
     <div class="col-auto my-auto">
         <div class="h-100">
-        <h5 class="mb-1">
-            Alec Thompson
-        </h5>
-        <p class="mb-0 font-weight-bold text-sm">
-            CEO / Co-Founder
-        </p>
+            <h5 class="mb-1">
+                Alec Thompson
+            </h5>
+            <p class="mb-0 font-weight-bold text-sm">
+                CEO / Co-Founder
+            </p>
         </div>
     </div>
     <div class="col-lg-4 col-md-6 my-sm-auto ms-sm-auto me-sm-0 mx-auto mt-3">

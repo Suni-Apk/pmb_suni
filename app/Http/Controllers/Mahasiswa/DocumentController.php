@@ -21,42 +21,54 @@ class DocumentController extends Controller
     {
 
         $request->validate([
-            'ktp' => 'required|mimes:pdf|max:8192', // Kartu Keluarga
-            'kk' => 'required|mimes:pdf|max:8192', // Ijazah
-            'ijazah' => 'required|mimes:pdf|max:8192', // Akta
-            'transkrip_nilai' => 'nullable|mimes:pdf|max:8192|required_without:ktp,kk,ijazah', // Opsional tetapi tidak boleh kosong
+            'ktp' => 'required|mimes:pdf|max:8192',
+            'kk' => 'required|mimes:pdf|max:8192',
+            'ijazah' => 'required|mimes:pdf|max:8192',
+            'transkrip_nilai' => 'nullable|mimes:pdf|max:8192',
         ]);
-    
-        if ($request->hasFile('ktp') && $request->hasFile('kk') && $request->hasFile('ijazah') && $request->hasFile('transkrip_nilai')) {
+        
+        if ($request->hasFile('ktp') && $request->hasFile('kk') && $request->hasFile('ijazah')) {
             $ktpFile = $request->file('ktp');
             $kkFile = $request->file('kk');
             $ijazahFile = $request->file('ijazah');
+            
             $transkripFile = $request->file('transkrip_nilai');
-    
+        
+            // Check if 'transkrip_nilai' is present before attempting to handle it
+            if ($transkripFile) {
+                $transkripFileName = time() . '_transkrip_nilai_' . $transkripFile->getClientOriginalName();
+                $transkripFile->storeAs('public/pdf', $transkripFileName);
+            } else {
+                // Handle the case when 'transkrip_nilai' is not present
+                $transkripFileName = null;
+            }
+        
             $ktpFileName = time() . '_ktp_' . $ktpFile->getClientOriginalName();
             $kkFileName = time() . '_kk_' . $kkFile->getClientOriginalName();
             $ijazahFileName = time() . '_ijazah_' . $ijazahFile->getClientOriginalName();
-            $transkripFileName = time() . '_transkrip_nilai_' . $transkripFile->getClientOriginalName();
-    
+        
             $ktpFile->storeAs('public/pdf', $ktpFileName);
             $kkFile->storeAs('public/pdf', $kkFileName);
             $ijazahFile->storeAs('public/pdf', $ijazahFileName);
-            $transkripFile->storeAs('public/pdf', $transkripFileName);
-    
+        
             // Proses penyimpanan informasi ke database
             $data = [
                 'ktp' => 'pdf/' . $ktpFileName,
                 'kk' => 'pdf/' . $kkFileName,
                 'ijazah' => 'pdf/' . $ijazahFileName,
-                'transkrip_nilai' => 'pdf/' . $transkripFileName,
+                'transkrip_nilai' => $transkripFileName,
             ];
-            
+        
             $data['user_id'] = Auth::user()->id;
-            
+        
             Document::create($data);
-
-            return redirect()->route('mahasiswa.dashboard')->with('success','Berhasil Melengkapi Dokument Ynag di Pelukan');
+        
+            return redirect()->route('mahasiswa.dashboard')->with('success', 'Berhasil Melengkapi Dokumen Yang Diinginkan');
         }
+        
+        // Handle the case where one or more files are missing
+        return redirect()->route('mahasiswa.dashboard')->with('error', 'Gagal mengunggah file. Pastikan semua file diunggah.');
+        
     }
 
         public function download_pdf_ktp(Request $request ,$id)

@@ -8,23 +8,12 @@
 @section('content')
     <div class="row">
         <div class="col-12">
-            <nav aria-label="breadcrumb">
-                <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
-                    <li class="breadcrumb-item text-sm"><a class="opacity-5 text-dark"
-                            href="{{ route('dashboard') }}">Pages</a>
-                    </li>
-                    <li class="breadcrumb-item text-sm text-dark active" aria-current="page">Transactions</li>
-                </ol>
-                <h6 class="font-weight-bolder mb-0">Semua Data Tagihan</h6>
-            </nav>
-            <div class="card mb-4 mt-4">
+            <div class="card mb-4">
                 <div class="card-header pb-0 d-flex justify-content-between">
-                    <h6>Tagihan table</h6>
+                    <h6>Daftar Tagihan</h6>
                     <!-- Button trigger modal -->
-                    <button type="button" class="btn btn-sm bg-gradient-primary py-2 px-3 text-xs" data-bs-toggle="modal"
-                        data-bs-target="#exampleModal">
-                        <i class="fas fa-plus me-1"></i> Tambah tagihan
-                    </button>
+                    <button type="button" class="btn bg-gradient-primary" data-bs-toggle="modal" data-bs-target="#exampleModal"
+                    >Tambah <i class="fas fa-plus me-1"></i></button>
 
                     <!-- Modal -->
                     <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
@@ -33,39 +22,35 @@
                             <div class="modal-content">
                                 <div class="modal-header">
                                     <h5 class="modal-title" id="exampleModalLabel">Pilih Jenis Tagihan</h5>
-                                    <button type="button" class="btn-close text-danger" data-bs-dismiss="modal"
-                                        aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
+                                    <button type="button" class="btn-close border rounded-circle p-1 fs-3 lh-1 text-dark" data-bs-dismiss="modal" aria-label="Close">&times;</button>
                                 </div>
                                 <form action="{{ route('admin.tagihan.next') }}" method="GET">
                                     <div class="modal-body">
                                         <div class="form-check mb-3">
                                             <input class="form-check-input" type="radio" name="jenis_tagihan"
-                                                id="jenis_tagihan" value="Routine">
-                                            <label class="custom-control-label" for="customRadio1">Spp</label>
+                                                id="spp" value="rutin">
+                                            <label class="custom-control-label" for="spp">Spp</label>
                                         </div>
                                         <div class="form-check mb-3">
                                             <input class="form-check-input" type="radio" name="jenis_tagihan"
-                                                id="customRadio1" value="Tidakroutine">
-                                            <label class="custom-control-label" for="customRadio1">Biaya Lain</label>
+                                                id="biaya_lain" value="tidak-rutin">
+                                            <label class="custom-control-label" for="biaya_lain">Biaya Lain</label>
                                         </div>
                                         <div class="form-check mb-3">
                                             <input class="form-check-input" type="radio" name="jenis_tagihan"
-                                                id="customRadio1" value="DaftarUlang">
-                                            <label class="custom-control-label" for="customRadio1">Daftar Ulang</label>
+                                                id="daftar_ulang" value="daftar-ulang">
+                                            <label class="custom-control-label" for="daftar_ulang">Daftar Ulang</label>
                                         </div>
                                         <div class="form-check mb-3">
                                             <input class="form-check-input" type="radio" name="jenis_tagihan"
-                                                id="customRadio1" value="Tingkatan">
-                                            <label class="custom-control-label" for="customRadio1">Tingkatan</label>
+                                                id="tingkatan" value="tingkatan">
+                                            <label class="custom-control-label" for="tingkatan">Tingkatan</label>
                                         </div>
                                     </div>
                                     <div class="modal-footer">
-                                        {{-- <button type="button" class="btn bg-gradient-secondary"
-                                            data-bs-dismiss="modal">Close</button> --}}
-                                        <button class="btn bg-gradient-primary" type="submit">Lanjut <i
-                                                class="fas fa-arrow-circle-right ms-1"></i></button>
+                                        <button class="btn bg-gradient-primary" type="submit">
+                                            Lanjut <i class="fas fa-arrow-circle-right ms-1"></i>
+                                        </button>
                                     </div>
                                 </form>
                             </div>
@@ -74,26 +59,17 @@
                 </div>
                 <div class="card-body px-0 pt-0 pb-2">
                     <div class="table-responsive p-0">
-                        <table class="table align-items-center mb-0" id="templateTable">
+                        <table class="table align-items-center mb-0" id="table">
                             <thead>
                                 <tr>
-                                    <th>No</th>
-                                    <th class=" text-uppercase text-secondary text-xs font-weight-bolder opacity-8">
-                                        Nama
-                                        Tagihan</th>
-                                    <th class="text-uppercase text-secondary text-xs px-2 font-weight-bolder opacity-8">
-                                        Tahun / Angkatan</th>
-                                    <th class=" text-uppercase text-secondary text-xs font-weight-bolder opacity-8">
-                                        Jurusan / Prodi</th>
-                                    <th class=" text-uppercase text-secondary text-xs font-weight-bolder opacity-8">
-                                        Program Belajar</th>
-                                    <th class=" text-uppercase text-secondary text-xs font-weight-bolder opacity-8">
-                                        Created</th>
-                                    <th class=" text-uppercase text-secondary text-xs font-weight-bolder opacity-8">
-                                        Jenis tagihan</th>
-                                    <th
-                                        class="text-center text-uppercase text-secondary text-xs font-weight-bolder opacity-8">
-                                        Action</th>
+                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-8">Id</th>
+                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-8">Nama Tagihan</th>
+                                    <th class="text-uppercase text-secondary text-xxs px-2 font-weight-bolder opacity-8">Angkatan</th>
+                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-8">Jurusan</th>
+                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-8">Program Belajar</th>
+                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-8">Created at</th>
+                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-8">Jenis tagihan</th>
+                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Aksi</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -109,7 +85,6 @@
 
                                         <td class="align-middle  text-secondary text-xs font-weight-bold">
                                             {{ $biayas->jurusans->name ?? 'Tidak Ada Jurusan' }}
-
                                         </td>
                                         <td class="align-middle  text-secondary text-xs font-weight-bold">
                                             <strong>{{ $biayas->program_belajar }}</strong>
@@ -120,13 +95,13 @@
                                         <td class="align-middle  text-secondary text-xs font-weight-bold">
                                             <strong>{{ $biayas->jenis_biaya }}</strong>
 
-                                        </td>
-                                        <td class="align-middle text-center">
-                                            <a href="{{ route('admin.tagihan.show', $biayas->id) }}"
-                                                class="badge text-uppercase badge-sm bg-gradient-info text-xxs mx-1"
-                                                data-toggle="tooltip" data-original-title="detail">
-                                                Detail
-                                            </a>
+                                    </td>
+                                    <td class="align-middle text-center">
+                                        <a href="{{ route('admin.tagihan.show', $biayas->id) }}"
+                                            class="badge text-uppercase badge-sm bg-gradient-info text-xxs mx-1"
+                                            data-toggle="tooltip" data-original-title="detail">
+                                            Detail
+                                        </a>
 
                                             <a href="{{ route('admin.tagihan.edit', $biayas->id) }}"
                                                 class="badge text-uppercase badge-sm bg-gradient-secondary text-xxs mx-1"
@@ -196,7 +171,7 @@
         @endif
     </script>
     <script>
-        const dataTableBasic = new simpleDatatables.DataTable("#templateTable", {
+        const dataTableBasic = new simpleDatatables.DataTable("#table", {
             searchable: true,
             fixedHeight: true,
         });

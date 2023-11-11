@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Kursus;
 
 use App\Http\Controllers\Controller;
 use App\Models\Biodata;
+use App\Models\Course;
 use App\Models\TahunAjaran;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -76,7 +77,8 @@ class ProfileController extends Controller
     {
         $user = User::where('id',$id)->first();
         $biodata = Biodata::where('program_belajar','KURSUS')->where('user_id',Auth::user()->id)->first();
-        return view('kursus.profile.edit-biodata',compact('user','biodata'));
+        $kursus = Course::get();
+        return view('kursus.profile.edit-biodata',compact('user','biodata','kursus'));
     }
 
     public function edit_biodata_process(Request $request,$id)
@@ -92,6 +94,7 @@ class ProfileController extends Controller
             'birthplace' => 'required',
             'address' => 'required',
         ]);
+        $data['course_id'] = $request->course_id;
         $data['program_belajar'] = "KURSUS";
         $data['user_id'] = $id;
         if ($request->hasFile('image')) {

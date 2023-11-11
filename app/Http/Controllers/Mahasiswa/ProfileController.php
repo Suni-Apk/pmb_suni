@@ -132,41 +132,45 @@ class ProfileController extends Controller
     public function edit_document_process(Request $request,$id)
     {
         $user = User::find($id);
-            // Memeriksa apakah ada file yang diunggah untuk setiap jenis dokumen dan hanya mengunggah jika ada
-            if ($request->hasFile('ktp')) {
-                // Upload dan ganti file Kartu Keluarga jika ada yang diunggah
-                $ktpFile = $request->file('ktp');
-                $ktpFileName = time() . '_ktp_' . $ktpFile->getClientOriginalName();
-                $ktpFile->storeAs('public/pdf', $ktpFileName);
-                $user->document->ktp = 'pdf/' . $ktpFileName;
-            }
 
-            if ($request->hasFile('kk')) {
-                // Upload dan ganti file Ijazah jika ada yang diunggah
-                $kkFile = $request->file('kk');
-                $kkFileName = time() . 'kk' . $kkFile->getClientOriginalName();
-                $kkFile->storeAs('public/pdf', $kkFileName);
-                $user->document->kk = 'pdf/' . $kkFileName;
-            }
+        // Memeriksa apakah ada file yang diunggah untuk setiap jenis dokumen dan hanya mengunggah jika ada
+        if ($request->hasFile('ktp')) {
+            // Upload dan ganti file Kartu Keluarga jika ada yang diunggah
+            $ktpFile = $request->file('ktp');
+            $ktpFileName = time() . '_ktp_' . $ktpFile->getClientOriginalName();
+            $ktpFile->storeAs('public/pdf', $ktpFileName);
+            $user->document->ktp = 'pdf/' . $ktpFileName;
+        }
 
-            if ($request->hasFile('ijazah')) {
-                // Upload dan ganti file Akta jika ada yang diunggah
-                $ijazahFile = $request->file('ijazah');
-                $ijazahFileName = time() . 'ijazah' . $ijazahFile->getClientOriginalName();
-                $ijazahFile->storeAs('public/pdf', $ijazahFileName);
-                $user->document->ijazah = 'pdf/' . $ijazahFileName;
-            }
+        if ($request->hasFile('kk')) {
+            // Upload dan ganti file Ijazah jika ada yang diunggah
+            $kkFile = $request->file('kk');
+            $kkFileName = time() . 'kk' . $kkFile->getClientOriginalName();
+            $kkFile->storeAs('public/pdf', $kkFileName);
+            $user->document->kk = 'pdf/' . $kkFileName;
+        }
 
-            if ($request->hasFile('transkrip_nilai')) {
-                // Upload dan ganti file Rapor jika ada yang diunggah
-                $transkrip_nilaiFile = $request->file('transkrip_nilai');
-                $transkrip_nilaiFileName = time() . '_transkrip_nilai_' . $transkrip_nilaiFile->getClientOriginalName();
-                $transkrip_nilaiFile->storeAs('public/pdf', $transkrip_nilaiFileName);
-                $user->document->transkrip_nilai = 'pdf/' . $transkrip_nilaiFileName;
-            }
-            
-            $user->document->save();
+        if ($request->hasFile('ijazah')) {
+            // Upload dan ganti file Akta jika ada yang diunggah
+            $ijazahFile = $request->file('ijazah');
+            $ijazahFileName = time() . 'ijazah' . $ijazahFile->getClientOriginalName();
+            $ijazahFile->storeAs('public/pdf', $ijazahFileName);
+            $user->document->ijazah = 'pdf/' . $ijazahFileName;
+        }
 
-            return redirect()->route('mahasiswa.profile.index')->with('success','Berhasil Mengganti Dokument');
+        if ($request->hasFile('transkrip_nilai')) {
+            // Upload dan ganti file Rapor jika ada yang diunggah
+            $transkrip_nilaiFile = $request->file('transkrip_nilai');
+            $transkrip_nilaiFileName = time() . '_transkrip_nilai_' . $transkrip_nilaiFile->getClientOriginalName();
+            $transkrip_nilaiFile->storeAs('public/pdf', $transkrip_nilaiFileName);
+            $user->document->transkrip_nilai = 'pdf/' . $transkrip_nilaiFileName;
+        } else {
+            // Jika 'transkrip_nilai' tidak diunggah, kosongkan nilainya
+            $user->document->transkrip_nilai = null;
+        }
+
+        $user->document->save();
+
+        return redirect()->route('mahasiswa.profile.index')->with('success','Berhasil Mengganti Dokumen');
     }
 }

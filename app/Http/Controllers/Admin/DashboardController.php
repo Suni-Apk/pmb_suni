@@ -3,18 +3,22 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Jurusan;
+use App\Models\Matkuls;
+use App\Models\Transaksi;
+use App\Models\User;
 use GuzzleHttp\Client;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class DashboardController extends Controller
 {
-        public function index()
-        {
-                $user = Auth::user();
-                $tanggal = now()->format('d-m-Y');
-                $bulan = now()->format('m'); // Format bulan sebagai "01" untuk Januari, "02" untuk Februari, dll.
-                $tahun = now()->format('Y'); // Format tahun sebagai "2023" (misalnya).
+    public function index()
+    {
+        $user = Auth::user();
+        $tanggal = now()->format('d-m-Y');
+        $bulan = now()->format('m'); // Format bulan sebagai "01" untuk Januari, "02" untuk Februari, dll.
+        $tahun = now()->format('Y'); // Format tahun sebagai "2023" (misalnya).
 
         $client = new Client();
         $response = $client->get("http://api.aladhan.com/v1/gToH/$tanggal");
@@ -22,9 +26,24 @@ class DashboardController extends Controller
 
         // Mengambil tanggal Hijriah untuk indeks pertama (bulan ini).
         $hijriDateday = $data['data']['hijri']['day'];
+        $hijriDatedayArabic = $data['data']['hijri']['weekday']['ar'];
         $hijriDatemonth = $data['data']['hijri']['month']['ar'];
         $hijriDateyear = $data['data']['hijri']['year'];
-        return view('admin.index', compact('hijriDateday', 'hijriDatemonth', 'hijriDateyear', 'user'));
-        // return view('admin.index', compact('user'));
+
+        // chart resources
+        $users = User::all();
+        $pemasukan = Transaksi::sum('total');
+        $akun = User::get();
+        $admin = User::where('role','Admin')->get();
+        $mahasiswa = User::where('role','Mahasiswa')->get();
+        $jurusan = Jurusan::get();
+        $matkul = Matkuls::get();
+        return view('admin.index',compact('hijriDateday','hijriDatedayArabic','hijriDatemonth','hijriDateyear', 'user', 'users','pemasukan','akun','admin',
+        'mahasiswa','jurusan','matkul'));
+    }
+
+    public function profile()
+    {
+        return view('admin.profile.profile');
     }
 }

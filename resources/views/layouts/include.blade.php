@@ -1,6 +1,6 @@
 {{-- icon --}}
-<link rel="apple-touch-icon" sizes="76x76" href="../soft-ui-dashboard-main/assets/img/apple-icon.png">
-<link rel="icon" type="image/png" href="../soft-ui-dashboard-main/assets/img/favicon.png">
+<link rel="apple-touch-icon" sizes="76x76" href="/soft-ui-dashboard-main/assets/img/apple-icon.png">
+<link rel="icon" type="image/png" href="/soft-ui-dashboard-main/assets/img/favicon.png">
 
 {{-- font and icons --}}
 {{-- font and icons --}}

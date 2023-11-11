@@ -25,7 +25,6 @@ class TagihanController extends Controller
         $biodata = Biodata::where('program_belajar','S1')->where('user_id',Auth::user()->id)->first();
         return view('mahasiswa.tagihan.detail-tagihan',compact('biodata'));
     }
-
     public function payment_spp($name)
     {
         $biodata = Biodata::where('program_belajar','S1')->where('user_id',Auth::user()->id)->first();

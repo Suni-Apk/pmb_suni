@@ -13,11 +13,16 @@ class AdministrasiSeeder extends Seeder
      */
     public function run(): void
     {
-        $administrasi = [
-            'amount' => '10000',
-            'nama_biaya' => 'Administrasi',
+        Administrasi::create([
+            'program_belajar' => 'S1',
+            'amount' => '250000',
             'id_tahunAjaran' => 1,
-        ];
-        Administrasi::create($administrasi);
+        ]);
+        
+        Administrasi::create([
+            'program_belajar' => 'Kursus',
+            'amount' => '850000',
+            'id_tahunAjaran' => 1,
+        ]);
     }
 }

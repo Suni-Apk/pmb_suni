@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Jurusan;
+use App\Models\Matkuls;
+use App\Models\Semester;
 use Illuminate\Http\Request;
 
 class MatkulController extends Controller
@@ -11,15 +14,18 @@ class MatkulController extends Controller
      */
     public function index()
     {
-        return view('admin.matkul.index');
+        $matkuls = Matkuls::all();
+        return view('admin.matkul.index' ,compact('matkuls'));
     }
 
     /**
      * Show the form for creating a new resource.
      */
     public function create()
-    {
-        return view('admin.matkul.create');
+    {   
+        $jurusan = Jurusan::all();
+        $semesterGrouped = Semester::with('jurusan')->get()->groupBy('id_jurusans');
+        return view('admin.matkul.create' , compact('jurusan', 'semesterGrouped'));
     }
 
     /**
@@ -27,7 +33,17 @@ class MatkulController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->validate([
+            'id_jurusans' => 'required',
+            'id_semesters' => 'required',
+            'mulai' => 'required',
+            'selesai' => 'required',
+            'tanggal' => 'required',
+            'nama_matkuls' => 'required',
+            'nama_dosen' => 'required'
+        ]);
+        Matkuls::create($data);
+        return redirect()->route('admin.matkul.index')->with('success', "Mata Kuliah Berhasil Di Buat!!");
     }
 
     /**
@@ -35,7 +51,8 @@ class MatkulController extends Controller
      */
     public function show(string $id)
     {
-        return view('admin.matkul.detail');
+        $matkuls = Matkuls::findOrFail($id);
+        return view('admin.matkul.detail', compact('matkuls'));
     }
 
     /**
@@ -59,6 +76,8 @@ class MatkulController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $matkuls = Matkuls::findOrFail($id);
+        $matkuls->delete();
+        return redirect()->route('admin.matkul.index');
     }
 }

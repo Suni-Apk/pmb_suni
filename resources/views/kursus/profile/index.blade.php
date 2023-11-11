@@ -12,7 +12,7 @@
             <div class="col-auto">
                 <div class="avatar avatar-xl position-relative">
                     <img src="
-                    @if (!Auth::user()->biodata->program_belajar == 'KURSUS')
+                    @if (!Auth::user()->biodata)
                     /soft-ui-dashboard-main/assets/img/no-profile.png
                     @elseif(!$biodata)
                         /soft-ui-dashboard-main/assets/img/no-profile.png
@@ -53,7 +53,7 @@
                         </li>
                         <li class="nav-item">
                             <a class="nav-link mb-0 px-0 py-1"
-                                href="{{ route('mahasiswa.profile.change_password', Auth::user()->name) }}" role="tab"
+                                href="{{ route('kursus.profile.change_password', Auth::user()->name) }}" role="tab"
                                 aria-selected="true">
                                 <svg class="text-dark" width="16px" height="16px" viewBox="0 0 40 44" version="1.1"
                                     xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -161,6 +161,9 @@
                                 <li class="list-group-item border-0 ps-0 pt-0 text-sm"><strong class="text-dark">
                                     Program Belajar :</strong>
                                     &nbsp; {{ $biodata->program_belajar }}</li>
+                                <li class="list-group-item border-0 ps-0 pt-0 text-sm"><strong class="text-dark">
+                                    Kursus :</strong>
+                                    &nbsp; {{ $biodata->course->name }}</li>
                                 <li class="list-group-item border-0 ps-0 pt-0 text-sm"><strong class="text-dark">
                                     Profesi :</strong>
                                     &nbsp; {{ $biodata->profesi }}</li>

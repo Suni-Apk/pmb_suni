@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Jurusan;
+use App\Models\Link;
+use App\Models\Matkuls;
+use App\Models\Semester;
 use App\Models\TahunAjaran;
 use Illuminate\Http\Request;
 
@@ -16,6 +19,7 @@ class JurusanController extends Controller
         $jurusan = Jurusan::all();
         return view('admin.jurusan.index', compact('jurusan'));
     }
+    
 
     /**
      * Show the form for creating a new resource.
@@ -36,7 +40,16 @@ class JurusanController extends Controller
             'name' => 'required',
             'code' => 'required'
         ]);
-        Jurusan::create($data);
+        $jurusan = Jurusan::create($data);
+        $semester = ['Semester 1', 'Semester 2', 'Semester 3', 'Semester 4', 'Semester 5', 'Semester 6', 'Semester 7', 'Semester 8'];      
+        // $tanggal = ['', 'Semester 2', 'Semester 3', 'Semester 4', 'Semester 5', 'Semester 6', 'Semester 7', 'Semester 8'];      
+        foreach($semester as $key => $item){
+            Semester::create([
+                'id_jurusans' => $jurusan->id,
+                'name' => $item
+                // 'start_date' =>  $tanggals
+            ]);
+        }
         return redirect()->route('admin.jurusan.index')->with('success', "Jurusan Berhasil Di Buat!!");
     }
 
@@ -45,7 +58,14 @@ class JurusanController extends Controller
      */
     public function show(string $id)
     {
-        return view('admin.jurusan.detail');
+        $matkuls = Matkuls::all();
+        $jurusan = Jurusan::findOrFail($id);
+        $jurusanAll = Jurusan::all();
+        $semester = Semester::where('id_jurusans', $id)->get();
+        $semesterGrouped = Semester::with('jurusan')->get()->groupBy('id_jurusans');
+        $tahun_ajaran = TahunAjaran::get();
+        $links = Link::get();
+        return view('admin.jurusan.detail',compact('semester', 'jurusan', 'matkuls', 'jurusanAll', 'semesterGrouped', 'links', 'tahun_ajaran')); 
     }
 
     /**
@@ -53,8 +73,9 @@ class JurusanController extends Controller
      */
     public function edit(string $id)
     {
+        $jurusan = Jurusan::find($id);
         $tahun_ajaran = TahunAjaran::all();
-        return view('admin.jurusan.edit', compact('tahun_ajaran'));
+        return view('admin.jurusan.edit', compact('tahun_ajaran', 'jurusan'));
     }
 
     /**
