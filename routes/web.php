@@ -1,10 +1,8 @@
 <?php
 
-use App\Http\Controllers\Admin\AccountController;
 use App\Http\Controllers\Admin\AuthController as AdminAuthController;
 use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
 use App\Http\Controllers\Admin\ProfileController;
-use App\Http\Controllers\AdministrasiController;
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\DocumentController as AdminDocumentController;
 use App\Http\Controllers\JurusanController;
@@ -40,7 +38,6 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 })->name('welcome');
-
 
 // Auth Mahasiswa
 Route::get('/register', [AuthController::class, 'register'])->name('register');
@@ -255,17 +252,12 @@ Route::prefix('template')->group(function () {
         return view('layouts.template.virtual-reality');
     })->name('virtual-reality');
 
-
     Route::get('/profile', function () {
         return view('admin.user.profile');
     })->name('profile');
 
 
     Route::get('/change-password', function () {
-        return view('admin.profile.change-password');
+        return view('admin.user.change-password');
     })->name('change-password');
-
-    Route::get('/wizard', function () {
-        return view('layouts.template.wizard');
-    })->name('wizard');
 });

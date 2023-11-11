@@ -6,7 +6,7 @@
 <aside
     class="sidenav navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-3 overflow-hidden"
     id="sidenav-main">
-    <div class="sidenav-header position-sticky">
+    <div class="sidenav-header">
         <i class="fas fa-times p-3 cursor-pointer text-secondary opacity-5 position-absolute end-0 top-0 d-none d-xl-none"
             aria-hidden="true" id="iconSidenav"></i>
         <a class="navbar-brand m-0" href="{{ route('welcome') }}">
@@ -113,7 +113,8 @@
                             </li>
                         </ul>
                     </div>
-                </li>
+                </a>
+            </li>
 
                 {{-- users --}}
                 <li class="nav-item">
@@ -148,7 +149,8 @@
                             </li>
                         </ul>
                     </div>
-                </li>
+                </a>
+            </li>
 
                 <!-- mahasiswa -->
                 <li class="nav-item">
@@ -535,24 +537,24 @@
                     </ul>
                 </li>
 
-                <!-- profile -->
-                <li class="nav-item">
-                    <a class="nav-link {{ Route::is('mahasiswa.profile.*') ? 'active' : '' }}"
-                        href="{{ route('mahasiswa.profile.index') }}">
-                        <div
-                            class="icon icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
-                            <i class="fas fa-user-alt"></i>
-                        </div>
-                        <span class="nav-link-text ms-1">Profile</span>
-                    </a>
-                </li>
-        </div>
-        <div class="sidenav-footer mx-3 nav-item">
-            <a class="btn bg-gradient-primary btn-tooltip mt-3 w-100 nav-link text-white"
-                href="{{ route('logout') }}" data-bs-toggle="tooltip" data-bs-placement="right" title="Logout"
-                data-container="body" data-animation="true">
-                <i class="fas fa-sign-out-alt"></i>
-            </a>
-        </div>
+            <!-- profile -->
+            <li class="nav-item">
+                <a class="nav-link " href="">
+                    <div
+                        class="icon icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
+                        <i class="fas fa-user-alt"></i>
+                    </div>
+                    <span class="nav-link-text ms-1">Profile</span>
+                </a>
+            </li>
+        </ul>
+    </div>
     @endif
+    <div class="sidenav-footer mx-3 nav-item">
+        <a class="btn bg-gradient-primary btn-tooltip mt-3 w-100 nav-link text-white"
+            href="{{ route('admin.logout') }}" data-bs-toggle="tooltip" data-bs-placement="right" title="Logout"
+            data-container="body" data-animation="true">
+            <i class="fas fa-sign-out-alt"></i>
+        </a>
+    </div>
 </aside>
