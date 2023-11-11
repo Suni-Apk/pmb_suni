@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\AccountController;
 use App\Http\Controllers\Admin\AuthController as AdminAuthController;
+use App\Http\Controllers\Admin\CourseController;    
 use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
 use App\Http\Controllers\Admin\ProfileController;
 use App\Http\Controllers\AdministrasiController;
@@ -21,9 +22,9 @@ use App\Http\Controllers\Mahasiswa\TagihanController;
 use App\Http\Controllers\MatkulController as ControllersMatkulController;
 use App\Http\Controllers\NotifyController;
 use App\Http\Controllers\SettingController;
-use App\Http\Controllers\TagihanController as AdminTagihanController;
+use App\Http\Controllers\Admin\TagihanController as AdminTagihanController;
 use App\Http\Controllers\TahunAjaranController;
-use App\Http\Controllers\TransactionController;
+use App\Http\Controllers\Admin\TransactionController;
 use App\Http\Controllers\MatkulController as AdminMatkulController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -86,6 +87,8 @@ Route::prefix('/admin')->middleware('admin')->name('admin.')->group(function () 
     // Route::post('/process', [AdminTagihanController::class, 'process'])->name('tagihan.process');
     Route::get('settings/notifications', [SettingController::class, 'index'])->name('settings.notifications');
     Route::put('/setting/notifications/process/{id}', [SettingController::class, 'notify_edit'])->name('settings.notification.process');
+
+    Route::resource('/course', CourseController::class);
 
     Route::resource('/transaction', TransactionController::class);
     Route::resource('/tahun_ajaran', TahunAjaranController::class);

@@ -50,14 +50,14 @@
                     <div class="collapse" id="angkatan">
                         <ul class="nav ms-4 ps-3">
                             <li class="nav-item ">
-                                <a class="nav-link " href="{{route('admin.tahun_ajaran.index')}}">
+                                <a class="nav-link " href="{{ route('admin.tahun_ajaran.index') }}">
                                     <span class="sidenav-mini-icon d-none d-xl-block"><i
                                             class="fas fa-border-all"></i></span>
                                     <span class="sidenav-normal"> Daftar Tahun Ajaran </span>
                                 </a>
                             </li>
                             <li class="nav-item ">
-                                <a class="nav-link " href="{{route('admin.tahun_ajaran.create')}}">
+                                <a class="nav-link " href="{{ route('admin.tahun_ajaran.create') }}">
                                     <span class="sidenav-mini-icon d-none d-xl-block"><i class="fas fa-plus"></i></span>
                                     <span class="sidenav-normal"> Tambah Tahun Ajaran </span>
                                 </a>
@@ -79,14 +79,14 @@
                     <div class="collapse" id="jurusan">
                         <ul class="nav ms-4 ps-3">
                             <li class="nav-item ">
-                                <a class="nav-link " href="{{route('admin.jurusan.index')}}">
+                                <a class="nav-link " href="{{ route('admin.jurusan.index') }}">
                                     <span class="sidenav-mini-icon d-none d-xl-block"><i
                                             class="fas fa-border-all"></i></span>
                                     <span class="sidenav-normal"> Daftar Jurusan </span>
                                 </a>
                             </li>
                             <li class="nav-item ">
-                                <a class="nav-link " href="{{route('admin.jurusan.create')}}">
+                                <a class="nav-link " href="{{ route('admin.jurusan.create') }}">
                                     <span class="sidenav-mini-icon d-none d-xl-block"><i class="fas fa-plus"></i></span>
                                     <span class="sidenav-normal"> Tambah Jurusan </span>
                                 </a>
@@ -108,17 +108,47 @@
                     <div class="collapse" id="matkul">
                         <ul class="nav ms-4 ps-3">
                             <li class="nav-item ">
-                                <a class="nav-link " href="{{route('admin.matkul.index')}}">
+                                <a class="nav-link " href="{{ route('admin.matkul.index') }}">
                                     <span class="sidenav-mini-icon d-none d-xl-block"><i
                                             class="fas fa-border-all"></i></span>
                                     <span class="sidenav-normal"> Daftar Mata Kuliah </span>
                                 </a>
                             </li>
                             <li class="nav-item ">
-                                <a class="nav-link " href="{{route('admin.matkul.create')}}">
+                                <a class="nav-link " href="{{ route('admin.matkul.create') }}">
                                     <span class="sidenav-mini-icon d-none d-xl-block"><i
                                             class="fas fa-plus"></i></span>
                                     <span class="sidenav-normal"> Tambah Mata Kuliah </span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+
+                <!-- Course -->
+                <li class="nav-item">
+                    <a data-bs-toggle="collapse" href="#course" class="nav-link" aria-controls="course"
+                        role="button" aria-expanded="false">
+                        <div
+                            class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center d-flex align-items-center justify-content-center  me-2">
+                            <i class="ni ni-book-bookmark"></i>
+                        </div>
+                        <span class="nav-link-text ms-1"> Kursus </span>
+                    </a>
+                    <div class="collapse" id="course">
+                        <ul class="nav ms-4 ps-3">
+                            <li class="nav-item ">
+                                <a class="nav-link " href="{{ route('admin.course.index') }}">
+                                    <span class="sidenav-mini-icon d-none d-xl-block"><i
+                                            class="fas fa-border-all"></i></span>
+                                    <span class="sidenav-normal"> Daftar Kursus </span>
+                                </a>
+                            </li>
+                            <li class="nav-item ">
+                                <a class="nav-link " href="{{ route('admin.course.create') }}">
+                                    <span class="sidenav-mini-icon d-none d-xl-block"><i
+                                            class="fas fa-plus"></i></span>
+                                    <span class="sidenav-normal"> Tambah Kursus </span>
                                 </a>
                             </li>
                         </ul>
@@ -326,7 +356,7 @@
                                 </a>
                             </li>
                             <li class="nav-item ">
-                                <a class="nav-link " href="{{route('admin.settings.notifications')}}">
+                                <a class="nav-link " href="{{ route('admin.settings.notifications') }}">
                                     <span class="sidenav-mini-icon d-none d-xl-block"><i
                                             class="ni ni-bell-55"></i></span>
                                     <span class="sidenav-normal"> Notifikasi </span>
@@ -480,7 +510,8 @@
                         <ul class="nav-link pb-0 mb-0">
                             <span class="sidenav-mini-icon d-none d-xl-block" style="color:rgb(196, 196, 196)"><i
                                     class="fas fa-university"></i></span>
-                            <span class="sidenav-normal text-uppercase text-xs ms-2 font-weight-bolder"> academy </span>
+                            <span class="sidenav-normal text-uppercase text-xs ms-2 font-weight-bolder"> academy
+                            </span>
                         </ul>
                     </li>
 
@@ -501,7 +532,8 @@
                         <ul class="nav-link pb-0 mb-0">
                             <span class="sidenav-mini-icon d-none d-xl-block" style="color:rgb(196, 196, 196)"><i
                                     class="ni ni-credit-card"></i></span>
-                            <span class="sidenav-normal text-uppercase text-xs ms-2 font-weight-bolder"> payment </span>
+                            <span class="sidenav-normal text-uppercase text-xs ms-2 font-weight-bolder"> payment
+                            </span>
                         </ul>
                     </li>
 
