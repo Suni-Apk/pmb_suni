@@ -229,6 +229,9 @@
                                     <input type="text" value="{{$user->document->ijazah}}" class="form-control rounded-4" disabled>
                                     </div>
                                 </div>
+                                @if (!$user->document->transkrip_nilai)
+                                    
+                                @else
                                 <div class="col-12 col-sm-3">
                                     <div class="mb-2">
                                         <label for="">Document Transkrip Nilai</label>
@@ -243,6 +246,7 @@
                                     <input type="text" value="{{$user->document->transkrip_nilai}}" class="form-control rounded-4" disabled>
                                     </div>
                                 </div>
+                                @endif
                             @endif
                         </div>
                     </div>

@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\AuthController as AdminAuthController;
+use App\Http\Controllers\Admin\CourseController;
 use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
 use App\Http\Controllers\Admin\ProfileController;
 use App\Http\Controllers\Auth\AuthController;
@@ -19,7 +20,7 @@ use App\Http\Controllers\Mahasiswa\ProfileController as MahasiswaProfileControll
 use App\Http\Controllers\Mahasiswa\TagihanController;
 use App\Http\Controllers\MatkulController as ControllersMatkulController;
 use App\Http\Controllers\SettingController;
-use App\Http\Controllers\TagihanController as AdminTagihanController;
+use App\Http\Controllers\Admin\TagihanController as AdminTagihanController;
 use App\Http\Controllers\TahunAjaranController;
 use App\Http\Controllers\TransactionController;
 use Illuminate\Support\Facades\Route;
@@ -108,6 +109,7 @@ Route::prefix('/admin')->middleware(['admin','auth'])->name('admin.')->group(fun
     Route::resource('/tahun-ajaran', TahunAjaranController::class);
     Route::resource('/tagihan', AdminTagihanController::class);
     Route::resource('/dokumen', AdminDocumentController::class);
+    Route::resource('/course',CourseController::class);
     Route::post('/next', [AdminTagihanController::class, 'next'])->name('tagihan.next');
 
     

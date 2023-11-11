@@ -162,6 +162,9 @@
                                     Program Belajar :</strong>
                                     &nbsp; {{ $biodata->program_belajar }}</li>
                                 <li class="list-group-item border-0 ps-0 pt-0 text-sm"><strong class="text-dark">
+                                    Kursus :</strong>
+                                    &nbsp; {{ $biodata->course->name }}</li>
+                                <li class="list-group-item border-0 ps-0 pt-0 text-sm"><strong class="text-dark">
                                     Profesi :</strong>
                                     &nbsp; {{ $biodata->profesi }}</li>
                                 <li class="list-group-item border-0 ps-0 pt-0 text-sm"><strong class="text-dark">
