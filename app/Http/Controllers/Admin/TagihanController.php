@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Biaya;
 use App\Models\Biodata;
+use App\Models\Course;
 use App\Models\Jurusan;
 use App\Models\Tagihan;
 use App\Models\TagihanDetail;
@@ -38,10 +39,11 @@ class TagihanController extends Controller
         ]);
         $jenis_tagihan = $request->jenis_tagihan;
         $tahunAjaran = TahunAjaran::all();
+        $course = Course::all();
         $jurusanGrouped = Jurusan::with('tahunAjaran')->get()->groupBy('id_tahun_ajarans');
         $jurusans = Jurusan::with('tahunAjaran')->first();
         $biaya = Biaya::all();
-        return view('admin.tagihan.create', compact('jenis_tagihan', 'tahunAjaran', 'jurusanGrouped', 'jurusans', 'biaya'));
+        return view('admin.tagihan.create', compact('jenis_tagihan', 'tahunAjaran', 'jurusanGrouped', 'jurusans', 'biaya', 'course'));
     }
     /**
      * Store a newly created resource in storage.
