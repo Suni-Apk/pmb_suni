@@ -15,6 +15,7 @@ class Transaksi extends Model
         'status',
         'total',
         'payment_link',
+        'program_belajar',
         'jenis_pembayaran',
         'jenis_tagihan',
         'no_invoice'

@@ -132,7 +132,7 @@
 					<div class="row align-items-center">
 						<div class="col">
 							<h6 class="card-title text-uppercase text-muted mb-0">Total User</h6>
-							<span class="h2 lh-1 font-weight-bold mb-0">123.400</span>
+							<span class="h2 lh-1 font-weight-bold mb-0">{{$akun->count()}}</span>
 						</div>
 						<div class="col-auto">
 							<div class="icon icon-shape bg-danger text-white rounded-circle shadow text-center">
@@ -149,7 +149,7 @@
 					<div class="row align-items-center">
 						<div class="col">
 							<h6 class="card-title text-uppercase text-muted mb-0">Admin</h6>
-							<span class="h2 lh-1 font-weight-bold mb-0">12.000</span>
+							<span class="h2 lh-1 font-weight-bold mb-0">{{$admin->count()}}</span>
 						</div>
 						<div class="col-auto">
 							<div class="icon icon-shape bg-orange text-white rounded-circle shadow text-center">
@@ -166,7 +166,7 @@
 					<div class="row align-items-center">
 						<div class="col">
 							<h6 class="card-title text-uppercase text-muted mb-0">Mahasiswa</h6>
-							<span class="h2 lh-1 font-weight-bold mb-0">111.400</span>
+							<span class="h2 lh-1 font-weight-bold mb-0">{{$mahasiswa->count()}}</span>
 						</div>
 						<div class="col-auto">
 							<div class="icon icon-shape bg-warning text-white rounded-circle shadow text-center">
@@ -183,7 +183,7 @@
 					<div class="row align-items-center">
 						<div class="col">
 							<h6 class="card-title text-uppercase text-muted mb-0">Mata Kuliah</h6>
-							<span class="h2 lh-1 font-weight-bold mb-0">123</span>
+							<span class="h2 lh-1 font-weight-bold mb-0">{{$matkul->count()}}</span>
 						</div>
 						<div class="col-auto">
 							<div class="icon icon-shape bg-green text-white rounded-circle shadow text-center">
@@ -200,7 +200,7 @@
 					<div class="row align-items-center">
 						<div class="col">
 							<h6 class="card-title text-uppercase text-muted mb-0">Jurusan</h6>
-							<span class="h2 lh-1 font-weight-bold mb-0">4</span>
+							<span class="h2 lh-1 font-weight-bold mb-0">{{$jurusan->count()}}</span>
 						</div>
 						<div class="col-auto">
 							<div class="icon icon-shape bg-teal text-white rounded-circle shadow text-center">
@@ -218,7 +218,7 @@
 						<div class="col">
 							<h6 class="card-title text-uppercase text-muted mb-0">Pemasukan</h6>
 							<span class="h2 lh-1 font-weight-bold mb-0">
-								134.000 <small class="fs-5 font-weight-normal">rupiah</small>
+								{{number_format($pemasukan)}} <small class="fs-5 font-weight-normal">rupiah</small>
 							</span>
 						</div>
 						<div class="col-auto">
@@ -252,7 +252,7 @@
 		</div>
 			<div class="col-12 mb-4 gy-3 g-lg-3 d-md-none row mx-auto">
 				<div class="col-3 col-md-2 text-center">
-					<a href="{{ route('admin.tahun_ajaran.index') }}" class="icon icon-shape p-0 bg-primary shadow text-center border-radius-md cursor-pointer"
+					<a href="{{ route('admin.tahun-ajaran.index') }}" class="icon icon-shape p-0 bg-primary shadow text-center border-radius-md cursor-pointer"
 						data-bs-toggle="tooltip" data-bs-placement="top" title="Tahun Ajaran">
 						<i class="ni ni-archive-2 text-lg opacity-10" aria-hidden="true"></i>
 					</a>
@@ -280,7 +280,7 @@
 					<span class="d-block mt-2" style="font-size: 13px;">Admin</span>
 				</div>
 				<div class="col-3 col-md-2 text-center">
-					<a href="{{ route('admin.mahasiswa.account') }}" class="icon icon-shape p-0 bg-blue shadow text-center border-radius-md cursor-pointer"
+					<a href="{{ route('admin.mahasiswa.index') }}" class="icon icon-shape p-0 bg-blue shadow text-center border-radius-md cursor-pointer"
 						data-bs-toggle="tooltip" data-bs-placement="top" title="Mahasiswa">
 						<i class="fas fa-user-graduate text-lg opacity-10" aria-hidden="true"></i>
 					</a>
@@ -294,14 +294,14 @@
 					<span class="d-block mt-2" style="font-size: 13px;">Tagihan</span>
 				</div>
 				<div class="col-3 col-md-2 text-center">
-					<a href="{{ route('admin.transaction.index') }}" class="icon icon-shape p-0 bg-purple shadow text-center border-radius-md cursor-pointer"
+					<a href="{{ route('admin.transaksi.index') }}" class="icon icon-shape p-0 bg-purple shadow text-center border-radius-md cursor-pointer"
 						data-bs-toggle="tooltip" data-bs-placement="top" title="Transaksi">
 						<i class="fas fa-money-check-alt text-lg opacity-10" aria-hidden="true"></i>
 					</a>
 					<span class="d-block mt-2" style="font-size: 13px;">Transaksi</span>
 				</div>
 				<div class="col-3 col-md-2 text-center">
-					<a href="{{ route('admin.document.index') }}" class="icon icon-shape p-0 bg-pink shadow text-center border-radius-md cursor-pointer"
+					<a href="{{ route('admin.dokumen.index') }}" class="icon icon-shape p-0 bg-pink shadow text-center border-radius-md cursor-pointer"
 						data-bs-toggle="tooltip" data-bs-placement="top" title="Dokumen">
 						<i class="fas fa-folder-open text-lg opacity-10" aria-hidden="true"></i>
 					</a>

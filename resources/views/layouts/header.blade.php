@@ -60,11 +60,12 @@
                     <li class="nav-item dropdown d-flex align-items-center">
                         <span role="button" class="nav-link text-body font-weight-bold px-0" id="dropdownProfile"
                             data-bs-toggle="dropdown" aria-expanded="false">
-                            <img src="@if (!Auth::user()->biodata)
-                            /soft-ui-dashboard-main/assets/img/no-profile.png
+                            <img src="@if (!Auth::user()->biodata) /soft-ui-dashboard-main/assets/img/no-profile.png
+                            @elseif($biodata)
+                                {{ asset('storage/' . $biodata->image) }}
                             @else
-                                {{ asset('storage/' . $biodata->image)}}
-                            @endif" class="avatar avatar-sm ms-2">
+                                /soft-ui-dashboard-main/assets/img/no-profile.png @endif"
+                                alt="" class="avatar avatar-sm ms-2">
                         </span>
                         <ul class="dropdown-menu dropdown-menu-end px-2 py-2 me-sm-n2"
                             aria-labelledby="dropdownProfile">

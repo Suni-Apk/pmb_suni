@@ -61,9 +61,29 @@
                                 Ubah
                             </a>
 
-                            <a style="letter-spacing: .02rem" href="" class="badge badge-sm bg-gradient-danger font-weight-bolder text-xxs" data-toggle="tooltip" data-original-title="hapus">
-                                Hapus
-                            </a>
+                            <form action="{{route('admin.mahasiswa.delete',$item->id)}}" class="d-inline" id="form1" method="POST">
+                              @csrf
+                              @method('DELETE')
+                              <button type="button" class="badge badge-sm bg-gradient-danger font-weight-bolder text-xxs border-0" data-bs-toggle="modal" data-bs-target="#exampleModal">Delete</button>
+                              <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered">
+                                  <div class="modal-content">
+                                    <div class="modal-header">
+                                      <h1 class="modal-title fs-5" id="exampleModalLabel">Warning!!!! <i class="fas fa-exclamation-circle fa-xl text-danger"></i></h1>
+                                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                      <i class="fas fa-exclamation-circle fa-xl text-danger"></i>
+                                      Apakah Anda Yakin Ingin Melakukan Penghapusan Admin?
+                                    </div>
+                                    <div class="modal-footer">
+                                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                                      <button type="submit" class="btn btn-primary">Lanjut</button>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </form>
 
                             <form action="{{route('admin.mahasiswa.status',$item->id)}}" method="POST" class="d-inline">
                               @csrf

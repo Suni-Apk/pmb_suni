@@ -12,7 +12,11 @@
                 <div class="card-body px-0 pt-0 pb-2">
                     <div class="card">
                         <div class="card-body">
+<<<<<<< HEAD
                             <form method="POST" action="#">
+=======
+                            <form method="POST" action="{{ route('password.email') }}">
+>>>>>>> 6548f29 (sementara fix aside)
                                 @csrf
                                 <div class="row mb-3">
                                     <label for="email" class="col-md-4 col-form-label text-md-end">{{ __('Email Address') }}</label>

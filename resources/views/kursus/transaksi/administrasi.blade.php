@@ -40,7 +40,7 @@
                                         <strong>{{$transaksi->jenis_tagihan}}</strong>
                                     </div>
                                 </div>
-                                <form action="{{route('mahasiswa.demo',$transaksi->no_invoice)}}" method="POST">
+                                <form action="{{route('kursus.demo',$transaksi->no_invoice)}}" method="POST">
                                     @csrf
                                     @method('PUT')
                                 <div class="col-12 col-sm-12">
