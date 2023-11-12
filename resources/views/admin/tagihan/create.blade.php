@@ -87,9 +87,10 @@
                             class="form-select @error('id_angkatans.*')
                         is-invalid
                     @enderror">
+
                             <option selected>-- Pilih Angkatan --</option>
-                            @foreach ($tahunAjaran as $key => $angkatan)
-                                <option value="{{ $angkatan->id }}">{{ $angkatan->year }}</option>
+                            @foreach ($onlyTahunAjaran as $key => $angkatanOnly)
+                                <option value="{{ $angkatanOnly->id }}">{{ $angkatanOnly->year }}</option>
                             @endforeach
                         </select>
                     </div>
@@ -285,8 +286,8 @@
                         <label for="">Angkatan</label>
                         <select name="id_angkatans" id="" class="form-select">
                             <option selected>-- Pilih Angkatan --</option>
-                            @foreach ($tahunAjaran as $angkatan)
-                                <option value="{{ $angkatan->id }}">{{ $angkatan->year }}</option>
+                            @foreach ($onlyTahunAjaran2 as $angkatan2)
+                                <option value="{{ $angkatan2->id }}">{{ $angkatan2->year }}</option>
                             @endforeach
                         </select>
                         @error('id_angkatans')

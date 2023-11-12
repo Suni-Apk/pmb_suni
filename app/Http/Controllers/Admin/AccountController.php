@@ -107,7 +107,7 @@ class AccountController extends Controller
         $data = $request->validate([
             'status' => ''
         ]);
-        
+
         // dd($request->status);
         $user->update($data);
         return redirect()->route('admin.admin.index')->with('success', 'Berhasil Memperbarui Status Akun');
@@ -115,11 +115,11 @@ class AccountController extends Controller
 
     public function admin_delete($id)
     {
-        $admin = User::where('role','Admin')->find($id);
+        $admin = User::where('role', 'Admin')->find($id);
 
         $admin->delete();
 
-        return redirect()->route('admin.admin.index')->with("success","Berhasil Menghapus Akun Admin $admin->name");
+        return redirect()->route('admin.admin.index')->with("success", "Berhasil Menghapus Akun Admin $admin->name");
     }
 
 
@@ -212,7 +212,7 @@ class AccountController extends Controller
         $data = $request->validate([
             'status' => ''
         ]);
-        
+
         $user->update($data);
         if ($user->status == 'on') {
             return redirect()->route('admin.mahasiswa.index')->with('success', 'Berhasil Mengaktifkan Akun');
@@ -223,15 +223,14 @@ class AccountController extends Controller
 
     public function mahasiswa_delete($id)
     {
-        $user = User::where('role','Mahasiswa')->find($id);
-        if($user->biodata){
+        $user = User::where('role', 'Mahasiswa')->find($id);
+        if ($user->biodata) {
             $user->biodata->delete();
             $user->delete();
-        }else{
+        } else {
             $user->delete();
         }
-        return redirect()->route('admin.mahasiswa.index')->with("success","Berhasil Melakukan Penghapusan Akun $user->name");
-
+        return redirect()->route('admin.mahasiswa.index')->with("success", "Berhasil Melakukan Penghapusan Akun $user->name");
     }
 
     public function mahasiswa_detail($id)
@@ -243,10 +242,26 @@ class AccountController extends Controller
 
         return view('admin.account.mahasiswa.detail', compact('biodata', 'mahasiswa', 'biaya', 'biayaAll'));
     }
-    public function mahasiswa_bayar(Request $request)
+    public function mahasiswa_bayar(Request $request, $id)
     {
         $jenis = $request->jenis_tagihan;
-        $id = $request->id;
-        return view('admin.account.mahasiswa.bayar', compact('jenis', 'id'));
+        $data = $request->validate([
+            'id' => 'required',
+        ]);
+        $ids = $request->id;
+
+        // dd($ids);
+        foreach ($ids as $idTagihan) {
+            $tagihans = TagihanDetail::where('id', $idTagihan)->get();
+            foreach ($tagihans as $t) {
+                $jumlahBiaya[] = $t->amount;
+            }
+        }
+
+        $tagihan = TagihanDetail::where('id', $ids)->firstOrFail();
+        $total = array_sum($jumlahBiaya);
+        $mahasiswa = User::findOrFail($id);
+
+        return view('admin.account.mahasiswa.bayar', compact('jenis', 'id', 'total', 'mahasiswa', 'tagihan', 'ids'));
     }
 }
