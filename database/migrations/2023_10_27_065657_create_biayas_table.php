@@ -17,7 +17,7 @@
                 $table->foreignId('id_jurusans')->nullable();
                 $table->string('nama_biaya');
                 $table->string('jenis_biaya');
-                $table->enum('program_belajar', ['S1', 'BAHASA ARAB']);
+                $table->enum('program_belajar', ['S1', 'KURSUS']);
                 $table->timestamps();
             });
         }

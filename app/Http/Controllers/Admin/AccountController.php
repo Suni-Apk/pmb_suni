@@ -224,12 +224,14 @@ class AccountController extends Controller
     public function mahasiswa_delete($id)
     {
         $user = User::where('role','Mahasiswa')->find($id);
-        if($user->biodata){
-            $user->biodata->delete();
-            $user->delete();
-        }else{
-            $user->delete();
+
+        $biodata = Biodata::where('user_id',$user->id)->get();
+
+        foreach($biodata as $asu){
+            Biodata::where('id',$asu->id)->delete();
         }
+        $user->delete();
+        
         return redirect()->route('admin.mahasiswa.index')->with("success","Berhasil Melakukan Penghapusan Akun $user->name");
 
     }

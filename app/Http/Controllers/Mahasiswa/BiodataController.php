@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Biaya;
 use App\Models\Biodata;
 use App\Models\Jurusan;
+use App\Models\Notify;
 use App\Models\Tagihan;
 use App\Models\TagihanDetail;
 use App\Models\TahunAjaran;
@@ -24,6 +25,7 @@ class BiodataController extends Controller
     public function pendaftaran_s1_process(Request $request)
     {
         $user = Auth::user()->id;
+        $notif = Notify::where('id',1)->first();
         $angkatan = TahunAjaran::where('status', 'Active')->first();
         $data = $request->validate([
             'birthdate' => 'required|date',
@@ -42,7 +44,9 @@ class BiodataController extends Controller
         $data['image'] = $image;
 
         $biodata = Biodata::create($data);
-
+        // $pesan = $notif->notif_isi_biodata_formal . $user->name;
+        
+        // $this->send_message($user->phone, $pesan);
         $biaya = Biaya::all();
 
         foreach ($biaya as $key => $biayas) {

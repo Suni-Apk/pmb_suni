@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\AccountController;
 use App\Http\Controllers\Admin\AuthController as AdminAuthController;
 use App\Http\Controllers\Admin\CourseController;
 use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
@@ -110,7 +111,7 @@ Route::prefix('/admin')->middleware(['admin','auth'])->name('admin.')->group(fun
     Route::resource('/tagihan', AdminTagihanController::class);
     Route::resource('/dokumen', AdminDocumentController::class);
     Route::resource('/course',CourseController::class);
-    Route::post('/next', [AdminTagihanController::class, 'next'])->name('tagihan.next');
+    Route::get('/next', [AdminTagihanController::class, 'next'])->name('tagihan.next');
 
     
     //data settings
