@@ -22,8 +22,10 @@ use App\Http\Controllers\Mahasiswa\TagihanController;
 use App\Http\Controllers\MatkulController as ControllersMatkulController;
 use App\Http\Controllers\SettingController;
 use App\Http\Controllers\Admin\TagihanController as AdminTagihanController;
+use App\Http\Controllers\Mahasiswa\TransaksiController;
 use App\Http\Controllers\TahunAjaranController;
 use App\Http\Controllers\TransactionController;
+use App\Models\Transaksi;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -170,6 +172,7 @@ Route::prefix('/mahasiswa')->middleware(['auth', 'mahasiswa','s1'])->name('mahas
     
     //callback demo doang
     Route::put('/change/status/{sid}',[AuthController::class,'demo_success'])->name('demo');
+    Route::put('/change-datar-ulang/status/{sid}',[AuthController::class,'daftar_ulang_demo_success'])->name('daftar.ulang.demo');
     //biodata
     Route::prefix('/biodata')->name('pendaftaran.')->group(function () {
         Route::get('/',[BiodataController::class,'pendaftaran_s1'])->name('s1');
@@ -209,6 +212,7 @@ Route::prefix('/mahasiswa')->middleware(['auth', 'mahasiswa','s1'])->name('mahas
     //tagihan mahasiswa
     Route::prefix('tagihan')->name('tagihan.')->group(function () {
         Route::get('/',[TagihanController::class,'index'])->name('index');
+        Route::get('/daftar-ulang',[TransaksiController::class,'daftarUlang'])->name('daftar.ulang');
         Route::get('/detail/{name}',[TagihanController::class,'detail_tidak_routine'])->name('detail.tidak.routine');
         Route::get('/detail-spp/{name}',[TagihanController::class,'detail_spp'])->name('detail.spp');
         Route::get('/payment-spp/{name}', [TagihanController::class, 'payment_spp'])->name('payment.spp');

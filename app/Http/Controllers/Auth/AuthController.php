@@ -4,8 +4,10 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Models\Administrasi;
+use App\Models\Biaya;
 use App\Models\Biodata;
 use App\Models\Notify;
+use App\Models\TagihanDetail;
 use App\Models\Transaksi;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -244,6 +246,36 @@ class AuthController extends Controller
 
         return redirect()->route($dashboardRoute)->with('success', 'Selamat Datang Anda Telah Melakukan Pembayaran');
     }
+
+    public function daftar_ulang_demo_success($sid)
+    {
+        $userId = Auth::user()->id;
+
+        $transaksi = Transaksi::where('user_id', $userId)->where('no_invoice', $sid)->first();
+
+        if (!$transaksi) {
+            return redirect()->back()->with('error', 'Transaction not found.');
+        }
+
+        $transaksi->update([
+            'status' => 'berhasil'
+        ]);
+        $biaya = Biaya::where('program_belajar','S1')->where('jenis_biaya','DaftarUlang')->where('id_angkatans',Auth::user()->biodata->angkatan_id)->latest()->first();
+      
+        $user = Auth::user();
+        $tagihan = TagihanDetail::where('id_biayas',$biaya->id)->where('id_users',$user->id)->latest()->first();
+        // $bagi3 = $tagihan->amount / 3;
+        // dd($bagi3);
+        $transaction = Transaksi::where('user_id',$user->id)->where('tagihan_detail_id',$tagihan->id)->where('jenis_tagihan',$biaya->jenis_biaya)->where('status','berhasil')->sum('total');
+        if($transaction == $tagihan->amount){
+            $tagihan->update([
+                'status' => 'LUNAS'
+            ]);
+        }
+
+        return redirect()->route('mahasiswa.tagihan.index')->with('success', 'Selamat Datang Anda Telah Melakukan Pembayaran');
+    }
+    
 
 
     public function logout()
