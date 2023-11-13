@@ -217,7 +217,7 @@
 
                 <!-- transaksi -->
                 <li class="nav-item">
-                    <a data-bs-toggle="collapse" href="#transaction" class="nav-link {{ Route::is('admin.transaction.*') ? 'active' : '' }}" aria-controls="transaction"
+                    <a data-bs-toggle="collapse" href="#transaction" class="nav-link {{ Route::is('admin.transaksi.*') ? 'active' : '' }}" aria-controls="transaction"
                         role="button" aria-expanded="false">
                         <div
                             class="icon icon-sm shadow border-radius-md bg-white text-center d-flex align-items-center justify-content-center  me-2">
@@ -225,17 +225,17 @@
                         </div>
                         <span class="nav-link-text ms-1">Data Transaksi</span>
                     </a>
-                    <div class="collapse {{ Route::is('admin.transaction.*') ? 'show' : '' }}" id="transaction">
+                    <div class="collapse {{ Route::is('admin.transaksi.*') ? 'show' : '' }}" id="transaction">
                         <ul class="nav ms-4 ps-3">
                             <li class="nav-item ">
-                                <a class="nav-link {{ Route::is('admin.transaction.index') ? 'active' : '' }}" href="{{ route('admin.transaction.index') }}">
+                                <a class="nav-link {{ Route::is('admin.transaksi.index') ? 'active' : '' }}" href="{{ route('admin.transaksi.index') }}">
                                     <span class="sidenav-mini-icon d-none d-xl-block"><i
                                             class="fas fa-border-all"></i></span>
                                     <span class="sidenav-normal"> Daftar transaksi </span>
                                 </a>
                             </li>
                             <li class="nav-item ">
-                                <a class="nav-link {{ Route::is('admin.transaction.create') ? 'active' : '' }}" href="{{ route('admin.transaction.create') }}">
+                                <a class="nav-link {{ Route::is('admin.transaksi.create') ? 'active' : '' }}" href="{{ route('admin.transaksi.create') }}">
                                     <span class="sidenav-mini-icon d-none d-xl-block"><i
                                             class="fas fa-plus"></i></span>
                                     <span class="sidenav-normal"> Tambah transaksi </span>

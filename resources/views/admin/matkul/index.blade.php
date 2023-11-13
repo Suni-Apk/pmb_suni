@@ -57,7 +57,7 @@
                                         <form action="{{ route('admin.matkul.destroy', $item->id) }}" method="POST">
                                             @csrf
                                             @method('DELETE')
-                                            <button type="submit" class="badge badge-sm bg-gradient-danger font-weight-bold text-xxs show_confirm"
+                                            <button type="submit" class="btn btn-sm bg-gradient-danger font-weight-bold text-xs mx-2 mt-3 show_confirm"
                                             data-toggle="tooltip" data-original-title="hapus">
                                                 Hapus
                                             </button>

@@ -39,10 +39,23 @@ class TahunAjaranController extends Controller
         return redirect()->route('admin.tahun_ajaran.index')->with('success', "Tahun Ajaran Berhasil Di Buat!!");
     }
 
-                                                                
+
     public function active(Request $request, string $id)
     {
         $tahun_ajaran = TahunAjaran::find($id);
+
+        $activeTahunAjaranCount = TahunAjaran::where('status', 'Active')->count();
+
+        
+        // if ($tahun_ajaran->status == 'Active' && $activeTahunAjaranCount <= 1) {
+        //     return redirect()->route('admin.tahun_ajaran.index')->with('pesan', "Tidak dapat menonaktifkan satu-satunya tahun ajaran yang aktif");
+        // }
+
+        
+        if ($tahun_ajaran->status == 'nonActive' && $activeTahunAjaranCount > 0) {
+            return redirect()->route('admin.tahun_ajaran.index')->with('pesan', "Tidak dapat mengaktifkan tahun ajaran lain ketika sudah ada yang aktif");
+        }
+
         $data['status'] = $tahun_ajaran->status === 'Active' ? 'nonActive' : 'Active';
 
         $tahun_ajaran->update($data);

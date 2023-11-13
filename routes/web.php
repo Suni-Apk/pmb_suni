@@ -1,8 +1,10 @@
 <?php
 
+use App\Http\Controllers\Admin\AccountController;
 use App\Http\Controllers\Admin\AuthController as AdminAuthController;
 use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
 use App\Http\Controllers\Admin\ProfileController;
+use App\Http\Controllers\AdministrasiController;
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\DocumentController as AdminDocumentController;
 use App\Http\Controllers\JurusanController;
@@ -157,6 +159,20 @@ Route::prefix('/admin')->middleware('admin')->name('admin.')->group(function () 
     Route::resource('/tagihan', AdminTagihanController::class);
     Route::post('/next', [AdminTagihanController::class, 'next'])->name('tagihan.next');
 
+    Route::prefix('settings')->group(function () {
+        Route::get('/administrasi', [AdministrasiController::class, 'administrasi'])->name('administrasi');
+        Route::put('/administrasi/{id}', [AdministrasiController::class, 'AdministrasiProses'])->name('administrasi.proses');
+
+        Route::prefix('')->name('settings.')->group(function () {
+            Route::get('/', [SettingController::class, 'index'])->name('general');
+            Route::put('/edit/{id}', [SettingController::class, 'general_edit'])->name('general.edit');
+            Route::put('/desc/edit/{id}', [SettingController::class, 'desc_edit'])->name('desc.edit');
+            
+            Route::get('/notifikasi', [SettingController::class, 'notify_index'])->name('notifications');
+            Route::put('/notifikasi/process/{id}',[SettingController::class,'notify_edit'])->name('notifications.process');
+        });
+    });
+
     //account menu
     //admin
     Route::get('/account/admin', [AccountController::class, 'admin'])->name('admin.account');
@@ -176,7 +192,7 @@ Route::prefix('/admin')->middleware('admin')->name('admin.')->group(function () 
     Route::post('/bayar/account/mahasiswa', [AccountController::class, 'mahasiswa_bayar'])->name('mahasiswa.bayar');
     Route::get('/account/mahasiswa/program/{id}', [AccountController::class, 'mahasiswa_program'])->name('mahasiswa.program');
     //setting admin
-    Route::get('/administrasi', [AdministrasiController::class, 'administrasi'])->name('administrasi.administrasi');
+    Route::get('/administrasi', [AdministrasiController::class, 'administrasi'])->name('admin.administrasi');
     Route::put('/administrasi/{id}', [AdministrasiController::class, 'AdministrasiProses'])->name('administrasi.proses');
 });
 
