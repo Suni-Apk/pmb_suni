@@ -17,7 +17,7 @@
                             @method('GET')
                             <button value="S1" name="program" class="btn btn-secondary">Program Belajar S1</button>
                             <button value="Kursus" name="program" class="btn btn-secondary">Program Belajar Bahasa Arab</button>
-                           </form>
+                        </form>
                     </div>
                 </div>
             </div>
