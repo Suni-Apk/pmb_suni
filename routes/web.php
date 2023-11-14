@@ -145,6 +145,7 @@ Route::prefix('/admin')->middleware(['admin','auth'])->name('admin.')->group(fun
     // Route::resource('/tahun_ajaran', TahunAjaranController::class);
     Route::resource('/tagihan', AdminTagihanController::class);
     Route::resource('/dokumen', AdminDocumentController::class);
+    Route::resource('/course',CourseController::class);
     Route::resource('/tagihan', AdminTagihanController::class);
     Route::post('/next', [AdminTagihanController::class, 'next'])->name('tagihan.next');
 

@@ -48,13 +48,13 @@
                     <div class="collapse {{ Route::is('admin.tahun-ajaran.*') ? 'show' : '' }}" id="angkatan">
                         <ul class="nav ms-4 ps-3">
                         <li class="nav-item ">
-                                <a class="nav-link {{ Route::is('admin.tahun-ajaran.index') ? 'active' : '' }} " href="{{ route('admin.tahun-ajaran.index') }}">
+                                <a class="nav-link {{ Route::is('admin.tahun_ajaran.index') ? 'active' : '' }} " href="{{ route('admin.tahun_ajaran.index') }}">
                                     <span class="sidenav-mini-icon d-none d-xl-block"><i class="fas fa-border-all"></i></span>
                                     <span class="sidenav-normal"> Daftar Tahun Ajaran </span>
                                 </a>
                             </li>
                             <li class="nav-item ">
-                                <a class="nav-link {{ Route::is('admin.tahun-ajaran.create') ? 'active' : '' }} " href="{{ route('admin.tahun-ajaran.create') }}">
+                                <a class="nav-link {{ Route::is('admin.tahun_ajaran.create') ? 'active' : '' }} " href="{{ route('admin.tahun_ajaran.create') }}">
                                     <span class="sidenav-mini-icon d-none d-xl-block"><i class="fas fa-plus"></i></span>
                                     <span class="sidenav-normal"> Tambah Tahun Ajaran </span>
                                 </a>

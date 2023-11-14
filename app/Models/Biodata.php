@@ -42,6 +42,11 @@ class Biodata extends Model
         return $this->belongsTo(Jurusan::class);
     }
 
+    public function semesters()
+    {
+        return $this->belongsTo(Semester::class);
+    }
+
     public function course()
     {
         return $this->belongsTo(Course::class);
