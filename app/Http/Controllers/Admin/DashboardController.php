@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Jurusan;
 use App\Models\Matkuls;
+use App\Models\Transaksi;
 use App\Models\User;
 use GuzzleHttp\Client;
 use Illuminate\Http\Request;
@@ -31,10 +32,14 @@ class DashboardController extends Controller
 
         // chart resources
         $users = User::all();
-        $jurusan = Jurusan::all();
-        $mataKuliah = Matkuls::all();
-
-        return view('admin.index',compact('hijriDateday','hijriDatedayArabic','hijriDatemonth','hijriDateyear', 'user', 'users', 'jurusan', 'mataKuliah'));
+        $pemasukan = Transaksi::sum('total');
+        $akun = User::get();
+        $admin = User::where('role','Admin')->get();
+        $mahasiswa = User::where('role','Mahasiswa')->get();
+        $jurusan = Jurusan::get();
+        $matkul = Matkuls::get();
+        return view('admin.index',compact('hijriDateday','hijriDatedayArabic','hijriDatemonth','hijriDateyear', 'user', 'users','pemasukan','akun','admin',
+        'mahasiswa','jurusan','matkul'));
     }
 
     public function profile()

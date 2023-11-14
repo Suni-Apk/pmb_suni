@@ -39,22 +39,22 @@
 
                 <!-- tahun ajaran -->
                 <li class="nav-item">
-                    <a data-bs-toggle="collapse" href="#angkatan" class="nav-link {{ Route::is('admin.tahun_ajaran.*') ? 'active' : '' }}" aria-controls="angkatan" role="button" aria-expanded="false">
+                    <a data-bs-toggle="collapse" href="#angkatan" class="nav-link {{ Route::is('admin.tahun-ajaran.*') ? 'active' : '' }}" aria-controls="angkatan" role="button" aria-expanded="false">
                         <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center d-flex align-items-center justify-content-center  me-2">
                             <i class="ni ni-hat-3"></i>
                         </div>
                         <span class="nav-link-text ms-1"> Tahun Ajaran </span>
                     </a>
-                    <div class="collapse {{ Route::is('admin.tahun_ajaran.*') ? 'show' : '' }}" id="angkatan">
+                    <div class="collapse {{ Route::is('admin.tahun-ajaran.*') ? 'show' : '' }}" id="angkatan">
                         <ul class="nav ms-4 ps-3">
                         <li class="nav-item ">
-                                <a class="nav-link {{ Route::is('admin.tahun_ajaran.index') ? 'active' : '' }} " href="{{ route('admin.tahun_ajaran.index') }}">
+                                <a class="nav-link {{ Route::is('admin.tahun-ajaran.index') ? 'active' : '' }} " href="{{ route('admin.tahun-ajaran.index') }}">
                                     <span class="sidenav-mini-icon d-none d-xl-block"><i class="fas fa-border-all"></i></span>
                                     <span class="sidenav-normal"> Daftar Tahun Ajaran </span>
                                 </a>
                             </li>
                             <li class="nav-item ">
-                                <a class="nav-link {{ Route::is('admin.tahun_ajaran.create') ? 'active' : '' }} " href="{{ route('admin.tahun_ajaran.create') }}">
+                                <a class="nav-link {{ Route::is('admin.tahun-ajaran.create') ? 'active' : '' }} " href="{{ route('admin.tahun-ajaran.create') }}">
                                     <span class="sidenav-mini-icon d-none d-xl-block"><i class="fas fa-plus"></i></span>
                                     <span class="sidenav-normal"> Tambah Tahun Ajaran </span>
                                 </a>
@@ -115,6 +115,36 @@
                     </div>
                 </li>
 
+                <!-- Course -->
+                <li class="nav-item">
+                    <a data-bs-toggle="collapse" href="#course" class="nav-link" aria-controls="course"
+                        role="button" aria-expanded="false">
+                        <div
+                            class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center d-flex align-items-center justify-content-center  me-2">
+                            <i class="ni ni-book-bookmark"></i>
+                        </div>
+                        <span class="nav-link-text ms-1"> Kursus </span>
+                    </a>
+                    <div class="collapse" id="course">
+                        <ul class="nav ms-4 ps-3">
+                            <li class="nav-item ">
+                                <a class="nav-link " href="{{ route('admin.course.index') }}">
+                                    <span class="sidenav-mini-icon d-none d-xl-block"><i
+                                            class="fas fa-border-all"></i></span>
+                                    <span class="sidenav-normal"> Daftar Kursus </span>
+                                </a>
+                            </li>
+                            <li class="nav-item ">
+                                <a class="nav-link " href="{{ route('admin.course.create') }}">
+                                    <span class="sidenav-mini-icon d-none d-xl-block"><i
+                                            class="fas fa-plus"></i></span>
+                                    <span class="sidenav-normal"> Tambah Kursus </span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+
                 {{-- users --}}
                 <li class="nav-item">
                     <ul class="nav-link pb-0 mb-0">
@@ -135,7 +165,7 @@
                     <div class="collapse {{ Route::is('admin.admin.*') ? 'show' : '' }}" id="admin">
                         <ul class="nav ms-4 ps-3">
                             <li class="nav-item ">
-                                <a class="nav-link {{ Route::is('admin.admin.account') ? 'active' : '' }} " href="{{ route('admin.admin.account') }}">
+                                <a class="nav-link {{ Route::is('admin.admin.index') ? 'active' : '' }} " href="{{ route('admin.admin.index') }}">
                                     <span class="sidenav-mini-icon d-none d-xl-block"><i class="fas fa-border-all"></i></span>
                                     <span class="sidenav-normal"> Daftar Admin </span>
                                 </a>
@@ -161,7 +191,7 @@
                     <div class="collapse {{ Route::is('admin.mahasiswa.*') ? 'show' : '' }}" id="mahasiswa">
                         <ul class="nav ms-4 ps-3">
                             <li class="nav-item ">
-                                <a class="nav-link {{ Route::is('admin.mahasiswa.account') ? 'active' : '' }} " href="{{ route('admin.mahasiswa.account') }}">
+                                <a class="nav-link {{ Route::is('admin.mahasiswa.index') ? 'active' : '' }} " href="{{ route('admin.mahasiswa.index') }}">
                                     <span class="sidenav-mini-icon d-none d-xl-block"><i class="fas fa-border-all"></i></span>
                                     <span class="sidenav-normal"> Daftar Mahasiswa </span>
                                 </a>
@@ -217,7 +247,7 @@
 
                 <!-- transaksi -->
                 <li class="nav-item">
-                    <a data-bs-toggle="collapse" href="#transaction" class="nav-link {{ Route::is('admin.transaksi.*') ? 'active' : '' }}" aria-controls="transaction"
+                    <a data-bs-toggle="collapse" href="#transaksi" class="nav-link {{ Route::is('admin.transaksi.*') ? 'active' : '' }}" aria-controls="transaksi"
                         role="button" aria-expanded="false">
                         <div
                             class="icon icon-sm shadow border-radius-md bg-white text-center d-flex align-items-center justify-content-center  me-2">
@@ -225,7 +255,7 @@
                         </div>
                         <span class="nav-link-text ms-1">Data Transaksi</span>
                     </a>
-                    <div class="collapse {{ Route::is('admin.transaksi.*') ? 'show' : '' }}" id="transaction">
+                    <div class="collapse {{ Route::is('admin.transaksi.*') ? 'show' : '' }}" id="transaksi">
                         <ul class="nav ms-4 ps-3">
                             <li class="nav-item ">
                                 <a class="nav-link {{ Route::is('admin.transaksi.index') ? 'active' : '' }}" href="{{ route('admin.transaksi.index') }}">
@@ -487,7 +517,8 @@
                         <ul class="nav-link pb-0 mb-0">
                             <span class="sidenav-mini-icon d-none d-xl-block" style="color:rgb(196, 196, 196)"><i
                                     class="fas fa-university"></i></span>
-                            <span class="sidenav-normal text-uppercase text-xs ms-2 font-weight-bolder"> academy </span>
+                            <span class="sidenav-normal text-uppercase text-xs ms-2 font-weight-bolder"> academy
+                            </span>
                         </ul>
                     </li>
 
@@ -508,7 +539,8 @@
                         <ul class="nav-link pb-0 mb-0">
                             <span class="sidenav-mini-icon d-none d-xl-block" style="color:rgb(196, 196, 196)"><i
                                     class="ni ni-credit-card"></i></span>
-                            <span class="sidenav-normal text-uppercase text-xs ms-2 font-weight-bolder"> payment </span>
+                            <span class="sidenav-normal text-uppercase text-xs ms-2 font-weight-bolder"> payment
+                            </span>
                         </ul>
                     </li>
 

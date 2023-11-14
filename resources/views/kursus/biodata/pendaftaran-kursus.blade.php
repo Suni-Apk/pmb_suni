@@ -23,6 +23,17 @@
                                     </div>
 
                                     <div class="form-group mb-3">
+                                        <label for="alamat">Pilih Kursus</label>
+                                        <select name="course_id" class="form-control">
+                                            <option value="" disabled selected>Pilih Kursus</option>
+                                            @foreach ($kursus as $index => $item)
+                                                <option value="{{ $item->id }}">{{ $item->name }}
+                                                </option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+
+                                    <div class="form-group mb-3">
                                         <label for="profesi">Profesi</label>
                                         <input type="text" name="profesi" id="profesi" class="form-control">
                                     </div>

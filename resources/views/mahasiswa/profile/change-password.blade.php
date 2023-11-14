@@ -1,5 +1,9 @@
 @extends('layouts.master')
-
+@php
+    $biodataS1 = App\Models\Biodata::where('program_belajar', 'S1')
+        ->where('user_id', Auth::user()->id)
+        ->first();
+@endphp
 @section('title', 'Change Password')
 
 @section('content')
@@ -11,14 +15,12 @@
         <div class="row gx-4">
             <div class="col-auto">
                 <div class="avatar avatar-xl position-relative">
-                    <img src="
-                    @if (!Auth::user()->biodata->image)
-                    /soft-ui-dashboard-main/assets/img/no-profile.png
-                    @else
-                        {{ asset('storage/' . Auth::user()->biodata->image)}}
-                    @endif
-                    " alt="profile_image"
-                        class="w-100 border-radius-lg shadow-sm">
+                    <img src="@if (!Auth::user()->biodata) /soft-ui-dashboard-main/assets/img/no-profile.png
+                            @elseif($biodataS1)
+                                {{ asset('storage/' . $biodataS1->image) }}
+                            @else
+                                /soft-ui-dashboard-main/assets/img/no-profile.png @endif"
+                                alt="" class="avatar avatar-sm ms-2">
                         
                 </div>
             </div>

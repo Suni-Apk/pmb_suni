@@ -15,13 +15,12 @@
         <div class="row gx-4">
             <div class="col-auto">
                 <div class="avatar avatar-xl position-relative">
-                    <img src="
-                    @if (!Auth::user()->biodata)
-                    /soft-ui-dashboard-main/assets/img/no-profile.png
-                    @else
-                        {{ asset('storage/' . $biodataS1->image)}}
-                    @endif
-                    " alt="profile_image">
+                    <img src="@if (!Auth::user()->biodata) /soft-ui-dashboard-main/assets/img/no-profile.png
+                            @elseif($biodataS1)
+                                {{ asset('storage/' . $biodataS1->image) }}
+                            @else
+                                /soft-ui-dashboard-main/assets/img/no-profile.png @endif"
+                                alt="" class="avatar avatar-sm ms-2">
                 </div>
             </div>
             <div class="col-auto my-auto">
@@ -110,7 +109,7 @@
                             <div class="col-md-8 d-flex align-items-center">
                                 <h6 class="mb-0">Biodata Information</h6>
                             </div>
-                            @if (!$user->biodata)
+                            @if (!$biodataS1)
                                 
                             @else
                                 <div class="col-md-4 text-end">
@@ -122,9 +121,9 @@
                             @endif
                         </div>
                     </div>
-                    @if (!$user->biodata)
+                    @if (!$biodataS1)
                         <div class="d-flex align-items-center justify-content-center mt-5">
-                            <a href="" class="btn btn-danger mt-4">Silahkan Lengkapi Biodata</a>
+                            <a href="{{route('mahasiswa.pendaftaran.s1')}}" class="btn btn-danger mt-4">Silahkan Lengkapi Biodata</a>
                         </div>
                     @else
                         <div class="card-body p-3">
@@ -185,7 +184,7 @@
                         <div class="row">
                             @if (!$user->document)
                                 <div class="d-flex align-items-center justify-content-center">
-                                    <a href="" class="btn btn-danger">Silahkan Lengkapi Dokumen Anda</a>
+                                    <a href="{{route('mahasiswa.pendaftaran.document')}}" class="btn btn-danger">Silahkan Lengkapi Dokumen Anda</a>
                                 </div>
                             @else
                                 <div class="col-12 col-sm-3">
@@ -230,6 +229,9 @@
                                     <input type="text" value="{{$user->document->ijazah}}" class="form-control rounded-4" disabled>
                                     </div>
                                 </div>
+                                @if (!$user->document->transkrip_nilai)
+                                    
+                                @else
                                 <div class="col-12 col-sm-3">
                                     <div class="mb-2">
                                         <label for="">Document Transkrip Nilai</label>
@@ -244,6 +246,7 @@
                                     <input type="text" value="{{$user->document->transkrip_nilai}}" class="form-control rounded-4" disabled>
                                     </div>
                                 </div>
+                                @endif
                             @endif
                         </div>
                     </div>

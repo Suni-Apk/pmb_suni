@@ -108,9 +108,18 @@ class AccountController extends Controller
             'status' => ''
         ]);
         
-        // dd($request);
+        // dd($request->status);
         $user->update($data);
         return redirect()->route('admin.admin.index')->with('success', 'Berhasil Memperbarui Status Akun');
+    }
+
+    public function admin_delete($id)
+    {
+        $admin = User::where('role','Admin')->find($id);
+
+        $admin->delete();
+
+        return redirect()->route('admin.admin.index')->with("success","Berhasil Menghapus Akun Admin $admin->name");
     }
 
 
@@ -211,6 +220,22 @@ class AccountController extends Controller
             return redirect()->route('admin.mahasiswa.index')->with('success', 'Berhasil Menonaktifkan Akun');
         }
     }
+
+    public function mahasiswa_delete($id)
+    {
+        $user = User::where('role','Mahasiswa')->find($id);
+
+        $biodata = Biodata::where('user_id',$user->id)->get();
+
+        foreach($biodata as $asu){
+            Biodata::where('id',$asu->id)->delete();
+        }
+        $user->delete();
+        
+        return redirect()->route('admin.mahasiswa.index')->with("success","Berhasil Melakukan Penghapusan Akun $user->name");
+
+    }
+
     public function mahasiswa_detail($id)
     {
         $mahasiswa = User::where('role', 'Mahasiswa')->find($id);

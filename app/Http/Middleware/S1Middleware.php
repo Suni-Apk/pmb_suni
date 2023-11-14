@@ -18,7 +18,7 @@ class S1Middleware
     public function handle(Request $request, Closure $next): Response
     {
         $transaksi = Transaksi::where('program_belajar','S1')->where('jenis_tagihan','Administrasi')->where('user_id',Auth::user()->id)->first();
-        if(Auth::check() && !$transaksi){
+        if(Auth::check() && !$transaksi && !$transaksi->status == 'pending'){
             return redirect()->route('login')->withErrors(['phone' => 'Kamu Belum Membayar']);
         }else{
             return $next($request);

@@ -8,39 +8,39 @@
             <div class="col-12 col-sm-12">
                 <div class="card border border-lg shadow-lg">
                     <div class="card-header">
-                       <h4 class="text-center">Pembayaran Administrasi {{$transaksi->user->name}}</h4>
+                       <h4 class="text-center">Pembayaran Administrasi {{$transaction->user->name}}</h4>
                     </div>
                     <div class="card-body d-flex align-items-center justify-content-center">
                         <div class="row">
                                 <div class="col-12 col-sm-6">
                                     <div class="mb-3">
                                         <label class="form-label">Nomor Invoice : </label>
-                                        <strong>{{$transaksi->no_invoice}}</strong>
+                                        <strong>{{$transaction->no_invoice}}</strong>
                                     </div>
                                     <div class="mb-3">
                                         <label class="form-label">Status Pembayaran : </label>
-                                        <strong>{{$transaksi->status}}</strong>
+                                        <strong>{{$transaction->status}}</strong>
                                     </div>
                                     <div class="mb-3">
                                         <label class="form-label">Total : </label>
-                                        <strong>{{$transaksi->total}}</strong>
+                                        <strong>{{$transaction->total}}</strong>
                                     </div>
                                 </div>
                                 <div class="col-12 col-sm-6">
                                     <div class="mb-3">
                                         <label class="form-label">Program Belajar : </label>
-                                        <strong>{{$transaksi->program_belajar}}</strong>
+                                        <strong>{{$transaction->program_belajar}}</strong>
                                     </div>
                                     <div class="mb-3">
                                         <label class="form-label">Jenis Pembayaran : </label>
-                                        <strong>{{$transaksi->jenis_pembayaran}}</strong>
+                                        <strong>{{$transaction->jenis_pembayaran}}</strong>
                                     </div>
                                     <div class="mb-3">
                                         <label class="form-label">Jenis Tagihan : </label>
-                                        <strong>{{$transaksi->jenis_tagihan}}</strong>
+                                        <strong>{{$transaction->jenis_tagihan}}</strong>
                                     </div>
                                 </div>
-                                <form action="{{route('mahasiswa.demo',$transaksi->no_invoice)}}" method="POST">
+                                <form action="{{route('mahasiswa.daftar.ulang.demo',$transaction->no_invoice)}}" method="POST">
                                     @csrf
                                     @method('PUT')
                                 <div class="col-12 col-sm-12">
