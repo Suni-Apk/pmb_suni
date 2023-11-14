@@ -100,10 +100,12 @@ Route::prefix('/admin')->middleware(['admin', 'auth'])->name('admin.')->group(fu
         Route::put('/change-status/{id}', [AccountController::class, 'mahasiswa_status'])->name('status');
         Route::delete('/delete/{id}', [AccountController::class, 'mahasiswa_delete'])->name('delete');
         Route::get('/detail/{id}', [AccountController::class, 'mahasiswa_detail'])->name('show');
-        Route::get('/bayar/{id}', [AccountController::class, 'mahasiswa_bayar'])->name('bayar');
+        Route::get('/bayar/{id}', [AccountController::class, 'mahasiswa_bayar'])->middleware(['Pembayaran'])->name('bayar');
         Route::get('/program/{id}', [AccountController::class, 'mahasiswa_program'])->name('program');
     });
-
+    Route::prefix('/transactions/')->name('transactions.')->group(function () {
+        Route::post('/proses_bayar/{id}', [TransactionController::class, 'proses_bayar'])->middleware(['Pembayaran'])->name('proses_bayar');
+    });
     // resources management
     Route::resource('/matkul', ControllersMatkulController::class);
     Route::resource('/jurusan', JurusanController::class);

@@ -4,7 +4,6 @@
 
 @section('content')
     <div class="row">
-
         @if (!isset($mahasiswa->biodata) == true)
             <div class="col-12">
                 <div class="card mb-4">
@@ -163,16 +162,24 @@
                                                                             </td>
                                                                             <td class="text-sm">
                                                                                 <span
-                                                                                    class="badge badge-sm {{ $tagihans->status == 'SUDAH' ? 'bg-gradient-success' : 'bg-gradient-danger' }}">{{ $tagihans->status }}</span>
+                                                                                    class="badge badge-sm {{ $tagihans->status == 'LUNAS' ? 'bg-gradient-success' : 'bg-gradient-danger' }}">{{ $tagihans->status }}</span>
 
                                                                             </td>
                                                                             <td class="text-sm">Rp
                                                                                 {{ number_format($tagihans->amount, 0, '', '.') }}
                                                                             </td>
-                                                                            <td><input type="checkbox" name="id[]"
-                                                                                    id=""
-                                                                                    value="{{ $tagihans->id }}"
-                                                                                    class="checksAll">
+                                                                            <td>
+                                                                                @if ($tagihans->status === 'LUNAS')
+                                                                                    <input type="checkbox" name="id[]"
+                                                                                        id=""
+                                                                                        value="{{ $tagihans->id }}"
+                                                                                        class="" disabled>
+                                                                                @else
+                                                                                    <input type="checkbox" name="id[]"
+                                                                                        id=""
+                                                                                        value="{{ $tagihans->id }}"
+                                                                                        class="checksAll">
+                                                                                @endif
                                                                             </td>
                                                                         </tr>
                                                                     @endif
@@ -240,15 +247,24 @@
                                                                         </td>
                                                                         <td class="text-sm">
                                                                             <span
-                                                                                class="badge badge-sm bg-gradient-danger">{{ $tagihans->status }}</span>
+                                                                                class="badge badge-sm {{ $tagihans->status == 'LUNAS' ? 'bg-gradient-success' : 'bg-gradient-danger' }}">{{ $tagihans->status }}</span>
                                                                         </td>
                                                                         <td class="text-sm">Rp
                                                                             {{ number_format($tagihans->amount, 0, '', '.') }}
                                                                         </td>
-                                                                        <td><input type="checkbox" name="id[]"
-                                                                                id=""
-                                                                                value="{{ $tagihans->id }}"
-                                                                                class="checksAll2">
+                                                                        <td>
+                                                                            @if ($tagihans->status === 'LUNAS')
+                                                                                <input type="checkbox" name="id[]"
+                                                                                    id=""
+                                                                                    value="{{ $tagihans->id }}"
+                                                                                    class="" disabled>
+                                                                            @else
+                                                                                <input type="checkbox" name="id[]"
+                                                                                    id=""
+                                                                                    value="{{ $tagihans->id }}"
+                                                                                    class="checksAll2">
+                                                                            @endif
+
                                                                         </td>
                                                                     </tr>
                                                                 @endif
@@ -306,16 +322,25 @@
                                                                     </td>
                                                                     <td class="text-sm">
                                                                         <span
-                                                                            class="badge badge-sm bg-gradient-danger">{{ $tagihans->status }}</span>
+                                                                            class="badge badge-sm {{ $tagihans->status == 'LUNAS' ? 'bg-gradient-success' : 'bg-gradient-danger' }}">{{ $tagihans->status }}</span>
 
                                                                     </td>
                                                                     <td class="text-sm">Rp
                                                                         {{ number_format($tagihans->amount, 0, '', '.') }}
                                                                     </td>
-                                                                    <td><input type="radio" name="id[]"
-                                                                            id=""
-                                                                            value="{{ $tagihans->id }}"
-                                                                            class=""></td>
+                                                                    <td>
+                                                                        @if ($tagihans->status === 'LUNAS')
+                                                                            <input type="radio" name="id[]"
+                                                                                id=""
+                                                                                value="{{ $tagihans->id }}"
+                                                                                class="" disabled>
+                                                                        @else
+                                                                            <input type="radio" name="id[]"
+                                                                                id=""
+                                                                                value="{{ $tagihans->id }}"
+                                                                                class="">
+                                                                        @endif
+                                                                    </td>
                                                                 </tr>
                                                             @endif
                                                         @endforeach
@@ -510,15 +535,25 @@
                                                                 </td>
                                                                 <td class="text-sm">
                                                                     <span
-                                                                        class="badge badge-sm bg-gradient-danger">{{ $tagihans->status }}</span>
+                                                                        class="badge badge-sm {{ $tagihans->status == 'LUNAS' ? 'bg-gradient-success' : 'bg-gradient-danger' }}">{{ $tagihans->status }}</span>
                                                                 </td>
                                                                 <td class="text-sm">Rp
                                                                     {{ number_format($tagihans->amount, 0, '', '.') }}
                                                                 </td>
-                                                                <td><input type="checkbox" name="id[]"
-                                                                        id=""
-                                                                        value="{{ $tagihans->id }}"
-                                                                        class="checksAll3">
+                                                                <td>
+                                                                    @if ($tagihans->status === 'LUNAS')
+                                                                        <input type="checkbox" name="id[]"
+                                                                            id=""
+                                                                            value="{{ $tagihans->id }}"
+                                                                            class="" disabled>
+                                                                    @else
+                                                                        <input type="checkbox" name="id[]"
+                                                                            id=""
+                                                                            value="{{ $tagihans->id }}"
+                                                                            class="checksAll3">
+                                                                    @endif
+
+
                                                                 </td>
                                                             </tr>
                                                         @endif
@@ -541,17 +576,36 @@
 
 @endsection
 @push('scripts')
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+@if (session('success'))
 <script>
-    $(function(e) {
-        $("#select_all_ids").click(function() {
-            $('.checksAll').prop('checked', $(this).prop('checked'));
+    Swal.fire(
+        "{{ session('success') }}", // Menggunakan session('success') untuk mengambil pesan
+        'You clicked the button!',
+        'success'
+    )
+</script>
+@endif
+@if (session('error'))
+<script>
+    Swal.fire(
+        "{{ session('error') }}", // Menggunakan session('success') untuk mengambil pesan
+        'You clicked the button!',
+        'error'
+    )
+</script>
+@endif
+<script>
+        $(function(e) {
+            $("#select_all_ids").click(function() {
+                $('.checksAll').prop('checked', $(this).prop('checked'));
+            });
+            $("#select_all_ids2").click(function() {
+                $('.checksAll2').prop('checked', $(this).prop('checked'));
+            });
+            $("#select_all_ids3").click(function() {
+                $('.checksAll3').prop('checked', $(this).prop('checked'));
+            });
         });
-        $("#select_all_ids2").click(function() {
-            $('.checksAll2').prop('checked', $(this).prop('checked'));
-        });
-        $("#select_all_ids3").click(function() {
-            $('.checksAll3').prop('checked', $(this).prop('checked'));
-        });
-    });
 </script>
 @endpush

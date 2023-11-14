@@ -15,7 +15,9 @@
         </nav>
         <div class="card h-100 mt-4">
             <div class="card-body p-3">
-                <form action="">
+                <form action="{{ route('admin.transactions.proses_bayar', $mahasiswa->id) }}" method="POST">
+                    @csrf
+                    @method('POST')
                     <div class="shadow-sm mb-3">
                         <div class="table-responsive p-0">
                             <table class="table align-items-center mb-0">
@@ -70,6 +72,8 @@
                                                 </td>
                                                 <td class="">Rp
                                                     {{ number_format($valueTagihanDetail->amount, 0, '', '.') }}</td>
+                                                <input type="hidden" value="{{ $total }}" name="total">
+                                                <input type="hidden" value="{{ $valueTagihanDetail->id }}" name="id[]">
                                             </tr>
                                         @endforeach
                                     @endforeach
@@ -91,7 +95,8 @@
     @if ($tagihan->biayasDetail->jenis_biaya == 'Tidakroutine')
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
-                <li class="breadcrumb-item text-sm"><a class="opacity-5 text-dark" href="{{ route('dashboard') }}">Pages</a>
+                <li class="breadcrumb-item text-sm"><a class="opacity-5 text-dark"
+                        href="{{ route('dashboard') }}">Pages</a>
                 </li>
                 <li class="breadcrumb-item text-sm text-dark active" aria-current="page">Transactions</li>
             </ol>
@@ -99,7 +104,9 @@
         </nav>
         <div class="card h-100 mt-4">
             <div class="card-body p-3">
-                <form action="">
+                <form action="{{ route('admin.transactions.proses_bayar', $mahasiswa->id) }}" method="POST">
+                    @csrf
+                    @method('POST')
                     <div class="shadow-sm mb-3">
                         <div class="table-responsive p-0">
                             <table class="table align-items-center mb-0">
@@ -118,7 +125,8 @@
 
                                     <tr>
                                         <td class="text-sm">Total Pembayaran : <strong>Rp
-                                                {{ number_format($total, 0, '', '.') }}</strong></td>
+                                                {{ number_format($total, 0, '', '.') }}</strong><input type="hidden"
+                                                value="{{ $total }}" name="total"></td>
                                     </tr>
                                     <tr>
                                         <td class="text-sm">Tanggal Pembayaran : <strong>{{ date('Y/m/d') }}</strong></td>
@@ -152,6 +160,7 @@
                                                 </td>
                                                 <td class="">Rp
                                                     {{ number_format($valueTagihanDetail->amount, 0, '', '.') }}</td>
+                                                <input type="hidden" value="{{ $valueTagihanDetail->id }}" name="id[]">
                                             </tr>
                                         @endforeach
                                     @endforeach
@@ -181,7 +190,9 @@
         </nav>
         <div class="card h-100 mt-4">
             <div class="card-body p-3">
-                <form action="">
+                <form action="{{ route('admin.transactions.proses_bayar', $mahasiswa->id) }}" method="POST">
+                    @csrf
+                    @method('POST')
                     <div class="shadow-sm mb-3">
                         <div class="table-responsive p-0">
                             <table class="table align-items-center mb-0">
@@ -203,12 +214,13 @@
 
                                     <tr>
                                         <td class="text-sm">Total Pembayaran : <strong>Rp
-                                                {{ number_format($total, 0, '', '.') }}</strong></td>
+                                                {{ number_format($total, 0, '', '.') }}</strong><input type="hidden"
+                                                value="{{ $total }}" name="total"></td>
                                     </tr>
                                     <tr>
                                         <td class="text-sm">Tanggal Pembayaran : <strong>{{ date('Y/m/d') }}</strong></td>
                                     </tr>
-
+                                    <input type="hidden" value="{{ $tagihan->id }}" name="id[]">
                                 </tbody>
                             </table>
                         </div>

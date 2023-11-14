@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Biaya;
 use App\Models\Biodata;
 use App\Models\TagihanDetail;
+use App\Models\Transaksi;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -258,9 +259,24 @@ class AccountController extends Controller
             }
         }
 
+
         $tagihan = TagihanDetail::where('id', $ids)->firstOrFail();
         $total = array_sum($jumlahBiaya);
         $mahasiswa = User::findOrFail($id);
+        foreach ($ids as $idTagih) {
+            $tagihanDetail = TagihanDetail::where('id', $idTagih)->get();
+            foreach ($tagihanDetail as $value) {
+                // dd($value);
+                $transaction = Transaksi::all();
+                foreach ($transaction as $transactions) {
+                    if ($value->id_transactions === $transactions->id && $value->status === 'LUNAS' && $value->id_users == $mahasiswa->id) {
+                        return redirect()->route('admin.mahasiswa.show', $mahasiswa->id);
+                    } else {
+                        return view('admin.account.mahasiswa.bayar', compact('jenis', 'id', 'total', 'mahasiswa', 'tagihan', 'ids'));
+                    }
+                }
+            }
+        }
 
         return view('admin.account.mahasiswa.bayar', compact('jenis', 'id', 'total', 'mahasiswa', 'tagihan', 'ids'));
     }
