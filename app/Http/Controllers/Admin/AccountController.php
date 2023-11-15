@@ -225,12 +225,14 @@ class AccountController extends Controller
     public function mahasiswa_delete($id)
     {
         $user = User::where('role', 'Mahasiswa')->find($id);
-        if ($user->biodata) {
-            $user->biodata->delete();
-            $user->delete();
-        } else {
-            $user->delete();
+
+        $biodata = Biodata::where('user_id', $user->id)->get();
+
+        foreach ($biodata as $asu) {
+            Biodata::where('id', $asu->id)->delete();
         }
+        $user->delete();
+
         return redirect()->route('admin.mahasiswa.index')->with("success", "Berhasil Melakukan Penghapusan Akun $user->name");
     }
 
@@ -260,23 +262,23 @@ class AccountController extends Controller
         }
 
 
-        $tagihan = TagihanDetail::where('id', $ids)->firstOrFail();
-        $total = array_sum($jumlahBiaya);
-        $mahasiswa = User::findOrFail($id);
-        foreach ($ids as $idTagih) {
-            $tagihanDetail = TagihanDetail::where('id', $idTagih)->get();
-            foreach ($tagihanDetail as $value) {
-                // dd($value);
-                $transaction = Transaksi::all();
-                foreach ($transaction as $transactions) {
-                    if ($value->id_transactions === $transactions->id && $value->status === 'LUNAS' && $value->id_users == $mahasiswa->id) {
-                        return redirect()->route('admin.mahasiswa.show', $mahasiswa->id);
-                    } else {
-                        return view('admin.account.mahasiswa.bayar', compact('jenis', 'id', 'total', 'mahasiswa', 'tagihan', 'ids'));
-                    }
-                }
-            }
-        }
+        // $tagihan = TagihanDetail::where('id', $ids)->firstOrFail();
+        // $total = array_sum($jumlahBiaya);
+        // $mahasiswa = User::findOrFail($id);
+        // foreach ($ids as $idTagih) {
+        //     $tagihanDetail = TagihanDetail::where('id', $idTagih)->get();
+        //     foreach ($tagihanDetail as $value) {
+        //         // dd($value);
+        //         $transaction = Transaksi::all();
+        //         foreach ($transaction as $transactions) {
+        //             if ($value->id_transactions === $transactions->id && $value->status === 'LUNAS' && $value->id_users == $mahasiswa->id) {
+        //                 return redirect()->route('admin.mahasiswa.show', $mahasiswa->id);
+        //             } else {
+        //                 return view('admin.account.mahasiswa.bayar', compact('jenis', 'id', 'total', 'mahasiswa', 'tagihan', 'ids'));
+        //             }
+        //         }
+        //     }
+        // }
 
         return view('admin.account.mahasiswa.bayar', compact('jenis', 'id', 'total', 'mahasiswa', 'tagihan', 'ids'));
     }

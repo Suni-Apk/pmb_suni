@@ -63,7 +63,7 @@ class DocumentController extends Controller
         
             Document::create($data);
         
-            return redirect()->route('mahasiswa.dashboard')->with('success', 'Berhasil Melengkapi Dokumen Yang Diinginkan');
+            return redirect()->route('mahasiswa.tagihan.index')->with('success', 'Berhasil Melengkapi Dokumen Yang Diinginkan Silahkan Membayar Uang Daftar Ulang');
         }
         
         // Handle the case where one or more files are missing

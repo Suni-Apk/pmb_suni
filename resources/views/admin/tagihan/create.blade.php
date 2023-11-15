@@ -170,7 +170,7 @@
                                 is-invalid
                             @enderror"
                                 id="program_belajar" onchange="enableProgram(this)">
-                                <option disabled selected>-- Pilih Program belajar --</option>
+                                <option disabled selected value="">-- Pilih Program belajar --</option>
                                 <option value="S1" {{ old('program_belajar') == 'S1' ? 'selected' : '' }}>S1</option>
                                 <option value="Kursus" {{ old('program_belajar') == 'Kursus' ? 'selected' : '' }}>
                                     Kursus</option>

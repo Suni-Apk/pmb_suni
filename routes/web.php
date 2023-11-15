@@ -22,6 +22,7 @@ use App\Http\Controllers\Mahasiswa\TagihanController;
 use App\Http\Controllers\MatkulController as ControllersMatkulController;
 use App\Http\Controllers\SettingController;
 use App\Http\Controllers\Admin\TagihanController as AdminTagihanController;
+use App\Http\Controllers\Mahasiswa\TransaksiController;
 use App\Http\Controllers\TahunAjaranController;
 use App\Http\Controllers\Admin\TransactionController;
 use App\Http\Controllers\AdministrasiController;
@@ -165,6 +166,7 @@ Route::prefix('/kursus')->middleware(['auth', 'kursus'])->name('kursus.')->group
         Route::get('/change-password/{name}', [KursusProfileController::class, 'change_password'])->name('change_password');
         Route::put('/change-password/process', [KursusProfileController::class, 'change_password_process'])->name('change_password.process');
     });
+    Route::get('/bayar/{id}', [KursusTagihanController::class, 'bayar'])->name('tagihan.bayar');
 });
 
 //Mahasiswa
@@ -173,6 +175,7 @@ Route::prefix('/mahasiswa')->middleware(['auth', 'mahasiswa', 's1'])->name('maha
 
     //callback demo doang
     Route::put('/change/status/{sid}', [AuthController::class, 'demo_success'])->name('demo');
+    Route::put('/change-datar-ulang/status/{sid}', [AuthController::class, 'daftar_ulang_demo_success'])->name('daftar.ulang.demo');
     //biodata
     Route::prefix('/biodata')->name('pendaftaran.')->group(function () {
         Route::get('/', [BiodataController::class, 'pendaftaran_s1'])->name('s1');
@@ -212,11 +215,13 @@ Route::prefix('/mahasiswa')->middleware(['auth', 'mahasiswa', 's1'])->name('maha
     //tagihan mahasiswa
     Route::prefix('tagihan')->name('tagihan.')->group(function () {
         Route::get('/', [TagihanController::class, 'index'])->name('index');
+        Route::get('/daftar-ulang', [TransaksiController::class, 'daftarUlang'])->name('daftar.ulang');
         Route::get('/detail/{name}', [TagihanController::class, 'detail_tidak_routine'])->name('detail.tidak.routine');
         Route::get('/detail-spp/{name}', [TagihanController::class, 'detail_spp'])->name('detail.spp');
         Route::get('/payment-spp/{name}', [TagihanController::class, 'payment_spp'])->name('payment.spp');
     });
-
+    //Detail Bayar 
+    Route::get('/bayar/{id}', [TagihanController::class, 'bayar'])->name('tagihan.bayar');
     // logout
     Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
 });
