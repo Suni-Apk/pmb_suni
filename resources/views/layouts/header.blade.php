@@ -12,9 +12,9 @@
             <span role="button" class="sidenav-toggler sidenav-toggler-inner d-xl-block d-none">
                 <span class="nav-link text-white p-0">
                     <div class="sidenav-toggler-inner">
-                        <i class="sidenav-toggler-line bg-primary shadow"></i>
-                        <i class="sidenav-toggler-line bg-primary shadow"></i>
-                        <i class="sidenav-toggler-line bg-primary shadow"></i>
+                        <i class="sidenav-toggler-line shadow" style="background: #28ce25"></i>
+                        <i class="sidenav-toggler-line shadow" style="background: #1bba19"></i>
+                        <i class="sidenav-toggler-line shadow" style="background: #0e8a0c"></i>
                     </div>
                 </span>
             </span>
@@ -77,11 +77,25 @@
                                 </span>
                             </li>
                             <li class="mb-1">
-                                <a class="dropdown-item border-radius-md" href="">
+                                @if (Auth::user()->role == 'Admin')
+                                <a class="dropdown-item border-radius-md" href="{{ route('admin.profile') }}">
                                     <div class="d-flex">
                                         <p class="mb-0">Account Settings</p>
                                     </div>
                                 </a>
+                                @elseif (Auth::user()->role == 'Mahasiswa')
+                                <a class="dropdown-item border-radius-md" href="{{ route('mahasiswa.profile.index') }}">
+                                    <div class="d-flex">
+                                        <p class="mb-0">Account Settings</p>
+                                    </div>
+                                </a>
+                                @elseif (Auth::user()->role == 'Kursus')
+                                <a class="dropdown-item border-radius-md" href="{{ route('kursus.profile.index') }}">
+                                    <div class="d-flex">
+                                        <p class="mb-0">Account Settings</p>
+                                    </div>
+                                </a>
+                                @endif
                             </li>
                             <li>
                                 <a class="dropdown-item border-radius-md" href="{{ route('logout') }}">

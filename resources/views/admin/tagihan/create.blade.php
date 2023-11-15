@@ -79,9 +79,10 @@
                             class="form-select @error('id_angkatans.*')
                         is-invalid
                     @enderror">
+
                             <option selected>-- Pilih Angkatan --</option>
-                            @foreach ($tahunAjaran as $key => $angkatan)
-                                <option value="{{ $angkatan->id }}">{{ $angkatan->year }}</option>
+                            @foreach ($onlyTahunAjaran as $key => $angkatanOnly)
+                                <option value="{{ $angkatanOnly->id }}">{{ $angkatanOnly->year }}</option>
                             @endforeach
                         </select>
                     </div>
@@ -165,14 +166,14 @@
                             @enderror
                         </div>
 
-                        <!--Jenis KURSUS-->
-                        <div class="form-group d-none" id="KURSUS">
-                            <label for="id_course">Jenis KURSUS</label>
+                        <!--Jenis Kursus-->
+                        <div class="form-group d-none" id="kursus">
+                            <label for="id_course">Jenis Kursus</label>
                             <select name="id_courses" id="id_course"
                                 class="form-select @error('id_courses')
                             is-invalid
                         @enderror">
-                                <option disabled selected>-- Pilih KURSUS --</option>
+                                <option disabled selected>-- Pilih Kursus --</option>
                                 @foreach ($course as $value)
                                     <option value="{{ $value->id }}"
                                         {{ old('id_courses') == $value->id ? 'selected' : '' }}>
@@ -262,8 +263,8 @@
                         <label for="">Angkatan</label>
                         <select name="id_angkatans" id="" class="form-select">
                             <option selected>-- Pilih Angkatan --</option>
-                            @foreach ($tahunAjaran as $angkatan)
-                                <option value="{{ $angkatan->id }}">{{ $angkatan->year }}</option>
+                            @foreach ($onlyTahunAjaran2 as $angkatan2)
+                                <option value="{{ $angkatan2->id }}">{{ $angkatan2->year }}</option>
                             @endforeach
                         </select>
                         @error('id_angkatans')
@@ -436,13 +437,13 @@
             if (program.value == "S1") {
                 document.getElementById("angkatans").classList.remove('d-none');
                 document.getElementById("jurusans").classList.remove('d-none');
-                document.getElementById("KURSUS").classList.add('d-none');
+                document.getElementById("kursus").classList.add('d-none');
                 document.getElementById("id_jurusans").setAttribute('name', 'id_jurusans');
                 document.getElementById("id_course").removeAttribute('name');
 
-            } else if (program.value == "KURSUS") {
+            } else if (program.value == "Kursus") {
                 document.getElementById("angkatans").classList.remove('d-none');
-                document.getElementById("KURSUS").classList.remove('d-none');
+                document.getElementById("kursus").classList.remove('d-none');
                 document.getElementById("jurusans").classList.add('d-none');
                 document.getElementById("id_course").setAttribute('name', 'id_courses');
                 document.getElementById("id_jurusans").removeAttribute('name');
