@@ -122,7 +122,7 @@ Route::prefix('/admin')->middleware(['admin','auth'])->name('admin.')->group(fun
         Route::get('/create', [TahunAjaranController::class, 'create'])->name('create');
         Route::post('/create/process', [TahunAjaranController::class, 'store'])->name('create.process');
         Route::post('/active/{id}', [TahunAjaranController::class, 'active'])->name('active');
-        Route::delete('/tahun_ajaran/{id}', [TahunAjaranController::class, 'destroy'])->name('destroy');
+        Route::delete('/delete/{id}', [TahunAjaranController::class, 'destroy'])->name('destroy');
     });
 
     // resources management
