@@ -9,26 +9,18 @@
     <div class="row">
         <div class="col-12">
             <div class="card mb-4">
-                <div class="card-header pb-0">
-                    <h6>Kursus Table</h6>
+                <div class="card-header pb-0 d-flex justify-content-between">
+                    <h6>Daftar Kursus</h6>
+                    <a href="{{route('admin.course.create')}}" class="btn bg-gradient-primary float-end">Tambah + </a>
                 </div>
                 <div class="card-body px-0 pt-0 pb-2">
                     <div class="table-responsive p-0">
                         <table class="table align-items-center mb-0" id="templateTable">
                             <thead>
                                 <tr>
-
-                                    <th
-                                        class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 text-center">
-                                        No</th>
-                                    <th
-                                        class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 text-center">
-                                        Nama
-                                        Kursus</th>
-                                    <th
-                                        class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 text-center">
-                                        Action</th>
-
+                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 text-center">No</th>
+                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 text-center">Nama Kursus</th>
+                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 text-center">Action</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -78,13 +70,8 @@
         integrity="sha512-3pIirOrwegjM6erE5gPSwkUzO+3cTjpnV9lexlNZqvupR64iZBnOOTiiLPb9M36zpMScbmUNIcHUqKD47M719g=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
     <script>
-        const dataTableSearch = new simpleDatatables.DataTable("#templateTableNoSearch", {
+        const dataTableSearch = new simpleDatatables.DataTable("#templateTable", {
             searchable: false,
-            fixedHeight: true,
-        });
-
-        const dataTableBasic = new simpleDatatables.DataTable("#templateTable", {
-            searchable: true,
             fixedHeight: true,
         });
     </script>
