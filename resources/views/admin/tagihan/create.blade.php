@@ -155,8 +155,8 @@
                                 id="program_belajar" onchange="enableProgram(this)">
                                 <option disabled selected>-- Pilih Program belajar --</option>
                                 <option value="S1" {{ old('program_belajar') == 'S1' ? 'selected' : '' }}>S1</option>
-                                <option value="Kursus" {{ old('program_belajar') == 'Kursus' ? 'selected' : '' }}>
-                                    Kursus</option>
+                                <option value="KURSUS" {{ old('program_belajar') == 'KURSUS' ? 'selected' : '' }}>
+                                    KURSUS</option>
                             </select>
                             @error('program_belajar')
                                 <div id="validationServer03Feedback" class="invalid-feedback">
@@ -164,6 +164,29 @@
                                 </div>
                             @enderror
                         </div>
+
+                        <!--Jenis KURSUS-->
+                        <div class="form-group d-none" id="KURSUS">
+                            <label for="id_course">Jenis KURSUS</label>
+                            <select name="id_courses" id="id_course"
+                                class="form-select @error('id_courses')
+                            is-invalid
+                        @enderror">
+                                <option disabled selected>-- Pilih KURSUS --</option>
+                                @foreach ($course as $value)
+                                    <option value="{{ $value->id }}"
+                                        {{ old('id_courses') == $value->id ? 'selected' : '' }}>
+                                        {{ $value->name }}
+                                    </option>
+                                @endforeach
+                            </select>
+                            @error('id_courses')
+                                <div id="validationServer03Feedback" class="invalid-feedback">
+                                    {{ $message }}
+                                </div>
+                            @enderror
+                        </div>
+                        <!--Tahun Ajaran-->
                         <div class="form-group d-none" id="angkatans">
                             <label for="id_angkatans">Angkatan</label>
                             <select name="id_angkatans" id="id_angkatans"
@@ -191,8 +214,6 @@
                                 is-invalid
                             @enderror">
                             </select>
-                        </div>
-                        <div class="form-group">
                         </div>
                     </ul>
 
@@ -415,11 +436,18 @@
             if (program.value == "S1") {
                 document.getElementById("angkatans").classList.remove('d-none');
                 document.getElementById("jurusans").classList.remove('d-none');
+                document.getElementById("KURSUS").classList.add('d-none');
                 document.getElementById("id_jurusans").setAttribute('name', 'id_jurusans');
-            } else if (program.value == "Kursus") {
+                document.getElementById("id_course").removeAttribute('name');
+
+            } else if (program.value == "KURSUS") {
                 document.getElementById("angkatans").classList.remove('d-none');
+                document.getElementById("KURSUS").classList.remove('d-none');
                 document.getElementById("jurusans").classList.add('d-none');
+                document.getElementById("id_course").setAttribute('name', 'id_courses');
                 document.getElementById("id_jurusans").removeAttribute('name');
+
+
 
             } else {
 

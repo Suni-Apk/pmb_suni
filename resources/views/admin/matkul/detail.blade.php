@@ -47,15 +47,15 @@
                                 @endif
                             </td>
                             <td>
-                                @if ($matkuls->start_at)
-                                    {{ $matkuls->start_at }}
+                                @if ($matkuls->mulai)
+                                    {{ $matkuls->mulai }}
                                 @else
                                     -
                                 @endif
                             </td>
                             <td>
-                                @if ($matkuls->end_at)
-                                    {{ $matkuls->end_at }}
+                                @if ($matkuls->selesai)
+                                    {{ $matkuls->selesai }}
                                 @else
                                     -
                                 @endif

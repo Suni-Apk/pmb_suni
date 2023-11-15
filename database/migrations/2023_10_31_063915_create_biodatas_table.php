@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('angkatan_id');
             $table->foreignId('jurusan_id')->nullable();
+            $table->foreignId('course_id')->nullable();
             $table->foreignId('user_id');
             $table->string('program_belajar');
             $table->string('image');

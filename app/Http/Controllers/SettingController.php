@@ -93,7 +93,12 @@ class SettingController extends Controller
         $notif = Notify::find($id);
 
         $data = $request->validate([
-            'notif_otp' => 'required|string'
+            'notif_otp' => 'required|string',
+            'notif_isi_biodata_formal' => 'required',
+            'notif_isi_biodata_nonformal' => 'required',
+            'notif_isi_document' => 'required',
+            'notif_administrasi_formal' => 'required',
+            'notif_administrasi_nonformal' => 'required'
         ]);
 
         $notif->update($data);

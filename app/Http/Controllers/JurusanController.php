@@ -17,9 +17,10 @@ class JurusanController extends Controller
     public function index()
     {
         $jurusan = Jurusan::all();
-        return view('admin.jurusan.index', compact('jurusan'));
+        return view('admin.jurusan.index', compact('jurusan')); 
+        return view('admin.jurusan.index', compact('jurusan')); 
     }
-    
+
 
     /**
      * Show the form for creating a new resource.
@@ -41,9 +42,9 @@ class JurusanController extends Controller
             'code' => 'required'
         ]);
         $jurusan = Jurusan::create($data);
-        $semester = ['Semester 1', 'Semester 2', 'Semester 3', 'Semester 4', 'Semester 5', 'Semester 6', 'Semester 7', 'Semester 8'];      
+        $semester = ['Semester 1', 'Semester 2', 'Semester 3', 'Semester 4', 'Semester 5', 'Semester 6', 'Semester 7', 'Semester 8'];
         // $tanggal = ['', 'Semester 2', 'Semester 3', 'Semester 4', 'Semester 5', 'Semester 6', 'Semester 7', 'Semester 8'];      
-        foreach($semester as $key => $item){
+        foreach ($semester as $key => $item) {
             Semester::create([
                 'id_jurusans' => $jurusan->id,
                 'name' => $item
@@ -83,7 +84,15 @@ class JurusanController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $jurusan = Jurusan::find($id);
+        $data  = $request->validate([
+            'id_tahun_ajarans' => 'required',
+            'name' => 'required',
+            'code' => 'required'
+        ]);
+
+        $jurusan->update($data);
+        return redirect()->route('admin.jurusan.index')->with('success', "Jurusan Berhasil Di Edit!!");
     }
 
     /**

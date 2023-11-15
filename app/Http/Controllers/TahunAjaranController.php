@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\TahunAjaran;
 use Illuminate\Http\Request;
+use League\CommonMark\Extension\CommonMark\Node\Inline\Strong;
 
 class TahunAjaranController extends Controller
 {
@@ -38,6 +39,28 @@ class TahunAjaranController extends Controller
         return redirect()->route('admin.tahun-ajaran.index')->with('success', "Tahun Ajaran Berhasil Di Buat!!");
     }
 
+
+    public function active(Request $request, string $id)
+    {
+        $tahun_ajaran = TahunAjaran::find($id);
+
+        $activeTahunAjaranCount = TahunAjaran::where('status', 'Active')->count();
+
+        
+        // if ($tahun_ajaran->status == 'Active' && $activeTahunAjaranCount <= 1) {
+        //     return redirect()->route('admin.tahun-ajaran.index')->with('pesan', "Tidak dapat menonaktifkan satu-satunya tahun ajaran yang aktif");
+        // }
+
+        
+        if ($tahun_ajaran->status == 'nonActive' && $activeTahunAjaranCount > 0) {
+            return redirect()->route('admin.tahun-ajaran.index')->with('pesan', "Tidak dapat mengaktifkan tahun ajaran lain ketika sudah ada yang aktif");
+        }
+
+        $data['status'] = $tahun_ajaran->status === 'Active' ? 'nonActive' : 'Active';
+
+        $tahun_ajaran->update($data);
+        return redirect()->route('admin.tahun-ajaran.index')->with('success', "Status Tahun Ajaran Berhasil Diubah");
+    }
     /**
      * Display the specified resource.
      */

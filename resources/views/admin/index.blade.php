@@ -3,9 +3,9 @@
 @section('title', 'Dashboard')
 
 @push('styles')
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400&display=swap" rel="stylesheet">
 @endpush
 
 @php
@@ -16,34 +16,30 @@
     }
 
     // dd($months);
+
 @endphp
 
 @push('scripts')
-  <script>
-    var ctx2 = document.getElementById("chart-line").getContext("2d");
+    <script>
+        var ctx2 = document.getElementById("chart-line").getContext("2d");
 
-    var gradientStroke1 = ctx2.createLinearGradient(0, 230, 0, 50);
+        var gradientStroke1 = ctx2.createLinearGradient(0, 230, 0, 50);
 
-    gradientStroke1.addColorStop(1, 'rgba(19, 169, 95,0.2)');
-    gradientStroke1.addColorStop(0.2, 'rgba(72,72,176,0.0)');
-    gradientStroke1.addColorStop(0, 'rgba(203,12,159,0)');
+        gradientStroke1.addColorStop(1, 'rgba(19, 169, 95,0.2)');
+        gradientStroke1.addColorStop(0.2, 'rgba(72,72,176,0.0)');
+        gradientStroke1.addColorStop(0, 'rgba(203,12,159,0)');
 
-    var gradientStroke2 = ctx2.createLinearGradient(0, 230, 0, 50);
+        var gradientStroke2 = ctx2.createLinearGradient(0, 230, 0, 50);
 
-    gradientStroke2.addColorStop(1, 'rgba(20,23,39,0.2)');
-    gradientStroke2.addColorStop(0.2, 'rgba(72,72,176,0.0)');
-    gradientStroke2.addColorStop(0, 'rgba(20,23,39,0)');
+        gradientStroke2.addColorStop(1, 'rgba(20,23,39,0.2)');
+        gradientStroke2.addColorStop(0.2, 'rgba(72,72,176,0.0)');
+        gradientStroke2.addColorStop(0, 'rgba(20,23,39,0)');
 
-    new Chart(ctx2, {
-        type: "line",
-        data: {
-            labels: [
-				'Mai',
-				'Abril',
-				'Novimbir',
-				'Decimbir'
-            ],
-            datasets: [{
+        new Chart(ctx2, {
+            type: "line",
+            data: {
+                labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep"],
+                datasets: [{
                     label: "Admin",
                     tension: 0.4,
                     borderWidth: 0,
@@ -53,77 +49,68 @@
                     backgroundColor: gradientStroke1,
                     fill: true,
                     data: [
-                      340,
-                      40,
-                      300,
-                      220,
-                      500,
-                      250,
-                      400,
-                      230,
-                      500,
+                        {{ $users->where('role', 'Admin')->count() }}
                     ],
                     maxBarThickness: 6
-                },
-            ],
-        },
-        options: {
-            responsive: true,
-            maintainAspectRatio: false,
-            plugins: {
-                legend: {
-                    display: false,
-                }
+                }, ],
             },
-            interaction: {
-                intersect: false,
-                mode: 'index',
-            },
-            scales: {
-                y: {
-                    grid: {
-                        drawBorder: false,
-                        display: true,
-                        drawOnChartArea: true,
-                        drawTicks: false,
-                        borderDash: [5, 5]
-                    },
-                    ticks: {
-                        display: true,
-                        padding: 10,
-                        color: '#b2b9bf',
-                        font: {
-                            size: 11,
-                            family: "Open Sans",
-                            style: 'normal',
-                            lineHeight: 2
-                        },
-                    }
-                },
-                x: {
-                    grid: {
-                        drawBorder: false,
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
                         display: false,
-                        drawOnChartArea: false,
-                        drawTicks: false,
-                        borderDash: [5, 5]
-                    },
-                    ticks: {
-                        display: true,
-                        color: '#b2b9bf',
-                        padding: 20,
-                        font: {
-                            size: 11,
-                            family: "Open Sans",
-                            style: 'normal',
-                            lineHeight: 2
-                        },
                     }
                 },
+                interaction: {
+                    intersect: false,
+                    mode: 'index',
+                },
+                scales: {
+                    y: {
+                        grid: {
+                            drawBorder: false,
+                            display: true,
+                            drawOnChartArea: true,
+                            drawTicks: false,
+                            borderDash: [5, 5]
+                        },
+                        ticks: {
+                            display: true,
+                            padding: 10,
+                            color: '#b2b9bf',
+                            font: {
+                                size: 11,
+                                family: "Open Sans",
+                                style: 'normal',
+                                lineHeight: 2
+                            },
+                        }
+                    },
+                    x: {
+                        grid: {
+                            drawBorder: false,
+                            display: false,
+                            drawOnChartArea: false,
+                            drawTicks: false,
+                            borderDash: [5, 5]
+                        },
+                        ticks: {
+                            display: true,
+                            color: '#b2b9bf',
+                            padding: 20,
+                            font: {
+                                size: 11,
+                                family: "Open Sans",
+                                style: 'normal',
+                                lineHeight: 2
+                            },
+                        }
+                    },
+                },
             },
-        },
-    });
-  </script>
+        });
+    </script>
 @endpush
 
 @section('content')
@@ -188,7 +175,7 @@
 					<div class="row align-items-center">
 						<div class="col">
 							<h6 class="card-title text-uppercase text-muted mb-0">Mata Kuliah</h6>
-							<span class="h2 lh-1 font-weight-bold mb-0">{{ App\Models\Matkuls::count() }}</span>
+							<span class="h2 lh-1 font-weight-bold mb-0">{{$matkul->count()}}</span>
 						</div>
 						<div class="col-auto">
 							<div class="icon icon-shape bg-green text-white rounded-circle shadow text-center">
@@ -205,7 +192,7 @@
 					<div class="row align-items-center">
 						<div class="col">
 							<h6 class="card-title text-uppercase text-muted mb-0">Jurusan</h6>
-							<span class="h2 lh-1 font-weight-bold mb-0">{{ App\Models\Jurusan::count() }}</span>
+							<span class="h2 lh-1 font-weight-bold mb-0">{{$jurusan->count()}}</span>
 						</div>
 						<div class="col-auto">
 							<div class="icon icon-shape bg-teal text-white rounded-circle shadow text-center">
@@ -275,7 +262,7 @@
 						<div class="col">
 							<h6 class="card-title text-uppercase text-muted mb-0">Pemasukan</h6>
 							<span class="h2 lh-1 font-weight-bold mb-0">
-								134.000 <small class="fs-5 font-weight-normal">rupiah</small>
+								{{number_format($pemasukan)}} <small class="fs-5 font-weight-normal">rupiah</small>
 							</span>
 						</div>
 						<div class="col-auto">
@@ -364,7 +351,7 @@
 					<span class="d-block mt-2" style="font-size: 13px;">Dokumen</span>
 				</div>
 				<div class="col-3 col-md-2 text-center">
-					<a href="" class="icon icon-shape p-0 bg-red shadow text-center border-radius-md cursor-pointer"
+					<a href="{{ route('admin.link.zoom') }}" class="icon icon-shape p-0 bg-red shadow text-center border-radius-md cursor-pointer"
 						data-bs-toggle="tooltip" data-bs-placement="top" title="Link">
 						<i class="fas fa-link text-lg opacity-10" aria-hidden="true"></i>
 					</a>
@@ -399,10 +386,10 @@
 			style="background-image: url('https://suniindonesia.com/wp-content/uploads/2022/10/masjid-pogung-dalangan-fQET4BjQmvc-unsplash.jpg');">
 				<span class="mask bg-gradient-dark"></span>
 				<div class="card-body position-relative z-index-1 d-flex flex-column justify-content-center gap-2">
-					<p class="text-white w-100 mb-0 text-center">Kalender hari ini</p>
+					<p class="text-white w-100 mb-0 text-center">Kalender hari ini,</p>
 					<h5 class="text-white font-weight-bolder fs-1 d-flex justify-content-evenly w-100 mb-0">
-						<span>{{ $hijriDateday }}</span>
-						<span class="text-green font-weight-normal" style="font-family: 'Rubik', sans-serif;">{{ $hijriDatemonth }}</span>
+					<span>{{ $hijriDateday }}</span>
+					<span class="text-green font-weight-normal" style="font-family: 'Rubik', sans-serif;">{{ $hijriDatemonth }}</span>
 					</h5>
 					<h5 class="w-100 mb-0 text-center lh-1 text-green font-weight-light" style="font-family: 'Rubik', sans-serif;">
 						{{ $hijriDatedayArabic }}
@@ -436,104 +423,106 @@
 	<div class="row my-4">
 		<div class="col-lg-8 col-md-6 mb-md-0 mb-4">
 			<div class="card">
-				<div class="card-header pb-0">
-					<div class="row">
-						<div class="col-lg-6 col-7">
-						<h6>Daftar Pendaftar Terbaru</h6>
-						</div>
+			<div class="card-header pb-0">
+				<div class="row">
+					<div class="col-lg-6 col-7">
+					<h6>Daftar Pendaftar Terbaru</h6>
+					</div>
+					<div class="col-lg-6 col-5 my-auto text-end">
+					<div class="dropdown float-lg-end pe-4">
+						<a class="cursor-pointer" id="dropdownTable" data-bs-toggle="dropdown" aria-expanded="false">
+							<i class="fa fa-ellipsis-v text-secondary"></i>
+						</a>
+						<ul class="dropdown-menu px-2 py-3 ms-sm-n4 ms-n5" aria-labelledby="dropdownTable">
+							<li><a class="dropdown-item border-radius-md" href="">Show All</a></li>
+							<li><a class="dropdown-item border-radius-md" href="">Another action</a></li>
+							<li><a class="dropdown-item border-radius-md" href="">Something else here</a></li>
+						</ul>
+					</div>
 					</div>
 				</div>
-				<div class="card-body px-0 pb-2">
-					<div class="table-responsive">
-						<table class="table align-items-center mb-0">
-							<thead>
-								<tr>
-									<th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Nama</th>
-									<th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">No. Telepon</th>
-									<th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Status Pembayaran</th>
-									<th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Status Biodata</th>
-								</tr>
-							</thead>
-							<tbody>
-								{{-- @forelse ($users->where('role', 'Mahasiswa')->where('tahunajaran_id', $tahunAjaran->terakhir)->take(10) as $item) --}}
-								@forelse ($users->where('role', 'Mahasiswa')->take(10) as $item)
-								<tr>
-									<td>
-										<div class="d-flex px-2 py-1">
-											<div>
-												<img src="@if (!Auth::user()->biodata)
-												/soft-ui-dashboard-main/assets/img/no-profile.png
-												@else
-													{{ asset('storage/' . Auth::user()->biodata->image)}}
-												@endif" class="avatar avatar-sm me-3" alt="xd">
-											</div>
-											<div class="d-flex flex-column justify-content-center">
-												<h6 class="mb-0 text-sm">{{ $item->name }}</h6>
-											</div>
-										</div>
-									</td>
-									<td class="font-weight-bold text-sm" id="phone">
-										{{ $item->phone }}
-									</td>
-									<td class="align-middle text-center text-sm">
-										<span class="badge badge-sm {{ $item ? 'bg-gradient-primary' : 'bg-gradient-danger' }}"
-										>{{ $item ? 'Lunas' : 'Belum' }}</span>
-									</td>
-									<td class="align-middle text-center text-sm">
-										<span class="badge badge-sm {{ $item ? 'bg-gradient-primary' : 'bg-gradient-danger' }}"
-										>{{ $item ? 'Lengkap' : 'Belum' }}</span>
-									</td>
-								</tr>
-								@empty
-								<tr>
-									<td colspan="4" class="text-center text-xs">
-										tidak ada data pendaftar
-									</td>
-								</tr>
-								@endforelse
-							</tbody>
-						</table>
-					</div>
+			</div>
+			<div class="card-body px-0 pb-2">
+				<div class="table-responsive">
+					<table class="table align-items-center mb-0">
+					<thead>
+						<tr>
+							<th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Nama</th>
+							<th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">No. Telepon</th>
+							<th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Status Pembayaran</th>
+							<th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Status Biodata</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>
+							<div class="d-flex px-2 py-1">
+								<div>
+									<img src="/soft-ui-dashboard-main/assets/img/small-logos/logo-xd.svg" class="avatar avatar-sm me-3" alt="xd">
+								</div>
+								<div class="d-flex flex-column justify-content-center">
+									<h6 class="mb-0 text-sm">Soft UI XD Version</h6>
+								</div>
+							</div>
+							</td>
+							<td>
+							<div class="avatar-group mt-2">
+								<a href="" class="avatar avatar-xs rounded-circle" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Ryan Tompson">
+									<img src="/soft-ui-dashboard-main/assets/img/team-1.jpg" alt="team1">
+								</a>
+								<a href="" class="avatar avatar-xs rounded-circle" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Romina Hadid">
+									<img src="/soft-ui-dashboard-main/assets/img/team-2.jpg" alt="team2">
+								</a>
+								<a href="" class="avatar avatar-xs rounded-circle" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Alexander Smith">
+									<img src="/soft-ui-dashboard-main/assets/img/team-3.jpg" alt="team3">
+								</a>
+								<a href="" class="avatar avatar-xs rounded-circle" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Jessica Doe">
+									<img src="/soft-ui-dashboard-main/assets/img/team-4.jpg" alt="team4">
+								</a>
+							</div>
+							</td>
+							<td class="align-middle text-center text-sm">
+							<span class="text-xs font-weight-bold"> $14,000 </span>
+							</td>
+							<td class="align-middle">
+							<div class="progress-wrapper w-75 mx-auto">
+								<div class="progress-info">
+									<div class="progress-percentage">
+									<span class="text-xs font-weight-bold">60%</span>
+									</div>
+								</div>
+								<div class="progress">
+									<div class="progress-bar bg-gradient-info w-60" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"></div>
+								</div>
+							</div>
+							</td>
+						</tr>
+					</tbody>
+					</table>
 				</div>
+			</div>
 			</div>
 		</div>
 		<div class="col-lg-4 col-md-6">
 			<div class="card h-100">
 			<div class="card-header pb-0">
 				<h6>Daftar Transaksi Terbaru</h6>
-				<p class="text-xs text-secondary">
+				<p class="text-sm">
 					<i class="fa fa-arrow-up text-success" aria-hidden="true"></i>
-					<span class="ms-1">diurutkan dari yang terbaru</span>
+					<span class="font-weight-bold">24%</span> this month
 				</p>
 			</div>
 			<div class="card-body p-3">
 				<div class="timeline timeline-one-side">
-					@forelse ($users->take(10) as $item)
 					<div class="timeline-block mb-3">
-						<span class="timeline-step">
-							@if ($item->role == 'Admin') <!-- kalau tagihan termasuk tagihan spp -->
-							<i class="far fa-credit-card text-success text-gradient"></i>
-							@else <!-- kalau tagihan termasuk tagihan tingkatan, dll, total ada 4-5 kondisi mengikuti macam-macam jenis tagihan -->
-							<i class="far fa-bell text-warning text-gradient"></i>
-							@endif
-						</span>
-						<div class="timeline-content">
-							<h6 class="text-dark text-sm font-weight-bold mb-0">
-								Rp. 250.000<!-- biaya yang dibayarkan -->, {{ $item->name }} <!-- nama orang -->
-								<span class="d-block text-secondary font-weight-normal text-xxs">({{ $item->role }})<!-- nama tagihan --></span>
-							</h6>
-							<style>
-								.hr { height: 1.7px; width: 20px; display: inline-block; background: #dee2e6; margin-bottom: 3px; }
-							</style>
-							<p class="text-secondary font-weight-bold text-xs mt-1 mb-0">
-								{{ $item->created_at->format('H:i:s') }} <span class="hr"></span> {{ $item->created_at->format('d M Y') }}
-							</p>
-						</div>
+					<span class="timeline-step">
+						<i class="ni ni-bell-55 text-success text-gradient"></i>
+					</span>
+					<div class="timeline-content">
+						<h6 class="text-dark text-sm font-weight-bold mb-0">$2400, Design changes</h6>
+						<p class="text-secondary font-weight-bold text-xs mt-1 mb-0">22 DEC 7:20 PM</p>
 					</div>
-					@empty
-						
-					@endforelse
-					
+					</div>
 				</div>
 			</div>
 			</div>

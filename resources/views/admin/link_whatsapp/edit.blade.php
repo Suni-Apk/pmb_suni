@@ -42,8 +42,13 @@
                                         <label for="id_jurusans">Jurusan</label>
                                         <select name="id_jurusans" id="id_jurusans" class="form-control" required>
                                             <option hidden selected>-----------</option>
+                                            @foreach ($jurusans as $item)
+                                                <option value="{{ $item->id }}" {{ (old('id_jurusans') == $item->id) || ($link->id_jurusans == $item->id) ? 'selected' : '' }}>
+                                                    {{ $item->name }}
+                                                </option>
+                                            @endforeach
                                         </select>
-                                    </div>
+                                    </div>                                    
                                     <div class="form-group mb-3">
                                         <label for="gender">Gender</label>
                                         <div class="form-check">
@@ -70,7 +75,7 @@
                                     </div>
                                 
                                     <button type="submit" class="btn btn-success">Submit</button>
-                                    <a href="#">
+                                    <a href="{{ route('admin.link_whatsapp.index') }}">
                                         <button type="button" class="btn btn-warning text-dark">Back</button>
                                     </a>
                                 </form>                                

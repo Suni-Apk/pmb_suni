@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Kursus;
 use App\Http\Controllers\Controller;
 use App\Models\Biaya;
 use App\Models\Biodata;
+use App\Models\Course;
 use App\Models\Jurusan;
 use App\Models\Tagihan;
 use App\Models\TagihanDetail;
@@ -16,8 +17,8 @@ class BiodataController extends Controller
 {
     public function pendaftaran_kursus()
     {
-        $jurusan = Jurusan::get();
-        return view('kursus.biodata.pendaftaran-kursus', compact('jurusan'));
+        $kursus = Course::get();
+        return view('kursus.biodata.pendaftaran-kursus', compact('kursus'));
     }
 
     public function pendaftaran_kursus_process(Request $request)
@@ -34,6 +35,7 @@ class BiodataController extends Controller
             'kecamatan' => 'required',
             'address' => 'required',
         ]);
+        $data['course_id'] = $request->course_id;
         $data['angkatan_id'] = $angkatan->id;
         $data['program_belajar'] = "KURSUS";
         $data['user_id'] = $user;

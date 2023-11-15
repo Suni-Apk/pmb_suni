@@ -14,7 +14,12 @@ class NotifySeeder extends Seeder
     public function run(): void
     {
         $notify = [
-            'notif_otp' => 'Ucu funky remixxxxx'
+            'notif_otp' => 'Ini Otp Anda ',
+            'notif_isi_biodata_formal' => 'Isi Biodata S1 Anda ',
+            'notif_isi_biodata_nonformal' => 'Isi Biodata Kursus Anda ',
+            'notif_isi_document' => 'Isi Document S1 Anda ',
+            'notif_administrasi_formal' => 'Silahkan Bayar Uang Administrasi S1 Anda ',
+            'notif_administrasi_nonformal' => 'Silahkan Bayar Uang Administrasi Kursus Anda '
         ];
         Notify::create($notify);
     }

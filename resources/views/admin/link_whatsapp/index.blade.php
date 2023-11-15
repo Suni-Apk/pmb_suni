@@ -10,7 +10,7 @@
         <div class="col-12">
             <div class="card mb-4">
                 <div class="card-header pb-0 d-flex justify-content-between">
-                    <h6>Daftar Link</h6>
+                    <h6>Daftar Link Whatsapp</h6>
                     <a href="{{ route('admin.link_whatsapp.create') }}" class="btn bg-gradient-primary float-end">Tambah + </a>
                 </div>
                 <div class="card-body px-0 pt-0 pb-2">
@@ -50,10 +50,6 @@
                                             <span class="text-secondary text-xs font-weight-bold">{{ $links->gender }}</span>
                                         </td>
                                         <td class="d-flex align-items-center justify-content-center">
-                                            <a href="#" class="btn btn-sm bg-gradient-success font-weight-bold text-xs mx-2 mt-3">
-                                                <strong>Detail</strong>
-                                            </a>
-
                                             <a href="{{ route('admin.link_whatsapp.edit', $links->id) }}" class="btn btn-sm bg-gradient-secondary font-weight-bold text-xs mx-2 mt-3">
                                                 <strong>Edit</strong>
                                             </a>

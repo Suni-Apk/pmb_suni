@@ -289,15 +289,44 @@
                                 <input type="date" name="tanggal" id="tanggal" class="form-control">
                             </div>
 
-                            <button type="submit" class="btn btn-success">Submit</button>
-                            <a href="{{ route('admin.jurusan.show', $jurusan->id) }}">
-                                <button type="button" class="btn btn-warning">Back</button>
-                            </a>
-                        </form>
+                                <button type="submit" class="btn btn-success">Submit</button>
+                                <button type="button" class="btn btn-warning" data-bs-dismiss="modal">Batal</button>
+                            </form>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-        
     </div>
+    @push('scripts')
+    <script>
+        const dataTableBasic = new simpleDatatables.DataTable("#table", {
+            searchable: true,
+            fixedHeight: true,
+        });
+    </script>
+    <script src="sweetalert2.all.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+        integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"
+        integrity="sha512-VEd+nq25CkR676O+pLBnDW09R7VQX9Mdiij052gVCp5yVH3jGtH70Ho/UUv4mJDsEdTvqRCFZg0NKGiojGnUCw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css"
+        integrity="sha512-3pIirOrwegjM6erE5gPSwkUzO+3cTjpnV9lexlNZqvupR64iZBnOOTiiLPb9M36zpMScbmUNIcHUqKD47M719g=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script>
+        @if (Session::has('success'))
+            toastr.success("{{ Session::get('success') }}")
+        @endif
+
+        @if (Session::has('delete'))
+            toastr.success("{{ Session::get('success') }}")
+        @endif
+
+        @if (Session::has('pesan'))
+            toastr.error('{{ Session::get('pesan') }}')
+        @endif
+    </script>
+@endpush
 @endsection

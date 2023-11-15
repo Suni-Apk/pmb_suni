@@ -19,6 +19,9 @@ class LinkController extends Controller
         return view('admin.link.whatsapp', compact('link'));
     }
 
+
+    //Zoom Section
+
     public function zoom()
     {
         $link = Link::where('type', 'Zoom')->orderBy('id', 'desc')->get();

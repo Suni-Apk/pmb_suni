@@ -1,83 +1,102 @@
 @extends('layouts.master')
 
-@section('title', 'Profile')
+@section('title', 'table template')
+
 
 @section('content')
-    <nav aria-label="breadcrumb">
-        <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
-            <li class="breadcrumb-item text-sm"><a class="opacity-5 text-dark" href="{{ route('dashboard') }}">Pages</a></li>
-            <li class="breadcrumb-item text-sm text-dark active" aria-current="page">Profile</li>
-        </ol>
-        <h6 class="font-weight-bolder mb-0">Detail Mata Kuliah</h6>
-    </nav>
+    <div class="row">
+        <div class="col-12">
+            <div class="card mb-4">
+                <div class="card-header pb-0">
+                    <h6>Edit Link</h6>
+                </div>
+                <div class="card-body px-0 pt-0 pb-2">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="table-responsive text-nowrap">
+                                <form action="{{ route('admin.link_whatsapp.create.process') }}" method="POST">
+                                    @csrf
+                                    <div class="form-group mb-3">
+                                        <label for="name">Nama</label>
+                                        <input type="text" name="name" id="name" class="form-control"
+                                            placeholder="Masukkan Nama Linknya Disini">
+                                    </div>
+                                    <div class="form-group mb-3">
+                                        <label for="url">Url Link Whatsapp</label>
+                                        <input type="text" name="url" id="url" class="form-control"
+                                            placeholder="Masukkan URL Linknya Disini">
+                                    </div>
+                                    <div class="form-group mb-3">
+                                        <label for="id_tahun_ajarans">Tahun Ajaran</label>
+                                        <select name="id_tahun_ajarans" id="id_tahun_ajarans" class="form-control" required>
+                                            <option hidden selected>-----------</option>
+                                            @foreach ($tahunAjaran as $tahunAjarans)
+                                                <option value="{{ $tahunAjarans->id }}">{{ $tahunAjarans->year }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                    <div class="form-group mb-3">
+                                        <label for="id_jurusans">Jurusan</label>
+                                        <select name="id_jurusans" id="id_jurusans" class="form-control" required>
+                                            <option hidden selected>-----------</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group mb-3">
+                                        <label for="gender">Gender</label>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="gender" id="ikhwan"
+                                                value="ikhwan">
+                                            <label class="form-check-label" for="ikhwan">
+                                                Ikhwan
+                                            </label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="gender" id="akhwat"
+                                                value="akhwat">
+                                            <label class="form-check-label" for="akhwat">
+                                                Akhwat
+                                            </label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="gender" id="all"
+                                                value="all">
+                                            <label class="form-check-label" for="all">
+                                                Semua (ditujukan untuk seluruh mahasiswa)
+                                            </label>
+                                        </div>
+                                    </div>
 
-<div class="page-header min-height-300 border-radius-xl mt-4"
-    style="background-image: url('/soft-ui-dashboard-main/assets/img/curved-images/curved0.jpg'); background-position-y: 50%;">
-    <span class="mask bg-gradient-primary opacity-6"></span>
-</div>
-<div class="card card-body blur shadow-blur mx-4 mt-n6 overflow-hidden">
-    <div class="row gx-4">
-        <div class="d-flex text-center justify-content-center fs-3 font-weight-bold">
-            {{ $matkuls->nama_matkuls }}
-        </div>
-    </div>
-
-    <div class="container-fluid py-4">
-        <div class="row">
-                <div class="card-body p-3">
-                    <hr class="horizontal gray-light">
-                    <ul class="list-group">
-                        <li class="list-group-item border-0 ps-0 pt-0 text-sm"><strong class="text-dark fs-5">Nama Dosen: {{ $matkuls->nama_dosen }}</strong>
-                            &nbsp; </li>
-                            <table class="table table-bordered mt-3">
-                                <thead class="bg-gradient-success">
-                                    <tr>
-                                        <th class="text-white">Jurusan</th>
-                                        <th class="text-white">Semester</th>
-                                        <th class="text-white">Mulai</th>
-                                        <th class="text-white">Selesai</th>
-                                        <th class="text-white d-flex">Tanggal</th>
-                                    </tr>
-                                </thead>
-                                    <tbody>
-                                                <tr>
-                                                    <td>
-                                                            {{ $matkuls->jurusan->name }}
-                                                    </td>                                                                                                                                               
-                                                    <td>
-                                                            @if ($matkuls->id_semesters)
-                                                                {{ $matkuls->id_semesters }}
-                                                            @else
-                                                                -
-                                                            @endif
-                                                    </td>
-                                                    <td>
-                                                        @if ($matkuls->start_at)
-                                                                {{ $matkuls->start_at }}
-                                                            @else
-                                                                -
-                                                            @endif
-                                                    </td>
-                                                    <td>
-                                                        @if ($matkuls->end_at)
-                                                                {{ $matkuls->end_at }}
-                                                            @else
-                                                                -
-                                                            @endif
-                                                    </td>
-                                                    <td>
-                                                        @if ($matkuls->tanggal)
-                                                                {{ $matkuls->tanggal }}
-                                                            @else
-                                                                -
-                                                            @endif
-                                                    </td>                                  
-                                                </tr>
-                                    </tbody>
-                            </table>
-                    </ul>
+                                    <button type="submit" class="btn btn-success">Submit</button>
+                                    <a href="#">
+                                        <button type="button" class="btn btn-warning text-dark">Back</button>
+                                    </a>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
+    <script>
+        const tahunAjaranSelect = document.getElementById('id_tahun_ajarans');
+        const jurusanSelect = document.getElementById('id_jurusans');
+        
+        const jurusanSemesterMap = @json($jurusanGrouped);
+    
+        tahunAjaranSelect.addEventListener('change', () => {
+            const selectedTahunAjaranId = tahunAjaranSelect.value;
+            const jurusanOptions = jurusanSemesterMap[selectedTahunAjaranId] || [];
+    
+            jurusanSelect.innerHTML = '';
+    
+            jurusanOptions.forEach(jurusan => {
+                const option = document.createElement('option');
+                option.value = jurusan.id;
+                option.textContent = jurusan.name;
+                jurusanSelect.appendChild(option);
+            });
+        });
+    </script>    
+
 @endsection
