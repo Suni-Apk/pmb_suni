@@ -100,19 +100,17 @@ Route::prefix('/admin')->middleware('admin')->name('admin.')->group(function () 
         Route::get('/program/{id}', [AccountController::class, 'mahasiswa_program'])->name('program');
     });
 
-    // Route::prefix('link/whatsapp')->name('link_whatsapp.')->group( function(){
-    //     Route::get('/', [LinkController::class, 'whatsapp'])->name('index');
-    //     Route::get('/create', [LinkController::class, 'whatsapp_create'])->name('create');
-    //     Route::post('/create/process', [LinkController::class, 'whatsapp_create_process'])->name('create.process');
-    //     Route::get('/edit/{id}', [LinkController::class, 'whatsapp_edit'])->name('edit');
-    //     Route::put('/edit/process/{id}', [LinkController::class, 'whatsapp_edit_process'])->name('edit.process');
-    // });
-
     Route::prefix('link')->name('link.')->group(function () {
         Route::get('/whatsapp', [LinkController::class, 'whatsapp'])->name('whatsapp');
         Route::get('/zoom', [LinkController::class, 'zoom'])->name('zoom');
-        Route::put('/create/process', [LinkController::class, 'store'])->name('create.process');
-        Route::put('/{type}/edit/process', [LinkController::class, 'edit'])->name('edit.process');
+        
+        Route::get('/create', [LinkController::class, 'create'])->name('create');
+        Route::post('/create/process', [LinkController::class, 'store'])->name('create.process');
+        
+        Route::get('/{type}/edit/{id}', [LinkController::class, 'edit'])->name('edit');
+        Route::put('/{type}/edit/process', [LinkController::class, 'update'])->name('edit.process');
+        
+        Route::get('/detail/{id}', [LinkController::class, 'show'])->name('detail');
         Route::delete('/delete/{id}', [LinkController::class,'destroy'])->name('destroy');
     });
 
@@ -123,8 +121,7 @@ Route::prefix('/admin')->middleware('admin')->name('admin.')->group(function () 
     Route::resource('/tahun-ajaran', TahunAjaranController::class);
     Route::resource('/dokumen', AdminDocumentController::class);
     Route::resource('/tagihan', AdminTagihanController::class);
-    Route::post('/next', [AdminTagihanController::class, 'next'])->name('tagihan.next');
-
+    Route::get('/next', [AdminTagihanController::class, 'next'])->name('tagihan.next');
     
     //data settings
     Route::prefix('settings')->group(function () {
@@ -135,6 +132,7 @@ Route::prefix('/admin')->middleware('admin')->name('admin.')->group(function () 
             Route::get('/', [SettingController::class, 'index'])->name('general');
             Route::put('/edit/{id}', [SettingController::class, 'general_edit'])->name('general.edit');
             Route::put('/desc/edit/{id}', [SettingController::class, 'desc_edit'])->name('desc.edit');
+            Route::post('/upload/desc', [SettingController::class, 'upload_file'])->name('upload.file');
             
             Route::get('/notifikasi', [SettingController::class, 'notify_index'])->name('notifications');
             Route::put('/notifikasi/process/{id}',[SettingController::class,'notify_edit'])->name('notifications.process');

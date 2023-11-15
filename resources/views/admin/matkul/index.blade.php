@@ -40,28 +40,26 @@
                                             </div>
                                         </div>
                                     </td>
-                                    <td class="align text-center">
+                                    <td class="text-center">
                                         <span class="text-secondary text-xs font-weight-bold">{{ $item->mulai }} - {{ $item->selesai }}</span>
                                     </td>
-                                    <td class="align text-center">
-                                        <span class="text-secondary text-xs font-weight-bold">{{ $item->tanggal->format('d/m/Y') }}</span>
+                                    <td class="text-center">
+                                        <span class="text-secondary text-xs font-weight-bold">{{ \Carbon\Carbon::parse($item->tanggal)->format('d F Y') }}</span>
                                     </td>
-                                    <td class="align-middle text-center">
+                                    <td class="text-center">
                                         <a href="{{route('admin.matkul.show', $item->id)}}"
-                                            class="badge badge-sm bg-gradient-info font-weight-bold text-xxs"
-                                            data-toggle="tooltip" data-original-title="detail">
+                                            class="badge badge-sm bg-gradient-info font-weight-bold text-xxs" data-toggle="tooltip" data-original-title="detail">
                                             Detail
                                         </a>
 
-                                            <a href="{{ route('admin.matkul.edit', 1) }}" class="btn btn-sm bg-gradient-secondary font-weight-bold text-xs mx-2 mt-3">
-                                                <strong>Edit</strong>
-                                            </a>
+                                        <a href="{{ route('admin.matkul.edit', $item->id) }}" class="badge badge-sm bg-gradient-secondary font-weight-bold text-xxs mx-1">
+                                            Edit
+                                        </a>
 
-                                        <form action="{{ route('admin.matkul.destroy', $item->id) }}" method="POST">
+                                        <form action="{{ route('admin.matkul.destroy', $item->id) }}" style="margin-top: -4px;" class="d-inline" method="POST">
                                             @csrf
                                             @method('DELETE')
-                                            <button type="submit" class="badge badge-sm bg-gradient-danger font-weight-bold text-xxs show_confirm"
-                                            data-toggle="tooltip" data-original-title="hapus">
+                                            <button type="submit" class="badge badge-sm border-0 bg-gradient-danger font-weight-bold text-xxs show_confirm" data-toggle="tooltip" data-original-title="hapus">
                                                 Hapus
                                             </button>
                                         </form>

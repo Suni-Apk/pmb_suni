@@ -28,7 +28,7 @@ class DashboardController extends Controller
         $hijriDateyear = $data['data']['hijri']['year'];
 
         // chart resources
-        $users = User::all();
+        $users = User::orderBy('id', 'desc')->get();
 
         return view('admin.index',compact('hijriDateday','hijriDatedayArabic','hijriDatemonth','hijriDateyear', 'user', 'users'));
     }

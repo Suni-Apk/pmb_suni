@@ -5,15 +5,7 @@
 @section('content')
 
     @if ($jenis_tagihan == 'Routine')
-        <nav aria-label="breadcrumb">
-            <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
-                <li class="breadcrumb-item text-sm"><a class="opacity-5 text-dark" href="{{ route('dashboard') }}">Pages</a>
-                </li>
-                <li class="breadcrumb-item text-sm text-dark active" aria-current="page">Tagihan</li>
-            </ol>
-            <h6 class="font-weight-bolder mb-0">Create Tagihan Spp</h6>
-        </nav>
-        <div class="card h-100 mt-4">
+        <div class="card h-100">
             <div class="card-body p-3">
                 <label for="">Isi semua harga</label>
                 <form onsubmit="return false">
@@ -106,16 +98,8 @@
         </div>
     @endif
     @if ($jenis_tagihan == 'Tidakroutine')
-        <nav aria-label="breadcrumb">
-            <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
-                <li class="breadcrumb-item text-sm"><a class="opacity-5 text-dark"
-                        href="{{ route('dashboard') }}">Pages</a>
-                </li>
-                <li class="breadcrumb-item text-sm text-dark active" aria-current="page">Tagihan</li>
-            </ol>
-            <h6 class="font-weight-bolder mb-0">Create Tagihan Tidak routine</h6>
-        </nav>
-        <div class="card h-100 mt-4">
+        <h3 class="font-weight-bolder">Buat Tagihan</h3>
+        <div class="card h-100">
             <div class="card-body p-3">
                 <form action="{{ route('admin.tagihan.store') }}" method="POST">
                     @csrf
@@ -224,15 +208,8 @@
         </div>
     @endif
     @if ($jenis_tagihan == 'DaftarUlang')
-        <nav aria-label="breadcrumb">
-            <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
-                <li class="breadcrumb-item text-sm"><a class="opacity-5 text-dark"
-                        href="{{ route('dashboard') }}">Pages</a></li>
-                <li class="breadcrumb-item text-sm text-dark active" aria-current="page">Tagihan</li>
-            </ol>
-            <h6 class="font-weight-bolder mb-0">Create Tagihan Daftar ulang</h6>
-        </nav>
-        <div class="card h-100 mt-4">
+        <h3 class="font-weight-bolder">Buat Tagihan</h3>
+        <div class="card h-100">
             <div class="card-body p-3">
                 <form action="{{ route('admin.tagihan.store') }}" method="POST">
                     @csrf
@@ -285,16 +262,8 @@
         </div>
     @endif
     @if ($jenis_tagihan == 'Tingkatan')
-        <nav aria-label="breadcrumb">
-            <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
-                <li class="breadcrumb-item text-sm"><a class="opacity-5 text-dark"
-                        href="{{ route('dashboard') }}">Pages</a>
-                </li>
-                <li class="breadcrumb-item text-sm text-dark active" aria-current="page">Tagihan</li>
-            </ol>
-            <h6 class="font-weight-bolder mb-0">Create Tagihan Tingkatan</h6>
-        </nav>
-        <div class="card h-100 mt-4">
+        <h3 class="font-weight-bolder">Buat Tagihan</h3>
+        <div class="card h-100">
             <div class="card-body p-3">
                 <label for="">Isi semua harga</label>
                 <form onsubmit="return false">
@@ -320,7 +289,7 @@
                             </thead>
                             <tbody>
                                 @php
-                                    $tingkatan = ['Mubtadai', 'Muttawassith', 'Mutaqaddim'];
+                                    $tingkatan = ["Mubtadi'", "Muttawassith", "Mutaqaddim"];
                                 @endphp
                                 @foreach ($tingkatan as $key => $tingkatans)
                                     <tr>
@@ -379,6 +348,7 @@
         </div>
     @endif
 @endsection
+
 @push('scripts')
     <script>
         const angkatanSelect = document.getElementById('id_angkatans');

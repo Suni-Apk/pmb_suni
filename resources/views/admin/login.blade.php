@@ -19,7 +19,7 @@
                                 @method('POST')
                                 <label>No. Handphone</label>
                                 <div class="mb-3">
-                                    <input type="text" name="phone" class="form-control @error('phone') is-invalid @enderror" placeholder="Masukkan Nomor" aria-label="nomor" aria-describedby="nomor-addon">
+                                    <input type="text" name="phone" class="form-control @error('phone') is-invalid @enderror" placeholder="Masukkan Nomor" aria-label="nomor" value="{{ old('phone') }}" aria-describedby="nomor-addon">
                                     @error('phone')
                                         <label for="" class="text-danger">{{$message}}</label>
                                     @enderror

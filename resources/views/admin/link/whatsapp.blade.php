@@ -1,6 +1,6 @@
 @extends('layouts.master')
 
-@section('title', 'table template')
+@section('title', 'Link Whatsapp')
 
 @push('styles')
 @endpush
@@ -10,8 +10,8 @@
         <div class="col-12">
             <div class="card mb-4">
                 <div class="card-header pb-0 d-flex justify-content-between">
-                    <h6>Daftar Link</h6>
-                    <a href="{{ route('admin.link_whatsapp.create') }}" class="btn bg-gradient-primary float-end">Tambah + </a>
+                    <h6>Daftar Link Whatsapp</h6>
+                    <a href="{{ route('admin.link.create') }}" class="btn bg-gradient-primary float-end">Tambah + </a>
                 </div>
                 <div class="card-body px-0 pt-0 pb-2">
                     <div class="table-responsive p-0">
@@ -35,33 +35,42 @@
                                         <td class="text-sm">
                                             <span class="text-bold">{{ $links->name }}</span>
                                         </td>
-                                        <td class="text-sm">
+                                        <td class="text-xs">
                                             <span class="text-bold">{{ $links->url }}</span>
                                         </td>
                                         <td>
                                             <div class="d-flex">
                                                 <div class="d-flex flex-column justify-content-center">
                                                     <h6 class="mb-0 text-xs">{{ $links->tahunAjaran->year }}</h6>
-                                                    <p class="text-xxs text-uppercase text-secondary mb-0">{{ $links->jurusan->name }}</p>
+                                                    @if ($links->jurusan)
+                                                    <p class="text-xxs text-uppercase text-secondary mb-0"> {{ $links->jurusan->name }} </p>
+                                                    @else
+                                                    <p class="text-xxs text-lowercase text-secondary mb-0"> Tidak untuk jurusan tertentu </p>
+                                                    @endif
                                                 </div>
                                             </div>
                                         </td>
                                         <td class="align text-center">
-                                            <span class="text-secondary text-xs font-weight-bold">{{ $links->gender }}</span>
+                                            <span class="text-secondary text-xs font-weight-bold">
+                                                @if ($links->gender == 'all')
+                                                    Semua
+                                                @else
+                                                    {{ $links->gender }}
+                                                @endif
+                                            </span>
                                         </td>
-                                        <td class="d-flex align-items-center justify-content-center">
-                                            <a href="#" class="btn btn-sm bg-gradient-success font-weight-bold text-xs mx-2 mt-3">
+                                        <td class="align-center">
+                                            <a href="{{ route('admin.link.detail', $links->id) }}" class="badge badge-sm bg-gradient-info font-weight-bold text-xxs">
                                                 <strong>Detail</strong>
                                             </a>
-
-                                            <a href="{{ route('admin.link_whatsapp.edit', $links->id) }}" class="btn btn-sm bg-gradient-secondary font-weight-bold text-xs mx-2 mt-3">
+                                            <a href="{{ route('admin.link.edit', ['type' => $links->type, 'id' => $links->id]) }}" class="badge badge-sm bg-gradient-secondary font-weight-bold text-xxs mx-1">
                                                 <strong>Edit</strong>
                                             </a>
 
-                                        <form action="#" method="POST">
+                                            <form action="{{ route('admin.link.destroy', $links->id) }}" method="POST" class="d-inline">
                                                 @csrf
                                                 @method('DELETE')
-                                                <button type="submit" class="btn btn-sm bg-gradient-danger font-weight-bold text-xs mx-2 show_confirm mt-3">
+                                                <button type="submit" class="badge badge-sm bg-gradient-danger font-weight-bold text-xxs border-0 show_confirm">
                                                     <strong>Hapus</strong>
                                                 </button>
                                             </form>

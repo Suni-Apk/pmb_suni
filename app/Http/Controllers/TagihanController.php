@@ -19,7 +19,6 @@ class TagihanController extends Controller
     {
         $biaya = Biaya::all();
 
-
         return view('admin.tagihan.index', compact('biaya'));
     }
 

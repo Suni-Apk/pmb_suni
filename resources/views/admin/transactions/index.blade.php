@@ -118,12 +118,12 @@
                                     </td>
                                     <td class="align-middle text-center">
                                         <a href="{{ route('admin.transaksi.show', 'tingkatan') }}"
-                                            class="btn btn-sm bg-gradient-info font-weight-bold text-xs mx-2 show_confirm mt-3"
+                                            class="badge badge-sm bg-gradient-info font-weight-bold text-xxs mx-1 show_confirm"
                                             data-toggle="tooltip" data-original-title="detail">
                                             Detail
                                         </a>
                                         <a href=""
-                                            class="btn btn-sm bg-gradient-danger font-weight-bold text-xs show_confirm mt-3"
+                                            class="badge badge-sm bg-gradient-danger font-weight-bold text-xxs show_confirm"
                                             data-toggle="tooltip" data-original-title="hapus">
                                             Hapus
                                         </a>
@@ -155,12 +155,12 @@
                                     </td>
                                     <td class="align-middle text-center">
                                         <a href="{{ route('admin.transaksi.show', 'tingkatan') }}"
-                                            class="btn btn-sm bg-gradient-info font-weight-bold text-xs mx-2 show_confirm mt-3"
+                                            class="badge badge-sm bg-gradient-info font-weight-bold text-xxs mx-1 show_confirm"
                                             data-toggle="tooltip" data-original-title="detail">
                                             Detail
                                         </a>
                                         <a href=""
-                                            class="btn btn-sm bg-gradient-danger font-weight-bold text-xs show_confirm mt-3"
+                                            class="badge badge-sm bg-gradient-danger font-weight-bold text-xxs show_confirm"
                                             data-toggle="tooltip" data-original-title="hapus">
                                             Hapus
                                         </a>
@@ -192,12 +192,12 @@
                                     </td>
                                     <td class="align-middle text-center">
                                         <a href="{{ route('admin.transaksi.show', 'tingkatan') }}"
-                                            class="btn btn-sm bg-gradient-info font-weight-bold text-xs mx-2 show_confirm mt-3"
+                                            class="badge badge-sm bg-gradient-info font-weight-bold text-xxs mx-1 show_confirm"
                                             data-toggle="tooltip" data-original-title="detail">
                                             Detail
                                         </a>
                                         <a href=""
-                                            class="btn btn-sm bg-gradient-danger font-weight-bold text-xs show_confirm mt-3"
+                                            class="badge badge-sm bg-gradient-danger font-weight-bold text-xxs show_confirm"
                                             data-toggle="tooltip" data-original-title="hapus">
                                             Hapus
                                         </a>
@@ -229,12 +229,12 @@
                                     </td>
                                     <td class="align-middle text-center">
                                         <a href="{{ route('admin.transaksi.show', 'tingkatan') }}"
-                                            class="btn btn-sm bg-gradient-info font-weight-bold text-xs mx-2 show_confirm mt-3"
+                                            class="badge badge-sm bg-gradient-info font-weight-bold text-xxs mx-1 show_confirm"
                                             data-toggle="tooltip" data-original-title="detail">
                                             Detail
                                         </a>
                                         <a href=""
-                                            class="btn btn-sm bg-gradient-danger font-weight-bold text-xs show_confirm mt-3"
+                                            class="badge badge-sm bg-gradient-danger font-weight-bold text-xxs show_confirm"
                                             data-toggle="tooltip" data-original-title="hapus">
                                             Hapus
                                         </a>

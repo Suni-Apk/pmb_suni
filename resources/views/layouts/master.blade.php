@@ -14,13 +14,13 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>SUNI Indonesia | @yield('title')</title>
+    <title>{{ App\Models\General::first()->title }} | @yield('title')</title>
 
     @include('layouts.include')
     @stack('styles')
 </head>
 
-<body class="g-sidenav-show bg-gray-100 overflow-x-hidden">
+<body class="g-sidenav-show bg-gray-100 overflow-x-hidden position-relative">
     @include('layouts.aside')
 
     <main class="main-content position-relative min-height-screen h-auto border-radius-lg">

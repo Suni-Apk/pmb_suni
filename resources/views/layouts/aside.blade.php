@@ -4,14 +4,14 @@
         ->first();
 @endphp
 <aside
-    class="sidenav navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-3 overflow-hidden"
+    class="sidenav navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-3 bg-white overflow-hidden"
     id="sidenav-main">
     <div class="sidenav-header position-sticky">
         <i class="fas fa-times p-3 cursor-pointer text-secondary opacity-5 position-absolute end-0 top-0 d-none d-xl-none"
             aria-hidden="true" id="iconSidenav"></i>
-        <a class="navbar-brand m-0" href="{{ route('welcome') }}">
-            <img src="/soft-ui-dashboard-main/assets/img/logo-ct-dark.png" class="navbar-brand-img h-100" alt="main_logo">
-            <span class="ms-1 font-weight-bold">PMB SUNI Indonesia</span>
+        <a class="navbar-brand text-center m-0" href="{{ route('welcome') }}">
+            <img src="{{ App\Models\General::first()->image }}" class="navbar-brand-img h-100" alt="main_logo">
+            <span class="ms-1 font-weight-bold">{{ App\Models\General::first()->name }}</span>
         </a>
     </div>
     <hr class="horizontal dark mt-0">
@@ -185,34 +185,14 @@
                     </ul>
                 </li>
 
-                <!-- billing -->
-                <li class="nav-item ">
-                    <a data-bs-toggle="collapse" href="#billing" class="nav-link {{ Route::is('admin.tagihan.*') ? 'active' : '' }}" aria-controls="billing"
-                        role="button" aria-expanded="false">
+                <li class="nav-item">
+                    <a class="nav-link {{ Route::is('admin.tagihan.*') ? 'active' : '' }}" href="{{ route('admin.tagihan.index') }}">
                         <div
-                            class="icon icon-sm shadow border-radius-md bg-white text-center d-flex align-items-center justify-content-center  me-2">
+                            class="icon icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
                             <i class="fas fa-wallet"></i>
                         </div>
-                        <span class="nav-link-text ms-1"> Biaya Tagihan </span>
+                        <span class="nav-link-text ms-1">Biaya Tagihan</span>
                     </a>
-                    <div class="collapse {{ Route::is('admin.tagihan.*') ? 'show' : '' }}" id="billing">
-                        <ul class="nav ms-4 ps-3">
-                            <li class="nav-item">
-                                <a class="nav-link {{ Route::is('admin.tagihan.index') ? 'active' : '' }}" href="{{ route('admin.tagihan.index') }}">
-                                    <span class="sidenav-mini-icon d-none d-xl-block"><i
-                                            class="fas fa-border-all"></i></span>
-                                    <span class="sidenav-normal"> Daftar Biaya Tagihan </span>
-                                </a>
-                            </li>
-                            <li class="nav-item ">
-                                <a class="nav-link " href="">
-                                    <span class="sidenav-mini-icon d-none d-xl-block"><i
-                                            class="fas fa-plus"></i></span>
-                                    <span class="sidenav-normal"> Tambah Biaya Tagihan </span>
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
                 </li>
 
                 <!-- transaksi -->
@@ -282,16 +262,17 @@
 
                 <!-- link -->
                 <li class="nav-item">
-                    <a data-bs-toggle="collapse" href="#link" class="nav-link " aria-controls="link" role="button" aria-expanded="false">
+                    <a data-bs-toggle="collapse" href="#link" aria-controls="link" role="button" aria-expanded="false"
+                    class="nav-link {{ Route::is('admin.link.*') ? 'active' : '' }}">
                         <div class="icon icon-sm shadow border-radius-md bg-white text-center d-flex align-items-center justify-content-center me-2">
                             <i class="fas fa-link"></i>
                         </div>
                         <span class="nav-link-text ms-1"> Link </span>
                     </a>
-                    <div class="collapse " id="link">
+                    <div class="collapse {{ Route::is('admin.link.*') ? 'show' : '' }}" id="link">
                         <ul class="nav ms-4 ps-3">
                             <li class="nav-item ">
-                                <a class="nav-link" href="">
+                                <a class="nav-link {{ Route::is('admin.link.zoom') ? 'active' : '' }}" href="{{ route('admin.link.zoom') }}">
                                     <span class="sidenav-mini-icon d-none d-xl-block">
                                         <img src="/soft-ui-dashboard-main/assets/img/icon-zoom.svg" width="14px">
                                     </span>
@@ -299,7 +280,7 @@
                                 </a>
                             </li>
                             <li class="nav-item ">
-                                <a class="nav-link " href="">
+                                <a class="nav-link {{ Route::is('admin.link.whatsapp') ? 'active' : '' }}" href="{{ route('admin.link.whatsapp') }}">
                                     <span class="sidenav-mini-icon d-none d-xl-block"><i class="fab fa-whatsapp"></i></span>
                                     <span class="sidenav-normal"> Link Whatsapp </span>
                                 </a>
