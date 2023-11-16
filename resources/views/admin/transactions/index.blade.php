@@ -24,7 +24,8 @@
                             <div class="modal-content">
                                 <div class="modal-header">
                                     <h5 class="modal-title" id="exampleModalLabel">Pilih Jenis Tagihan</h5>
-                                    <button type="button" class="btn-close border rounded-circle p-1 fs-3 lh-1 text-dark" data-bs-dismiss="modal" aria-label="Close">&times;</button>
+                                    <button type="button" class="btn-close border rounded-circle p-1 fs-3 lh-1 text-dark"
+                                        data-bs-dismiss="modal" aria-label="Close">&times;</button>
                                 </div>
                                 <form action="{{ route('admin.tagihan.next') }}" method="POST">
                                     @csrf
@@ -118,7 +119,7 @@
                                     </td>
                                     <td class="align-middle text-center">
                                         <a href="{{ route('admin.transaksi.show', 'tingkatan') }}"
-                                            class="btn btn-sm bg-gradient-info font-weight-bold text-xs mx-2 show_confirm mt-3"
+                                            class="btn btn-sm bg-gradient-info font-weight-bold text-xs mx-2 mt-3"
                                             data-toggle="tooltip" data-original-title="detail">
                                             Detail
                                         </a>
@@ -155,7 +156,7 @@
                                     </td>
                                     <td class="align-middle text-center">
                                         <a href="{{ route('admin.transaksi.show', 'tingkatan') }}"
-                                            class="btn btn-sm bg-gradient-info font-weight-bold text-xs mx-2 show_confirm mt-3"
+                                            class="btn btn-sm bg-gradient-info font-weight-bold text-xs mx-2 mt-3"
                                             data-toggle="tooltip" data-original-title="detail">
                                             Detail
                                         </a>
@@ -192,7 +193,7 @@
                                     </td>
                                     <td class="align-middle text-center">
                                         <a href="{{ route('admin.transaksi.show', 'tingkatan') }}"
-                                            class="btn btn-sm bg-gradient-info font-weight-bold text-xs mx-2 show_confirm mt-3"
+                                            class="btn btn-sm bg-gradient-info font-weight-bold text-xs mx-2 mt-3"
                                             data-toggle="tooltip" data-original-title="detail">
                                             Detail
                                         </a>
@@ -229,7 +230,7 @@
                                     </td>
                                     <td class="align-middle text-center">
                                         <a href="{{ route('admin.transaksi.show', 'tingkatan') }}"
-                                            class="btn btn-sm bg-gradient-info font-weight-bold text-xs mx-2 show_confirm mt-3"
+                                            class="btn btn-sm bg-gradient-info font-weight-bold text-xs mx-2 mt-3"
                                             data-toggle="tooltip" data-original-title="detail">
                                             Detail
                                         </a>

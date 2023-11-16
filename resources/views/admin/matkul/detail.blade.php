@@ -66,8 +66,8 @@
                                                             @endif
                                                     </td>
                                                     <td>
-                                                        @if ($matkuls->tanggal)
-                                                                {{ $matkuls->tanggal }}
+                                                        @if ($matkuls->hari)
+                                                                {{ $matkuls->hari }}
                                                             @else
                                                                 -
                                                             @endif

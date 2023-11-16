@@ -43,14 +43,14 @@
                                             <span class="text-secondary text-xs font-weight-bold">{{ $item->mulai }} <strong>WIB</strong> - {{ $item->selesai }} <strong>WIB</strong> </span>
                                         </td>
                                         <td class="align text-center">
-                                            <span class="text-secondary text-xs font-weight-bold">{{ $item->tanggal }}</span>
+                                            <span class="text-secondary text-xs font-weight-bold"> {{ $item->hari }}</span>
                                         </td>
                                         <td class="d-flex align-items-center justify-content-center">
                                             <a href="{{ route('admin.matkul.show' , $item->id) }}" class="btn btn-sm bg-gradient-success font-weight-bold text-xs mx-2 mt-3">
                                                 <strong>Detail</strong>
                                             </a>
 
-                                            <a href="{{ route('admin.matkul.edit', 1) }}" class="btn btn-sm bg-gradient-secondary font-weight-bold text-xs mx-2 mt-3">
+                                            <a href="{{ route('admin.matkul.edit', $item->id) }}" class="btn btn-sm bg-gradient-secondary font-weight-bold text-xs mx-2 mt-3">
                                                 <strong>Edit</strong>
                                             </a>
 

@@ -38,7 +38,7 @@ class MatkulController extends Controller
             'id_semesters' => 'required',
             'mulai' => 'required',
             'selesai' => 'required',
-            'tanggal' => 'required',
+            'hari' => 'required',
             'nama_matkuls' => 'required',
             'nama_dosen' => 'required'
         ]);
@@ -79,7 +79,7 @@ class MatkulController extends Controller
             'nama_dosen' => 'required|min:3', 
             'mulai' => 'required',
             'selesai' => 'required',
-            'tanggal' => 'required'
+            'hari' => 'required'
         ]);
         // dd($data);
         $matkuls->update($data);

@@ -23,9 +23,11 @@ use App\Http\Controllers\Mahasiswa\TagihanController;
 use App\Http\Controllers\MatkulController as ControllersMatkulController;
 use App\Http\Controllers\SettingController;
 use App\Http\Controllers\Admin\TagihanController as AdminTagihanController;
+use App\Http\Controllers\LinkController;
 use App\Http\Controllers\Mahasiswa\TransaksiController;
 use App\Http\Controllers\TahunAjaranController;
-use App\Http\Controllers\TransactionController;
+use App\Http\Controllers\Admin\TransactionController;
+use App\Http\Controllers\MapelsController;
 use App\Models\Transaksi;
 use Illuminate\Support\Facades\Route;
 
@@ -140,6 +142,7 @@ Route::prefix('/admin')->middleware(['admin','auth'])->name('admin.')->group(fun
     });
     // resources management
     Route::resource('/matkul', ControllersMatkulController::class);
+    Route::resource('/mapel', MapelsController::class);
     Route::resource('/jurusan', JurusanController::class);
     Route::resource('/transaksi', TransactionController::class);
     // Route::resource('/tahun_ajaran', TahunAjaranController::class);
