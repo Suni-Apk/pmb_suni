@@ -1,11 +1,11 @@
 @extends('layouts.master')
 
-@section('title', 'table template')
+@section('title', 'Tambah Mata Kuliah')
 
 @section('content')
     <div class="row">
         <div class="col-12">
-            <div class="card mb-4">
+            <div class="card">
                 <div class="card-header pb-0">
                     <h6>Tambah Mata Kuliah</h6>
                 </div>

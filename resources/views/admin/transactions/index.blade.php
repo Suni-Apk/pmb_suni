@@ -8,57 +8,10 @@
 @section('content')
     <div class="row">
         <div class="col-12">
-            <div class="card mb-4">
+            <div class="card">
                 <div class="card-header pb-0 d-flex justify-content-between">
                     <h6>Daftar Transaksi</h6>
-                    <!-- Button trigger modal -->
-                    <button type="button" class="btn bg-gradient-primary" data-bs-toggle="modal"
-                        data-bs-target="#exampleModal">
-                        <i class="fas fa-plus me-1"></i> Buat Transaksi
-                    </button>
-
-                    <!-- Modal -->
-                    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
-                        aria-labelledby="exampleModalLabel" aria-hidden="true">
-                        <div class="modal-dialog modal-dialog-centered" role="document">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="exampleModalLabel">Pilih Jenis Tagihan</h5>
-                                    <button type="button" class="btn-close border rounded-circle p-1 fs-3 lh-1 text-dark"
-                                        data-bs-dismiss="modal" aria-label="Close">&times;</button>
-                                </div>
-                                <form action="{{ route('admin.tagihan.next') }}" method="POST">
-                                    @csrf
-                                    <div class="modal-body">
-                                        <div class="form-check mb-3">
-                                            <input class="form-check-input" type="radio" name="jenis_tagihan"
-                                                id="spp" value="rutin">
-                                            <label class="custom-control-label" for="spp">Spp</label>
-                                        </div>
-                                        <div class="form-check mb-3">
-                                            <input class="form-check-input" type="radio" name="jenis_tagihan"
-                                                id="biaya_lain" value="tidak-rutin">
-                                            <label class="custom-control-label" for="biaya_lain">Biaya Lain</label>
-                                        </div>
-                                        <div class="form-check mb-3">
-                                            <input class="form-check-input" type="radio" name="jenis_tagihan"
-                                                id="daftar_ulang" value="daftar-ulang">
-                                            <label class="custom-control-label" for="daftar_ulang">Daftar Ulang</label>
-                                        </div>
-                                        <div class="form-check mb-3">
-                                            <input class="form-check-input" type="radio" name="jenis_tagihan"
-                                                id="tingkatan" value="tingkatan">
-                                            <label class="custom-control-label" for="tingkatan">Tingkatan</label>
-                                        </div>
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button class="btn bg-gradient-primary" type="submit">Lanjut <i
-                                                class="fas fa-arrow-circle-right ms-1"></i></button>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
+                    <a href="{{ route('admin.transaksi.create') }}" class="btn bg-gradient-primary">Tambah +</a>
                 </div>
                 <div class="card-body px-0 pt-0 pb-2">
                     <div class="table-responsive p-0">
@@ -119,12 +72,12 @@
                                     </td>
                                     <td class="align-middle text-center">
                                         <a href="{{ route('admin.transaksi.show', 'tingkatan') }}"
-                                            class="btn btn-sm bg-gradient-info font-weight-bold text-xs mx-2 mt-3"
+                                            class="badge badge-sm bg-gradient-info font-weight-bold text-xxs mx-1 show_confirm"
                                             data-toggle="tooltip" data-original-title="detail">
                                             Detail
                                         </a>
                                         <a href=""
-                                            class="btn btn-sm bg-gradient-danger font-weight-bold text-xs show_confirm mt-3"
+                                            class="badge badge-sm bg-gradient-danger font-weight-bold text-xxs show_confirm"
                                             data-toggle="tooltip" data-original-title="hapus">
                                             Hapus
                                         </a>
@@ -156,12 +109,12 @@
                                     </td>
                                     <td class="align-middle text-center">
                                         <a href="{{ route('admin.transaksi.show', 'tingkatan') }}"
-                                            class="btn btn-sm bg-gradient-info font-weight-bold text-xs mx-2 mt-3"
+                                            class="badge badge-sm bg-gradient-info font-weight-bold text-xxs mx-1 show_confirm"
                                             data-toggle="tooltip" data-original-title="detail">
                                             Detail
                                         </a>
                                         <a href=""
-                                            class="btn btn-sm bg-gradient-danger font-weight-bold text-xs show_confirm mt-3"
+                                            class="badge badge-sm bg-gradient-danger font-weight-bold text-xxs show_confirm"
                                             data-toggle="tooltip" data-original-title="hapus">
                                             Hapus
                                         </a>
@@ -193,12 +146,12 @@
                                     </td>
                                     <td class="align-middle text-center">
                                         <a href="{{ route('admin.transaksi.show', 'tingkatan') }}"
-                                            class="btn btn-sm bg-gradient-info font-weight-bold text-xs mx-2 mt-3"
+                                            class="badge badge-sm bg-gradient-info font-weight-bold text-xxs mx-1 show_confirm"
                                             data-toggle="tooltip" data-original-title="detail">
                                             Detail
                                         </a>
                                         <a href=""
-                                            class="btn btn-sm bg-gradient-danger font-weight-bold text-xs show_confirm mt-3"
+                                            class="badge badge-sm bg-gradient-danger font-weight-bold text-xxs show_confirm"
                                             data-toggle="tooltip" data-original-title="hapus">
                                             Hapus
                                         </a>
@@ -230,12 +183,12 @@
                                     </td>
                                     <td class="align-middle text-center">
                                         <a href="{{ route('admin.transaksi.show', 'tingkatan') }}"
-                                            class="btn btn-sm bg-gradient-info font-weight-bold text-xs mx-2 mt-3"
+                                            class="badge badge-sm bg-gradient-info font-weight-bold text-xxs mx-1 show_confirm"
                                             data-toggle="tooltip" data-original-title="detail">
                                             Detail
                                         </a>
                                         <a href=""
-                                            class="btn btn-sm bg-gradient-danger font-weight-bold text-xs show_confirm mt-3"
+                                            class="badge badge-sm bg-gradient-danger font-weight-bold text-xxs show_confirm"
                                             data-toggle="tooltip" data-original-title="hapus">
                                             Hapus
                                         </a>

@@ -3,14 +3,6 @@
 @section('title', 'Profile')
 
 @section('content')
-    <nav aria-label="breadcrumb">
-        <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
-            <li class="breadcrumb-item text-sm"><a class="opacity-5 text-dark" href="{{ route('dashboard') }}">Pages</a></li>
-            <li class="breadcrumb-item text-sm text-dark active" aria-current="page">Profile</li>
-        </ol>
-        <h6 class="font-weight-bolder mb-0">Profile</h6>
-    </nav>
-
     <div class="page-header min-height-300 border-radius-xl mt-4"
         style="background-image: url('../soft-ui-dashboard-main/assets/img/curved-images/curved0.jpg'); background-position-y: 50%;">
         <span class="mask bg-gradient-primary opacity-6"></span>

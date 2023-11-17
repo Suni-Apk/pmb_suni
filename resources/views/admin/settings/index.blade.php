@@ -58,25 +58,61 @@
                 <div class="card-header">
                     <h5 class="text-bold">Deskripsi Program Belajar</h5>
                 </div>
+                <style type="text/css">
+                    .ck-editor__editable {
+                        min-height: 250px;
+                    }
+                </style>
                 <form action="{{ route('admin.settings.desc.edit', $descPro->id) }}" method="post" class="card-body pt-0">
                     @csrf
                     @method('PUT')
                     <div class="row">
-                        <div class="col form-group">
+                        <div class="col-12 col-md-6 form-group">
                             <label for="s1">Deskripsi Program Kuliah S1</label>
                             <textarea name="s1" id="s1" class="form-control min-height-200">{{ $descPro->s1 }}</textarea>
                         </div>
-                        <div class="col form-group">
+                        <div class="col-12 col-md-6 form-group">
                             <label for="kursus">Deskripsi Program Kursus MABANI</label>
                             <textarea name="kursus" id="kursus" class="form-control min-height-200">{{ $descPro->kursus }}</textarea>
                         </div>
                         <div class="form-group mb-0">
                             <button type="submit" class="btn btn-primary">Submit</button>
-                            <a href="" class="btn btn-warning">Reset</a>
+                            <a href="javascript:window.location.reload();" class="btn btn-warning">Reset</a>
                         </div>
                     </div>
                 </form>
-            </div>
+            </div>{{ route('admin.settings.upload.file') }}
         </div>
     </div>
 @endsection
+
+@push('scripts')
+    <script src="https://cdn.ckeditor.com/ckeditor5/35.4.0/classic/ckeditor.js"></script>
+    <script type="text/javascript">
+        ClassicEditor
+            .create( document.getElementById( 's1' ), {
+                ckfinder: {
+                    uploadUrl: "{{ route('admin.settings.upload.file').'?_token='.csrf_token() }}",
+                }
+            })
+            .then( editor => {
+                console.log(editor);
+            })
+            .catch( error => {
+                console.log(error);
+            });
+
+        ClassicEditor
+            .create( document.getElementById( 'kursus' ), {
+                ckfinder: {
+                    uploadUrl: "{{ route('admin.settings.upload.file').'?_token='.csrf_token() }}",
+                }
+            })
+            .then( editor => {
+                console.log(editor);
+            })
+            .catch( error => {
+                console.log(error);
+            })
+    </script>
+@endpush

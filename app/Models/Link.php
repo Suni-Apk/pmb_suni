@@ -9,6 +9,8 @@ class Link extends Model
 {
     use HasFactory;
 
+    protected $guarded = [];
+
     protected $fillable = [
         'name', //nama linknya
         'url', // link URL nya

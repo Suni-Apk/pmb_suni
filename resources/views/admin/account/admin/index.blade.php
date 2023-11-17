@@ -53,14 +53,15 @@
                             @endif
                         </td>
                         <td class="text-center"> 
-                            <a style="letter-spacing: .02rem" href="" class="badge badge-sm bg-gradient-info font-weight-bolder text-xxs" data-toggle="tooltip" data-original-title="detail">
-                                Detail
-                            </a>
+                          <a style="letter-spacing: .02rem" href="" class="badge badge-sm bg-gradient-info font-weight-bolder text-xxs" data-toggle="tooltip" data-original-title="detail">
+                              Detail
+                          </a>
 
-                            <a style="letter-spacing: .02rem" href="{{route('admin.admin.edit',$item->id)}}" class="badge badge-sm bg-gradient-secondary font-weight-bolder text-xxs mx-1" data-toggle="tooltip" data-original-title="edit">
-                                Ubah
-                            </a>
+                          <a style="letter-spacing: .02rem" href="{{route('admin.admin.edit',$item->id)}}" class="badge badge-sm bg-gradient-secondary font-weight-bolder text-xxs mx-1" data-toggle="tooltip" data-original-title="edit">
+                              Ubah
+                          </a>
 
+                          @if (Auth::user()->id !== $item->id)
                             <form action="{{route('admin.admin.status',$item->id)}}" method="POST" class="d-inline">
                               @csrf
                               @method('PUT')
@@ -76,6 +77,7 @@
                                 </button>
                               @endif
                             </form>
+                            
                             <form action="{{route('admin.admin.delete',$item->id)}}" class="d-inline" id="form1" method="POST">
                               @csrf
                               @method('DELETE')
@@ -99,6 +101,7 @@
                                 </div>
                               </div>
                             </form>
+                          @endif
                         </td>
                     </tr>
                   @endforeach

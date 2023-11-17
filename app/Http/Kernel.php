@@ -40,7 +40,7 @@ class Kernel extends HttpKernel
 
         'api' => [
             // \Laravel\Sanctum\Http\Middleware\EnsureFrontendRequestsAreStateful::class,
-            \Illuminate\Routing\Middleware\ThrottleRequests::class.':api',
+            \Illuminate\Routing\Middleware\ThrottleRequests::class . ':api',
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
         ],
     ];
@@ -70,5 +70,6 @@ class Kernel extends HttpKernel
         'mahasiswa' => \App\Http\Middleware\MahasiswaMiddleware::class,
         's1' => \App\Http\Middleware\S1Middleware::class,
         'kursus' => \App\Http\Middleware\KursusMiddleware::class,
+        'Pembayaran' => \App\Http\Middleware\PembayaranMiddleware::class,
     ];
 }

@@ -13,114 +13,19 @@ class LinkController extends Controller
      * Display a listing of the resource.
      */
     public function whatsapp()
-    {   
-        $link = Link::where('type', 'whatsapp')->get();
-        return view('admin.link_whatsapp.index', compact('link'));
-    }
-
-    public function whatsapp_create()
     {
-        $tahunAjaran = TahunAjaran::all();
-        $jurusanGrouped = Jurusan::with('tahunAjaran')->get()->groupBy('id_tahun_ajarans');
-        return view('admin.link_whatsapp.create', compact('tahunAjaran', 'jurusanGrouped'));
-    }
-
-    public function whatsapp_create_process(Request $request)
-    {
-        $data = $request->validate([
-            'name' => 'required|min:3|max:255|string',
-            'url' => 'required',
-            'id_tahun_ajarans' => 'required',
-            'id_jurusans' => 'required',
-            'gender' => 'required'
-        ]);
-
-        $data['type'] = 'whatsapp';
-        // dd($data);
-        Link::create($data);
-        return redirect()->route('admin.link_whatsapp.index')->with('success', "Link Berhasil Di Buat!!");
-    }
-
-    public function whatsapp_edit($id)
-    {
-        $link = Link::findOrFail($id);
-        $tahunAjaran = TahunAjaran::all();
-        $jurusans = Jurusan::all();
-        $jurusanGrouped = Jurusan::with('tahunAjaran')->get()->groupBy('id_tahun_ajarans');
-        return view('admin.link_whatsapp.edit', compact('tahunAjaran', 'jurusanGrouped', 'link', 'jurusans'));
-    }
-
-    public function whatsapp_edit_process(Request $request, string $Id)
-    {
-        $link = Link::findOrFail($Id);
-
-        $data = $request->validate([
-            'name' => 'required|min:3|max:255|string',
-            'url' => 'required',
-            'id_tahun_ajarans' => 'required',
-            'id_jurusans' => 'required',
-            'gender' => 'required'
-        ]);
-
-        $link->update($data);
-        return redirect()->route('admin.link_whatsapp.index')->with('success', "Link Berhasil Di Edit!!");
+        $link = Link::where('type', 'Whatsapp')->orderBy('id', 'desc')->get();
+        // dd($link);
+        return view('admin.link.whatsapp', compact('link'));
     }
 
 
     //Zoom Section
 
     public function zoom()
-    {   
-        $link = Link::where('type', 'zoom')->get();
-        return view('admin.link_zoom.index', compact('link'));
-    }
-
-    public function zoom_create()
     {
-        $tahunAjaran = TahunAjaran::all();
-        $jurusanGrouped = Jurusan::with('tahunAjaran')->get()->groupBy('id_tahun_ajarans');
-        return view('admin.link_zoom.create', compact('tahunAjaran', 'jurusanGrouped'));
-    }
-
-    public function zoom_create_process(Request $request)
-    {
-        $data = $request->validate([
-            'name' => 'required|min:3|max:255|string',
-            'url' => 'required',
-            'id_tahun_ajarans' => 'required',
-            'id_jurusans' => 'required',
-            'gender' => 'required'
-        ]);
-
-        $data['type'] = 'zoom';
-        // dd($data);
-        Link::create($data);
-        return redirect()->route('admin.link_zoom.index')->with('success', "Link Berhasil Di Buat!!");
-    }
-
-    public function zoom_edit($id)
-    {
-        $link = Link::findOrFail($id);
-        $tahunAjaran = TahunAjaran::all();
-        $jurusans = Jurusan::all();
-        $jurusanGrouped = Jurusan::with('tahunAjaran')->get()->groupBy('id_tahun_ajarans');
-        return view('admin.link_zoom.edit', compact('tahunAjaran', 'jurusanGrouped', 'link', 'jurusans'));
-    }
-
-    public function zoom_edit_process(Request $request, string $Id)
-    {
-        $link = Link::findOrFail($Id);
-
-        $data = $request->validate([
-            'name' => 'required|min:3|max:255|string',
-            'url' => 'required',
-            'id_tahun_ajarans' => 'required',
-            'id_jurusans' => 'required',
-            'gender' => 'required'
-        ]);
-
-        $link->update($data);
-        return redirect()->route('admin.link_zoom.index')->with('success', "Link Berhasil Di Edit!!");
+        $link = Link::where('type', 'Zoom')->orderBy('id', 'desc')->get();
+        return view('admin.link.zoom', compact('link'));
     }
 
     /**
@@ -128,7 +33,9 @@ class LinkController extends Controller
      */
     public function create()
     {
-        //
+        $jurusans = Jurusan::get();
+        $tahun_ajarans = TahunAjaran::get();
+        return view('admin.link.create', compact('jurusans', 'tahun_ajarans'));
     }
 
     /**
@@ -136,7 +43,24 @@ class LinkController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->validate([
+            'name' => 'required|min:3|max:255|string',
+            'url' => 'required',
+            'type' => 'required',
+            'id_tahun_ajarans' => 'string',
+            'id_jurusans' => 'string',
+            'gender' => 'required'
+        ]);
+
+        // dd($data);
+        Link::create($data);
+        if ( $request->type == 'Whatsapp' ) {
+            return redirect()->route('admin.link.whatsapp')->with('success', "Link Berhasil Di Buat!!");
+        } elseif ( $request->type == 'Zoom' ) {
+            return redirect()->route('admin.link.zoom')->with('success', "Link Berhasil Di Buat!!");
+        } else {
+            return false;
+        }
     }
 
     /**
@@ -144,15 +68,19 @@ class LinkController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $link = Link::find($id);
+        return view("admin.link.detail", compact("link"));
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(string $type, string $id)
     {
-        //
+        $link = Link::find($id);
+        $jurusans = Jurusan::get();
+        $tahun_ajarans = TahunAjaran::get();
+        return view("admin.link.edit", compact("link", "jurusans", "tahun_ajarans"));
     }
 
     /**
@@ -160,7 +88,25 @@ class LinkController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $link = Link::find($id);
+        $data = $request->validate([
+            'name' => 'required|min:3|max:255|string',
+            'url' => 'required',
+            'type' => 'required',
+            'id_tahun_ajarans' => 'string',
+            'id_jurusans' => 'string',
+            'gender' => 'required'
+        ]);
+
+        // dd($data);
+        $link->update($data);
+        if ( $request->type == 'Whatsapp' ) {
+            return redirect()->route('admin.link.whatsapp')->with('success', "Link Berhasil Di Ubah!!");
+        } elseif ( $request->type == 'Zoom' ) {
+            return redirect()->route('admin.link.zoom')->with('success', "Link Berhasil Di Ubah!!");
+        } else {
+            return false;
+        }
     }
 
     /**
@@ -168,6 +114,16 @@ class LinkController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $link = Link::find($id);
+        
+        if ( $link->type == 'Whatsapp' || $link->type == 'whatsapp' ) {
+            $link->delete();
+            return redirect()->route('admin.link.whatsapp')->with('success', "Link Berhasil Di Ubah!!");
+        } elseif ( $link->type == 'Zoom' || $link->type == 'zoom' ) {
+            $link->delete();
+            return redirect()->route('admin.link.zoom')->with('success', "Link Berhasil Di Ubah!!");
+        } else {
+            return false;
+        }
     }
 }

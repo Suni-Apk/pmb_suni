@@ -54,11 +54,10 @@
                                                 <strong>Edit</strong>
                                             </a>
 
-                                        <form action="{{ route('admin.matkul.destroy', $item->id) }}" method="POST">
+                                        <form action="{{ route('admin.matkul.destroy', $item->id) }}" style="margin-top: -4px;" class="d-inline" method="POST">
                                             @csrf
                                             @method('DELETE')
-                                            <button type="submit" class="btn btn-sm bg-gradient-danger font-weight-bold text-xs mx-2 mt-3 show_confirm"
-                                            data-toggle="tooltip" data-original-title="hapus">
+                                            <button type="submit" class="badge badge-sm border-0 bg-gradient-danger font-weight-bold text-xxs show_confirm" data-toggle="tooltip" data-original-title="hapus">
                                                 Hapus
                                             </button>
                                         </form>

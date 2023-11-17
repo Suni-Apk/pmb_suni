@@ -13,12 +13,12 @@
                     <img src="/soft-ui-dashboard-main/assets/img/logo-ct.png" class="my-5" alt="" width="100">
                     <h4 class="text-white">Selamat Datang di</h4>
                     <h3 class="text-dark lh-1 blur py-2 rounded-pill">Website Pendaftaran</h3>
-                    <h1 class="text-white lh-1">Safwa Ulum Nafiah Islamiyah (SUNI) Indonesia</h1>
+                    <h1 class="text-white lh-1 text-uppercase">{{ App\Models\General::first()->name }}</h1>
                 </div>
-                <div class="col-9 col-lg-5 mx-auto d-flex justify-content-center gap-3 mt-4">
+                <div class="col-9 col-lg-5 mx-auto d-flex justify-content-center gap-3 mt-5">
                     @if (!Auth::user())
-                        <a href="{{ route('register') }}" class="btn bg-gradient-secondary"
-                        data-bs-toggle="tooltip" data-bs-placement="left" title="Belum mendaftar?">Daftar</a>
+                    <a href="{{ route('register') }}" class="btn bg-gradient-secondary"
+                    data-bs-toggle="tooltip" data-bs-placement="left" title="Belum mendaftar?">Daftar</a>
                     @endif
                     <a href="#informasi" class="btn btn-outline-secondary" 
                     data-bs-toggle="tooltip" data-bs-placement="right" title="Butuh informasi?">Selengkapnya</a>
@@ -38,13 +38,45 @@
                     >Program Madrasah Bahasa Arab</a>
                 </div>
             </div>
-            <div class="col-12 py-3 px-4">
+            <div class="col-12 pt-3 px-4">
                 <div class="tab-content" id="nav-tabContent">
                     <div class="tab-pane fade show active" id="list-sarjana" role="tabpanel" aria-labelledby="list-sarjana-list">
-                        {{ App\Models\DescProgramBelajar::first()->s1 }}
+                        <div class="card border">
+                            <div class="row flex-column-reverse flex-sm-row justify-content-between align-items-start card-body px-5">
+                                <div class="col-12 col-sm-9 p-1 p-sm-2">
+                                    {!! App\Models\DescProgramBelajar::first()->s1 !!}
+                                </div>
+                                <div class="col-12 col-sm-3 py-2 px-1 d-flex flex-column justify-content-start align-items-center">
+                                    <a href="" class="px-2 btn bg-gradient-info">
+                                        Informasi Lebih Lanjut <i class="fa fa-arrow-right ms-1"></i>
+                                    </a>
+                                    <ul class="list-group">
+                                        <li class="list-group-item text-sm lh-sm">Biaya Administrasi : Rp. 250.000,-</li>
+                                        <li class="list-group-item text-sm lh-sm">Biaya Prakuliah : Rp. 12.000.000,-</li>
+                                        <li class="list-group-item text-sm lh-sm">Hubungi Kami : 089609494411</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                     <div class="tab-pane fade" id="list-kursus" role="tabpanel" aria-labelledby="list-kursus-list">
-                        {{ App\Models\DescProgramBelajar::first()->kursus }}
+                        <div class="card border">
+                            <div class="row flex-column-reverse flex-sm-row justify-content-between align-items-start card-body px-5">
+                                <div class="col-12 col-sm-9 p-1 p-sm-2">
+                                    {!! App\Models\DescProgramBelajar::first()->kursus !!}
+                                </div>
+                                <div class="col-12 col-sm-3 py-2 px-1 d-flex flex-column justify-content-start align-items-center">
+                                    <a href="" class="px-2 btn bg-gradient-info">
+                                        Informasi Lebih Lanjut <i class="fa fa-arrow-right ms-1"></i>
+                                    </a>
+                                    <ul class="list-group">
+                                        <li class="list-group-item text-sm lh-sm">Biaya Administrasi : Rp. 850.000,-</li>
+                                        <li class="list-group-item text-sm lh-sm">Memiliki 3 Tingkatan : Mubtadi', Mutawassith, Mutaqaddim</li>
+                                        <li class="list-group-item text-sm lh-sm">Hubungi Kami : 089609494411</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

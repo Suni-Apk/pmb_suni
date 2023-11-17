@@ -31,15 +31,12 @@ class DashboardController extends Controller
         $hijriDateyear = $data['data']['hijri']['year'];
 
         // chart resources
-        $users = User::all();
+        $users = User::orderBy('id', 'desc')->get();
         $pemasukan = Transaksi::sum('total');
-        $akun = User::get();
-        $admin = User::where('role','Admin')->get();
-        $mahasiswa = User::where('role','Mahasiswa')->get();
         $jurusan = Jurusan::get();
         $matkul = Matkuls::get();
-        return view('admin.index',compact('hijriDateday','hijriDatedayArabic','hijriDatemonth','hijriDateyear', 'user', 'users','pemasukan','akun','admin',
-        'mahasiswa','jurusan','matkul'));
+
+        return view('admin.index',compact('hijriDateday','hijriDatedayArabic','hijriDatemonth','hijriDateyear', 'user', 'users', 'pemasukan', 'jurusan', 'matkul'));
     }
 
     public function profile()
