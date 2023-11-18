@@ -28,14 +28,14 @@ class BeforeTenggatJobs implements ShouldQueue
      */
     public function handle(): void
     {
-        $tagihanDetail = TagihanDetail::all();
-
-        foreach ($tagihanDetail as $keys => $value) {
-            $end_date = strtotime('-10 days', strtotime($value->end_date));
-            $end_dates = date('Y-m-d', $end_date);
-            if ($end_dates == date('Y-m-d')) {
-                Log::info('sdasdas');
-            }
-        }
+        // $tagihanDetail = TagihanDetail::all();
+        Log::info('tess');
+        // foreach ($tagihanDetail as $keys => $value) {
+        //     $end_date = strtotime('-10 days', strtotime($value->end_date));
+        //     $end_dates = date('Y-m-d', $end_date);
+        //     if ($end_dates == date('Y-m-d')) {
+        //         Log::info('sdasdas');
+        //     }
+        // }
     }
 }

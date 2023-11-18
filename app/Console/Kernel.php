@@ -11,10 +11,13 @@ class Kernel extends ConsoleKernel
     /**
      * Define the application's command schedule.
      */
+
+    protected $commands = [
+        Commands\BeforeTenggat::class,
+    ];
     protected function schedule(Schedule $schedule): void
     {
-        // $schedule->command('inspire')->hourly();
-        // $schedule->job(new BeforeTenggatJobs())->everyFiveSeconds();
+        $schedule->command('app:before-tenggat')->everySecond();
     }
 
     /**
