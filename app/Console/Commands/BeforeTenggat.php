@@ -28,7 +28,7 @@ class BeforeTenggat extends Command
     public function handle()
     {
         // $tagihanDetail = TagihanDetail::all();
-        Log::info('tess');
+        Log::info('sdasd');
         // foreach ($tagihanDetail as $keys => $value) {
         //     $end_date = strtotime('-10 days', strtotime($value->end_date));
         //     $end_dates = date('Y-m-d', $end_date);

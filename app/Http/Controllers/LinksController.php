@@ -13,7 +13,7 @@ class LinkController extends Controller
      * Display a listing of the resource.
      */
     public function whatsapp()
-    {   
+    {
         $link = Link::all();
         return view('admin.link_whatsapp.index', compact('link'));
     }
