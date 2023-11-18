@@ -89,6 +89,9 @@ class TagihanController extends Controller
                 $mahasiswa = Biodata::where('angkatan_id', $biaya->id_angkatans)->where('program_belajar', $biaya->program_belajar)->get();
 
                 foreach ($mahasiswa as $index => $value) {
+                    $end_date = strtotime('-10 days', strtotime($dateEnd[$key]));
+                    $end_dates = date('Y-m-d', $end_date);
+
                     TagihanDetail::create([
                         'id_biayas' => $biaya->id,
                         'id_tagihans' => $tagihanCreate->id,
@@ -96,6 +99,7 @@ class TagihanController extends Controller
                         'end_date' => $dateEnd[$key],
                         'amount' => $amount,
                         'status' => 'BELUM',
+                        'before_end' => $end_dates,
                     ]);
                 }
             }
@@ -142,6 +146,8 @@ class TagihanController extends Controller
                 $mahasiswa = Biodata::where('jurusan_id', $biaya->id_jurusans)->where('angkatan_id', $biaya->id_angkatans)->where('program_belajar', $biaya->program_belajar)->get();
 
                 foreach ($mahasiswa as $index => $value) {
+                    $end_date = strtotime('-10 days', strtotime($dateEnd));
+                    $end_dates = date('Y-m-d', $end_date);
                     TagihanDetail::create([
                         'id_biayas' => $biaya->id,
                         'id_tagihans' => $tagihanCreate->id,
@@ -149,6 +155,7 @@ class TagihanController extends Controller
                         'end_date' => $dateEnd,
                         'amount' => $replace_amount,
                         'status' => 'BELUM',
+                        'before_end' => $end_dates
                     ]);
                 }
                 return redirect()->route('admin.tagihan.index')->with('success', 'Berhasil Membuat tagihan ' . $biaya->nama_biaya);
@@ -184,6 +191,8 @@ class TagihanController extends Controller
                 $mahasiswa = Biodata::where('angkatan_id', $biaya->id_angkatans)->where('program_belajar', $biaya->program_belajar)->get();
 
                 foreach ($mahasiswa as $index => $value) {
+                    $end_date = strtotime('-10 days', strtotime($dateEnd));
+                    $end_dates = date('Y-m-d', $end_date);
                     TagihanDetail::create([
                         'id_biayas' => $biaya->id,
                         'id_tagihans' => $tagihanCreate->id,
@@ -221,6 +230,8 @@ class TagihanController extends Controller
             $mahasiswa = Biodata::where('angkatan_id', $biaya->id_angkatans)->where('program_belajar', $biaya->program_belajar)->get();
 
             foreach ($mahasiswa as $index => $value) {
+                $end_date = strtotime('-10 days', strtotime($dateEnd));
+                $end_dates = date('Y-m-d', $end_date);
                 TagihanDetail::create([
                     'id_biayas' => $biaya->id,
                     'id_tagihans' => $tagihanCreate->id,
@@ -228,46 +239,47 @@ class TagihanController extends Controller
                     'end_date' => $dateEnd,
                     'amount' => $replace_amount,
                     'status' => 'BELUM',
+                    'before_end' => $end_dates,
                 ]);
             }
             return redirect()->route('admin.tagihan.index')->with('success', 'Berhasil Membuat tagihan ' . $biaya->nama_biaya);
-        } else if ($request->jenis_biaya == 'Tingkatan') {
-            $data = $request->validate([
-                'id_angkatans' => 'required',
-                'jenis_biaya' => 'required',
-                'end_date' => 'required',
-                'mounth' => 'nullable',
-                'amount' => 'required|string|min:6',
-                'status' => 'nullable',
-            ]);
-            $tahunAjaran = TahunAjaran::where('id', $data['id_angkatans'])->first();
-            $biaya = Biaya::create([
-                'id_angkatans' => $data['id_angkatans'],
-                'jenis_biaya' => 'DaftarUlang',
-                'nama_biaya' => 'Tagihan Daftar Ulang ' . $tahunAjaran->year,
-                'program_belajar' => 'S1',
-            ]);
-            $dateEnd = $data['end_date'];
-            // $mounth = $tagihan['mounth'];
-            $replace_amount = str_replace('.', '', $data['amount']);
-            $tagihanCreate = Tagihan::create([
-                'id_biayas' => $biaya->id,
-                'amount' => $replace_amount,
-                'end_date' => $dateEnd,
-            ]);
-            $mahasiswa = Biodata::where('angkatan_id', $biaya->id_angkatans)->where('program_belajar', $biaya->program_belajar)->get();
+            // } else if ($request->jenis_biaya == 'Tingkatan') {
+            //     $data = $request->validate([
+            //         'id_angkatans' => 'required',
+            //         'jenis_biaya' => 'required',
+            //         'end_date' => 'required',
+            //         'mounth' => 'nullable',
+            //         'amount' => 'required|string|min:6',
+            //         'status' => 'nullable',
+            //     ]);
+            //     $tahunAjaran = TahunAjaran::where('id', $data['id_angkatans'])->first();
+            //     $biaya = Biaya::create([
+            //         'id_angkatans' => $data['id_angkatans'],
+            //         'jenis_biaya' => 'DaftarUlang',
+            //         'nama_biaya' => 'Tagihan Daftar Ulang ' . $tahunAjaran->year,
+            //         'program_belajar' => 'S1',
+            //     ]);
+            //     $dateEnd = $data['end_date'];
+            //     // $mounth = $tagihan['mounth'];
+            //     $replace_amount = str_replace('.', '', $data['amount']);
+            //     $tagihanCreate = Tagihan::create([
+            //         'id_biayas' => $biaya->id,
+            //         'amount' => $replace_amount,
+            //         'end_date' => $dateEnd,
+            //     ]);
+            //     $mahasiswa = Biodata::where('angkatan_id', $biaya->id_angkatans)->where('program_belajar', $biaya->program_belajar)->get();
 
-            foreach ($mahasiswa as $index => $value) {
-                TagihanDetail::create([
-                    'id_biayas' => $biaya->id,
-                    'id_tagihans' => $tagihanCreate->id,
-                    'id_users' => $value->user->id,
-                    'end_date' => $dateEnd,
-                    'amount' => $replace_amount,
-                    'status' => 'BELUM',
-                ]);
-            }
-            return redirect()->route('admin.tagihan.index')->with('success', 'Berhasil Membuat tagihan ' . $biaya->nama_biaya);
+            //     foreach ($mahasiswa as $index => $value) {
+            //         TagihanDetail::create([
+            //             'id_biayas' => $biaya->id,
+            //             'id_tagihans' => $tagihanCreate->id,
+            //             'id_users' => $value->user->id,
+            //             'end_date' => $dateEnd,
+            //             'amount' => $replace_amount,
+            //             'status' => 'BELUM',
+            //         ]);
+            //     }
+            //     return redirect()->route('admin.tagihan.index')->with('success', 'Berhasil Membuat tagihan ' . $biaya->nama_biaya);
         } else {
             return redirect()->back();
         }
@@ -322,10 +334,13 @@ class TagihanController extends Controller
 
                 $tagihanGet = Tagihan::where('id', $tagihans->id)->get();
                 foreach ($tagihanGet as $index => $value) {
+                    $end_date = strtotime('-10 days', strtotime($dateEnd[$key]));
+                    $end_dates = date('Y-m-d', $end_date);
                     TagihanDetail::where('id_tagihans', $value->id)->update([
                         'end_date' => $dateEnd[$key],
                         'amount' => $value->amount,
                         'status' => 'BELUM',
+                        'before_end' => $end_dates,
                     ]);
                 }
             }
@@ -350,10 +365,13 @@ class TagihanController extends Controller
             ]);
             $tagihanGet = Tagihan::where('id', $tagihans->id)->get();
             foreach ($tagihanGet as $index => $value) {
+                $end_date = strtotime('-10 days', strtotime($dateEnd));
+                $end_dates = date('Y-m-d', $end_date);
                 TagihanDetail::where('id_tagihans', $value->id)->update([
                     'end_date' => $dateEnd,
                     'amount' => $value->amount,
                     'status' => 'BELUM',
+                    'before_end' => $end_dates,
                 ]);
             }
             return redirect()->back()->with('success', 'Berhasil mengupdate data ' . $biaya->nama_biaya);

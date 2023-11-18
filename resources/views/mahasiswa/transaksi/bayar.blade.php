@@ -15,7 +15,7 @@
         </nav>
         <div class="card h-100 mt-4">
             <div class="card-body p-3">
-                <form action="{{ route('admin.transactions.proses_bayar', $mahasiswa->id) }}" method="POST">
+                <form action="{{ route('mahasiswa.transactions.proses_bayar') }}" method="POST">
                     @csrf
                     @method('POST')
                     <div class="shadow-sm mb-3">
@@ -105,7 +105,7 @@
         </nav>
         <div class="card h-100 mt-4">
             <div class="card-body p-3">
-                <form action="{{ route('admin.transactions.proses_bayar', $mahasiswa->id) }}" method="POST">
+                <form action="{{ route('admin.transactions.proses_bayar') }}" method="POST">
                     @csrf
                     @method('POST')
                     <div class="shadow-sm mb-3">

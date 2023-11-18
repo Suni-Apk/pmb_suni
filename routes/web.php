@@ -26,6 +26,7 @@ use App\Http\Controllers\Mahasiswa\TransaksiController;
 use App\Http\Controllers\TahunAjaranController;
 use App\Http\Controllers\Admin\TransactionController;
 use App\Http\Controllers\AdministrasiController;
+use App\Http\Controllers\Kursus\TransactionController as KursusTransactionController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -42,6 +43,8 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 })->name('welcome');
+
+Route::get('log', [\Rap2hpoutre\LaravelLogViewer\LogViewerController::class, 'index']);
 
 // Auth Mahasiswa
 Route::get('/register', [AuthController::class, 'register'])->name('register');
@@ -167,6 +170,10 @@ Route::prefix('/kursus')->middleware(['auth', 'kursus'])->name('kursus.')->group
         Route::put('/change-password/process', [KursusProfileController::class, 'change_password_process'])->name('change_password.process');
     });
     Route::get('/bayar/{id}', [KursusTagihanController::class, 'bayar'])->name('tagihan.bayar');
+
+    Route::prefix('/transactions/')->name('transactions.')->group(function () {
+        Route::post('/proses_bayar', [KursusTransactionController::class, 'proses_bayar'])->middleware('KursusTransactions')->name('proses_bayar');
+    });
 });
 
 //Mahasiswa
@@ -176,6 +183,7 @@ Route::prefix('/mahasiswa')->middleware(['auth', 'mahasiswa', 's1'])->name('maha
     //callback demo doang
     Route::put('/change/status/{sid}', [AuthController::class, 'demo_success'])->name('demo');
     Route::put('/change-datar-ulang/status/{sid}', [AuthController::class, 'daftar_ulang_demo_success'])->name('daftar.ulang.demo');
+
     //biodata
     Route::prefix('/biodata')->name('pendaftaran.')->group(function () {
         Route::get('/', [BiodataController::class, 'pendaftaran_s1'])->name('s1');
@@ -221,7 +229,12 @@ Route::prefix('/mahasiswa')->middleware(['auth', 'mahasiswa', 's1'])->name('maha
         Route::get('/payment-spp/{name}', [TagihanController::class, 'payment_spp'])->name('payment.spp');
     });
     //Detail Bayar 
-    Route::get('/bayar/{id}', [TagihanController::class, 'bayar'])->name('tagihan.bayar');
+    Route::get('/bayar/{id}', [TagihanController::class, 'bayar'])->middleware('MahasiswaTransactions')->name('tagihan.bayar');
+
+    //callback demo bayar tagihan
+    Route::prefix('/transactions/')->name('transactions.')->group(function () {
+        Route::post('/proses_bayar', [TransaksiController::class, 'proses_bayar'])->middleware('MahasiswaTransactions')->name('proses_bayar');
+    });
     // logout
     Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
 });
