@@ -208,6 +208,80 @@
 
 @section('content')
     <div class="row">
+        <div class="col-lg-8 mb-lg-0 mb-4">
+            <div class="card">
+            <div class="card-body p-3">
+                <div class="height-200 d-flex justify-content-center flex-column align-items-center bg-cover text-center"
+                style="background: url(/soft-ui-dashboard-main/assets/img/admin-db.svg);
+                    background-position: center; background-repeat: no-repeat;">
+                    <h4 class="font-weight-bold mb-0 p-3 pb-0" style="background: rgba(255,255,255,.5)!important; backdrop-filter: blur(1px);">
+                    Selamat Datang 
+                    <b class="font-weight-bolder">{{ $user->name }}</b>!
+                    </h4>
+                    <p class="mb-0 mx-2 pb-3 px-3" style="background: rgba(255,255,255,.5)!important; backdrop-filter: blur(2px);">
+                    Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ut, voluptate?
+                    </p>
+                </div>
+            </div>
+            </div>
+        </div>
+        <div class="col-12 mb-4 gy-3 g-lg-3 d-md-none row mx-auto justify-content-center">
+            @if (!$biodata && !Auth::user()->document)
+            <div class="col-3 col-md-2 text-center">
+                <a href="{{ route('mahasiswa.pendaftaran.s1') }}" class="icon icon-shape p-0 bg-primary shadow text-center border-radius-md cursor-pointer"
+                data-bs-toggle="tooltip" data-bs-placement="top" title="Isi Biodata">
+                <i class="fas fa-user-shield text-lg opacity-10" aria-hidden="true"></i>
+                </a>
+                <span class="d-block mt-2" style="font-size: 13px;">Isi Biodata</span>
+            </div>
+            <div class="col-3 col-md-2 text-center">
+                <a href="{{ route('mahasiswa.pendaftaran.document') }}" class="icon icon-shape p-0 bg-primary shadow text-center border-radius-md cursor-pointer"
+                data-bs-toggle="tooltip" data-bs-placement="top" title="Upload Dokumen">
+                <i class="fas fa-folder text-lg opacity-10" aria-hidden="true"></i>
+                </a>
+                <span class="d-block mt-2" style="font-size: 13px;">Upload Dokumen</span>
+            </div>
+            @elseif ($biodata && !Auth::user()->document)
+            <div class="col-3 col-md-2 text-center">
+                <a href="{{ route('mahasiswa.pendaftaran.document') }}" class="icon icon-shape p-0 bg-primary shadow text-center border-radius-md cursor-pointer"
+                data-bs-toggle="tooltip" data-bs-placement="top" title="Upload Dokumen">
+                <i class="fas fa-folder text-lg opacity-10" aria-hidden="true"></i>
+                </a>
+                <span class="d-block mt-2" style="font-size: 13px;">Upload Dokumen</span>
+            </div>
+            @elseif (!$biodata && Auth::user()->document)
+            <div class="col-3 col-md-2 text-center">
+                <a href="{{ route('mahasiswa.pendaftaran.s1') }}" class="icon icon-shape p-0 bg-primary shadow text-center border-radius-md cursor-pointer"
+                data-bs-toggle="tooltip" data-bs-placement="top" title="Isi Biodata">
+                <i class="fas fa-user-shield text-lg opacity-10" aria-hidden="true"></i>
+                </a>
+                <span class="d-block mt-2" style="font-size: 13px;">Isi Biodata</span>
+            </div>
+            @else
+            <div class="col-3 col-md-2 text-center">
+                <a href="{{ route('kursus.matkul') }}" class="icon icon-shape p-0 bg-primary shadow text-center border-radius-md cursor-pointer"
+                data-bs-toggle="tooltip" data-bs-placement="top" title="Mata Kuliah">
+                <i class="ni ni-archive-2 text-lg opacity-10" aria-hidden="true"></i>
+                </a>
+                <span class="d-block mt-2" style="font-size: 13px;">Mata Pelajaran</span>
+            </div>
+            <div class="col-3 col-md-2 text-center">
+                <a href="{{ route('kursus.tagihan.index') }}" class="icon icon-shape p-0 bg-primary shadow text-center border-radius-md cursor-pointer"
+                data-bs-toggle="tooltip" data-bs-placement="top" title="Tagihan">
+                <i class="ni ni-archive-2 text-lg opacity-10" aria-hidden="true"></i>
+                </a>
+                <span class="d-block mt-2" style="font-size: 13px;">Tagihan</span>
+            </div>
+            @endif
+            <div class="col-3 col-md-2 text-center">
+            <a href="{{ route('kursus.profile.index') }}" class="icon icon-shape p-0 bg-yellow shadow text-center border-radius-md cursor-pointer"
+                data-bs-toggle="tooltip" data-bs-placement="top" title="Profile">
+                <i class="fas fa-user-alt text-lg opacity-10" aria-hidden="true"></i>
+            </a>
+            <span class="d-block mt-2" style="font-size: 13px;">Profile</span>
+            </div>
+        </div>
+        
         <div class="col-12 col-sm-6 col-md-4 mb-4">
             <div class="card card-stats mb-xl-0">
                 <div class="card-body p-4">
@@ -261,79 +335,8 @@
         </div>
     </div>
     <div class="row">
-    <div class="col-lg-8 mb-lg-0 mb-4">
-        <div class="card">
-        <div class="card-body p-3">
-            <div class="height-200 d-flex justify-content-center flex-column align-items-center bg-cover text-center"
-            style="background: url(/soft-ui-dashboard-main/assets/img/admin-db.svg);
-                background-position: center; background-repeat: no-repeat;">
-                <h4 class="font-weight-bold mb-0 p-3 pb-0" style="background: rgba(255,255,255,.5)!important; backdrop-filter: blur(1px);">
-                Selamat Datang 
-                <b class="font-weight-bolder">{{ $user->name }}</b>!
-                </h4>
-                <p class="mb-0 mx-2 pb-3 px-3" style="background: rgba(255,255,255,.5)!important; backdrop-filter: blur(2px);">
-                Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ut, voluptate?
-                </p>
-            </div>
-        </div>
-        </div>
-    </div>
-    <div class="col-12 mb-4 gy-3 g-lg-3 d-md-none row mx-auto justify-content-center">
-        @if (!$biodata && !Auth::user()->document)
-        <div class="col-3 col-md-2 text-center">
-            <a href="{{ route('mahasiswa.pendaftaran.s1') }}" class="icon icon-shape p-0 bg-primary shadow text-center border-radius-md cursor-pointer"
-            data-bs-toggle="tooltip" data-bs-placement="top" title="Isi Biodata">
-            <i class="fas fa-user-shield text-lg opacity-10" aria-hidden="true"></i>
-            </a>
-            <span class="d-block mt-2" style="font-size: 13px;">Isi Biodata</span>
-        </div>
-        <div class="col-3 col-md-2 text-center">
-            <a href="{{ route('mahasiswa.pendaftaran.document') }}" class="icon icon-shape p-0 bg-primary shadow text-center border-radius-md cursor-pointer"
-            data-bs-toggle="tooltip" data-bs-placement="top" title="Upload Dokumen">
-            <i class="fas fa-folder text-lg opacity-10" aria-hidden="true"></i>
-            </a>
-            <span class="d-block mt-2" style="font-size: 13px;">Upload Dokumen</span>
-        </div>
-        @elseif ($biodata && !Auth::user()->document)
-        <div class="col-3 col-md-2 text-center">
-            <a href="{{ route('mahasiswa.pendaftaran.document') }}" class="icon icon-shape p-0 bg-primary shadow text-center border-radius-md cursor-pointer"
-            data-bs-toggle="tooltip" data-bs-placement="top" title="Upload Dokumen">
-            <i class="fas fa-folder text-lg opacity-10" aria-hidden="true"></i>
-            </a>
-            <span class="d-block mt-2" style="font-size: 13px;">Upload Dokumen</span>
-        </div>
-        @elseif (!$biodata && Auth::user()->document)
-        <div class="col-3 col-md-2 text-center">
-            <a href="{{ route('mahasiswa.pendaftaran.s1') }}" class="icon icon-shape p-0 bg-primary shadow text-center border-radius-md cursor-pointer"
-            data-bs-toggle="tooltip" data-bs-placement="top" title="Isi Biodata">
-            <i class="fas fa-user-shield text-lg opacity-10" aria-hidden="true"></i>
-            </a>
-            <span class="d-block mt-2" style="font-size: 13px;">Isi Biodata</span>
-        </div>
-        @else
-        <div class="col-3 col-md-2 text-center">
-            <a href="{{ route('mahasiswa.matkul') }}" class="icon icon-shape p-0 bg-primary shadow text-center border-radius-md cursor-pointer"
-            data-bs-toggle="tooltip" data-bs-placement="top" title="Mata Kuliah">
-            <i class="ni ni-archive-2 text-lg opacity-10" aria-hidden="true"></i>
-            </a>
-            <span class="d-block mt-2" style="font-size: 13px;">Mata Kuliah</span>
-        </div>
-        <div class="col-3 col-md-2 text-center">
-            <a href="{{ route('mahasiswa.tagihan.index') }}" class="icon icon-shape p-0 bg-primary shadow text-center border-radius-md cursor-pointer"
-            data-bs-toggle="tooltip" data-bs-placement="top" title="Tagihan">
-            <i class="ni ni-archive-2 text-lg opacity-10" aria-hidden="true"></i>
-            </a>
-            <span class="d-block mt-2" style="font-size: 13px;">Tagihan</span>
-        </div>
-        @endif
-        <div class="col-3 col-md-2 text-center">
-        <a href="{{ route('mahasiswa.profile.index') }}" class="icon icon-shape p-0 bg-yellow shadow text-center border-radius-md cursor-pointer"
-            data-bs-toggle="tooltip" data-bs-placement="top" title="Profile">
-            <i class="fas fa-user-alt text-lg opacity-10" aria-hidden="true"></i>
-        </a>
-        <span class="d-block mt-2" style="font-size: 13px;">Profile</span>
-        </div>
-    </div>
+    
+    
     <div class="col-12 col-lg-4">
         <div class="card h-100 p-3">
         <div class="overflow-hidden position-relative border-radius-lg bg-cover h-100" 

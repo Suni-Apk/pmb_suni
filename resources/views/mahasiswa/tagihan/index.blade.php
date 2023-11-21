@@ -44,31 +44,23 @@
       $tagihan = App\Models\TagihanDetail::where('id_biayas', $biaya->id)->where('id_users', $user->id)->latest()->first();
 
       // Menghitung total pembayaran yang telah dilakukan
-      $total_pembayaran = App\Models\Transaksi::where('user_id', $user->id)
+      $total_pembayaran = round(App\Models\Transaksi::where('user_id', $user->id)
           ->where('tagihan_detail_id', $tagihan->id)
           ->where('jenis_tagihan', $biaya->jenis_biaya)
           ->where('status', 'berhasil')
           ->where('jenis_pembayaran','cicil')
-          ->sum('total');
-
+          ->sum('total'));
+      // dd($total_pembayaran);
       // Hitung setengah dari $jumlah_uang_daftar_ulang
-      $setengah_jumlah_daftar_ulang = $tagihan->amount * 2/3;
+      $setengah_jumlah_daftar_ulang = round($tagihan->amount * 2/3);
       
+      // dd($setengah_jumlah_daftar_ulang);
+
       // Hitung sepersepuluh dari $jumlah_uang_daftar_ulang
       $sepertiganya_jumlah_daftar_ulang = $tagihan->amount / 3;
-
-      // Mengecek apakah mahasiswa telah berhasil membayar cicilan pertama
-     
-
-      // Mengecek apakah mahasiswa telah berhasil membayar cicilan kedua
-      
-
-      // Mengecek apakah mahasiswa telah berhasil membayar cicilan ketiga
-      
-
-      // dd($cicilan_pertama_terbayar, $cicilan_kedua_terbayar, $cicilan_ketiga_terbayar);
     @endphp
 
+    
     @if ($total_pembayaran == $sepertiganya_jumlah_daftar_ulang)
     <div class="row">
       {{-- INI ADALAH CARD BUAT TAGIHAN DAFTAR ULANG CICIL --}}
@@ -139,11 +131,20 @@
         </div>
       </div>
       </div>
-    @elseif($total_pembayaran >= $tagihan->amount)
+    @elseif($total_pembayaran == $tagihan->amount)
     <div class="row">
       {{-- INI ADALAH CARD BUAT TAGIHAN DAFTAR ULANG CICIL --}}
       <div class="col-12 text-center mb-4">
-      <div class="card">
+        <div class="card">
+          <div class="flex-row d-flex">
+            <form action="{{route('mahasiswa.invoice.download',Auth::user()->id)}}" method="POST">
+              @csrf
+              @method('POST')
+              <button type="submit" name="DaftarUlang" value="DaftarUlang" class="btn btn-secondary fs-6 p-2 px-3 ms-2 mt-2">
+                <i class="fas fa-file-download"></i>
+            </button>
+            </form>
+        </div>
         <h3 class="mt-3">Tagihan</h3>
         <h5 class="text-secondary font-weight-normal">Daftar Ulang Nyicil</h5>
         <div class="multisteps-form">
@@ -267,7 +268,7 @@
       $tagihan = App\Models\TagihanDetail::where('id_biayas',$biaya->id)->where('id_users',$user->id)->latest()->first();
       // $bagi3 = $tagihan->amount / 3;
       // dd($bagi3);
-      $transaction = App\Models\Transaksi::where('user_id',$user->id)->where('tagihan_detail_id',$tagihan->id)->where('jenis_tagihan',$biaya->jenis_biaya)->where('status','berhasil')->sum('total');
+      $transaction = round(App\Models\Transaksi::where('user_id',$user->id)->where('tagihan_detail_id',$tagihan->id)->where('jenis_tagihan',$biaya->jenis_biaya)->where('status','berhasil')->sum('total'));
     @endphp
     @if ($transaction != $tagihan->amount)
       

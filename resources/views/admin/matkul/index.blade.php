@@ -44,7 +44,7 @@
                                         <span class="text-secondary text-xs font-weight-bold">{{ $item->mulai }} - {{ $item->selesai }}</span>
                                     </td>
                                     <td class="align text-center">
-                                        <span class="text-secondary text-xs font-weight-bold">{{ $item->tanggal->format('d/m/Y') }}</span>
+                                        <span class="text-secondary text-xs font-weight-bold">{{ $item->tanggal }}</span>
                                     </td>
                                     <td class="align-middle text-center">
                                         <a href="{{route('admin.matkul.show', $item->id)}}"
@@ -53,14 +53,14 @@
                                             Detail
                                         </a>
 
-                                            <a href="{{ route('admin.matkul.edit', 1) }}" class="btn btn-sm bg-gradient-secondary font-weight-bold text-xs mx-2 mt-3">
-                                                <strong>Edit</strong>
+                                            <a href="{{ route('admin.matkul.edit', 1) }}" class="badge badge-sm bg-gradient-secondary font-weight-bold text-xs ">
+                                                Edit
                                             </a>
 
-                                        <form action="{{ route('admin.matkul.destroy', $item->id) }}" method="POST">
+                                        <form action="{{ route('admin.matkul.destroy', $item->id) }}" method="POST" class="d-inline">
                                             @csrf
                                             @method('DELETE')
-                                            <button type="submit" class="badge badge-sm bg-gradient-danger font-weight-bold text-xxs show_confirm"
+                                            <button type="submit" class="badge badge-sm bg-gradient-danger font-weight-bold text-xxs show_confirm border-0"
                                             data-toggle="tooltip" data-original-title="hapus">
                                                 Hapus
                                             </button>

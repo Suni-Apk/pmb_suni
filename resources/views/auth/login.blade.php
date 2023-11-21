@@ -33,6 +33,13 @@
                                         <p style="font-size: 11px;" class="font-weight-bold text-danger">{{$message}}</p>
                                     @enderror
                                 </div>
+
+                                <div class="card-footer pt-0 px-lg-2 pb-0">
+                                    <p class="mb-4 text-sm mx-auto">
+                                        Lupa
+                                        <a href="{{ route('forgot.password') }}" class="text-primary text-gradient font-weight-bold">Password Anda ?</a>
+                                    </p>
+                                </div>
                                 
                                 <div class="form-check form-switch">
                                     <input class="form-check-input" type="checkbox" id="rememberMe">
