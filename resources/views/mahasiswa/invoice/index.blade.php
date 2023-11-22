@@ -154,7 +154,7 @@
 
 
 				<tr class="heading">
-					<td>Status Pembayarannnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn</td>
+					<td>Status Pembayaran</td>
 
 					<td>#Check</td>
 				</tr>
