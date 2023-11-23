@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Mahasiswa;
 use App\Http\Controllers\Controller;
 use App\Models\Biaya;
 use App\Models\Biodata;
+use App\Models\Cicilan;
 use App\Models\TagihanDetail;
 use App\Models\Transaksi;
 use App\Models\User;
@@ -19,9 +20,10 @@ class TagihanController extends Controller
         $mahasiswa = Auth::user();
         $biayas = Biaya::all();
         $biayaAll = Biaya::all();
+        $cicilanAll = Cicilan::all();
 
         // return view('admin.account.mahasiswa.detail', compact('biodata');
-        return view('mahasiswa.tagihan.index', compact('biodata', 'mahasiswa', 'biayas', 'biayaAll'));
+        return view('mahasiswa.tagihan.index', compact('biodata', 'mahasiswa', 'biayas', 'biayaAll', 'cicilanAll'));
     }
     public function bayar(Request $request, $id)
     {

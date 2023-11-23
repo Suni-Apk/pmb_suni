@@ -262,9 +262,9 @@ class AccountController extends Controller
         }
 
 
-        // $tagihan = TagihanDetail::where('id', $ids)->firstOrFail();
-        // $total = array_sum($jumlahBiaya);
-        // $mahasiswa = User::findOrFail($id);
+        $tagihan = TagihanDetail::where('id', $ids)->firstOrFail();
+        $total = array_sum($jumlahBiaya);
+        $mahasiswa = User::findOrFail($id);
         // foreach ($ids as $idTagih) {
         //     $tagihanDetail = TagihanDetail::where('id', $idTagih)->get();
         //     foreach ($tagihanDetail as $value) {

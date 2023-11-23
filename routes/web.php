@@ -230,6 +230,10 @@ Route::prefix('/mahasiswa')->middleware(['auth', 'mahasiswa', 's1'])->name('maha
     });
     //Detail Bayar 
     Route::get('/bayar/{id}', [TagihanController::class, 'bayar'])->middleware('MahasiswaTransactions')->name('tagihan.bayar');
+    //Demo bayar cicilan 
+
+    Route::get('/demo-cicilan/{id}', [TransaksiController::class, 'demo_cicilan'])->name('transactions.cicilan');
+    Route::put('/demoBayar/{id}', [TransaksiController::class, 'demo_bayar_cicilan'])->name('transactions.cicilan.bayar');
 
     //callback demo bayar tagihan
     Route::prefix('/transactions/')->name('transactions.')->group(function () {

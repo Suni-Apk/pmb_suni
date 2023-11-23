@@ -14,10 +14,14 @@ class Kernel extends ConsoleKernel
 
     protected $commands = [
         Commands\BeforeTenggat::class,
+        Commands\Tenggat::class,
+        Commands\TagihanDetail::class
     ];
     protected function schedule(Schedule $schedule): void
     {
-        $schedule->command('app:before-tenggat')->everySecond();
+        $schedule->command('app:before-tenggat')->dailyAt('21:52');
+        $schedule->command('app:tagihan-detail')->everySecond();
+        $schedule->command('app:tenggat')->dailyAt('21:32');
     }
 
     /**

@@ -403,6 +403,11 @@
 @endsection
 @push('scripts')
     <script>
+        $('.rupiah').mask("#.##0", {
+            reverse: true
+        });
+    </script>
+    <script>
         const angkatanSelect = document.getElementById('id_angkatans');
         const jurusanSelect = document.getElementById('id_jurusans');
 
@@ -485,10 +490,5 @@
             }
 
         }
-    </script>
-    <script>
-        $('.rupiah').mask("#.##0", {
-            reverse: true
-        });
     </script>
 @endpush

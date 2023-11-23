@@ -18,7 +18,8 @@ class Transaksi extends Model
         'program_belajar',
         'jenis_pembayaran',
         'jenis_tagihan',
-        'no_invoice'
+        'no_invoice',
+        'id_cicilans',
     ];
 
     public function user()
