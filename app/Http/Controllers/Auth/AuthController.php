@@ -79,6 +79,7 @@ class AuthController extends Controller
         if (Str::startsWith($phone, '0')) {
             $phone = '62' . substr($phone, 1);
         }
+
         $messages = [
             'phone.required' => 'Nomor Wajib Diisi!!',
             'password.required' => 'Password Wajib Diisi',

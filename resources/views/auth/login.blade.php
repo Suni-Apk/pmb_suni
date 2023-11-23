@@ -35,8 +35,8 @@
                                 </div>
                                 
                                 <div class="form-check form-switch">
-                                    <input class="form-check-input" type="checkbox" id="rememberMe">
-                                    <label class="form-check-label" for="rememberMe">Remember me</label>
+                                    <input class="form-check-input" type="checkbox" name="remember" id="remember">
+                                    <label class="form-check-label" for="remember">Remember me</label>
                                 </div>
                                 
                                 <div class="text-center">

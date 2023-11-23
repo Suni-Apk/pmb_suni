@@ -13,7 +13,7 @@
         <div class="col-lg-6">
           <ul class="nav nav-footer justify-content-center justify-content-lg-end">
             <li class="nav-item">
-              <a href="https://api.whatsapp.com/send?phone=089608494411&text=Send%20a%20quote" class="nav-link text-muted" target="_blank">Hubungi Kami</a>
+              <a href="https://api.whatsapp.com/send?phone={{ App\Models\General::first()->phone }}" class="nav-link text-muted" target="_blank">Hubungi Kami</a>
             </li>
             <li class="nav-item">
               <a href="https://suniindonesia.com/" class="nav-link text-muted" target="_blank">Suni Indonesia</a>

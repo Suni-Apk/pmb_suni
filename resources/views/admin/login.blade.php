@@ -34,8 +34,8 @@
                                 </div>
 
                                 <div class="form-check form-switch">
-                                    <input class="form-check-input" type="checkbox" id="rememberMe" checked="">
-                                    <label class="form-check-label" for="rememberMe">Remember me</label>
+                                    <input class="form-check-input" type="checkbox" name="remember" id="remember">
+                                    <label class="form-check-label" for="remember">Remember me</label>
                                 </div>
                                 
                                 <div class="text-center">
@@ -46,7 +46,7 @@
                         <div class="card-footer text-center pt-0 px-lg-2 px-1">
                             <p class="mb-4 text-sm mx-auto">
                                 Belum punya akun? &nbsp;
-                                <a href="" class="text-dark text-gradient font-weight-bold">Sign up</a>
+                                <a href="https://api.whatsapp.com/send?phone={{ App\Models\General::first()->phone }}" target="_blank" class="text-dark text-gradient font-weight-bold">hubungi kami</a>
                             </p>
                         </div>
                     </div>
