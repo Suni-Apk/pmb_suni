@@ -259,7 +259,6 @@ class AccountController extends Controller
             }
         }
 
-
         $tagihan = TagihanDetail::where('id', $ids)->firstOrFail();
         $total = array_sum($jumlahBiaya);
         $mahasiswa = User::findOrFail($id);
@@ -279,5 +278,26 @@ class AccountController extends Controller
         }
 
         return view('admin.account.mahasiswa.bayar', compact('jenis', 'id', 'total', 'mahasiswa', 'tagihan', 'ids'));
+    }
+
+    public function pendaftar()
+    {
+        $mahasiswa = User::where('role', 'Mahasiswa')->get();
+        return view('admin.account.pendaftar.index', compact('mahasiswa'));
+    }
+
+    public function pendaftar_edit()
+    {
+        
+    }
+
+    public function pendaftar_edit_process()
+    {
+        
+    }
+
+    public function pendaftar_delete()
+    {
+
     }
 }

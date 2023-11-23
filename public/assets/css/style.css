@@ -2655,9 +2655,9 @@ textarea.form-control,textarea.form-control-lg,textarea.form-control-sm {
 }
 
 .form-select:focus {
-    border-color: #e293d3;
+    border-color: #91f6af;
     outline: 0;
-    box-shadow: 0 0 0 2px #e9aede
+    box-shadow: 0 0 0 2px #91f6af
 }
 
 .form-select[multiple],.form-select[size]:not([size="1"]) {
@@ -9266,6 +9266,12 @@ textarea.form-control,textarea.form-control-lg,textarea.form-control-sm {
     margin-top: -14rem!important
 }
 
+@media (max-width: 575.98px) {
+    .mt-n11 {
+        margin-top: -7rem!important
+    }
+}
+
 .mt-n12 {
     margin-top: -16rem!important
 }
@@ -10573,6 +10579,12 @@ textarea.form-control,textarea.form-control-lg,textarea.form-control-sm {
 
 .height-600 {
     height: 600px!important
+}
+
+@media (max-width: 575.98px) {
+    .height-600 {
+        height: 400px!important;
+    }
 }
 
 .max-width-100 {
@@ -24815,6 +24827,12 @@ body.dark-version {
 
 .width-64-px {
     width: 64px
+}
+
+@media (max-width: 575.98px) {
+    .width-64-px {
+        width: 48px
+    }
 }
 
 .animated-blur {

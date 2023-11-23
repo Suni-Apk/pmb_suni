@@ -6,8 +6,8 @@
 <section>
     <div class="page-header min-vh-75">
         <div class="container">
-            <div class="row justify-content-evenly mx-auto mt-n5 mt-md-5">
-                <div class="col-xl-4 col-lg-5 col-md-6 d-flex flex-column z-index-3">
+            <div class="row">
+                <div class="col-xl-4 col-lg-5 col-md-6 d-flex flex-column mx-auto">
                     <div class="card card-plain mt-8">
                         <div class="card-header pb-0 text-left bg-transparent">
                             <h3 class="font-weight-bolder text-primary text-gradient">Selamat Datang Kembali</h3>
@@ -19,7 +19,7 @@
                                 @method('POST')
                                 <div class="mb-3 form-floating">
                                     <input type="tel" class="form-control @error('phone') is-invalid @enderror" name="phone" id="phone" value="{{ old('phone') }}" placeholder="0896XXXXXXXX">
-                                    <label class="font-weight-bold" for="phone">No. Handphone</label>
+                                    <label class="font-weight-bold text-dark" for="phone">No. Handphone</label>
                                     @error('phone')
                                         <p style="font-size: 11px;" class="font-weight-bold text-danger">{{$message}}</p>
                                     @enderror
@@ -28,7 +28,7 @@
                                 <div class="mb-3 form-floating">
                                     <input type="password" class="form-control @error('password') is-invalid @enderror" name="password" id="password"
                                     value="{{ old('password') }}" placeholder="&bull;&bull;&bull;&bull;&bull;&bull;&bull;">
-                                    <label class="font-weight-bold" for="password">Password</label>
+                                    <label class="font-weight-bold text-dark" for="password">Password</label>
                                     @error('password')
                                         <p style="font-size: 11px;" class="font-weight-bold text-danger">{{$message}}</p>
                                     @enderror
@@ -52,9 +52,9 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-6">
-                    <div class="d-none d-md-block">
-                        <img src="/soft-ui-dashboard-main/assets/img/Learning-bro.png" class="img-fluid" alt="">
+                <div class="col-md-6 pt-4">
+                    <div class="d-none d-md-block p-1">
+                        <img src="/assets/img/learning.svg" class="img-fluid" draggable="false">
                     </div>
                 </div>
             </div>

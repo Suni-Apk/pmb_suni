@@ -67,9 +67,6 @@ Route::prefix('admin')->name('admin.')->group(function () {
 
 // Controller / Dashboard Admin
 Route::prefix('/admin')->middleware(['admin', 'auth'])->name('admin.')->group(function () {
-    Route::get('/', function () {
-        return view('admin.notfound');
-    })->name('notfound');
     Route::get('/dashboard', [AdminDashboardController::class, 'index'])->name('dashboard');
 
     // profile
@@ -105,7 +102,18 @@ Route::prefix('/admin')->middleware(['admin', 'auth'])->name('admin.')->group(fu
         Route::get('/bayar/{id}', [AccountController::class, 'mahasiswa_bayar'])->middleware(['Pembayaran'])->name('bayar');
         Route::get('/program/{id}', [AccountController::class, 'mahasiswa_program'])->name('program');
     });
+
+    // data pendaftar
+    Route::prefix('pendaftar/account')->name('pendaftar.')->group(function () {
+        Route::get('/', [AccountController::class, 'pendaftar'])->name('index');
+        Route::get('/edit/{id}', [AccountController::class, 'pendaftar_edit'])->name('edit');
+        Route::put('/edit/process/{id}', [AccountController::class, 'pendaftar_edit_process'])->name('edit.process');
+        Route::put('/change-status/{id}', [AccountController::class, 'pendaftar_status'])->name('status');
+        Route::delete('/delete/{id}', [AccountController::class, 'pendaftar_delete'])->name('delete');
+        Route::get('/detail/{id}', [AccountController::class, 'pendaftar_detail'])->name('show');
+    });
     
+    // data link
     Route::prefix('link')->name('link.')->group(function () {
         Route::get('/whatsapp', [LinkController::class, 'whatsapp'])->name('whatsapp');
         Route::get('/zoom', [LinkController::class, 'zoom'])->name('zoom');
@@ -117,17 +125,20 @@ Route::prefix('/admin')->middleware(['admin', 'auth'])->name('admin.')->group(fu
         Route::delete('/delete/{id}', [LinkController::class,'destroy'])->name('destroy');
     });
     
+    // data tahun ajaran
     Route::prefix('tahun-ajaran')->name('tahun-ajaran.')->group( function(){
         Route::get('/', [TahunAjaranController::class, 'index'])->name('index');
         Route::get('/create', [TahunAjaranController::class, 'create'])->name('create');
         Route::post('/create/process', [TahunAjaranController::class, 'store'])->name('create.process');
+        Route::get('/detail/{id}', [TahunAjaranController::class, 'show'])->name('detail');
         Route::post('/active/{id}', [TahunAjaranController::class, 'active'])->name('active');
         Route::delete('/delete/{id}', [TahunAjaranController::class, 'destroy'])->name('destroy');
     });
     
-        Route::prefix('transaksi')->name('transactions.')->group(function () {
-            Route::post('/proses_bayar/{id}', [TransactionController::class, 'proses_bayar'])->middleware(['Pembayaran'])->name('proses_bayar');
-        });
+    // proses transaksi
+    Route::prefix('transaksi')->name('transactions.')->group(function () {
+        Route::post('/proses_bayar/{id}', [TransactionController::class, 'proses_bayar'])->middleware(['Pembayaran'])->name('proses_bayar');
+    });
     
     // resources management
     Route::resource('/matkul', ControllersMatkulController::class);
@@ -141,6 +152,7 @@ Route::prefix('/admin')->middleware(['admin', 'auth'])->name('admin.')->group(fu
     
     //data settings
     Route::prefix('settings')->group(function () {
+        // data administrasi
         Route::get('/administrasi', [AdministrasiController::class, 'administrasi'])->name('administrasi');
         Route::put('/administrasi/{id}', [AdministrasiController::class, 'AdministrasiProses'])->name('administrasi.proses');
 
@@ -152,6 +164,18 @@ Route::prefix('/admin')->middleware(['admin', 'auth'])->name('admin.')->group(fu
             
             Route::get('/notifikasi', [SettingController::class, 'notify_index'])->name('notifications');
             Route::put('/notifikasi/process/{id}', [SettingController::class, 'notify_edit'])->name('notifications.process');
+
+            Route::prefix('')->group(function () {
+                Route::get('/komponen', [SettingController::class, 'komponen'])->name('component');
+
+                Route::prefix('banner')->name('banner.')->group(function () {
+                    Route::get('/create', [SettingController::class, 'create_banner'])->name('create');
+                    Route::post('/create/process', [SettingController::class, 'store_banner'])->name('store');
+                    Route::get('/edit/{id}', [SettingController::class, 'edit_banner'])->name('edit');
+                    Route::put('/edit/process/{id}', [SettingController::class, 'update_banner'])->name('update');
+                    Route::delete('/delete/{id}', [SettingController::class, 'delete_banner'])->name('delete');
+                });
+            });
         });
     });
 });

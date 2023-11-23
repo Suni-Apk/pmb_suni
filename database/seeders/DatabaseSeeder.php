@@ -40,10 +40,11 @@ class DatabaseSeeder extends Seeder
         ]);
 
         $this->call([
+            BannerSeeder::class,
             NotifySeeder::class,
+            GeneralSeeder::class,
             TahunAjaranSeeder::class,
             AdministrasiSeeder::class,
-            GeneralSeeder::class,
             DescProgramBelajarSeeder::class,
         ]);
     }

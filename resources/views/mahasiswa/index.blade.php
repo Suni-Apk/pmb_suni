@@ -26,75 +26,75 @@
 
 @section('content')
     <div class="row">
-        <div class="col-12 col-sm-6 col-md-4 mb-4">
-            <div class="card card-stats mb-xl-0">
-                <div class="card-body p-4">
-                    <div class="row align-items-center">
-                        <div class="col">
-                            <h6 class="card-title text-uppercase text-muted mb-0">Mata Kuliah</h6>
-                            <span class="h2 lh-1 font-weight-bold mb-0">123</span>
-                        </div>
-                        <div class="col-auto">
-                            <div class="icon icon-shape bg-teal text-white rounded-circle shadow text-center">
-                                <i class="ni ni-hat-3"></i>
-                            </div>
-                        </div>
+        {{-- <div class="col-lg-8 mb-lg-0 mb-4">
+            <div class="card">
+                <div class="card-body p-3">
+                    <div class="height-200 d-flex justify-content-center flex-column align-items-center bg-cover text-center"
+                    style="background: url(/assets/img/admin-db.svg);
+                            background-position: center; background-repeat: no-repeat;">
+                        <h4 class="font-weight-bold mb-0 p-3 pb-0" style="background: rgba(255,255,255,.5)!important; backdrop-filter: blur(1px);">
+                            Selamat Datang 
+                            <b class="font-weight-bolder">{{ $user->name }}</b>!
+                        </h4>
+                        <p class="mb-0 mx-2 pb-3 px-3" style="background: rgba(255,255,255,.5)!important; backdrop-filter: blur(2px);">
+                            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ut, voluptate?
+                        </p>
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="col-12 col-sm-6 col-md-4 mb-4">
-            <div class="card card-stats mb-xl-0">
-                <div class="card-body p-4">
-                    <div class="row align-items-center">
-                        <div class="col">
-                            <h6 class="card-title text-uppercase text-muted mb-0">Jurusan</h6>
-                            <span class="h2 lh-1 font-weight-bold mb-0">4</span>
-                        </div>
-                        <div class="col-auto">
-                            <div class="icon icon-shape bg-green text-white rounded-circle shadow text-center">
-                                <i class="ni ni-paper-diploma"></i>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+        </div> --}}
+        <div id="carouselDashboard" data-bs-ride="carousel" data-bs-interval="3000" class="col-12 col-lg-8 mb-lg-0 mb-4 carousel slide page-header align-items-start height-300 pb-7 rounded-3">
+            <div class="carousel-indicators">
+                <button type="button" data-bs-target="#carouselDashboard" data-bs-slide-to="0" class="active" aria-current="true"></button>
+                @foreach ($banner->filter(function ($item) {
+                    return $item->target == 'MAHASISWA' || $item->target == 'SEMUA';
+                    }) as $item)
+                <button type="button" data-bs-target="#carouselDashboard" data-bs-slide-to="{{ $loop->index+1 }}" class="" aria-current="true"></button>
+                @endforeach
             </div>
-        </div>
-        <div class="col-12 col-sm-6 col-md-4 mb-4">
-            <div class="card card-stats mb-xl-0">
-                <div class="card-body p-4">
-                    <div class="row align-items-center">
-                        <div class="col">
-                            <h6 class="card-title text-uppercase text-muted mb-0">Tagihan</h6>
-                            <span class="h2 lh-1 font-weight-bold mb-0">0</span>
-                        </div>
-                        <div class="col-auto">
-                            <div class="icon icon-shape bg-blue text-white rounded-circle shadow text-center">
-                                <i class="fas fa-wallet"></i>
-                            </div>
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <div class="row flex-column justify-content-center height-300"
+                    style="background-image: url('/assets/img/curved-images/curved14.jpg'); background-size: cover; background-position: center;">
+                        <span class="mask bg-gradient-dark opacity-6"></span>
+                        <div class="d-flex justify-content-center flex-column align-items-center text-white text-center z-index-1">
+                            <h4 class="font-weight-bold mb-0 p-3 pb-0 text-white">
+                                Selamat Datang 
+                                <b class="font-weight-bolder">{{ $user->name }}</b>!
+                            </h4>
+                            <p class="mb-0 mx-2">
+                                Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ut, voluptate?
+                            </p>
                         </div>
                     </div>
                 </div>
+                @foreach ($banner->filter(function ($item) {
+                    return $item->target == 'MAHASISWA' || $item->target == 'SEMUA';
+                    }) as $item)
+                <div class="carousel-item">
+                    <div class="row flex-column justify-content-center height-300"
+                    style="background-image: url('{{ $item->image }}'); background-size: cover; background-position: center;">
+                        <span class="mask bg-gradient-dark opacity-6"></span>
+                        <div class="d-flex justify-content-center flex-column align-items-center text-white text-center z-index-1">
+                            <h4 class="font-weight-bold mb-0 p-3 pb-0 text-white">
+                                {{ $item->title }}
+                            </h4>
+                            <p class="mb-0 mx-2">
+                                {{ $item->desc }}
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                @endforeach
             </div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-lg-8 mb-lg-0 mb-4">
-        <div class="card">
-            <div class="card-body p-3">
-            <div class="height-200 d-flex justify-content-center flex-column align-items-center bg-cover text-center"
-            style="background: url(/soft-ui-dashboard-main/assets/img/admin-db.svg);
-                    background-position: center; background-repeat: no-repeat;">
-                <h4 class="font-weight-bold mb-0 p-3 pb-0" style="background: rgba(255,255,255,.5)!important; backdrop-filter: blur(1px);">
-                    Selamat Datang 
-                    <b class="font-weight-bolder">{{ $user->name }}</b>!
-                </h4>
-                <p class="mb-0 mx-2 pb-3 px-3" style="background: rgba(255,255,255,.5)!important; backdrop-filter: blur(2px);">
-                    Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ut, voluptate?
-                </p>
-            </div>
-            </div>
-        </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselDashboard" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselDashboard" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
         </div>
         <div class="col-12 mb-4 gy-3 g-lg-3 d-md-none row mx-auto justify-content-center">
         @if (!$biodata && !Auth::user()->document)
@@ -155,7 +155,7 @@
         <div class="col-12 col-lg-4">
         <div class="card h-100 p-3">
             <div class="overflow-hidden position-relative border-radius-lg bg-cover h-100" 
-            {{-- style="background-image: url('/soft-ui-dashboard-main/assets/img/ivancik.jpg');"> --}}
+            {{-- style="background-image: url('/assets/img/ivancik.jpg');"> --}}
             style="background-image: url('https://suniindonesia.com/wp-content/uploads/2022/10/masjid-pogung-dalangan-fQET4BjQmvc-unsplash.jpg');">
             <span class="mask bg-gradient-dark"></span>
             <div class="card-body position-relative z-index-1 d-flex flex-column justify-content-center gap-2">
@@ -261,7 +261,7 @@
                                     <td>
                                         <div class="d-flex px-2 py-1">
                                             <div>
-                                                <img src="/soft-ui-dashboard-main/assets/img/small-logos/logo-xd.svg"
+                                                <img src="/assets/img/small-logos/logo-xd.svg"
                                                     class="avatar avatar-sm me-3" alt="xd">
                                             </div>
                                             <div class="d-flex flex-column justify-content-center">
@@ -273,20 +273,20 @@
                                         <div class="avatar-group mt-2">
                                             <a href="javascript:;" class="avatar avatar-xs rounded-circle"
                                                 data-bs-toggle="tooltip" data-bs-placement="bottom" title="Ryan Tompson">
-                                                <img src="/soft-ui-dashboard-main/assets/img/team-1.jpg" alt="team1">
+                                                <img src="/assets/img/team-1.jpg" alt="team1">
                                             </a>
                                             <a href="javascript:;" class="avatar avatar-xs rounded-circle"
                                                 data-bs-toggle="tooltip" data-bs-placement="bottom" title="Romina Hadid">
-                                                <img src="/soft-ui-dashboard-main/assets/img/team-2.jpg" alt="team2">
+                                                <img src="/assets/img/team-2.jpg" alt="team2">
                                             </a>
                                             <a href="javascript:;" class="avatar avatar-xs rounded-circle"
                                                 data-bs-toggle="tooltip" data-bs-placement="bottom"
                                                 title="Alexander Smith">
-                                                <img src="/soft-ui-dashboard-main/assets/img/team-3.jpg" alt="team3">
+                                                <img src="/assets/img/team-3.jpg" alt="team3">
                                             </a>
                                             <a href="javascript:;" class="avatar avatar-xs rounded-circle"
                                                 data-bs-toggle="tooltip" data-bs-placement="bottom" title="Jessica Doe">
-                                                <img src="/soft-ui-dashboard-main/assets/img/team-4.jpg" alt="team4">
+                                                <img src="/assets/img/team-4.jpg" alt="team4">
                                             </a>
                                         </div>
                                     </td>
@@ -311,7 +311,7 @@
                                     <td>
                                         <div class="d-flex px-2 py-1">
                                             <div>
-                                                <img src="/soft-ui-dashboard-main/assets/img/small-logos/logo-atlassian.svg"
+                                                <img src="/assets/img/small-logos/logo-atlassian.svg"
                                                     class="avatar avatar-sm me-3" alt="atlassian">
                                             </div>
                                             <div class="d-flex flex-column justify-content-center">
@@ -323,11 +323,11 @@
                                         <div class="avatar-group mt-2">
                                             <a href="javascript:;" class="avatar avatar-xs rounded-circle"
                                                 data-bs-toggle="tooltip" data-bs-placement="bottom" title="Romina Hadid">
-                                                <img src="/soft-ui-dashboard-main/assets/img/team-2.jpg" alt="team5">
+                                                <img src="/assets/img/team-2.jpg" alt="team5">
                                             </a>
                                             <a href="javascript:;" class="avatar avatar-xs rounded-circle"
                                                 data-bs-toggle="tooltip" data-bs-placement="bottom" title="Jessica Doe">
-                                                <img src="/soft-ui-dashboard-main/assets/img/team-4.jpg" alt="team6">
+                                                <img src="/assets/img/team-4.jpg" alt="team6">
                                             </a>
                                         </div>
                                     </td>
@@ -352,7 +352,7 @@
                                     <td>
                                         <div class="d-flex px-2 py-1">
                                             <div>
-                                                <img src="/soft-ui-dashboard-main/assets/img/small-logos/logo-slack.svg"
+                                                <img src="/assets/img/small-logos/logo-slack.svg"
                                                     class="avatar avatar-sm me-3" alt="team7">
                                             </div>
                                             <div class="d-flex flex-column justify-content-center">
@@ -364,11 +364,11 @@
                                         <div class="avatar-group mt-2">
                                             <a href="javascript:;" class="avatar avatar-xs rounded-circle"
                                                 data-bs-toggle="tooltip" data-bs-placement="bottom" title="Romina Hadid">
-                                                <img src="/soft-ui-dashboard-main/assets/img/team-3.jpg" alt="team8">
+                                                <img src="/assets/img/team-3.jpg" alt="team8">
                                             </a>
                                             <a href="javascript:;" class="avatar avatar-xs rounded-circle"
                                                 data-bs-toggle="tooltip" data-bs-placement="bottom" title="Jessica Doe">
-                                                <img src="/soft-ui-dashboard-main/assets/img/team-1.jpg" alt="team9">
+                                                <img src="/assets/img/team-1.jpg" alt="team9">
                                             </a>
                                         </div>
                                     </td>
@@ -393,7 +393,7 @@
                                     <td>
                                         <div class="d-flex px-2 py-1">
                                             <div>
-                                                <img src="/soft-ui-dashboard-main/assets/img/small-logos/logo-spotify.svg"
+                                                <img src="/assets/img/small-logos/logo-spotify.svg"
                                                     class="avatar avatar-sm me-3" alt="spotify">
                                             </div>
                                             <div class="d-flex flex-column justify-content-center">
@@ -405,20 +405,20 @@
                                         <div class="avatar-group mt-2">
                                             <a href="javascript:;" class="avatar avatar-xs rounded-circle"
                                                 data-bs-toggle="tooltip" data-bs-placement="bottom" title="Ryan Tompson">
-                                                <img src="/soft-ui-dashboard-main/assets/img/team-4.jpg" alt="user1">
+                                                <img src="/assets/img/team-4.jpg" alt="user1">
                                             </a>
                                             <a href="javascript:;" class="avatar avatar-xs rounded-circle"
                                                 data-bs-toggle="tooltip" data-bs-placement="bottom" title="Romina Hadid">
-                                                <img src="/soft-ui-dashboard-main/assets/img/team-3.jpg" alt="user2">
+                                                <img src="/assets/img/team-3.jpg" alt="user2">
                                             </a>
                                             <a href="javascript:;" class="avatar avatar-xs rounded-circle"
                                                 data-bs-toggle="tooltip" data-bs-placement="bottom"
                                                 title="Alexander Smith">
-                                                <img src="/soft-ui-dashboard-main/assets/img/team-4.jpg" alt="user3">
+                                                <img src="/assets/img/team-4.jpg" alt="user3">
                                             </a>
                                             <a href="javascript:;" class="avatar avatar-xs rounded-circle"
                                                 data-bs-toggle="tooltip" data-bs-placement="bottom" title="Jessica Doe">
-                                                <img src="/soft-ui-dashboard-main/assets/img/team-1.jpg" alt="user4">
+                                                <img src="/assets/img/team-1.jpg" alt="user4">
                                             </a>
                                         </div>
                                     </td>
@@ -443,7 +443,7 @@
                                     <td>
                                         <div class="d-flex px-2 py-1">
                                             <div>
-                                                <img src="/soft-ui-dashboard-main/assets/img/small-logos/logo-jira.svg"
+                                                <img src="/assets/img/small-logos/logo-jira.svg"
                                                     class="avatar avatar-sm me-3" alt="jira">
                                             </div>
                                             <div class="d-flex flex-column justify-content-center">
@@ -455,7 +455,7 @@
                                         <div class="avatar-group mt-2">
                                             <a href="javascript:;" class="avatar avatar-xs rounded-circle"
                                                 data-bs-toggle="tooltip" data-bs-placement="bottom" title="Ryan Tompson">
-                                                <img src="/soft-ui-dashboard-main/assets/img/team-4.jpg" alt="user5">
+                                                <img src="/assets/img/team-4.jpg" alt="user5">
                                             </a>
                                         </div>
                                     </td>
@@ -480,7 +480,7 @@
                                     <td>
                                         <div class="d-flex px-2 py-1">
                                             <div>
-                                                <img src="/soft-ui-dashboard-main/assets/img/small-logos/logo-invision.svg"
+                                                <img src="/assets/img/small-logos/logo-invision.svg"
                                                     class="avatar avatar-sm me-3" alt="invision">
                                             </div>
                                             <div class="d-flex flex-column justify-content-center">
@@ -492,11 +492,11 @@
                                         <div class="avatar-group mt-2">
                                             <a href="javascript:;" class="avatar avatar-xs rounded-circle"
                                                 data-bs-toggle="tooltip" data-bs-placement="bottom" title="Ryan Tompson">
-                                                <img src="/soft-ui-dashboard-main/assets/img/team-1.jpg" alt="user6">
+                                                <img src="/assets/img/team-1.jpg" alt="user6">
                                             </a>
                                             <a href="javascript:;" class="avatar avatar-xs rounded-circle"
                                                 data-bs-toggle="tooltip" data-bs-placement="bottom" title="Jessica Doe">
-                                                <img src="/soft-ui-dashboard-main/assets/img/team-4.jpg" alt="user7">
+                                                <img src="/assets/img/team-4.jpg" alt="user7">
                                             </a>
                                         </div>
                                     </td>

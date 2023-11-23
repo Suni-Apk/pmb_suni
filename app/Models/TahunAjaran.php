@@ -28,6 +28,6 @@ class TahunAjaran extends Model
 
     public function links()
     {
-        return $this->hasMany(Link::class);
+        return $this->hasMany(Link::class, 'id_tahun_ajarans');
     }
 }

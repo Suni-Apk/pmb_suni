@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Models\Administrasi;
+use App\Models\Banner;
 use App\Models\Biaya;
 use App\Models\Biodata;
 use App\Models\Notify;
@@ -21,7 +22,8 @@ class AuthController extends Controller
     use Fonnte;
     public function register()
     {
-        return view('auth.register');
+        $banner = Banner::get();
+        return view('auth.register', compact('banner'));
     }
 
     public function register_process(Request $request)
@@ -36,15 +38,15 @@ class AuthController extends Controller
         }
         $messages = [
             'name.required' => 'Nama Lengkap Wajib Diisi',
-            'name.min:3' => 'Nama Anda Minimal 3 Huruf!!',
-            'name.max:255' => 'Nama Anda Kepanjangan',
-            'phone.required' => 'Nomor Whatshapp Wajib Diisi',
-            'phone.min' => 'Nomor Whatshapp Minimal 12 Angka!!',
-            'phone.max' => 'Nomor Whatshapp Maksimal 13 Angka!!',
+            'name.min:3' => 'Masukkan Minimal 3 Huruf',
+            'name.max:255' => 'Batas hanya 255 karakter',
+            'phone.required' => 'Nomor Whatsapp Wajib Diisi',
+            'phone.min' => 'Nomor Whatsapp Minimal 12 Angka',
+            'phone.max' => 'Nomor Whatsapp Maksimal 13 Angka',
             'gender.required' => 'Gender Wajib Diisi',
             'password.required' => 'Password Wajib Diisi',
             'password.confirmed' => 'Password Harus Sama',
-            'password.min:8' => 'Password Wajib 8 Angka / Huruf!!!'
+            'password.min:8' => 'Password Wajib 8 Angka / Huruf'
         ];
         $data = $request->validate([
             'name' => 'required|min:3|max:255|string',

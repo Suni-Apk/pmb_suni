@@ -70,4 +70,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(Transaksi::class);
     }
+
+    public function banners()
+    {
+        return $this->hasMany(Banner::class, 'author');
+    }
 }

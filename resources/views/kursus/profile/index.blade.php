@@ -4,7 +4,7 @@
 
 @section('content')
     <div class="page-header min-height-300 border-radius-xl mt-4"
-        style="background-image: url('../soft-ui-dashboard-main/assets/img/curved-images/curved0.jpg'); background-position-y: 50%;">
+        style="background-image: url('../assets/img/curved-images/curved0.jpg'); background-position-y: 50%;">
         <span class="mask bg-gradient-primary opacity-6"></span>
     </div>
     <div class="card card-body blur shadow-blur mx-4 mt-n6 overflow-hidden">
@@ -13,9 +13,9 @@
                 <div class="avatar avatar-xl position-relative">
                     <img src="
                     @if (!Auth::user()->biodata)
-                    /soft-ui-dashboard-main/assets/img/no-profile.png
+                    /assets/img/no-profile.png
                     @elseif(!$biodata)
-                        /soft-ui-dashboard-main/assets/img/no-profile.png
+                        /assets/img/no-profile.png
                     @else
                         {{ asset('storage/' . $biodata['image'])}}
                     @endif
