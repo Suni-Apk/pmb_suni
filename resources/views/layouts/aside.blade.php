@@ -40,11 +40,8 @@
 
                 <!-- tahun ajaran -->
                 <li class="nav-item">
-                    <a data-bs-toggle="collapse" href="#angkatan"
-                        class="nav-link {{ Route::is('admin.tahun-ajaran.*') ? 'active' : '' }}"
-                        aria-controls="angkatan" role="button" aria-expanded="false">
-                        <div
-                            class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center d-flex align-items-center justify-content-center  me-2">
+                    <a data-bs-toggle="collapse" href="#angkatan" class="nav-link {{ Route::is('admin.tahun-ajaran.*') ? 'active' : '' }}" aria-controls="angkatan" role="button" aria-expanded="false">
+                        <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center d-flex align-items-center justify-content-center  me-2">
                             <i class="ni ni-hat-3"></i>
                         </div>
                         <span class="nav-link-text ms-1"> Tahun Ajaran </span>
@@ -135,29 +132,50 @@
                     </div>
                 </li>
 
+                <li class="nav-item">
+                    <a data-bs-toggle="collapse" href="#mapel" class="nav-link {{ Route::is('admin.mapel.*') ? 'active' : '' }}" aria-controls="matkul" role="button" aria-expanded="false">
+                        <div class="icon icon-sm shadow border-radius-md bg-white text-center d-flex align-items-center justify-content-center  me-2">
+                            <i class="fas fa-book-open"></i>
+                        </div>
+                        <span class="nav-link-text ms-1"> Mata Pelajaran </span>
+                    </a>
+                    <div class="collapse {{ Route::is('admin.mapel.*') ? 'show' : '' }}" id="mapel">
+                        <ul class="nav ms-4 ps-3">
+                            <li class="nav-item ">
+                                <a class="nav-link {{ Route::is('admin.mapel.index') ? 'active' : '' }} " href="{{ route('admin.mapel.index') }}">
+                                    <span class="sidenav-mini-icon d-none d-xl-block"><i class="fas fa-border-all"></i></span>
+                                    <span class="sidenav-normal"> Daftar Mata Pelajaran </span>
+                                </a>
+                            </li>
+                            <li class="nav-item ">
+                                <a class="nav-link {{ Route::is('admin.mapel.create') ? 'active' : '' }} " href="{{ route('admin.mapel.create') }}">
+                                    <span class="sidenav-mini-icon d-none d-xl-block"><i class="fas fa-plus"></i></span>
+                                    <span class="sidenav-normal"> Tambah Mata Kuliah </span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+
                 <!-- Course -->
                 <li class="nav-item">
-                    <a data-bs-toggle="collapse" href="#course" class="nav-link {{ Route::is('admin.course.*') ? 'active' : '' }}" aria-controls="course"
-                        role="button" aria-expanded="false">
-                        <div
-                            class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center d-flex align-items-center justify-content-center  me-2">
+                    <a data-bs-toggle="collapse" href="#course" class="nav-link {{ Route::is('admin.course.*') ? 'active' : '' }}" aria-controls="course" role="button" aria-expanded="false">
+                        <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center d-flex align-items-center justify-content-center  me-2">
                             <i class="ni ni-book-bookmark"></i>
                         </div>
                         <span class="nav-link-text ms-1"> Kursus </span>
                     </a>
                     <div class="collapse {{ Route::is('admin.course.*') ? 'show' : '' }}" id="course">
                         <ul class="nav ms-4 ps-3">
-                            <li class="nav-item ">
+                            <li class="nav-item">
                                 <a class="nav-link {{ Route::is('admin.course.index') ? 'active' : '' }}" href="{{ route('admin.course.index') }}">
-                                    <span class="sidenav-mini-icon d-none d-xl-block"><i
-                                            class="fas fa-border-all"></i></span>
+                                    <span class="sidenav-mini-icon d-none d-xl-block"><i class="fas fa-border-all"></i></span>
                                     <span class="sidenav-normal"> Daftar Kursus </span>
                                 </a>
                             </li>
-                            <li class="nav-item ">
+                            <li class="nav-item">
                                 <a class="nav-link {{ Route::is('admin.course.create') ? 'active' : '' }}" href="{{ route('admin.course.create') }}">
-                                    <span class="sidenav-mini-icon d-none d-xl-block"><i
-                                            class="fas fa-plus"></i></span>
+                                    <span class="sidenav-mini-icon d-none d-xl-block"><i class="fas fa-plus"></i></span>
                                     <span class="sidenav-normal"> Tambah Kursus </span>
                                 </a>
                             </li>
@@ -260,19 +278,21 @@
                     </ul>
                 </li>
 
+                <!-- tagihan -->
                 <li class="nav-item">
-                    <a class="nav-link {{ Route::is('admin.tagihan.*') ? 'active' : '' }}" href="{{ route('admin.tagihan.index') }}">
+                    <a class="nav-link {{ Route::is('admin.tagihan.*') ? 'active' : '' }}"
+                        href="{{ route('admin.tagihan.index') }}">
                         <div
                             class="icon icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
                             <i class="fas fa-wallet"></i>
                         </div>
-                        <span class="nav-link-text ms-1">Biaya Tagihan</span>
+                        <span class="nav-link-text ms-1">Tagihan</span>
                     </a>
                 </li>
 
                 <!-- transaction -->
                 <li class="nav-item">
-                    <a class="nav-link {{ Route::is('admin.transaksi.index') ? 'active' : '' }}"
+                    <a class="nav-link {{ Route::is('admin.transaksi.*') ? 'active' : '' }}"
                         href="{{ route('admin.transaksi.index') }}">
                         <div
                             class="icon icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">

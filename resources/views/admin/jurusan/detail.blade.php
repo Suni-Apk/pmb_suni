@@ -122,7 +122,7 @@
                                                                 Selesai
                                                             </th>
                                                             <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                                                Tanggal
+                                                                Hari
                                                             </th>
                                                         </tr>
                                                     </thead>
@@ -148,7 +148,7 @@
                                                                     <p class="text-xs font-weight-bold mb-0">{{ $matkul->selesai }}</p>
                                                                 </td>
                                                                 <td class="align-text-center text-sm">
-                                                                    <p class="text-xs font-weight-bold mb-0">{{ \Carbon\Carbon::parse($matkul->tanggal)->format('d F Y') }}</p>
+                                                                    <p class="text-xs font-weight-bold mb-0 ms-3">{{ $matkul->hari}}</p>
                                                                 </td>
                                                             </tr>
                                                         @endforeach

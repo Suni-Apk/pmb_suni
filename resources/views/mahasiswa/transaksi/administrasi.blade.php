@@ -40,9 +40,9 @@
                                         <strong>{{$transaksi->jenis_tagihan}}</strong>
                                     </div>
                                 </div>
-                                <form action="{{route('mahasiswa.demo',$transaksi->no_invoice)}}" method="POST">
+                                <form action="{{$transaksi->payment_link}}" method="GET">
                                     @csrf
-                                    @method('PUT')
+                                    @method('GET')
                                 <div class="col-12 col-sm-12">
                                     <button type="submit" class="btn btn-primary w-100">Bayar</button>
                                 </div>

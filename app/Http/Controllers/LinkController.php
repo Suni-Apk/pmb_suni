@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Course;
 use App\Models\Jurusan;
 use App\Models\Link;
 use App\Models\TahunAjaran;
@@ -35,7 +36,8 @@ class LinkController extends Controller
     {
         $jurusans = Jurusan::get();
         $tahun_ajarans = TahunAjaran::get();
-        return view('admin.link.create', compact('jurusans', 'tahun_ajarans'));
+        $kursus = Course::get();
+        return view('admin.link.create', compact('jurusans', 'tahun_ajarans', 'kursus'));
     }
 
     /**
@@ -49,17 +51,18 @@ class LinkController extends Controller
             'type' => 'required',
             'id_tahun_ajarans' => 'string',
             'id_jurusans' => 'string',
-            'gender' => 'required'
+            'gender' => 'required',
+            'id_courses' => 'required'
         ]);
 
         // dd($data);
         Link::create($data);
-        if ( $request->type == 'Whatsapp' ) {
+        if ( $request->type == 'whatsapp' ) {
             return redirect()->route('admin.link.whatsapp')->with('success', "Link Berhasil Di Buat!!");
-        } elseif ( $request->type == 'Zoom' ) {
+        } elseif ( $request->type == 'zoom' ) {
             return redirect()->route('admin.link.zoom')->with('success', "Link Berhasil Di Buat!!");
         } else {
-            return false;
+
         }
     }
 

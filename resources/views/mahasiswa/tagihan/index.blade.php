@@ -13,6 +13,7 @@
             ->where('status', 'berhasil')
             ->where('jenis_pembayaran', 'cash')
             ->first();
+
         $biaya = App\Models\Biaya::where('program_belajar', 'S1')
             ->where('jenis_biaya', 'DaftarUlang')
             ->where('id_angkatans', Auth::user()->biodata->angkatan_id)
@@ -20,15 +21,17 @@
             ->first();
 
         $user = Auth::user();
+
         $tagihan = App\Models\TagihanDetail::where('id_biayas', $biaya->id)
             ->where('id_users', $user->id)
             ->latest()
             ->first();
+
         $cicilans = App\Models\Cicilan::where('id_tagihan_details', $tagihan->id)->first();
+
         $cicilan2 = App\Models\Cicilan::where('id_tagihan_details', $tagihan->id)
             ->where('status', 'LUNAS')
             ->get();
-
     @endphp
     @if (!isset($cicilans) && !isset($transactionDaftar))
         <div class="col-12 text-center mb-4">
@@ -707,36 +710,22 @@
 @endsection
 
 @push('scripts')
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-@if (session('success'))
 <script>
-    Swal.fire(
-        "{{ session('success') }}", // Menggunakan session('success') untuk mengambil pesan
-        'You clicked the button!',
-        'success'
-    )
-</script>
-@endif
-@if (session('error'))
-<script>
-    Swal.fire(
-        "{{ session('error') }}", // Menggunakan session('success') untuk mengambil pesan
-        'You clicked the button!',
-        'error'
-    )
-</script>
-@endif
-<script>
-    $(function(e) {
-        $("#select_all_ids").click(function() {
-            $('.checksAll').prop('checked', $(this).prop('checked'));
-        });
-        $("#select_all_ids2").click(function() {
-            $('.checksAll2').prop('checked', $(this).prop('checked'));
-        });
-        $("#select_all_ids3").click(function() {
-            $('.checksAll3').prop('checked', $(this).prop('checked'));
-        });
+	const dataTableSearch = new simpleDatatables.DataTable("#templateTableNoSearch", {
+      searchable: false,
+      fixedHeight: true,
     });
 </script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+  @if (session('success'))
+      <script>
+          Swal.fire(
+              "{{ session('success') }}", // Menggunakan session('success') untuk mengambil pesan
+              'You clicked the button!',
+              'success'
+          )
+      </script>
+  @endif
 @endpush
+

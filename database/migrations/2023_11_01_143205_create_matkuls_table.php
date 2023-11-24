@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('nama_dosen');
             $table->string('mulai')->nullable();
             $table->string('selesai')->nullable();
-            $table->string('tanggal')->nullable();
+            $table->string('hari')->nullable();
             $table->timestamps();
         });
     }

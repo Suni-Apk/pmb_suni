@@ -16,6 +16,7 @@ class Link extends Model
         'url', // link URL nya
         'id_tahun_ajarans', // relasi ke angkatan berapa
         'id_jurusans', // relasi ke jurusan apa // nullable
+        'id_courses', // untuk bikin link untuk kursus yg mana // nullable
         'gender', // cowo apa cewe atau semuanya
         'type' //whatsapp, atau zoom
     ];
@@ -28,5 +29,10 @@ class Link extends Model
     public function jurusan()
     {
         return $this->belongsTo(Jurusan::class, 'id_jurusans');
+    }
+
+    public function kursus()
+    {
+        return $this->belongsTo(Course::class, 'id_courses');
     }
 }

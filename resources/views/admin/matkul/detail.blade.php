@@ -14,62 +14,61 @@
         </div>
     </div>
 
-    <div class="container-fluid pb-4">
-        <div class="card-body px-0">
-            <hr class="horizontal dark mb-2">
-            <ul class="list-group">
-                <li class="list-group-item border-0 ps-0 pt-0 text-sm">
-                    <span class="text-lg">Nama Dosen: <strong class="text-dark">{{ $matkuls->nama_dosen }}</strong></span>
-                </li>
-            </ul>
-            <hr class="horizontal dark m-0">
-            <div class="table-responsive">
-                <table class="table table-bordered mt-3">
-                    <thead class="bg-gradient-success">
-                        <tr>
-                            <th class="text-white text-xs">Jurusan</th>
-                            <th class="text-white text-xs">Semester</th>
-                            <th class="text-white text-xs">Mulai</th>
-                            <th class="text-white text-xs">Selesai</th>
-                            <th class="text-white text-xs">Tanggal</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>
-                                {{ $matkuls->jurusan->name }}
-                            </td>                                              
-                            <td>
-                                @if ($matkuls->id_semesters)
-                                    {{ $matkuls->id_semesters }}
-                                @else
-                                    -
-                                @endif
-                            </td>
-                            <td>
-                                @if ($matkuls->mulai)
-                                    {{ $matkuls->mulai }}
-                                @else
-                                    -
-                                @endif
-                            </td>
-                            <td>
-                                @if ($matkuls->selesai)
-                                    {{ $matkuls->selesai }}
-                                @else
-                                    -
-                                @endif
-                            </td>
-                            <td>
-                                @if ($matkuls->tanggal)
-                                    {{ $matkuls->tanggal }}
-                                @else
-                                    -
-                                @endif
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
+    <div class="container-fluid py-4">
+        <div class="row">
+                <div class="card-body p-3">
+                    <hr class="horizontal gray-light">
+                    <ul class="list-group">
+                        <li class="list-group-item border-0 ps-0 pt-0 text-sm"><strong class="text-dark fs-5">Nama Dosen: {{ $matkuls->nama_dosen }}</strong>
+                            &nbsp; </li>
+                            <table class="table table-bordered mt-3">
+                                <thead class="bg-gradient-success">
+                                    <tr>
+                                        <th class="text-white">Jurusan</th>
+                                        <th class="text-white">Semester</th>
+                                        <th class="text-white">Mulai</th>
+                                        <th class="text-white">Selesai</th>
+                                        <th class="text-white d-flex">Tanggal</th>
+                                    </tr>
+                                </thead>
+                                    <tbody>
+                                                <tr>
+                                                    <td>
+                                                            {{ $matkuls->jurusan->name }}
+                                                    </td>                                                                                                                                               
+                                                    <td>
+                                                            @if ($matkuls->id_semesters)
+                                                                {{ $matkuls->id_semesters }}
+                                                            @else
+                                                                -
+                                                            @endif
+                                                    </td>
+                                                    <td>
+                                                        @if ($matkuls->mulai)
+                                                                {{ $matkuls->mulai }}
+                                                            @else
+                                                                -
+                                                            @endif
+                                                    </td>
+                                                    <td>
+                                                        @if ($matkuls->selesai)
+                                                                {{ $matkuls->selesai }}
+                                                            @else
+                                                                -
+                                                            @endif
+                                                    </td>
+                                                    <td>
+                                                        @if ($matkuls->hari)
+                                                                {{ $matkuls->hari }}
+                                                            @else
+                                                                -
+                                                            @endif
+                                                    </td>                                  
+                                                </tr>
+                                    </tbody>
+                            </table>
+                    </ul>
+                </div>
             </div>
         </div>
     </div>

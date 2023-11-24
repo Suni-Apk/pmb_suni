@@ -49,10 +49,10 @@
                                     </div>
 
                                     <button type="submit" class="btn btn-success">Submit</button>
-                                    <a href="{{ route('admin.jurusan.index') }}">
+                                    <a href="{{ route('admin.course.index') }}">
                                         <button type="button" class="btn btn-warning">Back</button>
                                     </a>
-                                </form
+                                </form>
                             </div>
                         </div>
                     </div>

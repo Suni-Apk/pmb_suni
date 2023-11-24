@@ -27,10 +27,10 @@ class MatkulController extends Controller
 
                 return view('mahasiswa.matkul.index', compact('jurusan', 'semester', 'matkuls'));
             } else {
-                return redirect()->route('nama_route_yang_diinginkan')->with('error', 'Anda belum memilih jurusan.');
+                return redirect()->route('mahasiswa.index')->with('error', 'Anda belum memilih jurusan.');
             }
         } else {
-            return redirect()->route('nama_route_yang_diinginkan')->with('error', 'Anda belum mengisi biodata.');
+            return redirect()->route('mahasiswa.index')->with('error', 'Anda belum mengisi biodata.');
         }
     }
 }

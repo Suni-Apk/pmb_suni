@@ -122,6 +122,22 @@
                                 </div>
                               </div>
                             </form>
+
+                            <form action="{{route('admin.mahasiswa.status',$item->id)}}" method="POST" class="d-inline">
+                              @csrf
+                              @method('PUT')
+                              @if ($item->status == 'on')
+                                <input type="hidden" name="status" value="off">
+                                <button class="badge badge-sm bg-gradient-dark font-weight-bolder text-xxs ms-1 border-0" type="submit">
+                                  OFF
+                                </button>
+                              @elseif($item->status == 'off')
+                                <input type="hidden" name="status" value="on">
+                                <button class="badge badge-sm bg-teal font-weight-bolder text-xxs ms-1 border-0" type="submit">
+                                  ON
+                                </button>
+                              @endif
+                            </form>
                         </td>
                     </tr>
                   @empty

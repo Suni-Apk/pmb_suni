@@ -17,4 +17,14 @@ class Course extends Model
     {
         return $this->hasMany(Biodata::class);
     }
+
+    public function mapel()
+    {
+        return $this->hasMany(Mapels::class, 'id_courses');
+    }
+
+    public function links()
+    {
+        return $this->hasMany(Links::class);
+    }
 }

@@ -13,21 +13,24 @@ use App\Http\Controllers\Kursus\BiodataController as KursusBiodataController;
 use App\Http\Controllers\Kursus\ProfileController as KursusProfileController;
 use App\Http\Controllers\Kursus\TagihanController as KursusTagihanController;
 use App\Http\Controllers\Kursus\DashboardController as KursusDashboardController;
+use App\Http\Controllers\Kursus\TransactionController as KursusTransactionController;
 use App\Http\Controllers\Mahasiswa\MatkulController;
 use App\Http\Controllers\Mahasiswa\BiodataController;
 use App\Http\Controllers\Mahasiswa\TagihanController;
 use App\Http\Controllers\Mahasiswa\DocumentController;
-use App\Http\Controllers\Mahasiswa\DashboardController;
 use App\Http\Controllers\Mahasiswa\TransaksiController;
 use App\Http\Controllers\Mahasiswa\ProfileController as MahasiswaProfileController;
+use App\Http\Controllers\Mahasiswa\DashboardController as S1DashboardController;
 use App\Http\Controllers\LinkController;
+use App\Http\Controllers\IpaymuController;
+use App\Http\Controllers\MapelsController;
 use App\Http\Controllers\SettingController;
 use App\Http\Controllers\JurusanController;
 use App\Http\Controllers\TahunAjaranController;
 use App\Http\Controllers\AdministrasiController;
+use App\Http\Controllers\PembayaranUserController;
 use App\Http\Controllers\DocumentController as AdminDocumentController;
 use App\Http\Controllers\MatkulController as ControllersMatkulController;
-use App\Http\Controllers\Kursus\TransactionController as KursusTransactionController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -58,7 +61,7 @@ Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
 
 Route::prefix('/switch')->middleware(['auth'])->name('program.')->group(function () {
     Route::get('/program-belajar', [AuthController::class, 'switch_program'])->name('program_belajar');
-    Route::get('/program-belajar/switch', [AuthController::class, 'switch'])->name('program_belajar.switch');
+    Route::post('/program-belajar/switch/{id}', [AuthController::class, 'switch'])->name('program_belajar.switch');
 });
 
 // Auth Admin
@@ -140,11 +143,12 @@ Route::prefix('/admin')->middleware(['admin', 'auth'])->name('admin.')->group(fu
     
     // proses transaksi
     Route::prefix('transaksi')->name('transactions.')->group(function () {
-        Route::post('/proses_bayar/{id}', [TransactionController::class, 'proses_bayar'])->middleware(['Pembayaran'])->name('proses_bayar');
+        Route::post('/proses-bayar/{id}', [TransactionController::class, 'proses_bayar'])->middleware(['Pembayaran'])->name('proses_bayar');
     });
     
     // resources management
     Route::resource('/matkul', ControllersMatkulController::class);
+    Route::resource('/mapel', MapelsController::class);
     Route::resource('/jurusan', JurusanController::class);
     Route::resource('/transaksi', TransactionController::class);
     Route::resource('/tagihan', AdminTagihanController::class);
@@ -197,7 +201,7 @@ Route::prefix('/kursus')->middleware(['auth', 'kursus'])->name('kursus.')->group
     });
 
     //mata pelajaran
-    Route::get('/mata-pelajaran', [MataPelajaranController::class, 'index'])->name('matkul');
+    Route::get('/mata-pelajaran', [MataPelajaranController::class, 'index'])->name('mapel');
 
     //tagihan kursus
     Route::prefix('/tagihan')->name('tagihan.')->group(function () {
@@ -217,17 +221,29 @@ Route::prefix('/kursus')->middleware(['auth', 'kursus'])->name('kursus.')->group
     });
     Route::get('/bayar/{id}', [KursusTagihanController::class, 'bayar'])->name('tagihan.bayar');
 
-    Route::prefix('/transactions/')->name('transactions.')->group(function () {
+    Route::prefix('/transaksi')->name('transactions.')->group(function () {
         Route::post('/proses_bayar', [KursusTransactionController::class, 'proses_bayar'])->middleware('KursusTransactions')->name('proses_bayar');
     });
 });
 
+Route::prefix('/callback')->name('callback.')->group(function () {
+    Route::get('/return', function () {
+        return view('callback.return');
+    })->name('return');
+
+    Route::get('/cancel', function () {
+        return view('callback.cancel');
+    })->name('cancel');
+
+    Route::post('/notify', [IpaymuController::class, 'notify'])->name('notify');
+});
+
 //Mahasiswa
 Route::prefix('/mahasiswa')->middleware(['auth', 'mahasiswa', 's1'])->name('mahasiswa.')->group(function () {
-    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+    Route::get('/dashboard', [S1DashboardController::class, 'index'])->name('dashboard');
 
     //callback demo doang
-    Route::put('/change/status/{sid}',[AuthController::class,'demo_success'])->name('demo');
+    // Route::post('/change/status/{sid}',[AuthController::class,'demo_success'])->name('demo');
     Route::put('/change-daftar-ulang/status/{sid}',[AuthController::class,'daftar_ulang_demo_success'])->name('daftar.ulang.demo');
 
     //biodata
@@ -273,6 +289,7 @@ Route::prefix('/mahasiswa')->middleware(['auth', 'mahasiswa', 's1'])->name('maha
         Route::get('/detail/{name}',[TagihanController::class,'detail_tidak_routine'])->name('detail.tidak.routine');
         Route::get('/detail-spp/{name}',[TagihanController::class,'detail_spp'])->name('detail.spp');
         Route::get('/payment-spp/{name}', [TagihanController::class, 'payment_spp'])->name('payment.spp');
+        Route::get('pay-ipaymu/{id}/{iduser}', [PembayaranUserController::class, 'payIpaymu'])->name('payment.ipaymu');
     });
     //Detail Bayar 
     Route::get('/bayar/{id}', [TagihanController::class, 'bayar'])->middleware('MahasiswaTransactions')->name('tagihan.bayar');
@@ -282,7 +299,7 @@ Route::prefix('/mahasiswa')->middleware(['auth', 'mahasiswa', 's1'])->name('maha
     Route::put('/demoBayar/{id}', [TransaksiController::class, 'demo_bayar_cicilan'])->name('transactions.cicilan.bayar');
 
     //callback demo bayar tagihan
-    Route::prefix('/transactions/')->name('transactions.')->group(function () {
+    Route::prefix('/transaksi')->name('transactions.')->group(function () {
         Route::post('/proses_bayar', [TransaksiController::class, 'proses_bayar'])->middleware('MahasiswaTransactions')->name('proses_bayar');
     });
     // logout

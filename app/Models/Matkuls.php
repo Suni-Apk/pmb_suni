@@ -16,7 +16,7 @@ class Matkuls extends Model
         'nama_dosen',
         'mulai',
         'selesai',
-        'tanggal'
+        'hari'
     ];
 
     public function jurusan()

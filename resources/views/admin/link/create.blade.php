@@ -71,14 +71,24 @@
                         </select>
                     </div>
                     <div class="form-group">
-                        <label for="">Jurusan</label>
+                        <label for="id_jurusans">Jurusan</label>
                         <select name="id_jurusans" id="id_jurusans" class="form-select">
-                            <option selected>-----------</option>
+                            <option selected disabled>-----------</option>
                             @foreach ($jurusans as $item)
                                 <option value="{{ $item->id }}">{{ $item->name }}</option>
                             @endforeach
                         </select>
                     </div>
+                    <div class="form-group">
+                        <label for="id_courses">Kursus</label>
+                        <small class="text-info" style="font-size: 10px">Diisi ketika ingin menambahkan link untuk Kursus</small>
+                        <select name="id_courses" id="id_courses" class="form-select">
+                            <option selected disabled value="">-----------</option>
+                            @foreach ($kursus as $item)
+                                <option value="{{ $item->id }}">{{ $item->name }}</option>
+                            @endforeach
+                        </select>
+                    </div>                    
                     <div class="form-group">
                         <button type="submit" class="btn btn-primary">Submit</button>
                         <a href="javascript:location.reload()" class="btn btn-warning">Reset</a>

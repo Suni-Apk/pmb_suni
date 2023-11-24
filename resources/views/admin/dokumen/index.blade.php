@@ -31,7 +31,7 @@
                                     </td>
                                     <td>
                                         <div class="d-flex justify-content-start align-items-center gap-3">
-                                            <embed src="{{ asset('soft-ui-dashboard-main/Akte Haidar.pdf') }}" type="application/pdf" height="150">
+                                            <embed src="{{ asset('Akte Haidar.pdf') }}" type="application/pdf" height="150">
                                             <h6 class="mb-0 text-sm">IJAZAH</h6>
                                         </div>
                                     </td>

@@ -60,10 +60,18 @@
                                         <input type="text" name="selesai" id="selesai" class="form-control" value="{{ old('selesai', $matkuls->selesai) }}">
                                     </div>
                                     <div class="form-group mb-3">
-                                        <label for="tanggal">Tanggal</label>
-                                        <input type="date" name="tanggal" id="tanggal" class="form-control" value="{{ old('tanggal', $matkuls->tanggal) }}">
-                                    </div>
-
+                                        <label for="hari">Hari</label>
+                                        <select name="hari" id="hari" class="form-control" required>
+                                            <option hidden selected>-----------</option>
+                                            <option value="Senin" {{ old('hari', $matkuls->hari) == 'Senin' ? 'selected' : '' }}>Senin</option> 
+                                            <option value="Selasa" {{ old('hari', $matkuls->hari) == 'Selasa' ? 'selected' : '' }}>Selasa</option> 
+                                            <option value="Rabu" {{ old('hari', $matkuls->hari) == 'Rabu' ? 'selected' : '' }}>Rabu</option> 
+                                            <option value="Kamis" {{ old('hari', $matkuls->hari) == 'Kamis' ? 'selected' : '' }}>Kamis</option> 
+                                            <option value="Jumat" {{ old('hari', $matkuls->hari) == 'Jumat' ? 'selected' : '' }}>Jumat</option> 
+                                            <option value="Sabtu" {{ old('hari', $matkuls->hari) == 'Sabtu' ? 'selected' : '' }}>Sabtu</option> 
+                                            <option value="Ahad" {{ old('hari', $matkuls->hari) == 'Ahad' ? 'selected' : '' }}>Ahad</option> 
+                                        </select>
+                                    </div>                                    
                                     <button type="submit" class="btn btn-success">Submit</button>
                                     <a href="{{ route('admin.matkul.index') }}">
                                         <button type="button" class="btn btn-warning">Back</button>

@@ -54,15 +54,15 @@
                                         </button>
                                         <ul class="dropdown-menu" aria-labelledby="dropdownLogin">
                                             <li>
-                                                <a class="dropdown-item" href="{{ route('admin.login') }}">
-                                                    <i class="fas me-2 fa-user-cog"></i>
-                                                  Admin
-                                                </a>
-                                            </li>
-                                            <li>
                                                 <a class="dropdown-item" href="{{ route('login') }}">
                                                     <i class="fas me-3 fa-user"></i>
                                                   Mahasiswa
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a class="dropdown-item" href="{{ route('admin.login') }}">
+                                                    <i class="fas me-2 fa-user-cog"></i>
+                                                  Admin
                                                 </a>
                                             </li>
                                         </ul>

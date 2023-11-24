@@ -11,15 +11,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('links', function (Blueprint $table) {
+        Schema::create('mapels', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('id_courses');
             $table->string('name');
-            $table->string('url');
-            $table->foreignId('id_tahun_ajarans');
-            $table->foreignId('id_jurusans')->nullable();
-            $table->foreignId('id_courses')->nullable();
-            $table->enum('type', ['whatsapp', 'zoom']);
-            $table->enum('gender', ['ikhwan', 'akhwat', 'all']);
+            $table->string('description')->nullable();
+            $table->string('guru');
+            $table->string('mulai')->nullable();
+            $table->string('selesai')->nullable();
+            $table->string('hari')->nullable();
             $table->timestamps();
         });
     }
@@ -29,6 +29,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('links');
+        Schema::dropIfExists('mapels');
     }
 };

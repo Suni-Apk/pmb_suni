@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('id_tahun_ajarans');
             $table->string('name');
-            $table->string('code');
+            $table->string('code')->unique();
             $table->timestamps();
         });
     }

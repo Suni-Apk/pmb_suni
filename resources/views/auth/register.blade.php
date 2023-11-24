@@ -4,19 +4,6 @@
 
 @section('content')
     <section class="min-vh-25">
-        {{-- <div class="page-header align-items-start min-vh-50 pt-5 pb-11 m-3 border-radius-lg"
-            style="background-image: url('/assets/img/curved-images/curved14.jpg');">
-            <span class="mask bg-gradient-dark opacity-6"></span>
-            <div class="container">
-                <div class="row justify-content-center">
-                    <div class="col-lg-5 text-center mx-auto">
-                        <h1 class="text-white mb-1 mt-6">Selamat Datang!</h1>
-                        <p class="letter-spacing-1 text-white">Harap isi formulir dibawah ini dengan benar.</p>
-                    </div>
-                </div>
-            </div>
-        </div> --}}
-
         <div id="carouselRegister" class="carousel slide page-header align-items-start height-500 pb-7 m-3 border-radius-lg z-index-1" data-bs-ride="carousel" data-bs-interval="3000">
             <div class="carousel-indicators" style="top: 5rem;">
                 @foreach ($banner->where('type', 'WELCOME') as $item)
