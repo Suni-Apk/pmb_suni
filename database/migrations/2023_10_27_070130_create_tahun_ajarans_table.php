@@ -15,8 +15,8 @@ return new class extends Migration
             $table->id();
             $table->string('year');
             $table->enum('status', ['Active', 'nonActive'])->default('nonActive');
-            $table->string('start_at');
-            $table->string('end_at');
+            $table->date('start_at');
+            $table->date('end_at');
             $table->timestamps();
         });
     }

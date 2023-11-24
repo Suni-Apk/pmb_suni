@@ -47,7 +47,9 @@
                                     </td>
                                     <td class="align-middle text-center">
                                         <button type="button" class="badge badge-sm border-0 bg-gradient-info" data-bs-toggle="modal" data-bs-target="#modalLink{{ $angkatans->id }}"
-                                        >Link <i class="fas fa-plus me-1"></i></button>
+                                        >Link <i class="fas fa-link ms-1"></i></button>
+
+                                        <a href="{{ route('admin.tahun-ajaran.detail', $angkatans->id) }}" class="badge badge-sm bg-gradient-warning text-xxs font-weight-bolder ms-1">Detail</a>
 
                                         <form action="{{ route('admin.tahun_ajaran.active',$angkatans->id) }}" method="POST" class="d-inline">
                                             @csrf
@@ -77,7 +79,7 @@
                                             <div class="modal-dialog modal-dialog-centered" role="document">
                                                 <div class="modal-content">
                                                     <div class="modal-header">
-                                                        <h5 class="modal-title" id="modalLinkLabel">Pilih Jenis Tagihan</h5>
+                                                        <h5 class="modal-title" id="modalLinkLabel">Tambah Link</h5>
                                                         <button type="button" class="btn-close border rounded-circle p-1 fs-3 lh-1 text-dark" data-bs-dismiss="modal" aria-label="Close">&times;</button>
                                                     </div>
                                                     <form action="{{ route('admin.link.create.process') }}" method="POST">

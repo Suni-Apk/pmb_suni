@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Link;
 use App\Models\TahunAjaran;
 use Illuminate\Http\Request;
 use League\CommonMark\Extension\CommonMark\Node\Inline\Strong;
@@ -66,7 +67,10 @@ class TahunAjaranController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $angkatan = TahunAjaran::findOrFail($id);
+        $links = Link::get();
+
+        return view('admin.tahun_ajaran.detail', compact('angkatan', 'links'));
     }
 
     /**

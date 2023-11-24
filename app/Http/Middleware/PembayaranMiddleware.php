@@ -30,7 +30,7 @@ class PembayaranMiddleware
             foreach ($tagihanDetail as $value) {
                 $transaction = Transaksi::all();
                 foreach ($transaction as $transactions) {
-                    if (!isset($value->id_transactions) == $transactions->id) {
+                    if (!isset($value->id_transactions) == $transactions->id && $transactions->status == 'berhasil') {
                         return $next($request);
                     } else {
                         return redirect()->route('admin.mahasiswa.show', $userId)->with('error', 'Maaf, anda sudah membayar !');

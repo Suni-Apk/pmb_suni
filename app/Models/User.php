@@ -3,6 +3,8 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+
+use Illuminate\Auth\Passwords\CanResetPassword;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -11,7 +13,7 @@ use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable
 {
-    use HasApiTokens, HasFactory, Notifiable;
+    use HasApiTokens, HasFactory, Notifiable, CanResetPassword;
 
     /**
      * The attributes that are mass assignable.
@@ -28,6 +30,7 @@ class User extends Authenticatable
         'email',
         'status',
         'password',
+        'angkatan_id',
     ];
 
     /**
@@ -50,6 +53,10 @@ class User extends Authenticatable
         'password' => 'hashed',
     ];
 
+    public function angkatan()
+    {
+        return $this->belongsTo(TahunAjaran::class);
+    }
 
     public function biodata()
     {
@@ -70,5 +77,14 @@ class User extends Authenticatable
     {
         return $this->hasMany(Transaksi::class);
     }
-    
+
+    public function banners()
+    {
+        return $this->hasMany(Banner::class, 'author');
+    }
+
+    public function tagihanDetail()
+    {
+        return $this->hasMany(TagihanDetail::class);
+    }
 }

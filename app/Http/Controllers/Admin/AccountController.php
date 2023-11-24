@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Biaya;
 use App\Models\Biodata;
 use App\Models\TagihanDetail;
+use App\Models\TahunAjaran;
 use App\Models\Transaksi;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -34,11 +35,11 @@ class AccountController extends Controller
     {
         $messages = [
             'name.required' => 'Nama Lengkap Wajib Diisi',
-            'name.min:3' => 'Nama Anda Minimal 3 Huruf!!',
+            'name.min:3' => 'Nama Anda Minimal 3 Huruf',
             'name.max:255' => 'Nama Anda Kepanjangan',
             'phone.required' => 'Nomor Whatshapp Wajib Diisi',
-            'phone.min' => 'Nomor Whatshapp Minimal 12 Angka!!',
-            'phone.max' => 'Nomor Whatshapp Maksimal 13 Angka!!',
+            'phone.min' => 'Nomor Whatshapp Minimal 12 Angka',
+            'phone.max' => 'Nomor Whatshapp Maksimal 13 Angka',
             'phone.unique' => 'Nomor Sudah DI pakai Orang Lain',
             'email.email' => 'Harus Format Email',
             'email.required' => 'Email Wajib Diisi',
@@ -46,7 +47,7 @@ class AccountController extends Controller
             'gender.required' => 'Gender Wajib Diisi',
             'password.required' => 'Password Wajib Diisi',
             'password.confirmed' => 'Password Harus Sama',
-            'password.min:8' => 'Password Wajib 8 Angka / Huruf!!!'
+            'password.min:8' => 'Password Wajib 8 Angka / Huruf!'
         ];
         $data = $request->validate([
             'name' => 'required|min:3|max:255|string',
@@ -139,19 +140,19 @@ class AccountController extends Controller
     {
         $messages = [
             'name.required' => 'Nama Lengkap Wajib Diisi',
-            'name.min:3' => 'Nama Anda Minimal 3 Huruf!!',
+            'name.min:3' => 'Nama Anda Minimal 3 Huruf',
             'name.max:255' => 'Nama Anda Kepanjangan',
             'phone.required' => 'Nomor Whatshapp Wajib Diisi',
-            'phone.min' => 'Nomor Whatshapp Minimal 12 Angka!!',
-            'phone.max' => 'Nomor Whatshapp Maksimal 13 Angka!!',
-            'phone.unique' => 'Nomor Sudah DI pakai Orang Lain',
+            'phone.min' => 'Nomor Whatshapp Minimal 12 Angka',
+            'phone.max' => 'Nomor Whatshapp Maksimal 13 Angka',
+            'phone.unique' => 'Nomor Sudah dipakai Orang Lain',
             'email.email' => 'Harus Format Email',
             'email.required' => 'Email Wajib Diisi',
             'email.unique' => 'Email Sudah Di pakai Orang Lain',
             'gender.required' => 'Gender Wajib Diisi',
             'password.required' => 'Password Wajib Diisi',
             'password.confirmed' => 'Password Harus Sama',
-            'password.min:8' => 'Password Wajib 8 Angka / Huruf!!!'
+            'password.min:8' => 'Password Wajib 8 Angka / Huruf'
         ];
         $data = $request->validate([
             'name' => 'required|min:3|max:255|string',
@@ -163,6 +164,7 @@ class AccountController extends Controller
         $data['active'] = 1;
         $data['token'] = rand(1111111, 999999);
         $data['role'] = 'Mahasiswa';
+        $data['angkatan_id'] = TahunAjaran::latest()->where('status', 'Active')->first();
 
         User::create($data);
 
@@ -259,25 +261,45 @@ class AccountController extends Controller
             }
         }
 
-
         $tagihan = TagihanDetail::where('id', $ids)->firstOrFail();
         $total = array_sum($jumlahBiaya);
         $mahasiswa = User::findOrFail($id);
-        foreach ($ids as $idTagih) {
-            $tagihanDetail = TagihanDetail::where('id', $idTagih)->get();
-            foreach ($tagihanDetail as $value) {
-                // dd($value);
-                $transaction = Transaksi::all();
-                foreach ($transaction as $transactions) {
-                    if ($value->id_transactions === $transactions->id && $value->status === 'LUNAS' && $value->id_users == $mahasiswa->id) {
-                        return redirect()->route('admin.mahasiswa.show', $mahasiswa->id);
-                    } else {
-                        return view('admin.account.mahasiswa.bayar', compact('jenis', 'id', 'total', 'mahasiswa', 'tagihan', 'ids'));
-                    }
-                }
-            }
-        }
+        // foreach ($ids as $idTagih) {
+        //     $tagihanDetail = TagihanDetail::where('id', $idTagih)->get();
+        //     foreach ($tagihanDetail as $value) {
+        //         // dd($value);
+        //         $transaction = Transaksi::all();
+        //         foreach ($transaction as $transactions) {
+        //             if ($value->id_transactions === $transactions->id && $value->status === 'LUNAS' && $value->id_users == $mahasiswa->id) {
+        //                 return redirect()->route('admin.mahasiswa.show', $mahasiswa->id);
+        //             } else {
+        //                 return view('admin.account.mahasiswa.bayar', compact('jenis', 'id', 'total', 'mahasiswa', 'tagihan', 'ids'));
+        //             }
+        //         }
+        //     }
+        // }
 
         return view('admin.account.mahasiswa.bayar', compact('jenis', 'id', 'total', 'mahasiswa', 'tagihan', 'ids'));
+    }
+
+    public function pendaftar()
+    {
+        $mahasiswa = User::where('role', 'Mahasiswa')->get();
+        return view('admin.account.pendaftar.index', compact('mahasiswa'));
+    }
+
+    public function pendaftar_edit()
+    {
+        
+    }
+
+    public function pendaftar_edit_process()
+    {
+        
+    }
+
+    public function pendaftar_delete()
+    {
+
     }
 }

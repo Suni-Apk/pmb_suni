@@ -8,16 +8,85 @@
     <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400&display=swap" rel="stylesheet">
 @endpush
 
-@php
+{{-- @php
     $months = [];
     $currentMonth = date('M Y'); // Mendapatkan bulan dan tahun saat ini
+    $currentTimeStamp = date('Y-m'); // Mendapatkan bulan dan tahun saat ini
     for ($i = 0; $i < 12; $i++) {
         $months[] = date('M Y', strtotime($currentMonth . " +$i month"));
+        $timestamps[] = date('Y-m', strtotime($currentTimeStamp . " +$i month"));
+    }
+	$item = '';
+    dump($timestamps);
+	foreach ($timestamps as $key => $value) {
+		$item = $users->where('role', 'Admin')->where('created_at', 'like', "%{$key}%")->count();
+		dd($item);
+	}
+@endphp --}}
+
+{{-- @php
+    $months = [];
+    $currentMonth = date('M Y'); // Mendapatkan bulan dan tahun saat ini
+    $currentTimeStamp = date('Y-m'); // Mendapatkan bulan dan tahun saat ini
+    $timestamps = []; // Deklarasi array timestamps
+
+    for ($i = 0; $i < 12; $i++) {
+        $months[] = date('M Y', strtotime($currentMonth . " +$i month"));
+        $timestamps[] = date('Y-m', strtotime($currentTimeStamp . " +$i month"));
     }
 
-    // dd($months);
+    // $item = 0; // Inisialisasi $item sebagai angka
+    // dump($timestamps);
+    // foreach ($timestamps as $key => $value) {
+    //     $item = $users->where('role', 'Admin')->where('created_at', 'like', "%{$value}%")->count();
+	// 	dump($item);
+    // }
 
-@endphp
+	$setahunkebelakang = date('Y-m', strtotime($currentTimeStamp . " -1 year +1 month"));
+	$tanggal = [];
+	for ($i=0; $i < 12; $i++) {
+		$tanggal[] = date('Y-m', strtotime($setahunkebelakang . " +$i month"));
+		// dump($tanggal);
+	}
+
+    foreach ($tanggal as $key => $value) {
+        $item = $users->where('role', 'Admin')->where('created_at', 'like', "%{$value}%")->all();
+	}
+	
+	dump($item);
+	dd($setahunkebelakang);
+@endphp --}}
+
+{{-- @php
+    $months = [];
+    $currentMonth = date('M Y'); // Mendapatkan bulan dan tahun saat ini
+    $currentTimeStamp = date('Y-m'); // Mendapatkan bulan dan tahun saat ini
+    $timestamps = []; // Deklarasi array timestamps
+
+    for ($i = 0; $i < 12; $i++) {
+        $months[] = date('M Y', strtotime($currentMonth . " +$i month"));
+        $timestamps[] = date('Y-m', strtotime($currentTimeStamp . " +$i month"));
+    }
+
+    $setahunkebelakang = date('Y-m', strtotime($currentTimeStamp . " -1 year +1 month"));
+
+    $tanggal = [];
+	$item = 0; // Inisialisasi $item sebagai angka
+    for ($i = 0; $i < 12; $i++) {
+        $tanggal[] = date('Y-m', strtotime($setahunkebelakang . " +$i month"));
+		// break;
+		foreach ($tanggal as $key => $value) {
+			
+			$item += $users->where('role', 'Admin')->where('created_at', 'like', "%{$value}%")->count();
+		}
+		// dump($item);
+		dump($users->where('role', 'Admin')->where('created_at', 'like', "%2023-11%"));
+    }
+	dump($tanggal);
+    
+    dd($setahunkebelakang);
+@endphp --}}
+
 
 @push('scripts')
     <script>
@@ -38,7 +107,8 @@
         new Chart(ctx2, {
             type: "line",
             data: {
-                labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep"],
+                labels: [
+				],
                 datasets: [{
                     label: "Admin",
                     tension: 0.4,
@@ -49,7 +119,6 @@
                     backgroundColor: gradientStroke1,
                     fill: true,
                     data: [
-                        {{ $users->where('role', 'Admin')->count() }}
                     ],
                     maxBarThickness: 6
                 }, ],
@@ -280,7 +349,7 @@
 			<div class="card">
 			<div class="card-body p-3">
 				<div class="height-200 d-flex justify-content-center flex-column align-items-center bg-cover text-center"
-				style="background: url(/soft-ui-dashboard-main/assets/img/admin-db.svg);
+				style="background: url(/assets/img/admin-db.svg);
 						background-position: center; background-repeat: no-repeat;">
 					<h4 class="font-weight-bold mb-0 p-3 pb-0" style="background: rgba(255,255,255,.5)!important; backdrop-filter: blur(1px);">
 						Selamat Datang 
@@ -382,7 +451,7 @@
 		<div class="col-12 col-lg-4">
 			<div class="card h-100 p-3">
 			<div class="overflow-hidden position-relative border-radius-lg bg-cover h-100" 
-			{{-- style="background-image: url('/soft-ui-dashboard-main/assets/img/ivancik.jpg');"> --}}
+			{{-- style="background-image: url('/assets/img/ivancik.jpg');"> --}}
 			style="background-image: url('https://suniindonesia.com/wp-content/uploads/2022/10/masjid-pogung-dalangan-fQET4BjQmvc-unsplash.jpg');">
 				<span class="mask bg-gradient-dark"></span>
 				<div class="card-body position-relative z-index-1 d-flex flex-column justify-content-center gap-2">
@@ -458,7 +527,7 @@
 									<td>
 									<div class="d-flex px-2 py-1">
 										<div>
-											<img src="/soft-ui-dashboard-main/assets/img/small-logos/logo-xd.svg" class="avatar avatar-sm me-3" alt="xd">
+											<img src="/assets/img/small-logos/logo-xd.svg" class="avatar avatar-sm me-3" alt="xd">
 										</div>
 										<div class="d-flex flex-column justify-content-center">
 											<h6 class="mb-0 text-sm">Soft UI XD Version</h6>
@@ -468,16 +537,16 @@
 									<td>
 									<div class="avatar-group mt-2">
 										<a href="" class="avatar avatar-xs rounded-circle" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Ryan Tompson">
-											<img src="/soft-ui-dashboard-main/assets/img/team-1.jpg" alt="team1">
+											<img src="/assets/img/team-1.jpg" alt="team1">
 										</a>
 										<a href="" class="avatar avatar-xs rounded-circle" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Romina Hadid">
-											<img src="/soft-ui-dashboard-main/assets/img/team-2.jpg" alt="team2">
+											<img src="/assets/img/team-2.jpg" alt="team2">
 										</a>
 										<a href="" class="avatar avatar-xs rounded-circle" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Alexander Smith">
-											<img src="/soft-ui-dashboard-main/assets/img/team-3.jpg" alt="team3">
+											<img src="/assets/img/team-3.jpg" alt="team3">
 										</a>
 										<a href="" class="avatar avatar-xs rounded-circle" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Jessica Doe">
-											<img src="/soft-ui-dashboard-main/assets/img/team-4.jpg" alt="team4">
+											<img src="/assets/img/team-4.jpg" alt="team4">
 										</a>
 									</div>
 									</td>

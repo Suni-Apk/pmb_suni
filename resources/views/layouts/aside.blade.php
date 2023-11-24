@@ -258,6 +258,17 @@
                     </div>
                 </li>
 
+                <!-- pendaftar -->
+                <li class="nav-item">
+                    <a class="nav-link {{ Route::is('admin.pendaftar.*') ? 'active' : '' }}" href="{{ route('admin.pendaftar.index') }}">
+                        <div
+                            class="icon icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
+                            <i class="fas fa-user-check"></i>
+                        </div>
+                        <span class="nav-link-text ms-1">Pendaftar</span>
+                    </a>
+                </li>
+
                 {{-- payment --}}
                 <li class="nav-item">
                     <ul class="nav-link pb-0 mb-0">
@@ -363,7 +374,7 @@
                             <li class="nav-item ">
                                 <a class="nav-link {{ Route::is('admin.link.zoom') ? 'active' : '' }}" href="{{ route('admin.link.zoom') }}">
                                     <span class="sidenav-mini-icon d-none d-xl-block">
-                                        <img src="/soft-ui-dashboard-main/assets/img/icon-zoom.svg" width="14px">
+                                        <img src="/assets/img/icon-zoom.svg" width="14px">
                                     </span>
                                     <span class="sidenav-normal"> Link Zoom </span>
                                 </a>
@@ -425,7 +436,7 @@
                             <li class="nav-item ">
                                 <a class="nav-link {{ Route::is('admin.administrasi') ? 'active' : '' }}"
                                     href="{{ route('admin.administrasi') }}">
-                                    <span class="sidenav-mini-icon"><i class="ni ni-bell-55"></i></span>
+                                    <span class="sidenav-mini-icon"><i class="fas fa-stream"></i></span>
                                     <span class="sidenav-normal"> Administrasi </span>
                                 </a>
                             </li>
@@ -434,6 +445,13 @@
                                     href="{{ route('admin.settings.notifications') }}">
                                     <span class="sidenav-mini-icon"><i class="ni ni-bell-55"></i></span>
                                     <span class="sidenav-normal"> Notifikasi </span>
+                                </a>
+                            </li>
+                            <li class="nav-item ">
+                                <a class="nav-link {{ Route::is('admin.settings.component') ? 'active' : '' }}"
+                                    href="{{ route('admin.settings.component') }}">
+                                    <span class="sidenav-mini-icon"><i class="fas fa-layer-group"></i></span>
+                                    <span class="sidenav-normal"> Komponen </span>
                                 </a>
                             </li>
                         </ul>
