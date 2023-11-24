@@ -19,7 +19,7 @@ class Biaya extends Model
 
     public function tagihan()
     {
-        return $this->hasMany(Tagihan::class);
+        return $this->hasMany(Tagihan::class, 'id_biayas');
     }
     public function tagihanDetail()
     {

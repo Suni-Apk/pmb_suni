@@ -25,4 +25,9 @@ class Transaksi extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    public function tagihanDetails()
+    {
+        return $this->hasMany(TagihanDetail::class, 'id_transactions');
+    }
 }

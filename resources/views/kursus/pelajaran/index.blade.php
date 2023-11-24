@@ -7,13 +7,13 @@
 
 @section('content')
     <div class="row">
-        <h4 class="ms-2">Jurusan Informatika</h4>
+        <h4 class="ms-2">{{ $biodata->course->name }}</h4>
         {{-- foreach here --}}
-        <div class="col-12 col-lg-6">
+        <div class="col-12 col-lg-12">
             <div class="card mb-4">
                 <div class="card-header pb-0 d-flex justify-content-between">
                     <div>
-                        <h6>Semester 1</h6>
+                        <h6>Mata Pelajaran</h6>
                     </div>
                     <div class="flex-row d-flex">
                         <a href="" class="btn btn-primary fs-6 p-2 px-3">
@@ -30,34 +30,36 @@
                             <thead>
                                 <tr>
                                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Nama
-                                        Mata Kuliah</th>
+                                        Mata Pelajaran</th>
                                     <th class="text-uppercase text-secondary text-xxs px-2 font-weight-bolder opacity-7">
                                         Mulai</th>
                                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
                                         Selesai</th>
-                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Tanggal
+                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Hari
                                     </th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td>
-                                        <div class="d-flex px-2 py-1">
-                                            <div class="d-flex flex-column justify-content-center">
-                                                <h6 class="mb-0 text-sm">Programming</h6>
+                                @foreach ($mapels as $mapel)
+                                    <tr>
+                                        <td>
+                                            <div class="d-flex px-2 py-1">
+                                                <div class="d-flex flex-column justify-content-center">
+                                                    <h6 class="mb-0 text-sm text-center">{{ $mapel->name }}</h6>
+                                                </div>
                                             </div>
-                                        </div>
-                                    </td>
-                                    <td class="align-text-start">
-                                        <span class="text-secondary text-xs font-weight-bold">19:20</span>
-                                    </td>
-                                    <td>
-                                        <p class="text-xs font-weight-bold mb-0">20:25</p>
-                                    </td>
-                                    <td class="align-text-center text-sm">
-                                        <p class="text-xs font-weight-bold mb-0">17-10-2023</p>
-                                    </td>
-                                </tr>
+                                        </td>
+                                        <td class="align-text-start">
+                                            <span class="text-secondary text-xs font-weight-bold">{{ $mapel->mulai }} WIB</span>
+                                        </td>
+                                        <td>
+                                            <p class="text-xs font-weight-bold mb-0">{{ $mapel->selesai }} WIB</p>
+                                        </td>
+                                        <td class="align-text-center text-sm">
+                                            <p class="text-xs font-weight-bold mb-0 ms-3">{{ $mapel->hari }}</p>
+                                        </td>
+                                    </tr>
+                                @endforeach
                             </tbody>
                         </table>
                     </div>

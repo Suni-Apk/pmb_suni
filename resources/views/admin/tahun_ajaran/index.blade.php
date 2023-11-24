@@ -8,7 +8,7 @@
             <div class="card mb-4">
                 <div class="card-header pb-0 d-flex justify-content-between">
                     <h6>Daftar Tahun Ajaran</h6>
-                    <a href="{{route('admin.tahun-ajaran.create')}}" class="btn bg-gradient-primary float-end">Tambah + </a>
+                    <a href="{{route('admin.tahun_ajaran.create')}}" class="btn bg-gradient-primary float-end">Tambah + </a>
                 </div>
                 <div class="card-body px-0 pt-0 pb-2">
                     <div class="table-responsive p-0">
@@ -49,7 +49,7 @@
                                         <button type="button" class="badge badge-sm border-0 bg-gradient-info" data-bs-toggle="modal" data-bs-target="#modalLink{{ $angkatans->id }}"
                                         >Link <i class="fas fa-plus me-1"></i></button>
 
-                                        <form action="{{ route('admin.tahun-ajaran.active',$angkatans->id) }}" method="POST" class="d-inline">
+                                        <form action="{{ route('admin.tahun_ajaran.active',$angkatans->id) }}" method="POST" class="d-inline">
                                             @csrf
                                             @if($angkatans->status == 'nonActive')
                                                 <button type="submit" class="badge border-0 badge-sm bg-gradient-success font-weight-bold text-xxs mx-1">
@@ -62,7 +62,7 @@
                                             @endif
                                         </form>
                                         
-                                        <form action="{{ route('admin.tahun-ajaran.destroy',$angkatans->id) }}" method="POST" class="d-inline">
+                                        <form action="{{ route('admin.tahun_ajaran.destroy',$angkatans->id) }}" method="POST" class="d-inline">
                                             @csrf
                                             @method('DELETE')
                                             <button type="submit" style="letter-spacing: .02rem"

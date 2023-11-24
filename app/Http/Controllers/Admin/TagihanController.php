@@ -29,7 +29,6 @@ class TagihanController extends Controller
      */
     public function create()
     {
-        return view('admin.tagihan.create');
     }
 
     public function next(Request $request)

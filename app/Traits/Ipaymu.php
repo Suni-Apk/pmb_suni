@@ -1,5 +1,7 @@
 <?php
 
+namespace App\Traits;
+
 use App\Models\User;
 use Illuminate\Support\Facades\Http;
 
@@ -9,8 +11,8 @@ trait Ipaymu {
 
     public function __construct()
     {
-        $this->va = config('ipaymu.va');
-        $this->apiKey = config('ipaymu.api_key');
+        $this->va = config('Ipaymu.va');
+        $this->apiKey = config('Ipaymu.api_key');
     }
     public function signature($body,$method)
     {
@@ -23,9 +25,9 @@ trait Ipaymu {
     }
     protected function balance()
     {
-        $va           = $this->va; //get on iPaymu dashboard
-        $url          = 'https://sandbox.ipaymu.com/api/v2/balance'; // for development mode     
-        $method       = 'POST'; //method     
+        $va           = $this->va; 
+        $url          = 'https://sandbox.ipaymu.com/api/v2/balance'; 
+        $method       = 'POST';  
         $timestamp    = Date('YmdHis');
         $body['account']    = $va;
         $signature    = $this->signature($body,$method);
@@ -63,7 +65,7 @@ trait Ipaymu {
         $body['price'][]         = 100000;
         $body['referenceId']     = 'ID-PPDB-'.rand(1111,9999);
         $body['returnUrl']       = route('callback.return');
-        $body['notifyUrl']       = 'https://061a-139-0-93-18.ngrok-free.app/callback/notify';
+        $body['notifyUrl']       = 'https://d179-139-0-154-123.ngrok-free.app/callback/notify';
         $body['cancelUrl']       = route('callback.cancel');
         $body['paymentChannel']  = 'qris';
         $body['expired']         = 24;

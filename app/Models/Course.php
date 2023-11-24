@@ -20,6 +20,11 @@ class Course extends Model
 
     public function mapel()
     {
-        return $this->hasMany(Mapels::class);
+        return $this->hasMany(Mapels::class, 'id_courses');
+    }
+
+    public function links()
+    {
+        return $this->hasMany(Links::class);
     }
 }

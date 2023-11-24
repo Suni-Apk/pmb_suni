@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Mahasiswa;
 
 use App\Http\Controllers\Controller;
+use App\Models\Biaya;
 use App\Models\Biodata;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -12,7 +13,8 @@ class TagihanController extends Controller
     public function index()
     {
         $biodata = Biodata::where('program_belajar','S1')->where('user_id',Auth::user()->id)->first();
-        return view('mahasiswa.tagihan.index',compact('biodata'));
+        $tagihan = Biaya::where('jenis_biaya', 'Routine')->get();
+        return view('mahasiswa.tagihan.index',compact('biodata', 'tagihan'));
     }
 
     public function detail($name)

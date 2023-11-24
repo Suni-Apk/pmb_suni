@@ -14,10 +14,12 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 use App\Traits\Fonnte;
+use App\Traits\Ipaymu;
 use Illuminate\Support\Facades\Redirect;
 
 class AuthController extends Controller
 {
+    use Ipaymu;
     use Fonnte;
     public function register()
     {
@@ -32,7 +34,7 @@ class AuthController extends Controller
         }
         $existingUser = User::where('phone', $phone)->first();
         if ($existingUser) {
-            return redirect()->back()->withErrors(['phone' => 'Nomor Sudah Di Pake Maybe']);
+            return redirect()->back()->withErrors(['phone' => 'Nomor Sudah Terpakai']);
         }
         $messages = [
             'name.required' => 'Nama Lengkap Wajib Diisi',
@@ -165,7 +167,7 @@ class AuthController extends Controller
         return view('mahasiswa.program.index', compact('user'));
     }
 
-    public function switch(Request $request)
+    public function switch(Request $request, $id)
     {
         $user = Auth::user();
         $biodataS1 = Biodata::where('user_id', $user->id)->where('program_belajar', 'S1')->first();
@@ -177,17 +179,19 @@ class AuthController extends Controller
                 $adminstrasiS1 = Administrasi::where('program_belajar', 'S1')->first();
                 // return redirect()->route('mahasiswa.administrasi');
 
+                $payment = json_decode(json_encode($this->redirect_payment($id)), true);
                 $transaksi = Transaksi::create([
                     'user_id' => $user->id,
-                    'no_invoice' => 123124412323,
+                    'no_invoice' => $payment['Data']['SessionID'],
                     'jenis_tagihan' => 'Administrasi',
-                    'jenis_pembayaran' => 'cash',
+                    'jenis_pembayaran' => 'Ipaymu',
                     'program_belajar' => 'S1',
                     'status' => 'pending',
                     'total' => '10000',
-                    'payment_link' => 'dsadadadasd',
+                    'payment_link' => $payment['Data']['Url'],
                 ]);
                 return view('mahasiswa.transaksi.administrasi', compact('transaksi'));
+                // return Redirect::to($transaksi->payment_link);
             } elseif ($transaksiS1->status == 'pending') {
                 $adminstrasiS1Pending = Transaksi::where('program_belajar', 'S1')->where('user_id', $user->id)->where('status', 'pending')->first();
                 return Redirect::to($adminstrasiS1Pending->payment_link);
@@ -204,17 +208,19 @@ class AuthController extends Controller
             if (!$transaksiKursus) {
                 $adminstrasiKursus = Administrasi::where('program_belajar', 'KURSUS')->first();
 
+                $payment = json_decode(json_encode($this->redirect_payment($id)), true);
                 $transaksi = Transaksi::create([
                     'user_id' => $user->id,
-                    'no_invoice' => 31231313123,
+                    'no_invoice' => $payment['Data']['SessionID'],
                     'jenis_tagihan' => 'Administrasi',
-                    'jenis_pembayaran' => 'cash',
+                    'jenis_pembayaran' => 'Ipaymu',
                     'program_belajar' => 'KURSUS',
                     'status' => 'pending',
                     'total' => '10000',
-                    'payment_link' => 'wkwkkwkwk',
+                    'payment_link' => $payment['Data']['Url'],
                 ]);
                 return view('kursus.transaksi.administrasi', compact('transaksi'));
+                return Redirect::to($transaksi->payment_link);
             } elseif ($transaksiKursus->status == 'pending') {
                 $adminstrasiKursusPending = Transaksi::where('program_belajar', 'KURSUS')->where('user_id', $user->id)->where('status', 'pending')->latest()->first();
                 return Redirect::to($adminstrasiKursusPending->payment_link);
@@ -247,6 +253,37 @@ class AuthController extends Controller
         return redirect()->route($dashboardRoute)->with('success', 'Selamat Datang Anda Telah Melakukan Pembayaran');
     }
 
+    // public function demo_success(Request $request, $sid)
+    // {
+    //     $userId = Auth::user()->id;
+    //     $transaksi = Transaksi::where('user_id', $userId)->where('no_invoice', $sid)->first();
+
+    //     $id_tagihan = $request->id_tagihan;
+    //     $sid = $request->id;
+    //     $status = $request->status;
+    //     $trx = $request->trx_id;
+    //     $transaction = Transaksi::with('user')->where('no_invoice', $sid)->first();
+
+    //     if ($status == 'berhasil') {
+    //         $transaction->update([
+    //             'status' => $status,
+    //             'id_user' => $transaction->user->name,
+    //             'update_at' => now()
+    //         ]);
+
+    //         $pembayaranGet = TagihanDetail::where('id_transactions', $transaction->id)->get();
+
+    //         // Redirect to payment link after successful transaction
+    //         return Redirect::to($transaksi->payment_link);
+    //     } else {
+    //         return redirect()->back()->with('error', 'Transaction not found.');
+    //     }
+
+    //     $dashboardRoute = ($transaction->program_belajar == 'S1') ? 'mahasiswa.dashboard' : 'kursus.dashboard';
+
+    //     return redirect()->route($dashboardRoute)->with('success', 'Selamat Datang Anda Telah Melakukan Pembayaran');
+    // }
+
     public function daftar_ulang_demo_success($sid)
     {
         $userId = Auth::user()->id;
@@ -260,14 +297,14 @@ class AuthController extends Controller
         $transaksi->update([
             'status' => 'berhasil'
         ]);
-        $biaya = Biaya::where('program_belajar','S1')->where('jenis_biaya','DaftarUlang')->where('id_angkatans',Auth::user()->biodata->angkatan_id)->latest()->first();
-      
+        $biaya = Biaya::where('program_belajar', 'S1')->where('jenis_biaya', 'DaftarUlang')->where('id_angkatans', Auth::user()->biodata->angkatan_id)->latest()->first();
+
         $user = Auth::user();
-        $tagihan = TagihanDetail::where('id_biayas',$biaya->id)->where('id_users',$user->id)->latest()->first();
+        $tagihan = TagihanDetail::where('id_biayas', $biaya->id)->where('id_users', $user->id)->latest()->first();
         // $bagi3 = $tagihan->amount / 3;
         // dd($bagi3);
-        $transaction = Transaksi::where('user_id',$user->id)->where('tagihan_detail_id',$tagihan->id)->where('jenis_tagihan',$biaya->jenis_biaya)->where('status','berhasil')->sum('total');
-        if($transaction == $tagihan->amount){
+        $transaction = Transaksi::where('user_id', $user->id)->where('tagihan_detail_id', $tagihan->id)->where('jenis_tagihan', $biaya->jenis_biaya)->where('status', 'berhasil')->sum('total');
+        if ($transaction == $tagihan->amount) {
             $tagihan->update([
                 'status' => 'LUNAS'
             ]);
@@ -275,7 +312,7 @@ class AuthController extends Controller
 
         return redirect()->route('mahasiswa.tagihan.index')->with('success', 'Selamat Datang Anda Telah Melakukan Pembayaran');
     }
-    
+
 
 
     public function logout()

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Kursus;
 
 use App\Http\Controllers\Controller;
 use App\Models\Biodata;
+use App\Models\Course;
 use GuzzleHttp\Client;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -26,7 +27,8 @@ class DashboardController extends Controller
         $hijriDatemonth = $data['data']['hijri']['month']['ar'];
         $hijriDateyear = $data['data']['hijri']['year'];
         $user = Auth::user();
+        $kursus = Course::all();
         $biodata = Biodata::where('program_belajar','KURSUS')->where('user_id',$user->id)->first();
-        return view('kursus.index',compact('hijriDateday','hijriDatemonth','hijriDateyear','user','biodata'));
+        return view('kursus.index',compact('hijriDateday','hijriDatemonth','hijriDateyear','user','biodata', 'kursus'));
     }
 }

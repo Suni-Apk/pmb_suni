@@ -15,7 +15,7 @@
                 </div>
                 <div class="card-body pt-0">
                     <div class="table-responsive text-nowrap">
-                        <form action="{{ route('admin.tahun-ajaran.create.process') }}" method="POST">
+                        <form action="{{ route('admin.tahun_ajaran.create.process') }}" method="POST">
                             @csrf
                             @method('POST')
                             <div class="form-group mb-3">
@@ -33,7 +33,7 @@
                             </div>
 
                             <button type="submit" class="btn btn-success">Submit</button>
-                            <a href="{{ route('admin.tahun-ajaran.index') }}">
+                            <a href="{{ route('admin.tahun_ajaran.index') }}">
                                 <button type="button" class="btn btn-warning">Back</button>
                             </a>
                         </form>
