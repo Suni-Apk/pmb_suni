@@ -13,6 +13,7 @@ use App\Models\Transaksi;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class TransaksiController extends Controller
 {
@@ -177,9 +178,6 @@ class TransaksiController extends Controller
             ]);
         }
 
-
-
-
         $cicilans = Cicilan::where('id_tagihan_details', $tagihanDetail->id)->where('status', 'LUNAS')->get();
         if ($cicilans->count() == 3) {
             $tagihanDetail->update([
@@ -230,5 +228,14 @@ class TransaksiController extends Controller
         }
         return redirect()->route('mahasiswa.tagihan.index')->with('success', 'Selamat anda berhasil menbayar');
         // if()
+    }
+
+    public function invoice(Request $request,$id)
+    {
+        $transaction = Transaksi::where('user_id',$id)->where('jenis_tagihan',$request->DaftarUlang)->where('status','berhasil')->get();
+        $user = Auth::user();
+        $pdf = Pdf::loadView('mahasiswa.invoice.index', compact('transaction', 'user'));
+
+        return $pdf->download("$request->DaftarUlang - INVOICE - $user->name.pdf");
     }
 }
