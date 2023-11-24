@@ -154,10 +154,10 @@
                                 is-invalid
                             @enderror"
                                 id="program_belajar" onchange="enableProgram(this)">
-                                <option disabled selected>-- Pilih Program belajar --</option>
+                                <option disabled selected value="">-- Pilih Program belajar --</option>
                                 <option value="S1" {{ old('program_belajar') == 'S1' ? 'selected' : '' }}>S1</option>
-                                <option value="KURSUS" {{ old('program_belajar') == 'KURSUS' ? 'selected' : '' }}>
-                                    KURSUS</option>
+                                <option value="Kursus" {{ old('program_belajar') == 'Kursus' ? 'selected' : '' }}>
+                                    Kursus</option>
                             </select>
                             @error('program_belajar')
                                 <div id="validationServer03Feedback" class="invalid-feedback">
@@ -373,6 +373,11 @@
 
 @push('scripts')
     <script>
+        $('.rupiah').mask("#.##0", {
+            reverse: true
+        });
+    </script>
+    <script>
         const angkatanSelect = document.getElementById('id_angkatans');
         const jurusanSelect = document.getElementById('id_jurusans');
 
@@ -455,10 +460,5 @@
             }
 
         }
-    </script>
-    <script>
-        $('.rupiah').mask("#.##0", {
-            reverse: true
-        });
     </script>
 @endpush

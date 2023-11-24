@@ -30,6 +30,7 @@ class User extends Authenticatable
         'email',
         'status',
         'password',
+        'angkatan_id',
     ];
 
     /**
@@ -52,6 +53,10 @@ class User extends Authenticatable
         'password' => 'hashed',
     ];
 
+    public function angkatan()
+    {
+        return $this->belongsTo(TahunAjaran::class);
+    }
 
     public function biodata()
     {
@@ -76,5 +81,10 @@ class User extends Authenticatable
     public function banners()
     {
         return $this->hasMany(Banner::class, 'author');
+    }
+
+    public function tagihanDetail()
+    {
+        return $this->hasMany(TagihanDetail::class);
     }
 }

@@ -4,12 +4,11 @@ namespace App\Http\Middleware;
 
 use App\Models\TagihanDetail;
 use App\Models\Transaksi;
-use App\Models\User;
 use Closure;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-class PembayaranMiddleware
+class KursusTransactionMiddleware
 {
     /**
      * Handle an incoming request.
@@ -18,13 +17,13 @@ class PembayaranMiddleware
      */
     public function handle(Request $request, Closure $next): Response
     {
-        $userId = $request->route()->parameter('id');
+        // $userId = $request->route()->parameter('id');
         $data = $request->validate([
             'id' => 'required'
         ]);
         $ids = $request->id;
 
-        $mahasiswa = User::findOrFail($userId);
+        // $mahasiswa = User::findOrFail($userId);
         foreach ($ids as $idTagih) {
             $tagihanDetail = TagihanDetail::where('id', $idTagih)->get();
             foreach ($tagihanDetail as $value) {
@@ -33,7 +32,7 @@ class PembayaranMiddleware
                     if (!isset($value->id_transactions) == $transactions->id && $transactions->status == 'berhasil') {
                         return $next($request);
                     } else {
-                        return redirect()->route('admin.mahasiswa.show', $userId)->with('error', 'Maaf, anda sudah membayar !');
+                        return redirect()->route('kursus.tagihan.index')->with('error', 'Maaf, anda sudah membayar !');
                     }
                 }
             }

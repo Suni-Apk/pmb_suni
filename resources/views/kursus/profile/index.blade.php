@@ -17,9 +17,9 @@
                     @elseif(!$biodata)
                         /assets/img/no-profile.png
                     @else
-                        {{ asset('storage/' . $biodata['image'])}}
-                    @endif
-                    " alt="profile_image">
+                        {{ asset('storage/' . $biodata['image']) }} @endif
+                    "
+                        alt="profile_image">
                 </div>
             </div>
             <div class="col-auto my-auto">
@@ -74,7 +74,7 @@
                     <div class="card-body p-3">
                         <hr class="horizontal gray-light">
                         <ul class="list-group">
-                            
+
                             <li class="list-group-item border-0 ps-0 pt-0 text-sm"><strong class="text-dark">Full
                                     Name:</strong>
                                 &nbsp; {{ Auth::user()->name }}</li>
@@ -90,7 +90,8 @@
                                     &nbsp;
                                     {{ Auth::user()->email }}</li>
                             @endif
-                            <li class="list-group-item border-0 ps-0 text-sm"><strong class="text-dark">Tanggal Lahir:</strong>
+                            <li class="list-group-item border-0 ps-0 text-sm"><strong class="text-dark">Tanggal
+                                    Lahir:</strong>
                                 &nbsp;
                                 {{ Auth::user()->birthdate }}
                             </li>
@@ -110,10 +111,9 @@
                                 <h6 class="mb-0">Biodata Information</h6>
                             </div>
                             @if (!$biodata)
-                                
                             @else
                                 <div class="col-md-4 text-end">
-                                    <a href="{{ route('kursus.pendaftaran.s1.edit',$user->id) }}">
+                                    <a href="{{ route('kursus.pendaftaran.s1.edit', $user->id) }}">
                                         <i class="fas fa-user-edit text-secondary text-sm" data-bs-toggle="tooltip"
                                             data-bs-placement="top" title="Edit Biodata"></i>
                                     </a>
@@ -130,13 +130,13 @@
                             <hr class="horizontal gray-light">
                             <ul class="list-group">
                                 <li class="list-group-item border-0 ps-0 pt-0 text-sm"><strong class="text-dark">
-                                    Program Belajar :</strong>
+                                        Program Belajar :</strong>
                                     &nbsp; {{ $biodata->program_belajar }}</li>
                                 <li class="list-group-item border-0 ps-0 pt-0 text-sm"><strong class="text-dark">
-                                    Kursus :</strong>
-                                    &nbsp; {{ $biodata->course->name }}</li>
+                                        Kursus :</strong>
+                                    &nbsp; {{ $biodata->course->name ?? 'Bahasa Arab' }}</li>
                                 <li class="list-group-item border-0 ps-0 pt-0 text-sm"><strong class="text-dark">
-                                    Profesi :</strong>
+                                        Profesi :</strong>
                                     &nbsp; {{ $biodata->profesi }}</li>
                                 <li class="list-group-item border-0 ps-0 pt-0 text-sm"><strong class="text-dark">
                                         Bisa Baca Al-Qur'an? :</strong>
@@ -144,17 +144,21 @@
                                 <li class="list-group-item border-0 ps-0 pt-0 text-sm"><strong class="text-dark">
                                         Tanggal Lahir :</strong>
                                     &nbsp; {{ $biodata->birthdate }}</li>
-                                <li class="list-group-item border-0 ps-0 text-sm"><strong class="text-dark">Tempat Lahir :</strong>
+                                <li class="list-group-item border-0 ps-0 text-sm"><strong class="text-dark">Tempat Lahir
+                                        :</strong>
                                     &nbsp;
                                     {{ $biodata->birthplace }}</li>
-                                <li class="list-group-item border-0 ps-0 text-sm"><strong class="text-dark">Provinsi :</strong>
+                                <li class="list-group-item border-0 ps-0 text-sm"><strong class="text-dark">Provinsi
+                                        :</strong>
                                     &nbsp;
                                     {{ $biodata->provinsi }}</li>
-                                <li class="list-group-item border-0 ps-0 text-sm"><strong class="text-dark">Kota :</strong>
+                                <li class="list-group-item border-0 ps-0 text-sm"><strong class="text-dark">Kota
+                                        :</strong>
                                     &nbsp;
                                     {{ $biodata->kota }}
                                 </li>
-                                <li class="list-group-item border-0 ps-0 text-sm"><strong class="text-dark">Kecamatan :</strong>
+                                <li class="list-group-item border-0 ps-0 text-sm"><strong class="text-dark">Kecamatan
+                                        :</strong>
                                     &nbsp;
                                     {{ $biodata->kecamatan }}
                                 </li>

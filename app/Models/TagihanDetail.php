@@ -29,4 +29,13 @@ class TagihanDetail extends Model
     {
         return $this->belongsTo(Biaya::class, 'id_biayas');
     }
+    public function users()
+    {
+        return $this->belongsTo(User::class, 'id_users');
+    }
+
+    public function cicilan()
+    {
+        return $this->hasMany(Cicilan::class);
+    }
 }

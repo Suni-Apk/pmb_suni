@@ -8,7 +8,9 @@ use App\Models\Banner;
 use App\Models\Biaya;
 use App\Models\Biodata;
 use App\Models\Notify;
+use App\Models\Tagihan;
 use App\Models\TagihanDetail;
+use App\Models\TahunAjaran;
 use App\Models\Transaksi;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -58,6 +60,7 @@ class AuthController extends Controller
         $data['phone'] = $request->phone;
         $data['role'] = 'Mahasiswa';
         $data['token'] = rand(111111, 999999);
+        $data['angkatan_id'] = TahunAjaran::latest()->where('status', 'Active')->first();
         // dd($data);
         $user = User::create($data);
         $notif = Notify::where('id', 1)->first();
@@ -245,6 +248,7 @@ class AuthController extends Controller
             'status' => 'berhasil'
         ]);
 
+
         $dashboardRoute = ($transaksi->program_belajar == 'S1') ? 'mahasiswa.dashboard' : 'kursus.dashboard';
 
         return redirect()->route($dashboardRoute)->with('success', 'Selamat Datang Anda Telah Melakukan Pembayaran');
@@ -263,22 +267,68 @@ class AuthController extends Controller
         $transaksi->update([
             'status' => 'berhasil'
         ]);
-        $biaya = Biaya::where('program_belajar','S1')->where('jenis_biaya','DaftarUlang')->where('id_angkatans',Auth::user()->biodata->angkatan_id)->latest()->first();
-      
+        $biodata = Biodata::where('user_id', $userId)->where('program_belajar', 'S1')->first();
+        $biayat = Biaya::where('program_belajar', $biodata->program_belajar)->where('jenis_biaya', 'DaftarUlang')->firstOrFail();
+        $transaction = Transaksi::where('user_id', $userId)->where('jenis_tagihan', 'DaftarUlang')->where('status', 'berhasil')->get();
+
+        $biaya = Biaya::where('program_belajar', 'S1')->where('jenis_biaya', 'DaftarUlang')->where('id_angkatans', Auth::user()->biodata->angkatan_id)->latest()->first();
+
         $user = Auth::user();
-        $tagihan = TagihanDetail::where('id_biayas',$biaya->id)->where('id_users',$user->id)->latest()->first();
+        $tagihan = TagihanDetail::where('id_biayas', $biaya->id)->where('id_users', $user->id)->latest()->first();
         // $bagi3 = $tagihan->amount / 3;
         // dd($bagi3);
-        $transaction = Transaksi::where('user_id',$user->id)->where('tagihan_detail_id',$tagihan->id)->where('jenis_tagihan',$biaya->jenis_biaya)->where('status','berhasil')->sum('total');
-        if($transaction == $tagihan->amount){
+        $transactions = Transaksi::where('user_id', $user->id)->where('tagihan_detail_id', $tagihan->id)->where('jenis_tagihan', $biaya->jenis_biaya)->where('status', 'berhasil')->sum('total');
+        if ($transactions == $tagihan->amount) {
             $tagihan->update([
                 'status' => 'LUNAS'
             ]);
         }
+        // dd($tagihanTails->status == 'LUNAS');
+        if ($transaction->count() < 2  && $tagihan->status == 'LUNAS') {
+            $biaya = Biaya::all();
+            // $transaksi = Transaksi::where('user_id', $user)->where('status', 'berhasil')->where('program_belajar', 'S1')->where('jenis_tagihan', 'Administrasi')->first();
+            foreach ($biaya as $key => $biayas) {
+                if ($biayas->id_angkatans == $biodata->angkatan_id && $biayas->id_jurusans == $biodata->jurusan_id && $biayas->program_belajar == $biodata->program_belajar) {
+                    $tagihan = Tagihan::where('id_biayas', $biayas->id)->get();
 
+                    foreach ($tagihan as $key => $tagihans) {
+                        if ($tagihans->biayas->jenis_biaya != 'DaftarUlang') {
+                            // dd($tagihans->biayas->jenis_biaya);
+                            $tagihanDetail = TagihanDetail::create([
+                                'id_biayas' => $biayas->id,
+                                'id_tagihans' => $tagihans->id,
+                                'id_users' => $biodata->user->id,
+                                'end_date' => $tagihans->end_date,
+                                'amount' => $tagihans->amount,
+                                'status' => 'BELUM',
+                            ]);
+                        }
+                    }
+                } else if ($biayas->id_angkatans == $biodata->angkatan_id && $biayas->program_belajar == $biodata->program_belajar) {
+                    $tagihan = Tagihan::where('id_biayas', $biayas->id)->get();
+
+                    foreach ($tagihan as $key => $tagihans) {
+                        if ($tagihans->biayas->jenis_biaya != 'DaftarUlang') {
+                            $tagihanDetail = TagihanDetail::create([
+                                'id_biayas' => $biayas->id,
+                                'id_tagihans' => $tagihans->id,
+                                'id_users' => $biodata->user->id,
+                                'end_date' => $tagihans->end_date,
+                                'amount' => $tagihans->amount,
+                                'status' => 'BELUM',
+                            ]);
+                        } else {
+                        }
+                    }
+                }
+            }
+        } else {
+        }
+        $jenis = 'cash';
+        session(['jenis' => $jenis]);
         return redirect()->route('mahasiswa.tagihan.index')->with('success', 'Selamat Datang Anda Telah Melakukan Pembayaran');
     }
-    
+
 
 
     public function logout()

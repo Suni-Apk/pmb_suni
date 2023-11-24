@@ -36,7 +36,8 @@ class DatabaseSeeder extends Seeder
             'phone' => '089608494411',
             'gender' => 'Laki-Laki',
             'role' => 'Mahasiswa',
-            'status' => 'on'
+            'status' => 'on',
+            'angkatan_id' => 4
         ]);
 
         $this->call([

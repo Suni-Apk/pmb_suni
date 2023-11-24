@@ -40,12 +40,8 @@
                         <td>
 									        <span class="text-secondary text-xs font-weight-bold">{{$item->email}}</span>
                         </td>
-                        <td class="text-center text-secondary text-xs font-weight-bold">
-                          @if ($item->biodata)
-                          <span class="badge rounded-pill bg-gradient-success">{{ $item->biodata->angkatan->year }} <i class="fas fa-plus ms-1"></i></span> 
-                          @else
-                          <span class="badge rounded-pill bg-gradient-danger">Biodata <i class="fas fa-times ms-1"></i></span> 
-                          @endif
+                        <td class="text-center text-secondary font-weight-bold">
+                          <span class="badge badge-sm rounded-pill bg-gradient-success">{{ $item->angkatan->year }}</span>
                         </td>
                         <td>
                           <p class="text-xs font-weight-bold mb-0">{{$item->gender}}</p>
@@ -96,7 +92,7 @@
                               @method('PUT')
                               @if ($item->status == 'on')
                                 <input type="hidden" name="status" value="off">
-                                <button class="badge badge-sm bg-red font-weight-bolder text-xxs ms-1 border-0" type="submit">
+                                <button class="badge badge-sm bg-gradient-dark font-weight-bolder text-xxs ms-1 border-0" type="submit">
                                   OFF
                                 </button>
                               @elseif($item->status == 'off')
