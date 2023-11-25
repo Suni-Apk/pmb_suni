@@ -155,7 +155,7 @@
 
 				<tr class="heading">
 					<td>Status Pembayaran</td>
-
+					
 					<td>#Check</td>
 				</tr>
 
