@@ -94,7 +94,11 @@ class ProfileController extends Controller
             'birthplace' => 'required',
             'address' => 'required',
         ]);
-        $data['course_id'] = $request->course_id;
+        if($request->course_id){
+            $data['course_id'] = $request->course_id;
+        }else{
+            $data['course_id'] = $user->course_id;
+        }
         $data['program_belajar'] = "KURSUS";
         $data['user_id'] = $id;
         if ($request->hasFile('image')) {

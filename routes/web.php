@@ -19,10 +19,11 @@ use App\Http\Controllers\Mahasiswa\MatkulController;
 use App\Http\Controllers\Mahasiswa\BiodataController;
 use App\Http\Controllers\Mahasiswa\TagihanController;
 use App\Http\Controllers\MatkulController as ControllersMatkulController;
+use App\Http\Controllers\SettingController;
+use App\Http\Controllers\Auth\ForgotPasswordController;
 use App\Http\Controllers\Mahasiswa\TransaksiController;
 use App\Http\Controllers\Mahasiswa\ProfileController as MahasiswaProfileController;
 use App\Http\Controllers\LinkController;
-use App\Http\Controllers\SettingController;
 use App\Http\Controllers\JurusanController;
 use App\Http\Controllers\Mahasiswa\DashboardController as S1DashboardController;
 use App\Http\Controllers\Mahasiswa\DocumentController;
@@ -47,16 +48,33 @@ Route::get('/', function () {
     return view('welcome');
 })->name('welcome');
 
-Route::get('log', [\Rap2hpoutre\LaravelLogViewer\LogViewerController::class, 'index']);
-
+Route::get('logs', [\Rap2hpoutre\LaravelLogViewer\LogViewerController::class, 'index']);
 // Auth Mahasiswa
 Route::get('/register', [AuthController::class, 'register'])->name('register');
+
 Route::post('/register-process', [AuthController::class, 'register_process'])->name('register.process');
+
+//register yang di mau in ustad
+Route::get('/S1/register', [AuthController::class, 's1_register'])->name('s1.register');
+Route::get('/kursus/register', [AuthController::class, 'kursus_register'])->name('kursus.register');
+
+Route::post('/register-process', [AuthController::class, 'register_process_new'])->name('register.process.new');
+
 Route::get('/login', [AuthController::class, 'login'])->name('login');
+
 Route::post('/login-process', [AuthController::class, 'login_process'])->name('login.process');
-Route::get('/verify', [AuthController::class, 'verify'])->name('verify');
+
 Route::post('/verify-process', [AuthController::class, 'verify_otp'])->name('verify.process');
+
 Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
+
+
+//reset password
+Route::get('forgot-password', [ForgotPasswordController::class, 'showForgotPasswordForm'])->name('forgot.password');
+Route::post('forgot-password', [ForgotPasswordController::class, 'submitForgotPasswordForm'])->name('forgot.password.post');
+Route::get('reset-password/{token}', [ForgotPasswordController::class, 'showResetPasswordForm'])->name('reset.password');
+Route::post('reset-password', [ForgotPasswordController::class, 'submitResetPasswordForm'])->name('reset.password.post');
+
 
 Route::prefix('/switch')->middleware(['auth'])->name('program.')->group(function () {
     Route::get('/program-belajar', [AuthController::class, 'switch_program'])->name('program_belajar');
@@ -292,6 +310,10 @@ Route::prefix('/mahasiswa')->middleware(['auth', 'mahasiswa', 's1'])->name('maha
         Route::get('/detail-spp/{name}',[TagihanController::class,'detail_spp'])->name('detail.spp');
         Route::get('/payment-spp/{name}', [TagihanController::class, 'payment_spp'])->name('payment.spp');
         Route::get('pay-ipaymu/{id}/{iduser}', [PembayaranUserController::class, 'payIpaymu'])->name('payment.ipaymu');
+    });
+
+    Route::prefix('invoice')->name('invoice.')->group(function(){
+        Route::post('/download/{id}',[TransaksiController::class,'invoice'])->name('download');
     });
     
 

@@ -207,154 +207,185 @@
 
 @section('content')
     <div class="row">
-        <div class="col-12 text-center mb-4">
-            <div class="card">
-                <h6 class="text-secondary font-weight-normal my-3">Proses pendaftaran kamu sampai dimana nih?</h6>
-                <div class="multisteps-form">
-                    <div class="row">
-                        <div class="col-12 col-lg-10 mx-auto mb-3">
-                            <div class="multisteps-form__progress">
-                                <button class="multisteps-form__progress-btn js-active" type="button" title="Register">
-                                    <span>Register</span>
-                                </button>
-                                <button class="multisteps-form__progress-btn js-active" type="button" title="Bayar Registrasi">
-                                    <span>Bayar Registrasi</span>
-                                </button>
-                                <button class="multisteps-form__progress-btn js-active" type="button" title="Mengisi Biodata">
-                                    <span>Mengisi Biodata</span>
-                                </button>
-                                <button class="multisteps-form__progress-btn js-active" type="button" title="Bayar Pra-Kuliah">
-                                    <span>Selesai!</span>
-                                </button>
+        <div class="col-12 col-sm-6 col-md-4 mb-4">
+            <div class="card card-stats mb-xl-0">
+                <div class="card-body p-4">
+                    <div class="row align-items-center">
+                        <div class="col">
+                            <h6 class="card-title text-uppercase text-muted mb-0">Mata Kuliah</h6>
+                            <span class="h2 lh-1 font-weight-bold mb-0">123</span>
+                        </div>
+                        <div class="col-auto">
+                            <div class="icon icon-shape bg-teal text-white rounded-circle shadow text-center">
+                                <i class="ni ni-hat-3"></i>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="col-lg-8 mb-lg-0 mb-4">
-            <div class="card">
-                <div class="card-body p-3">
-                    <div class="height-200 d-flex justify-content-center flex-column align-items-center bg-cover text-center"
-                        style="background: url(/soft-ui-dashboard-main/assets/img/admin-db.svg);
+        <div class="col-12 col-sm-6 col-md-4 mb-4">
+            <div class="card card-stats mb-xl-0">
+                <div class="card-body p-4">
+                    <div class="row align-items-center">
+                        <div class="col">
+                            <h6 class="card-title text-uppercase text-muted mb-0">Jurusan</h6>
+                            <span class="h2 lh-1 font-weight-bold mb-0">4</span>
+                        </div>
+                        <div class="col-auto">
+                            <div class="icon icon-shape bg-green text-white rounded-circle shadow text-center">
+                                <i class="ni ni-paper-diploma"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-12 col-sm-6 col-md-4 mb-4">
+            <div class="card card-stats mb-xl-0">
+                <div class="card-body p-4">
+                    <div class="row align-items-center">
+                        <div class="col">
+                            <h6 class="card-title text-uppercase text-muted mb-0">Tagihan</h6>
+                            <span class="h2 lh-1 font-weight-bold mb-0">0</span>
+                        </div>
+                        <div class="col-auto">
+                            <div class="icon icon-shape bg-blue text-white rounded-circle shadow text-center">
+                                <i class="fas fa-wallet"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+    <div class="col-lg-8 mb-lg-0 mb-4">
+        <div class="card">
+        <div class="card-body p-3">
+            <div class="height-200 d-flex justify-content-center flex-column align-items-center bg-cover text-center"
+            style="background: url(/soft-ui-dashboard-main/assets/img/admin-db.svg);
                 background-position: center; background-repeat: no-repeat;">
-                        <h4 class="font-weight-bold mb-0 p-3 pb-0"
-                            style="background: rgba(255,255,255,.5)!important; backdrop-filter: blur(1px);">
-                            Selamat Datang
-                            <b class="font-weight-bolder">{{ $user->name }}</b>!
-                        </h4>
-                        <p class="mb-0 mx-2 pb-3 px-3"
-                            style="background: rgba(255,255,255,.5)!important; backdrop-filter: blur(2px);">
-                            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ut, voluptate?
-                        </p>
-                    </div>
-                </div>
+                <h4 class="font-weight-bold mb-0 p-3 pb-0" style="background: rgba(255,255,255,.5)!important; backdrop-filter: blur(1px);">
+                Selamat Datang 
+                <b class="font-weight-bolder">{{ $user->name }}</b>!
+                </h4>
+                <p class="mb-0 mx-2 pb-3 px-3" style="background: rgba(255,255,255,.5)!important; backdrop-filter: blur(2px);">
+                Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ut, voluptate?
+                </p>
             </div>
         </div>
-        <div class="col-12 mb-4 gy-3 g-lg-3 d-md-none row mx-auto justify-content-center">
-            @if (!$biodata && !Auth::user()->document)
-                <div class="col-3 col-md-2 text-center">
-                    <a href="{{ route('mahasiswa.pendaftaran.s1') }}"
-                        class="icon icon-shape p-0 bg-primary shadow text-center border-radius-md cursor-pointer"
-                        data-bs-toggle="tooltip" data-bs-placement="top" title="Isi Biodata">
-                        <i class="fas fa-user-shield text-lg opacity-10" aria-hidden="true"></i>
-                    </a>
-                    <span class="d-block mt-2" style="font-size: 13px;">Isi Biodata</span>
-                </div>
-                <div class="col-3 col-md-2 text-center">
-                    <a href="{{ route('mahasiswa.pendaftaran.document') }}"
-                        class="icon icon-shape p-0 bg-primary shadow text-center border-radius-md cursor-pointer"
-                        data-bs-toggle="tooltip" data-bs-placement="top" title="Upload Dokumen">
-                        <i class="fas fa-folder text-lg opacity-10" aria-hidden="true"></i>
-                    </a>
-                    <span class="d-block mt-2" style="font-size: 13px;">Upload Dokumen</span>
-                </div>
-            @elseif ($biodata && !Auth::user()->document)
-                <div class="col-3 col-md-2 text-center">
-                    <a href="{{ route('mahasiswa.pendaftaran.document') }}"
-                        class="icon icon-shape p-0 bg-primary shadow text-center border-radius-md cursor-pointer"
-                        data-bs-toggle="tooltip" data-bs-placement="top" title="Upload Dokumen">
-                        <i class="fas fa-folder text-lg opacity-10" aria-hidden="true"></i>
-                    </a>
-                    <span class="d-block mt-2" style="font-size: 13px;">Upload Dokumen</span>
-                </div>
-            @elseif (!$biodata && Auth::user()->document)
-                <div class="col-3 col-md-2 text-center">
-                    <a href="{{ route('mahasiswa.pendaftaran.s1') }}"
-                        class="icon icon-shape p-0 bg-primary shadow text-center border-radius-md cursor-pointer"
-                        data-bs-toggle="tooltip" data-bs-placement="top" title="Isi Biodata">
-                        <i class="fas fa-user-shield text-lg opacity-10" aria-hidden="true"></i>
-                    </a>
-                    <span class="d-block mt-2" style="font-size: 13px;">Isi Biodata</span>
-                </div>
-            @else
-                <div class="col-3 col-md-2 text-center">
-                    <a href="{{ route('mahasiswa.matkul') }}"
-                        class="icon icon-shape p-0 bg-primary shadow text-center border-radius-md cursor-pointer"
-                        data-bs-toggle="tooltip" data-bs-placement="top" title="Mata Kuliah">
-                        <i class="ni ni-archive-2 text-lg opacity-10" aria-hidden="true"></i>
-                    </a>
-                    <span class="d-block mt-2" style="font-size: 13px;">Mata Kuliah</span>
-                </div>
-                <div class="col-3 col-md-2 text-center">
-                    <a href="{{ route('mahasiswa.tagihan.index') }}"
-                        class="icon icon-shape p-0 bg-primary shadow text-center border-radius-md cursor-pointer"
-                        data-bs-toggle="tooltip" data-bs-placement="top" title="Tagihan">
-                        <i class="ni ni-archive-2 text-lg opacity-10" aria-hidden="true"></i>
-                    </a>
-                    <span class="d-block mt-2" style="font-size: 13px;">Tagihan</span>
-                </div>
-            @endif
-            <div class="col-3 col-md-2 text-center">
-                <a href="{{ route('mahasiswa.profile.index') }}"
-                    class="icon icon-shape p-0 bg-yellow shadow text-center border-radius-md cursor-pointer"
-                    data-bs-toggle="tooltip" data-bs-placement="top" title="Profile">
-                    <i class="fas fa-user-alt text-lg opacity-10" aria-hidden="true"></i>
-                </a>
-                <span class="d-block mt-2" style="font-size: 13px;">Profile</span>
-            </div>
         </div>
-        <div class="col-12 col-lg-4 mb-4">
-            <div class="card h-100 p-3">
-                <div class="overflow-hidden position-relative border-radius-lg bg-cover h-100"
-                    style="background-image: url('https://suniindonesia.com/wp-content/uploads/2022/10/masjid-pogung-dalangan-fQET4BjQmvc-unsplash.jpg');">
-                    <span class="mask bg-gradient-dark"></span>
-                    <div class="card-body position-relative z-index-1 d-flex flex-column justify-content-center gap-2">
-                        <p class="text-white w-100 mb-0 text-center">Kalender hari ini,</p>
-                        <h5 class="text-white font-weight-bolder fs-1 d-flex justify-content-evenly w-100 mb-0">
-                            <span>{{ $hijriDateday }}</span>
-                            <span class="text-green font-weight-normal"
-                                style="font-family: 'Rubik', sans-serif;">{{ $hijriDatemonth }}</span>
-                        </h5>
-                        <h5 class="w-100 mb-0 text-center lh-1 text-green font-weight-light"
-                            style="font-family: 'Rubik', sans-serif;">
-                            {{-- {{ $hijriDatedayArabic }} --}}
-                        </h5>
-                        <p class="text-white w-100 mb-0 text-center">
-                            {{ $hijriDateyear }} Hijriyah
-                        </p>
-                    </div>
-                </div>
-            </div>
+    </div>
+    <div class="col-12 mb-4 gy-3 g-lg-3 d-md-none row mx-auto justify-content-center">
+        @if (!$biodata && !Auth::user()->document)
+        <div class="col-3 col-md-2 text-center">
+            <a href="{{ route('mahasiswa.pendaftaran.s1') }}" class="icon icon-shape p-0 bg-primary shadow text-center border-radius-md cursor-pointer"
+            data-bs-toggle="tooltip" data-bs-placement="top" title="Isi Biodata">
+            <i class="fas fa-user-shield text-lg opacity-10" aria-hidden="true"></i>
+            </a>
+            <span class="d-block mt-2" style="font-size: 13px;">Isi Biodata</span>
         </div>
-        @php
-            $user = Auth::user();
-            $biodataS1 = App\Models\Biodata::where('user_id', $user->id)->where('program_belajar', 'S1')->first();
-            $biodataKURSUS = App\Models\Biodata::where('user_id', $user->id)->where('program_belajar', 'KURSUS')->first();
-        @endphp
-        @if($biodataS1 && $biodataKURSUS)
-                <div class="col-12" id="informasi">
-                    <div class="list-group list-group-horizontal" id="list-tab" role="tablist">
-                        <a id="list-sarjana-list" data-bs-toggle="list" href="#list-sarjana" role="tab"
-                            aria-controls="list-sarjana"
-                            class="list-group-item list-group-item-action border-0 shadow text-center">Program Kuliah S1</a>
-                        <a id="list-kursus-list" data-bs-toggle="list" href="#list-kursus" role="tab"
-                            aria-controls="list-kursus"
-                            class="list-group-item list-group-item-action border-0 shadow text-center active">Program Kursus</a>
-                    </div>
-                </div>
+        <div class="col-3 col-md-2 text-center">
+            <a href="{{ route('mahasiswa.pendaftaran.document') }}" class="icon icon-shape p-0 bg-primary shadow text-center border-radius-md cursor-pointer"
+            data-bs-toggle="tooltip" data-bs-placement="top" title="Upload Dokumen">
+            <i class="fas fa-folder text-lg opacity-10" aria-hidden="true"></i>
+            </a>
+            <span class="d-block mt-2" style="font-size: 13px;">Upload Dokumen</span>
+        </div>
+        @elseif ($biodata && !Auth::user()->document)
+        <div class="col-3 col-md-2 text-center">
+            <a href="{{ route('mahasiswa.pendaftaran.document') }}" class="icon icon-shape p-0 bg-primary shadow text-center border-radius-md cursor-pointer"
+            data-bs-toggle="tooltip" data-bs-placement="top" title="Upload Dokumen">
+            <i class="fas fa-folder text-lg opacity-10" aria-hidden="true"></i>
+            </a>
+            <span class="d-block mt-2" style="font-size: 13px;">Upload Dokumen</span>
+        </div>
+        @elseif (!$biodata && Auth::user()->document)
+        <div class="col-3 col-md-2 text-center">
+            <a href="{{ route('mahasiswa.pendaftaran.s1') }}" class="icon icon-shape p-0 bg-primary shadow text-center border-radius-md cursor-pointer"
+            data-bs-toggle="tooltip" data-bs-placement="top" title="Isi Biodata">
+            <i class="fas fa-user-shield text-lg opacity-10" aria-hidden="true"></i>
+            </a>
+            <span class="d-block mt-2" style="font-size: 13px;">Isi Biodata</span>
+        </div>
         @else
+        <div class="col-3 col-md-2 text-center">
+            <a href="{{ route('mahasiswa.matkul') }}" class="icon icon-shape p-0 bg-primary shadow text-center border-radius-md cursor-pointer"
+            data-bs-toggle="tooltip" data-bs-placement="top" title="Mata Kuliah">
+            <i class="ni ni-archive-2 text-lg opacity-10" aria-hidden="true"></i>
+            </a>
+            <span class="d-block mt-2" style="font-size: 13px;">Mata Kuliah</span>
+        </div>
+        <div class="col-3 col-md-2 text-center">
+            <a href="{{ route('mahasiswa.tagihan.index') }}" class="icon icon-shape p-0 bg-primary shadow text-center border-radius-md cursor-pointer"
+            data-bs-toggle="tooltip" data-bs-placement="top" title="Tagihan">
+            <i class="ni ni-archive-2 text-lg opacity-10" aria-hidden="true"></i>
+            </a>
+            <span class="d-block mt-2" style="font-size: 13px;">Tagihan</span>
+        </div>
         @endif
+        <div class="col-3 col-md-2 text-center">
+        <a href="{{ route('mahasiswa.profile.index') }}" class="icon icon-shape p-0 bg-yellow shadow text-center border-radius-md cursor-pointer"
+            data-bs-toggle="tooltip" data-bs-placement="top" title="Profile">
+            <i class="fas fa-user-alt text-lg opacity-10" aria-hidden="true"></i>
+        </a>
+        <span class="d-block mt-2" style="font-size: 13px;">Profile</span>
+        </div>
+    </div>
+    <div class="col-12 col-lg-4">
+        <div class="card h-100 p-3">
+        <div class="overflow-hidden position-relative border-radius-lg bg-cover h-100" 
+        {{-- style="background-image: url('/soft-ui-dashboard-main/assets/img/ivancik.jpg');"> --}}
+        style="background-image: url('https://suniindonesia.com/wp-content/uploads/2022/10/masjid-pogung-dalangan-fQET4BjQmvc-unsplash.jpg');">
+            <span class="mask bg-gradient-dark"></span>
+            <div class="card-body position-relative z-index-1 d-flex flex-column justify-content-center gap-2">
+            <p class="text-white w-100 mb-0 text-center">Kalender hari ini,</p>
+            <h5 class="text-white font-weight-bolder fs-1 d-flex justify-content-evenly w-100 mb-0">
+                <span>{{ $hijriDateday }}</span>
+                <span class="text-green font-weight-normal" style="font-family: 'Rubik', sans-serif;">{{ $hijriDatemonth }}</span>
+            </h5>
+            <h5 class="w-100 mb-0 text-center lh-1 text-green font-weight-light" style="font-family: 'Rubik', sans-serif;">
+                {{-- {{ $hijriDatedayArabic }} --}}
+            </h5>
+            <p class="text-white w-100 mb-0 text-center">
+                {{ $hijriDateyear }} Hijriyah
+            </p>
+            </div>
+        </div>
+        </div>
+    </div>
+    <div class="col-12 text-center mt-4">
+        <div class="card">
+        <h6 class="text-secondary font-weight-normal my-3">proses pendaftaran kamu sampai dimana nih?</h6>
+        <div class="multisteps-form">
+            <div class="row">
+            <div class="col-12 col-lg-10 mx-auto mb-3">
+                <div class="multisteps-form__progress">
+                <button class="multisteps-form__progress-btn js-active" type="button" title="Register">
+                    <span>Register</span>
+                </button>
+                <button class="multisteps-form__progress-btn" type="button" title="Bayar Registrasi">
+                    <span>Bayar Registrasi</span>
+                </button>
+                <button class="multisteps-form__progress-btn" type="button" title="Mengisi Biodata">
+                    <span>Mengisi Biodata</span>
+                </button>
+                <button class="multisteps-form__progress-btn" type="button" title="Upload Dokumen">
+                    <span>Upload Dokumen</span>
+                </button>
+                <button class="multisteps-form__progress-btn" type="button" title="Bayar Pra-Kuliah">
+                    <span>Bayar Pra-Kuliah</span>
+                </button>
+                <button class="multisteps-form__progress-btn" type="button" title="Bayar Pra-Kuliah">
+                    <span>Selesai!</span>
+                </button>
+                </div>
+            </div>
+            </div>
+        </div>
+        </div>
+    </div>
     </div>
     <div class="row my-4">
         <div class="col-lg-8 col-md-6 mb-md-0 mb-4">

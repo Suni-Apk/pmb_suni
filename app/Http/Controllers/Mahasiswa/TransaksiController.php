@@ -13,6 +13,7 @@ use App\Models\Transaksi;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class TransaksiController extends Controller
 {
@@ -29,11 +30,9 @@ class TransaksiController extends Controller
     {
         $biaya = Biaya::where('program_belajar', 'S1')->where('jenis_biaya', 'DaftarUlang')->where('id_angkatans', Auth::user()->biodata->angkatan_id)->latest()->first();
         $user = Auth::user();
-
-        $tagihan = TagihanDetail::where('id_biayas', $biaya->id)->where('id_users', $user->id)->latest()->first();
+        $tagihan = TagihanDetail::where('id_biayas',$biaya->id)->where('id_users',$user->id)->latest()->first();
         $cicil = intval($tagihan->amount / 3);
-        $jenis = 'cash';
-        if ($request->jenis_pembayaran == 'cash') {
+        if($request->jenis_pembayaran == 'cash'){
             $transaction = Transaksi::create([
                 'program_belajar' => 'S1',
                 'status' => 'pending',
@@ -230,5 +229,13 @@ class TransaksiController extends Controller
         }
         return redirect()->route('mahasiswa.tagihan.index')->with('success', 'Selamat anda berhasil menbayar');
         // if()
+    }
+
+    public function invoice(Request $request,$id)
+    {
+        $transaction = Transaksi::where('user_id',$id)->where('jenis_tagihan',$request->DaftarUlang)->where('status','berhasil')->get();
+        $user = Auth::user();
+        $pdf = PDF::loadView('mahasiswa.invoice.index', compact('transaction', 'user'));
+        return $pdf->download("$request->DaftarUlang - INVOICE - $user->name.pdf");
     }
 }
