@@ -59,10 +59,10 @@ class AuthController extends Controller
             'gender' => 'required|string',
             'password' => 'required|confirmed|min:8',
         ], $messages);
-        $data['phone'] = $request->phone;
+        $data['phone'] = $phone;
         $data['role'] = 'Mahasiswa';
         $data['token'] = rand(111111, 999999);
-        $data['angkatan_id'] = TahunAjaran::latest()->where('status', 'Active')->first();
+        // $data['angkatan_id'] = TahunAjaran::latest()->where('status', 'Active')->first()->id;
         // dd($data);
         $user = User::create($data);
         $notif = Notify::where('id', 1)->first();

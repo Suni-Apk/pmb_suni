@@ -29,6 +29,7 @@ use App\Http\Controllers\Mahasiswa\DocumentController;
 use App\Http\Controllers\TahunAjaranController;
 use App\Http\Controllers\DocumentController as AdminDocumentController;
 use App\Http\Controllers\Kursus\TransactionController as KursusTransactionController;
+use App\Http\Controllers\MapelsController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -91,6 +92,7 @@ Route::prefix('/admin')->middleware(['admin', 'auth'])->name('admin.')->group(fu
         Route::put('/edit/process/{id}', [AccountController::class, 'admin_edit_process'])->name('edit.process');
         Route::put('/change-status/{id}', [AccountController::class, 'admin_status'])->name('status');
         Route::delete('/delete/{id}', [AccountController::class, 'admin_delete'])->name('delete');
+        Route::get('/exportAdmin', [AccountController::class, 'export'])->name('exportAdmin');
     });
 
     // data mahasiswa
@@ -105,6 +107,7 @@ Route::prefix('/admin')->middleware(['admin', 'auth'])->name('admin.')->group(fu
         Route::get('/detail/{id}', [AccountController::class, 'mahasiswa_detail'])->name('show');
         Route::get('/bayar/{id}', [AccountController::class, 'mahasiswa_bayar'])->middleware(['Pembayaran'])->name('bayar');
         Route::get('/program/{id}', [AccountController::class, 'mahasiswa_program'])->name('program');
+        Route::get('/exportMahasiswa', [AccountController::class, 'exportMahasiswa'])->name('exportMahasiswa');
     });
 
     // data pendaftar
@@ -147,7 +150,9 @@ Route::prefix('/admin')->middleware(['admin', 'auth'])->name('admin.')->group(fu
     Route::resource('/matkul', ControllersMatkulController::class);
     Route::resource('/mapel', MapelsController::class);
     Route::resource('/jurusan', JurusanController::class);
+    Route::get('/exportJurusan', [JurusanController::class, 'exportJurusan'])->name('exportJurusan');
     Route::resource('/transaksi', TransactionController::class);
+    Route::get('/exportTransaction', [TransactionController::class, 'export'])->name('exportTransaction');
     Route::resource('/tagihan', AdminTagihanController::class);
     Route::resource('/dokumen', AdminDocumentController::class);
     Route::resource('/course',CourseController::class);

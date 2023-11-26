@@ -26,8 +26,6 @@ return new class extends Migration
             $table->string('token');
             $table->timestamp('email_verified_at')->nullable();
             $table->rememberToken();
-            
-            $table->foreignId('angkatan_id')->nullable();
 
             $table->timestamps();
         });

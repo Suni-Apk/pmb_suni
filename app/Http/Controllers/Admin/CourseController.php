@@ -32,6 +32,8 @@ class CourseController extends Controller
     {
         $data = $request->validate([
             'name' => 'required|string',
+            'notes' => 'required|string',
+            'desc' => 'required|string',
         ]);
 
         $course = Course::create($data);

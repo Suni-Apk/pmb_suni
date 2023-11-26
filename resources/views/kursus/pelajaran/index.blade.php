@@ -8,7 +8,6 @@
 @section('content')
     <div class="row">
         <h4 class="ms-2">{{ $biodata->course->name }}</h4>
-        {{-- foreach here --}}
         <div class="col-12 col-lg-12">
             <div class="card mb-4">
                 <div class="card-header pb-0 d-flex justify-content-between">
@@ -66,6 +65,6 @@
                 </div>
             </div>
         </div>
-        {{-- end forech --}}
     </div>
+    
 @endsection

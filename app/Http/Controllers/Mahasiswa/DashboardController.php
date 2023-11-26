@@ -24,13 +24,14 @@ class DashboardController extends Controller
         $data = json_decode($response->getBody(), true); // Menggunakan true untuk mendapatkan array asosiatif
 
         // Mengambil tanggal Hijriah untuk indeks pertama (bulan ini).
-        // $hijriDateArabic = $data['data']['hijri']['day']['ar'];
         $hijriDateday = $data['data']['hijri']['day'];
+        $hijriDatedayArabic = $data['data']['hijri']['weekday']['ar'];
         $hijriDatemonth = $data['data']['hijri']['month']['ar'];
         $hijriDateyear = $data['data']['hijri']['year'];
         $user = Auth::user();
         $banner = Banner::where('type', 'DASHBOARD')->get();
         $biodata = Biodata::where('program_belajar','S1')->where('user_id',$user->id)->first();
-        return view('mahasiswa.index',compact('hijriDateday','hijriDatedayArabic','hijriDatemonth','hijriDateyear', 'user', 'biodata', 'banner'));
+        // dd($user->biodata);
+        return view('mahasiswa.index',compact('hijriDateday', 'hijriDatedayArabic','hijriDatemonth','hijriDateyear', 'user', 'biodata', 'banner'));
     }
 }

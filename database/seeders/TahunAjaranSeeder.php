@@ -13,7 +13,7 @@ class TahunAjaranSeeder extends Seeder
      */
     public function run()
     {
-        $numberOfYears = 2; 
+        $numberOfYears = 1; 
 
         foreach (range(1, $numberOfYears) as $index) {
             $year = 2020 + $index; // Ganti tahun awal sesuai kebutuhan

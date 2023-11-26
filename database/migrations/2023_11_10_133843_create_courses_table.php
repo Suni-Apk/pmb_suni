@@ -15,8 +15,8 @@ return new class extends Migration
             $table->id();
 
             $table->string('name');
-            $table->string('notes');
-            $table->text('desc');
+            $table->string('notes')->nullable();
+            $table->text('desc')->nullable();
             
             $table->timestamps();
         });

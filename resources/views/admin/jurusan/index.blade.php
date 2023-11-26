@@ -11,7 +11,14 @@
             <div class="card mb-4">
                 <div class="card-header pb-0 d-flex justify-content-between">
                     <h6>Daftar Jurusan</h6>
-                    <a href="{{ route('admin.jurusan.create') }}" class="btn bg-gradient-primary float-end">Tambah + </a>
+                    <div class="d-flex gap-2">
+                        <form action="{{ route('admin.exportJurusan') }}" method="GET">
+                            <button class="btn btn-success ms-2 d-flex align-items-center">
+                                <i class='bx bxs-file-export me-1'></i> Export
+                            </button>
+                        </form>     
+                        <a href="{{ route('admin.jurusan.create') }}" class="btn bg-gradient-primary float-end">Tambah + </a>
+                    </div>
                 </div>
                 <div class="card-body px-0 pt-0 pb-2">
                     <div class="table-responsive p-0">
@@ -23,9 +30,6 @@
                                     <th
                                         class="text-uppercase text-start text-secondary text-xxs font-weight-bolder opacity-7">
                                         Nama</th>
-                                    <th
-                                        class="text-uppercase text-start text-secondary text-xxs font-weight-bolder opacity-7">
-                                        Tahun Ajaran</th>
                                     <th
                                         class="text-uppercase text-start text-secondary text-xxs font-weight-bolder opacity-7">
                                         Kode</th>
@@ -42,9 +46,6 @@
                                         </td>
                                         <td class="text-sm">
                                             <span class="text-bold">{{ $jurusans->name }}</span>
-                                        </td>
-                                        <td class="text-sm">
-                                            <span class="">{{ $jurusans->tahunAjaran->year }}</span>
                                         </td>
                                         <td class="text-sm">
                                             <span class="font-weight-bold">{{ $jurusans->code }}</span>

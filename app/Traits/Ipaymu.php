@@ -65,12 +65,12 @@ trait Ipaymu {
         $body['price'][]         = 100000;
         $body['referenceId']     = 'ID-PPDB-'.rand(1111,9999);
         $body['returnUrl']       = route('callback.return');
-        $body['notifyUrl']       = 'https://d179-139-0-154-123.ngrok-free.app/callback/notify';
+        $body['notifyUrl']       = 'https://6042-149-113-118-174.ngrok-free.app/callback/notify';
         $body['cancelUrl']       = route('callback.cancel');
         $body['paymentChannel']  = 'qris';
         $body['expired']         = 24;
         $body['buyerName']       = $user->name;
-        $body['buyerPhone']      = $user->nomor;
+        $body['buyerPhone']      = $user->phone;
         if ($user->email) {
             $body['buyerEmail']  = $user->email;
         }

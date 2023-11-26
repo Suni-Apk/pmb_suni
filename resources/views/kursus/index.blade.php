@@ -217,19 +217,13 @@
                                 <button class="multisteps-form__progress-btn js-active" type="button" title="Register">
                                     <span>Register</span>
                                 </button>
-                                <button class="multisteps-form__progress-btn" type="button" title="Bayar Registrasi">
+                                <button class="multisteps-form__progress-btn js-active" type="button" title="Bayar Registrasi">
                                     <span>Bayar Registrasi</span>
                                 </button>
-                                <button class="multisteps-form__progress-btn" type="button" title="Mengisi Biodata">
+                                <button class="multisteps-form__progress-btn js-active" type="button" title="Mengisi Biodata">
                                     <span>Mengisi Biodata</span>
                                 </button>
-                                <button class="multisteps-form__progress-btn" type="button" title="Upload Dokumen">
-                                    <span>Upload Dokumen</span>
-                                </button>
-                                <button class="multisteps-form__progress-btn" type="button" title="Bayar Pra-Kuliah">
-                                    <span>Bayar Pra-Kuliah</span>
-                                </button>
-                                <button class="multisteps-form__progress-btn" type="button" title="Bayar Pra-Kuliah">
+                                <button class="multisteps-form__progress-btn js-active" type="button" title="Bayar Pra-Kuliah">
                                     <span>Selesai!</span>
                                 </button>
                             </div>

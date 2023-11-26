@@ -10,7 +10,6 @@ class Jurusan extends Model
     use HasFactory;
 
     protected $fillable = [
-        'id_tahun_ajarans',
         'name',
         'code'
     ];
