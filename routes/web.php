@@ -50,11 +50,15 @@ Route::get('/register', [AuthController::class, 'register'])->name('register');
 
 Route::post('/register-process', [AuthController::class, 'register_process'])->name('register.process');
 
+//register yang di mau in ustad
+Route::get('/S1/register', [AuthController::class, 's1_register'])->name('s1.register');
+Route::get('/kursus/register', [AuthController::class, 'kursus_register'])->name('kursus.register');
+
+Route::post('/register-process', [AuthController::class, 'register_process_new'])->name('register.process.new');
+
 Route::get('/login', [AuthController::class, 'login'])->name('login');
 
 Route::post('/login-process', [AuthController::class, 'login_process'])->name('login.process');
-
-Route::get('/verify', [AuthController::class, 'verify'])->name('verify');
 
 Route::post('/verify-process', [AuthController::class, 'verify_otp'])->name('verify.process');
 

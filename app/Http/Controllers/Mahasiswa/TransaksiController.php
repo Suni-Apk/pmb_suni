@@ -62,7 +62,6 @@ class TransaksiController extends Controller
         $transaction = Transaksi::where('user_id',$id)->where('jenis_tagihan',$request->DaftarUlang)->where('status','berhasil')->get();
         $user = Auth::user();
         $pdf = PDF::loadView('mahasiswa.invoice.index', compact('transaction', 'user'));
-
         return $pdf->download("$request->DaftarUlang - INVOICE - $user->name.pdf");
     }
 }

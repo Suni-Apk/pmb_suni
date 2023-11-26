@@ -463,7 +463,7 @@
                         <span class="nav-link-text ms-1">Dashboard</span>
                     </a>
                 </li>
-                @php
+                {{-- @php
                 $biaya = App\Models\Biaya::where('program_belajar','S1')->where('jenis_biaya','DaftarUlang')->where('id_angkatans',Auth::user()->biodata->angkatan_id)->latest()->first();
                 
                 $user = Auth::user();
@@ -471,7 +471,7 @@
                 // $bagi3 = $tagihan->amount / 3;
                 // dd($bagi3);
                 $transaction = round(App\Models\Transaksi::where('user_id',$user->id)->where('tagihan_detail_id',$tagihan->id)->where('jenis_tagihan',$biaya->jenis_biaya)->where('status','berhasil')->sum('total'));
-                @endphp
+                @endphp --}}
                 @if (!$biodata && !Auth::user()->document)
                     <!-- biodata -->
                     <li class="nav-item">
