@@ -46,9 +46,9 @@ Route::get('/', function () {
 
 Route::get('logs', [\Rap2hpoutre\LaravelLogViewer\LogViewerController::class, 'index']);
 // Auth Mahasiswa
-Route::get('/register', [AuthController::class, 'register'])->name('register');
+// Route::get('/register', [AuthController::class, 'register'])->name('register');
 
-Route::post('/register-process', [AuthController::class, 'register_process'])->name('register.process');
+// Route::post('/register-process', [AuthController::class, 'register_process'])->name('register.process');
 
 //register yang di mau in ustad
 Route::get('/S1/register', [AuthController::class, 's1_register'])->name('s1.register');

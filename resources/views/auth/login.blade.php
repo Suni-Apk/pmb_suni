@@ -54,7 +54,7 @@
                         <div class="card-footer text-center pt-0 px-lg-2 px-1">
                             <p class="mb-4 text-sm mx-auto">
                                 Belum punya akun? &nbsp;
-                                <a href="{{ route('register') }}" class="text-primary text-gradient font-weight-bold">Sign Up</a>
+                                <a href="{{ route('s1.register') }}" class="text-primary text-gradient font-weight-bold">Sign Up</a>
                             </p>
                         </div>
                     </div>

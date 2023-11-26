@@ -19,14 +19,19 @@ use Illuminate\Support\Facades\Redirect;
 class AuthController extends Controller
 {
     use Fonnte;
-    public function register()
-    {
-        return view('auth.register');
-    }
+    // public function register()
+    // {
+    //     return view('auth.register');
+    // }
 
     public function s1_register()
     {
         return view('auth.register-s1');
+    }
+
+    public function kursus_register()
+    {
+        return view('auth.register-kursus');
     }
 
     public function register_process_new(Request $request)
@@ -85,52 +90,47 @@ class AuthController extends Controller
 
     }
 
-    public function kursus_register()
-    {
-        return view('auth.register-kursus');
-    }
-
-    public function register_process(Request $request)
-    {
-        $phone = $request->phone;
-        if (Str::startsWith($phone, '0')) {
-            $phone = '62' . substr($phone, 1);
-        }
-        $existingUser = User::where('phone', $phone)->first();
-        if ($existingUser) {
-            return redirect()->back()->withErrors(['phone' => 'Nomor Sudah Di Pake Maybe']);
-        }
-        $messages = [
-            'name.required' => 'Nama Lengkap Wajib Diisi',
-            'name.min:3' => 'Nama Anda Minimal 3 Huruf!!',
-            'name.max:255' => 'Nama Anda Kepanjangan',
-            'phone.required' => 'Nomor Whatshapp Wajib Diisi',
-            'phone.min' => 'Nomor Whatshapp Minimal 12 Angka!!',
-            'phone.max' => 'Nomor Whatshapp Maksimal 13 Angka!!',
-            'gender.required' => 'Gender Wajib Diisi',
-            'password.required' => 'Password Wajib Diisi',
-            'password.confirmed' => 'Password Harus Sama',
-            'password.min:8' => 'Password Wajib 8 Angka / Huruf!!!'
-        ];
-        $data = $request->validate([
-            'name' => 'required|min:3|max:255|string',
-            'phone' => 'required|min:11|max:13|unique:users,phone',
-            'email' => 'required|email|unique:users,email',
-            'gender' => 'required|string',
-            'password' => 'required|confirmed|min:8',
-        ], $messages);
-        $data['phone'] = $request->phone;
-        $data['role'] = 'Mahasiswa';
-        $data['token'] = rand(111111, 999999);
-        // dd($data);
-        $user = User::create($data);
-        $notif = Notify::where('id',1)->first();
-        $messages =  $notif->notif_otp . ' ' . $user->token;
+    // public function register_process(Request $request)
+    // {
+    //     $phone = $request->phone;
+    //     if (Str::startsWith($phone, '0')) {
+    //         $phone = '62' . substr($phone, 1);
+    //     }
+    //     $existingUser = User::where('phone', $phone)->first();
+    //     if ($existingUser) {
+    //         return redirect()->back()->withErrors(['phone' => 'Nomor Sudah Di Pake Maybe']);
+    //     }
+    //     $messages = [
+    //         'name.required' => 'Nama Lengkap Wajib Diisi',
+    //         'name.min:3' => 'Nama Anda Minimal 3 Huruf!!',
+    //         'name.max:255' => 'Nama Anda Kepanjangan',
+    //         'phone.required' => 'Nomor Whatshapp Wajib Diisi',
+    //         'phone.min' => 'Nomor Whatshapp Minimal 12 Angka!!',
+    //         'phone.max' => 'Nomor Whatshapp Maksimal 13 Angka!!',
+    //         'gender.required' => 'Gender Wajib Diisi',
+    //         'password.required' => 'Password Wajib Diisi',
+    //         'password.confirmed' => 'Password Harus Sama',
+    //         'password.min:8' => 'Password Wajib 8 Angka / Huruf!!!'
+    //     ];
+    //     $data = $request->validate([
+    //         'name' => 'required|min:3|max:255|string',
+    //         'phone' => 'required|min:11|max:13|unique:users,phone',
+    //         'email' => 'required|email|unique:users,email',
+    //         'gender' => 'required|string',
+    //         'password' => 'required|confirmed|min:8',
+    //     ], $messages);
+    //     $data['phone'] = $request->phone;
+    //     $data['role'] = 'Mahasiswa';
+    //     $data['token'] = rand(111111, 999999);
+    //     // dd($data);
+    //     $user = User::create($data);
+    //     $notif = Notify::where('id',1)->first();
+    //     $messages =  $notif->notif_otp . ' ' . $user->token;
         
-        $this->send_message($user->phone, $messages);
+    //     $this->send_message($user->phone, $messages);
 
-        return redirect()->route('verify');
-    }
+    //     return redirect()->route('verify');
+    // }
 
     public function login()
     {
@@ -174,16 +174,24 @@ class AuthController extends Controller
 
         $input = $request->all();
         $users = Auth::user();
-        $administrasiS1 = Transaksi::where('user_id',$users->id)->where('jenis_tagihan','Administrasi')->where('program_belajar','S1')->where('status','berhasil')->first();
-        $administrasiKURSUS = Transaksi::where('user_id',$users->id)->where('jenis_tagihan','Administrasi')->where('program_belajar','KURSUS')->where('status','berhasil')->first();
+        $administrasiS1 = Transaksi::where('user_id',$users->id)->where('jenis_tagihan','Administrasi')->where('program_belajar','S1')->first();
+        $administrasiKURSUS = Transaksi::where('user_id',$users->id)->where('jenis_tagihan','Administrasi')->where('program_belajar','KURSUS')->first();
 
         auth()->attempt(array('phone' => $input['phone'], 'password' => $input['password']));
             
             if (auth()->user()->role == 'Mahasiswa') {
-                if($administrasiS1){
-                    return redirect()->route('mahasiswa.dashboard')->with('success',"Halo $user->name Selamat Datang ");
-                }elseif($administrasiKURSUS){
-                    return redirect()->route('kursus.dashboard')->with('success',"Halo $user->name Selamat Datang ");
+                if($administrasiS1 && !$administrasiKURSUS){
+                    if($administrasiS1->status == 'berhasil'){
+                        return redirect()->route('mahasiswa.dashboard')->with('success',"Halo $user->name Selamat Datang ");
+                    }elseif($administrasiS1->status == 'pending'){
+                        return $administrasiS1->payment_link;
+                    }
+                }elseif($administrasiKURSUS && !$administrasiKURSUS){
+                    if($administrasiKURSUS->status == 'berhasil'){
+                        return redirect()->route('kursus.dashboard')->with('success',"Halo $user->name Selamat Datang ");
+                    }elseif($administrasiKURSUS->status == 'pending'){
+                        return $administrasiKURSUS->payment_link;
+                    }
                 }elseif($administrasiS1 && $administrasiKURSUS){
                     return redirect()->route('mahasiswa.dashboard')->with('success',"Halo $user->name Selamat Datang");
                 }
@@ -192,11 +200,6 @@ class AuthController extends Controller
                     'phone' => 'Kamu bukan Mahasiswa Disini'
                 ]);
             }
-    }
-
-    public function verify()
-    {
-        return view('auth.verify');
     }
 
     public function verify_otp(Request $request)

@@ -36,7 +36,7 @@
                                     @endif
                                 @else
                                     <li class="nav-item">
-                                        <a class="nav-link me-2" href="{{route('register')}}">
+                                        <a class="nav-link me-2" href="{{route('s1.register')}}">
                                             <i class="fas fa-user-circle opacity-6 text-dark me-1"></i>
                                             Daftar
                                         </a>
