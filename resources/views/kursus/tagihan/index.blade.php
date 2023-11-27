@@ -137,7 +137,8 @@
                         @if (
                             $biayaHead->jenis_biaya == 'Tidakroutine' &&
                                 $biayaHead?->id_angkatans == $biodatas->angkatan_id &&
-                                $biayaHead?->program_belajar == $biodatas->program_belajar)
+                                $biayaHead?->program_belajar == $biodatas->program_belajar &&
+                                $biayaHead->id_kursus == $biodatas->course_id)
                             <p class="text-bold">Tagihan Biaya lain</p>
                             <div class="table-responsive mb-3">
                                 <form action="{{ route('kursus.tagihan.bayar', $mahasiswa->id) }}" method="GET">
@@ -167,7 +168,8 @@
                                                     @if (
                                                         $biayas->jenis_biaya == 'Tidakroutine' &&
                                                             $biayas->id_angkatans == $biodatas->angkatan_id &&
-                                                            $biayas->program_belajar == $biodatas->program_belajar)
+                                                            $biayas->program_belajar == $biodatas->program_belajar &&
+                                                            $biayas->id_kursus == $biodatas->course_id)
                                                         @foreach ($biayas->tagihanDetail as $key => $tagihans)
                                                             @if ($tagihans->id_users == $mahasiswa->id)
                                                                 <tr>

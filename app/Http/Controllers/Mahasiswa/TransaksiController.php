@@ -46,7 +46,7 @@ class TransaksiController extends Controller
                 'user_id' => $user->id
             ]);
 
-            return view('mahasiswa.transaksi.daftar-ulang', compact('transaction'));
+            return view('mahasiswa.transaksi.daftar-ulang-cash', compact('transaction', 'user'));
         } else {
             $jenis = 'cicil';
             $array = ['1', '2', '3'];
@@ -177,9 +177,6 @@ class TransaksiController extends Controller
             ]);
         }
 
-
-
-
         $cicilans = Cicilan::where('id_tagihan_details', $tagihanDetail->id)->where('status', 'LUNAS')->get();
         if ($cicilans->count() == 3) {
             $tagihanDetail->update([
@@ -230,5 +227,69 @@ class TransaksiController extends Controller
         }
         return redirect()->route('mahasiswa.tagihan.index')->with('success', 'Selamat anda berhasil menbayar');
         // if()
+    }
+
+    public function demo_bayar_cash(Request $request, $invoice)
+    {
+        $user = Auth::user();
+        $biaya = Biaya::where('program_belajar', 'S1')->where('jenis_biaya', 'DaftarUlang')->where('id_angkatans', $user->biodata->angkatan_id)->latest()->first();
+        $tagihanDetail = TagihanDetail::where('id_biayas', $biaya->id)->where('id_users', $user->id)->latest()->first();
+
+        $transaksi = Transaksi::where('user_id', $user->id)->where('no_invoice', $invoice)->first();
+
+        if (!$transaksi) {
+            return redirect()->back()->with('error', 'Transaction not found.');
+        }
+
+        $transaksi->update([
+            'status' => 'berhasil'
+        ]);
+
+        if ($transaksi->status == 'berhasil' && $transaksi->jenis_pembayaran == 'cash') {
+            $tagihanDetail->update([
+                'status' => 'LUNAS',
+                'id_transactions' => $transaksi->id
+            ]);
+
+            $biodata = Biodata::where('user_id', $user->id)->where('program_belajar', 'S1')->first();
+
+            $biaya = Biaya::all();
+            // $transaksi = Transaksi::where('user_id', $user)->where('status', 'berhasil')->where('program_belajar', 'S1')->where('jenis_tagihan', 'Administrasi')->first();
+            foreach ($biaya as $key => $biayas) {
+                if ($biayas->id_angkatans == $biodata->angkatan_id && $biayas->id_jurusans == $biodata->jurusan_id && $biayas->program_belajar == $biodata->program_belajar) {
+                    $tagihan = Tagihan::where('id_biayas', $biayas->id)->get();
+
+                    foreach ($tagihan as $key => $tagihans) {
+                        if ($tagihans->biayas->jenis_biaya != 'DaftarUlang') {
+                            // dd($tagihans->biayas->jenis_biaya);
+                            $tagihanDetail = TagihanDetail::create([
+                                'id_biayas' => $biayas->id,
+                                'id_tagihans' => $tagihans->id,
+                                'id_users' => $biodata->user->id,
+                                'end_date' => $tagihans->end_date,
+                                'amount' => $tagihans->amount,
+                                'status' => 'BELUM',
+                            ]);
+                        }
+                    }
+                } else if ($biayas->id_angkatans == $biodata->angkatan_id && $biayas->program_belajar == $biodata->program_belajar) {
+                    $tagihan = Tagihan::where('id_biayas', $biayas->id)->get();
+
+                    foreach ($tagihan as $key => $tagihans) {
+                        if ($tagihans->biayas->jenis_biaya != 'DaftarUlang') {
+                            $tagihanDetail = TagihanDetail::create([
+                                'id_biayas' => $biayas->id,
+                                'id_tagihans' => $tagihans->id,
+                                'id_users' => $biodata->user->id,
+                                'end_date' => $tagihans->end_date,
+                                'amount' => $tagihans->amount,
+                                'status' => 'BELUM',
+                            ]);
+                        } else {
+                        }
+                    }
+                }
+            }
+        }
     }
 }

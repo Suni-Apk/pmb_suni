@@ -23,7 +23,7 @@
         $tagihan = App\Models\TagihanDetail::where('id_biayas', $biaya->id)
             ->where('id_users', $user->id)
             ->latest()
-            ->first();
+            ->firstOrFail();
         $cicilans = App\Models\Cicilan::where('id_tagihan_details', $tagihan->id)->first();
         $cicilan2 = App\Models\Cicilan::where('id_tagihan_details', $tagihan->id)
             ->where('status', 'LUNAS')
@@ -64,13 +64,13 @@
                 ->where('jenis_biaya', 'DaftarUlang')
                 ->where('id_angkatans', Auth::user()->biodata->angkatan_id)
                 ->latest()
-                ->first();
+                ->firstOrfail();
 
             $user = Auth::user();
             $tagihan = App\Models\TagihanDetail::where('id_biayas', $biaya->id)
                 ->where('id_users', $user->id)
                 ->latest()
-                ->first();
+                ->firstOrFail();
 
             // Menghitung total pembayaran yang telah dilakukan
             $total_pembayaran = App\Models\Transaksi::where('user_id', $user->id)
@@ -82,7 +82,7 @@
             $cicilannya = App\Models\Cicilan::where('id_tagihan_details', $tagihan->id)->get();
             $cicilan1 = App\Models\Cicilan::where('id_tagihan_details', $tagihan->id)
                 ->where('status', 'LUNAS')
-                ->first();
+                ->firstOrFail();
 
             // Hitung setengah dari $jumlah_uang_daftar_ulang
             // $setengah_jumlah_daftar_ulang = ($tagihan->amount * 2) / 3;
@@ -444,13 +444,13 @@
         ->where('jenis_biaya', 'DaftarUlang')
         ->where('id_angkatans', Auth::user()->biodata->angkatan_id)
         ->latest()
-        ->first();
+        ->firstOrFail();
 
     $user = Auth::user();
     $tagihan = App\Models\TagihanDetail::where('id_biayas', $biaya->id)
         ->where('id_users', $user->id)
         ->latest()
-        ->first();
+        ->firstOrFail();
 
     // Menghitung total pembayaran yang telah dilakukan
     $total_pembayaran = App\Models\Transaksi::where('user_id', $user->id)
@@ -485,20 +485,21 @@
         ->where('jenis_biaya', 'DaftarUlang')
         ->where('id_angkatans', Auth::user()->biodata->angkatan_id)
         ->latest()
-        ->first();
+        ->firstOrFail();
 
     $user = Auth::user();
     $tagihan = App\Models\TagihanDetail::where('id_biayas', $biaya->id)
         ->where('id_users', $user->id)
         ->latest()
-        ->first();
+        ->firstOrFail();
     // $bagi3 = $tagihan->amount / 3;
     // dd($bagi3);
     $transaction = App\Models\Transaksi::where('user_id', $user->id)
         ->where('tagihan_detail_id', $tagihan->id)
         ->where('jenis_tagihan', $biaya->jenis_biaya)
         ->where('status', 'berhasil')
-        ->first();
+        ->where('jenis_pembayaran', 'cash')
+        ->firstOrFail();
 @endphp
 @if (!$transaction)
 @else

@@ -15,6 +15,7 @@
                 $table->id();
                 $table->foreignId('id_angkatans');
                 $table->foreignId('id_jurusans')->nullable();
+                $table->foreignId('id_kursus')->nullable();
                 $table->string('nama_biaya');
                 $table->string('jenis_biaya');
                 $table->enum('program_belajar', ['S1', 'KURSUS']);

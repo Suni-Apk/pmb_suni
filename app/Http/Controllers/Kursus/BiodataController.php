@@ -47,9 +47,8 @@ class BiodataController extends Controller
         $biaya = Biaya::all();
 
         foreach ($biaya as $key => $biayas) {
-            if ($biayas->id_angkatans == $biodata->angkatan_id  && $biayas->program_belajar == $biodata->program_belajar) {
+            if ($biayas->id_angkatans == $biodata->angkatan_id  && $biayas->program_belajar == $biodata->program_belajar && $biayas->id_kursus == $biodata->course_id) {
                 $tagihan = Tagihan::where('id_biayas', $biayas->id)->get();
-
                 foreach ($tagihan as $key => $tagihans) {
                     $tagihanDetail = TagihanDetail::create([
                         'id_biayas' => $biayas->id,

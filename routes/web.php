@@ -104,9 +104,14 @@ Route::prefix('/admin')->middleware(['admin', 'auth'])->name('admin.')->group(fu
         Route::put('/change-status/{id}', [AccountController::class, 'mahasiswa_status'])->name('status');
         Route::delete('/delete/{id}', [AccountController::class, 'mahasiswa_delete'])->name('delete');
         Route::get('/detail/{id}', [AccountController::class, 'mahasiswa_detail'])->name('show');
+        Route::get('/daftar-ulang/{id}', [TransactionController::class, 'DaftarUlang'])->name('daftar-ulang');
         Route::get('/bayar/{id}', [AccountController::class, 'mahasiswa_bayar'])->middleware(['Pembayaran'])->name('bayar');
         Route::get('/program/{id}', [AccountController::class, 'mahasiswa_program'])->name('program');
     });
+    Route::get('/demo-cicilan/{id}', [TransactionController::class, 'demo_cicilan'])->name('transactions.cicilan');
+    Route::put('/demoBayar/{id}', [TransactionController::class, 'demo_bayar_cicilan_admin'])->name('transactions.cicilan.bayar');
+    Route::put('/demoBayarCash/{id}', [TransactionController::class, 'demo_bayar_cash'])->name('transactions.cash.bayar');
+
     Route::prefix('/transactions/')->name('transactions.')->group(function () {
         Route::post('/proses_bayar/{id}', [TransactionController::class, 'proses_bayar'])->middleware(['Pembayaran'])->name('proses_bayar');
     });
@@ -234,6 +239,7 @@ Route::prefix('/mahasiswa')->middleware(['auth', 'mahasiswa', 's1'])->name('maha
 
     Route::get('/demo-cicilan/{id}', [TransaksiController::class, 'demo_cicilan'])->name('transactions.cicilan');
     Route::put('/demoBayar/{id}', [TransaksiController::class, 'demo_bayar_cicilan'])->name('transactions.cicilan.bayar');
+    Route::put('/demoBayarCash/{id}', [TransaksiController::class, 'demo_bayar_cash'])->name('transactions.cash.bayar');
 
     //callback demo bayar tagihan
     Route::prefix('/transactions/')->name('transactions.')->group(function () {

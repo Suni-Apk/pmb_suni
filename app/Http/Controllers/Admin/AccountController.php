@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Biaya;
 use App\Models\Biodata;
+use App\Models\Cicilan;
 use App\Models\TagihanDetail;
 use App\Models\Transaksi;
 use App\Models\User;
@@ -242,8 +243,8 @@ class AccountController extends Controller
         $biodata = Biodata::where('user_id', $mahasiswa->id)->get();
         $biaya = Biaya::get();
         $biayaAll = Biaya::all();
-
-        return view('admin.account.mahasiswa.detail', compact('biodata', 'mahasiswa', 'biaya', 'biayaAll'));
+        $cicilanAll = Cicilan::all();
+        return view('admin.account.mahasiswa.detail', compact('biodata', 'mahasiswa', 'biaya', 'biayaAll', 'cicilanAll'));
     }
     public function mahasiswa_bayar(Request $request, $id)
     {
