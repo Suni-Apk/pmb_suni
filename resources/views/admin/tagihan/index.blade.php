@@ -94,7 +94,7 @@
                                         </td>
 
                                         <td class="align-middle  text-secondary text-xs font-weight-bold">
-                                            {{ $biayas->jurusans->name ?? 'Tidak Ada Jurusan' }}
+                                            {{ $biayas->jurusans->name ?? '-' }}
 
                                         </td>
                                         <td class="align-middle  text-secondary text-xs font-weight-bold">

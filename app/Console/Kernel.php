@@ -2,6 +2,7 @@
 
 namespace App\Console;
 
+use App\Jobs\BeforeTenggatJobs;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 
@@ -18,7 +19,9 @@ class Kernel extends ConsoleKernel
     ];
     protected function schedule(Schedule $schedule): void
     {
-        // $schedule->command('inspire')->hourly();
+        $schedule->command('app:before-tenggat')->dailyAt('21:52');
+        $schedule->command('app:tagihan-detail')->everySecond();
+        $schedule->command('app:tenggat')->dailyAt('21:32');
     }
 
     /**

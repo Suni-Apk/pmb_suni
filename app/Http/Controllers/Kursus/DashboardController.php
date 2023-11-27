@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Kursus;
 
 use App\Http\Controllers\Controller;
+use App\Models\Banner;
 use App\Models\Biodata;
 use App\Models\Course;
 use GuzzleHttp\Client;
@@ -24,11 +25,13 @@ class DashboardController extends Controller
         // Mengambil tanggal Hijriah untuk indeks pertama (bulan ini).
         // $hijriDateArabic = $data['data']['hijri']['day']['ar'];
         $hijriDateday = $data['data']['hijri']['day'];
+        $hijriDatedayArabic = $data['data']['hijri']['weekday']['ar'];
         $hijriDatemonth = $data['data']['hijri']['month']['ar'];
         $hijriDateyear = $data['data']['hijri']['year'];
         $user = Auth::user();
         $kursus = Course::all();
+        $banner = Banner::where('type', 'DASHBOARD')->get();
         $biodata = Biodata::where('program_belajar','KURSUS')->where('user_id',$user->id)->first();
-        return view('kursus.index',compact('hijriDateday','hijriDatemonth','hijriDateyear','user','biodata', 'kursus'));
+        return view('kursus.index',compact('hijriDateday', 'hijriDatedayArabic','hijriDatemonth','hijriDateyear','user','biodata', 'kursus', 'banner'));
     }
 }

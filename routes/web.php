@@ -65,6 +65,8 @@ Route::get('/login', [AuthController::class, 'login'])->name('login');
 Route::post('/login-process', [AuthController::class, 'login_process'])->name('login.process');
 
 Route::post('/verify-process', [AuthController::class, 'verify_otp'])->name('verify.process');
+Route::post('/administrasiS1/{id}', [AuthController::class, 'administrasiS1'])->name('administrasiS1');
+Route::post('/administrasiKursus/{id}', [AuthController::class, 'administrasiKursus'])->name('administrasiKursus');
 
 Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
 
@@ -76,10 +78,10 @@ Route::get('reset-password/{token}', [ForgotPasswordController::class, 'showRese
 Route::post('reset-password', [ForgotPasswordController::class, 'submitResetPasswordForm'])->name('reset.password.post');
 
 
-Route::prefix('/switch')->middleware(['auth'])->name('program.')->group(function () {
-    Route::get('/program-belajar', [AuthController::class, 'switch_program'])->name('program_belajar');
-    Route::post('/program-belajar/switch/{id}', [AuthController::class, 'switch'])->name('program_belajar.switch');
-});
+// Route::prefix('/switch')->middleware(['auth'])->name('program.')->group(function () {
+//     Route::get('/program-belajar', [AuthController::class, 'switch_program'])->name('program_belajar');
+//     Route::post('/program-belajar/switch/{id}', [AuthController::class, 'switch'])->name('program_belajar.switch');
+// });
 
 // Auth Admin
 Route::prefix('admin')->name('admin.')->group(function () {

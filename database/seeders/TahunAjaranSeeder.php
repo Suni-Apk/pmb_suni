@@ -30,8 +30,8 @@ class TahunAjaranSeeder extends Seeder
             DB::table('tahun_ajarans')->insert([
                 'year' => $year . '/' . ($year + 1),
                 'status' => 'Active', // Status aktif
-                'start_at' => now()->subDays(rand(1, 365)), // Tanggal mulai acak dalam satu tahun terakhir
-                'end_at' => now()->addDays(rand(1, 365)), // Tanggal selesai acak dalam satu tahun mendatang
+                'start_at' => now()->subDays(rand(2, 365)), // Tanggal mulai acak dalam satu tahun terakhir
+                'end_at' => now()->addDays(rand(2, 365)), // Tanggal selesai acak dalam satu tahun mendatang
             ]);
         }
         
