@@ -186,7 +186,7 @@ class AuthController extends Controller
                     }elseif($administrasiS1->status == 'pending'){
                         return $administrasiS1->payment_link;
                     }
-                }elseif($administrasiKURSUS && !$administrasiKURSUS){
+                }elseif($administrasiKURSUS && !$administrasiS1){
                     if($administrasiKURSUS->status == 'berhasil'){
                         return redirect()->route('kursus.dashboard')->with('success',"Halo $user->name Selamat Datang ");
                     }elseif($administrasiKURSUS->status == 'pending'){

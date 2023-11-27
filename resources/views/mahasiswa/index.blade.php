@@ -26,59 +26,6 @@
 
 @section('content')
     <div class="row">
-        <div class="col-12 col-sm-6 col-md-4 mb-4">
-            <div class="card card-stats mb-xl-0">
-                <div class="card-body p-4">
-                    <div class="row align-items-center">
-                        <div class="col">
-                            <h6 class="card-title text-uppercase text-muted mb-0">Mata Kuliah</h6>
-                            <span class="h2 lh-1 font-weight-bold mb-0">123</span>
-                        </div>
-                        <div class="col-auto">
-                            <div class="icon icon-shape bg-teal text-white rounded-circle shadow text-center">
-                                <i class="ni ni-hat-3"></i>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-12 col-sm-6 col-md-4 mb-4">
-            <div class="card card-stats mb-xl-0">
-                <div class="card-body p-4">
-                    <div class="row align-items-center">
-                        <div class="col">
-                            <h6 class="card-title text-uppercase text-muted mb-0">Jurusan</h6>
-                            <span class="h2 lh-1 font-weight-bold mb-0">4</span>
-                        </div>
-                        <div class="col-auto">
-                            <div class="icon icon-shape bg-green text-white rounded-circle shadow text-center">
-                                <i class="ni ni-paper-diploma"></i>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-12 col-sm-6 col-md-4 mb-4">
-            <div class="card card-stats mb-xl-0">
-                <div class="card-body p-4">
-                    <div class="row align-items-center">
-                        <div class="col">
-                            <h6 class="card-title text-uppercase text-muted mb-0">Tagihan</h6>
-                            <span class="h2 lh-1 font-weight-bold mb-0">0</span>
-                        </div>
-                        <div class="col-auto">
-                            <div class="icon icon-shape bg-blue text-white rounded-circle shadow text-center">
-                                <i class="fas fa-wallet"></i>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="row">
         <div class="col-lg-8 mb-lg-0 mb-4">
         <div class="card">
             <div class="card-body p-3">
@@ -174,6 +121,20 @@
             </div>
         </div>
         </div>
+        @php
+            $biodata = App\Models\Biodata::where('user_id',Auth::user()->id)->where('program_belajar','S1')->first();
+
+            $document = App\Models\Document::where('user_id',Auth::user()->id)->first();
+
+            $biaya = App\Models\Biaya::where('program_belajar','S1')->where('jenis_biaya','DaftarUlang')->latest()->first();
+      
+            $user = Auth::user();
+            // dd($user);
+            $tagihan = App\Models\TagihanDetail::where('id_biayas',$biaya->id)->where('id_users',$user->id)->latest()->first();
+            // $bagi3 = $tagihan->amount / 3;
+            // dd($bagi3);
+            $transaction = round(App\Models\Transaksi::where('user_id',$user->id)->where('tagihan_detail_id',$tagihan->id)->where('jenis_tagihan',$biaya->jenis_biaya)->where('status','berhasil')->sum('total'));
+        @endphp
         <div class="col-12 text-center mt-4">
         <div class="card">
             <h6 class="text-secondary font-weight-normal my-3 px-3">proses pendaftaran kamu sampai dimana nih?</h6>
@@ -181,24 +142,52 @@
             <div class="row">
                 <div class="col-12 col-lg-10 mx-auto mb-3">
                 <div class="multisteps-form__progress">
-                    <button class="multisteps-form__progress-btn js-active" type="button" title="Register">
-                    <span>Register</span>
-                    </button>
-                    <button class="multisteps-form__progress-btn" type="button" title="Bayar Registrasi">
-                    <span>Bayar Registrasi</span>
-                    </button>
-                    <button class="multisteps-form__progress-btn" type="button" title="Mengisi Biodata">
-                    <span>Mengisi Biodata</span>
-                    </button>
-                    <button class="multisteps-form__progress-btn" type="button" title="Upload Dokumen">
-                    <span>Upload Dokumen</span>
-                    </button>
-                    <button class="multisteps-form__progress-btn" type="button" title="Bayar Pra-Kuliah">
-                    <span>Bayar Pra-Kuliah</span>
-                    </button>
-                    <button class="multisteps-form__progress-btn" type="button" title="Bayar Pra-Kuliah">
-                    <span>Selesai!</span>
-                    </button>
+                    @if (!$biodata)
+                        <button class="multisteps-form__progress-btn js-active" type="button" title="Register">
+                        <span>Register</span>
+                        </button>
+                        <button class="multisteps-form__progress-btn js-active" type="button" title="Bayar Registrasi">
+                        <span>Bayar Registrasi</span>
+                        </button>
+                        <button class="multisteps-form__progress-btn" type="button" title="Mengisi Biodata">
+                        <span>Mengisi Biodata</span>
+                        </button>
+                    @else
+                        <button class="multisteps-form__progress-btn js-active" type="button" title="Register">
+                        <span>Register</span>
+                        </button>
+                        <button class="multisteps-form__progress-btn js-active" type="button" title="Bayar Registrasi">
+                        <span>Bayar Registrasi</span>
+                        </button>
+                        <button class="multisteps-form__progress-btn js-active" type="button" title="Mengisi Biodata">
+                        <span>Mengisi Biodata</span>
+                        </button>
+                    @endif
+                    @if (!$document)
+                        <button class="multisteps-form__progress-btn" type="button" title="Upload Dokumen">
+                        <span>Upload Dokumen</span>
+                        </button>
+                    @else
+                        <button class="multisteps-form__progress-btn js-active" type="button" title="Upload Dokumen">
+                        <span>Upload Dokumen</span>
+                        </button>
+                    @endif
+                    @if ($transaction != $tagihan->amount)
+                        <button class="multisteps-form__progress-btn" type="button" title="Bayar Pra-Kuliah">
+                        <span>Bayar Pra-Kuliah</span>
+                        </button>
+                        <button class="multisteps-form__progress-btn" type="button" title="Bayar Pra-Kuliah">
+                        <span>Selesai!</span>
+                        </button>
+                    @else
+                        <button class="multisteps-form__progress-btn js-active" type="button" title="Bayar Pra-Kuliah">
+                        <span>Bayar Pra-Kuliah</span>
+                        </button>
+                        <button class="multisteps-form__progress-btn js-active" type="button" title="Bayar Pra-Kuliah">
+                        <span>Selesai!</span>
+                        </button>
+                    @endif
+                        
                 </div>
                 </div>
             </div>
