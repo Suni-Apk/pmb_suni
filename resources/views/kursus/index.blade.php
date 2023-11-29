@@ -217,19 +217,13 @@
                                 <button class="multisteps-form__progress-btn js-active" type="button" title="Register">
                                     <span>Register</span>
                                 </button>
-                                <button class="multisteps-form__progress-btn" type="button" title="Bayar Registrasi">
+                                <button class="multisteps-form__progress-btn js-active" type="button" title="Bayar Registrasi">
                                     <span>Bayar Registrasi</span>
                                 </button>
-                                <button class="multisteps-form__progress-btn" type="button" title="Mengisi Biodata">
+                                <button class="multisteps-form__progress-btn js-active" type="button" title="Mengisi Biodata">
                                     <span>Mengisi Biodata</span>
                                 </button>
-                                <button class="multisteps-form__progress-btn" type="button" title="Upload Dokumen">
-                                    <span>Upload Dokumen</span>
-                                </button>
-                                <button class="multisteps-form__progress-btn" type="button" title="Bayar Pra-Kuliah">
-                                    <span>Bayar Pra-Kuliah</span>
-                                </button>
-                                <button class="multisteps-form__progress-btn" type="button" title="Bayar Pra-Kuliah">
+                                <button class="multisteps-form__progress-btn js-active" type="button" title="Bayar Pra-Kuliah">
                                     <span>Selesai!</span>
                                 </button>
                             </div>
@@ -238,23 +232,59 @@
                 </div>
             </div>
         </div>
-        <div class="col-lg-8 mb-lg-0 mb-4">
-            <div class="card">
-                <div class="card-body p-3">
-                    <div class="height-200 d-flex justify-content-center flex-column align-items-center bg-cover text-center"
-                        style="background: url(/assets/img/admin-db.svg);
-                background-position: center; background-repeat: no-repeat;">
-                        <h4 class="font-weight-bold mb-0 p-3 pb-0"
-                            style="background: rgba(255,255,255,.5)!important; backdrop-filter: blur(1px);">
-                            Selamat Datang
-                            <b class="font-weight-bolder">{{ $user->name }}</b>!
-                        </h4>
-                        <p class="mb-0 mx-2 pb-3 px-3"
-                            style="background: rgba(255,255,255,.5)!important; backdrop-filter: blur(2px);">
-                            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ut, voluptate?
-                        </p>
-                    </div>
+        <div class="col-12 col-lg-8 mb-lg-0">
+            <div id="carouselDashboard" data-bs-ride="carousel" data-bs-interval="3000" class="carousel slide page-header align-items-start height-300 pb-7 rounded-3">
+                <div class="carousel-indicators">
+                    <button type="button" data-bs-target="#carouselDashboard" data-bs-slide-to="0" class="active" aria-current="true"></button>
+                    @foreach ($banner->filter(function ($item) {
+                        return $item->target == 'MAHASISWA' || $item->target == 'SEMUA';
+                        }) as $item)
+                    <button type="button" data-bs-target="#carouselDashboard" data-bs-slide-to="{{ $loop->index+1 }}" class="" aria-current="true"></button>
+                    @endforeach
                 </div>
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                        <div class="row flex-column justify-content-center height-300"
+                        style="background-image: url('/assets/img/curved-images/curved14.jpg'); background-size: cover; background-position: center;">
+                            <span class="mask bg-gradient-dark opacity-6"></span>
+                            <div class="d-flex justify-content-center flex-column align-items-center text-white text-center z-index-1">
+                                <h4 class="font-weight-bold mb-0 p-3 pb-0 text-white">
+                                    Selamat Datang 
+                                    <b class="font-weight-bolder">{{ $user->name }}</b>!
+                                </h4>
+                                <p class="mb-0 mx-2">
+                                    Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ut, voluptate?
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    @foreach ($banner->filter(function ($item) {
+                        return $item->target == 'MAHASISWA' || $item->target == 'SEMUA';
+                        }) as $item)
+                    <div class="carousel-item">
+                        <div class="row flex-column justify-content-center height-300"
+                        style="background-image: url('{{ $item->image }}'); background-size: cover; background-position: center;">
+                            <span class="mask bg-gradient-dark opacity-6"></span>
+                            <div class="d-flex justify-content-center flex-column align-items-center text-white text-center z-index-1">
+                                <h4 class="font-weight-bold mb-0 p-3 pb-0 text-white">
+                                    {{ $item->title }}
+                                </h4>
+                                <p class="mb-0 mx-2">
+                                    {{ $item->desc }}
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    @endforeach
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#carouselDashboard" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#carouselDashboard" data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                </button>
             </div>
         </div>
         <div class="col-12 mb-4 gy-3 g-lg-3 d-md-none row mx-auto justify-content-center">
@@ -320,20 +350,18 @@
                 <span class="d-block mt-2" style="font-size: 13px;">Profile</span>
             </div>
         </div>
-        <div class="col-12 col-lg-4 mb-4">
+        <div class="col-12 col-lg-4">
             <div class="card h-100 p-3">
                 <div class="overflow-hidden position-relative border-radius-lg bg-cover h-100"
-                    style="background-image: url('https://suniindonesia.com/wp-content/uploads/2022/10/masjid-pogung-dalangan-fQET4BjQmvc-unsplash.jpg');">
+                style="background-image: url('https://suniindonesia.com/wp-content/uploads/2022/10/masjid-pogung-dalangan-fQET4BjQmvc-unsplash.jpg');">
                     <span class="mask bg-gradient-dark"></span>
                     <div class="card-body position-relative z-index-1 d-flex flex-column justify-content-center gap-2">
                         <p class="text-white w-100 mb-0 text-center">Kalender hari ini,</p>
                         <h5 class="text-white font-weight-bolder fs-1 d-flex justify-content-evenly w-100 mb-0">
                             <span>{{ $hijriDateday }}</span>
-                            <span class="text-green font-weight-normal"
-                                style="font-family: 'Rubik', sans-serif;">{{ $hijriDatemonth }}</span>
+                            <span class="text-green font-weight-normal" style="font-family: 'Rubik', sans-serif;">{{ $hijriDatemonth }}</span>
                         </h5>
-                        <h5 class="w-100 mb-0 text-center lh-1 text-green font-weight-light"
-                            style="font-family: 'Rubik', sans-serif;">
+                        <h5 class="w-100 mb-0 text-center lh-1 text-green font-weight-light" style="font-family: 'Rubik', sans-serif;">
                             {{ $hijriDatedayArabic }}
                         </h5>
                         <p class="text-white w-100 mb-0 text-center">
@@ -349,7 +377,7 @@
             $biodataKURSUS = App\Models\Biodata::where('user_id', $user->id)->where('program_belajar', 'KURSUS')->first();
         @endphp
         @if($biodataS1 && $biodataKURSUS)
-                <div class="col-12" id="informasi">
+                <div class="col-12 mt-4" id="informasi">
                     <div class="list-group list-group-horizontal" id="list-tab" role="tablist">
                         <a id="list-sarjana-list" data-bs-toggle="list" href="#list-sarjana" role="tab"
                             aria-controls="list-sarjana"
@@ -360,6 +388,22 @@
                     </div>
                 </div>
         @else
+
+                {{-- Ini buat misalkan ia mau daftar jadi S1 tinggal pencet Program S1 nanti ia akan disuruh membayar Administrasi Trus Lanjut ke Pendaftaran S1 --}}
+                <div class="col-12 mt-4" id="informasi">
+                    <div class="list-group list-group-horizontal" id="list-tab" role="tablist">
+                        <form id="form-S1" action="{{ route('administrasiS1', ['id' => Auth::id()]) }}" class="w-50" method="POST">
+                            @csrf
+                            <a id="list-S1-list" href="#" onclick="event.preventDefault(); document.getElementById('form-S1').submit();" role="tab" aria-controls="list-kursus" class="list-group-item list-group-item-action border-0 shadow text-center">Program S1</a>
+                        </form>
+                
+                {{-- Ini buat misalkan ia mau daftar jadi KURSUS tinggal pencet Program KURSUS nanti ia akan disuruh membayar Administrasi Trus Lanjut ke Pendaftaran KURSUS --}}
+                        <form id="form-kursus" action="{{ route('administrasiKursus', ['id' => Auth::id()]) }}" class="w-50" method="POST">
+                            @csrf
+                            <a id="list-kursus-list" href="#" onclick="event.preventDefault(); document.getElementById('form-kursus').submit();" role="tab" aria-controls="list-kursus" class="list-group-item list-group-item-action border-0 shadow text-center active">Program Kursus</a>
+                        </form>
+                    </div>
+                </div>    
         @endif
     </div>
     <div class="row my-4">

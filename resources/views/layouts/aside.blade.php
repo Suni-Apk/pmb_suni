@@ -134,8 +134,11 @@
 
                 <!-- Course -->
                 <li class="nav-item">
-                    <a data-bs-toggle="collapse" href="#course" class="nav-link {{ Route::is('admin.course.*') ? 'active' : '' }}" aria-controls="course" role="button" aria-expanded="false">
-                        <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center d-flex align-items-center justify-content-center  me-2">
+                    <a data-bs-toggle="collapse" href="#course"
+                        class="nav-link {{ Route::is('admin.course.*') ? 'active' : '' }}" aria-controls="course"
+                        role="button" aria-expanded="false">
+                        <div
+                            class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center d-flex align-items-center justify-content-center  me-2">
                             <i class="ni ni-book-bookmark"></i>
                         </div>
                         <span class="nav-link-text ms-1"> Kursus </span>
@@ -143,14 +146,18 @@
                     <div class="collapse {{ Route::is('admin.course.*') ? 'show' : '' }}" id="course">
                         <ul class="nav ms-4 ps-3">
                             <li class="nav-item">
-                                <a class="nav-link {{ Route::is('admin.course.index') ? 'active' : '' }}" href="{{ route('admin.course.index') }}">
-                                    <span class="sidenav-mini-icon d-none d-xl-block"><i class="fas fa-border-all"></i></span>
+                                <a class="nav-link {{ Route::is('admin.course.index') ? 'active' : '' }}"
+                                    href="{{ route('admin.course.index') }}">
+                                    <span class="sidenav-mini-icon d-none d-xl-block"><i
+                                            class="fas fa-border-all"></i></span>
                                     <span class="sidenav-normal"> Daftar Kursus </span>
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link {{ Route::is('admin.course.create') ? 'active' : '' }}" href="{{ route('admin.course.create') }}">
-                                    <span class="sidenav-mini-icon d-none d-xl-block"><i class="fas fa-plus"></i></span>
+                                <a class="nav-link {{ Route::is('admin.course.create') ? 'active' : '' }}"
+                                    href="{{ route('admin.course.create') }}">
+                                    <span class="sidenav-mini-icon d-none d-xl-block"><i
+                                            class="fas fa-plus"></i></span>
                                     <span class="sidenav-normal"> Tambah Kursus </span>
                                 </a>
                             </li>
@@ -260,7 +267,8 @@
 
                 <!-- pendaftar -->
                 <li class="nav-item">
-                    <a class="nav-link {{ Route::is('admin.pendaftar.*') ? 'active' : '' }}" href="{{ route('admin.pendaftar.index') }}">
+                    <a class="nav-link {{ Route::is('admin.pendaftar.*') ? 'active' : '' }}"
+                        href="{{ route('admin.pendaftar.index') }}">
                         <div
                             class="icon icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
                             <i class="fas fa-user-check"></i>
@@ -311,44 +319,24 @@
                     </ul>
                 </li>
 
-                <!-- document -->
+                <!-- dokumen -->
                 <li class="nav-item">
-                    <a data-bs-toggle="collapse" href="#document"
-                        class="nav-link {{ Route::is('admin.dokumen.*') ? 'active' : '' }}" aria-controls="document"
-                        role="button" aria-expanded="false">
+                    <a class="nav-link {{ Route::is('admin.dokumen.*') ? 'active' : '' }}"
+                        href="{{ route('admin.dokumen.index') }}">
                         <div
-                            class="icon icon-sm shadow border-radius-md bg-white text-center d-flex align-items-center justify-content-center  me-2">
+                            class="icon icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
                             <i class="fas fa-folder-open"></i>
                         </div>
                         <span class="nav-link-text ms-1"> Dokumen </span>
                     </a>
-                    <div class="collapse {{ Route::is('admin.dokumen.*') ? 'show' : '' }}" id="document">
-                        <ul class="nav ms-4 ps-3">
-                            <li class="nav-item ">
-                                <a class="nav-link {{ Route::is('admin.dokumen.index') ? 'active' : '' }}"
-                                    href="{{ route('admin.dokumen.index') }}">
-                                    <span class="sidenav-mini-icon d-none d-xl-block"><i
-                                            class="fas fa-border-all"></i></span>
-                                    <span class="sidenav-normal"> Daftar Dokumen </span>
-                                </a>
-                            </li>
-                            <li class="nav-item ">
-                                <a class="nav-link {{ Route::is('admin.dokumen.create') ? 'active' : '' }}"
-                                    href="{{ route('admin.dokumen.create') }}">
-                                    <span class="sidenav-mini-icon d-none d-xl-block"><i
-                                            class="fas fa-plus"></i></span>
-                                    <span class="sidenav-normal"> Tambah Dokumen </span>
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
                 </li>
 
                 <!-- link -->
                 <li class="nav-item">
-                    <a data-bs-toggle="collapse" href="#link" aria-controls="link" role="button" aria-expanded="false"
-                    class="nav-link {{ Route::is('admin.link.*') ? 'active' : '' }}">
-                        <div class="icon icon-sm shadow border-radius-md bg-white text-center d-flex align-items-center justify-content-center me-2">
+                    <a data-bs-toggle="collapse" href="#link" aria-controls="link" role="button"
+                        aria-expanded="false" class="nav-link {{ Route::is('admin.link.*') ? 'active' : '' }}">
+                        <div
+                            class="icon icon-sm shadow border-radius-md bg-white text-center d-flex align-items-center justify-content-center me-2">
                             <i class="fas fa-link"></i>
                         </div>
                         <span class="nav-link-text ms-1"> Link </span>
@@ -356,7 +344,8 @@
                     <div class="collapse {{ Route::is('admin.link.*') ? 'show' : '' }}" id="link">
                         <ul class="nav ms-4 ps-3">
                             <li class="nav-item ">
-                                <a class="nav-link {{ Route::is('admin.link.zoom') ? 'active' : '' }}" href="{{ route('admin.link.zoom') }}">
+                                <a class="nav-link {{ Route::is('admin.link.zoom') ? 'active' : '' }}"
+                                    href="{{ route('admin.link.zoom') }}">
                                     <span class="sidenav-mini-icon d-none d-xl-block">
                                         <img src="/assets/img/icon-zoom.svg" width="14px">
                                     </span>
@@ -364,8 +353,10 @@
                                 </a>
                             </li>
                             <li class="nav-item ">
-                                <a class="nav-link {{ Route::is('admin.link.whatsapp') ? 'active' : '' }}" href="{{ route('admin.link.whatsapp') }}">
-                                    <span class="sidenav-mini-icon d-none d-xl-block"><i class="fab fa-whatsapp"></i></span>
+                                <a class="nav-link {{ Route::is('admin.link.whatsapp') ? 'active' : '' }}"
+                                    href="{{ route('admin.link.whatsapp') }}">
+                                    <span class="sidenav-mini-icon d-none d-xl-block"><i
+                                            class="fab fa-whatsapp"></i></span>
                                     <span class="sidenav-normal"> Link Whatsapp </span>
                                 </a>
                             </li>
@@ -535,7 +526,7 @@
                 // $bagi3 = $tagihan->amount / 3;
                 // dd($bagi3);
                 $transaction = round(App\Models\Transaksi::where('user_id',$user->id)->where('tagihan_detail_id',$tagihan->id)->where('jenis_tagihan',$biaya->jenis_biaya)->where('status','berhasil')->sum('total'));
-                @endphp
+                @endphp --}}
                 @if (!$biodata && !Auth::user()->document)
                     <!-- biodata -->
                     <li class="nav-item">
@@ -607,7 +598,17 @@
                         </a>
                     </li>
                 @else
-                    @if (!$transaction == $tagihan->amount)
+                @php
+                    $biaya = App\Models\Biaya::where('program_belajar','S1')->where('jenis_biaya','DaftarUlang')->latest()->first();
+      
+                    $user = Auth::user();
+                    // dd($user);
+                    $tagihan = App\Models\TagihanDetail::where('id_biayas',$biaya->id)->where('id_users',$user->id)->latest()->first();
+                    // $bagi3 = $tagihan->amount / 3;
+                    // dd($bagi3);
+                    $transaction = round(App\Models\Transaksi::where('user_id',$user->id)->where('tagihan_detail_id',$tagihan->id)->where('jenis_tagihan',$biaya->jenis_biaya)->where('status','berhasil')->sum('total'));
+                @endphp
+                    @if ($transaction != $tagihan->amount)
                         
                     @else
                         {{-- academy --}}

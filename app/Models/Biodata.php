@@ -37,6 +37,11 @@ class Biodata extends Model
         return $this->belongsTo(User::class,'user_id');
     }
 
+    public function angkatan()
+    {
+        return $this->belongsTo(TahunAjaran::class);
+    }
+
     public function jurusan()
     {
         return $this->belongsTo(Jurusan::class);

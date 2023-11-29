@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Jurusan;
 use App\Models\Link;
 use App\Models\TahunAjaran;
 use Illuminate\Http\Request;
@@ -68,9 +69,10 @@ class TahunAjaranController extends Controller
     public function show(string $id)
     {
         $angkatan = TahunAjaran::findOrFail($id);
+        $jurusan = Jurusan::all();
         $links = Link::get();
 
-        return view('admin.tahun_ajaran.detail', compact('angkatan', 'links'));
+        return view('admin.tahun_ajaran.detail', compact('angkatan', 'links', 'jurusan'));
     }
 
     /**

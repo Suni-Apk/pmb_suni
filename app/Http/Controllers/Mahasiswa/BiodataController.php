@@ -19,7 +19,8 @@ class BiodataController extends Controller
     public function pendaftaran_s1()
     {
         $tahunAjaran = TahunAjaran::where('status', 'Active')->first();
-        $jurusan = Jurusan::where('id_tahun_ajarans', $tahunAjaran->id)->get();
+        // $jurusan = Jurusan::where('id_tahun_ajarans', $tahunAjaran->id)->get();
+        $jurusan = Jurusan::get();
         return view('mahasiswa.biodata.pendaftaran-s1', compact('jurusan'));
     }
 

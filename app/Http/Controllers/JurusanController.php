@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\JurusanExport;
 use App\Models\Jurusan;
 use App\Models\Link;
 use App\Models\Matkuls;
 use App\Models\Semester;
 use App\Models\TahunAjaran;
 use Illuminate\Http\Request;
+use Maatwebsite\Excel\Facades\Excel;
 
 class JurusanController extends Controller
 {
@@ -37,7 +39,7 @@ class JurusanController extends Controller
     public function store(Request $request)
     {
         $data = $request->validate([
-            'id_tahun_ajarans' => 'required',
+            'id_tahun_ajarans' => '',
             'name' => 'required',
             'code' => 'required'
         ]);
@@ -103,5 +105,10 @@ class JurusanController extends Controller
         $jurusan = Jurusan::findOrFail($id);
         $jurusan->delete();
         return redirect()->route('admin.jurusan.index');
+    }
+    
+    public function exportJurusan(Request $request)
+    {
+        return Excel::download(new JurusanExport($request), 'dataJurusan.xlsx');
     }
 }

@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Exports\AdminExport;
+use App\Exports\MahasiswaExport;
 use App\Http\Controllers\Controller;
 use App\Models\Biaya;
 use App\Models\Biodata;
@@ -12,6 +14,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Maatwebsite\Excel\Facades\Excel;
 
 class AccountController extends Controller
 {
@@ -124,12 +127,26 @@ class AccountController extends Controller
         return redirect()->route('admin.admin.index')->with("success", "Berhasil Menghapus Akun Admin $admin->name");
     }
 
-
-    public function mahasiswa()
+    public function export(Request $request)
     {
-        $mahasiswa = User::where('role', 'Mahasiswa')->get();
-        return view('admin.account.mahasiswa.index', compact('mahasiswa'));
+        return Excel::download(new AdminExport, 'dataAdmin.xlsx');
     }
+
+
+    public function mahasiswa(Request $request)
+    {
+        $tahun_ajaran = TahunAjaran::all();
+        $tahunAjaran = $request->input('angkatan_id');
+
+        $mahasiswa = Biodata::when($tahunAjaran, function ($query) use ($tahunAjaran) {
+            $query->whereHas('user', function ($query) use ($tahunAjaran) {
+                $query->where('angkatan_id', $tahunAjaran);
+            });
+        })->get();
+
+        return view('admin.account.mahasiswa.index', compact('mahasiswa', 'tahun_ajaran', 'tahunAjaran'));
+    }
+
 
     public function mahasiswa_create()
     {
@@ -282,6 +299,11 @@ class AccountController extends Controller
         return view('admin.account.mahasiswa.bayar', compact('jenis', 'id', 'total', 'mahasiswa', 'tagihan', 'ids'));
     }
 
+    public function exportMahasiswa(Request $request)
+    {
+        return Excel::download(new MahasiswaExport, 'dataMahasiswa.xlsx');
+    }
+
     public function pendaftar()
     {
         $mahasiswa = User::where('role', 'Mahasiswa')->get();
@@ -290,16 +312,13 @@ class AccountController extends Controller
 
     public function pendaftar_edit()
     {
-        
     }
 
     public function pendaftar_edit_process()
     {
-        
     }
 
     public function pendaftar_delete()
     {
-
     }
 }

@@ -11,8 +11,27 @@
             <div class="card">
                 <div class="card-header pb-0 d-flex justify-content-between">
                     <h6>Daftar Transaksi</h6>
-                    <a href="{{ route('admin.transaksi.create') }}" class="btn bg-gradient-primary">Tambah +</a>
+                    <div class="d-flex gap-2">
+                        <form action="{{ route('admin.exportTransaction') }}" method="GET">
+                            <input type="hidden" name="program_belajar" value="{{ $programBelajar }}">
+                            <button class="btn btn-success ms-2 d-flex align-items-center">
+                                <i class='bx bxs-file-export me-1'></i> Export
+                            </button>
+                        </form>                    
+                        <a href="{{ route('admin.transaksi.create') }}" class="btn bg-gradient-primary">Tambah +</a>
+                    </div>
                 </div>
+                <form action="{{ route('admin.transaksi.index') }}" method="GET">
+                    <div class="d-flex align-items-center justify-content-end">
+                        <label for="program_belajar" class="ms-3">Program Belajar</label>
+                        <select name="program_belajar" id="programbelajarSelect" class="form-control w-20 ms-4">
+                            <option value="">--SEMUA--</option>
+                            <option value="S1">S1</option>
+                            <option value="KURSUS">KURSUS</option>
+                        </select>
+                        <button type="submit" class="btn btn-primary mt-xl-3 ms-3 me-3" id="searchButton">Cari</button>
+                    </div>
+                </form>
                 <div class="card-body px-0 pt-0 pb-2">
                     <div class="table-responsive p-0">
                         <table class="table mb-0" id="templateTable">
@@ -29,6 +48,9 @@
                                     </th>
                                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                         Total Pembayaran
+                                    </th>
+                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                        program
                                     </th>
                                     <th class=" text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                         Status
@@ -62,6 +84,9 @@
                                     </td>
                                     <td class="align-middle text-secondary text-xs font-weight-bold">
                                         Rp. {{ number_format($item->total,0,'','.') }},-
+                                    </td>
+                                    <td class="align-middle  text-secondary text-xs font-weight-bold">
+                                        {{ $item->program_belajar }}
                                     </td>
                                     <td class="align-middle  text-secondary font-weight-bold">
                                         @if ($item->status == 'berhasil')
@@ -108,7 +133,6 @@
     </script>
     <script src="sweetalert2.all.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
     <script type="text/javascript">
         $('.show_confirm').click(function(event) {
             var form = $(this).closest("form");

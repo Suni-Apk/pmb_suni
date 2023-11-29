@@ -25,6 +25,20 @@
                                     <div class="text-danger text-sm">{{ $message }}</div>
                                 @enderror
                             </div>
+                            <div class="form-group mb-3">
+                                <label for="note">Note</label>
+                                <input type="text" name="notes" id="notes" class="form-control" required>
+                                @error('name')
+                                    <div class="text-danger">{{ $message }}</div>
+                                @enderror
+                            </div>
+                            <div class="form-group mb-3">
+                                <label for="desc">Deskripsi</label>
+                                <input type="text" name="desc" id="desc" class="form-control" required>
+                                @error('name')
+                                    <div class="text-danger">{{ $message }}</div>
+                                @enderror
+                            </div>
 
                             <div class="form-group mb-3">
                                 <label for="">Biaya Administrasi</label>

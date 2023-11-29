@@ -30,7 +30,6 @@ class TransaksiController extends Controller
     {
         $biaya = Biaya::where('program_belajar', 'S1')->where('jenis_biaya', 'DaftarUlang')->where('id_angkatans', Auth::user()->biodata->angkatan_id)->latest()->first();
         $user = Auth::user();
-
         $tagihan = TagihanDetail::where('id_biayas', $biaya->id)->where('id_users', $user->id)->latest()->first();
         $cicil = intval($tagihan->amount / 3);
         $jenis = 'cash';

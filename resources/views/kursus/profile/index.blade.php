@@ -143,7 +143,8 @@
                                     &nbsp; {{ $biodata->baca_quran }}</li>
                                 <li class="list-group-item border-0 ps-0 pt-0 text-sm"><strong class="text-dark">
                                         Tanggal Lahir :</strong>
-                                    &nbsp; {{ $biodata->birthdate }}</li>
+                                    &nbsp; {{ \Carbon\Carbon::parse($biodata->birthdate)->translatedFormat('d F Y') }}
+                                </li>
                                 <li class="list-group-item border-0 ps-0 text-sm"><strong class="text-dark">Tempat Lahir
                                         :</strong>
                                     &nbsp;

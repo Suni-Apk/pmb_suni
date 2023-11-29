@@ -190,28 +190,40 @@
             </div>
         </div>
     </div>
-    @php
-        $user = Auth::user();
-        $biodataS1 = App\Models\Biodata::where('user_id', $user->id)
-            ->where('program_belajar', 'S1')
-            ->first();
-        $biodataKURSUS = App\Models\Biodata::where('user_id', $user->id)
-            ->where('program_belajar', 'KURSUS')
-            ->first();
-    @endphp
-    @if ($biodataS1 && $biodataKURSUS)
-        <div class="col-12" id="informasi">
+        @php
+            $user = Auth::user();
+            $biodataS1 = App\Models\Biodata::where('user_id', $user->id)
+                ->where('program_belajar', 'S1')
+                ->first();
+            $biodataKURSUS = App\Models\Biodata::where('user_id', $user->id)
+                ->where('program_belajar', 'KURSUS')
+                ->first();
+        @endphp
+        @if ($biodataS1 && $biodataKURSUS)
+            <div class="col-12 mt-4" id="informasi">
+                <div class="list-group list-group-horizontal" id="list-tab" role="tablist">
+                    <a id="list-sarjana-list" data-bs-toggle="list" href="#list-sarjana" role="tab"
+                        aria-controls="list-sarjana"
+                        class="list-group-item list-group-item-action border-0 shadow text-center active">Program Kuliah S1</a>
+                    <a id="list-kursus-list" data-bs-toggle="list" href="#list-kursus" role="tab"
+                        aria-controls="list-kursus"
+                        class="list-group-item list-group-item-action border-0 shadow text-center">Program Kursus</a>
+                </div>
+            </div>
+        @else
+        <div class="col-12 mt-4" id="informasi">
             <div class="list-group list-group-horizontal" id="list-tab" role="tablist">
                 <a id="list-sarjana-list" data-bs-toggle="list" href="#list-sarjana" role="tab"
                     aria-controls="list-sarjana"
-                    class="list-group-item list-group-item-action border-0 shadow text-center active">Program Kuliah S1</a>
-                <a id="list-kursus-list" data-bs-toggle="list" href="#list-kursus" role="tab"
-                    aria-controls="list-kursus"
-                    class="list-group-item list-group-item-action border-0 shadow text-center">Program Kursus</a>
+                    class="list-group-item list-group-item-action border-0 shadow text-center active w-50">Program Kuliah S1</a>
+        
+                <form id="form-kursus" action="{{ route('administrasiKursus', ['id' => Auth::id()]) }}" class="w-50" method="POST">
+                    @csrf
+                    <a id="list-kursus-list" href="#" onclick="event.preventDefault(); document.getElementById('form-kursus').submit();" role="tab" aria-controls="list-kursus" class="list-group-item list-group-item-action border-0 shadow text-center">Program Kursus</a>
+                </form>
             </div>
-        </div>
-    @else
-    @endif
+        </div>    
+        @endif
     <div class="row my-4">
         <div class="col-lg-8 col-md-6 mb-md-0 mb-4">
             <div class="card">

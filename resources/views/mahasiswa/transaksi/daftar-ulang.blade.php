@@ -8,7 +8,7 @@
             <div class="col-12 col-sm-12">
                 <div class="card border border-lg shadow-lg">
                     <div class="card-header">
-                       <h4 class="text-center">Pembayaran Administrasi {{$transaction->user->name}}</h4>
+                        <h4 class="text-center">Pembayaran Daftar Ulang {{$transaction->user->name}}</h4>
                     </div>
                     <div class="card-body d-flex align-items-center justify-content-center">
                         <div class="row">

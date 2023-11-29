@@ -18,7 +18,7 @@
                             <div class="table-responsive text-nowrap">
                                 <form action="{{ route('admin.jurusan.store') }}" method="POST">
                                     @csrf
-                                    <div class="form-group mb-3">
+                                    {{-- <div class="form-group mb-3">
                                         <label for="id_tahun_ajarans">Tahun Ajaran</label>
                                         <select name="id_tahun_ajarans" id="id_tahun_ajarans" class="form-control" required>
                                             <option hidden selected>-----------</option>
@@ -29,7 +29,7 @@
                                         @error('id_tahun_ajarans')
                                             <div class="text-danger">{{ $message }}</div>
                                         @enderror
-                                    </div>
+                                    </div> --}}
 
                                     <div class="form-group mb-3">
                                         <label for="name">Nama</label>

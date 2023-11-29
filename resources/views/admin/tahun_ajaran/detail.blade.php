@@ -83,17 +83,91 @@
                             <tr>
                                 <td>Mulai Pendaftaran</td>
                                 <td>:</td>
-                                <td class="font-weight-normal">{{ $angkatan->start_at }}</td>
+                                <td class="font-weight-normal">{{ \Carbon\Carbon::parse($angkatan->start_at)->format('d F Y') }}</td>
                             </tr>
                             <tr>
                                 <td>Selesai Pendaftaran</td>
                                 <td>:</td>
-                                <td class="font-weight-normal">{{ $angkatan->end_at }}</td>
+                                <td class="font-weight-normal">{{ \Carbon\Carbon::parse($angkatan->end_at)->format('d F Y') }}</td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
             </div>
+
+            <div class="card mb-4">
+                <div class="card-header pb-0 d-flex justify-content-between">
+                    <h6>Jurusan</h6>
+                    <div>
+                        <button class="btn bg-gradient-primary" data-bs-toggle="modal" data-bs-target="#modalLink">Tambah +</button>
+
+                        <div class="modal fade text-start" id="modalLink" tabindex="-1" role="dialog"
+                            aria-labelledby="modalLinkLabel" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="modalLinkLabel">Tambah Jurusan</h5>
+                                            <button type="button" class="btn-close border rounded-circle p-1 fs-3 lh-1 text-dark" data-bs-dismiss="modal" aria-label="Close">&times;</button>
+                                        </div>
+                                        <form action="{{ route('admin.jurusan.store') }}" method="POST">
+                                            @csrf
+                                            @method('POST')
+                                            <div class="modal-body">
+                                                <div class="form-group mb-3">
+                                                    <label for="name">Nama Jurusan</label>
+                                                    <select name="jurusan" id="jurusan" class="form-control">
+                                                        <option value="" selected disabled>-- Pilih Jurusan --</option>
+                                                        @foreach ($jurusan as $j)
+                                                            <option value="{{ $j->id }}">{{ $j->name }}</option>
+                                                        @endforeach
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button class="btn bg-gradient-primary" type="submit">
+                                                    Submit <i class="fas fa-arrow-circle-right ms-1"></i>
+                                                </button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                    </div>
+                </div>
+                <hr class="horizontal dark">
+                <div class="card-body pt-0">
+                    <div class="table-responsive">
+                        <table class="table" id="table">
+                            <thead>
+                                <tr>
+                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Nama</th>
+                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 text-center">Aksi</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach ($links->where('id_tahun_ajarans', $angkatan->id) as $index => $link)
+                                <tr>
+                                    <td class="text-xs">
+                                        {{ $link->name }}
+                                    </td>
+                                    <td class="text-xs">
+                                        <a href="{{ route('admin.link.detail', $link->id) }}" class="badge badge-sm text-xxs bg-gradient-info">detail</a>
+                                        <form action="{{ route('admin.link.destroy', $link->id) }}" method="POST" class="d-inline">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="badge badge-sm bg-gradient-danger font-weight-bold text-xxs border-0 show_confirm">
+                                                <strong>Hapus</strong>
+                                            </button>
+                                        </form>
+                                    </td>
+                                </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
             <div class="card">
                 <div class="card-header pb-0 d-flex justify-content-between">
                     <h6>Detail Link</h6>

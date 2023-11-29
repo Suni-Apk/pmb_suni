@@ -26,6 +26,11 @@ class TahunAjaran extends Model
         return $this->hasMany(User::class, 'angkatan_id');
     }
 
+    public function biodatas()
+    {
+        return $this->hasMany(Biodata::class);
+    }
+
     public function links()
     {
         return $this->hasMany(Link::class, 'id_tahun_ajarans');
