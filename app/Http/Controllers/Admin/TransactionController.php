@@ -2,25 +2,66 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Exports\TransactionExport;
 use App\Http\Controllers\Controller;
+use App\Models\TagihanDetail;
+use App\Models\Transaksi;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Maatwebsite\Excel\Facades\Excel;
 
 class TransactionController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        return view('admin.transactions.index');
+        $programBelajar = $request->input('program_belajar');
+
+        $transaction = Transaksi::when($programBelajar, function ($query) use ($programBelajar) {
+            return $query->where('program_belajar', $programBelajar);
+        })->get();
+        return view('admin.transactions.index', compact('transaction', 'programBelajar'));
     }
 
+    //Cash Transaction
+    public function proses_bayar(Request $request, $id)
+    {
+        $ids = $request->id;
+        $total = $request->total;
+        $user = User::find($id);
+        $tagihanJenis = TagihanDetail::where('id', $ids)->first();
+        $transaction = Transaksi::create([
+            'user_id' => $id,
+            'total' => $total,
+            'status' => 'berhasil',
+            'payment_link' => '-',
+            'program_belajar' => $user->biodata->program_belajar,
+            'jenis_pembayaran' => 'cash',
+            'jenis_tagihan' => $tagihanJenis->biayasDetail->jenis_biaya,
+            'no_invoice' => rand(2, 30),
+        ]);
+
+        if ($transaction->status == 'berhasil') {
+            foreach ($ids as $id) {
+                $tagihans = TagihanDetail::where('id', $id);
+                $sudah = 'LUNAS';
+                $tagihans->update([
+                    'id_transactions' => $transaction->id,
+                    'status' => $sudah,
+                ]);
+            }
+        }
+
+        return redirect()->route('admin.mahasiswa.show', $user->id)->with('success', 'Selamat anda berhasil menbayar');
+    }
     /**
      * Show the form for creating a new resource.
      */
     public function create()
     {
-        //
+        
     }
 
     /**
@@ -37,6 +78,11 @@ class TransactionController extends Controller
     public function show(string $id)
     {
         return view('admin.transactions.detail', compact('id'));
+    }
+
+    public function export(Request $request)
+    {
+        return Excel::download(new TransactionExport($request), 'dataTransaksi.xlsx');
     }
 
     /**

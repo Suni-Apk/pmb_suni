@@ -18,10 +18,10 @@ class KursusMiddleware
     public function handle(Request $request, Closure $next): Response
     {
         $transaksi = Transaksi::where('program_belajar','KURSUS')->where('jenis_tagihan','Administrasi')->where('user_id',Auth::user()->id)->first();
-        if(Auth::check() && !$transaksi){
-            return redirect()->route('login')->withErrors(['phone' => 'Kamu Belum Membayar Uang Administrasi Kursus']);
-        }else{
+        if(Auth::check() && $transaksi && $transaksi->status == 'pending'){
+            return redirect()->route('login')->withErrors(['phone' => 'Kamu Belum Membayar']);
+        } else {
             return $next($request);
-        }
+        }        
     }
 }

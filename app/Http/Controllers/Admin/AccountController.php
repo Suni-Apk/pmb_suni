@@ -2,14 +2,19 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Exports\AdminExport;
+use App\Exports\MahasiswaExport;
 use App\Http\Controllers\Controller;
 use App\Models\Biaya;
 use App\Models\Biodata;
 use App\Models\TagihanDetail;
+use App\Models\TahunAjaran;
+use App\Models\Transaksi;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Maatwebsite\Excel\Facades\Excel;
 
 class AccountController extends Controller
 {
@@ -19,7 +24,7 @@ class AccountController extends Controller
         $currentAdmin = Auth::user();
 
         // Dapatkan semua admin kecuali admin yang sedang login
-        $admin = User::where('role', 'Admin')->where('id', '!=', $currentAdmin->id)->get();
+        $admin = User::where('role', 'Admin')->get();
 
         return view('admin.account.admin.index', compact('admin'));
     }
@@ -33,11 +38,11 @@ class AccountController extends Controller
     {
         $messages = [
             'name.required' => 'Nama Lengkap Wajib Diisi',
-            'name.min:3' => 'Nama Anda Minimal 3 Huruf!!',
+            'name.min:3' => 'Nama Anda Minimal 3 Huruf',
             'name.max:255' => 'Nama Anda Kepanjangan',
             'phone.required' => 'Nomor Whatshapp Wajib Diisi',
-            'phone.min' => 'Nomor Whatshapp Minimal 12 Angka!!',
-            'phone.max' => 'Nomor Whatshapp Maksimal 13 Angka!!',
+            'phone.min' => 'Nomor Whatshapp Minimal 12 Angka',
+            'phone.max' => 'Nomor Whatshapp Maksimal 13 Angka',
             'phone.unique' => 'Nomor Sudah DI pakai Orang Lain',
             'email.email' => 'Harus Format Email',
             'email.required' => 'Email Wajib Diisi',
@@ -45,7 +50,7 @@ class AccountController extends Controller
             'gender.required' => 'Gender Wajib Diisi',
             'password.required' => 'Password Wajib Diisi',
             'password.confirmed' => 'Password Harus Sama',
-            'password.min:8' => 'Password Wajib 8 Angka / Huruf!!!'
+            'password.min:8' => 'Password Wajib 8 Angka / Huruf!'
         ];
         $data = $request->validate([
             'name' => 'required|min:3|max:255|string',
@@ -107,7 +112,7 @@ class AccountController extends Controller
         $data = $request->validate([
             'status' => ''
         ]);
-        
+
         // dd($request->status);
         $user->update($data);
         return redirect()->route('admin.admin.index')->with('success', 'Berhasil Memperbarui Status Akun');
@@ -115,19 +120,33 @@ class AccountController extends Controller
 
     public function admin_delete($id)
     {
-        $admin = User::where('role','Admin')->find($id);
+        $admin = User::where('role', 'Admin')->find($id);
 
         $admin->delete();
 
-        return redirect()->route('admin.admin.index')->with("success","Berhasil Menghapus Akun Admin $admin->name");
+        return redirect()->route('admin.admin.index')->with("success", "Berhasil Menghapus Akun Admin $admin->name");
     }
 
-
-    public function mahasiswa()
+    public function export(Request $request)
     {
-        $mahasiswa = User::where('role', 'Mahasiswa')->get();
-        return view('admin.account.mahasiswa.index', compact('mahasiswa'));
+        return Excel::download(new AdminExport, 'dataAdmin.xlsx');
     }
+
+
+    public function mahasiswa(Request $request)
+    {
+        $tahun_ajaran = TahunAjaran::all();
+        $tahunAjaran = $request->input('angkatan_id');
+
+        $mahasiswa = Biodata::when($tahunAjaran, function ($query) use ($tahunAjaran) {
+            $query->whereHas('user', function ($query) use ($tahunAjaran) {
+                $query->where('angkatan_id', $tahunAjaran);
+            });
+        })->get();
+
+        return view('admin.account.mahasiswa.index', compact('mahasiswa', 'tahun_ajaran', 'tahunAjaran'));
+    }
+
 
     public function mahasiswa_create()
     {
@@ -138,19 +157,19 @@ class AccountController extends Controller
     {
         $messages = [
             'name.required' => 'Nama Lengkap Wajib Diisi',
-            'name.min:3' => 'Nama Anda Minimal 3 Huruf!!',
+            'name.min:3' => 'Nama Anda Minimal 3 Huruf',
             'name.max:255' => 'Nama Anda Kepanjangan',
             'phone.required' => 'Nomor Whatshapp Wajib Diisi',
-            'phone.min' => 'Nomor Whatshapp Minimal 12 Angka!!',
-            'phone.max' => 'Nomor Whatshapp Maksimal 13 Angka!!',
-            'phone.unique' => 'Nomor Sudah DI pakai Orang Lain',
+            'phone.min' => 'Nomor Whatshapp Minimal 12 Angka',
+            'phone.max' => 'Nomor Whatshapp Maksimal 13 Angka',
+            'phone.unique' => 'Nomor Sudah dipakai Orang Lain',
             'email.email' => 'Harus Format Email',
             'email.required' => 'Email Wajib Diisi',
             'email.unique' => 'Email Sudah Di pakai Orang Lain',
             'gender.required' => 'Gender Wajib Diisi',
             'password.required' => 'Password Wajib Diisi',
             'password.confirmed' => 'Password Harus Sama',
-            'password.min:8' => 'Password Wajib 8 Angka / Huruf!!!'
+            'password.min:8' => 'Password Wajib 8 Angka / Huruf'
         ];
         $data = $request->validate([
             'name' => 'required|min:3|max:255|string',
@@ -162,6 +181,7 @@ class AccountController extends Controller
         $data['active'] = 1;
         $data['token'] = rand(1111111, 999999);
         $data['role'] = 'Mahasiswa';
+        $data['angkatan_id'] = TahunAjaran::latest()->where('status', 'Active')->first();
 
         User::create($data);
 
@@ -212,7 +232,7 @@ class AccountController extends Controller
         $data = $request->validate([
             'status' => ''
         ]);
-        
+
         $user->update($data);
         if ($user->status == 'on') {
             return redirect()->route('admin.mahasiswa.index')->with('success', 'Berhasil Mengaktifkan Akun');
@@ -223,17 +243,14 @@ class AccountController extends Controller
 
     public function mahasiswa_delete($id)
     {
-        $user = User::where('role','Mahasiswa')->find($id);
-
-        $biodata = Biodata::where('user_id',$user->id)->get();
-
-        foreach($biodata as $asu){
-            Biodata::where('id',$asu->id)->delete();
+        $user = User::where('role', 'Mahasiswa')->find($id);
+        if ($user->biodata) {
+            $user->biodata->delete();
+            $user->delete();
+        } else {
+            $user->delete();
         }
-        $user->delete();
-        
-        return redirect()->route('admin.mahasiswa.index')->with("success","Berhasil Melakukan Penghapusan Akun $user->name");
-
+        return redirect()->route('admin.mahasiswa.index')->with("success", "Berhasil Melakukan Penghapusan Akun $user->name");
     }
 
     public function mahasiswa_detail($id)
@@ -245,10 +262,63 @@ class AccountController extends Controller
 
         return view('admin.account.mahasiswa.detail', compact('biodata', 'mahasiswa', 'biaya', 'biayaAll'));
     }
-    public function mahasiswa_bayar(Request $request)
+    public function mahasiswa_bayar(Request $request, $id)
     {
         $jenis = $request->jenis_tagihan;
-        $id = $request->id;
-        return view('admin.account.mahasiswa.bayar', compact('jenis', 'id'));
+        $data = $request->validate([
+            'id' => 'required',
+        ]);
+        $ids = $request->id;
+
+        // dd($ids);
+        foreach ($ids as $idTagihan) {
+            $tagihans = TagihanDetail::where('id', $idTagihan)->get();
+            foreach ($tagihans as $t) {
+                $jumlahBiaya[] = $t->amount;
+            }
+        }
+
+        $tagihan = TagihanDetail::where('id', $ids)->firstOrFail();
+        $total = array_sum($jumlahBiaya);
+        $mahasiswa = User::findOrFail($id);
+        // foreach ($ids as $idTagih) {
+        //     $tagihanDetail = TagihanDetail::where('id', $idTagih)->get();
+        //     foreach ($tagihanDetail as $value) {
+        //         // dd($value);
+        //         $transaction = Transaksi::all();
+        //         foreach ($transaction as $transactions) {
+        //             if ($value->id_transactions === $transactions->id && $value->status === 'LUNAS' && $value->id_users == $mahasiswa->id) {
+        //                 return redirect()->route('admin.mahasiswa.show', $mahasiswa->id);
+        //             } else {
+        //                 return view('admin.account.mahasiswa.bayar', compact('jenis', 'id', 'total', 'mahasiswa', 'tagihan', 'ids'));
+        //             }
+        //         }
+        //     }
+        // }
+
+        return view('admin.account.mahasiswa.bayar', compact('jenis', 'id', 'total', 'mahasiswa', 'tagihan', 'ids'));
+    }
+
+    public function exportMahasiswa(Request $request)
+    {
+        return Excel::download(new MahasiswaExport, 'dataMahasiswa.xlsx');
+    }
+
+    public function pendaftar()
+    {
+        $mahasiswa = User::where('role', 'Mahasiswa')->get();
+        return view('admin.account.pendaftar.index', compact('mahasiswa'));
+    }
+
+    public function pendaftar_edit()
+    {
+    }
+
+    public function pendaftar_edit_process()
+    {
+    }
+
+    public function pendaftar_delete()
+    {
     }
 }

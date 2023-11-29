@@ -7,19 +7,19 @@
 @section('title', 'Change Password')
 
 @section('content')
-    <div class="page-header min-height-300 border-radius-xl mt-4"
-        style="background-image: url('/soft-ui-dashboard-main/assets/img/curved-images/curved0.jpg'); background-position-y: 50%;">
+    <div class="page-header min-height-300 border-radius-xl"
+        style="background-image: url('/assets/img/curved-images/curved0.jpg'); background-position-y: 50%;">
         <span class="mask bg-gradient-primary opacity-6"></span>
     </div>
     <div class="card card-body blur shadow-blur mx-4 mt-n6 overflow-hidden">
         <div class="row gx-4">
             <div class="col-auto">
                 <div class="avatar avatar-xl position-relative">
-                    <img src="@if (!Auth::user()->biodata) /soft-ui-dashboard-main/assets/img/no-profile.png
+                    <img src="@if (!Auth::user()->biodata) /assets/img/no-profile.png
                             @elseif($biodataS1)
                                 {{ asset('storage/' . $biodataS1->image) }}
                             @else
-                                /soft-ui-dashboard-main/assets/img/no-profile.png @endif"
+                                /assets/img/no-profile.png @endif"
                                 alt="" class="avatar avatar-sm ms-2">
                         
                 </div>

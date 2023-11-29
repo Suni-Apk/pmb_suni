@@ -18,11 +18,17 @@ class Transaksi extends Model
         'program_belajar',
         'jenis_pembayaran',
         'jenis_tagihan',
-        'no_invoice'
+        'no_invoice',
+        'id_cicilans',
     ];
 
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function tagihanDetails()
+    {
+        return $this->hasMany(TagihanDetail::class, 'id_transactions');
     }
 }

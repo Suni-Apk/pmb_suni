@@ -19,7 +19,7 @@
                                     <th class="text-uppercase text-secondary text-xxs px-2 font-weight-bolder opacity-7">Nama Matkul</th>
                                     <th class="text-uppercase text-secondary text-xxs px-2 font-weight-bolder opacity-7">Jurusan / Semester</th>
                                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2 text-center">Jadwal</th>
-                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2 text-center">Tanggal</th>
+                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2 text-center">Hari</th>
                                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Aksi</th>
                                 </tr>
                             </thead>
@@ -38,30 +38,26 @@
                                                 <h6 class="mb-0 text-xs">{{ $item->jurusan->name }}</h6>
                                                 <p class="text-xxs text-uppercase text-secondary mb-0">{{ $item->semesters->name }}</p>
                                             </div>
-                                        </div>
-                                    </td>
-                                    <td class="align text-center">
-                                        <span class="text-secondary text-xs font-weight-bold">{{ $item->mulai }} - {{ $item->selesai }}</span>
-                                    </td>
-                                    <td class="align text-center">
-                                        <span class="text-secondary text-xs font-weight-bold">{{ $item->tanggal }}</span>
-                                    </td>
-                                    <td class="align-middle text-center">
-                                        <a href="{{route('admin.matkul.show', $item->id)}}"
-                                            class="badge badge-sm bg-gradient-info font-weight-bold text-xxs"
-                                            data-toggle="tooltip" data-original-title="detail">
-                                            Detail
-                                        </a>
-
-                                            <a href="{{ route('admin.matkul.edit', 1) }}" class="badge badge-sm bg-gradient-secondary font-weight-bold text-xs ">
-                                                Edit
+                                        </td>
+                                        <td class="align text-center">
+                                            <span class="text-secondary text-xs font-weight-bold">{{ $item->mulai }} <strong>WIB</strong> - {{ $item->selesai }} <strong>WIB</strong> </span>
+                                        </td>
+                                        <td class="align text-center">
+                                            <span class="text-secondary text-xs font-weight-bold"> {{ $item->hari }}</span>
+                                        </td>
+                                        <td class="d-flex align-items-center justify-content-center">
+                                            <a href="{{ route('admin.matkul.show' , $item->id) }}" class="btn btn-sm bg-gradient-success font-weight-bold text-xs mx-2 mt-3">
+                                                <strong>Detail</strong>
                                             </a>
 
-                                        <form action="{{ route('admin.matkul.destroy', $item->id) }}" method="POST" class="d-inline">
+                                            <a href="{{ route('admin.matkul.edit', $item->id) }}" class="btn btn-sm bg-gradient-secondary font-weight-bold text-xs mx-2 mt-3">
+                                                <strong>Edit</strong>
+                                            </a>
+
+                                        <form action="{{ route('admin.matkul.destroy', $item->id) }}" class="d-inline" method="POST">
                                             @csrf
                                             @method('DELETE')
-                                            <button type="submit" class="badge badge-sm bg-gradient-danger font-weight-bold text-xxs show_confirm border-0"
-                                            data-toggle="tooltip" data-original-title="hapus">
+                                            <button type="submit" class="btn btn-sm border-0 bg-gradient-danger font-weight-bold text-xxs show_confirm mt-3" data-toggle="tooltip" data-original-title="hapus">
                                                 Hapus
                                             </button>
                                         </form>

@@ -60,7 +60,7 @@
             <p class="mb-0 text-secondary">Halaman yang anda cari tidak dapat ditemukan</p>
         </div>
         <div class="col-12 col-md-4 mb-4 mb-md-0">
-            <img src="/soft-ui-dashboard-main/assets/img/404-2.svg" alt="" class="img-fluid">
+            <img src="/assets/img/404-2.svg" alt="" class="img-fluid">
         </div>
     </div>
 

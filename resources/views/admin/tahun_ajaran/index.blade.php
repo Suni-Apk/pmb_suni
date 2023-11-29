@@ -8,7 +8,7 @@
             <div class="card mb-4">
                 <div class="card-header pb-0 d-flex justify-content-between">
                     <h6>Daftar Tahun Ajaran</h6>
-                    <a href="{{route('admin.tahun-ajaran.create')}}" class="btn bg-gradient-primary float-end">Tambah + </a>
+                    <a href="{{route('admin.tahun_ajaran.create')}}" class="btn bg-gradient-primary float-end">Tambah + </a>
                 </div>
                 <div class="card-body px-0 pt-0 pb-2">
                     <div class="table-responsive p-0">
@@ -39,17 +39,120 @@
                                         <span class="text-bold">{{ \Carbon\Carbon::parse($angkatans->end_at)->format('d F') }}</span>
                                     </td>
                                     <td class="align-middle text-center">
-                                        <span class="text-uppercase badge badge-sm bg-gradient-success">{{ $angkatans->status }}</span>
+                                        @if ($angkatans->status == 'nonActive')
+                                            <span class="text-uppercase badge badge-sm bg-gradient-danger">{{ $angkatans->status }}</span>
+                                        @else
+                                            <span class="text-uppercase badge badge-sm bg-gradient-success">{{ $angkatans->status }}</span>
+                                        @endif
                                     </td>
                                     <td class="align-middle text-center">
-                                        <form action="{{ route('admin.tahun-ajaran.destroy',$angkatans->id) }}" method="POST">
+                                        <button type="button" class="badge badge-sm border-0 bg-gradient-info" data-bs-toggle="modal" data-bs-target="#modalLink{{ $angkatans->id }}"
+                                        >Link <i class="fas fa-link ms-1"></i></button>
+
+                                        <a href="{{ route('admin.tahun_ajaran.detail', $angkatans->id) }}" class="badge badge-sm bg-gradient-warning text-xxs font-weight-bolder ms-1">Detail</a>
+
+                                        <form action="{{ route('admin.tahun_ajaran.active',$angkatans->id) }}" method="POST" class="d-inline">
+                                            @csrf
+                                            @if($angkatans->status == 'nonActive')
+                                                <button type="submit" class="badge border-0 badge-sm bg-gradient-success font-weight-bold text-xxs mx-1">
+                                                    <strong>On</strong>
+                                                </button>
+                                            @else
+                                                <button type="submit" class="badge border-0 badge-sm bg-gradient-secondary font-weight-bold text-xxs mx-1">
+                                                    <strong>Off</strong>
+                                                </button>
+                                            @endif
+                                        </form>
+                                        
+                                        <form action="{{ route('admin.tahun_ajaran.destroy',$angkatans->id) }}" method="POST" class="d-inline">
                                             @csrf
                                             @method('DELETE')
                                             <button type="submit" style="letter-spacing: .02rem"
-                                                class="badge badge-sm bg-gradient-danger font-weight-bolder text-xxs mx-2 show_confirm border-0" data-toggle="tooltip" data-original-title="Hapus">
+                                                class="badge badge-sm bg-gradient-danger font-weight-bolder text-xxs show_confirm border-0" data-toggle="tooltip" data-original-title="Hapus">
                                                 Hapus
                                             </button>
                                         </form>
+                                        
+                                        {{-- modal --}}
+                                        <div class="modal fade text-start" id="modalLink{{ $angkatans->id }}" tabindex="-1" role="dialog"
+                                        aria-labelledby="modalLinkLabel" aria-hidden="true">
+                                            <div class="modal-dialog modal-dialog-centered" role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title" id="modalLinkLabel">Tambah Link</h5>
+                                                        <button type="button" class="btn-close border rounded-circle p-1 fs-3 lh-1 text-dark" data-bs-dismiss="modal" aria-label="Close">&times;</button>
+                                                    </div>
+                                                    <form action="{{ route('admin.link.create.process') }}" method="POST">
+                                                        @csrf
+                                                        @method('POST')
+                                                        <div class="modal-body">
+                                                            <div class="form-group mb-3">
+                                                                <label for="name">Nama</label>
+                                                                <small class="text-danger" style="font-size: 12px">*</small>
+                                                                <input type="text" name="name" id="name" class="form-control" placeholder="Masukkan Nama linknya Disini" value="{{ old('name') }}">
+                                                            </div>
+                                                            <div class="form-group mb-3">
+                                                                <label for="url">URL Link</label>
+                                                                <small class="text-danger" style="font-size: 12px">*</small>
+                                                                <input type="url" name="url" id="url" class="form-control" placeholder="Masukkan URL linknya Disini" {{ old('url') }}>
+                                                            </div>
+                                                            <div class="form-group mb-3">
+                                                                <label>Tipe Link</label>
+                                                                <small class="text-danger" style="font-size: 12px">*</small>
+                                                                <div class="form-check">
+                                                                    <input type="radio" name="type" id="Whatsapp" class="form-check-input" value="Whatsapp">
+                                                                    <label class="form-check-label" for="Whatsapp">Whatsapp</label>
+                                                                </div>
+                                                                <div class="form-check">
+                                                                    <input type="radio" name="type" id="Zoom" class="form-check-input" value="Zoom">
+                                                                    <label class="form-check-label" for="Zoom">Zoom</label>
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group mb-3">
+                                                                <label>Gender</label>
+                                                                <small class="text-danger" style="font-size: 12px">*</small>
+                                                                <div class="form-check">
+                                                                    <input class="form-check-input" type="radio" name="gender" id="ikhwan"
+                                                                        value="ikhwan">
+                                                                    <label class="form-check-label" for="ikhwan">
+                                                                        Ikhwan
+                                                                    </label>
+                                                                </div>
+                                                                <div class="form-check">
+                                                                    <input class="form-check-input" type="radio" name="gender" id="akhwat"
+                                                                        value="akhwat">
+                                                                    <label class="form-check-label" for="akhwat">
+                                                                        Akhwat
+                                                                    </label>
+                                                                </div>
+                                                                <div class="form-check">
+                                                                    <input class="form-check-input" type="radio" name="gender" id="all"
+                                                                        value="all">
+                                                                    <label class="form-check-label" for="all">
+                                                                        Semua (ditujukan untuk seluruh mahasiswa)
+                                                                    </label>
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group mb-4">
+                                                                <label for="id_tahun_ajarans">Tahun Ajaran</label>
+                                                                <small class="text-danger" style="font-size: 12px">*</small>
+                                                                <select name="id_tahun_ajarans" id="id_tahun_ajarans" class="form-select" required>
+                                                                    <option disabled selected>-----------</option>
+                                                                    @foreach ($tahun_ajaran as $item)
+                                                                        <option value="{{ $item->id }}" {{ $angkatans->id == $item->id ? 'selected' : '' }}>{{ $item->year }}</option>
+                                                                    @endforeach
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button class="btn bg-gradient-primary" type="submit">
+                                                                Submit <i class="fas fa-arrow-circle-right ms-1"></i>
+                                                            </button>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </td>
                                 </tr>
                                 @endforeach

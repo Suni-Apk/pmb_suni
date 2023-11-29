@@ -12,9 +12,9 @@
             <span role="button" class="sidenav-toggler sidenav-toggler-inner d-xl-block d-none">
                 <span class="nav-link text-white p-0">
                     <div class="sidenav-toggler-inner">
-                        <i class="sidenav-toggler-line bg-primary shadow"></i>
-                        <i class="sidenav-toggler-line bg-primary shadow"></i>
-                        <i class="sidenav-toggler-line bg-primary shadow"></i>
+                        <i class="sidenav-toggler-line shadow" style="background: #28ce25"></i>
+                        <i class="sidenav-toggler-line shadow" style="background: #1bba19"></i>
+                        <i class="sidenav-toggler-line shadow" style="background: #0e8a0c"></i>
                     </div>
                 </span>
             </span>
@@ -40,7 +40,7 @@
                                 <a class="dropdown-item border-radius-md" href="">
                                     <div class="d-flex py-1">
                                         <div class="my-auto">
-                                            <img src="/soft-ui-dashboard-main/assets/img/team-2.jpg"
+                                            <img src="/assets/img/team-2.jpg"
                                                 class="avatar avatar-sm  me-3 ">
                                         </div>
                                         <div class="d-flex flex-column justify-content-center">
@@ -60,11 +60,11 @@
                     <li class="nav-item dropdown d-flex align-items-center">
                         <span role="button" class="nav-link text-body font-weight-bold px-0" id="dropdownProfile"
                             data-bs-toggle="dropdown" aria-expanded="false">
-                            <img src="@if (!Auth::user()->biodata) /soft-ui-dashboard-main/assets/img/no-profile.png
+                            <img src="@if (!Auth::user()->biodata) /assets/img/no-profile.png
                             @elseif($biodata)
                                 {{ asset('storage/' . $biodata->image) }}
                             @else
-                                /soft-ui-dashboard-main/assets/img/no-profile.png @endif"
+                                /assets/img/no-profile.png @endif"
                                 alt="" class="avatar avatar-sm ms-2">
                         </span>
                         <ul class="dropdown-menu dropdown-menu-end px-2 py-2 me-sm-n2"
@@ -77,11 +77,25 @@
                                 </span>
                             </li>
                             <li class="mb-1">
-                                <a class="dropdown-item border-radius-md" href="">
+                                @if (Auth::user()->role == 'Admin')
+                                <a class="dropdown-item border-radius-md" href="{{ route('admin.profile') }}">
                                     <div class="d-flex">
                                         <p class="mb-0">Account Settings</p>
                                     </div>
                                 </a>
+                                @elseif (Auth::user()->role == 'Mahasiswa')
+                                <a class="dropdown-item border-radius-md" href="{{ route('mahasiswa.profile.index') }}">
+                                    <div class="d-flex">
+                                        <p class="mb-0">Account Settings</p>
+                                    </div>
+                                </a>
+                                @elseif (Auth::user()->role == 'Kursus')
+                                <a class="dropdown-item border-radius-md" href="{{ route('kursus.profile.index') }}">
+                                    <div class="d-flex">
+                                        <p class="mb-0">Account Settings</p>
+                                    </div>
+                                </a>
+                                @endif
                             </li>
                             <li>
                                 <a class="dropdown-item border-radius-md" href="{{ route('logout') }}">

@@ -5,7 +5,7 @@
         <i class="fas fa-times p-3 cursor-pointer text-secondary opacity-5 position-absolute end-0 top-0 d-none d-xl-none"
             aria-hidden="true" id="iconSidenav"></i>
         <a class="navbar-brand m-0" href="">
-            <img src="/soft-ui-dashboard-main/assets/img/logo-ct-dark.png" class="navbar-brand-img h-100" alt="main_logo">
+            <img src="{{ App\Models\General::first()->image }}" class="navbar-brand-img h-100" alt="main_logo">
             <span class="ms-1 font-weight-bold">PMB SUNI Indonesia</span>
         </a>
     </div>
@@ -13,7 +13,7 @@
         <div class="collapse navbar-collapse w-auto min-vh-75" id="sidenav-collapse-main">
             <ul class="navbar-nav overflow-x-hidden" id="accordionSidebar">
                 <li class="nav-item">
-                    <a class="nav-link {{ Route::is('mahasiswa.dashboard') ? 'active' : '' }}"
+                    <a class="nav-link {{ Route::is('kursus.dashboard') ? 'active' : '' }}"
                         href="{{ route('kursus.dashboard') }}">
                         <div
                             class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
@@ -91,8 +91,8 @@
 
                     <!-- tahun ajaran -->
                     <li class="nav-item">
-                        <a href="{{ route('kursus.matkul') }}"
-                            class="nav-link {{ Route::is('kursus.matkul') ? 'active' : '' }}">
+                        <a href="{{ route('kursus.mapel') }}"
+                            class="nav-link {{ Route::is('kursus.mapel') ? 'active' : '' }}">
                             <div
                                 class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center d-flex align-items-center justify-content-center  me-2">
                                 <i class="ni ni-hat-3"></i>
