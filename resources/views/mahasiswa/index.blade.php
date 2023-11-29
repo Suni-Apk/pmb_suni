@@ -20,6 +20,14 @@
                 'success'
             )
         </script>
+    @elseif(session('eror'))
+    <script>
+        Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "{{ session('eror') }}",
+        });
+    </script>
     @endif
 @endpush
 

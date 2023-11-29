@@ -203,6 +203,8 @@ class AuthController extends Controller
                     }
                 }elseif($administrasiS1 && $administrasiKURSUS){
                     return redirect()->route('mahasiswa.dashboard')->with('success',"Halo $user->name Selamat Datang");
+                }else{
+                    return back()->withErrors(['phone' => 'Silahkan Hubungi Admin']);
                 }
             }else{
                 return redirect()->back()->withErrors([
@@ -323,9 +325,9 @@ class AuthController extends Controller
             return Redirect::to($adminstrasiS1Pending->payment_link);
         } elseif ($transaksiS1->status == 'berhasil') {
             if (!$biodataS1 && !$user->document) {
-                return redirect()->route('mahasiswa.dashboard')->with('success', 'Silahkan Lengkapi Biodata Dan Document Anda');
+                return redirect()->route('mahasiswa.dashboard')->with('eror', 'Silahkan Lengkapi Biodata Dan Document Anda');
             } elseif ($biodataS1 && !$user->document) {
-                return redirect()->route('mahasiswa.dashboard')->with('success', 'Silahkan Lengakpi Document Anda');
+                return redirect()->route('mahasiswa.dashboard')->with('eror', 'Silahkan Lengakpi Document Anda');
             } else {
                 return redirect()->route('mahasiswa.dashboard')->with("success','Selamat Datang Di Dashboard S1 . $user->name");
             }
