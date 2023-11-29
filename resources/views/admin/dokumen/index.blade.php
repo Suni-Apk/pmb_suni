@@ -16,20 +16,15 @@
                     <table class="table align-items-center mb-0" id="table">
                         <thead>
                             <tr class="text-center">
-                                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 text-center">ID</th>
                                 <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Item</th>
                                 <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">uploaded by</th>
+                                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">status</th>
                                 <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Aksi</th>
                             </tr>
                         </thead>
                         <tbody>
                             @foreach ($documents as $index => $item)
                                 <tr>
-                                    <td>
-                                        <div>
-                                            <h6 class="mb-0 text-sm">1</h6>
-                                        </div>
-                                    </td>
                                     <td>
                                         <div class="row">
                                             <div class="col-12 col-sm-3">
@@ -85,7 +80,14 @@
                                     <td>
                                         <span class="text-secondary text-xs font-weight-bold">{{ $item->user->name }}</span>
                                     </td>
-                                    <td class="text-center"> 
+                                    <td>
+                                        @if ($item->status == 'deny')
+                                        <span class="badge badge-sm bg-gradient-warning text-xxs font-weight-bold">{{ $item->status }}</span>
+                                        @else
+                                        <span class="badge badge-sm bg-gradient-primary text-xxs font-weight-bold">{{ $item->status }}</span>
+                                        @endif
+                                    </td>
+                                    <td class="text-center">
                                         <a href="{{ route('admin.document.verify', $item->id) }}" class="badge badge-sm bg-gradient-info font-weight-bolder text-xxs me-1" data-toggle="tooltip" data-original-title="detail">
                                             Verify
                                         </a>
