@@ -48,6 +48,7 @@
                             @csrf
                             @method('GET')
                             <div class="col-6 col-sm-4">
+                                <input type="hidden" name="id" value="{{ $tagihan->id }}">
                                 <button name="jenis_pembayaran" value="cash" type="submit"
                                     class="btn bg-gradient-primary sm:w-50">
                                     Cash

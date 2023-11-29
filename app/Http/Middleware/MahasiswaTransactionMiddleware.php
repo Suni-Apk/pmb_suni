@@ -36,7 +36,7 @@ class MahasiswaTransactionMiddleware
                     } elseif (!isset($value->id_transactions) == $transactions->id) {
                         return $next($request);
                     } else {
-                        // return redirect()->route('mahasiswa.tagihan.index')->with('error', 'Maaf, anda sudah membayar !');
+                        return redirect()->route('mahasiswa.tagihan.index')->with('error', 'Maaf, anda sudah membayar !');
                     }
                 }
             }

@@ -36,19 +36,26 @@ class TransaksiController extends Controller
         $tagihan = TagihanDetail::where('id_biayas', $biaya->id)->where('id_users', $user->id)->latest()->first();
         $cicil = intval($tagihan->amount / 3);
         if ($request->jenis_pembayaran == 'cash') {
-            $transaction = Transaksi::create([
-                'program_belajar' => 'S1',
-                'status' => 'pending',
-                'total' => $tagihan->amount,
-                'payment_link' => 'dasdafassadas',
-                'jenis_pembayaran' => 'cash',
-                'jenis_tagihan' => 'DaftarUlang',
-                'no_invoice' => rand(111111, 999999),
-                'tagihan_detail_id' => $tagihan->id,
-                'user_id' => $user->id
+            $jenis = $request->jenis_tagihan;
+            $data = $request->validate([
+                'id' => 'required',
             ]);
+            $ids = $request->id;
 
-            return view('mahasiswa.transaksi.daftar-ulang-cash', compact('transaction', 'user'));
+            // dd($ids);
+            // foreach ($ids as $idTagihan) {
+            $tagihans = TagihanDetail::where('id', $ids)->get();
+            foreach ($tagihans as $t) {
+                $jumlahBiaya[] = $t->amount;
+            }
+            // }
+
+
+            $total = array_sum($jumlahBiaya);
+            $tagihan = TagihanDetail::where('id', $ids)->firstOrFail();
+            $mahasiswa = Auth::user();
+
+            return view('mahasiswa.transaksi.bayar', compact('jenis', 'total', 'mahasiswa', 'tagihan', 'ids'));
         } else {
             $jenis = 'cicil';
             $array = ['1', '2', '3'];
@@ -146,26 +153,32 @@ class TransaksiController extends Controller
         $jenis_tagihan = implode(", ", $data2);
         $data3 = array_values($data3);
         $id_transactions = implode($data3);
-        print_r($id_transactions);
-        // $payment = json_decode(json_encode($this->redirect_payment1($nama_product, $total, $id_tagihan)), true);       // return redirect()->route('mahasiswa.tagihan.index')->with('success', 'Selamat anda berhasil menbayar');
-        // $transaction = Transaksi::create([
-        //     'program_belajar' => 'S1',
-        //     'status' => 'pending',
-        //     'total' => $total,
-        //     'payment_link' => $payment['Data']['Url'],
-        //     'jenis_pembayaran' => 'cash',
-        //     'jenis_tagihan' => $jenis_tagihan,
-        //     'no_invoice' => $payment['Data']['SessionID'],
-        //     'user_id' => Auth::user()->id,
-        // ]);
-        // foreach ($id_tagihan as $tagihandetails) {
-        //     $idTagihan = TagihanDetail::where('id', $tagihandetails);
+        // print_r($id_transactions);
+        if (collect($data3)->contains('')) {
+            $payment = json_decode(json_encode($this->redirect_payment1($nama_product, $total, $id_tagihan)), true);       // return redirect()->route('mahasiswa.tagihan.index')->with('success', 'Selamat anda berhasil menbayar');
+            $transaction = Transaksi::create([
+                'program_belajar' => 'S1',
+                'status' => 'pending',
+                'total' => $total,
+                'payment_link' => $payment['Data']['Url'],
+                'jenis_pembayaran' => 'cash',
+                'jenis_tagihan' => $jenis_tagihan,
+                'no_invoice' => $payment['Data']['SessionID'],
+                'user_id' => Auth::user()->id,
+            ]);
+            foreach ($id_tagihan as $tagihandetails) {
+                $idTagihan = TagihanDetail::where('id', $tagihandetails);
 
-        //     $idTagihan->update([
-        //         'id_transactions' => $transaction->id,
-        //     ]);
-        // }
-        // return Redirect::to($transaction->payment_link);
+                $idTagihan->update([
+                    'id_transactions' => $transaction->id,
+                ]);
+            }
+            return Redirect::to($transaction->payment_link);
+        } else {
+            $transaksis =  Transaksi::where('id', $id_transactions)->first();
+
+            return Redirect::to($transaksis->payment_link);
+        }
     }
 
 
