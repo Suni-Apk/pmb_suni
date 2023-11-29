@@ -17,6 +17,7 @@ class Kernel extends ConsoleKernel
         Commands\Tenggat::class,
         Commands\TagihanDetail::class,
         Commands\AfterTenggat::class,
+        Commands\Ipaymu::class,
     ];
     protected function schedule(Schedule $schedule): void
     {
@@ -24,6 +25,7 @@ class Kernel extends ConsoleKernel
         $schedule->command('app:tagihan-detail')->everySecond();
         $schedule->command('app:tenggat')->dailyAt('21:32');
         $schedule->command('app:after-tenggat')->everySecond();
+        $schedule->command('app:ipaymu')->everySecond();
     }
 
     /**
