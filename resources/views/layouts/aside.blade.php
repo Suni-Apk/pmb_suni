@@ -132,31 +132,6 @@
                     </div>
                 </li>
 
-                <li class="nav-item">
-                    <a data-bs-toggle="collapse" href="#mapel" class="nav-link {{ Route::is('admin.mapel.*') ? 'active' : '' }}" aria-controls="matkul" role="button" aria-expanded="false">
-                        <div class="icon icon-sm shadow border-radius-md bg-white text-center d-flex align-items-center justify-content-center  me-2">
-                            <i class="fas fa-book-open"></i>
-                        </div>
-                        <span class="nav-link-text ms-1"> Mata Pelajaran </span>
-                    </a>
-                    <div class="collapse {{ Route::is('admin.mapel.*') ? 'show' : '' }}" id="mapel">
-                        <ul class="nav ms-4 ps-3">
-                            <li class="nav-item ">
-                                <a class="nav-link {{ Route::is('admin.mapel.index') ? 'active' : '' }} " href="{{ route('admin.mapel.index') }}">
-                                    <span class="sidenav-mini-icon d-none d-xl-block"><i class="fas fa-border-all"></i></span>
-                                    <span class="sidenav-normal"> Daftar Mata Pelajaran </span>
-                                </a>
-                            </li>
-                            <li class="nav-item ">
-                                <a class="nav-link {{ Route::is('admin.mapel.create') ? 'active' : '' }} " href="{{ route('admin.mapel.create') }}">
-                                    <span class="sidenav-mini-icon d-none d-xl-block"><i class="fas fa-plus"></i></span>
-                                    <span class="sidenav-normal"> Tambah Mata Kuliah </span>
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                </li>
-
                 <!-- Course -->
                 <li class="nav-item">
                     <a data-bs-toggle="collapse" href="#course" class="nav-link {{ Route::is('admin.course.*') ? 'active' : '' }}" aria-controls="course" role="button" aria-expanded="false">
@@ -177,6 +152,31 @@
                                 <a class="nav-link {{ Route::is('admin.course.create') ? 'active' : '' }}" href="{{ route('admin.course.create') }}">
                                     <span class="sidenav-mini-icon d-none d-xl-block"><i class="fas fa-plus"></i></span>
                                     <span class="sidenav-normal"> Tambah Kursus </span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+
+                <li class="nav-item">
+                    <a data-bs-toggle="collapse" href="#mapel" class="nav-link {{ Route::is('admin.mapel.*') ? 'active' : '' }}" aria-controls="matkul" role="button" aria-expanded="false">
+                        <div class="icon icon-sm shadow border-radius-md bg-white text-center d-flex align-items-center justify-content-center  me-2">
+                            <i class="fas fa-book-open"></i>
+                        </div>
+                        <span class="nav-link-text ms-1"> Mata Pelajaran </span>
+                    </a>
+                    <div class="collapse {{ Route::is('admin.mapel.*') ? 'show' : '' }}" id="mapel">
+                        <ul class="nav ms-4 ps-3">
+                            <li class="nav-item ">
+                                <a class="nav-link {{ Route::is('admin.mapel.index') ? 'active' : '' }} " href="{{ route('admin.mapel.index') }}">
+                                    <span class="sidenav-mini-icon d-none d-xl-block"><i class="fas fa-border-all"></i></span>
+                                    <span class="sidenav-normal"> Daftar Mata Pelajaran </span>
+                                </a>
+                            </li>
+                            <li class="nav-item ">
+                                <a class="nav-link {{ Route::is('admin.mapel.create') ? 'active' : '' }} " href="{{ route('admin.mapel.create') }}">
+                                    <span class="sidenav-mini-icon d-none d-xl-block"><i class="fas fa-plus"></i></span>
+                                    <span class="sidenav-normal"> Tambah Mata Kuliah </span>
                                 </a>
                             </li>
                         </ul>
@@ -528,7 +528,7 @@
                     </a>
                 </li>
                 @php
-                $biaya = App\Models\Biaya::where('program_belajar','S1')->where('jenis_biaya','DaftarUlang')->where('id_angkatans',Auth::user()->biodata->angkatan_id)->latest()->first();
+                $biaya = App\Models\Biaya::where('program_belajar','S1')->where('jenis_biaya','DaftarUlang')->where('id_angkatans',Auth::user()->biodata->angkatan_id)->latest()->firstOrFail();
                 
                 $user = Auth::user();
                 $tagihan = App\Models\TagihanDetail::where('id_biayas',$biaya->id)->where('id_users',$user->id)->latest()->first();
@@ -569,6 +569,29 @@
                                 <i class="fas fa-folder"></i>
                             </div>
                             <span class="nav-link-text ms-1">Upload Dokumen</span>
+                        </a>
+                    </li>
+                    
+                    {{-- payment --}}
+                    <li class="nav-item">
+                        <ul class="nav-link pb-0 mb-0">
+                            <span class="sidenav-mini-icon d-none d-xl-block" style="color:rgb(196, 196, 196)"><i
+                                    class="ni ni-credit-card"></i></span>
+                            <span class="sidenav-normal text-uppercase text-xs ms-2 font-weight-bolder"> payment
+                            </span>
+                        </ul>
+                    </li>
+
+                    <!-- billing -->
+                    <li class="nav-item">
+                        <a href="{{ route('mahasiswa.tagihan.index') }}"
+                            class="nav-link {{ Route::is('mahasiswa.tagihan.*') ? 'active' : '' }}"
+                            aria-controls="billing" role="button" aria-expanded="false">
+                            <div
+                                class="icon icon-sm shadow border-radius-md bg-white text-center d-flex align-items-center justify-content-center  me-2">
+                                <i class="fas fa-wallet"></i>
+                            </div>
+                            <span class="nav-link-text ms-1"> Tagihan </span>
                         </a>
                     </li>
                 @elseif(!$biodata && Auth::user()->document)

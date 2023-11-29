@@ -7,7 +7,7 @@
 
 @section('content')
 
-    @php
+    {{-- @php
         $transactionDaftar = App\Models\Transaksi::where('user_id', Auth::user()->id)
             ->where('jenis_tagihan', 'DaftarUlang')
             ->where('status', 'berhasil')
@@ -16,7 +16,7 @@
 
         $biaya = App\Models\Biaya::where('program_belajar', 'S1')
             ->where('jenis_biaya', 'DaftarUlang')
-            ->where('id_angkatans', Auth::user()->biodata->angkatan_id)
+            ->where('id_angkatans', Auth::user()->angkatan->id)
             ->latest()
             ->first();
 
@@ -32,7 +32,7 @@
         $cicilan2 = App\Models\Cicilan::where('id_tagihan_details', $tagihan->id)
             ->where('status', 'LUNAS')
             ->get();
-    @endphp
+    @endphp --}}
     @if (!isset($cicilans) && !isset($transactionDaftar))
         <div class="col-12 text-center mb-4">
             <div class="card">
@@ -62,10 +62,10 @@
             </div>
         </div>
     @elseif($cicilans)
-        @php
+        {{-- @php
             $biaya = App\Models\Biaya::where('program_belajar', 'S1')
                 ->where('jenis_biaya', 'DaftarUlang')
-                ->where('id_angkatans', Auth::user()->biodata->angkatan_id)
+                ->where('id_angkatans', Auth::user()->angkatan->id)
                 ->latest()
                 ->first();
 
@@ -101,7 +101,7 @@
 
             // dd($cicilan_pertama_terbayar, $cicilan_kedua_terbayar, $cicilan_ketiga_terbayar);
 
-        @endphp
+        @endphp --}}
         @if ($cicilan2->count() != 3)
             <div class="row">
                 @if ($biodata->program_belajar === 'S1')
@@ -576,7 +576,6 @@
                                                                         <td class="text-sm">
                                                                             <span
                                                                                 class="badge badge-sm {{ $tagihans->status == 'LUNAS' ? 'bg-gradient-success' : 'bg-gradient-danger' }}">{{ $tagihans->status }}</span>
-
                                                                         </td>
                                                                         <td class="text-sm">Rp
                                                                             {{ number_format($tagihans->amount, 0, '', '.') }}
@@ -644,11 +643,10 @@
                                                     $no = 1;
                                                 @endphp
                                                 @foreach ($biayas as $index => $value)
-                                                    @if (
-                                                        $value->jenis_biaya == 'Tidakroutine' &&
-                                                            $value->id_angkatans == $biodata->angkatan_id &&
-                                                            $value->id_jurusans == $biodata->jurusan_id &&
-                                                            $value->program_belajar == $biodata->program_belajar)
+                                                    @if ($value->jenis_biaya == 'Tidakroutine' &&
+                                                        $value->id_angkatans == $biodata->angkatan_id &&
+                                                        $value->id_jurusans == $biodata->jurusan_id &&
+                                                        $value->program_belajar == $biodata->program_belajar)
                                                         @foreach ($value->tagihanDetail as $key => $tagihans)
                                                             @if ($tagihans->id_users == $mahasiswa->id)
                                                                 <tr>

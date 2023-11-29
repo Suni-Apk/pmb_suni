@@ -12,7 +12,14 @@ class DescProgramBelajar extends Model
     protected $guarded = [];
 
     protected $fillable = [
-        's1',
-        'kursus',
+        'course_id',
+        'title',
+        'keyword',
+        'desc',
     ];
+
+    public function course()
+    {
+        return $this->belongsTo(Course::class, 'course_id');
+    }
 }

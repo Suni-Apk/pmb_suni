@@ -1,6 +1,6 @@
 @extends('layouts.master')
 
-@section('title', 'Tagihan')
+@section('title', 'Transaksi')
 
 @push('styles')
 @endpush
@@ -18,9 +18,6 @@
                         <table class="table mb-0" id="templateTable">
                             <thead>
                                 <tr>
-                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                        ID
-                                    </th>
                                     <th class=" text-uppercase text-secondary text-xxs  font-weight-bolder opacity-7">
                                         Nama Tagihan
                                     </th>
@@ -46,33 +43,42 @@
                                 </tr>
                             </thead>
                             <tbody>
+                                @foreach ($transactions as $item)
+                                 
                                 <tr>
-                                    <td class="align-middle text-xs font-weight-bold">
-                                        1
-                                    </td>
                                     <td class="align-middle text-secondary text-xs font-weight-bold">
-                                        Tagihan jas
+                                        @if ($item->tagihanDetails)
+                                        {{$item->tagihanDetails->biayasDetail->nama_biaya}}
+                                        @else
+                                        {{ $item->jenis_tagihan }}
+                                        @endif
                                     </td>
                                     <td class="align-middle  text-secondary text-xs font-weight-bold">
-                                        20 January 2030
+                                        <h6 class="mb-0 text-xs">{{ $item->created_at->format('d F Y') }}</h6>
+                                        <p class="mb-0 text-xs">{{ $item->created_at->format('H:i:s') }}</p>
                                     </td>
                                     <td class="align-middle  text-secondary text-xs font-weight-bold">
-                                        Asep Kastelo
-
+                                        {{ $item->user->name }}
                                     </td>
                                     <td class="align-middle text-secondary text-xs font-weight-bold">
-                                        Rp. 200.000,-
+                                        Rp. {{ number_format($item->total,0,'','.') }},-
                                     </td>
                                     <td class="align-middle  text-secondary font-weight-bold">
-                                        <span class="badge text-uppercase badge-sm bg-gradient-success">SUCCESS</span>
+                                        @if ($item->status == 'berhasil')
+                                        <span class="badge text-uppercase badge-sm rounded-pill bg-gradient-success">{{ $item->status }}</span>
+                                        @elseif ($item->status == 'pending')
+                                        <span class="badge text-uppercase badge-sm rounded-pill bg-gradient-warning">{{ $item->status }}</span>
+                                        @else
+                                        <span class="badge text-uppercase badge-sm rounded-pill bg-gradient-danger">{{ $item->status }}</span>
+                                        @endif
                                     </td>
                                     <td>
-                                        <p class="text-xs font-weight-bold mb-0">Tidak Rutin</p>
-                                        <p class="text-xs text-uppercase text-secondary mb-0">CASH</p>
+                                        <p class="text-xs font-weight-bold mb-0">{{ $item->jenis_tagihan }}</p>
+                                        <p class="text-xs text-uppercase text-secondary mb-0">{{ $item->jenis_pembayaran }}</p>
                                     </td>
                                     <td class="align-middle text-center">
                                         <a href="{{ route('admin.transaksi.show', 'tingkatan') }}"
-                                            class="badge badge-sm bg-gradient-info font-weight-bold text-xxs mx-1 show_confirm"
+                                            class="badge badge-sm bg-gradient-info font-weight-bold text-xxs mx-1"
                                             data-toggle="tooltip" data-original-title="detail">
                                             Detail
                                         </a>
@@ -83,117 +89,7 @@
                                         </a>
                                     </td>
                                 </tr>
-                                <tr>
-                                    <td class="align-middle text-xs font-weight-bold">
-                                        2
-                                    </td>
-                                    <td class="align-middle text-secondary text-xs font-weight-bold">
-                                        Spp 2022/2023
-                                    </td>
-                                    <td class="align-middle  text-secondary text-xs font-weight-bold">
-                                        20 January 2030
-                                    </td>
-                                    <td class="align-middle  text-secondary text-xs font-weight-bold">
-                                        Bopak Mine
-
-                                    </td>
-                                    <td class="align-middle text-secondary text-xs font-weight-bold">
-                                        Rp. 200.000,-
-                                    </td>
-                                    <td class="align-middle  text-secondary font-weight-bold">
-                                        <span class="badge text-uppercase badge-sm bg-gradient-warning">PENDING</span>
-                                    </td>
-                                    <td>
-                                        <p class="text-xs font-weight-bold mb-0">Rutin</p>
-                                        <p class="text-xs text-uppercase text-secondary mb-0">CASH</p>
-                                    </td>
-                                    <td class="align-middle text-center">
-                                        <a href="{{ route('admin.transaksi.show', 'tingkatan') }}"
-                                            class="badge badge-sm bg-gradient-info font-weight-bold text-xxs mx-1 show_confirm"
-                                            data-toggle="tooltip" data-original-title="detail">
-                                            Detail
-                                        </a>
-                                        <a href=""
-                                            class="badge badge-sm bg-gradient-danger font-weight-bold text-xxs show_confirm"
-                                            data-toggle="tooltip" data-original-title="hapus">
-                                            Hapus
-                                        </a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="align-middle text-xs font-weight-bold">
-                                        3
-                                    </td>
-                                    <td class="align-middle text-secondary text-xs font-weight-bold">
-                                        Daftar Ulang 2022/2023
-                                    </td>
-                                    <td class="align-middle  text-secondary text-xs font-weight-bold">
-                                        20 January 2030
-                                    </td>
-                                    <td class="align-middle  text-secondary text-xs font-weight-bold">
-                                        Joko susilo
-
-                                    </td>
-                                    <td class="align-middle text-secondary text-xs font-weight-bold">
-                                        Rp. 200.000,-
-                                    </td>
-                                    <td class="align-middle  text-secondary font-weight-bold">
-                                        <span class="badge text-uppercase badge-sm bg-gradient-danger">EXPIRED</span>
-                                    </td>
-                                    <td>
-                                        <p class="text-xs font-weight-bold mb-0">Daftar Ulang</p>
-                                        <p class="text-xs text-uppercase text-secondary mb-0">CASH</p>
-                                    </td>
-                                    <td class="align-middle text-center">
-                                        <a href="{{ route('admin.transaksi.show', 'tingkatan') }}"
-                                            class="badge badge-sm bg-gradient-info font-weight-bold text-xxs mx-1 show_confirm"
-                                            data-toggle="tooltip" data-original-title="detail">
-                                            Detail
-                                        </a>
-                                        <a href=""
-                                            class="badge badge-sm bg-gradient-danger font-weight-bold text-xxs show_confirm"
-                                            data-toggle="tooltip" data-original-title="hapus">
-                                            Hapus
-                                        </a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="align-middle text-xs font-weight-bold">
-                                        4
-                                    </td>
-                                    <td class="align-middle text-secondary text-xs font-weight-bold">
-                                        Tagihan Tingkatan
-                                    </td>
-                                    <td class="align-middle  text-secondary text-xs font-weight-bold">
-                                        30 January 2050
-                                    </td>
-                                    <td class="align-middle  text-secondary text-xs font-weight-bold">
-                                        Bambang Jenoko
-
-                                    </td>
-                                    <td class="align-middle text-secondary text-xs font-weight-bold">
-                                        Rp 850.000
-                                    </td>
-                                    <td class="align-middle  text-secondary font-weight-bold">
-                                        <span class="badge text-uppercase badge-sm bg-gradient-danger">EXPIRED</span>
-                                    </td>
-                                    <td>
-                                        <p class="text-xs font-weight-bold mb-0">Tingkatan</p>
-                                        <p class="text-xs text-uppercase text-secondary mb-0">CASH</p>
-                                    </td>
-                                    <td class="align-middle text-center">
-                                        <a href="{{ route('admin.transaksi.show', 'tingkatan') }}"
-                                            class="badge badge-sm bg-gradient-info font-weight-bold text-xxs mx-1 show_confirm"
-                                            data-toggle="tooltip" data-original-title="detail">
-                                            Detail
-                                        </a>
-                                        <a href=""
-                                            class="badge badge-sm bg-gradient-danger font-weight-bold text-xxs show_confirm"
-                                            data-toggle="tooltip" data-original-title="hapus">
-                                            Hapus
-                                        </a>
-                                    </td>
-                                </tr>
+                                @endforeach
                             </tbody>
                         </table>
                     </div>

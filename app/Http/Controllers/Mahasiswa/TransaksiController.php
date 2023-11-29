@@ -60,7 +60,7 @@ class TransaksiController extends Controller
                     'status' => 'belum',
                     'nama_cicilan' => 'Cicilan ke ' . $nilai,
                     'harga' => $cicil,
-                    'end_date' => $end_dates
+                    'end_date' => $end_dates,
                 ]);
             }
             // $transaction = Transaksi::create([

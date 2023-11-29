@@ -16,6 +16,7 @@ return new class extends Migration
 
             $table->string('program_belajar');
             $table->string('amount');
+            $table->foreignId('course_id')->nullable();
             $table->string('id_tahunAjaran');
 
             $table->timestamps();

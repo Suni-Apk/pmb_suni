@@ -130,13 +130,13 @@
                                                         @foreach ($matkuls->where('id_semesters', $semesters->id) as $matkul)
                                                             <tr>
                                                                 <td>
-                                                                    <div class="d-flex px-2 py-1">
+                                                                    <div class="d-flex py-1">
                                                                         <div class="d-flex flex-column justify-content-center">
                                                                             <a href="{{ route('admin.matkul.show', $matkul->id) }}" class="title-item font-weight-bold mb-0 text-sm ms-2">{{ $matkul->nama_matkuls }}</a>
                                                                         </div>
                                                                     </div>
                                                                 </td>
-                                                                <td class="align-text-start">
+                                                                <td class="ps-4">
                                                                     <span class="text-secondary text-xs font-weight-bold"
                                                                     >{{ $matkul->nama_dosen }}</span>
                                                                 </td>
@@ -186,11 +186,11 @@
                                                 <label>Tipe Link</label>
                                                 <small class="text-danger" style="font-size: 12px">*</small>
                                                 <div class="form-check">
-                                                    <input type="radio" name="type" id="Whatsapp" class="form-check-input" value="Whatsapp">
+                                                    <input type="radio" name="type" id="Whatsapp" class="form-check-input" value="whatsapp">
                                                     <label class="form-check-label" for="Whatsapp">Whatsapp</label>
                                                 </div>
                                                 <div class="form-check">
-                                                    <input type="radio" name="type" id="Zoom" class="form-check-input" value="Zoom">
+                                                    <input type="radio" name="type" id="Zoom" class="form-check-input" value="zoom">
                                                     <label class="form-check-label" for="Zoom">Zoom</label>
                                                 </div>
                                             </div>
@@ -285,8 +285,17 @@
                                 <input type="time" name="selesai" id="selesai" class="form-control">
                             </div>
                             <div class="form-group mb-3">
-                                <label for="tanggal">Tanggal</label>
-                                <input type="date" name="tanggal" id="tanggal" class="form-control">
+                                <label for="hari">Hari</label>
+                                <select name="hari" id="hari" class="form-control" required>
+                                    <option hidden selected>-----------</option>
+                                    <option value="Senin">Senin</option> 
+                                    <option value="Selasa">Selasa</option> 
+                                    <option value="Rabu">Rabu</option> 
+                                    <option value="Kamis">Kamis</option> 
+                                    <option value="Jumat">Jumat</option> 
+                                    <option value="Sabtu">Sabtu</option> 
+                                    <option value="Ahad">Ahad</option> 
+                                </select>
                             </div>
 
                                 <button type="submit" class="btn btn-success">Submit</button>

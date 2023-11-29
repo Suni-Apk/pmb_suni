@@ -30,7 +30,6 @@ class User extends Authenticatable
         'email',
         'status',
         'password',
-        'angkatan_id',
     ];
 
     /**
@@ -52,11 +51,6 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
-
-    public function angkatan()
-    {
-        return $this->belongsTo(TahunAjaran::class);
-    }
 
     public function biodata()
     {

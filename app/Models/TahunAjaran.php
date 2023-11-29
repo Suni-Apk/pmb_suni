@@ -23,7 +23,7 @@ class TahunAjaran extends Model
 
     public function users()
     {
-        return $this->hasMany(User::class);
+        return $this->hasMany(User::class, 'angkatan_id');
     }
 
     public function links()

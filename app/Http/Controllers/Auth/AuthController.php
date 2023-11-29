@@ -62,8 +62,11 @@ class AuthController extends Controller
         $data['phone'] = $request->phone;
         $data['role'] = 'Mahasiswa';
         $data['token'] = rand(111111, 999999);
-        $data['angkatan_id'] = TahunAjaran::latest()->where('status', 'Active')->first();
-        // dd($data);
+
+        $angkatan = TahunAjaran::latest()->where('status', 'Active')->first();
+
+        $data['angkatan_id'] = $angkatan;
+        
         $user = User::create($data);
         $notif = Notify::where('id', 1)->first();
         $messages =  $notif->notif_otp . ' ' . $user->token;

@@ -4,6 +4,10 @@
 
 @section('content')
 
+@error('error')
+    {{ $message }}
+@enderror
+
     @if ($jenis_tagihan == 'Routine')
         <div class="card h-100">
             <div class="card-body p-3">

@@ -242,7 +242,7 @@
             <div class="card">
                 <div class="card-body p-3">
                     <div class="height-200 d-flex justify-content-center flex-column align-items-center bg-cover text-center"
-                        style="background: url(/soft-ui-dashboard-main/assets/img/admin-db.svg);
+                        style="background: url(/assets/img/admin-db.svg);
                 background-position: center; background-repeat: no-repeat;">
                         <h4 class="font-weight-bold mb-0 p-3 pb-0"
                             style="background: rgba(255,255,255,.5)!important; backdrop-filter: blur(1px);">

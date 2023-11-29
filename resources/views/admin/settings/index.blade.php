@@ -88,17 +88,9 @@
                     @csrf
                     @method('PUT')
                     <div class="row">
-                        <div class="col-12 col-md-6 form-group">
-                            <label for="s1">Deskripsi Program Kuliah S1</label>
-                            <textarea name="s1" id="s1" class="form-control min-height-200">{{ $descPro->s1 }}</textarea>
-                        </div>
-                        <div class="form-group mb-0 d-block d-md-none">
-                            <button type="submit" class="btn btn-primary">Submit</button>
-                            <a href="javascript:location.reload();" class="btn btn-warning">Reset</a>
-                        </div>
-                        <div class="col-12 col-md-6 form-group">
-                            <label for="kursus">Deskripsi Program Kursus MABANI</label>
-                            <textarea name="kursus" id="kursus" class="form-control min-height-200">{{ $descPro->kursus }}</textarea>
+                        <div class="col-12 form-group">
+                            <label for="desc">Deskripsi Program Kuliah S1</label>
+                            <textarea name="desc" id="desc" class="form-control">{{ $descPro->desc }}</textarea>
                         </div>
                         <div class="form-group mb-0">
                             <button type="submit" class="btn btn-primary">Submit</button>
@@ -115,7 +107,7 @@
     <script src="https://cdn.ckeditor.com/ckeditor5/35.4.0/classic/ckeditor.js"></script>
     <script type="text/javascript">
         ClassicEditor
-            .create( document.getElementById( 's1' ), {
+            .create( document.getElementById( 'desc' ), {
                 ckfinder: {
                     uploadUrl: "{{ route('admin.settings.upload.file').'?_token='.csrf_token() }}",
                 }
@@ -126,18 +118,5 @@
             .catch( error => {
                 console.log(error);
             });
-
-        ClassicEditor
-            .create( document.getElementById( 'kursus' ), {
-                ckfinder: {
-                    uploadUrl: "{{ route('admin.settings.upload.file').'?_token='.csrf_token() }}",
-                }
-            })
-            .then( editor => {
-                console.log(editor);
-            })
-            .catch( error => {
-                console.log(error);
-            })
     </script>
 @endpush

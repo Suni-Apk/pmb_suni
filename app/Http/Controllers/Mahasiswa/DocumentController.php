@@ -63,11 +63,10 @@ class DocumentController extends Controller
                 'transkrip_nilai' => $transkripFileName,
             ];
 
+            $data['status'] = 'deny';
+
             $data['user_id'] = Auth::user()->id;
-
             $documents = Document::create($data);
-
-            
 
             return redirect()->route('mahasiswa.tagihan.index')->with('success', 'Berhasil Melengkapi Dokumen Yang Diinginkan Silahkan Membayar Uang Daftar Ulang');
         }

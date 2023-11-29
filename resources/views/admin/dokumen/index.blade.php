@@ -8,21 +8,22 @@
         <div class="card">
             <div class="card-header pb-0 d-flex justify-content-between">
                 <h6>Daftar Dokumen</h6>
-                <a href="{{route('admin.dokumen.create')}}" class="btn bg-gradient-primary float-end">Tambah + </a>
+                {{-- <a href="{{route('admin.dokumen.create')}}" class="btn bg-gradient-primary float-end">Tambah + </a> --}}
             </div>
+            <hr class="horizontal dark m-0">
             <div class="card-body px-0 pt-0 pb-2">
                 <div class="table-responsive p-0">
                     <table class="table align-items-center mb-0" id="table">
                         <thead>
                             <tr class="text-center">
                                 <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 text-center">ID</th>
-                                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Nama</th>
+                                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Item</th>
                                 <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">uploaded by</th>
                                 <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Aksi</th>
                             </tr>
                         </thead>
                         <tbody>
-                            {{-- @forelse ($admin as $index => $item) --}}
+                            @foreach ($documents as $index => $item)
                                 <tr>
                                     <td>
                                         <div>
@@ -30,28 +31,70 @@
                                         </div>
                                     </td>
                                     <td>
-                                        <div class="d-flex justify-content-start align-items-center gap-3">
-                                            <embed src="{{ asset('Akte Haidar.pdf') }}" type="application/pdf" height="150">
-                                            <h6 class="mb-0 text-sm">IJAZAH</h6>
+                                        <div class="row">
+                                            <div class="col-12 col-sm-3">
+                                                <div class="mb-2">
+                                                    <label for="">Dokumen KTP</label>
+                                                    <div class="d-flex input-group">
+                                                        <a href="{{ asset('storage/' . $item->ktp) }}" target="_blank" class="input-group-text">
+                                                            <i class="fas fa-eye"></i>
+                                                        </a>
+                                                        <input type="text" value="{{$item->ktp}}" class="form-control" disabled>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-12 col-sm-3">
+                                                <div class="mb-2">
+                                                    <label for="">Dokumen KK</label>
+                                                    <div class="d-flex input-group">
+                                                        <a href="{{ asset('storage/' . $item->kk) }}" target="_blank" class="input-group-text">
+                                                            <i class="fas fa-eye"></i>
+                                                        </a>
+                                                        <input type="text" value="{{$item->kk}}" class="form-control" disabled>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-12 col-sm-3">
+                                                <div class="mb-2">
+                                                    <label for="">Dokumen IJAZAH</label>
+                                                    <div class="d-flex input-group">
+                                                        <a href="{{ asset('storage/' . $item->ijazah) }}" target="_blank" class="input-group-text">
+                                                            <i class="fas fa-eye"></i>
+                                                        </a>
+                                                        <input type="text" value="{{$item->ijazah}}" class="form-control" disabled>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            @if ($item->transkrip_nilai)
+                                            <div class="col-12 col-sm-3">
+                                                <div class="mb-2">
+                                                    <label for="">Dokumen TRANSKRIP NILAI</label>
+                                                    <div class="d-flex input-group">
+                                                        <a href="{{ asset('storage/' . $item->transkrip_nilai) }}" target="_blank" class="input-group-text">
+                                                            <i class="fas fa-eye"></i>
+                                                        </a>
+                                                        <input type="text" value="{{$item->transkrip_nilai}}" class="form-control" disabled>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            @else
+                                            tidak ada dokumen transkrip nilai
+                                            @endif
                                         </div>
                                     </td>
                                     <td>
-                                        <span class="text-secondary text-xs font-weight-bold">Mahasiswa 2</span>
+                                        <span class="text-secondary text-xs font-weight-bold">{{ $item->user->name }}</span>
                                     </td>
                                     <td class="text-center"> 
-                                        <a style="letter-spacing: .02rem" href="" class="badge badge-sm bg-gradient-info font-weight-bolder text-xxs me-1" data-toggle="tooltip" data-original-title="detail">
+                                        <a href="{{ route('admin.document.verify', $item->id) }}" class="badge badge-sm bg-gradient-info font-weight-bolder text-xxs me-1" data-toggle="tooltip" data-original-title="detail">
                                             Verify
                                         </a>
-
-                                        <a style="letter-spacing: .02rem" href="{{route('admin.dokumen.destroy',1)}}" class="badge badge-sm bg-gradient-danger font-weight-bolder text-xxs" data-toggle="tooltip" data-original-title="hapus">
+                                        <a href="{{route('admin.dokumen.destroy', $item->id)}}" class="badge badge-sm bg-gradient-danger font-weight-bolder text-xxs" data-toggle="tooltip" data-original-title="hapus">
                                             Hapus
                                         </a>
-
                                     </td>
                                 </tr>
-                            {{-- @empty
-                                
-                            @endforelse --}}
+                            @endforeach
                             </tbody>
                         </table>
                     </div>

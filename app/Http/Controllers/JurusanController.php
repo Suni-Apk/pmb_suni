@@ -17,8 +17,8 @@ class JurusanController extends Controller
     public function index()
     {
         $jurusan = Jurusan::all();
-        return view('admin.jurusan.index', compact('jurusan')); 
-        return view('admin.jurusan.index', compact('jurusan')); 
+        $tahun_ajaran = TahunAjaran::all();
+        return view('admin.jurusan.index', compact('jurusan', 'tahun_ajaran')); 
     }
 
 

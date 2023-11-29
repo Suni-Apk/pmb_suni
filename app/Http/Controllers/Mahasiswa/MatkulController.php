@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Mahasiswa;
 use App\Http\Controllers\Controller;
 use App\Models\Biodata;
 use App\Models\Jurusan;
+use App\Models\Link;
 use App\Models\Matkuls;
 use App\Models\Semester;
 use Illuminate\Http\Request;
@@ -20,12 +21,13 @@ class MatkulController extends Controller
             if ($biodata->jurusan_id) {
                 $jurusan = Jurusan::find($biodata->jurusan_id);
 
-                
+                $links = Link::where('id_jurusans', $jurusan->id)->where('id_tahun_ajarans', $jurusan->tahunAjaran->id)->where('gender', 'all')->first();
+
                 $semester = Semester::where('id_jurusans', $jurusan->id)->get();
 
                 $matkuls = Matkuls::where('id_jurusans', $jurusan->id)->get();
 
-                return view('mahasiswa.matkul.index', compact('jurusan', 'semester', 'matkuls'));
+                return view('mahasiswa.matkul.index', compact('jurusan', 'semester', 'matkuls', 'links'));
             } else {
                 return redirect()->route('mahasiswa.index')->with('error', 'Anda belum memilih jurusan.');
             }

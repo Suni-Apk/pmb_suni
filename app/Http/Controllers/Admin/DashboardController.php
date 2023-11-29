@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Banner;
 use App\Models\Jurusan;
 use App\Models\Matkuls;
 use App\Models\Transaksi;
@@ -35,8 +36,9 @@ class DashboardController extends Controller
         $pemasukan = Transaksi::sum('total');
         $jurusan = Jurusan::get();
         $matkul = Matkuls::get();
-
-        return view('admin.index',compact('hijriDateday','hijriDatedayArabic','hijriDatemonth','hijriDateyear', 'user', 'users', 'pemasukan', 'jurusan', 'matkul'));
+        $banner = Banner::where('type', 'DASHBOARD')->get();
+        $transaksi = Transaksi::latest()->get();
+        return view('admin.index',compact('hijriDateday','hijriDatedayArabic','hijriDatemonth','hijriDateyear', 'user', 'users', 'pemasukan', 'jurusan', 'matkul', 'banner', 'transaksi'));
     }
 
     public function profile()

@@ -1,9 +1,10 @@
 @extends('auth.layouts.master')
 
-@section('title', 'Welcome to Our Page')
+@section('title', 'Selamat Datang!')
 
 @php
     $banner = App\Models\Banner::where('type', 'WELCOME')->get();
+    $descProgram = App\Models\DescProgramBelajar::get();
 @endphp
 
 @section('content')
@@ -58,56 +59,54 @@
         <div class="row flex-column justify-content-center align-items-start w-100">
             <div class="col-12" id="informasi">
                 <div class="list-group list-group-horizontal" id="list-tab" role="tablist">
-                    <a id="list-sarjana-list" data-bs-toggle="list" href="#list-sarjana" role="tab" aria-controls="list-sarjana"
-                        class="list-group-item list-group-item-action border-0 shadow text-center active" 
-                    >Program Kuliah S1</a>
-                    <a id="list-kursus-list" data-bs-toggle="list" href="#list-kursus" role="tab" aria-controls="list-kursus"
-                    class="list-group-item list-group-item-action border-0 shadow text-center" 
-                    >Program Madrasah Bahasa Arab</a>
+                    @foreach ($descProgram as $item)
+                    <a id="list-sarjana-list" data-bs-toggle="list" href="#{{ $item->keyword }}" role="tab" aria-controls="{{ $item->keyword }}"
+                        class="list-group-item list-group-item-action border-0 shadow text-center {{ $loop->first ? 'active' : '' }}" 
+                    >Program {{ $item->title }}</a>
+                    @endforeach
                 </div>
             </div>
             <div class="col-12 pt-3 px-3">
                 <div class="tab-content" id="nav-tabContent">
-                    <div class="tab-pane fade show active" id="list-sarjana" role="tabpanel" aria-labelledby="list-sarjana-list">
+                    @foreach ($descProgram as $item)
+                    <div class="tab-pane fade {{ $loop->first ? 'show active' : '' }}" id="{{ $item->keyword }}" role="tabpanel" aria-labelledby="{{ $item->keyword }}-list">
                         <div class="card border">
                             <div class="row flex-column-reverse flex-sm-row justify-content-between align-items-start card-body" 
                             style="padding-left: 1.7rem; padding-right: 1.7rem;">
-                                <div class="col-12 col-sm-9 p-1 p-sm-2">
-                                    {!! App\Models\DescProgramBelajar::first()->s1 !!}
+                                <style> .desc-program img { max-width: 100%!important; height: auto } </style>
+                                <div class="col-12 col-sm-9 p-1 p-sm-2 desc-program">
+                                    {!! $item->desc !!}
                                 </div>
                                 <div class="col-12 col-sm-3 py-2 px-1 d-flex flex-column justify-content-start align-items-center">
-                                    <a href="" class="px-2 btn bg-gradient-info">
-                                        Informasi Lebih Lanjut <i class="fa fa-arrow-right ms-1"></i>
+                                    <a href="{{ App\Models\General::first()->url }}" class="px-2 btn bg-gradient-info">
+                                        Informasi Lebih Lengkap <i class="fa fa-arrow-right ms-1"></i>
                                     </a>
                                     <ul class="list-group">
-                                        <li class="list-group-item text-sm lh-sm">Biaya Administrasi : Rp. 250.000,-</li>
-                                        <li class="list-group-item text-sm lh-sm">Biaya Prakuliah : Rp. 12.000.000,-</li>
-                                        <li class="list-group-item text-sm lh-sm">Hubungi Kami : 089609494411</li>
+                                        @if ($loop->first)
+                                        <li class="list-group-item text-sm lh-sm">
+                                            Biaya Administrasi : Rp. {{ number_format(App\Models\Administrasi::first()->amount,0,'','.') }},-
+                                        </li>
+                                        <li class="list-group-item text-sm lh-sm">
+                                            Biaya Prakuliah : Rp. 12.000.000,-
+                                        </li>
+                                        @else
+                                            @if ($item->course)
+                                                @foreach ($item->course->notes as $note)
+                                                <li class="list-group-item text-sm lh-sm">
+                                                    {{ $note }}
+                                                </li>
+                                                @endforeach
+                                            @endif
+                                        @endif
+                                        <li class="list-group-item text-sm lh-sm">
+                                            Hubungi Kami : <a href="">{{ App\Models\General::first()->phone }}</a>
+                                        </li>
                                     </ul>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="tab-pane fade" id="list-kursus" role="tabpanel" aria-labelledby="list-kursus-list">
-                        <div class="card border">
-                            <div class="row flex-column-reverse flex-sm-row justify-content-between align-items-start card-body" 
-                            style="padding-left: 1.7rem; padding-right: 1.7rem;">
-                                <div class="col-12 col-sm-9 p-1 p-sm-2">
-                                    {!! App\Models\DescProgramBelajar::first()->kursus !!}
-                                </div>
-                                <div class="col-12 col-sm-3 py-2 px-1 d-flex flex-column justify-content-start align-items-center">
-                                    <a href="" class="px-2 btn bg-gradient-info">
-                                        Informasi Lebih Lanjut <i class="fa fa-arrow-right ms-1"></i>
-                                    </a>
-                                    <ul class="list-group">
-                                        <li class="list-group-item text-sm lh-sm">Biaya Administrasi : Rp. 850.000,-</li>
-                                        <li class="list-group-item text-sm lh-sm">Memiliki 3 Tingkatan : Mubtadi', Mutawassith, Mutaqaddim</li>
-                                        <li class="list-group-item text-sm lh-sm">Hubungi Kami : 089609494411</li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    @endforeach
                 </div>
             </div>
         </div>

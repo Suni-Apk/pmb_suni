@@ -169,6 +169,9 @@ Route::prefix('/admin')->middleware(['admin', 'auth'])->name('admin.')->group(fu
     Route::resource('/course',CourseController::class);
     Route::resource('/tagihan', AdminTagihanController::class);
     Route::get('/next', [AdminTagihanController::class, 'next'])->name('tagihan.next');
+
+    Route::get('/dokumen/verify/{id}', [AdminDocumentController::class, 'verify'])->name('document.verify');
+    Route::put('/dokumen/verify/process/{id}', [AdminDocumentController::class, 'verify'])->name('document.verify.process');
     
     //data settings
     Route::prefix('settings')->group(function () {

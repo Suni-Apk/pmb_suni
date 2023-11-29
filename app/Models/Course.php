@@ -9,9 +9,26 @@ class Course extends Model
 {
     use HasFactory;
 
+    protected $guarded = [];
+
     protected $fillable = [
-        'name'
+        'name',
+        'notes',
     ];
+
+    protected $casts = [
+        'notes' => 'array',
+    ];
+
+    public function descProgram()
+    {
+        return $this->hasOne(DescProgramBelajar::class);
+    }
+
+    public function administrasi()
+    {
+        return $this->hasOne(Administrasi::class);
+    }
 
     public function biodata()
     {
@@ -25,6 +42,6 @@ class Course extends Model
 
     public function links()
     {
-        return $this->hasMany(Links::class);
+        return $this->hasMany(Link::class);
     }
 }

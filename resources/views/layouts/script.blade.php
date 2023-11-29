@@ -4,8 +4,6 @@
 <script src="/assets/js/plugins/smooth-scrollbar.min.js"></script>
 <script src="/assets/js/plugins/chartjs.min.js"></script>
 <script src="/assets/js/plugins/datatables.js"></script>
-<script src="/assets/js/plugins/fullcalendar.js"></script>
-<script src="/assets/js/plugins/wizard.js"></script>
 <script src="/assets/js/jquery.mask.min.js"></script>
 <script>
     var win = navigator.platform.indexOf('Win') > -1;
