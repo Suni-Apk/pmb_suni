@@ -7,6 +7,20 @@
 
 @section('content')
     <div class="row">
+        <div class="container-fluid">
+            <div class="ca  rd mb-4 w-100">
+                @foreach ($tahunAjaran as $angkatan)
+                    <div class="card mb-4">
+                        <h5 class="mt-4 text-center">Data Mahasiswa Angkatan {{ $angkatan->year }}</h5>
+                        <form action="{{ route('admin.laporan.exportMahasiswaLaporan', $angkatan->id) }}" method="GET"
+                            class="d-flex align-items-center justify-content-center mt-4">
+                            @csrf
+                            <button type="submit" class="btn btn-primary text-center w-30">Unduh Data</button>
+                        </form>
+                    </div>
+                @endforeach
+            </div>
+        </div>
         <div class="col-12">
             <div class="row mb-4">
                 <div class="col-12">
@@ -30,7 +44,7 @@
                 <div class="card-header pb-0 d-flex justify-content-between">
                     <h6>Daftar Pendaftar</h6>
                     <div class="d-flex gap-2">
-                        <form action="#" method="GET">
+                        <form action="{{ route('admin.laporan.exportPendaftar') }}" method="GET">
                             <input type="hidden" name="angkatan_id" value="#">
                             <button class="btn btn-success ms-2 d-flex align-items-center">
                                 <i class='bx bxs-file-export me-1'></i> Export
@@ -192,7 +206,8 @@
                         backgroundColor: gradientStroke1,
                         fill: true,
                         data: [10, 50, 200, 40, 90, 100, 10, 20, 180, 190, 200,
-                        20], // Ganti dengan nilai-nilai yang sesuai
+                            20
+                        ], // Ganti dengan nilai-nilai yang sesuai
                         maxBarThickness: 6
                     },
                     {
@@ -205,7 +220,8 @@
                         backgroundColor: gradientStroke2,
                         fill: true,
                         data: [30, 60, 150, 80, 70, 120, 30, 50, 160, 170, 180,
-                        30], // Ganti dengan nilai-nilai yang sesuai
+                            30
+                        ], // Ganti dengan nilai-nilai yang sesuai
                         maxBarThickness: 6
                     }
                 ],

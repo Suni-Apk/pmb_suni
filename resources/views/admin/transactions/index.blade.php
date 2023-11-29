@@ -80,7 +80,7 @@
                                             {{ \Carbon\Carbon::parse($transactions->created_at)->isoFormat('D MMMM YYYY') }}
                                         </td>
                                         <td class="align-middle  text-secondary text-xs font-weight-bold">
-                                            {{ $transactions->user->name }}
+                                            {{ $transactions->user->name ?? 'User not available' }}
                                         </td>
                                         <td class="align-middle text-secondary text-xs font-weight-bold">
                                             Rp. {{ number_format($transactions->total) }},-

@@ -12,12 +12,12 @@
                 <div class="card-header pb-0 d-flex justify-content-between">
                     <h6>Daftar Mahasiswa</h6>
                     <div class="d-flex gap-2">
-                        <form action="{{ route('admin.mahasiswa.exportMahasiswa') }}" method="GET">
-                            <input type="hidden" name="angkatan_id" value="{{ $tahunAjaran }}">
+                            <form action="{{ route('admin.mahasiswa.exportMahasiswa') }}" method="GET">
+                                <input type="hidden" name="angkatan_id" value="{{ $tahunAjaran }}">
                                 <button class="btn btn-success ms-2 d-flex align-items-center">
                                     <i class='bx bxs-file-export me-1'></i> Export
                                 </button>
-                            </form>
+                            </form>                        
                             <a href="{{ route('admin.mahasiswa.create') }}" class="btn bg-gradient-primary float-end">Tambah + </a>
                     </div>
                 </div>
@@ -58,23 +58,26 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($mahasiswa as $index => $item)
+                                @php
+                                    $mahasiswaData = $tahunAjaran ? $mahasiswa : $mahasiswaAll;
+                                @endphp
+                                @foreach ($mahasiswaData as $index => $item)
                                     <tr>
                                         <td>
-                                            <h6 class="mb-0 text-sm">{{ $item->user->name }}</h6>
+                                            <h6 class="mb-0 text-sm">{{ $item->name }}</h6>
                                         </td>
                                         <td>
-                                            <span class="text-secondary text-xs font-weight-bold">{{ $item->user->phone }}</span>
+                                            <span class="text-secondary text-xs font-weight-bold">{{ $item->phone }}</span>
                                         </td>
                                         <td>
-                                            <span class="text-secondary text-xs font-weight-bold">{{ $item->user->email }}</span>
+                                            <span class="text-secondary text-xs font-weight-bold">{{ $item->email }}</span>
                                         </td>
                                         <td class="text-center text-secondary font-weight-bold">
-                                            <span class="badge badge-sm rounded-pill bg-gradient-success">{{ $item->angkatan->year }}</span>
+                                            <span class="badge badge-sm rounded-pill bg-gradient-success">{{ $item->biodata->angkatan->year }}</span>
                                         </td>
                                         <td>
-                                            <p class="text-xs font-weight-bold mb-0">{{ $item->user->gender }}</p>
-                                            <p class="text-xs text-uppercase text-secondary mb-0">{{ $item->user->role }}</p>
+                                            <p class="text-xs font-weight-bold mb-0">{{ $item->gender }}</p>
+                                            <p class="text-xs text-uppercase text-secondary mb-0">{{ $item->role }}</p>
                                         </td>
                                         <td class="text-center">
                                             @if ($item->status == 'on')
@@ -119,7 +122,7 @@
                                                             </div>
                                                             <div class="modal-body">
                                                                 <i class="fas fa-exclamation-circle fa-xl text-danger"></i>
-                                                                Apakah Anda Yakin Ingin Melakukan Penghapusan Admin?
+                                                                Apakah Anda Yakin Ingin Melakukan Penghapusan Mahasiswa?
                                                             </div>
                                                             <div class="modal-footer">
                                                                 <button type="button" class="btn btn-secondary"

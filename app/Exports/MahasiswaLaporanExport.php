@@ -8,7 +8,7 @@ use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\WithHeadings;
 use Maatwebsite\Excel\Concerns\FromArray;
 
-class MahasiswaExport implements FromCollection, WithHeadings
+class MahasiswaLaporanExport implements FromCollection, WithHeadings
 {
 
     protected $mahasiswa;

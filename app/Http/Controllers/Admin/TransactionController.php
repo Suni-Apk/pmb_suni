@@ -18,7 +18,6 @@ class TransactionController extends Controller
     public function index(Request $request)
     {
         $programBelajar = $request->input('program_belajar');
-
         $transaction = Transaksi::when($programBelajar, function ($query) use ($programBelajar) {
             return $query->where('program_belajar', $programBelajar);
         })->get();
@@ -54,7 +53,7 @@ class TransactionController extends Controller
             }
         }
 
-        return redirect()->route('admin.mahasiswa.show', $user->id)->with('success', 'Selamat anda berhasil menbayar');
+        return redirect()->route('admin.mahasiswa.show', $user->id)->with('success', 'Selamat anda berhasil membayar');
     }
     /**
      * Show the form for creating a new resource.

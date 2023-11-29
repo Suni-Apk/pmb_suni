@@ -169,6 +169,8 @@ Route::prefix('/admin')->middleware(['admin', 'auth'])->name('admin.')->group(fu
 
     Route::prefix('laporan')->name('laporan.')->group( function() {
         Route::get('/', [LaporanController::class, 'index'])->name('index');
+        Route::get('/exportMahasiswaLaporan/{tahunAjaran}', [LaporanController::class, 'exportMahasiswaLaporan'])->name('exportMahasiswaLaporan');    
+        Route::get('/exporPendaftar', [LaporanController::class, 'exportPendaftar'])->name('exportPendaftar');    
     });
     
     // resources management

@@ -136,16 +136,22 @@ class AccountController extends Controller
     public function mahasiswa(Request $request)
     {
         $tahun_ajaran = TahunAjaran::all();
+        $mahasiswaAll = User::where('role', 'Mahasiswa')->get();
         $tahunAjaran = $request->input('angkatan_id');
 
-        $mahasiswa = Biodata::when($tahunAjaran, function ($query) use ($tahunAjaran) {
-            $query->whereHas('user', function ($query) use ($tahunAjaran) {
+        if ($tahunAjaran) {
+            $mahasiswa = User::whereHas('biodata', function ($query) use ($tahunAjaran) {
                 $query->where('angkatan_id', $tahunAjaran);
-            });
-        })->get();
+            })->where('role', 'Mahasiswa')->get();
+        } else {
+            $mahasiswa = $mahasiswaAll;
+        }
 
-        return view('admin.account.mahasiswa.index', compact('mahasiswa', 'tahun_ajaran', 'tahunAjaran'));
+        return view('admin.account.mahasiswa.index', compact('mahasiswa', 'tahun_ajaran', 'tahunAjaran', 'mahasiswaAll'));
     }
+
+
+
 
 
     public function mahasiswa_create()
@@ -301,8 +307,17 @@ class AccountController extends Controller
 
     public function exportMahasiswa(Request $request)
     {
-        return Excel::download(new MahasiswaExport, 'dataMahasiswa.xlsx');
+        $tahunAjaran = $request->input('angkatan_id');
+        $mahasiswa = User::when($tahunAjaran, function ($query) use ($tahunAjaran) {
+            $query->whereHas('biodata', function ($query) use ($tahunAjaran) {
+                $query->where('angkatan_id', $tahunAjaran);
+            });
+        })->where('role', 'Mahasiswa')->get();
+
+        $export = new MahasiswaExport($mahasiswa);
+        return Excel::download($export, 'dataMahasiswa.xlsx');
     }
+
 
     public function pendaftar()
     {
@@ -321,4 +336,7 @@ class AccountController extends Controller
     public function pendaftar_delete()
     {
     }
+
+    
+    
 }
