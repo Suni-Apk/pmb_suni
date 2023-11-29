@@ -16,7 +16,7 @@ class Semester extends Model
 
     public function jurusan()
     {
-        return $this->belongsTo(Jurusan::class, 'id');
+        return $this->belongsTo(Jurusan::class, 'id_jurusans');
     }
 
     public function matkuls()

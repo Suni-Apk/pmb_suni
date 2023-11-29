@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Exports\TransactionExport;
 use App\Http\Controllers\Controller;
 use App\Models\Biaya;
 use App\Models\Biodata;
@@ -12,18 +13,22 @@ use App\Models\Transaksi;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Maatwebsite\Excel\Facades\Excel;
 
 class TransactionController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        return view('admin.transactions.index');
+        $programBelajar = $request->input('program_belajar');
+
+        $transaction = Transaksi::when($programBelajar, function ($query) use ($programBelajar) {
+            return $query->where('program_belajar', $programBelajar);
+        })->get();
+        return view('admin.transactions.index', compact('transaction', 'programBelajar'));
     }
-
-
 
     //Cash Transaction
     public function proses_bayar(Request $request, $id)
@@ -61,7 +66,6 @@ class TransactionController extends Controller
      */
     public function create()
     {
-        //
     }
 
     /**
@@ -78,6 +82,11 @@ class TransactionController extends Controller
     public function show(string $id)
     {
         return view('admin.transactions.detail', compact('id'));
+    }
+
+    public function export(Request $request)
+    {
+        return Excel::download(new TransactionExport($request), 'dataTransaksi.xlsx');
     }
 
     /**

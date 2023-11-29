@@ -30,10 +30,13 @@ class MahasiswaTransactionMiddleware
             foreach ($tagihanDetail as $value) {
                 $transaction = Transaksi::all();
                 foreach ($transaction as $transactions) {
-                    if (!isset($value->id_transactions) == $transactions->id && $transactions->status == 'berhasil') {
+                    // dd($transactions->id);
+                    if ($value->id_transactions == $transactions->id && $transactions->status != 'berhasil') {
+                        return $next($request);
+                    } elseif (!isset($value->id_transactions) == $transactions->id) {
                         return $next($request);
                     } else {
-                        return redirect()->route('mahasiswa.tagihan.index')->with('error', 'Maaf, anda sudah membayar !');
+                        // return redirect()->route('mahasiswa.tagihan.index')->with('error', 'Maaf, anda sudah membayar !');
                     }
                 }
             }

@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('url');
             $table->foreignId('id_tahun_ajarans');
             $table->foreignId('id_jurusans')->nullable();
+            $table->foreignId('id_courses')->nullable();
             $table->enum('type', ['whatsapp', 'zoom']);
             $table->enum('gender', ['ikhwan', 'akhwat', 'all']);
             $table->timestamps();

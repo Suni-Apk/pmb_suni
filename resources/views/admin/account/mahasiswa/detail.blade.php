@@ -21,21 +21,26 @@
                                     </thead>
                                     <tbody class="table-border-bottom-0">
                                         <tr>
-                                            <td class="text-sm">Nama : <strong>{{ $mahasiswa->name }}</strong></td>
+                                            <td class="text-sm">
+                                                Nama : 
+                                                {{ $mahasiswa->name }}</td>
                                         </tr>
                                         <tr>
-                                            <td class="text-sm">Nomor Tlp :
-                                                <strong>{{ $mahasiswa->phone }}</strong>
+                                            <td class="text-sm">
+                                                Nomor Telepon :
+                                                {{ $mahasiswa->phone }}
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td class="text-sm">Email :
-                                                <strong>{{ $mahasiswa->email }}</strong>
+                                            <td class="text-sm">
+                                                Email :
+                                                {{ $mahasiswa->email }}
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td class="text-sm">Gender :
-                                                <strong>{{ $mahasiswa->gender }}</strong>
+                                            <td class="text-sm">
+                                                Gender :
+                                                {{ $mahasiswa->gender }}
                                             </td>
                                         </tr>
                                     </tbody>

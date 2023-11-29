@@ -11,11 +11,15 @@ use App\Models\Tagihan;
 use App\Models\TagihanDetail;
 use App\Models\Transaksi;
 use App\Models\User;
+use App\Traits\Ipaymu;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Barryvdh\DomPDF\Facade\Pdf;
+use Illuminate\Support\Facades\Redirect;
 
 class TransaksiController extends Controller
 {
+    use Ipaymu;
     public function administrasi()
     {
         $user = Auth::user();
@@ -29,10 +33,8 @@ class TransaksiController extends Controller
     {
         $biaya = Biaya::where('program_belajar', 'S1')->where('jenis_biaya', 'DaftarUlang')->where('id_angkatans', Auth::user()->biodata->angkatan_id)->latest()->first();
         $user = Auth::user();
-
         $tagihan = TagihanDetail::where('id_biayas', $biaya->id)->where('id_users', $user->id)->latest()->first();
         $cicil = intval($tagihan->amount / 3);
-        $jenis = 'cash';
         if ($request->jenis_pembayaran == 'cash') {
             $transaction = Transaksi::create([
                 'program_belajar' => 'S1',
@@ -88,33 +90,82 @@ class TransaksiController extends Controller
     }
     public function proses_bayar(Request $request)
     {
-        $ids = $request->id;
-        $total = $request->total;
-        $user = Auth::user();
-        $tagihanJenis = TagihanDetail::where('id', $ids)->first();
-        $transaction = Transaksi::create([
-            'user_id' => $user->id,
-            'total' => $total,
-            'status' => 'berhasil',
-            'payment_link' => '-',
-            'program_belajar' => $user->biodata->program_belajar,
-            'jenis_pembayaran' => 'cash',
-            'jenis_tagihan' => $tagihanJenis->biayasDetail->jenis_biaya,
-            'no_invoice' => rand(2, 30),
-        ]);
+        // $ids = $request->id;
+        // $total = $request->total;
+        // $user = Auth::user();
+        // $tagihanJenis = TagihanDetail::where('id', $ids)->first();
+        // $transaction = Transaksi::create([
+        //     'user_id' => $user->id,
+        //     'total' => $total,
+        //     'status' => 'berhasil',
+        //     'payment_link' => '-',
+        //     'program_belajar' => $user->biodata->program_belajar,
+        //     'jenis_pembayaran' => 'cash',
+        //     'jenis_tagihan' => $tagihanJenis->biayasDetail->jenis_biaya,
+        //     'no_invoice' => rand(2, 30),
+        // ]);
 
-        if ($transaction->status == 'berhasil') {
-            foreach ($ids as $id) {
-                $tagihans = TagihanDetail::where('id', $id);
-                $sudah = 'LUNAS';
-                $tagihans->update([
-                    'id_transactions' => $transaction->id,
-                    'status' => $sudah,
-                ]);
+        // if ($transaction->status == 'berhasil') {
+        //     foreach ($ids as $id) {
+        //         $tagihans = TagihanDetail::where('id', $id);
+        //         $sudah = 'LUNAS';
+        //         $tagihans->update([
+        //             'id_transactions' => $transaction->id,
+        //             'status' => $sudah,
+        //         ]);
+        //     }
+        // }
+        $total = $request->total;
+        $id_tagihan = $request->input('id');
+        $id_tagihan = array_map('strip_tags', $id_tagihan);
+        $id_tagihan = array_map('htmlspecialchars', $id_tagihan);
+        // dd($id_tagihan);
+        $data = [];
+        $data2 = [];
+        $data3 = [];
+        foreach ($id_tagihan as $ids) {
+            $tagihan = TagihanDetail::where('id', $ids)->get();
+            foreach ($tagihan as $value) {
+                $tagihan1 = Biaya::where('id', $value->id_biayas)->get();
+                foreach ($tagihan1 as $value1) {
+                    if (!isset($data[$value1['nama_biaya']])) {
+                        $data[$value1['nama_biaya']] = $value1->nama_biaya;
+                    }
+                    if (!isset($data2[$value1['jenis_biaya']])) {
+                        $data2[$value1['jenis_biaya']] = $value1->jenis_biaya;
+                    }
+                }
+                if (!isset($data3[$value['id_transactions']])) {
+                    $data3[$value['id_transactions']] = $value->id_transactions;
+                }
             }
         }
+        $data = array_values($data);
+        $nama_product = implode(", ", $data);
+        $data2 = array_values($data2);
+        $jenis_tagihan = implode(", ", $data2);
+        $data3 = array_values($data3);
+        $id_transactions = implode($data3);
+        print_r($id_transactions);
+        // $payment = json_decode(json_encode($this->redirect_payment1($nama_product, $total, $id_tagihan)), true);       // return redirect()->route('mahasiswa.tagihan.index')->with('success', 'Selamat anda berhasil menbayar');
+        // $transaction = Transaksi::create([
+        //     'program_belajar' => 'S1',
+        //     'status' => 'pending',
+        //     'total' => $total,
+        //     'payment_link' => $payment['Data']['Url'],
+        //     'jenis_pembayaran' => 'cash',
+        //     'jenis_tagihan' => $jenis_tagihan,
+        //     'no_invoice' => $payment['Data']['SessionID'],
+        //     'user_id' => Auth::user()->id,
+        // ]);
+        // foreach ($id_tagihan as $tagihandetails) {
+        //     $idTagihan = TagihanDetail::where('id', $tagihandetails);
 
-        return redirect()->route('mahasiswa.tagihan.index')->with('success', 'Selamat anda berhasil menbayar');
+        //     $idTagihan->update([
+        //         'id_transactions' => $transaction->id,
+        //     ]);
+        // }
+        // return Redirect::to($transaction->payment_link);
     }
 
 
@@ -127,8 +178,8 @@ class TransaksiController extends Controller
         $ids = $request->id;
 
         // dd($ids);
-        foreach ($ids as $idTagihan) {
-            $tagihans = Cicilan::where('id', $idTagihan)->get();
+        foreach ($ids as $idCicilan) {
+            $tagihans = Cicilan::where('id', $idCicilan)->get();
             foreach ($tagihans as $t) {
                 $jumlahBiaya[] = $t->harga;
             }
@@ -136,20 +187,10 @@ class TransaksiController extends Controller
 
 
         $total = array_sum($jumlahBiaya);
-        $tagihan = Cicilan::where('id', $ids)->first();
+        $tagihan = Cicilan::where('id', $ids)->firstOrFail();
         $mahasiswa = Auth::user();
-        $transaction = Transaksi::create([
-            'program_belajar' => 'S1',
-            'status' => 'pending',
-            'total' => $tagihan->harga,
-            'payment_link' => 'dasdafassadas',
-            'jenis_pembayaran' => 'cicilan',
-            'jenis_tagihan' => 'DaftarUlang',
-            'no_invoice' => rand(111111, 999999),
-            'user_id' => $mahasiswa->id,
-            'id_cicilans' => $tagihan->id,
-        ]);
-        return view('mahasiswa.transaksi.daftar-ulang-cicilan', compact('jenis', 'id', 'total', 'mahasiswa', 'tagihan', 'ids', 'transaction'));
+
+        return view('mahasiswa.transaksi.bayar-cicilan', compact('jenis', 'id', 'total', 'mahasiswa', 'tagihan', 'ids'));
     }
     public function demo_bayar_cicilan(Request $request, $sid)
     {
@@ -228,7 +269,6 @@ class TransaksiController extends Controller
         return redirect()->route('mahasiswa.tagihan.index')->with('success', 'Selamat anda berhasil menbayar');
         // if()
     }
-
     public function demo_bayar_cash(Request $request, $invoice)
     {
         $user = Auth::user();
@@ -290,6 +330,49 @@ class TransaksiController extends Controller
                     }
                 }
             }
+        }
+    }
+    public function invoice(Request $request, $id)
+    {
+        $transaction = Transaksi::where('user_id', $id)->where('jenis_tagihan', $request->DaftarUlang)->where('status', 'berhasil')->get();
+        $user = Auth::user();
+        $pdf = PDF::loadView('mahasiswa.invoice.index', compact('transaction', 'user'));
+        return $pdf->download("$request->DaftarUlang - INVOICE - $user->name.pdf");
+    }
+    public function proses_bayar_cicilan(Request $request)
+    {
+        $total = $request->total;
+        $id_tagihan = $request->id;
+        // $id_tagihan = array_map('strip_tags', $id_tagihan);
+        // $id_tagihan = array_map('htmlspecialchars', $id_tagihan);
+        // dd($id_tagihan);
+        $data = [];
+        $cicilan = Cicilan::where('id', $id_tagihan)->first();
+        // dd($cicilan->nama_cicilan);
+        // $data = array_values($data);
+        $nama_product = $cicilan->nama_cicilan;
+        $transactionGet = Transaksi::find($cicilan->id_transactions);
+        if ($cicilan->id_transactions == null) {
+            $payment = json_decode(json_encode($this->redirect_payment2($nama_product, $total, $id_tagihan)), true);       // return redirect()->route('mahasiswa.tagihan.index')->with('success', 'Selamat anda berhasil menbayar');
+            $transaction = Transaksi::create([
+                'program_belajar' => 'S1',
+                'status' => 'pending',
+                'total' => $total,
+                'payment_link' => $payment['Data']['Url'],
+                'jenis_pembayaran' => 'cicilan',
+                'jenis_tagihan' => 'Daftar Ulang Cicilan',
+                'no_invoice' => $payment['Data']['SessionID'],
+                'user_id' => Auth::user()->id,
+            ]);
+            // foreach ($id_tagihan as $tagihandetails) {
+            $idTagihan = Cicilan::where('id', $id_tagihan);
+
+            $idTagihan->update([
+                'id_transactions' => $transaction->id,
+            ]);
+            return Redirect::to($transaction->payment_link);
+        } elseif ($cicilan->id_transactions != null) {
+            return Redirect::to($transactionGet->payment_link);
         }
     }
 }

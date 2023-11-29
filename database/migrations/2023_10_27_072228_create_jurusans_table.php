@@ -13,9 +13,9 @@ return new class extends Migration
     {
         Schema::create('jurusans', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('id_tahun_ajarans');
+            $table->foreignId('id_tahun_ajarans')->nullable();
             $table->string('name');
-            $table->string('code');
+            $table->string('code')->unique();
             $table->timestamps();
         });
     }

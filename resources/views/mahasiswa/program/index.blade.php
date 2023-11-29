@@ -12,12 +12,12 @@
                                 <h5>Silahkan Pilih Program Belajar Anda!</h5>
                     </div>
                     <div class="card-body">
-                        <form action="{{route('program.program_belajar.switch')}}" method="GET">
+                        <form action="{{ route('program.program_belajar.switch', ['id' => Auth::id()]) }}" method="POST">
                             @csrf
-                            @method('GET')
+                            @method('POST')
                             <button value="S1" name="program" class="btn btn-secondary">Program Belajar S1</button>
                             <button value="Kursus" name="program" class="btn btn-secondary">Program Belajar Bahasa Arab</button>
-                           </form>
+                        </form>
                     </div>
                 </div>
             </div>

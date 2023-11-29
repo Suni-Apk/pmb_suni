@@ -53,7 +53,7 @@
                                     
                                     <button type="submit" class="btn btn-success">Submit</button>
                                     <a href="" class="btn btn-warning">Back</a>
-                                    <button type="submit" class="btn btn-warning text-dark">Back</button>
+                                    <button type="submit" class="btn btn-warning">Back</button>
                                 </form>
                             </div>
                         </div>

@@ -22,7 +22,6 @@ class TagihanController extends Controller
     {
         $biaya = Biaya::all();
 
-
         return view('admin.tagihan.index', compact('biaya'));
     }
 
@@ -46,9 +45,7 @@ class TagihanController extends Controller
         $biayaRoutine = Biaya::where('jenis_biaya', 'Routine')->pluck('id_angkatans');
         $biayaDaftarUlang = Biaya::where('jenis_biaya', 'DaftarUlang')->pluck('id_angkatans');
 
-
         $onlyTahunAjaran = $tahunAjaran->whereNotIn('id', $biayaRoutine);
-
         $onlyTahunAjaran2 = $tahunAjaran->whereNotIn('id', $biayaDaftarUlang);
 
         return view('admin.tagihan.create', compact('jenis_tagihan', 'tahunAjaran', 'jurusanGrouped', 'jurusans', 'course', 'onlyTahunAjaran', 'onlyTahunAjaran2'));

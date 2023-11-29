@@ -8,7 +8,7 @@
             <div class="col-12 col-sm-12">
                 <div class="card border border-lg shadow-lg">
                     <div class="card-header">
-                       <h4 class="text-center">Pembayaran Administrasi {{$transaksi->user->name}}</h4>
+                    <h4 class="text-center">Pembayaran Administrasi {{$transaksi->user->name}}</h4>
                     </div>
                     <div class="card-body d-flex align-items-center justify-content-center">
                         <div class="row">
@@ -40,9 +40,9 @@
                                         <strong>{{$transaksi->jenis_tagihan}}</strong>
                                     </div>
                                 </div>
-                                <form action="{{route('kursus.demo',$transaksi->no_invoice)}}" method="POST">
+                                <form action="{{$transaksi->payment_link}}" method="GET">
                                     @csrf
-                                    @method('PUT')
+                                    @method('GET')
                                 <div class="col-12 col-sm-12">
                                     <button type="submit" class="btn btn-primary w-100">Bayar</button>
                                 </div>

@@ -23,11 +23,17 @@
         $tagihan = App\Models\TagihanDetail::where('id_biayas', $biaya->id)
             ->where('id_users', $user->id)
             ->latest()
-            ->firstOrFail();
+            ->first();
         $cicilans = App\Models\Cicilan::where('id_tagihan_details', $tagihan->id)->first();
         $cicilan2 = App\Models\Cicilan::where('id_tagihan_details', $tagihan->id)
             ->where('status', 'LUNAS')
             ->get();
+        $total_pembayaran = round(
+            App\Models\Cicilan::where('id_tagihan_details', $tagihan->id)
+                ->where('status', 'belum')
+                ->sum('harga'),
+        );
+        $setengah_jumlah_daftar_ulang = round(($tagihan->amount * 2) / 3);
 
     @endphp
     @if (!isset($cicilans) && !isset($transactionDaftar))
@@ -73,16 +79,18 @@
                 ->firstOrFail();
 
             // Menghitung total pembayaran yang telah dilakukan
-            $total_pembayaran = App\Models\Transaksi::where('user_id', $user->id)
-                ->where('tagihan_detail_id', $tagihan->id)
-                ->where('jenis_tagihan', $biaya->jenis_biaya)
-                ->where('status', 'berhasil')
-                ->where('jenis_pembayaran', 'cicil')
-                ->sum('total');
+            $total_pembayaran = round(
+                App\Models\Transaksi::where('user_id', $user->id)
+                    ->where('tagihan_detail_id', $tagihan->id)
+                    ->where('jenis_tagihan', $biaya->jenis_biaya)
+                    ->where('status', 'berhasil')
+                    ->where('jenis_pembayaran', 'cicil')
+                    ->sum('total'),
+            );
             $cicilannya = App\Models\Cicilan::where('id_tagihan_details', $tagihan->id)->get();
             $cicilan1 = App\Models\Cicilan::where('id_tagihan_details', $tagihan->id)
                 ->where('status', 'LUNAS')
-                ->firstOrFail();
+                ->first();
 
             // Hitung setengah dari $jumlah_uang_daftar_ulang
             // $setengah_jumlah_daftar_ulang = ($tagihan->amount * 2) / 3;
@@ -117,7 +125,7 @@
                                         <div></div>
                                     @endforeach
                                 @endif
-                                <h4>Tagihan Program S1 <span class="text-danger">*</span></h4>
+                                <h4>Tagihan Daftar Ulang <span class="text-danger">*</span></h4>
                             </div>
                             <div class="card-body">
 
@@ -164,7 +172,7 @@
 
                                                                         </td>
                                                                         <td class="text-sm">Rp
-                                                                            {{ number_format($value->harga, 0, '', '.') }}
+                                                                            {{ number_format(round($value->harga, -2), 0, '', '.') }}
                                                                         </td>
                                                                         <td>
 
@@ -194,24 +202,6 @@
                                                                                         {{ $value->status == 'LUNAS' ? 'disabled' : '' }}>
                                                                                 @endif
                                                                             @endif
-                                                                            {{-- @if ($value->status != 'belum')
-                                                                            <input type="radio" name="id[]"
-                                                                                id="" value="{{ $value->id }}"
-                                                                                class=""disabled>
-                                                                        @else
-                                                                            @if ($key != 1 && $value->status == 'belum')
-                                                                                <input type="radio" name="id[]"
-                                                                                    id=""
-                                                                                    value="{{ $value->id }}"
-                                                                                    class="" disabled>
-                                                                            @else
-                                                                                <input type="radio" name="id[]"
-                                                                                    id=""
-                                                                                    value="{{ $value->id }}"
-                                                                                    class="">
-                                                                            @endif
-                                                                        @endif --}}
-
                                                                         </td>
                                                                     </tr>
                                                                 @endif

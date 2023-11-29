@@ -8,57 +8,43 @@
 @section('content')
     <div class="row">
         <div class="col-12">
-            <nav aria-label="breadcrumb">
-                <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
-                    <li class="breadcrumb-item text-sm"><a class="opacity-5 text-dark"
-                            href="{{ route('dashboard') }}">Pages</a>
-                    </li>
-                    <li class="breadcrumb-item text-sm text-dark active" aria-current="page">Transactions</li>
-                </ol>
-                <h6 class="font-weight-bolder mb-0">Semua Data Tagihan</h6>
-            </nav>
-            <div class="card mb-4 mt-4">
+            <div class="card">
                 <div class="card-header pb-0 d-flex justify-content-between">
                     <h6>Tagihan table</h6>
                     <!-- Button trigger modal -->
-                    <button type="button" class="btn btn-sm bg-gradient-primary py-2 px-3 text-xs" data-bs-toggle="modal"
-                        data-bs-target="#exampleModal">
-                        <i class="fas fa-plus me-1"></i> Tambah tagihan
-                    </button>
+                    <button type="button" class="btn bg-gradient-primary" data-bs-toggle="modal" data-bs-target="#modalTagihan"
+                    >Tambah <i class="fas fa-plus me-1"></i></button>
 
                     <!-- Modal -->
-                    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
-                        aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal fade" id="modalTagihan" tabindex="-1" role="dialog"
+                        aria-labelledby="modalTagihanLabel" aria-hidden="true">
                         <div class="modal-dialog modal-dialog-centered" role="document">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <h5 class="modal-title" id="exampleModalLabel">Pilih Jenis Tagihan</h5>
-                                    <button type="button" class="btn-close text-danger" data-bs-dismiss="modal"
-                                        aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
+                                    <h5 class="modal-title" id="modalTagihanLabel">Pilih Jenis Tagihan</h5>
+                                    <button type="button" class="btn-close border rounded-circle p-1 fs-3 lh-1 text-dark" data-bs-dismiss="modal" aria-label="Close">&times;</button>
                                 </div>
                                 <form action="{{ route('admin.tagihan.next') }}" method="GET">
                                     <div class="modal-body">
                                         <div class="form-check mb-3">
                                             <input class="form-check-input" type="radio" name="jenis_tagihan"
-                                                id="jenis_tagihan" value="Routine">
-                                            <label class="custom-control-label" for="customRadio1">Spp</label>
+                                                id="spp" value="Routine">
+                                            <label class="custom-control-label" for="spp">Spp</label>
                                         </div>
                                         <div class="form-check mb-3">
                                             <input class="form-check-input" type="radio" name="jenis_tagihan"
-                                                id="customRadio1" value="Tidakroutine">
-                                            <label class="custom-control-label" for="customRadio1">Biaya Lain</label>
+                                                id="biaya_lain" value="Tidakroutine">
+                                            <label class="custom-control-label" for="biaya_lain">Biaya Lain</label>
                                         </div>
                                         <div class="form-check mb-3">
                                             <input class="form-check-input" type="radio" name="jenis_tagihan"
-                                                id="customRadio1" value="DaftarUlang">
-                                            <label class="custom-control-label" for="customRadio1">Daftar Ulang</label>
+                                                id="daftar_ulang" value="DaftarUlang">
+                                            <label class="custom-control-label" for="daftar_ulang">Daftar Ulang</label>
                                         </div>
                                         <div class="form-check mb-3">
                                             <input class="form-check-input" type="radio" name="jenis_tagihan"
-                                                id="customRadio1" value="Tingkatan">
-                                            <label class="custom-control-label" for="customRadio1">Tingkatan</label>
+                                                id="tingkatan" value="Tingkatan">
+                                            <label class="custom-control-label" for="tingkatan">Tingkatan</label>
                                         </div>
                                     </div>
                                     <div class="modal-footer">
@@ -108,7 +94,7 @@
                                         </td>
 
                                         <td class="align-middle  text-secondary text-xs font-weight-bold">
-                                            {{ $biayas->jurusans->name ?? 'Tidak Ada Jurusan' }}
+                                            {{ $biayas->jurusans->name ?? '-' }}
 
                                         </td>
                                         <td class="align-middle  text-secondary text-xs font-weight-bold">

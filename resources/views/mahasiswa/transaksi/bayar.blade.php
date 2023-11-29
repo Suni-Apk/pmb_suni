@@ -4,7 +4,7 @@
 
 @section('content')
 
-    @if ($tagihan->biayasDetail->jenis_biaya == 'Routine')
+    @if ($tagihan->biayasDetail?->jenis_biaya == 'Routine')
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
                 <li class="breadcrumb-item text-sm"><a class="opacity-5 text-dark" href="{{ route('dashboard') }}">Pages</a>
@@ -93,7 +93,7 @@
             </div>
         </div>
     @endif
-    @if ($tagihan->biayasDetail->jenis_biaya == 'Tidakroutine')
+    @if ($tagihan->biayasDetail?->jenis_biaya == 'Tidakroutine')
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
                 <li class="breadcrumb-item text-sm"><a class="opacity-5 text-dark"
@@ -105,7 +105,7 @@
         </nav>
         <div class="card h-100 mt-4">
             <div class="card-body p-3">
-                <form action="{{ route('admin.transactions.proses_bayar') }}" method="POST">
+                <form action="{{ route('mahasiswa.transactions.proses_bayar') }}" method="POST">
                     @csrf
                     @method('POST')
                     <div class="shadow-sm mb-3">
@@ -125,7 +125,7 @@
                                     </tr>
                                     <tr>
                                         <td class="text-sm">Nama tagihan :
-                                            <strong>{{ $tagihan->biayasDetail->nama_biaya }}</strong>
+                                            <strong>{{ $tagihan->biayasDetail?->nama_biaya }}</strong>
                                         </td>
                                     </tr>
                                     <tr>
@@ -162,7 +162,7 @@
                                             <tr>
                                                 <td class="">{{ $key + 1 }}</td>
                                                 <td class="">
-                                                    {{ $valueTagihanDetail->biayasDetail->nama_biaya }}
+                                                    {{ $valueTagihanDetail->biayasDetail?->nama_biaya }}
                                                 </td>
                                                 <td class="">Rp
                                                     {{ number_format($valueTagihanDetail->amount, 0, '', '.') }}</td>
@@ -184,7 +184,6 @@
             </div>
         </div>
     @endif
-
 
 
 @endsection

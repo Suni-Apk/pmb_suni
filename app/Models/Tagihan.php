@@ -23,6 +23,6 @@ class Tagihan extends Model
     }
     public function tagihanDetails()
     {
-        return $this->hasMany(Tagihan::class);
+        return $this->hasMany(TagihanDetail::class);
     }
 }

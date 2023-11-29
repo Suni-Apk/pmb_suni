@@ -11,7 +11,14 @@
             <div class="card mb-4">
                 <div class="card-header pb-0 d-flex justify-content-between">
                     <h6>Daftar Jurusan</h6>
-                    <a href="{{ route('admin.jurusan.create') }}" class="btn bg-gradient-primary float-end">Tambah + </a>
+                    <div class="d-flex gap-2">
+                        <form action="{{ route('admin.exportJurusan') }}" method="GET">
+                            <button class="btn btn-success ms-2 d-flex align-items-center">
+                                <i class='bx bxs-file-export me-1'></i> Export
+                            </button>
+                        </form>     
+                        <a href="{{ route('admin.jurusan.create') }}" class="btn bg-gradient-primary float-end">Tambah + </a>
+                    </div>
                 </div>
                 <div class="card-body px-0 pt-0 pb-2">
                     <div class="table-responsive p-0">
@@ -23,9 +30,6 @@
                                     <th
                                         class="text-uppercase text-start text-secondary text-xxs font-weight-bolder opacity-7">
                                         Nama</th>
-                                    <th
-                                        class="text-uppercase text-start text-secondary text-xxs font-weight-bolder opacity-7">
-                                        Tahun Ajaran</th>
                                     <th
                                         class="text-uppercase text-start text-secondary text-xxs font-weight-bolder opacity-7">
                                         Kode</th>
@@ -43,30 +47,27 @@
                                         <td class="text-sm">
                                             <span class="text-bold">{{ $jurusans->name }}</span>
                                         </td>
-                                        <td class=" text-sm">
-                                            <span class="">{{ $jurusans->tahunAjaran->year }}</span>
+                                        <td class="text-sm">
+                                            <span class="font-weight-bold">{{ $jurusans->code }}</span>
                                         </td>
-                                        <td class=" text-sm">
-                                            <span class="">{{ $jurusans->code }}</span>
-                                        </td>
-                                        <td class="d-flex align-items-center justify-content-center">
+                                        <td class="text-center">
                                             <a href="{{ route('admin.jurusan.show', $jurusans->id) }}"
-                                                class="btn btn-sm bg-gradient-success font-weight-bold text-xs mx-2 mt-3"
+                                                class="badge badge-sm bg-gradient-info font-weight-bold text-xxs"
                                                 data-toggle="tooltip" data-original-title="detail">
                                                 Detail
                                             </a>
 
                                             <a href="{{ route('admin.jurusan.edit', $jurusans->id) }}"
-                                                class="btn btn-sm bg-gradient-secondary font-weight-bold text-xs mx-2 mt-3"
+                                                class="badge badge-sm bg-gradient-secondary font-weight-bold text-xxs mx-1"
                                                 data-toggle="tooltip" data-original-title="edit">
                                                 Edit
                                             </a>
 
-                                            <form action="{{ route('admin.jurusan.destroy', $jurusans->id) }}"
+                                            <form action="{{ route('admin.jurusan.destroy', $jurusans->id) }}" class="d-inline"
                                                 method="POST">
                                                 @csrf
                                                 @method('DELETE')
-                                                <button type="submit" class="btn btn-sm bg-gradient-danger font-weight-bold text-xs mx-2 show_confirm mt-3">
+                                                <button type="submit" class="badge badge-sm border-0 bg-gradient-danger font-weight-bold text-xxs">
                                                     <strong>Hapus</strong>
                                                 </button>
                                             </form>

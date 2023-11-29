@@ -77,7 +77,7 @@
                         </table>
                     </div>
                 </div>
-                <a href="{{ route('admin.transaction.index') }}" class="btn btn-warning"><i class="fas fa-backward"></i>
+                <a href="{{ route('admin.transaksi.index') }}" class="btn btn-warning"><i class="fas fa-backward"></i>
                     Back</a>
             </div>
 
@@ -151,7 +151,7 @@
                         </table>
                     </div>
                 </div>
-                <a href="{{ route('admin.transaction.index') }}" class="btn btn-warning"><i class="fas fa-backward"></i>
+                <a href="{{ route('admin.transaksi.index') }}" class="btn btn-warning"><i class="fas fa-backward"></i>
                     Back</a>
             </div>
         </div>
@@ -225,7 +225,7 @@
                         </table>
                     </div>
                 </div>
-                <a href="{{ route('admin.transaction.index') }}" class="btn btn-warning"><i class="fas fa-backward"></i>
+                <a href="{{ route('admin.transaksi.index') }}" class="btn btn-warning"><i class="fas fa-backward"></i>
                     Back</a>
             </div>
         </div>
@@ -300,7 +300,7 @@
                         </table>
                     </div>
                 </div>
-                <a href="{{ route('admin.transaction.index') }}" class="btn btn-warning"><i class="fas fa-backward"></i>
+                <a href="{{ route('admin.transaksi.index') }}" class="btn btn-warning"><i class="fas fa-backward"></i>
                     Back</a>
             </div>
         </div>
