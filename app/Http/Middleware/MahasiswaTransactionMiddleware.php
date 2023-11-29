@@ -33,9 +33,7 @@ class MahasiswaTransactionMiddleware
                     // dd($transactions->id);
                     if ($value->id_transactions == $transactions->id && $transactions->status != 'berhasil') {
                         return $next($request);
-                    } elseif (!isset($value->id_transactions) == $transactions->id) {
-                        return $next($request);
-                    } else {
+                    } else if ($value->id_transactions == $transactions->id && $transactions->status == 'berhasil' && $value->status == 'LUNAS') {
                         return redirect()->route('mahasiswa.tagihan.index')->with('error', 'Maaf, anda sudah membayar !');
                     }
                 }
