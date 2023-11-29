@@ -4,6 +4,7 @@ namespace App\Traits;
 
 use App\Models\User;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Auth;
 
 trait Ipaymu {
     public $va;
@@ -93,6 +94,6 @@ trait Ipaymu {
         $data_request = Http::withHeaders($headers)->post($url,$body);
         $response     = $data_request->object();
 
-        return $response;
+        return $response; 
     }
 }

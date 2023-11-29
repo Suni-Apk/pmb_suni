@@ -23,9 +23,9 @@
                                 <h6>{{ $semesters->name }}</h6>
                             </div>
                             <div class="flex-row d-flex">
-                                <a href="" class="btn btn-secondary fs-6 p-2 px-3 ms-2">
+                                {{-- <a href="" class="btn btn-secondary fs-6 p-2 px-3 ms-2">
                                     <i class="fas fa-file-download"></i>
-                                </a>
+                                </a> --}}
                             </div>
                         </div>
                         <div class="card-body px-0 pt-0 pb-2">

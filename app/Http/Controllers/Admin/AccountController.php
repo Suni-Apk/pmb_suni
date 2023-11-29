@@ -7,6 +7,7 @@ use App\Exports\MahasiswaExport;
 use App\Http\Controllers\Controller;
 use App\Models\Biaya;
 use App\Models\Biodata;
+use App\Models\Cicilan;
 use App\Models\TagihanDetail;
 use App\Models\TahunAjaran;
 use App\Models\Transaksi;
@@ -138,13 +139,18 @@ class AccountController extends Controller
         $tahun_ajaran = TahunAjaran::all();
         $tahunAjaran = $request->input('angkatan_id');
 
-        $mahasiswa = Biodata::when($tahunAjaran, function ($query) use ($tahunAjaran) {
-            $query->whereHas('user', function ($query) use ($tahunAjaran) {
-                $query->where('angkatan_id', $tahunAjaran);
-            });
-        })->get();
-
+        if ($request->input('angkatan_id')) {
+            $mahasiswa = User::when($tahunAjaran, function ($query) use ($tahunAjaran) {
+                $query->whereHas('biodata', function ($query) use ($tahunAjaran) {
+                    $query->where('angkatan_id', $tahunAjaran);
+                });
+            })->latest()->get();
+        } else {
+            $mahasiswa = User::where('role', 'Mahasiswa')->latest()->get();
+        }
+        
         return view('admin.account.mahasiswa.index', compact('mahasiswa', 'tahun_ajaran', 'tahunAjaran'));
+
     }
 
 
@@ -259,8 +265,8 @@ class AccountController extends Controller
         $biodata = Biodata::where('user_id', $mahasiswa->id)->get();
         $biaya = Biaya::get();
         $biayaAll = Biaya::all();
-
-        return view('admin.account.mahasiswa.detail', compact('biodata', 'mahasiswa', 'biaya', 'biayaAll'));
+        $cicilanAll = Cicilan::all();
+        return view('admin.account.mahasiswa.detail', compact('biodata', 'mahasiswa', 'biaya', 'biayaAll', 'cicilanAll'));
     }
     public function mahasiswa_bayar(Request $request, $id)
     {
@@ -308,17 +314,5 @@ class AccountController extends Controller
     {
         $mahasiswa = User::where('role', 'Mahasiswa')->get();
         return view('admin.account.pendaftar.index', compact('mahasiswa'));
-    }
-
-    public function pendaftar_edit()
-    {
-    }
-
-    public function pendaftar_edit_process()
-    {
-    }
-
-    public function pendaftar_delete()
-    {
     }
 }

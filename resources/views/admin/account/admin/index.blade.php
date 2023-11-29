@@ -17,7 +17,7 @@
                       <button class="btn btn-success ms-2 d-flex align-items-center show_confirm">
                           <i class='bx bxs-file-export me-1'></i> Export
                       </button>
-                    </form>              
+                    </form>
                     <a href="{{route('admin.admin.create')}}" class="btn bg-gradient-primary float-end">Tambah + </a>
                 </div>
             </div>
@@ -64,7 +64,7 @@
                               Detail
                           </a>
 
-                          <a style="letter-spacing: .02rem" href="{{route('admin.admin.edit',$item->id)}}" class="badge badge-sm bg-gradient-secondary font-weight-bolder text-xxs mx-1" data-toggle="tooltip" data-original-title="edit">
+                          <a style="letter-spacing: .02rem" href="{{route('admin.admin.edit',$item->id)}}" class="badge badge-sm bg-gradient-secondary font-weight-bolder text-xxs ms-1" data-toggle="tooltip" data-original-title="edit">
                               Ubah
                           </a>
                           

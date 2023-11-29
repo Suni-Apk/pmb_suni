@@ -29,9 +29,9 @@ class KursusTransactionMiddleware
             foreach ($tagihanDetail as $value) {
                 $transaction = Transaksi::all();
                 foreach ($transaction as $transactions) {
-                    if (!isset($value->id_transactions) == $transactions->id && $transactions->status == 'berhasil') {
+                    if ($value->id_transactions == $transactions->id && $transactions->status != 'berhasil' && $value->status != 'LUNAS') {
                         return $next($request);
-                    } else {
+                    } else if ($value->id_transactions == $transactions->id && $transactions->status == 'berhasil' && $value->status == 'LUNAS') {
                         return redirect()->route('kursus.tagihan.index')->with('error', 'Maaf, anda sudah membayar !');
                     }
                 }

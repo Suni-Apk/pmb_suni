@@ -53,13 +53,13 @@
                     @forelse ($mahasiswa as $index => $item)
                     <tr>
                         <td>
-									        <h6 class="mb-0 text-sm">{{$item->name}}</h6>
+							<h6 class="mb-0 text-sm">{{$item->name}}</h6>
                         </td>
                         <td>
-									        <span class="text-secondary text-xs font-weight-bold">{{$item->phone}}</span>
+							<span class="text-secondary text-xs font-weight-bold">{{$item->phone}}</span>
                         </td>
                         <td>
-									        <span class="text-secondary text-xs font-weight-bold">{{$item->email}}</span>
+							<span class="text-secondary text-xs font-weight-bold">{{$item->email}}</span>
                         </td>
                         <td class="text-center text-secondary font-weight-bold">
                           @if ($item->biodata)

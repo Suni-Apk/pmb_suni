@@ -648,7 +648,6 @@
 												  Apakah anda yakin ingin menghapus data pendaftar?
 												</div>
 												<div class="modal-footer">
-												  {{-- <button type="button" class="btn bg-gradient-secondary" data-bs-dismiss="modal">Batal</button> --}}
 												  <button type="submit" class="btn bg-gradient-primary">Lanjut</button>
 												</div>
 											  </div>
@@ -686,10 +685,6 @@
 			<div class="card h-100">
 				<div class="card-header pb-0">
 					<h6>Daftar Transaksi Terbaru</h6>
-					<p class="text-sm">
-						<i class="fa fa-arrow-down text-success me-1" aria-hidden="true"></i>
-						20 transaksi terakhir
-					</p>
 				</div>
 				<div class="card-body p-3">
 					@foreach ($transaksi->take(20) as $item)

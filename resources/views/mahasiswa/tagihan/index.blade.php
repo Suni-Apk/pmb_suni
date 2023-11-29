@@ -7,32 +7,35 @@
 
 @section('content')
 
-    {{-- @php
+    @php
         $transactionDaftar = App\Models\Transaksi::where('user_id', Auth::user()->id)
             ->where('jenis_tagihan', 'DaftarUlang')
             ->where('status', 'berhasil')
             ->where('jenis_pembayaran', 'cash')
             ->first();
-
         $biaya = App\Models\Biaya::where('program_belajar', 'S1')
             ->where('jenis_biaya', 'DaftarUlang')
-            ->where('id_angkatans', Auth::user()->angkatan->id)
+            ->where('id_angkatans', Auth::user()->biodata->angkatan_id)
             ->latest()
             ->first();
 
         $user = Auth::user();
-
         $tagihan = App\Models\TagihanDetail::where('id_biayas', $biaya->id)
             ->where('id_users', $user->id)
             ->latest()
             ->first();
-
         $cicilans = App\Models\Cicilan::where('id_tagihan_details', $tagihan->id)->first();
-
         $cicilan2 = App\Models\Cicilan::where('id_tagihan_details', $tagihan->id)
             ->where('status', 'LUNAS')
             ->get();
-    @endphp --}}
+        $total_pembayaran = round(
+            App\Models\Cicilan::where('id_tagihan_details', $tagihan->id)
+                ->where('status', 'belum')
+                ->sum('harga'),
+        );
+        $setengah_jumlah_daftar_ulang = round(($tagihan->amount * 2) / 3);
+
+    @endphp
     @if (!isset($cicilans) && !isset($transactionDaftar))
         <div class="col-12 text-center mb-4">
             <div class="card">
@@ -45,6 +48,7 @@
                             @csrf
                             @method('GET')
                             <div class="col-6 col-sm-4">
+                                <input type="hidden" name="id" value="{{ $tagihan->id }}">
                                 <button name="jenis_pembayaran" value="cash" type="submit"
                                     class="btn bg-gradient-primary sm:w-50">
                                     Cash
@@ -62,26 +66,28 @@
             </div>
         </div>
     @elseif($cicilans)
-        {{-- @php
+        @php
             $biaya = App\Models\Biaya::where('program_belajar', 'S1')
                 ->where('jenis_biaya', 'DaftarUlang')
-                ->where('id_angkatans', Auth::user()->angkatan->id)
+                ->where('id_angkatans', Auth::user()->biodata->angkatan_id)
                 ->latest()
-                ->first();
+                ->firstOrfail();
 
             $user = Auth::user();
             $tagihan = App\Models\TagihanDetail::where('id_biayas', $biaya->id)
                 ->where('id_users', $user->id)
                 ->latest()
-                ->first();
+                ->firstOrFail();
 
             // Menghitung total pembayaran yang telah dilakukan
-            $total_pembayaran = App\Models\Transaksi::where('user_id', $user->id)
-                ->where('tagihan_detail_id', $tagihan->id)
-                ->where('jenis_tagihan', $biaya->jenis_biaya)
-                ->where('status', 'berhasil')
-                ->where('jenis_pembayaran', 'cicil')
-                ->sum('total');
+            $total_pembayaran = round(
+                App\Models\Transaksi::where('user_id', $user->id)
+                    ->where('tagihan_detail_id', $tagihan->id)
+                    ->where('jenis_tagihan', $biaya->jenis_biaya)
+                    ->where('status', 'berhasil')
+                    ->where('jenis_pembayaran', 'cicil')
+                    ->sum('total'),
+            );
             $cicilannya = App\Models\Cicilan::where('id_tagihan_details', $tagihan->id)->get();
             $cicilan1 = App\Models\Cicilan::where('id_tagihan_details', $tagihan->id)
                 ->where('status', 'LUNAS')
@@ -101,7 +107,7 @@
 
             // dd($cicilan_pertama_terbayar, $cicilan_kedua_terbayar, $cicilan_ketiga_terbayar);
 
-        @endphp --}}
+        @endphp
         @if ($cicilan2->count() != 3)
             <div class="row">
                 @if ($biodata->program_belajar === 'S1')
@@ -120,7 +126,7 @@
                                         <div></div>
                                     @endforeach
                                 @endif
-                                <h4>Tagihan Program S1 <span class="text-danger">*</span></h4>
+                                <h4>Tagihan Daftar Ulang <span class="text-danger">*</span></h4>
                             </div>
                             <div class="card-body">
 
@@ -167,7 +173,7 @@
 
                                                                         </td>
                                                                         <td class="text-sm">Rp
-                                                                            {{ number_format($value->harga, 0, '', '.') }}
+                                                                            {{ number_format(round($value->harga, -2), 0, '', '.') }}
                                                                         </td>
                                                                         <td>
 
@@ -197,24 +203,6 @@
                                                                                         {{ $value->status == 'LUNAS' ? 'disabled' : '' }}>
                                                                                 @endif
                                                                             @endif
-                                                                            {{-- @if ($value->status != 'belum')
-                                                                            <input type="radio" name="id[]"
-                                                                                id="" value="{{ $value->id }}"
-                                                                                class=""disabled>
-                                                                        @else
-                                                                            @if ($key != 1 && $value->status == 'belum')
-                                                                                <input type="radio" name="id[]"
-                                                                                    id=""
-                                                                                    value="{{ $value->id }}"
-                                                                                    class="" disabled>
-                                                                            @else
-                                                                                <input type="radio" name="id[]"
-                                                                                    id=""
-                                                                                    value="{{ $value->id }}"
-                                                                                    class="">
-                                                                            @endif
-                                                                        @endif --}}
-
                                                                         </td>
                                                                     </tr>
                                                                 @endif
@@ -447,13 +435,13 @@
         ->where('jenis_biaya', 'DaftarUlang')
         ->where('id_angkatans', Auth::user()->biodata->angkatan_id)
         ->latest()
-        ->first();
+        ->firstOrFail();
 
     $user = Auth::user();
     $tagihan = App\Models\TagihanDetail::where('id_biayas', $biaya->id)
         ->where('id_users', $user->id)
         ->latest()
-        ->first();
+        ->firstOrFail();
 
     // Menghitung total pembayaran yang telah dilakukan
     $total_pembayaran = App\Models\Transaksi::where('user_id', $user->id)
@@ -488,20 +476,21 @@
         ->where('jenis_biaya', 'DaftarUlang')
         ->where('id_angkatans', Auth::user()->biodata->angkatan_id)
         ->latest()
-        ->first();
+        ->firstOrFail();
 
     $user = Auth::user();
     $tagihan = App\Models\TagihanDetail::where('id_biayas', $biaya->id)
         ->where('id_users', $user->id)
         ->latest()
-        ->first();
+        ->firstOrFail();
     // $bagi3 = $tagihan->amount / 3;
     // dd($bagi3);
     $transaction = App\Models\Transaksi::where('user_id', $user->id)
         ->where('tagihan_detail_id', $tagihan->id)
         ->where('jenis_tagihan', $biaya->jenis_biaya)
         ->where('status', 'berhasil')
-        ->first();
+        ->where('jenis_pembayaran', 'cash')
+        ->firstOrFail();
 @endphp
 @if (!$transaction)
 @else
@@ -576,6 +565,7 @@
                                                                         <td class="text-sm">
                                                                             <span
                                                                                 class="badge badge-sm {{ $tagihans->status == 'LUNAS' ? 'bg-gradient-success' : 'bg-gradient-danger' }}">{{ $tagihans->status }}</span>
+
                                                                         </td>
                                                                         <td class="text-sm">Rp
                                                                             {{ number_format($tagihans->amount, 0, '', '.') }}
@@ -643,10 +633,11 @@
                                                     $no = 1;
                                                 @endphp
                                                 @foreach ($biayas as $index => $value)
-                                                    @if ($value->jenis_biaya == 'Tidakroutine' &&
-                                                        $value->id_angkatans == $biodata->angkatan_id &&
-                                                        $value->id_jurusans == $biodata->jurusan_id &&
-                                                        $value->program_belajar == $biodata->program_belajar)
+                                                    @if (
+                                                        $value->jenis_biaya == 'Tidakroutine' &&
+                                                            $value->id_angkatans == $biodata->angkatan_id &&
+                                                            $value->id_jurusans == $biodata->jurusan_id &&
+                                                            $value->program_belajar == $biodata->program_belajar)
                                                         @foreach ($value->tagihanDetail as $key => $tagihans)
                                                             @if ($tagihans->id_users == $mahasiswa->id)
                                                                 <tr>
@@ -699,12 +690,9 @@
                 <!--Daftar Ulang -->
             </div>
         </div>
+        @endif
+    @endif
 @endif
-@endif
-@endif
-
-
-
 @endsection
 
 @push('scripts')
@@ -715,15 +703,35 @@
     });
 </script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
-  @if (session('success'))
-      <script>
-          Swal.fire(
-              "{{ session('success') }}", // Menggunakan session('success') untuk mengambil pesan
-              'You clicked the button!',
-              'success'
-          )
-      </script>
-  @endif
+@if (session('success'))
+<script>
+    Swal.fire(
+        "{{ session('success') }}", // Menggunakan session('success') untuk mengambil pesan
+        'You clicked the button!',
+        'success'
+    )
+</script>
+@endif
+@if (session('error'))
+<script>
+    Swal.fire(
+        "{{ session('error') }}", // Menggunakan session('success') untuk mengambil pesan
+        'You clicked the button!',
+        'error'
+    )
+</script>
+@endif
+<script>
+    $(function(e) {
+        $("#select_all_ids").click(function() {
+            $('.checksAll').prop('checked', $(this).prop('checked'));
+        });
+        $("#select_all_ids2").click(function() {
+            $('.checksAll2').prop('checked', $(this).prop('checked'));
+        });
+        $("#select_all_ids3").click(function() {
+            $('.checksAll3').prop('checked', $(this).prop('checked'));
+        });
+    });
+</script>
 @endpush
-

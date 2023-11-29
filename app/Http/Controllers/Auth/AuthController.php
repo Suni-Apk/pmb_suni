@@ -19,7 +19,6 @@ use Illuminate\Support\Str;
 use App\Traits\Fonnte;
 use App\Traits\Ipaymu;
 use Illuminate\Support\Facades\Redirect;
-use Illuminate\Support\Facades\URL;
 
 class AuthController extends Controller
 {
@@ -33,7 +32,8 @@ class AuthController extends Controller
 
     public function s1_register()
     {
-        return view('auth.register-s1');
+        $banner = Banner::get();
+        return view('auth.register-s1', compact('banner'));
     }
 
     public function register_process_new(Request $request)
@@ -93,7 +93,8 @@ class AuthController extends Controller
 
     public function kursus_register()
     {
-        return view('auth.register-kursus');
+        $banner = Banner::get();
+        return view('auth.register-kursus', compact('banner'));
     }
 
     public function register_process(Request $request)

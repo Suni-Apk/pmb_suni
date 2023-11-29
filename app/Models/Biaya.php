@@ -12,6 +12,7 @@ class Biaya extends Model
     protected $fillable = [
         'id_angkatans',
         'id_jurusans',
+        'id_kursus',
         'nama_biaya',
         'jenis_biaya',
         'program_belajar',
@@ -20,6 +21,10 @@ class Biaya extends Model
     public function tagihan()
     {
         return $this->hasMany(Tagihan::class, 'id_biayas');
+    }
+    public function kursus()
+    {
+        return $this->belongsTo(Course::class, 'id_kursus');
     }
     public function tagihanDetail()
     {

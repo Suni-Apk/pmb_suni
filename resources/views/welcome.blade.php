@@ -44,10 +44,27 @@
             <h4 class="mt-1 mt-sm-4">Selamat Datang di</h4>
             <h3 class="text-white lh-1 py-1 mt-1 mb-2 bg-gradient-dark rounded-pill">Website Pendaftaran</h3>
             <h1 class=" lh-1 text-uppercase">{{ App\Models\General::first()->name }}</h1>
-            <div class="mx-auto d-flex justify-content-center gap-3 mt-2 mt-sm-4">
+            <div class="mx-auto d-flex justify-content-center gap-2 mt-2 mt-sm-4">
                 @if (!Auth::user())
-                <a href="{{ route('register') }}" class="btn rounded-pill bg-gradient-secondary"
-                data-bs-toggle="tooltip" data-bs-placement="left" title="Belum mendaftar?">Daftar</a>
+                <div class="dropdown">
+                    <button class="btn bg-gradient-dark dropdown-toggle me-2 mb-0 rounded-pill" data-bs-toggle="dropdown" id="dropdownReg">
+                        Daftar
+                    </button>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownReg">
+                        <li>
+                            <a class="dropdown-item" href="{{ route('s1.register') }}">
+                                <i class="me-2 fas fa-graduation-cap"></i>
+                                Program Formal
+                            </a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item" href="{{ route('kursus.register') }}">
+                                <i class="me-2 fas fa-user-tag"></i>
+                                Program Non Formal
+                            </a>
+                        </li>
+                    </ul>
+                </div>
                 @endif
                 <a href="#informasi" class="btn rounded-pill btn-outline-secondary" 
                 data-bs-toggle="tooltip" data-bs-placement="right" title="Butuh informasi?">Selengkapnya</a>
@@ -85,9 +102,6 @@
                                         @if ($loop->first)
                                         <li class="list-group-item text-sm lh-sm">
                                             Biaya Administrasi : Rp. {{ number_format(App\Models\Administrasi::first()->amount,0,'','.') }},-
-                                        </li>
-                                        <li class="list-group-item text-sm lh-sm">
-                                            Biaya Prakuliah : Rp. 12.000.000,-
                                         </li>
                                         @else
                                             @if ($item->course)
