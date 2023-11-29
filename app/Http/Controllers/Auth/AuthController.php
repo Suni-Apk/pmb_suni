@@ -32,7 +32,8 @@ class AuthController extends Controller
 
     public function s1_register()
     {
-        return view('auth.register-s1');
+        $banner = Banner::get();
+        return view('auth.register-s1', compact('banner'));
     }
 
     public function register_process_new(Request $request)
@@ -214,9 +215,11 @@ class AuthController extends Controller
             ]);
             // Setelah mengupdate status aktif, kita akan mencoba masuk
             auth()->login($user);
+            $biayaAdministrasiS1 = Administrasi::where('program_belajar', 'S1')->value('amount');
             $biodataS1 = Biodata::where('user_id', $user->id)->where('program_belajar', 'S1')->first();
             $biodataKursus = Biodata::where('user_id', $user->id)->where('program_belajar', 'KURSUS')->first();
             $transaksiS1 = Transaksi::where('user_id', $user->id)->where('program_belajar', 'S1')->where('jenis_tagihan', 'Administrasi')->first();
+            $biayaAdministrasiKursus = Administrasi::where('program_belajar', 'Kursus')->value('amount');
             $transaksiKursus = Transaksi::where('user_id', $user->id)->where('program_belajar', 'KURSUS')->where('jenis_tagihan', 'Administrasi')->first();
             if ($request->program == 'S1') {
                 if (!$transaksiS1) {
@@ -229,7 +232,7 @@ class AuthController extends Controller
                         'jenis_pembayaran' => 'Ipaymu',
                         'program_belajar' => 'S1',
                         'status' => 'pending',
-                        'total' => '10000',
+                        'total' => $biayaAdministrasiS1,
                         'payment_link' => $payment['Data']['Url'],
                     ]);
                     return view('mahasiswa.transaksi.administrasi', compact('transaksi'));
@@ -257,7 +260,7 @@ class AuthController extends Controller
                         'jenis_pembayaran' => 'Ipaymu',
                         'program_belajar' => 'KURSUS',
                         'status' => 'pending',
-                        'total' => '10000',
+                        'total' => $biayaAdministrasiKursus,
                         'payment_link' => $payment['Data']['Url'],
                     ]);
                     return view('kursus.transaksi.administrasi', compact('transaksi'));
@@ -284,6 +287,7 @@ class AuthController extends Controller
         auth()->login($user);
         $biodataS1 = Biodata::where('user_id', $user->id)->where('program_belajar', 'S1')->first();
         $transaksiS1 = Transaksi::where('user_id', $user->id)->where('program_belajar', 'S1')->where('jenis_tagihan', 'Administrasi')->first();
+        $biayaAdministrasiS1 = Administrasi::where('program_belajar', 'S1')->value('amount');
 
         if (!$transaksiS1) {
             $adminstrasiS1 = Administrasi::where('program_belajar', 'S1')->first();
@@ -295,7 +299,7 @@ class AuthController extends Controller
                 'jenis_pembayaran' => 'Ipaymu',
                 'program_belajar' => 'S1',
                 'status' => 'pending',
-                'total' => '10000',
+                'total' => $biayaAdministrasiS1,
                 'payment_link' => $payment['Data']['Url'],
             ]);
             return view('mahasiswa.transaksi.administrasi', compact('transaksi'));
@@ -319,6 +323,7 @@ class AuthController extends Controller
         auth()->login($user);
         $biodataKursus = Biodata::where('user_id', $user->id)->where('program_belajar', 'KURSUS')->first();
         $transaksiKursus = Transaksi::where('user_id', $user->id)->where('program_belajar', 'KURSUS')->where('jenis_tagihan', 'Administrasi')->first();
+        $biayaAdministrasiKursus = Administrasi::where('program_belajar', 'Kursus')->value('amount');
 
         if (!$transaksiKursus) {
             $adminstrasiKursus = Administrasi::where('program_belajar', 'KURSUS')->first();
@@ -331,7 +336,7 @@ class AuthController extends Controller
                 'jenis_pembayaran' => 'Ipaymu',
                 'program_belajar' => 'KURSUS',
                 'status' => 'pending',
-                'total' => '10000',
+                'total' => $biayaAdministrasiKursus,
                 'payment_link' => $payment['Data']['Url'],
             ]);
             return view('kursus.transaksi.administrasi', compact('transaksi'));

@@ -30,6 +30,7 @@ use App\Http\Controllers\Mahasiswa\DocumentController;
 use App\Http\Controllers\TahunAjaranController;
 use App\Http\Controllers\DocumentController as AdminDocumentController;
 use App\Http\Controllers\Kursus\TransactionController as KursusTransactionController;
+use App\Http\Controllers\LaporanController;
 use App\Http\Controllers\MapelsController;
 use Illuminate\Support\Facades\Route;
 
@@ -164,6 +165,10 @@ Route::prefix('/admin')->middleware(['admin', 'auth'])->name('admin.')->group(fu
     // proses transaksi
     Route::prefix('transaksi')->name('transactions.')->group(function () {
         Route::post('/proses_bayar/{id}', [TransactionController::class, 'proses_bayar'])->middleware(['Pembayaran'])->name('proses_bayar');
+    });
+
+    Route::prefix('laporan')->name('laporan.')->group( function() {
+        Route::get('/', [LaporanController::class, 'index'])->name('index');
     });
     
     // resources management

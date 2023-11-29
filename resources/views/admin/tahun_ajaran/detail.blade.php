@@ -99,8 +99,6 @@
                 <div class="card-header pb-0 d-flex justify-content-between">
                     <h6>Jurusan</h6>
                     <div>
-                        <button class="btn bg-gradient-primary" data-bs-toggle="modal" data-bs-target="#modalLink">Tambah +</button>
-
                         <div class="modal fade text-start" id="modalLink" tabindex="-1" role="dialog"
                             aria-labelledby="modalLinkLabel" aria-hidden="true">
                                 <div class="modal-dialog modal-dialog-centered" role="document">
@@ -109,13 +107,13 @@
                                             <h5 class="modal-title" id="modalLinkLabel">Tambah Jurusan</h5>
                                             <button type="button" class="btn-close border rounded-circle p-1 fs-3 lh-1 text-dark" data-bs-dismiss="modal" aria-label="Close">&times;</button>
                                         </div>
-                                        <form action="{{ route('admin.jurusan.store') }}" method="POST">
+                                        <form action="{{ route('admin.jurusan.store', $angkatan->id) }}" method="POST">
                                             @csrf
                                             @method('POST')
                                             <div class="modal-body">
                                                 <div class="form-group mb-3">
                                                     <label for="name">Nama Jurusan</label>
-                                                    <select name="jurusan" id="jurusan" class="form-control">
+                                                    <select name="id_tahun_ajarans" id="id_tahun_ajarans" class="form-control">
                                                         <option value="" selected disabled>-- Pilih Jurusan --</option>
                                                         @foreach ($jurusan as $j)
                                                             <option value="{{ $j->id }}">{{ $j->name }}</option>
@@ -140,19 +138,18 @@
                         <table class="table" id="table">
                             <thead>
                                 <tr>
-                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Nama</th>
+                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7  text-center">Nama</th>
                                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 text-center">Aksi</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($links->where('id_tahun_ajarans', $angkatan->id) as $index => $link)
+                                @foreach ($jurusans as $index)
                                 <tr>
-                                    <td class="text-xs">
-                                        {{ $link->name }}
+                                    <td class="text-xs  text-center">
+                                        {{ $index->name }}
                                     </td>
-                                    <td class="text-xs">
-                                        <a href="{{ route('admin.link.detail', $link->id) }}" class="badge badge-sm text-xxs bg-gradient-info">detail</a>
-                                        <form action="{{ route('admin.link.destroy', $link->id) }}" method="POST" class="d-inline">
+                                    <td class="text-xs  text-center">
+                                        <form action="#" class="d-inline">
                                             @csrf
                                             @method('DELETE')
                                             <button type="submit" class="badge badge-sm bg-gradient-danger font-weight-bold text-xxs border-0 show_confirm">

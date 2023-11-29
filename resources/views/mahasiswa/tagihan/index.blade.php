@@ -336,46 +336,43 @@
                             <table class="table align-items-center mb-0" id="templateTable">
                                 <thead>
                                     <tr>
-                                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">ID
-                                        </th>
-                                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                        <th
+                                            class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 width-32-px text-center">
+                                            ID</th>
+                                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 text-center">
                                             Nama Tagihan</th>
                                         <th
-                                            class="text-uppercase text-secondary text-xxs px-2 font-weight-bolder opacity-7">
+                                            class="text-uppercase text-secondary text-xxs px-2 font-weight-bolder opacity-7 text-center">
                                             Jenis Tagihan</th>
                                         <th
-                                            class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
+                                            class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2 text-center">
                                             Angkatan</th>
-                                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 text-center">
                                             Jurusan</th>
-                                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 text-center">
                                             Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <tr>
                                         <td>
-                                            <div class="d-flex px-2 py-1">
-                                                <h6 class="mb-0 text-sm text-center">1</h6>
-                                            </div>
+                                            <h6 class="text-dark mb-0 text-sm text-center">#1</h6>
                                         </td>
                                         <td>
-                                            <div class="d-flex px-2 py-1">
                                                 <h6 class="mb-0 text-sm text-center">SPP</h6>
-                                            </div>
                                         </td>
-                                        <td class="align- text-start">
-                                            <span class="text-secondary text-xs font-weight-bold">Routine</span>
+                                        <td class="text-center">
+                                            <span class="text-dark text-xs font-weight-bold ">Routine</span>
                                         </td>
-                                        <td class="align- text-start">
-                                            <span class="text-secondary text-xs font-weight-bold">2023</span>
-                                        </td>
-                                        <td>
-                                            <p class="text-xs font-weight-bold mb-0">Informatika</p>
+                                        <td class="text-center">
+                                            <span class="text-dark text-xs font-weight-bold text-center">2023</span>
                                         </td>
                                         <td>
-                                            <a href="{{ route('mahasiswa.tagihan.detail.spp', Auth::user()->name) }}"
-                                                class="badge badge-sm bg-gradient-primary font-weight-bold text-xs mx-2"
+                                            <p class="text-dark text-xs font-weight-bold mb-0 text-center">Informatika</p>
+                                        </td>
+                                        <td class="text-center">
+                                            <a href="{{ route('mahasiswa.tagihan.detail.tidak.routine', Auth::user()->name) }}"
+                                                class="badge badge-sm bg-gradient-primary font-weight-bold text-xxs"
                                                 data-toggle="tooltip" data-original-title="Edit user">
                                                 Detail
                                             </a>
@@ -400,42 +397,40 @@
                                 <thead>
                                     <tr>
                                         <th
-                                            class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 width-32-px">
+                                            class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 width-32-px text-center">
                                             ID</th>
-                                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 text-center">
                                             Nama Tagihan</th>
                                         <th
-                                            class="text-uppercase text-secondary text-xxs px-2 font-weight-bolder opacity-7">
+                                            class="text-uppercase text-secondary text-xxs px-2 font-weight-bolder opacity-7 text-center">
                                             Jenis Tagihan</th>
                                         <th
-                                            class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
+                                            class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2 text-center">
                                             Angkatan</th>
-                                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 text-center">
                                             Jurusan</th>
-                                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 text-center">
                                             Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <tr>
                                         <td>
-                                            <h6 class="text-secondary mb-0 text-sm text-center">#1</h6>
+                                            <h6 class="text-dark mb-0 text-sm text-center">#1</h6>
                                         </td>
                                         <td>
-                                            <div class="d-flex px-2 py-1">
                                                 <h6 class="mb-0 text-sm text-center">KKN</h6>
-                                            </div>
                                         </td>
-                                        <td class="align- text-start">
-                                            <span class="text-secondary text-xs font-weight-bold">Tidak Routine</span>
+                                        <td class="text-center">
+                                            <span class="text-dark text-xs font-weight-bold ">Tidak Routine</span>
                                         </td>
-                                        <td class="align- text-start">
-                                            <span class="text-secondary text-xs font-weight-bold">2023</span>
-                                        </td>
-                                        <td>
-                                            <p class="text-xs font-weight-bold mb-0">Informatika</p>
+                                        <td class="text-center">
+                                            <span class="text-dark text-xs font-weight-bold text-center">2023</span>
                                         </td>
                                         <td>
+                                            <p class="text-dark text-xs font-weight-bold mb-0 text-center">Informatika</p>
+                                        </td>
+                                        <td class="text-center">
                                             <a href="{{ route('mahasiswa.tagihan.detail.tidak.routine', Auth::user()->name) }}"
                                                 class="badge badge-sm bg-gradient-primary font-weight-bold text-xxs"
                                                 data-toggle="tooltip" data-original-title="Edit user">
