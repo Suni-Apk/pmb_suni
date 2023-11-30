@@ -17,7 +17,7 @@ return new class extends Migration
             $table->date('start_date')->nullable();
             $table->date('end_date')->nullable();
             $table->string('status');
-            $table->foreignId('id_transactions');
+            $table->foreignId('id_transactions')->nullable();
             $table->string('nama_cicilan');
             $table->integer('harga');
             $table->timestamps();

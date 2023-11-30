@@ -169,19 +169,19 @@
                         <!--Jenis Kursus-->
                         <div class="form-group d-none" id="kursus">
                             <label for="id_course">Jenis Kursus</label>
-                            <select name="id_courses" id="id_course"
-                                class="form-select @error('id_courses')
+                            <select name="id_kursus" id="id_kursus"
+                                class="form-select @error('id_kursus')
                             is-invalid
                         @enderror">
                                 <option disabled selected>-- Pilih Kursus --</option>
                                 @foreach ($course as $value)
                                     <option value="{{ $value->id }}"
-                                        {{ old('id_courses') == $value->id ? 'selected' : '' }}>
+                                        {{ old('id_kursus') == $value->id ? 'selected' : '' }}>
                                         {{ $value->name }}
                                     </option>
                                 @endforeach
                             </select>
-                            @error('id_courses')
+                            @error('id_kursus')
                                 <div id="validationServer03Feedback" class="invalid-feedback">
                                     {{ $message }}
                                 </div>
@@ -444,13 +444,13 @@
                 document.getElementById("jurusans").classList.remove('d-none');
                 document.getElementById("kursus").classList.add('d-none');
                 document.getElementById("id_jurusans").setAttribute('name', 'id_jurusans');
-                document.getElementById("id_course").removeAttribute('name');
+                document.getElementById("id_kursus").removeAttribute('name');
 
             } else if (program.value == "Kursus") {
                 document.getElementById("angkatans").classList.remove('d-none');
                 document.getElementById("kursus").classList.remove('d-none');
                 document.getElementById("jurusans").classList.add('d-none');
-                document.getElementById("id_course").setAttribute('name', 'id_courses');
+                document.getElementById("id_kursus").setAttribute('name', 'id_kursus');
                 document.getElementById("id_jurusans").removeAttribute('name');
 
 

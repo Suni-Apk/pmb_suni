@@ -18,6 +18,12 @@ class Course extends Model
         return $this->hasMany(Biodata::class);
     }
 
+
+    public function biaya()
+    {
+        return $this->hasMany(biaya::class);
+    }
+
     public function mapel()
     {
         return $this->hasMany(Mapels::class, 'id_courses');
@@ -25,6 +31,6 @@ class Course extends Model
 
     public function links()
     {
-        return $this->hasMany(Links::class);
+        return $this->hasMany(Link::class);
     }
 }

@@ -450,6 +450,7 @@
         ->where('status', 'berhasil')
         ->where('jenis_pembayaran', 'cicil')
         ->sum('total');
+        
     $cicilannya = App\Models\Cicilan::where('id_tagihan_details', $tagihan->id);
     // Hitung setengah dari $jumlah_uang_daftar_ulang
     // $setengah_jumlah_daftar_ulang = ($tagihan->amount * 2) / 3;
@@ -490,7 +491,7 @@
         ->where('jenis_tagihan', $biaya->jenis_biaya)
         ->where('status', 'berhasil')
         ->where('jenis_pembayaran', 'cash')
-        ->firstOrFail();
+        ->first();
 @endphp
 @if (!$transaction)
 @else

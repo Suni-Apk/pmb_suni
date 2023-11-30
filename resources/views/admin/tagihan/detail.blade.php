@@ -189,7 +189,14 @@
 
                                     </tr>
                                 @endif
+                                @if ($biaya->program_belajar == 'KURSUS')
+                                    <tr>
+                                        <td class="text-sm">Untuk Kursus :
+                                            <strong>{{ $biaya->kursus->name }}</strong>
+                                        </td>
 
+                                    </tr>
+                                @endif
                                 <tr>
                                     <td class="text-sm">Tenggat Tagihan :
                                         <strong>{{ Carbon\Carbon::parse($tagihans->end_date)->format('d F Y') }}</strong>

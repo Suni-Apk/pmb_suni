@@ -12,8 +12,8 @@
                 <div class="card-header pb-0 d-flex justify-content-between">
                     <h6>Tagihan table</h6>
                     <!-- Button trigger modal -->
-                    <button type="button" class="btn bg-gradient-primary" data-bs-toggle="modal" data-bs-target="#modalTagihan"
-                    >Tambah <i class="fas fa-plus me-1"></i></button>
+                    <button type="button" class="btn bg-gradient-primary" data-bs-toggle="modal"
+                        data-bs-target="#modalTagihan">Tambah <i class="fas fa-plus me-1"></i></button>
 
                     <!-- Modal -->
                     <div class="modal fade" id="modalTagihan" tabindex="-1" role="dialog"
@@ -22,7 +22,8 @@
                             <div class="modal-content">
                                 <div class="modal-header">
                                     <h5 class="modal-title" id="modalTagihanLabel">Pilih Jenis Tagihan</h5>
-                                    <button type="button" class="btn-close border rounded-circle p-1 fs-3 lh-1 text-dark" data-bs-dismiss="modal" aria-label="Close">&times;</button>
+                                    <button type="button" class="btn-close border rounded-circle p-1 fs-3 lh-1 text-dark"
+                                        data-bs-dismiss="modal" aria-label="Close">&times;</button>
                                 </div>
                                 <form action="{{ route('admin.tagihan.next') }}" method="GET">
                                     <div class="modal-body">
@@ -41,11 +42,11 @@
                                                 id="daftar_ulang" value="DaftarUlang">
                                             <label class="custom-control-label" for="daftar_ulang">Daftar Ulang</label>
                                         </div>
-                                        <div class="form-check mb-3">
+                                        {{-- <div class="form-check mb-3">
                                             <input class="form-check-input" type="radio" name="jenis_tagihan"
                                                 id="tingkatan" value="Tingkatan">
                                             <label class="custom-control-label" for="tingkatan">Tingkatan</label>
-                                        </div>
+                                        </div> --}}
                                     </div>
                                     <div class="modal-footer">
                                         {{-- <button type="button" class="btn bg-gradient-secondary"
@@ -119,8 +120,8 @@
                                                 data-toggle="tooltip" data-original-title="Edit">
                                                 Ubah
                                             </a>
-                                            <form action="{{ route('admin.tagihan.destroy', $biayas->id) }}"
-                                                method="POST" class="d-inline">
+                                            <form action="{{ route('admin.tagihan.destroy', $biayas->id) }}" method="POST"
+                                                class="d-inline">
                                                 @csrf
                                                 @method('DELETE')
                                                 <button
