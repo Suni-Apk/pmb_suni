@@ -105,7 +105,7 @@ trait Ipaymu {
         $body['price'][]         = $total;
         $body['referenceId']     = 'ID-PPDB-'.rand(1111,9999);
         $body['returnUrl']       = route('callback.return');
-        $body['notifyUrl']       = 'https://3485-139-0-146-57.ngrok-free.app/callback/notify';
+        $body['notifyUrl']       = 'https://a7be-139-0-145-157.ngrok-free.app/callback/notify';
         $body['cancelUrl']       = route('callback.cancel');
         $body['paymentChannel']  = 'qris';
         $body['expired']         = 24;
@@ -143,7 +143,7 @@ trait Ipaymu {
         $body['price'][]         = $total;
         $body['referenceId']     = 'ID-PPDB-'.rand(1111,9999);
         $body['returnUrl']       = route('callback.return');
-        $body['notifyUrl']       = 'https://3485-139-0-146-57.ngrok-free.app/callback/notify';
+        $body['notifyUrl']       = 'https://a7be-139-0-145-157.ngrok-free.app/callback/notify';
         $body['cancelUrl']       = route('callback.cancel');
         $body['paymentChannel']  = 'qris';
         $body['expired']         = 24;
