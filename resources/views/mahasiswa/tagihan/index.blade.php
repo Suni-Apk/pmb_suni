@@ -71,13 +71,13 @@
                 ->where('jenis_biaya', 'DaftarUlang')
                 ->where('id_angkatans', Auth::user()->biodata->angkatan_id)
                 ->latest()
-                ->firstOrfail();
+                ->first();
 
             $user = Auth::user();
             $tagihan = App\Models\TagihanDetail::where('id_biayas', $biaya->id)
                 ->where('id_users', $user->id)
                 ->latest()
-                ->firstOrFail();
+                ->first();
 
             // Menghitung total pembayaran yang telah dilakukan
             $total_pembayaran = round(
@@ -435,13 +435,13 @@
         ->where('jenis_biaya', 'DaftarUlang')
         ->where('id_angkatans', Auth::user()->biodata->angkatan_id)
         ->latest()
-        ->firstOrFail();
+        ->first();
 
     $user = Auth::user();
     $tagihan = App\Models\TagihanDetail::where('id_biayas', $biaya->id)
         ->where('id_users', $user->id)
         ->latest()
-        ->firstOrFail();
+        ->first();
 
     // Menghitung total pembayaran yang telah dilakukan
     $total_pembayaran = App\Models\Transaksi::where('user_id', $user->id)
@@ -476,13 +476,13 @@
         ->where('jenis_biaya', 'DaftarUlang')
         ->where('id_angkatans', Auth::user()->biodata->angkatan_id)
         ->latest()
-        ->firstOrFail();
+        ->first();
 
     $user = Auth::user();
     $tagihan = App\Models\TagihanDetail::where('id_biayas', $biaya->id)
         ->where('id_users', $user->id)
         ->latest()
-        ->firstOrFail();
+        ->first();
     // $bagi3 = $tagihan->amount / 3;
     // dd($bagi3);
     $transaction = App\Models\Transaksi::where('user_id', $user->id)
@@ -490,7 +490,7 @@
         ->where('jenis_tagihan', $biaya->jenis_biaya)
         ->where('status', 'berhasil')
         ->where('jenis_pembayaran', 'cash')
-        ->firstOrFail();
+        ->first();
 @endphp
 @if (!$transaction)
 @else

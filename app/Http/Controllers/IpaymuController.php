@@ -24,12 +24,13 @@ class IpaymuController extends Controller
 
         $transaction = Transaksi::with('user')->where('no_invoice', $sid)->first();
         if ($status == 'berhasil') {
-            $transaction->update([
-                'status' => $status,
-                'user_id' => $transaction->user->id,
-                'update_at' => now()
-            ]);
+
             if ($transaction->jenis_tagihan != 'Daftar Ulang Cicilan' && $transaction->jenis_tagihan != 'DaftarUlang') {
+                $transaction->update([
+                    'status' => $status,
+                    'user_id' => $transaction->user->id,
+                    'update_at' => now()
+                ]);
                 $tagihanGet = TagihanDetail::where('id_transactions', $transaction->id)->get();
 
                 foreach ($tagihanGet as $tagihan) {
@@ -42,28 +43,22 @@ class IpaymuController extends Controller
             } else if ($transaction->jenis_tagihan == 'DaftarUlang') {
                 $tagihanGet = TagihanDetail::where('id_transactions', $transaction->id)->get();
 
+
                 foreach ($tagihanGet as $tagihan) {
+
+                    $transaction->update([
+                        'status' => $status,
+                        'user_id' => $transaction->user->id,
+                        'update_at' => now(),
+                        'tagihan_detail_id' => $tagihan->id
+                    ]);
+
                     $tagihanupdate = TagihanDetail::where('id', $tagihan->id);
 
                     $tagihanupdate->update([
                         'status' => 'LUNAS',
                     ]);
                 }
-                $biodata = Biodata::where('user_id', $transaction->user_id)->where('program_belajar', 'S1')->first();
-            } else if ($transaction->jenis_tagihan == 'Daftar Ulang Cicilan') {
-                $cicilan = Cicilan::where('id_transactions', $transaction->id)->first();
-                $cicilan->update([
-                    'status' => 'LUNAS',
-                ]);
-                $tagihanDetail = TagihanDetail::where('id', $cicilan->id_tagihan_details);
-
-                $cicilans = Cicilan::where('id_tagihan_details', $cicilan->id_tagihan_details)->where('status', 'LUNAS')->get();
-                if ($cicilans->count() == 3) {
-                    $tagihanDetail->update([
-                        'status' => 'LUNAS'
-                    ]);
-                }
-
                 $biodata = Biodata::where('user_id', $transaction->user_id)->where('program_belajar', 'S1')->first();
                 $biaya = Biaya::all();
                 // $transaksi = Transaksi::where('user_id', $user)->where('status', 'berhasil')->where('program_belajar', 'S1')->where('jenis_tagihan', 'Administrasi')->first();
@@ -102,6 +97,21 @@ class IpaymuController extends Controller
                         }
                     }
                 }
+            } else if ($transaction->jenis_tagihan == 'Daftar Ulang Cicilan') {
+                $cicilan = Cicilan::where('id_transactions', $transaction->id)->first();
+                $cicilan->update([
+                    'status' => 'LUNAS',
+                ]);
+                $tagihanDetail = TagihanDetail::where('id', $cicilan->id_tagihan_details);
+
+                $cicilans = Cicilan::where('id_tagihan_details', $cicilan->id_tagihan_details)->where('status', 'LUNAS')->get();
+                if ($cicilans->count() == 3) {
+                    $tagihanDetail->update([
+                        'status' => 'LUNAS'
+                    ]);
+                }
+
+                $biodata = Biodata::where('user_id', $transaction->user_id)->where('program_belajar', 'S1')->first();
                 if ($cicilans->count() < 2) {
                     $biaya = Biaya::all();
                     // $transaksi = Transaksi::where('user_id', $user)->where('status', 'berhasil')->where('program_belajar', 'S1')->where('jenis_tagihan', 'Administrasi')->first();
