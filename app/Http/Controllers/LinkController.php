@@ -50,9 +50,9 @@ class LinkController extends Controller
             'url' => 'required',
             'type' => 'required',
             'id_tahun_ajarans' => 'string',
-            'id_jurusans' => 'string',
+            'id_jurusans' => 'nullable',
             'gender' => 'required',
-            'id_courses' => 'required'
+            'id_courses' => 'nullable'
         ]);
 
         // dd($data);

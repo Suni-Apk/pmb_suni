@@ -321,7 +321,13 @@ class AccountController extends Controller
 
     public function pendaftar()
     {
-        $mahasiswa = User::where('role', 'Mahasiswa')->get();
+        $mahasiswa = User::where('role', 'Mahasiswa')
+            ->whereHas('biodata', function ($query) {
+                $query->whereHas('angkatan', function ($subQuery) {
+                    $subQuery->where('status', 'Active');
+                });
+            })
+            ->get();
         return view('admin.account.pendaftar.index', compact('mahasiswa'));
     }
 
@@ -336,7 +342,4 @@ class AccountController extends Controller
     public function pendaftar_delete()
     {
     }
-
-    
-    
 }

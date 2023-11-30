@@ -15,7 +15,7 @@ use App\Http\Controllers\Kursus\BiodataController as KursusBiodataController;
 use App\Http\Controllers\Kursus\ProfileController as KursusProfileController;
 use App\Http\Controllers\Kursus\TagihanController as KursusTagihanController;
 use App\Http\Controllers\Kursus\DashboardController as KursusDashboardController;
-use App\Http\Controllers\Mahasiswa\MatkulController;
+use App\Http\Controllers\Mahasiswa\MatkulController as MahasiswaMatkulController;
 use App\Http\Controllers\Mahasiswa\BiodataController;
 use App\Http\Controllers\Mahasiswa\TagihanController;
 use App\Http\Controllers\MatkulController as ControllersMatkulController;
@@ -309,7 +309,9 @@ Route::prefix('/mahasiswa')->middleware(['auth', 'mahasiswa', 's1'])->name('maha
     });
 
     //matkul mahasiswa
-    Route::get('/matkul', [MatkulController::class, 'index'])->name('matkul');
+    Route::get('/matkul', [MahasiswaMatkulController::class, 'index'])->name('matkul');
+    Route::match(['get', 'post'],'/downloadMatkuls/{id}/', [MahasiswaMatkulController::class, 'downloadMatkuls'])->name('downloadMatkuls');
+    Route::get('/JadwalPreview/{id}', [MahasiswaMatkulController::class, 'JadwalPreview'])->name('JadwalPreview');
 
     //tagihan mahasiswa
     Route::prefix('tagihan')->name('tagihan.')->group(function () {

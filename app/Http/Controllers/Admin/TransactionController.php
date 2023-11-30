@@ -76,7 +76,8 @@ class TransactionController extends Controller
      */
     public function show(string $id)
     {
-        return view('admin.transactions.detail', compact('id'));
+        $transaksi = Transaksi::find($id); 
+        return view('admin.transactions.detail', compact('transaksi'));
     }
 
     public function export(Request $request)

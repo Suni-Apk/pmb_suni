@@ -32,11 +32,12 @@ class DashboardController extends Controller
 
         // chart resources
         $users = User::orderBy('id', 'desc')->get();
-        $pemasukan = Transaksi::sum('total');
+        $pemasukan = Transaksi::where('status', 'berhasil')->sum('total');
         $jurusan = Jurusan::get();
         $matkul = Matkuls::get();
+        $mahasiswa = User::where('role', 'Mahasiswa')->get();
 
-        return view('admin.index',compact('hijriDateday','hijriDatedayArabic','hijriDatemonth','hijriDateyear', 'user', 'users', 'pemasukan', 'jurusan', 'matkul', 'adminCount'));
+        return view('admin.index',compact('hijriDateday','hijriDatedayArabic','hijriDatemonth','hijriDateyear', 'user', 'users', 'pemasukan', 'jurusan', 'matkul', 'adminCount', 'mahasiswa'));
     }
 
     public function profile()

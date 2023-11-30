@@ -34,24 +34,30 @@
                         <div class="col-12 col-lg-10 mx-auto mb-3">
                             <div class="multisteps-form__progress">
                                 <button class="multisteps-form__progress-btn js-active" type="button" title="Register">
-                                <span>Register</span>
+                                    <span>Register</span>
                                 </button>
-                                <button class="multisteps-form__progress-btn" type="button" title="Bayar Registrasi">
-                                <span>Bayar Registrasi</span>
+                                <button class="multisteps-form__progress-btn js-active" type="button" title="Bayar Administrasi">
+                                    <span>Bayar Administrasi</span>
                                 </button>
-                                <button class="multisteps-form__progress-btn" type="button" title="Mengisi Biodata">
-                                <span>Mengisi Biodata</span>
-                                </button>
-                                <button class="multisteps-form__progress-btn" type="button" title="Upload Dokumen">
-                                <span>Upload Dokumen</span>
-                                </button>
+                                @if ($biodata && !Auth::user()->document)
+                                    <button class="multisteps-form__progress-btn js-active" type="button" title="Mengisi Biodata">
+                                        <span>Mengisi Biodata</span>
+                                    </button>
+                                @else
+                                    <button class="multisteps-form__progress-btn" type="button" title="Mengisi Biodata">
+                                        <span>Mengisi Biodata</span>
+                                    </button>
+                                    <button class="multisteps-form__progress-btn js-active" type="button" title="Upload Dokumen">
+                                        <span>Upload Dokumen</span>
+                                    </button>
+                                @endif
                                 <button class="multisteps-form__progress-btn" type="button" title="Bayar Pra-Kuliah">
-                                <span>Bayar Pra-Kuliah</span>
+                                    <span>Bayar Pra-Kuliah</span>
                                 </button>
-                                <button class="multisteps-form__progress-btn" type="button" title="Bayar Pra-Kuliah">
-                                <span>Selesai!</span>
+                                <button class="multisteps-form__progress-btn" type="button" title="Selesai">
+                                    <span>Selesai!</span>
                                 </button>
-                            </div>
+                            </div>                            
                         </div>
                     </div>
                 </div>
