@@ -29,7 +29,7 @@ class IpaymuController extends Controller
                 'user_id' => $transaction->user->id,
                 'update_at' => now()
             ]);
-            if ($transaction->jenis_tagihan != 'Daftar Ulang Cicilan' && $transaction->jenis_tagihan == 'DaftarUlang') {
+            if ($transaction->jenis_tagihan != 'Daftar Ulang Cicilan' && $transaction->jenis_tagihan != 'DaftarUlang') {
                 $tagihanGet = TagihanDetail::where('id_transactions', $transaction->id)->get();
 
                 foreach ($tagihanGet as $tagihan) {
