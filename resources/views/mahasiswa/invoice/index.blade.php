@@ -144,13 +144,38 @@
 					<td>Check #</td>
 				</tr>
 
-                @foreach ($transaction as $item)
-                    <tr class="details">
-                        <td>Cicilan {{$loop->iteration}}: </td>
+				@php
+					$biaya = App\Models\Biaya::where('program_belajar', 'S1')->where('jenis_biaya', 'DaftarUlang')->where('id_angkatans', Auth::user()->biodata->angkatan_id)->latest()->first();
 
-                        <td>Rp. {{number_format(round($item->total),0,'','.')}},-</td>
-                    </tr>
-                @endforeach
+					$user = Auth::user();
+					$tagihan = App\Models\TagihanDetail::where('id_biayas', $biaya->id)->where('id_users', $user->id)->latest()->first();
+
+					// Menghitung total pembayaran yang telah dilakukan
+					$transaksiCicilan = App\Models\Cicilan::where('id_tagihan_details',$tagihan->id)->where('status','LUNAS')
+						->get();
+					// $transaksiCash = App\Models\Transaksi::where('user_id',Auth::user()->id)->where('jenis_pembayaran','cash')->where('status','berhasil')->first();
+					$transaksiCash = App\Models\Transaksi::where('user_id', $user->id)
+                                ->where('tagihan_detail_id', $tagihan->id)
+                                ->where('jenis_tagihan', $biaya->jenis_biaya)
+                                ->where('status', 'berhasil')
+                                ->first();
+				@endphp
+
+				@if (!$transaksiCash && $transaksiCicilan)
+					@foreach ($transaksiCicilan as $item)
+						<tr class="details">
+							<td>Cicilan {{$loop->iteration}}: </td>
+
+							<td>Rp. {{number_format(round($item->harga),0,'','.')}},-</td>
+						</tr>
+					@endforeach
+				@elseif(!$transaksiCicilan && $transaksiCash)
+					<tr class="details">
+						<td>Daftar Ulang Cash: </td>
+
+						<td>Rp. {{number_format(round($transaksiCash->total),0,'','.')}},-</td>
+					</tr>
+				@endif
 
 
 				<tr class="heading">
@@ -179,18 +204,33 @@
                             $tagihan = App\Models\TagihanDetail::where('id_biayas', $biaya->id)->where('id_users', $user->id)->latest()->first();
 
                             // Menghitung total pembayaran yang telah dilakukan
-                            $total_pembayaran = round(App\Models\Transaksi::where('user_id', $user->id)
+							$total_pembayaranCicilan = round(App\Models\Cicilan::where('id_tagihan_details',$tagihan->id)->where('status','LUNAS')
+                                ->sum('harga'));
+                            $total_pembayaranCash = round(App\Models\Transaksi::where('user_id', $user->id)
                                 ->where('tagihan_detail_id', $tagihan->id)
                                 ->where('jenis_tagihan', $biaya->jenis_biaya)
                                 ->where('status', 'berhasil')
                                 ->where('jenis_pembayaran','cicil')
                                 ->sum('total'));
                         @endphp
-                        @if ($total_pembayaran != $tagihan->amount)
-                            Belum Lunas
-                        @else
-                            Lunas
-                        @endif
+                        @if (!$total_pembayaranCicilan)
+							
+						@else
+							@if ($total_pembayaranCicilan != $tagihan->amount)
+								Belum Lunas
+							@else
+								Lunas
+							@endif			
+						@endif
+						@if (!$total_pembayaranCash)
+							
+						@else
+							@if ($total_pembayaranCash != $tagihan->amount)
+								Belum Lunas
+							@else
+								Lunas
+							@endif	
+						@endif
                     </td>
 				</tr>
 

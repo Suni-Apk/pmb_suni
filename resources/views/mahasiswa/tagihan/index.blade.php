@@ -71,13 +71,13 @@
                 ->where('jenis_biaya', 'DaftarUlang')
                 ->where('id_angkatans', Auth::user()->biodata->angkatan_id)
                 ->latest()
-                ->firstOrfail();
+                ->first();
 
             $user = Auth::user();
             $tagihan = App\Models\TagihanDetail::where('id_biayas', $biaya->id)
                 ->where('id_users', $user->id)
                 ->latest()
-                ->firstOrFail();
+                ->first();
 
             // Menghitung total pembayaran yang telah dilakukan
             $total_pembayaran = round(
@@ -223,6 +223,13 @@
         @else
             <div class="col-12 text-center mb-4">
                 <div class="card py-3">
+                    <div class="d-flex align-items-start justify-content-start ms-2">
+                        <form action="{{route('mahasiswa.invoice.download',Auth::user()->id)}}" method="POST">
+                            @csrf
+                            @method('POST')
+                            <button type="submit" class="btn btn-secondary" name="DaftarUlang" value="DaftarUlang"><i class="fas fa-file-download me-2"></i>Invoice</button>
+                        </form>
+                    </div>
                     <h2 class="mt-3">Selamat !</h2>
                     <h5 class="text-secondary font-weight-normal">Tagihan Daftar Ulang Sudah Lunas</h5>
                 </div>
@@ -435,13 +442,13 @@
         ->where('jenis_biaya', 'DaftarUlang')
         ->where('id_angkatans', Auth::user()->biodata->angkatan_id)
         ->latest()
-        ->firstOrFail();
+        ->first();
 
     $user = Auth::user();
     $tagihan = App\Models\TagihanDetail::where('id_biayas', $biaya->id)
         ->where('id_users', $user->id)
         ->latest()
-        ->firstOrFail();
+        ->first();
 
     // Menghitung total pembayaran yang telah dilakukan
     $total_pembayaran = App\Models\Transaksi::where('user_id', $user->id)
@@ -468,6 +475,13 @@
 @endphp
 <div class="col-12 text-center mb-4">
     <div class="card py-3">
+        <div class="d-flex align-items-start justify-content-start ms-2">
+            <form action="{{route('mahasiswa.invoice.download',Auth::user()->id)}}" method="POST">
+                @csrf
+                @method('POST')
+                <button type="submit" class="btn btn-secondary" name="DaftarUlang" value="DaftarUlang"><i class="fas fa-file-download me-2"></i>Invoice</button>
+            </form>
+        </div>
         <h2 class="mt-3">Selamat !</h2>
         <h5 class="text-secondary font-weight-normal">Tagihan Daftar Ulang Sudah Lunas</h5>
     </div>
@@ -477,13 +491,13 @@
         ->where('jenis_biaya', 'DaftarUlang')
         ->where('id_angkatans', Auth::user()->biodata->angkatan_id)
         ->latest()
-        ->firstOrFail();
+        ->first();
 
     $user = Auth::user();
     $tagihan = App\Models\TagihanDetail::where('id_biayas', $biaya->id)
         ->where('id_users', $user->id)
         ->latest()
-        ->firstOrFail();
+        ->first();
     // $bagi3 = $tagihan->amount / 3;
     // dd($bagi3);
     $transaction = App\Models\Transaksi::where('user_id', $user->id)
