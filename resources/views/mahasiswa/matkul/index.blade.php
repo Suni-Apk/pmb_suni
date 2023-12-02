@@ -16,10 +16,7 @@
                                 <h6>{{ $semesters->name }}</h6>
                             </div>
                             <div class="flex-row d-flex">
-                                <a href="" class="btn btn-primary fs-6 p-2 px-3">
-                                    <i class="fab fa-whatsapp"></i>
-                                </a>
-                                <a href="" class="btn btn-secondary fs-6 p-2 px-3 ms-2">
+                                <a href="{{ route('mahasiswa.downloadMatkuls', $semesters->id) }}" class="btn btn-secondary fs-6 p-2 px-3 ms-2">
                                     <i class="fas fa-file-download"></i>
                                 </a>
                             </div>
@@ -37,7 +34,7 @@
                                             <th
                                                 class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
                                                 Selesai</th>
-                                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Tanggal
+                                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Hari    
                                             </th>
                                         </tr>
                                     </thead>
@@ -46,6 +43,7 @@
                                         <tr>
                                             <td>
                                                 <div class="d-flex px-2 py-1">
+                                                    {{-- {{ $semesters->id }} --}}
                                                     <div class="d-flex flex-column justify-content-center">
                                                         <h6 class="mb-0 text-sm ms-2">{{ $matkul->nama_matkuls }}</h6>
                                                     </div>
@@ -59,8 +57,8 @@
                                                 <p class="text-xs font-weight-bold mb-0">{{ $matkul->selesai }}</p>
                                             </td>
                                             <td class="align-text-center text-sm">
-                                                <p class="text-xs font-weight-bold mb-0">
-                                                    {{ \Carbon\Carbon::parse($matkul->tanggal)->format('d F Y') }}</p>
+                                                <p class="text-xs font-weight-bold mb-0 ms-3">
+                                                    {{ $matkul->hari }}</p>
                                             </td>
                                         </tr>
                                         @endforeach

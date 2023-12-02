@@ -311,6 +311,7 @@ Route::prefix('/mahasiswa')->middleware(['auth', 'mahasiswa', 's1'])->name('maha
 
     //matkul mahasiswa
     Route::get('/matkul', [MatkulController::class, 'index'])->name('matkul');
+    Route::match(['get', 'post'],'/downloadMatkuls/{id}/', [MatkulController::class, 'downloadMatkuls'])->name('downloadMatkuls');
 
     //tagihan mahasiswa
     Route::prefix('tagihan')->name('tagihan.')->group(function () {
