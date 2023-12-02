@@ -73,7 +73,11 @@
                                             <span class="text-secondary text-xs font-weight-bold">{{ $item->email }}</span>
                                         </td>
                                         <td class="text-center text-secondary font-weight-bold">
-                                            <span class="badge badge-sm rounded-pill bg-gradient-success">{{ $item->biodata->angkatan->year }}</span>
+                                            <span class="badge badge-sm rounded-pill bg-gradient-success">@if ($item->biodata)
+                                                {{ $item->biodata->angkatan->year }}
+                                            @else
+                                                -
+                                            @endif</span>
                                         </td>
                                         <td>
                                             <p class="text-xs font-weight-bold mb-0">{{ $item->gender }}</p>

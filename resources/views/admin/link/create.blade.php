@@ -40,14 +40,14 @@
                         <small class="text-danger" style="font-size: 12px">*</small>
                         <div class="form-check">
                             <input class="form-check-input" type="radio" name="gender" id="ikhwan"
-                                value="ikhwan">
+                                value="Laki-Laki">
                             <label class="form-check-label" for="ikhwan">
                                 Ikhwan
                             </label>
                         </div>
                         <div class="form-check">
                             <input class="form-check-input" type="radio" name="gender" id="akhwat"
-                                value="akhwat">
+                                value="Perempuan">
                             <label class="form-check-label" for="akhwat">
                                 Akhwat
                             </label>

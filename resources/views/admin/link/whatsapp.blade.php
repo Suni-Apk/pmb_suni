@@ -41,11 +41,11 @@
                                         <td>
                                             <div class="d-flex">
                                                 <div class="d-flex flex-column justify-content-center">
-                                                    <h6 class="mb-0 text-xs">{{ $links->tahunAjaran->year }}</h6>
+                                                    <h6 class="mb-0 text-xs ms-3">{{ $links->tahunAjaran->year }}</h6>
                                                     @if ($links->jurusan)
-                                                    <p class="text-xxs text-uppercase text-secondary mb-0"> {{ $links->jurusan->name }} </p>
+                                                    <p class="text-xxs text-uppercase text-secondary mb-0 ms-3"> {{ $links->jurusan->name }} </p>
                                                     @else
-                                                    <p class="text-xxs text-lowercase text-secondary mb-0"> Tidak untuk jurusan tertentu </p>
+                                                    <p class="text-xxs text-lowercase text-secondary mb-0 ms-3">-</p>
                                                     @endif
                                                 </div>
                                             </div>

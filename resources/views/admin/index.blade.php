@@ -534,7 +534,7 @@
 								</tr>
 							</thead>
 							<tbody>
-								@foreach ($mahasiswa as $mahasiswas)
+								@foreach ($mahasiswaBaru as $mahasiswas)
 									<tr>
 										<td>
 										<div class="d-flex px-2 py-1">

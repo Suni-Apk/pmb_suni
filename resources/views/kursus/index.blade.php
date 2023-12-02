@@ -217,13 +217,16 @@
                                 <button class="multisteps-form__progress-btn js-active" type="button" title="Register">
                                     <span>Register</span>
                                 </button>
-                                <button class="multisteps-form__progress-btn js-active" type="button" title="Bayar Registrasi">
+                                <button class="multisteps-form__progress-btn js-active" type="button"
+                                    title="Bayar Registrasi">
                                     <span>Bayar Registrasi</span>
                                 </button>
-                                <button class="multisteps-form__progress-btn js-active" type="button" title="Mengisi Biodata">
+                                <button class="multisteps-form__progress-btn js-active" type="button"
+                                    title="Mengisi Biodata">
                                     <span>Mengisi Biodata</span>
                                 </button>
-                                <button class="multisteps-form__progress-btn js-active" type="button" title="Bayar Pra-Kuliah">
+                                <button class="multisteps-form__progress-btn js-active" type="button"
+                                    title="Bayar Pra-Kuliah">
                                     <span>Selesai!</span>
                                 </button>
                             </div>
@@ -233,24 +236,28 @@
             </div>
         </div>
         <div class="col-12 col-lg-8 mb-lg-0">
-            <div id="carouselDashboard" data-bs-ride="carousel" data-bs-interval="3000" class="carousel slide page-header align-items-start height-300 pb-7 rounded-3">
+            <div id="carouselDashboard" data-bs-ride="carousel" data-bs-interval="3000"
+                class="carousel slide page-header align-items-start height-300 pb-7 rounded-3">
                 <div class="carousel-indicators">
-                    <button type="button" data-bs-target="#carouselDashboard" data-bs-slide-to="0" class="active" aria-current="true"></button>
+                    <button type="button" data-bs-target="#carouselDashboard" data-bs-slide-to="0" class="active"
+                        aria-current="true"></button>
                     @foreach ($banner->filter(function ($item) {
-                        return $item->target == 'MAHASISWA' || $item->target == 'SEMUA';
-                        }) as $item)
-                    <button type="button" data-bs-target="#carouselDashboard" data-bs-slide-to="{{ $loop->index+1 }}" class="" aria-current="true"></button>
+            return $item->target == 'MAHASISWA' || $item->target == 'SEMUA';
+        }) as $item)
+                        <button type="button" data-bs-target="#carouselDashboard" data-bs-slide-to="{{ $loop->index + 1 }}"
+                            class="" aria-current="true"></button>
                     @endforeach
                 </div>
                 <div class="carousel-inner">
                     <div class="carousel-item active">
                         <div class="row flex-column justify-content-center height-300"
-                        style="background-image: url('/assets/img/curved-images/curved14.jpg'); background-size: cover; background-position: center;">
+                            style="background-image: url('/assets/img/curved-images/curved14.jpg'); background-size: cover; background-position: center;">
                             <span class="mask bg-gradient-dark opacity-6"></span>
-                            <div class="d-flex justify-content-center flex-column align-items-center text-white text-center z-index-1">
+                            <div
+                                class="d-flex justify-content-center flex-column align-items-center text-white text-center z-index-1">
                                 <h4 class="font-weight-bold mb-0 p-3 pb-0 text-white">
-                                    Selamat Datang 
-                                    <b class="font-weight-bolder">{{ $user->name }}</b>!
+                                    Selamat Datang
+                                    <b class="font-weight-bolder">{{ $mahasiswa->name }}</b>!
                                 </h4>
                                 <p class="mb-0 mx-2">
                                     Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ut, voluptate?
@@ -259,29 +266,32 @@
                         </div>
                     </div>
                     @foreach ($banner->filter(function ($item) {
-                        return $item->target == 'MAHASISWA' || $item->target == 'SEMUA';
-                        }) as $item)
-                    <div class="carousel-item">
-                        <div class="row flex-column justify-content-center height-300"
-                        style="background-image: url('{{ $item->image }}'); background-size: cover; background-position: center;">
-                            <span class="mask bg-gradient-dark opacity-6"></span>
-                            <div class="d-flex justify-content-center flex-column align-items-center text-white text-center z-index-1">
-                                <h4 class="font-weight-bold mb-0 p-3 pb-0 text-white">
-                                    {{ $item->title }}
-                                </h4>
-                                <p class="mb-0 mx-2">
-                                    {{ $item->desc }}
-                                </p>
+            return $item->target == 'MAHASISWA' || $item->target == 'SEMUA';
+        }) as $item)
+                        <div class="carousel-item">
+                            <div class="row flex-column justify-content-center height-300"
+                                style="background-image: url('{{ $item->image }}'); background-size: cover; background-position: center;">
+                                <span class="mask bg-gradient-dark opacity-6"></span>
+                                <div
+                                    class="d-flex justify-content-center flex-column align-items-center text-white text-center z-index-1">
+                                    <h4 class="font-weight-bold mb-0 p-3 pb-0 text-white">
+                                        {{ $item->title }}
+                                    </h4>
+                                    <p class="mb-0 mx-2">
+                                        {{ $item->desc }}
+                                    </p>
+                                </div>
                             </div>
                         </div>
-                    </div>
                     @endforeach
                 </div>
-                <button class="carousel-control-prev" type="button" data-bs-target="#carouselDashboard" data-bs-slide="prev">
+                <button class="carousel-control-prev" type="button" data-bs-target="#carouselDashboard"
+                    data-bs-slide="prev">
                     <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                     <span class="visually-hidden">Previous</span>
                 </button>
-                <button class="carousel-control-next" type="button" data-bs-target="#carouselDashboard" data-bs-slide="next">
+                <button class="carousel-control-next" type="button" data-bs-target="#carouselDashboard"
+                    data-bs-slide="next">
                     <span class="carousel-control-next-icon" aria-hidden="true"></span>
                     <span class="visually-hidden">Next</span>
                 </button>
@@ -353,15 +363,17 @@
         <div class="col-12 col-lg-4">
             <div class="card h-100 p-3">
                 <div class="overflow-hidden position-relative border-radius-lg bg-cover h-100"
-                style="background-image: url('https://suniindonesia.com/wp-content/uploads/2022/10/masjid-pogung-dalangan-fQET4BjQmvc-unsplash.jpg');">
+                    style="background-image: url('https://suniindonesia.com/wp-content/uploads/2022/10/masjid-pogung-dalangan-fQET4BjQmvc-unsplash.jpg');">
                     <span class="mask bg-gradient-dark"></span>
                     <div class="card-body position-relative z-index-1 d-flex flex-column justify-content-center gap-2">
                         <p class="text-white w-100 mb-0 text-center">Kalender hari ini,</p>
                         <h5 class="text-white font-weight-bolder fs-1 d-flex justify-content-evenly w-100 mb-0">
                             <span>{{ $hijriDateday }}</span>
-                            <span class="text-green font-weight-normal" style="font-family: 'Rubik', sans-serif;">{{ $hijriDatemonth }}</span>
+                            <span class="text-green font-weight-normal"
+                                style="font-family: 'Rubik', sans-serif;">{{ $hijriDatemonth }}</span>
                         </h5>
-                        <h5 class="w-100 mb-0 text-center lh-1 text-green font-weight-light" style="font-family: 'Rubik', sans-serif;">
+                        <h5 class="w-100 mb-0 text-center lh-1 text-green font-weight-light"
+                            style="font-family: 'Rubik', sans-serif;">
                             {{ $hijriDatedayArabic }}
                         </h5>
                         <p class="text-white w-100 mb-0 text-center">
@@ -373,39 +385,74 @@
         </div>
         @php
             $user = Auth::user();
-            $biodataS1 = App\Models\Biodata::where('user_id', $user->id)->where('program_belajar', 'S1')->first();
-            $biodataKURSUS = App\Models\Biodata::where('user_id', $user->id)->where('program_belajar', 'KURSUS')->first();
+            $biodataS1 = App\Models\Biodata::where('user_id', $user->id)
+                ->where('program_belajar', 'S1')
+                ->first();
+            $biodataKURSUS = App\Models\Biodata::where('user_id', $user->id)
+                ->where('program_belajar', 'KURSUS')
+                ->first();
         @endphp
-        @if($biodataS1 && $biodataKURSUS)
-                <div class="col-12 mt-4" id="informasi">
-                    <div class="list-group list-group-horizontal" id="list-tab" role="tablist">
-                        <a id="list-sarjana-list" data-bs-toggle="list" href="#list-sarjana" role="tab"
-                            aria-controls="list-sarjana"
-                            class="list-group-item list-group-item-action border-0 shadow text-center">Program Kuliah S1</a>
-                        <a id="list-kursus-list" data-bs-toggle="list" href="#list-kursus" role="tab"
-                            aria-controls="list-kursus"
-                            class="list-group-item list-group-item-action border-0 shadow text-center active">Program Kursus</a>
-                    </div>
+        @if ($biodataS1 && $biodataKURSUS)
+            <div class="col-12 mt-4" id="informasi">
+                <div class="list-group list-group-horizontal" id="list-tab" role="tablist">
+                    <a id="list-sarjana-list" data-bs-toggle="list" href="#list-sarjana" role="tab"
+                        aria-controls="list-sarjana"
+                        class="list-group-item list-group-item-action border-0 shadow text-center">Program Kuliah S1</a>
+                    <a id="list-kursus-list" data-bs-toggle="list" href="#list-kursus" role="tab"
+                        aria-controls="list-kursus"
+                        class="list-group-item list-group-item-action border-0 shadow text-center active">Program
+                        Kursus</a>
                 </div>
+            </div>
         @else
+            {{-- Ini buat misalkan ia mau daftar jadi S1 tinggal pencet Program S1 nanti ia akan disuruh membayar Administrasi Trus Lanjut ke Pendaftaran S1 --}}
+            <div class="col-12 mt-4" id="informasi">
+                <div class="list-group list-group-horizontal" id="list-tab" role="tablist">
+                    <form id="form-S1" action="{{ route('administrasiS1', ['id' => Auth::id()]) }}" class="w-50"
+                        method="POST">
+                        @csrf
+                        <a id="list-S1-list" href="#"
+                            onclick="event.preventDefault(); document.getElementById('form-S1').submit();" role="tab"
+                            aria-controls="list-kursus"
+                            class="list-group-item list-group-item-action border-0 shadow text-center">Program S1</a>
+                    </form>
 
-                {{-- Ini buat misalkan ia mau daftar jadi S1 tinggal pencet Program S1 nanti ia akan disuruh membayar Administrasi Trus Lanjut ke Pendaftaran S1 --}}
-                <div class="col-12 mt-4" id="informasi">
-                    <div class="list-group list-group-horizontal" id="list-tab" role="tablist">
-                        <form id="form-S1" action="{{ route('administrasiS1', ['id' => Auth::id()]) }}" class="w-50" method="POST">
-                            @csrf
-                            <a id="list-S1-list" href="#" onclick="event.preventDefault(); document.getElementById('form-S1').submit();" role="tab" aria-controls="list-kursus" class="list-group-item list-group-item-action border-0 shadow text-center">Program S1</a>
-                        </form>
-                
-                {{-- Ini buat misalkan ia mau daftar jadi KURSUS tinggal pencet Program KURSUS nanti ia akan disuruh membayar Administrasi Trus Lanjut ke Pendaftaran KURSUS --}}
-                        <form id="form-kursus" action="{{ route('administrasiKursus', ['id' => Auth::id()]) }}" class="w-50" method="POST">
-                            @csrf
-                            <a id="list-kursus-list" href="#" onclick="event.preventDefault(); document.getElementById('form-kursus').submit();" role="tab" aria-controls="list-kursus" class="list-group-item list-group-item-action border-0 shadow text-center active">Program Kursus</a>
-                        </form>
-                    </div>
-                </div>    
+                    {{-- Ini buat misalkan ia mau daftar jadi KURSUS tinggal pencet Program KURSUS nanti ia akan disuruh membayar Administrasi Trus Lanjut ke Pendaftaran KURSUS --}}
+                    <form id="form-kursus" action="{{ route('administrasiKursus', ['id' => Auth::id()]) }}"
+                        class="w-50" method="POST">
+                        @csrf
+                        <a id="list-kursus-list" href="#"
+                            onclick="event.preventDefault(); document.getElementById('form-kursus').submit();"
+                            role="tab" aria-controls="list-kursus"
+                            class="list-group-item list-group-item-action border-0 shadow text-center active">Program
+                            Kursus</a>
+                    </form>
+                </div>
+            </div>
         @endif
     </div>
+    <div class="row" style="max-height: 500px; overflow-y: auto;">
+            @foreach ($kursus as $kursuss)
+            <div class="col-sm-6 mb-3 mb-sm-0 mt-3">
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ $kursuss->name }}</h5>
+                        {{ $kursuss->id }}
+                        <p class="card-text">
+                            @if(strlen($kursuss->desc) > 80)
+                                <span class="short-desc">{{ substr($kursuss->desc, 0, 80) }}...</span>
+                                <span class="full-desc" style="display: none;">{{ $kursuss->desc }}</span>
+                                <a href="#" class="read-more">Lihat Selengkapnya</a>
+                            @else
+                                {{ $kursuss->desc }}
+                            @endif
+                        </p>                                              
+                        <a href="{{ route('kursus.pendaftaran.kursus') }}" class="btn btn-primary">Daftar Sekarang!!</a>
+                    </div>
+                </div>
+            </div>
+            @endforeach
+        </div>
     <div class="row my-4">
         <div class="col-lg-8 col-md-6 mb-md-0 mb-4">
             <div class="card">
@@ -458,266 +505,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td>
-                                        <div class="d-flex px-2 py-1">
-                                            <div>
-                                                <img src="/assets/img/small-logos/logo-xd.svg"
-                                                    class="avatar avatar-sm me-3" alt="xd">
-                                            </div>
-                                            <div class="d-flex flex-column justify-content-center">
-                                                <h6 class="mb-0 text-sm">Soft UI XD Version</h6>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div class="avatar-group mt-2">
-                                            <a href="javascript:;" class="avatar avatar-xs rounded-circle"
-                                                data-bs-toggle="tooltip" data-bs-placement="bottom" title="Ryan Tompson">
-                                                <img src="/assets/img/team-1.jpg" alt="team1">
-                                            </a>
-                                            <a href="javascript:;" class="avatar avatar-xs rounded-circle"
-                                                data-bs-toggle="tooltip" data-bs-placement="bottom" title="Romina Hadid">
-                                                <img src="/assets/img/team-2.jpg" alt="team2">
-                                            </a>
-                                            <a href="javascript:;" class="avatar avatar-xs rounded-circle"
-                                                data-bs-toggle="tooltip" data-bs-placement="bottom"
-                                                title="Alexander Smith">
-                                                <img src="/assets/img/team-3.jpg" alt="team3">
-                                            </a>
-                                            <a href="javascript:;" class="avatar avatar-xs rounded-circle"
-                                                data-bs-toggle="tooltip" data-bs-placement="bottom" title="Jessica Doe">
-                                                <img src="/assets/img/team-4.jpg" alt="team4">
-                                            </a>
-                                        </div>
-                                    </td>
-                                    <td class="align-middle text-center text-sm">
-                                        <span class="text-xs font-weight-bold"> $14,000 </span>
-                                    </td>
-                                    <td class="align-middle">
-                                        <div class="progress-wrapper w-75 mx-auto">
-                                            <div class="progress-info">
-                                                <div class="progress-percentage">
-                                                    <span class="text-xs font-weight-bold">60%</span>
-                                                </div>
-                                            </div>
-                                            <div class="progress">
-                                                <div class="progress-bar bg-gradient-info w-60" role="progressbar"
-                                                    aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"></div>
-                                            </div>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <div class="d-flex px-2 py-1">
-                                            <div>
-                                                <img src="/assets/img/small-logos/logo-atlassian.svg"
-                                                    class="avatar avatar-sm me-3" alt="atlassian">
-                                            </div>
-                                            <div class="d-flex flex-column justify-content-center">
-                                                <h6 class="mb-0 text-sm">Add Progress Track</h6>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div class="avatar-group mt-2">
-                                            <a href="javascript:;" class="avatar avatar-xs rounded-circle"
-                                                data-bs-toggle="tooltip" data-bs-placement="bottom" title="Romina Hadid">
-                                                <img src="/assets/img/team-2.jpg" alt="team5">
-                                            </a>
-                                            <a href="javascript:;" class="avatar avatar-xs rounded-circle"
-                                                data-bs-toggle="tooltip" data-bs-placement="bottom" title="Jessica Doe">
-                                                <img src="/assets/img/team-4.jpg" alt="team6">
-                                            </a>
-                                        </div>
-                                    </td>
-                                    <td class="align-middle text-center text-sm">
-                                        <span class="text-xs font-weight-bold"> $3,000 </span>
-                                    </td>
-                                    <td class="align-middle">
-                                        <div class="progress-wrapper w-75 mx-auto">
-                                            <div class="progress-info">
-                                                <div class="progress-percentage">
-                                                    <span class="text-xs font-weight-bold">10%</span>
-                                                </div>
-                                            </div>
-                                            <div class="progress">
-                                                <div class="progress-bar bg-gradient-info w-10" role="progressbar"
-                                                    aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"></div>
-                                            </div>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <div class="d-flex px-2 py-1">
-                                            <div>
-                                                <img src="/assets/img/small-logos/logo-slack.svg"
-                                                    class="avatar avatar-sm me-3" alt="team7">
-                                            </div>
-                                            <div class="d-flex flex-column justify-content-center">
-                                                <h6 class="mb-0 text-sm">Fix Platform Errors</h6>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div class="avatar-group mt-2">
-                                            <a href="javascript:;" class="avatar avatar-xs rounded-circle"
-                                                data-bs-toggle="tooltip" data-bs-placement="bottom" title="Romina Hadid">
-                                                <img src="/assets/img/team-3.jpg" alt="team8">
-                                            </a>
-                                            <a href="javascript:;" class="avatar avatar-xs rounded-circle"
-                                                data-bs-toggle="tooltip" data-bs-placement="bottom" title="Jessica Doe">
-                                                <img src="/assets/img/team-1.jpg" alt="team9">
-                                            </a>
-                                        </div>
-                                    </td>
-                                    <td class="align-middle text-center text-sm">
-                                        <span class="text-xs font-weight-bold"> Not set </span>
-                                    </td>
-                                    <td class="align-middle">
-                                        <div class="progress-wrapper w-75 mx-auto">
-                                            <div class="progress-info">
-                                                <div class="progress-percentage">
-                                                    <span class="text-xs font-weight-bold">100%</span>
-                                                </div>
-                                            </div>
-                                            <div class="progress">
-                                                <div class="progress-bar bg-gradient-success w-100" role="progressbar"
-                                                    aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
-                                            </div>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <div class="d-flex px-2 py-1">
-                                            <div>
-                                                <img src="/assets/img/small-logos/logo-spotify.svg"
-                                                    class="avatar avatar-sm me-3" alt="spotify">
-                                            </div>
-                                            <div class="d-flex flex-column justify-content-center">
-                                                <h6 class="mb-0 text-sm">Launch our Mobile App</h6>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div class="avatar-group mt-2">
-                                            <a href="javascript:;" class="avatar avatar-xs rounded-circle"
-                                                data-bs-toggle="tooltip" data-bs-placement="bottom" title="Ryan Tompson">
-                                                <img src="/assets/img/team-4.jpg" alt="user1">
-                                            </a>
-                                            <a href="javascript:;" class="avatar avatar-xs rounded-circle"
-                                                data-bs-toggle="tooltip" data-bs-placement="bottom" title="Romina Hadid">
-                                                <img src="/assets/img/team-3.jpg" alt="user2">
-                                            </a>
-                                            <a href="javascript:;" class="avatar avatar-xs rounded-circle"
-                                                data-bs-toggle="tooltip" data-bs-placement="bottom"
-                                                title="Alexander Smith">
-                                                <img src="/assets/img/team-4.jpg" alt="user3">
-                                            </a>
-                                            <a href="javascript:;" class="avatar avatar-xs rounded-circle"
-                                                data-bs-toggle="tooltip" data-bs-placement="bottom" title="Jessica Doe">
-                                                <img src="/assets/img/team-1.jpg" alt="user4">
-                                            </a>
-                                        </div>
-                                    </td>
-                                    <td class="align-middle text-center text-sm">
-                                        <span class="text-xs font-weight-bold"> $20,500 </span>
-                                    </td>
-                                    <td class="align-middle">
-                                        <div class="progress-wrapper w-75 mx-auto">
-                                            <div class="progress-info">
-                                                <div class="progress-percentage">
-                                                    <span class="text-xs font-weight-bold">100%</span>
-                                                </div>
-                                            </div>
-                                            <div class="progress">
-                                                <div class="progress-bar bg-gradient-success w-100" role="progressbar"
-                                                    aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
-                                            </div>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <div class="d-flex px-2 py-1">
-                                            <div>
-                                                <img src="/assets/img/small-logos/logo-jira.svg"
-                                                    class="avatar avatar-sm me-3" alt="jira">
-                                            </div>
-                                            <div class="d-flex flex-column justify-content-center">
-                                                <h6 class="mb-0 text-sm">Add the New Pricing Page</h6>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div class="avatar-group mt-2">
-                                            <a href="javascript:;" class="avatar avatar-xs rounded-circle"
-                                                data-bs-toggle="tooltip" data-bs-placement="bottom" title="Ryan Tompson">
-                                                <img src="/assets/img/team-4.jpg" alt="user5">
-                                            </a>
-                                        </div>
-                                    </td>
-                                    <td class="align-middle text-center text-sm">
-                                        <span class="text-xs font-weight-bold"> $500 </span>
-                                    </td>
-                                    <td class="align-middle">
-                                        <div class="progress-wrapper w-75 mx-auto">
-                                            <div class="progress-info">
-                                                <div class="progress-percentage">
-                                                    <span class="text-xs font-weight-bold">25%</span>
-                                                </div>
-                                            </div>
-                                            <div class="progress">
-                                                <div class="progress-bar bg-gradient-info w-25" role="progressbar"
-                                                    aria-valuenow="25" aria-valuemin="0" aria-valuemax="25"></div>
-                                            </div>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <div class="d-flex px-2 py-1">
-                                            <div>
-                                                <img src="/assets/img/small-logos/logo-invision.svg"
-                                                    class="avatar avatar-sm me-3" alt="invision">
-                                            </div>
-                                            <div class="d-flex flex-column justify-content-center">
-                                                <h6 class="mb-0 text-sm">Redesign New Online Shop</h6>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div class="avatar-group mt-2">
-                                            <a href="javascript:;" class="avatar avatar-xs rounded-circle"
-                                                data-bs-toggle="tooltip" data-bs-placement="bottom" title="Ryan Tompson">
-                                                <img src="/assets/img/team-1.jpg" alt="user6">
-                                            </a>
-                                            <a href="javascript:;" class="avatar avatar-xs rounded-circle"
-                                                data-bs-toggle="tooltip" data-bs-placement="bottom" title="Jessica Doe">
-                                                <img src="/assets/img/team-4.jpg" alt="user7">
-                                            </a>
-                                        </div>
-                                    </td>
-                                    <td class="align-middle text-center text-sm">
-                                        <span class="text-xs font-weight-bold"> $2,000 </span>
-                                    </td>
-                                    <td class="align-middle">
-                                        <div class="progress-wrapper w-75 mx-auto">
-                                            <div class="progress-info">
-                                                <div class="progress-percentage">
-                                                    <span class="text-xs font-weight-bold">40%</span>
-                                                </div>
-                                            </div>
-                                            <div class="progress">
-                                                <div class="progress-bar bg-gradient-info w-40" role="progressbar"
-                                                    aria-valuenow="40" aria-valuemin="0" aria-valuemax="40"></div>
-                                            </div>
-                                        </div>
-                                    </td>
-                                </tr>
+
                             </tbody>
                         </table>
                     </div>
@@ -727,48 +515,37 @@
         <div class="col-lg-4 col-md-6">
             <div class="card h-100">
                 <div class="card-header pb-0">
-                    <h6>Daftar Link</h6>
+                    <h3>Daftar Link</h3>
                     <p class="text-sm">
                         <i class="fas fa-link text-success" aria-hidden="true"></i>
                         Daftar link yang diikuti
                     </p>
                 </div>
-                <div class="card-body p-3">
-                    <div class="timeline timeline-one-side">
-                        <div class="timeline-block mb-3">
-                            <span class="timeline-step">
-                                <i class="ni ni-bell-55 text-success text-gradient"></i>
-                            </span>
-                            <div class="timeline-content">
-                                <a href="" class="text-dark text-sm font-weight-bold mb-0">$2400, Design
-                                    changes</a>
-                                <p class="text-secondary font-weight-bold text-xs mt-1 mb-0">22 DEC 7:20 PM</p>
+                <div class="container mb-3" style="max-height: 340px; overflow-y: auto;">
+                    @foreach ($linkKursus as $item)
+                        <div class="card border mb-3">
+                            <div class="card-body">
+                                <h5 class="card-title">{{ $item->name }}</h5>
+                                <a href="{{ $item->url }}" class="btn btn-primary mt-3">Klik Untuk Bergabung</a>
                             </div>
                         </div>
-                        <div class="timeline-block mb-3">
-                            <span class="timeline-step">
-                                <i class="ni ni-html5 text-danger text-gradient"></i>
-                            </span>
-                            <div class="timeline-content">
-                                <a href="" class="text-dark text-sm font-weight-bold mb-0">New order #1832412</a>
-                                <p class="text-secondary font-weight-bold text-xs mt-1 mb-0">21 DEC 11 PM</p>
-                            </div>
-                        </div>
-                        <div class="timeline-block">
-                            <span class="timeline-step">
-                                <i class="ni ni-money-coins text-dark text-gradient"></i>
-                            </span>
-                            <div class="timeline-content">
-                                <a href="" class="text-dark text-sm font-weight-bold mb-0">New order #9583120</a>
-                                <p class="text-secondary font-weight-bold text-xs mt-1 mb-0">17 DEC</p>
-                            </div>
-                        </div>
-                    </div>
+                    @endforeach
                 </div>
             </div>
         </div>
     </div>
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('.read-more').click(function() {
+                $('.short-desc').hide();
+                $('.full-desc').show();
+                $(this).hide();
+                return false;
+            });
+        });
+    </script>
+
     <script>
         $(document).ready(function() {
             // Menangani perubahan tab

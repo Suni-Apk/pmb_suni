@@ -31,11 +31,11 @@ class CourseController extends Controller
     public function store(Request $request)
     {
         $data = $request->validate([
-            'name' => 'required|string',
-            'notes' => 'required|string',
-            'desc' => 'required|string',
+            'name' => 'required',
+            'notes' => 'required',
+            'desc' => 'required',
         ]);
-
+        // dd($data);
         $course = Course::create($data);
 
         if ($course) {

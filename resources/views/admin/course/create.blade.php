@@ -27,23 +27,23 @@
                             <div class="form-group mb-3">
                                 <label for="note">Note</label>
                                 <input type="text" name="notes" id="notes" class="form-control" required>
-                                @error('name')
+                                @error('notes') <!-- Perubahan disini -->
                                     <div class="text-danger">{{ $message }}</div>
                                 @enderror
                             </div>
                             <div class="form-group mb-3">
                                 <label for="desc">Deskripsi</label>
                                 <input type="text" name="desc" id="desc" class="form-control" required>
-                                @error('name')
+                                @error('desc') <!-- Perubahan disini -->
                                     <div class="text-danger">{{ $message }}</div>
                                 @enderror
                             </div>
-
+                        
                             <button type="submit" class="btn btn-success">Submit</button>
-                            <a href="{{ route('admin.jurusan.index') }}">
+                            <a href="{{ route('admin.course.index') }}">
                                 <button type="button" class="btn btn-warning">Back</button>
                             </a>
-                        </form>
+                        </form>                        
                     </div>
                 </div>
             </div>

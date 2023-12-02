@@ -39,7 +39,7 @@ class JurusanController extends Controller
     public function store(Request $request)
     {
         $data = $request->validate([
-            'id_tahun_ajaran' => 'required',
+            'id_tahun_ajaran' => '',
             'name' => 'required',
             'code' => 'required'
         ]);

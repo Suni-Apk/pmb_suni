@@ -36,8 +36,15 @@ class DashboardController extends Controller
         $jurusan = Jurusan::get();
         $matkul = Matkuls::get();
         $mahasiswa = User::where('role', 'Mahasiswa')->get();
+        $mahasiswaBaru = User::where('role', 'Mahasiswa')
+            ->whereHas('biodata', function ($query) {
+                $query->whereHas('angkatan', function ($subQuery) {
+                    $subQuery->where('status', 'Active');
+                });
+            })
+            ->get();
 
-        return view('admin.index',compact('hijriDateday','hijriDatedayArabic','hijriDatemonth','hijriDateyear', 'user', 'users', 'pemasukan', 'jurusan', 'matkul', 'adminCount', 'mahasiswa'));
+        return view('admin.index',compact('hijriDateday','hijriDatedayArabic','hijriDatemonth','hijriDateyear', 'user', 'users', 'pemasukan', 'jurusan', 'matkul', 'adminCount', 'mahasiswa', 'mahasiswaBaru'));
     }
 
     public function profile()

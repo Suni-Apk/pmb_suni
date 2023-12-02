@@ -224,6 +224,7 @@ Route::prefix('/kursus')->middleware(['auth', 'kursus'])->name('kursus.')->group
     //biodata
     Route::prefix('/biodata')->name('pendaftaran.')->group(function () {
         Route::get('/', [KursusBiodataController::class, 'pendaftaran_kursus'])->name('kursus');
+        // Route::get('/pendaftaran-kursus/{kursus_id}', [KursusBiodataController::class, 'showPendaftaranForm'])->name('form');
         Route::post('/process', [KursusBiodataController::class, 'pendaftaran_kursus_process'])->name('kursus.process');
         Route::get('/edit/{id}', [KursusProfileController::class, 'edit_biodata'])->name('s1.edit');
         Route::put('/edit/process/{id}', [KursusProfileController::class, 'edit_biodata_process'])->name('s1.edit.process');

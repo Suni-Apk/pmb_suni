@@ -169,8 +169,8 @@ class AuthController extends Controller
         $user = User::where('phone', $credentials)->first();
 
         if ($user->active == 0) {
-
-            return redirect()->route('verify')->with('gagal', 'Kamu Harus Mengisi Kode OTP Yang Dikirim');
+        $program = $request->program_belajar;
+            return view('auth.verify',compact('user','program'))->with('gagal', 'Kamu Harus Mengisi Kode OTP Yang Dikirim');
         } elseif ($user->status == 'off') {
             return redirect()->route('login')->withErrors(['phone' => 'Nomor Kamu Di NonAktifkan']);
         }
@@ -183,19 +183,34 @@ class AuthController extends Controller
 
         $input = $request->all();
         $users = Auth::user();
-        $administrasiS1 = Transaksi::where('user_id', $users->id)->where('jenis_tagihan', 'Administrasi')->where('program_belajar', 'S1')->where('status', 'berhasil')->first();
-        $administrasiKURSUS = Transaksi::where('user_id', $users->id)->where('jenis_tagihan', 'Administrasi')->where('program_belajar', 'KURSUS')->where('status', 'berhasil')->first();
+        $administrasiS1 = Transaksi::where('user_id',$users->id)->where('jenis_tagihan','Administrasi')->where('program_belajar','S1')->first();
+        $administrasiKURSUS = Transaksi::where('user_id',$users->id)->where('jenis_tagihan','Administrasi')->where('program_belajar','KURSUS')->first();
 
         auth()->attempt(array('phone' => $input['phone'], 'password' => $input['password']));
-        if (auth()->user()->role == 'Mahasiswa') {
-            return redirect()->route('mahasiswa.dashboard');
-        } else {
-            return redirect()->back()->withErrors([
-                'phone' => 'Kamu bukan Mahasiswa Disini'
-            ]);
-        }
-
-        return redirect()->route('mahasiswa.dashboard');
+            
+            if (auth()->user()->role == 'Mahasiswa') {
+                if($administrasiS1 && !$administrasiKURSUS){
+                    if($administrasiS1->status == 'berhasil'){
+                        return redirect()->route('mahasiswa.dashboard')->with('success',"Halo $user->name Selamat Datang ");
+                    }elseif($administrasiS1->status == 'pending'){
+                        return redirect($administrasiS1->payment_link);
+                    }
+                }elseif($administrasiKURSUS && !$administrasiS1){
+                    if($administrasiKURSUS->status == 'berhasil'){
+                        return redirect()->route('kursus.dashboard')->with('success',"Halo $user->name Selamat Datang ");
+                    }elseif($administrasiKURSUS->status == 'pending'){
+                        return redirect($administrasiKURSUS->payment_link);
+                    }
+                }elseif($administrasiS1 && $administrasiKURSUS){
+                    return redirect()->route('mahasiswa.dashboard')->with('success',"Halo $user->name Selamat Datang");
+                }else{
+                    return back()->withErrors(['phone' => 'Silahkan Hubungi Admin']);
+                }
+            }else{
+                return redirect()->back()->withErrors([
+                    'phone' => 'Kamu bukan Mahasiswa Disini'
+                ]);
+            }
     }
 
     public function verify()
