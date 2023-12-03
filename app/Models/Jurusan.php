@@ -10,7 +10,6 @@ class Jurusan extends Model
     use HasFactory;
 
     protected $fillable = [
-        'id_tahun_ajarans',
         'name',
         'code'
     ];
@@ -22,7 +21,7 @@ class Jurusan extends Model
 
     public function semesters()
     {
-        return $this->hasMany(Semester::class);
+        return $this->hasMany(Semester::class, 'id_tahun_ajarans');
     }
 
     public function matkuls()

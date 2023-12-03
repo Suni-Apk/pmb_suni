@@ -176,6 +176,17 @@ Route::prefix('/admin')->middleware(['admin', 'auth'])->name('admin.')->group(fu
     // resources management
     Route::resource('/matkul', ControllersMatkulController::class);
     Route::resource('/mapel', MapelsController::class);
+    Route::prefix('mapel')->name('mapel.')->group( function() {
+        Route::get('/', [MapelsController::class, 'index'])->name('index');
+        Route::get('/create', [MapelsController::class, 'create'])->name('create');
+        Route::post('/create/process', [MapelsController::class, 'store'])->name('create.process');
+        Route::get('/detail/{id}', [MapelsController::class, 'show'])->name('detail');
+        Route::post('/active/{id}', [MapelsController::class, 'active'])->name('active');
+        Route::get('edit/{id}', [MapelsController::class, 'edit'])->name('edit');
+        Route::post('edit/{id}', [MapelsController::class, 'update'])->name('edit.process');
+        Route::post('/active/{id}', [MapelsController::class, 'active'])->name('active');
+        Route::delete('delete/{id}', [MapelsController::class, 'destroy'])->name('destroy');
+    });
     Route::resource('/jurusan', JurusanController::class);
     Route::get('/exportJurusan', [JurusanController::class, 'exportJurusan'])->name('exportJurusan');
     Route::resource('/transaksi', TransactionController::class);

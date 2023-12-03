@@ -222,7 +222,7 @@
                                 @foreach ($transaksi->tagihanDetails as $index => $transaksis)
                                     <tr>
                                         <td class="">{{ $index + 1 }}</td>
-                                        <td class="">{{ $transaksis->biayasDetail->nama_Biaya ??  }}</td>
+                                        <td class="">{{ $transaksis->biayasDetail->nama_Biaya  }}</td>
                                         <td class="">Rp anjay</td>
                                     </tr>
                                 @endforeach

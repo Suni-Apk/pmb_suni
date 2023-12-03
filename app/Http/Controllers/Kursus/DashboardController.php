@@ -32,12 +32,32 @@ class DashboardController extends Controller
         $banner = Banner::where('type', 'DASHBOARD')->get();
         $mahasiswa = Auth::user();
         $biodata = Biodata::where('program_belajar','KURSUS')->where('user_id',$mahasiswa->id)->first();
-        $kursusBiodata = Biodata::where('user_id', $mahasiswa->id)->where('program_belajar','KURSUS')
-        ->whereHas('course',function($query) {
-        })->first();
-        $linkKursus =  Link::where('id_courses', $kursusBiodata->id)->where('gender', $mahasiswa->gender)->get();
-        $kursus = Course::where('id', '!=', $kursusBiodata->id)->get();
+        $kursusBiodata = Biodata::where('user_id', $mahasiswa->id)
+        ->where('program_belajar', 'KURSUS')
+        ->with('course') 
+        ->first();
+
+        if(!$kursusBiodata){
+            $linkKursus = Link::where('gender',$mahasiswa->gender)->get();
+            $kursus = Course::all();
+        }else{
         
+            $linkKursus = Link::where('id_courses', $kursusBiodata->course->id)
+            ->where('gender', $mahasiswa->gender)
+            ->get();
+
+            
+            $kursus = Course::where('id', '!=', $kursusBiodata->course->id)->get();
+        }
+
+
+        return view('kursus.index', compact('hijriDateday', 'hijriDatedayArabic', 'hijriDatemonth', 'hijriDateyear', 'biodata', 'banner', 'kursusBiodata',
+            (!$kursusBiodata) ? ['linkKursus','kursus'] : ['linkKursus', 'kursus'],
+            'mahasiswa'
+        ));
+        $kursus = Course::where('id', '!=', $kursusBiodata->id)->get();
+        $linkKursus =  Link::where('id_courses', $kursusBiodata->id)->where('gender', $mahasiswa->gender)->get();   
         return view('kursus.index',compact('hijriDateday', 'hijriDatedayArabic','hijriDatemonth','hijriDateyear','biodata', 'kursus', 'banner', 'kursusBiodata', 'linkKursus', 'mahasiswa'));
+        // return view('kursus.index',compact('hijriDateday', 'hijriDatedayArabic','hijriDatemonth','hijriDateyear','biodata',  'banner',  'mahasiswa'));
     }
 }

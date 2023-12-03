@@ -21,7 +21,7 @@ class AdministrasiController extends Controller
         ]);
 
         $administrasi = Administrasi::find($id);
-        dd($administrasi);
+        // dd($administrasi);
         $replace_amount = str_replace('.', '', $request->amount);
         $tahunAjaran = TahunAjaran::where('status', 'Active')->orderBy('id', 'desc')->first();
         $administrasi->update([

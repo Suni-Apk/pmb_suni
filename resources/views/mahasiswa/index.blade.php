@@ -20,12 +20,19 @@
                 'success'
             )
         </script>
+    @elseif(session('eror'))
+    <script>
+        Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "{{ session('eror') }}",
+        });
+    </script>
     @endif
 @endpush
 
 @section('content')
     <div class="row">
-        
         <div class="col-12 text-center mb-4">
             <div class="card">
                 <h6 class="text-secondary font-weight-normal my-3 px-3">proses pendaftaran kamu sampai dimana nih?</h6>
@@ -201,9 +208,11 @@
             $biodataS1 = App\Models\Biodata::where('user_id', $user->id)
                 ->where('program_belajar', 'S1')
                 ->first();
+            $documentS1 = App\Models\Document::where('user_id',$user->id)->first();
             $biodataKURSUS = App\Models\Biodata::where('user_id', $user->id)
                 ->where('program_belajar', 'KURSUS')
                 ->first();
+            $jurusan = App\Models\Jurusan::all();
         @endphp
         @if ($biodataS1 && $biodataKURSUS)
             <div class="col-12 mt-4" id="informasi">
@@ -230,87 +239,264 @@
             </div>
         </div>    
         @endif
-    <div class="row my-4">
-        <div class="col-lg-8 col-md-6 mb-md-0 mb-4">
-            <div class="card">
-                <div class="card-header pb-0">
-                    <div class="row">
-                        <div class="col-lg-6 col-7">
-                            <h6>Daftar Tagihan</h6>
-                            <p class="text-sm mb-0">
-                                <i class="fa fa-check text-info" aria-hidden="true"></i>
-                                Daftar tagihan yang harus dibayarkan
-                            </p>
+        
+        {{-- jika belum ada biodata maka bisa isi di dalam halaman dashboard --}}
+
+        @if (!$biodataS1)
+            <div class="row mt-5">
+                <div class="col-12">
+                    <div class="card mb-4">
+                        <div class="card-header pb-0">
+                            <h6>Form Page</h6>
                         </div>
-                        <div class="col-lg-6 col-5 my-auto text-end">
-                            <div class="dropdown float-lg-end pe-4">
-                                <a class="cursor-pointer" id="dropdownTable" data-bs-toggle="dropdown"
-                                    aria-expanded="false">
-                                    <i class="fa fa-ellipsis-v text-secondary"></i>
-                                </a>
-                                <ul class="dropdown-menu px-2 py-3 ms-sm-n4 ms-n5" aria-labelledby="dropdownTable">
-                                    <li>
-                                        <a class="dropdown-item border-radius-md" href="javascript:;">Action</a>
-                                    </li>
-                                    <li>
-                                        <a class="dropdown-item border-radius-md" href="javascript:;">Another action</a>
-                                    </li>
-                                    <li>
-                                        <a class="dropdown-item border-radius-md" href="javascript:;">Something else
-                                            here</a>
-                                    </li>
-                                </ul>
+                        <div class="card-body px-0 pt-0 pb- 2">
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="table-responsive text-nowrap">
+                                        <form action="{{ route('mahasiswa.pendaftaran.s1.process') }}" method="POST"
+                                            enctype="multipart/form-data">
+                                            @csrf
+                                            @method('POST')
+                                            <div class="form-group mb-3">
+                                                <label for="image" class="form-label">Image</label>
+                                                <input type="file" name="image" id="image" class="form-control">
+                                                <p class="text-muted mb-0">Allowed JPG, GIF or PNG. Max size of 2Mb</p>
+                                            </div>
+        
+                                            <div class="form-group mb-3">
+                                                <label for="alamat">Pilih Jurusan</label>
+                                                <select name="jurusan_id" class="form-control">
+                                                    <option value="" disabled selected>Pilih Jurusan</option>
+                                                    @foreach ($jurusan as $index => $item)
+                                                        <option value="{{ $item->id }}">{{ $item->name }}
+                                                        </option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+        
+                                            <div class="form-group mb-3">
+                                                <label for="birthdate">Tanggal Lahir</label>
+                                                <input type="date" name="birthdate" id="birthdate" class="form-control">
+                                            </div>
+        
+                                            <div class="form-group mb-3">
+                                                <label for="birthplace">Tempat Lahir</label>
+                                                <input type="text" name="birthplace" id="birthplace" class="form-control"
+                                                    placeholder="Masukkan Tempat Lahir Anda">
+                                            </div>
+        
+                                            <div class="form-group mb-3">
+                                                <label for="alamat">Alamat Kamu</label>
+                                                <select name="provinsi" id="provinsi" class="form-control">
+                                                    <option value="" disabled selected>Pilih Provinsi</option>
+                                                    <!-- Data Provinsi dari API bisa dimasukkan di sini -->
+                                                </select>
+                                                <select name="kota" id="kota" class="form-control mt-2">
+                                                    <option value="" disabled selected>--- Pilih Kabupaten / Kota ---</option>
+                                                    <!-- Data Kabupaten dari API bisa dimasukkan di sini -->
+                                                </select>
+                                                <select name="kecamatan" id="kecamatan" class="form-control mt-2">
+                                                    <option value="" disabled selected>--- Pilih Kecamatan ---</option>
+                                                    <!-- Data Kota dari API bisa dimasukkan di sini -->
+                                                </select>
+                                            </div>
+        
+                                            <div class="form-group mb-3">
+                                                <label for="address">Jalan Dan Kode Pos</label>
+                                                <textarea name="address" id="address" class="form-control"></textarea>
+                                            </div>
+        
+                                            <div class="form-group mb-3">
+                                                <label for="last_graduate">Pendidikan Terakhir</label>
+                                                <input type="text" name="last_graduate" id="last_graduate" class="form-control">
+                                            </div>
+        
+                                            <button type="submit" class="btn btn-success">Submit</button>
+                                            <button type="reset" class="btn btn-warning">Reset</button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <script>
+                            fetch(`https://kanglerian.github.io/api-wilayah-indonesia/api/provinces.json`)
+                                .then(response => response.json())
+                                .then(provinces => {
+                                    var data = provinces;
+                                    var tampung = '<option>--- Pilih Provinsi ---</option>';
+                                    data.forEach(element => {
+                                        tampung +=
+                                            `<option data-reg="${element.id}" value="${element.name}">${element.name}</option>`;
+                                    });
+                                    document.getElementById('provinsi').innerHTML = tampung;
+                                });
+                        </script>
+                        <script>
+                            const selectProvinsi = document.getElementById('provinsi');
+                            selectProvinsi.addEventListener('change', (e) => {
+                                var provinsi = e.target.options[e.target.selectedIndex].dataset.reg;
+                                fetch(`https://kanglerian.github.io/api-wilayah-indonesia/api/regencies/${provinsi}.json`)
+                                    .then(response => response.json())
+                                    .then(regencies => {
+                                        var data = regencies;
+                                        var tampung = '<option>--- Pilih Kota ---</option>';
+                                        data.forEach(element => {
+                                            tampung +=
+                                                `<option data-dist="${element.id}" value="${element.name}">${element.name}</option>`;
+                                        });
+                                        document.getElementById('kota').innerHTML = tampung
+        
+                                    });
+                            });
+        
+                            const selectKota = document.getElementById('kota');
+                            selectKota.addEventListener('change', (e) => {
+                                var kota = e.target.options[e.target.selectedIndex].dataset.dist;
+                                fetch(`https://kanglerian.github.io/api-wilayah-indonesia/api/districts/${kota}.json`)
+                                    .then(response => response.json())
+                                    .then(districts => {
+                                        var data = districts;
+                                        var tampung = '<option>--- Pilih Kecamatan ---</option>';
+                                        data.forEach(element => {
+                                            tampung +=
+                                                `<option data-vill="${element.id}" value="${element.name}">${element.name}</option>`;
+                                        });
+                                        document.getElementById('kecamatan').innerHTML = tampung;
+                                    });
+                            });
+                        </script>
+                    </div>
+                </div>
+            </div>
+        @else
+            @if (!$documentS1)
+                <div class="row mt-5">
+                    <div class="col-12">
+                        <div class="card mb-4">
+                            <div class="card-header pb-0">
+                                <h6>Form Dokumen</h6>
+                            </div>
+                            <div class="card-body px-0 pt-0 pb-2">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <div class="table-responsive text-nowrap">
+                                            <form action="{{route('mahasiswa.pendaftaran.document.process')}}" method="POST" enctype="multipart/form-data">
+                                                @csrf
+                                                @method('POST')
+                                                <div class="form-group mb-3">
+                                                    <label for="ijazah">Ijazah SMA/MA/Paket C Terlegalisir</label>
+                                                    <input type="file" name="ijazah" id="ijazah" class="form-control" accept="application/pdf">
+                                                </div>
+                                            
+                                                <div class="form-group mb-3">
+                                                    <label for="ktp">KTP (Kartu Tanda Penduduk)</label>
+                                                    <input type="file" name="ktp" id="ktp" class="form-control" accept="application/pdf">
+                                                </div>
+                                            
+                                                <div class="form-group mb-3">
+                                                    <label for="kk">Kartu Keluarga</label>
+                                                    <input type="file" name="kk" id="kk" class="form-control" accept="application/pdf">
+                                                </div>
+                                            
+                                                <div class="form-group mb-3">
+                                                    <label for="transkip">Transkip Nilai (untuk mahasiswa pindahan)</label>
+                                                    <input type="file" name="transkrip_nilai" id="transkip" class="form-control" accept="application/pdf">
+                                                </div>
+                                            
+                                                <button type="submit" class="btn btn-success">Submit</button>
+                                                <button type="reset" class="btn btn-warning">Reset</button>
+                                            </form>                                                              
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="card-body px-0 pb-2">
-                    <div class="table-responsive">
-                        <table class="table align-items-center mb-0">
-                            <thead>
-                                <tr>
-                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                        Companies</th>
-                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
-                                        Members</th>
-                                    <th
-                                        class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                        Budget</th>
-                                    <th
-                                        class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                        Completion</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-lg-4 col-md-6">
-            <div class="card h-100">
-                <div class="card-header pb-0">
-                    <h3>Daftar Link</h3>
-                    <p class="text-sm">
-                        <i class="fas fa-link text-success" aria-hidden="true"></i>
-                        Daftar link yang diikuti
-                    </p>
-                </div>
-                <div class="container mb-3" style="max-height: 340px; overflow-y: auto;">
-                    {{-- @foreach ($linkKursus as $item) --}}
-                        <div class="card border mb-3">
-                            <div class="card-body">
-                                <h5 class="card-title">Hukum Ekonomi Syariah</h5>
-                                <a href="#" class="btn btn-primary mt-3">Klik Untuk Bergabung</a>
+            @else
+                <div class="row my-4">
+                    <div class="col-lg-8 col-md-6 mb-md-0 mb-4">
+                        <div class="card">
+                            <div class="card-header pb-0">
+                                <div class="row">
+                                    <div class="col-lg-6 col-7">
+                                        <h6>Daftar Tagihan</h6>
+                                        <p class="text-sm mb-0">
+                                            <i class="fa fa-check text-info" aria-hidden="true"></i>
+                                            Daftar tagihan yang harus dibayarkan
+                                        </p>
+                                    </div>
+                                    <div class="col-lg-6 col-5 my-auto text-end">
+                                        <div class="dropdown float-lg-end pe-4">
+                                            <a class="cursor-pointer" id="dropdownTable" data-bs-toggle="dropdown"
+                                                aria-expanded="false">
+                                                <i class="fa fa-ellipsis-v text-secondary"></i>
+                                            </a>
+                                            <ul class="dropdown-menu px-2 py-3 ms-sm-n4 ms-n5" aria-labelledby="dropdownTable">
+                                                <li>
+                                                    <a class="dropdown-item border-radius-md" href="javascript:;">Action</a>
+                                                </li>
+                                                <li>
+                                                    <a class="dropdown-item border-radius-md" href="javascript:;">Another action</a>
+                                                </li>
+                                                <li>
+                                                    <a class="dropdown-item border-radius-md" href="javascript:;">Something else
+                                                        here</a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-body px-0 pb-2">
+                                <div class="table-responsive">
+                                    <table class="table align-items-center mb-0">
+                                        <thead>
+                                            <tr>
+                                                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                                    Companies</th>
+                                                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
+                                                    Members</th>
+                                                <th
+                                                    class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                                    Budget</th>
+                                                <th
+                                                    class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                                    Completion</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            
+                                        </tbody>
+                                    </table>
+                                </div>
                             </div>
                         </div>
-                    {{-- @endforeach --}}
+                    </div>
+                    <div class="col-lg-4 col-md-6">
+                        <div class="card h-100">
+                            <div class="card-header pb-0">
+                                <h3>Daftar Link</h3>
+                                <p class="text-sm">
+                                    <i class="fas fa-link text-success" aria-hidden="true"></i>
+                                    Daftar link yang diikuti
+                                </p>
+                            </div>
+                            <div class="container mb-3" style="max-height: 340px; overflow-y: auto;">
+                                {{-- @foreach ($linkKursus as $item) --}}
+                                    <div class="card border mb-3">
+                                        <div class="card-body">
+                                            <h5 class="card-title">Hukum Ekonomi Syariah</h5>
+                                            <a href="#" class="btn btn-primary mt-3">Klik Untuk Bergabung</a>
+                                        </div>
+                                    </div>
+                                {{-- @endforeach --}}
+                            </div>
+                        </div>
+                    </div>
                 </div>
-            </div>
-        </div>
-    </div>
+            @endif
+        @endif
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <script>
         $(document).ready(function() {

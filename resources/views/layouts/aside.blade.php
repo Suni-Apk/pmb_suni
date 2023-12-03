@@ -315,14 +315,6 @@
                                     <span class="sidenav-normal"> Daftar Biaya Tagihan </span>
                                 </a>
                             </li>
-                            <li class="nav-item ">
-                                <a class="nav-link {{ Route::is('admin.tagihan.create') ? 'active' : '' }}"
-                                    href="{{ route('admin.tagihan.create') }}">
-                                    <span class="sidenav-mini-icon d-none d-xl-block"><i
-                                            class="fas fa-plus"></i></span>
-                                    <span class="sidenav-normal"> Tambah Biaya Tagihan </span>
-                                </a>
-                            </li>
                         </ul>
                     </div>
                 </li>

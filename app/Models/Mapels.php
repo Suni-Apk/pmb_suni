@@ -15,6 +15,7 @@ class Mapels extends Model
         'description',
         'guru',
         'mulai',
+        'status',
         'selesai',
         'hari'
     ];

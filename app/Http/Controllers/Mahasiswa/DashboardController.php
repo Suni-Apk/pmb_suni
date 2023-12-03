@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Mahasiswa;
 use App\Http\Controllers\Controller;
 use App\Models\Banner;
 use App\Models\Biodata;
+use App\Models\Link;
 use App\Models\User;
 use GuzzleHttp\Client;
 use Illuminate\Http\Request;

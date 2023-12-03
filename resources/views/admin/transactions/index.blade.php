@@ -18,7 +18,6 @@
                                 <i class='bx bxs-file-export me-1'></i> Export
                             </button>
                         </form>                    
-                        <a href="{{ route('admin.transaksi.create') }}" class="btn bg-gradient-primary">Tambah +</a>
                     </div>
                 </div>
                 <form action="{{ route('admin.transaksi.index') }}" method="GET">

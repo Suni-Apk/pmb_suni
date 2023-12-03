@@ -6,8 +6,9 @@
 @endpush
 
 @section('content')
+    @foreach ($biodata as $item)
     <div class="row">
-        <h4 class="ms-2">{{ $biodata->course->name }}</h4>
+        <h4 class="ms-2">{{ $item->course->name }}</h4>
         <div class="col-12 col-lg-12">
             <div class="card mb-4">
                 <div class="card-header pb-0 d-flex justify-content-between">
@@ -15,9 +16,6 @@
                         <h6>Mata Pelajaran</h6>
                     </div>
                     <div class="flex-row d-flex">
-                        <a href="" class="btn btn-primary fs-6 p-2 px-3">
-                            <i class="fab fa-whatsapp"></i>
-                        </a>
                         <a href="" class="btn btn-secondary fs-6 p-2 px-3 ms-2">
                             <i class="fas fa-file-download"></i>
                         </a>
@@ -39,7 +37,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($mapels as $mapel)
+                                @foreach ($item->course->mapel as $mapel)
                                     <tr>
                                         <td>
                                             <div class="d-flex px-2 py-1">
@@ -66,5 +64,6 @@
             </div>
         </div>
     </div>
+    @endforeach
     
 @endsection

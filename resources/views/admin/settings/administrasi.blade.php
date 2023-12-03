@@ -14,6 +14,7 @@
                     @method('PUT')
                     <div class="form-group">
                         <label for="" class="">Masukkan Harga Adminstrasi Program {{ $item->program_belajar }}<span class="text-danger">*</span></label>
+                        <input type="hidden" name="program_belajar" value="{{ $item->program_belajar }}">
                         <div class="input-group mb-4">
                             <span class="input-group-text text-bolder">Rp. </span>
                             <input type="number" class="form-control" id="input" name="amount" placeholder="200.000" value="{{ $item->amount }}">
