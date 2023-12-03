@@ -61,7 +61,7 @@
             </div>
         </div>
 
-        <div class="col-6 px-2 py-1">
+        {{-- <div class="col-6 px-2 py-1">
             <div class="card mb-4">
                 <div class="card-header">
                     <h6>Notifikasi Pendaftaran</h6>
@@ -152,7 +152,7 @@
                     <button class="btn btn-primary">Save & Submit</button>
                 </div>
             </div>
-        </div>
+        </div> --}}
     </div>
 @endsection
 @push('scripts')

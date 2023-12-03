@@ -26,12 +26,13 @@ use App\Http\Controllers\IpaymuController;
 use App\Http\Controllers\MapelsController;
 use App\Http\Controllers\SettingController;
 use App\Http\Controllers\JurusanController;
+use App\Http\Controllers\LaporanController;
 use App\Http\Controllers\TahunAjaranController;
 use App\Http\Controllers\AdministrasiController;
-use App\Http\Controllers\Auth\ForgotPasswordController;
 use App\Http\Controllers\PembayaranUserController;
 use App\Http\Controllers\DocumentController as AdminDocumentController;
 use App\Http\Controllers\MatkulController as ControllersMatkulController;
+use App\Http\Controllers\Auth\ForgotPasswordController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -51,28 +52,19 @@ Route::get('/', function () {
 
 Route::get('log', [\Rap2hpoutre\LaravelLogViewer\LogViewerController::class, 'index']);
 // Auth Mahasiswa
-// Route::get('/register', [AuthController::class, 'register'])->name('register');
-
-// Route::post('/register-process', [AuthController::class, 'register_process'])->name('register.process');
-
-//register yang di mau in ustad
-Route::get('/S1/register', [AuthController::class, 's1_register'])->name('s1.register');
-Route::get('/kursus/register', [AuthController::class, 'kursus_register'])->name('kursus.register');
+// register yuumuu
+Route::get('/register/{program?}', [AuthController::class, 'register'])->name('register');
 
 Route::post('/register-process', [AuthController::class, 'register_process_new'])->name('register.process.new');
 
 Route::get('/login', [AuthController::class, 'login'])->name('login');
-
 Route::post('/login-process', [AuthController::class, 'login_process'])->name('login.process');
-
 Route::post('/verify-process', [AuthController::class, 'verify_otp'])->name('verify.process');
 
 Route::post('/administrasiS1/{id}', [AuthController::class, 'administrasiS1'])->name('administrasiS1');
-
 Route::post('/administrasiKursus/{id}', [AuthController::class, 'administrasiKursus'])->name('administrasiKursus');
 
 Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
-
 
 //reset password
 Route::get('forgot-password', [ForgotPasswordController::class, 'showForgotPasswordForm'])->name('forgot.password');
@@ -137,8 +129,6 @@ Route::prefix('/admin')->middleware(['admin', 'auth'])->name('admin.')->group(fu
     Route::put('/demoBayar/{id}', [TransactionController::class, 'demo_bayar_cicilan_admin'])->name('transactions.cicilan.bayar');
     Route::put('/demoBayarCash/{id}', [TransactionController::class, 'demo_bayar_cash'])->name('transactions.cash.bayar');
 
-    Route::prefix('/transactions/')->name('transactions.')->group(function () {
-    });
     // data pendaftar
     Route::prefix('pendaftar/account')->name('pendaftar.')->group(function () {
         Route::get('/', [AccountController::class, 'pendaftar'])->name('index');
@@ -176,6 +166,12 @@ Route::prefix('/admin')->middleware(['admin', 'auth'])->name('admin.')->group(fu
         Route::post('/proses-bayar/{id}', [TransactionController::class, 'proses_bayar'])->middleware(['Pembayaran'])->name('proses_bayar');
     });
 
+    Route::prefix('laporan')->name('laporan.')->group( function() {
+        Route::get('/', [LaporanController::class, 'index'])->name('index');
+        Route::get('/exportMahasiswaLaporan/{tahunAjaran}', [LaporanController::class, 'exportMahasiswaLaporan'])->name('exportMahasiswaLaporan');    
+        Route::get('/exporPendaftar', [LaporanController::class, 'exportPendaftar'])->name('exportPendaftar');    
+    });
+    
     // resources management
     Route::resource('/matkul', ControllersMatkulController::class);
     Route::resource('/mapel', MapelsController::class);

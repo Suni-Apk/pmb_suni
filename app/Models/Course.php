@@ -14,6 +14,7 @@ class Course extends Model
     protected $fillable = [
         'name',
         'notes',
+        'keyword',
     ];
 
     protected $casts = [

@@ -1,6 +1,6 @@
 @extends('layouts.master')
 
-@section('title', 'table template')
+@section('title', 'Isi Form Biodata')
 
 @section('content')
     <div class="row">

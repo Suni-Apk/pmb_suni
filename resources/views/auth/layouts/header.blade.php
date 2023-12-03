@@ -20,7 +20,7 @@
                             </span>
                         </button>
                         <div class="collapse navbar-collapse justify-content-end" id="navigation">
-                            <ul class="navbar-nav pt-3 pt-sm-0 me-lg-2">
+                            <ul class="navbar-nav pt-3 pt-sm-0 me-lg-2 flex-row">
                                 @if (Auth::user())
                                     @if (Auth::user()->role == 'Admin')
                                         <li class="nav-item mb-2 mb-sm-0">
@@ -41,26 +41,12 @@
                                         </a>
                                     </li>
                                 @else
-                                    <div class="dropdown">
-                                        <button class="btn btn-outline-dark dropdown-toggle me-2 mb-0 rounded-pill" data-bs-toggle="dropdown" id="dropdownReg">
-                                            <i class="fas fa-user-circle opacity-6 text-dark me-1"></i>
+                                    <li class="nav-item me-2">
+                                        <a class="btn btn-outline-dark mb-0 rounded-pill" href="{{route('register')}}">
+                                            <i class="fas fa-user-circle opacity-7 text-dark me-1"></i>
                                             Daftar
-                                        </button>
-                                        <ul class="dropdown-menu" aria-labelledby="dropdownReg">
-                                            <li>
-                                                <a class="dropdown-item" href="{{ route('s1.register') }}">
-                                                    <i class="me-2 fas fa-graduation-cap"></i>
-                                                    Program Formal
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a class="dropdown-item" href="{{ route('kursus.register') }}">
-                                                    <i class="me-2 fas fa-user-tag"></i>
-                                                    Program Non Formal
-                                                </a>
-                                            </li>
-                                        </ul>
-                                    </div>
+                                        </a>
+                                    </li>
                                     <div class="dropdown">
                                         <button class="btn bg-gradient-dark dropdown-toggle mb-0 rounded-pill" data-bs-toggle="dropdown" id="dropdownLogin">
                                             <i class="fas fa-key opacity-6 text-white me-1"></i>

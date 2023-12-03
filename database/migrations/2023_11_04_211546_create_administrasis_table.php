@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
 
             $table->string('program_belajar');
-            $table->string('amount');
+            $table->bigInteger('amount');
             $table->foreignId('course_id')->nullable();
             $table->string('id_tahunAjaran');
 

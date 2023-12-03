@@ -225,6 +225,7 @@
         </div>    
         @endif
     <div class="row my-4">
+        @if ($user->biodata)
         <div class="col-lg-8 col-md-6 mb-md-0 mb-4">
             <div class="card">
                 <div class="card-header pb-0">
@@ -318,6 +319,7 @@
                 </div>
             </div>
         </div>
+        @endif
     </div>
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <script>

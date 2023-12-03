@@ -2,6 +2,7 @@
 
 namespace App\Traits;
 
+use App\Models\General;
 use App\Models\User;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Auth;
@@ -61,20 +62,25 @@ trait Ipaymu {
         $method       = 'POST'; //method
         $timestamp    = Date('YmdHis');
 
-        if($program == 'S1'){
+        // set product
+        if ($program == 'S1') {
         $body['product'][]       = "Pendaftaran $program";
-        }else{
+        } else {
         $body['product'][]       = "Pendaftaran $program";
         }
+
         $body['qty'][]           = 1;
-        if($program == 'S1'){
+
+        // pricing
+        if($program == 'S1') {
         $body['price'][]         = $administrasiS1->amount;
-        }else{
+        } else {
         $body['price'][]         = $administrasiKursus->amount;
         }
-        $body['referenceId']     = 'ID-PPDB-'.rand(1111,9999);
+
+        $body['referenceId']     = 'ID-' . strtoupper(str_replace(' ', '', General::first()->title)) . '-'.rand(1111,9999);
         $body['returnUrl']       = route('callback.return');
-        $body['notifyUrl']       = 'https://1ec5-149-113-118-174.ngrok-free.app/callback/notify';
+        $body['notifyUrl']       = 'https://32e0-139-192-158-139.ngrok-free.app/callback/notify';
         $body['cancelUrl']       = route('callback.cancel');
         $body['paymentChannel']  = 'qris';
         $body['expired']         = 24;

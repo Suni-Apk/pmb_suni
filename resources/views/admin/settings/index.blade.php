@@ -31,7 +31,7 @@
                                 </div>
                                 <div class="vr"></div>
                                 <div class="w-100">
-                                    <input type="text" name="image_link" id="image_link" class="form-control" value="{{ $general->image }}">
+                                    <input type="text" name="image_link" id="image_link" class="form-control">
                                     <small class="text-muted text-xs mb-0">Paste link gambar dari internet untuk versi tautan.</small>
                                 </div>
                             </div>

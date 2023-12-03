@@ -14,13 +14,15 @@ class CourseSeeder extends Seeder
     public function run(): void
     {
         Course::create([
-            'name'   => 'MABANI',
+            'name'    => 'MABANI',
             'notes'   => ['lorem ipsum dolor sit amet', 'consectetur adipiscing elit'],
+            'keyword' => 'MABANI',
         ]);
 
         Course::create([
-            'name'   => 'Dirasah Islamiyah',
+            'name'    => 'Dirasah Islamiyah',
             'notes'   => ['lorem ipsum dolor sit amet', 'consectetur adipiscing elit', 'iyahh'],
+            'keyword' => 'DIRASAHISLAMIYAH',
         ]);
     }
 }

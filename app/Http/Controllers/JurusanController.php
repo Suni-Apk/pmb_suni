@@ -39,22 +39,24 @@ class JurusanController extends Controller
     public function store(Request $request)
     {
         $data = $request->validate([
-            'id_tahun_ajarans' => '',
+            'id_tahun_ajaran' => 'required',
             'name' => 'required',
             'code' => 'required'
         ]);
         $jurusan = Jurusan::create($data);
+
         $semester = ['Semester 1', 'Semester 2', 'Semester 3', 'Semester 4', 'Semester 5', 'Semester 6', 'Semester 7', 'Semester 8'];
-        // $tanggal = ['', 'Semester 2', 'Semester 3', 'Semester 4', 'Semester 5', 'Semester 6', 'Semester 7', 'Semester 8'];      
+
         foreach ($semester as $key => $item) {
             Semester::create([
-                'id_jurusans' => $jurusan->id,
+                // 'id_jurusan' => $jurusan->id,
                 'name' => $item
-                // 'start_date' =>  $tanggals
             ]);
         }
+
         return redirect()->route('admin.jurusan.index')->with('success', "Jurusan Berhasil Di Buat!!");
     }
+
 
     /**
      * Display the specified resource.
@@ -68,7 +70,7 @@ class JurusanController extends Controller
         $semesterGrouped = Semester::with('jurusan')->get()->groupBy('id_jurusans');
         $tahun_ajaran = TahunAjaran::get();
         $links = Link::get();
-        return view('admin.jurusan.detail',compact('semester', 'jurusan', 'matkuls', 'jurusanAll', 'semesterGrouped', 'links', 'tahun_ajaran')); 
+        return view('admin.jurusan.detail', compact('semester', 'jurusan', 'matkuls', 'jurusanAll', 'semesterGrouped', 'links', 'tahun_ajaran'));
     }
 
     /**
@@ -92,7 +94,6 @@ class JurusanController extends Controller
             'name' => 'required',
             'code' => 'required'
         ]);
-
         $jurusan->update($data);
         return redirect()->route('admin.jurusan.index')->with('success', "Jurusan Berhasil Di Edit!!");
     }
@@ -106,7 +107,7 @@ class JurusanController extends Controller
         $jurusan->delete();
         return redirect()->route('admin.jurusan.index');
     }
-    
+
     public function exportJurusan(Request $request)
     {
         return Excel::download(new JurusanExport($request), 'dataJurusan.xlsx');

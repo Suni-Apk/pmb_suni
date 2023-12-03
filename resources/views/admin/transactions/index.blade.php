@@ -18,7 +18,7 @@
                                 <i class='bx bxs-file-export me-1'></i> Export
                             </button>
                         </form>                    
-                        <a href="{{ route('admin.transaksi.create') }}" class="btn bg-gradient-primary">Tambah +</a>
+                        {{-- <a href="{{ route('admin.transaksi.create') }}" class="btn bg-gradient-primary">Tambah +</a> --}}
                     </div>
                 </div>
                 <form action="{{ route('admin.transaksi.index') }}" method="GET">
@@ -58,8 +58,7 @@
                                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                         Jenis Tagihan / Pembayaran
                                     </th>
-                                    <th
-                                        class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                         Aksi
                                     </th>
                                 </tr>
@@ -102,16 +101,21 @@
                                         <p class="text-xs text-uppercase text-secondary mb-0">{{ $item->jenis_pembayaran }}</p>
                                     </td>
                                     <td class="align-middle text-center">
-                                        <a href="{{ route('admin.transaksi.show', 'tingkatan') }}"
+                                        <a href="{{ route('admin.transaksi.show', $item->id) }}"
                                             class="badge badge-sm bg-gradient-info font-weight-bold text-xxs mx-1"
                                             data-toggle="tooltip" data-original-title="detail">
                                             Detail
                                         </a>
-                                        <a href=""
-                                            class="badge badge-sm bg-gradient-danger font-weight-bold text-xxs show_confirm"
-                                            data-toggle="tooltip" data-original-title="hapus">
-                                            Hapus
-                                        </a>
+
+                                        <form action="{{ route('admin.transaksi.destroy', $item->id) }}" method="post" class="d-inline">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="button" 
+                                                class="badge badge-sm border-0 bg-gradient-danger font-weight-bold text-xxs show_confirm"
+                                                data-toggle="tooltip" data-original-title="hapus">
+                                                Hapus
+                                            </button>
+                                        </form>
                                     </td>
                                 </tr>
                                 @endforeach

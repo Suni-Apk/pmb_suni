@@ -8,184 +8,155 @@
     <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400&display=swap" rel="stylesheet">
 @endpush
 
-{{-- @php
-    $months = [];
-    $currentMonth = date('M Y'); // Mendapatkan bulan dan tahun saat ini
+@php
+    $timestampsTitle = date('M Y'); // Mendapatkan bulan dan tahun saat ini
     $currentTimeStamp = date('Y-m'); // Mendapatkan bulan dan tahun saat ini
-    for ($i = 0; $i < 12; $i++) {
-        $months[] = date('M Y', strtotime($currentMonth . " +$i month"));
-        $timestamps[] = date('Y-m', strtotime($currentTimeStamp . " +$i month"));
-    }
-	$item = '';
-    dump($timestamps);
-	foreach ($timestamps as $key => $value) {
-		$item = $users->where('role', 'Admin')->where('created_at', 'like', "%{$key}%")->count();
-		dd($item);
-	}
-@endphp --}}
-
-{{-- @php
-    $months = [];
-    $currentMonth = date('M Y'); // Mendapatkan bulan dan tahun saat ini
-    $currentTimeStamp = date('Y-m'); // Mendapatkan bulan dan tahun saat ini
-    $timestamps = []; // Deklarasi array timestamps
-
-    for ($i = 0; $i < 12; $i++) {
-        $months[] = date('M Y', strtotime($currentMonth . " +$i month"));
-        $timestamps[] = date('Y-m', strtotime($currentTimeStamp . " +$i month"));
-    }
-
-    // $item = 0; // Inisialisasi $item sebagai angka
-    // dump($timestamps);
-    // foreach ($timestamps as $key => $value) {
-    //     $item = $users->where('role', 'Admin')->where('created_at', 'like', "%{$value}%")->count();
-	// 	dump($item);
-    // }
-
-	$setahunkebelakang = date('Y-m', strtotime($currentTimeStamp . " -1 year +1 month"));
-	$tanggal = [];
-	for ($i=0; $i < 12; $i++) {
-		$tanggal[] = date('Y-m', strtotime($setahunkebelakang . " +$i month"));
-		// dump($tanggal);
-	}
-
-    foreach ($tanggal as $key => $value) {
-        $item = $users->where('role', 'Admin')->where('created_at', 'like', "%{$value}%")->all();
-	}
 	
-	dump($item);
-	dd($setahunkebelakang);
-@endphp --}}
-
-{{-- @php
-    $months = [];
-    $currentMonth = date('M Y'); // Mendapatkan bulan dan tahun saat ini
-    $currentTimeStamp = date('Y-m'); // Mendapatkan bulan dan tahun saat ini
-    $timestamps = []; // Deklarasi array timestamps
-
+	$timestampsTitleBack = date('Y-m', strtotime($timestampsTitle . " -1 year +1 month"));
+	$setahunkebelakang = date('Y-m', strtotime($currentTimeStamp . " -1 year +1 month"));
+	
+    $timetitle = []; // Deklarasi array timestamps
+    $rawTimestamps = []; // Deklarasi array timestamps
     for ($i = 0; $i < 12; $i++) {
-        $months[] = date('M Y', strtotime($currentMonth . " +$i month"));
-        $timestamps[] = date('Y-m', strtotime($currentTimeStamp . " +$i month"));
+        $timetitle[] = date('M Y', strtotime($timestampsTitleBack . " +$i month"));
+        $rawTimestamps[] = date('Y-m', strtotime($setahunkebelakang . " +$i month"));
     }
 
-    $setahunkebelakang = date('Y-m', strtotime($currentTimeStamp . " -1 year +1 month"));
+	$rawUsersChartAdmin = [];
+	$rawUsersChartMahasiswa = [];
+	foreach ($rawTimestamps as $key => $value) {
+		$rawUsersChartAdmin[] = App\Models\User::where('role', 'Admin')
+		->where(Illuminate\Support\Facades\DB::raw("DATE_FORMAT(created_at, '%Y-%m')"), $value)
+		->count();
 
-    $tanggal = [];
-	$item = 0; // Inisialisasi $item sebagai angka
-    for ($i = 0; $i < 12; $i++) {
-        $tanggal[] = date('Y-m', strtotime($setahunkebelakang . " +$i month"));
-		// break;
-		foreach ($tanggal as $key => $value) {
-			
-			$item += $users->where('role', 'Admin')->where('created_at', 'like', "%{$value}%")->count();
-		}
-		// dump($item);
-		dump($users->where('role', 'Admin')->where('created_at', 'like', "%2023-11%"));
-    }
-	dump($tanggal);
-    
-    dd($setahunkebelakang);
-@endphp --}}
+		$rawUsersChartMahasiswa[] = App\Models\User::where('role', 'Mahasiswa')
+		->where(Illuminate\Support\Facades\DB::raw("DATE_FORMAT(created_at, '%Y-%m')"), $value)
+		->count();
+	}
 
+	$timetitles = json_encode($timetitle,JSON_NUMERIC_CHECK);
+	$timestamps = json_encode($rawTimestamps,JSON_NUMERIC_CHECK);
+	$usersChartAdmin = json_encode($rawUsersChartAdmin,JSON_NUMERIC_CHECK);
+	$usersChartMahasiswa = json_encode($rawUsersChartMahasiswa,JSON_NUMERIC_CHECK);
+
+	// dump($timetitles);
+	// dump($timestamps);
+	// dd($usersChart);
+@endphp
 
 @push('scripts')
-    <script>
-        var ctx2 = document.getElementById("chart-line").getContext("2d");
+	<script>
+		var ctx2 = document.getElementById("chart-line").getContext("2d");
 
-        var gradientStroke1 = ctx2.createLinearGradient(0, 230, 0, 50);
+		var gradientStroke1 = ctx2.createLinearGradient(0, 230, 0, 50);
+		gradientStroke1.addColorStop(1, 'rgba(19, 169, 95,0.2)');
+		gradientStroke1.addColorStop(0.2, 'rgba(72,72,176,0.0)');
+		gradientStroke1.addColorStop(0, 'rgba(203,12,159,0)');
 
-        gradientStroke1.addColorStop(1, 'rgba(19, 169, 95,0.2)');
-        gradientStroke1.addColorStop(0.2, 'rgba(72,72,176,0.0)');
-        gradientStroke1.addColorStop(0, 'rgba(203,12,159,0)');
+		var gradientStroke2 = ctx2.createLinearGradient(0, 230, 0, 50);
+		gradientStroke2.addColorStop(1, 'rgba(20,23,39,0.2)');
+		gradientStroke2.addColorStop(0.2, 'rgba(72,72,176,0.0)');
+		gradientStroke2.addColorStop(0, 'rgba(20,23,39,0)');
 
-        var gradientStroke2 = ctx2.createLinearGradient(0, 230, 0, 50);
+		var usersAdmin = <?php echo $usersChartAdmin; ?>;
+		var usersMahasiswa = <?php echo $usersChartMahasiswa; ?>;
+		var titleTimestamps = <?php echo $timetitles; ?>;
+		var timestamps = <?php echo $timestamps; ?>;
 
-        gradientStroke2.addColorStop(1, 'rgba(20,23,39,0.2)');
-        gradientStroke2.addColorStop(0.2, 'rgba(72,72,176,0.0)');
-        gradientStroke2.addColorStop(0, 'rgba(20,23,39,0)');
-
-        new Chart(ctx2, {
-            type: "line",
-            data: {
-                labels: [
-				],
-                datasets: [{
-                    label: "Admin",
-                    tension: 0.4,
-                    borderWidth: 0,
-                    pointRadius: 0,
-                    borderColor: "#3C9D9B",
-                    borderWidth: 3,
-                    backgroundColor: gradientStroke1,
-                    fill: true,
-                    data: [
-                    ],
-                    maxBarThickness: 6
-                }, ],
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                plugins: {
-                    legend: {
-                        display: false,
-                    }
-                },
-                interaction: {
-                    intersect: false,
-                    mode: 'index',
-                },
-                scales: {
-                    y: {
-                        grid: {
-                            drawBorder: false,
-                            display: true,
-                            drawOnChartArea: true,
-                            drawTicks: false,
-                            borderDash: [5, 5]
-                        },
-                        ticks: {
-                            display: true,
-                            padding: 10,
-                            color: '#b2b9bf',
-                            font: {
-                                size: 11,
-                                family: "Open Sans",
-                                style: 'normal',
-                                lineHeight: 2
-                            },
-                        }
-                    },
-                    x: {
-                        grid: {
-                            drawBorder: false,
-                            display: false,
-                            drawOnChartArea: false,
-                            drawTicks: false,
-                            borderDash: [5, 5]
-                        },
-                        ticks: {
-                            display: true,
-                            color: '#b2b9bf',
-                            padding: 20,
-                            font: {
-                                size: 11,
-                                family: "Open Sans",
-                                style: 'normal',
-                                lineHeight: 2
-                            },
-                        }
-                    },
-                },
-            },
-        });
-    </script>
+		new Chart(ctx2, {
+			type: "line",
+			data: {
+				labels: titleTimestamps,  // Ganti dengan nilai-nilai yang sesuai
+				datasets: [
+					{
+					label: "Admin",
+					tension: 0.4,
+					borderWidth: 0,
+					pointRadius: 0,
+					borderColor: "#3C9D9B",
+					borderWidth: 3,
+					backgroundColor: gradientStroke1,
+					fill: true,
+					data: usersAdmin,  // Ganti dengan nilai-nilai yang sesuai
+					maxBarThickness: 6
+				},
+				{
+					label: "Pendaftar",
+					tension: 0.4,
+					borderWidth: 0,
+					pointRadius: 0,
+					borderColor: "#A9A9A9", // Ganti dengan warna yang sesuai
+					borderWidth: 3,
+					backgroundColor: gradientStroke2,
+					fill: true,
+					data: usersMahasiswa, // Ganti dengan nilai-nilai yang sesuai
+					maxBarThickness: 6
+				}
+			],
+			},
+			options: {
+				responsive: true,
+				maintainAspectRatio: false,
+				plugins: {
+					legend: {
+						display: false,
+					}
+				},
+				interaction: {
+					intersect: false,
+					mode: 'index',
+				},
+				scales: {
+					y: {
+						grid: {
+							drawBorder: false,
+							display: true,
+							drawOnChartArea: true,
+							drawTicks: false,
+							borderDash: [5, 5]
+						},
+						ticks: {
+							display: true,
+							padding: 10,
+							color: '#b2b9bf',
+							font: {
+								size: 11,
+								family: "Open Sans",
+								style: 'normal',
+								lineHeight: 2
+							},
+						}
+					},
+					x: {
+						grid: {
+							drawBorder: false,
+							display: false,
+							drawOnChartArea: false,
+							drawTicks: false,
+							borderDash: [5, 5]
+						},
+						ticks: {
+							display: true,
+							color: '#b2b9bf',
+							padding: 20,
+							font: {
+								size: 11,
+								family: "Open Sans",
+								style: 'normal',
+								lineHeight: 2
+							},
+						}
+					},
+				},
+			},
+		});
+	</script>
 @endpush
 
 @section('content')
 	<div class="row">
 		{{-- total users --}}
-		<div class="col-xl-3 col-lg-4 col-sm-6 col-12 mb-4">
+		<div class="col-xl-3 col-lg-4 col-sm-6 col-12 mb-3 mb-sm-4">
 			<div class="card card-stats mb-xl-0">
 				<div class="card-body" style="padding: 1rem 1.4rem;">
 					<div class="row align-items-center">
@@ -272,9 +243,26 @@
 				</div>
 			</div>
 		</div>
+		<div class="col-xl-3 col-lg-4 col-sm-6 col-12 mb-4 d-none d-sm-block">
+			<div class="card card-stats mb-xl-0">
+				<div class="card-body" style="padding: 1rem 1.4rem;">
+					<div class="row align-items-center">
+						<div class="col">
+							<h6 class="card-title text-uppercase text-muted mb-0">Mata Pelajaran</h6>
+							<span class="h2 lh-1 font-weight-bold mb-0">{{App\Models\Mapels::count()}}</span>
+						</div>
+						<div class="col-auto">
+							<div class="icon icon-shape bg-blue text-white rounded-circle shadow text-center">
+								<i class="fas fa-book-reader"></i>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
 		
 		{{-- admin, mahasiswa, mata kuliah, jurusan for mobile --}}
-		<div class="col-6 mb-4 d-block d-sm-none">
+		<div class="col-6 mb-3 d-block d-sm-none">
 			<div class="card">
 				<div class="card-body p-3 text-center">
 					<div class="d-flex justify-content-center align-items-center gap-2">
@@ -286,7 +274,7 @@
 				</div>
 			</div>
 		</div>
-		<div class="col-6 mb-4 d-block d-sm-none">
+		<div class="col-6 mb-3 d-block d-sm-none">
 			<div class="card">
 				<div class="card-body p-3 text-center">
 					<div class="d-flex justify-content-center align-items-center gap-2">
@@ -298,7 +286,7 @@
 				</div>
 			</div>
 		</div>
-		<div class="col-6 mb-4 d-block d-sm-none">
+		<div class="col-6 mb-3 d-block d-sm-none">
 			<div class="card">
 				<div class="card-body p-3 text-center">
 					<div class="d-flex justify-content-center align-items-center gap-2">
@@ -310,7 +298,7 @@
 				</div>
 			</div>
 		</div>
-		<div class="col-6 mb-4 d-block d-sm-none">
+		<div class="col-6 mb-3 d-block d-sm-none">
 			<div class="card">
 				<div class="card-body p-3 text-center">
 					<div class="d-flex justify-content-center align-items-center gap-2">
@@ -322,6 +310,18 @@
 				</div>
 			</div>
 		</div>
+		<div class="col-12 mb-3 d-block d-sm-none">
+			<div class="card">
+				<div class="card-body p-3 text-center">
+					<div class="d-flex justify-content-center align-items-center gap-2">
+						<i class="fas fa-book-reader opacity-10 text-blue"></i>
+						<h6 class="text-center mb-0 text-uppercase text-muted">Mata Pelajaran</h6>
+					</div>
+					<hr class="horizontal dark my-1">
+					<h5 class="mb-0">{{ App\Models\Mapels::count() }}</h5>
+				</div>
+			</div>
+		</div>
 
 		{{-- total pemasukan --}}
 		<div class="col-12 col-sm-6 mb-4">
@@ -330,8 +330,8 @@
 					<div class="row align-items-center">
 						<div class="col">
 							<h6 class="card-title text-uppercase text-muted mb-0">Pemasukan</h6>
-							<span class="h2 lh-1 font-weight-bold mb-0">
-								{{number_format($pemasukan,0,'','.')}} <small class="fs-5 font-weight-normal">rupiah</small>
+							<span class="h2 lh-1 font-weight-bold mb-0" id="pemasukan">
+								<span>{{number_format($pemasukan,0,'','.')}}</span><small class="fs-5 font-weight-normal">rupiah</small>
 							</span>
 						</div>
 						<div class="col-auto">
@@ -532,18 +532,18 @@
 				<div class="card-header pb-0">
 					<div class="row">
 						<div class="col-lg-6 col-7">
-						<h6>Daftar Pendaftar Terbaru</h6>
+							<h6>Daftar Pendaftar Terbaru</h6>
 						</div>
 						<div class="col-lg-6 col-5 my-auto text-end">
-						<div class="dropdown float-lg-end pe-4">
-							<a class="cursor-pointer" id="dropdownTable" data-bs-toggle="dropdown" aria-expanded="false">
-								<i class="fa fa-ellipsis-v text-secondary"></i>
-							</a>
-							<ul class="dropdown-menu px-2 py-3 ms-sm-n4 ms-n5" aria-labelledby="dropdownTable">
-								<li><a class="dropdown-item border-radius-md" href="{{ route('admin.pendaftar.index') }}">Tampilkan Pendaftar</a></li>
-								<li><a class="dropdown-item border-radius-md" href="{{ route('admin.mahasiswa.index') }}">Tampilkan Mahasiswa</a></li>
-							</ul>
-						</div>
+							<div class="dropdown float-lg-end pe-4">
+								<a class="cursor-pointer" id="dropdownTable" data-bs-toggle="dropdown" aria-expanded="false">
+									<i class="fa fa-ellipsis-v text-secondary"></i>
+								</a>
+								<ul class="dropdown-menu px-2 py-3 ms-sm-n4 ms-n5" aria-labelledby="dropdownTable">
+									<li><a class="dropdown-item border-radius-md" href="{{ route('admin.pendaftar.index') }}">Tampilkan Pendaftar</a></li>
+									<li><a class="dropdown-item border-radius-md" href="{{ route('admin.mahasiswa.index') }}">Tampilkan Mahasiswa</a></li>
+								</ul>
+							</div>
 						</div>
 					</div>
 				</div>
@@ -563,7 +563,7 @@
 							  </tr>
 							</thead>
 							<tbody>
-							  @forelse ($users->where('role', 'Mahasiswa')->take(10) as $index => $item)
+							  @forelse ($users->where('role', 'Mahasiswa')->take(20) as $index => $item)
 								<tr>
 									<td>
 									  <style>
@@ -684,7 +684,10 @@
 		<div class="col-lg-4 col-md-6">
 			<div class="card h-100">
 				<div class="card-header pb-0">
-					<h6>Daftar Transaksi Terbaru</h6>
+					<div class="d-flex justify-content-between align-items-center">
+						<h6 class="mb-0">Daftar Transaksi Terbaru</h6>
+						<a href="{{ route('admin.transaksi.index') }}" class="badge badge-sm text-xxs font-weight-bolder bg-gradient-info">Show</a>
+					</div>
 				</div>
 				<div class="card-body p-3">
 					@foreach ($transaksi->take(20) as $item)
@@ -694,7 +697,7 @@
 								<i class="fas fa-money-check-alt text-success text-gradient"></i>
 							</span>
 							<div class="timeline-content">
-								<h6 class="text-dark text-sm font-weight-bold mb-0">
+								<a href="{{ route('admin.transaksi.show', $item->id) }}" class="text-dark text-sm font-weight-bold mb-0">
 									Rp. {{ number_format($item->total,0,'','.') }},
 									<span class="font-weight-normal">
 										@if ($item->tagihanDetails)
@@ -703,7 +706,7 @@
 											{{ $item->jenis_tagihan }}
 										@endif
 									</span>
-								</h6>
+								</a>
 								<p class="text-secondary font-weight-normal text-xs mt-1 mb-0">
 									{{ $item->created_at->format('d M y H:i:s') }} - 
 									<a href="{{ route('admin.mahasiswa.show', $item->user->id) }}">{{ $item->user->name }}</a>

@@ -23,7 +23,7 @@
                                     </div>
                                     <div class="mb-3">
                                         <label class="form-label">Total : </label>
-                                        <strong>{{$transaksi->total}}</strong>
+                                        <strong>Rp {{number_format($transaksi->total)}}</strong>
                                     </div>
                                 </div>
                                 <div class="col-12 col-sm-6">

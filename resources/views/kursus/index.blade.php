@@ -237,7 +237,7 @@
                 <div class="carousel-indicators">
                     <button type="button" data-bs-target="#carouselDashboard" data-bs-slide-to="0" class="active" aria-current="true"></button>
                     @foreach ($banner->filter(function ($item) {
-                        return $item->target == 'MAHASISWA' || $item->target == 'SEMUA';
+                        return $item->target == 'KURSUS' || $item->target == 'SEMUA';
                         }) as $item)
                     <button type="button" data-bs-target="#carouselDashboard" data-bs-slide-to="{{ $loop->index+1 }}" class="" aria-current="true"></button>
                     @endforeach
@@ -259,7 +259,7 @@
                         </div>
                     </div>
                     @foreach ($banner->filter(function ($item) {
-                        return $item->target == 'MAHASISWA' || $item->target == 'SEMUA';
+                        return $item->target == 'KURSUS' || $item->target == 'SEMUA';
                         }) as $item)
                     <div class="carousel-item">
                         <div class="row flex-column justify-content-center height-300"

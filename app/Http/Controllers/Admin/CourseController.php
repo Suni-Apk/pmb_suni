@@ -41,6 +41,7 @@ class CourseController extends Controller
             'notes.*' => 'nullable|string',
             'desc' => 'required',
         ]);
+        $data['keyword'] = strtoupper(str_replace(' ', '', $request->name));
 
         $data['notes'] = $request->notes;
 
@@ -55,9 +56,11 @@ class CourseController extends Controller
                 'desc'      => $request->desc,
             ]);
 
+            $amount = $course->amount ? $course->amount : '';
+
             $admin = Administrasi::create([
                 'program_belajar' => 'Kursus',
-                'amount'          => $request->amount,
+                'amount'          => $amount,
                 'course_id'       => $course->id,
                 'id_tahunAjaran'  => TahunAjaran::latest()->where('status', 'Active')->first()->id,
             ]);
@@ -65,8 +68,7 @@ class CourseController extends Controller
             if ($desc) {
                 return redirect()->route('admin.course.index')->with('success', 'Berhasil Membuat Course');
             } else {
-                dump($course);
-                dd($desc);
+                return redirect()->back()->with('error', 'Ada kesalahan sistem');
             }
         } else {
             return redirect()->route('admin.course.index')->with('error', 'Gagal Membuat Course');
@@ -108,14 +110,13 @@ class CourseController extends Controller
             'notes.*' => 'nullable|string',
             'desc' => 'required',
         ]);
+        $data['keyword'] = strtoupper(str_replace(' ', '', $request->name));
 
         $data['notes'] = $request->notes;
 
         $course->update($data);
 
         if ($course) {
-            // dd($course);
-
             $descProgram = DescProgramBelajar::where('course_id', $course->id)->first();
             $key = strtoupper(str_replace(' ', '', $course->name));
             
@@ -133,11 +134,10 @@ class CourseController extends Controller
                 'id_tahunAjaran'  => TahunAjaran::latest()->where('status', 'Active')->first()->id,
             ]);
 
-            if ($desc) {
+            if ($desc && $admin) {
                 return redirect()->route('admin.course.index')->with('success', 'Berhasil Mengubah Course');
             } else {
-                dump($course);
-                dd($desc);
+                return redirect()->back()->with('error', 'Ada kesalahan sistem');
             }
         } else {
             return redirect()->route('admin.course.index')->with('error', 'Gagal Mengubah Course');

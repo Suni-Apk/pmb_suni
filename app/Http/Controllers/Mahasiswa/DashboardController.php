@@ -37,8 +37,12 @@ class DashboardController extends Controller
         $user = Auth::user();
         $banner = Banner::where('type', 'DASHBOARD')->get();
         $biodata = Biodata::where('program_belajar','S1')->where('user_id',$user->id)->first();
-        $links = Link::where('id_tahun_ajarans', $user->biodata->angkatan_id)->latest()->get();
+        if ($user->biodata) {
+            $links = Link::where('id_tahun_ajarans', $user->biodata->angkatan_id)->latest()->get();
+            return view('mahasiswa.index',compact('hijriDateday','hijriDatedayArabic','hijriDatemonth','hijriDateyear', 'user', 'biodata', 'banner', 'biayas', 'cicilanAll', 'links'));
+        } else {
+            return view('mahasiswa.index',compact('hijriDateday','hijriDatedayArabic','hijriDatemonth','hijriDateyear', 'user', 'biodata', 'banner', 'biayas', 'cicilanAll'));
+        }
 
-        return view('mahasiswa.index',compact('hijriDateday','hijriDatedayArabic','hijriDatemonth','hijriDateyear', 'user', 'biodata', 'banner', 'biayas', 'cicilanAll', 'links'));
     }
 }

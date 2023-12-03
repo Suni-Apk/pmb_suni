@@ -1,6 +1,6 @@
 @extends('layouts.master')
 
-@section('title', 'table template')
+@section('title', 'Upload Dokumen')
 
 @section('content')
     <div class="row">

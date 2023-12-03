@@ -62,7 +62,7 @@ class TransactionController extends Controller
             }
         }
 
-        return redirect()->route('admin.mahasiswa.show', $user->id)->with('success', 'Selamat anda berhasil menbayar');
+        return redirect()->route('admin.mahasiswa.show', $user->id)->with('success', 'Selamat anda berhasil membayar');
     }
     /**
      * Show the form for creating a new resource.
@@ -84,7 +84,8 @@ class TransactionController extends Controller
      */
     public function show(string $id)
     {
-        return view('admin.transactions.detail', compact('id'));
+        $transaksi = Transaksi::find($id);
+        return view('admin.transactions.detail', compact('transaksi'));
     }
 
     public function export(Request $request)
@@ -113,7 +114,11 @@ class TransactionController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $data = Transaksi::find($id);
+
+        $data->delete();
+
+        return redirect()->route('admin.transaksi.index')->with('delete', 'Anda berhasil menghapus data');
     }
 
     public function DaftarUlang(string $id, Request $request)
@@ -200,7 +205,7 @@ class TransactionController extends Controller
         $biaya = Biaya::where('program_belajar', 'S1')->where('jenis_biaya', 'DaftarUlang')->where('id_angkatans', $userId->biodata->angkatan_id)->latest()->first();
 
         $tagihanDetail = TagihanDetail::where('id_biayas', $biaya->id)->where('id_users', $userId->id)->latest()->first();
-
+        
         $transaksi = Transaksi::where('user_id', $userId->id)->where('no_invoice', $invoice)->first();
 
         // dd($transaksi);

@@ -51,7 +51,7 @@
                                 @csrf
                                 @method('POST')
                                 <div class="row">
-                                    <div class="col-6">
+                                    <div class="col-12 col-sm-6">
                                         <div class="mb-3">
                                             <label for="" class="form-label">Nama Lengkap <strong
                                                     class="text-danger">*</strong></label>
@@ -81,16 +81,18 @@
                                                 <label for="" class="text-danger">{{ $message }}</label>
                                             @enderror
                                         </div>
-                                        <div class="form-check form-check-info text-left">
-                                            <input class="form-check-input" type="checkbox" value="" id="checkBill"
-                                                checked>
-                                            <label class="form-check-label" for="checkBill">
-                                                I agree the <a href="" class="text-dark font-weight-bolder">Terms and
-                                                    Conditions</a>
-                                            </label>
+                                        <div class="mb-3">
+                                            <label for="birthdate" class="form-label">Ulangi Password <strong
+                                                    class="text-danger">*</strong></label>
+                                            <input type="password" name="password_confirmation"
+                                                class="form-control @error('password_confirmation') is-invalid @enderror"
+                                                placeholder="Password" aria-label="Password">
+                                            @error('password_confirmation')
+                                                <label for="" class="text-danger">{{ $message }}</label>
+                                            @enderror
                                         </div>
                                     </div>
-                                    <div class="col-6">
+                                    <div class="col-12 col-sm-6">
                                         <div class="mb-3">
                                             <label for="" class="form-label">Email <strong
                                                     class="text-danger">*</strong></label>
@@ -115,27 +117,31 @@
                                             @enderror
                                         </div>
                                         <div class="mb-3">
-                                            <label for="gender" class="form-label">Pilih Program Akademik<strong
+                                            <label for="gender" class="form-label">Program Akademik<strong
                                                     class="text-danger">*</strong></label>
                                             <select name="program_belajar" id="gender"
                                                 class="form-select @error('program_belajar') is-invalid @enderror">
                                                 <option value="" disabled selected>Pilih Program Akademik</option>
                                                 <option value="S1">S1</option>
                                                 <option value="KURSUS" selected>KURSUS</option>
+                                                {{-- @php
+                                                    $courses = App\Models\Course::get();
+                                                @endphp
+                                                @foreach ($courses as $item)
+                                                    <option value="{{ $item->keyword }}">{{ $item->name }}</option>
+                                                @endforeach --}}
                                             </select>
                                             @error('program_belajar')
                                                 <label for="" class="text-danger">{{ $message }}</label>
                                             @enderror
                                         </div>
-                                        <div class="mb-3">
-                                            <label for="birthdate" class="form-label">Ulangi Password <strong
-                                                    class="text-danger">*</strong></label>
-                                            <input type="password" name="password_confirmation"
-                                                class="form-control @error('password_confirmation') is-invalid @enderror"
-                                                placeholder="Password" aria-label="Password">
-                                            @error('password_confirmation')
-                                                <label for="" class="text-danger">{{ $message }}</label>
-                                            @enderror
+                                        <div class="form-check form-check-info text-left">
+                                            <input class="form-check-input" type="checkbox" value="" id="checkBill"
+                                                checked>
+                                            <label class="form-check-label" for="checkBill">
+                                                I agree the <a href="" class="text-dark font-weight-bolder">Terms and
+                                                    Conditions</a>
+                                            </label>
                                         </div>
                                     </div>
                                 </div>
@@ -143,7 +149,7 @@
                                     <button type="submit" id="nextStep" class="btn bg-gradient-dark w-100 my-4 mb-2">Sign
                                         up</button>
                                 </div>
-                                <p class="text-sm mt-3 mb-0">Sudah punya akun? <a href=""
+                                <p class="text-sm mt-3 mb-0">Sudah punya akun? <a href="{{ route('login') }}"
                                         class="text-dark text-gradient font-weight-bolder">Sign in</a></p>
                             </form>
                             {{-- <script>

@@ -10,7 +10,7 @@
 @section('content')
 <section class="min-vh-25 mb-n4 overflow-x-hidden">
 
-    <div id="carouselWelcome" class="carousel slide page-header align-items-start height-600 pb-7 m-3 border-radius-lg" data-bs-ride="carousel" data-bs-interval="3000">
+    <div id="carouselWelcome" class="carousel slide page-header align-items-start height-600 pb-7 m-3 border-radius-lg" data-bs-ride="carousel" data-bs-interval="3000" style="background-color: #fff;">
         <div class="carousel-indicators" style="top: 5rem;">
             @foreach ($banner as $item)
             <button type="button" data-bs-target="#carouselWelcome" data-bs-slide-to="{{ $loop->index }}" class="{{ $loop->first ? 'active' : '' }}" aria-current="true"></button>
@@ -46,28 +46,14 @@
             <h1 class=" lh-1 text-uppercase">{{ App\Models\General::first()->name }}</h1>
             <div class="mx-auto d-flex justify-content-center gap-2 mt-2 mt-sm-4">
                 @if (!Auth::user())
-                <div class="dropdown">
-                    <button class="btn bg-gradient-dark dropdown-toggle me-2 mb-0 rounded-pill" data-bs-toggle="dropdown" id="dropdownReg">
+                <div class="nav-item">
+                    <a class="btn bg-gradient-dark mb-0 rounded-pill" href="{{route('register')}}">
                         Daftar
-                    </button>
-                    <ul class="dropdown-menu" aria-labelledby="dropdownReg">
-                        <li>
-                            <a class="dropdown-item" href="{{ route('s1.register') }}">
-                                <i class="me-2 fas fa-graduation-cap"></i>
-                                Program Formal
-                            </a>
-                        </li>
-                        <li>
-                            <a class="dropdown-item" href="{{ route('kursus.register') }}">
-                                <i class="me-2 fas fa-user-tag"></i>
-                                Program Non Formal
-                            </a>
-                        </li>
-                    </ul>
+                    </a>
                 </div>
                 @endif
                 <a href="#informasi" class="btn rounded-pill btn-outline-secondary" 
-                data-bs-toggle="tooltip" data-bs-placement="right" title="Butuh informasi?">Selengkapnya</a>
+                data-bs-toggle="tooltip" data-bs-placement="right" title="Butuh informasi?">Selengkapnya <i class="fas fa-arrow-down ms-1"></i></a>
             </div>
         </div>
     </div>
@@ -95,7 +81,7 @@
                                     {!! $item->desc !!}
                                 </div>
                                 <div class="col-12 col-sm-3 py-2 px-1 d-flex flex-column justify-content-start align-items-center">
-                                    <a href="{{ App\Models\General::first()->url }}" class="px-2 btn bg-gradient-info">
+                                    <a href="{{ App\Models\General::first()->url }}" class="px-3 btn bg-gradient-info rounded-pill">
                                         Informasi Lebih Lengkap <i class="fa fa-arrow-right ms-1"></i>
                                     </a>
                                     <ul class="list-group">
@@ -108,8 +94,11 @@
                                                 @foreach ($item->course->notes as $note)
                                                 <li class="list-group-item text-sm lh-sm">
                                                     {{ $note }}
+                                                    @endforeach
                                                 </li>
-                                                @endforeach
+                                                <li class="list-group-item text-sm lh-sm">
+                                                    Biaya Administrasi : Rp. {{ number_format($item->course->administrasi->amount,0,'','.') }},-
+                                                </li>
                                             @endif
                                         @endif
                                         <li class="list-group-item text-sm lh-sm">
