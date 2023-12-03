@@ -8,6 +8,7 @@
             <div class="col-12">
                 <div class="card mb-4">
                     <div class="card-header">
+                        <h4>Detail Mahasiswa <span class="text-danger">*</span></h4>
                     </div>
                     <div class="card-body">
                         <div class="shadow-sm mb-3">
@@ -22,7 +23,7 @@
                                     <tbody class="table-border-bottom-0">
                                         <tr>
                                             <td class="text-sm">
-                                                Nama : 
+                                                Nama :
                                                 {{ $mahasiswa->name }}</td>
                                         </tr>
                                         <tr>

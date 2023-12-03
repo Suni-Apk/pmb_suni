@@ -8,6 +8,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Biaya;
 use App\Models\Biodata;
 use App\Models\Cicilan;
+use App\Models\Tagihan;
 use App\Models\TagihanDetail;
 use App\Models\TahunAjaran;
 use App\Models\Transaksi;
@@ -137,15 +138,18 @@ class AccountController extends Controller
     public function mahasiswa(Request $request)
     {
         $tahun_ajaran = TahunAjaran::all();
+        $mahasiswaAll = User::where('role', 'Mahasiswa')->get();
         $tahunAjaran = $request->input('angkatan_id');
 
-        $mahasiswa = Biodata::when($tahunAjaran, function ($query) use ($tahunAjaran) {
-            $query->whereHas('user', function ($query) use ($tahunAjaran) {
+        if ($tahunAjaran) {
+            $mahasiswa = User::whereHas('biodata', function ($query) use ($tahunAjaran) {
                 $query->where('angkatan_id', $tahunAjaran);
-            });
-        })->get();
+            })->where('role', 'Mahasiswa')->get();
+        } else {
+            $mahasiswa = $mahasiswaAll;
+        }
 
-        return view('admin.account.mahasiswa.index', compact('mahasiswa', 'tahun_ajaran', 'tahunAjaran'));
+        return view('admin.account.mahasiswa.index', compact('mahasiswa', 'tahun_ajaran', 'tahunAjaran', 'mahasiswaAll'));
     }
 
 
@@ -321,5 +325,24 @@ class AccountController extends Controller
 
     public function pendaftar_delete()
     {
+    }
+    public function deleteAll(Request $request)
+    {
+        $ids = $request->ids;
+        $user = User::where('role', 'Mahasiswa')->whereIn('id', $ids);
+        $biodata = Biodata::whereIn('user_id', $ids);
+        $tagihanDetail =  TagihanDetail::whereIn('id_users', $ids);
+        $tagihanDetailGet =  TagihanDetail::whereIn('id_users', $ids)->get();
+
+        foreach ($tagihanDetailGet as $value) {
+            $cicilan = Cicilan::whereIn('id_tagihan_details', $value->id);
+            $cicilan->delete();
+        }
+
+        $tagihanDetail->delete();
+        $biodata->delete();
+        $user->delete();
+
+        return redirect()->back();
     }
 }

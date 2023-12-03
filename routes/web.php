@@ -129,6 +129,7 @@ Route::prefix('/admin')->middleware(['admin', 'auth'])->name('admin.')->group(fu
         Route::get('/bayar/{id}', [AccountController::class, 'mahasiswa_bayar'])->middleware(['Pembayaran'])->name('bayar');
         Route::get('/program/{id}', [AccountController::class, 'mahasiswa_program'])->name('program');
         Route::get('/exportMahasiswa', [AccountController::class, 'exportMahasiswa'])->name('exportMahasiswa');
+        Route::delete('/DeleteAll', [AccountController::class, 'deleteAll'])->name('delete.all');
     });
     Route::get('/demo-cicilan/{id}', [TransactionController::class, 'demo_cicilan'])->name('transactions.cicilan');
     Route::put('/demoBayar/{id}', [TransactionController::class, 'demo_bayar_cicilan_admin'])->name('transactions.cicilan.bayar');
@@ -178,11 +179,14 @@ Route::prefix('/admin')->middleware(['admin', 'auth'])->name('admin.')->group(fu
     Route::resource('/jurusan', JurusanController::class);
     Route::get('/exportJurusan', [JurusanController::class, 'exportJurusan'])->name('exportJurusan');
     Route::resource('/transaksi', TransactionController::class);
+    Route::delete('/DeleteAll-transaksi', [TransactionController::class, 'deleteAll'])->name('transaksi.delete.all');
+
     Route::get('/exportTransaction', [TransactionController::class, 'export'])->name('exportTransaction');
-    Route::resource('/tagihan', AdminTagihanController::class);
+    // Route::resource('/tagihan', AdminTagihanController::class);
     Route::resource('/dokumen', AdminDocumentController::class);
     Route::resource('/course', CourseController::class);
     Route::resource('/tagihan', AdminTagihanController::class);
+    Route::delete('/tagihanDeletes', [AdminTagihanController::class, 'deleteAll'])->name('tagihan.deletes');
     Route::get('/next', [AdminTagihanController::class, 'next'])->name('tagihan.next');
 
     //data settings
@@ -276,7 +280,7 @@ Route::prefix('/mahasiswa')->middleware(['auth', 'mahasiswa', 's1'])->name('maha
 
     //biodata
     Route::prefix('/biodata')->name('pendaftaran.')->group(function () {
-        Route::get('/', [BiodataController::class, 'pendaftaran_s1'])->name('s1');
+        Route::get('/', [BiodataController::class, 'pendaftaran_s1'])->middleware('DaftarUlang')->name('s1');
         Route::post('/process', [BiodataController::class, 'pendaftaran_s1_process'])->name('s1.process');
         Route::get('/edit/{id}', [MahasiswaProfileController::class, 'edit_biodata'])->name('s1.edit');
         Route::put('/edit/process/{id}', [MahasiswaProfileController::class, 'edit_biodata_process'])->name('s1.edit.process');

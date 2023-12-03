@@ -23,4 +23,12 @@ class Cicilan extends Model
     {
         $this->belongsTo(TagihanDetail::class, 'id_tagihan_details');
     }
+    public function transaction()
+    {
+        $this->hasOne(Transaksi::class, 'id_cicilans');
+    }
+    public function transactions()
+    {
+        $this->belongsTo(Cicilan::class, 'id_transactions');
+    }
 }

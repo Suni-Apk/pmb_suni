@@ -399,9 +399,10 @@ class TransaksiController extends Controller
                 'total' => $total,
                 'payment_link' => $payment['Data']['Url'],
                 'jenis_pembayaran' => 'cicilan',
-                'jenis_tagihan' => 'Daftar Ulang Cicilan',
+                'jenis_tagihan' => 'Daftar Ulang CicilanDaftar Ulang Cicilan',
                 'no_invoice' => $payment['Data']['SessionID'],
                 'user_id' => Auth::user()->id,
+                'id_cicilans' => $cicilan->id,
             ]);
             // foreach ($id_tagihan as $tagihandetails) {
             $idTagihan = Cicilan::where('id', $id_tagihan);
