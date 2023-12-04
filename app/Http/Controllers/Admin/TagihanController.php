@@ -444,6 +444,24 @@ class TagihanController extends Controller
     /**
      * Remove the specified resource from storage.
      */
+
+    public function deleteAll(Request $request)
+    {
+        //
+        $sid = $request->ids;
+        $biaya = Biaya::whereIn('id', $sid);
+        $tagihans = Tagihan::whereIn('id_biayas', $sid)->get();
+        $tagihan = Tagihan::whereIn('id_biayas', $sid);
+
+        foreach ($tagihans as $tagihanDelete) {
+            $detail = TagihanDetail::where('id_tagihans', $tagihanDelete->id);
+            $detail->delete();
+        }
+        $tagihan->delete();
+        $biaya->delete();
+
+        return redirect()->back()->with('success', 'Berhasil menghapus biaya yang terpilih');
+    }
     public function destroy($id)
     {
         //

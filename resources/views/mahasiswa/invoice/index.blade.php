@@ -152,11 +152,12 @@
 
 					$user = Auth::user();
 					$tagihan = App\Models\TagihanDetail::where('id_biayas', $biaya->id)->where('id_users', $user->id)->latest()->first();
-
+					$transaksis = App\Models\Transaksi::where('user_id',$user->id)
+						->get();
 					$transaksiCicilan = App\Models\Cicilan::where('id_tagihan_details',$tagihan->id)->where('status','LUNAS')
 					->get();
+					// dd($transaksiCicilan);
 					// Menghitung total pembayaran yang telah dilakukan
-					$transaksi = App\Models\Transaksi::where('user_id',$user->id)->where('id_cicilans',$transaksiCicilan->id)->get();
 					// $transaksiCash = App\Models\Transaksi::where('user_id',Auth::user()->id)->where('jenis_pembayaran','cash')->where('status','berhasil')->first();
 					$transaksiCash = App\Models\Transaksi::where('user_id', $user->id)
                                 ->where('tagihan_detail_id', $tagihan->id)
@@ -165,26 +166,44 @@
                                 ->first();
 				@endphp
 
-				@if (!$transaksiCash && $transaksiCicilan)
-				{{-- @dd($transaksiCicilan) --}}
+				@if (!$transaksiCash && $transaksis)
+					@php
+						$nomor = 1;
+					@endphp
 					@foreach ($transaksiCicilan as $item)
-							<tr class="details">
-								<td>Cicilan {{$loop->iteration}}: </td>
-	
-								<td>Rp. {{number_format(round($item->total),0,'','.')}},-</td>
-							</tr>
-							<tr>
-								<td>No Invoice</td>
-								<td>{{$item->no_invoice}}</td>
-							</tr>
+						@php
+							$transaksi = App\Models\Transaksi::where('user_id',$user->id)
+						->where('id_cicilans',$item->id)
+						->get();
+						@endphp
+						@foreach ($transaksi as $value)
+								<tr>
+									<td>Cicilan {{$nomor++}}: </td>
+									<td>Rp. {{number_format(round($value->total), 0, '', '.')}},-</td>
+								</tr>
+								<tr>
+									<td>No Invoice</td>
+									<td>{{ $value->no_invoice }}</td>
+								</tr>
+						@endforeach
 					@endforeach
-				@elseif($transaksiCash && !$transaksiCicilan)
+					{{-- @foreach ($transaksi as $item)
+						<tr class="details">
+							<td>Cicilan {{$loop->iteration}}: </td>
+							<td>Rp. {{number_format(round($item->total), 0, '', '.')}},-</td>
+						</tr>
+						<tr>
+							<td>No Invoice</td>
+							<td>{{ optional($item->transaction)->no_invoice }}</td>
+						</tr>
+					@endforeach --}}
+				@elseif($transaksiCash && !$transaksis)
 					<tr class="details">
 						<td>Daftar Ulang Cash: </td>
-
 						<td>Rp. {{number_format(round($transaksiCash->total),0,'','.')}},-</td>
 					</tr>
 				@endif
+
 
 
 				<tr class="heading">

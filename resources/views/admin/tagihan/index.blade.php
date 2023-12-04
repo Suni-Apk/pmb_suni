@@ -64,14 +64,17 @@
                         <table class="table align-items-center mb-0" id="templateTable">
                             <thead>
                                 <tr>
-                                    <th>No</th>
+                                    <th class="d-flex text-uppercase text-secondary text-xs font-weight-bolder opacity-8">
+                                        Pilih</th>
+                                    <th class="text-uppercase text-secondary text-xs font-weight-bolder opacity-8">No
+                                    </th>
                                     <th class=" text-uppercase text-secondary text-xs font-weight-bolder opacity-8">
                                         Nama
                                         Tagihan</th>
                                     <th class="text-uppercase text-secondary text-xs px-2 font-weight-bolder opacity-8">
                                         Tahun / Angkatan</th>
                                     <th class=" text-uppercase text-secondary text-xs font-weight-bolder opacity-8">
-                                        Jurusan / Prodi</th>
+                                        Jurusan / Kursus</th>
                                     <th class=" text-uppercase text-secondary text-xs font-weight-bolder opacity-8">
                                         Program Belajar</th>
                                     <th class=" text-uppercase text-secondary text-xs font-weight-bolder opacity-8">
@@ -86,6 +89,8 @@
                             <tbody>
                                 @foreach ($biaya as $key => $biayas)
                                     <tr>
+                                        <td><input type="checkbox" name="ids" id="" class="checksAll"
+                                                value="{{ $biayas->id }}"></td>
                                         <td class="align-middle text-xs font-weight-bold">{{ $key + 1 }}</td>
                                         <td class="align-middle  text-secondary text-xs font-weight-bold">
                                             <strong>{{ $biayas->nama_biaya }}</strong>
@@ -95,7 +100,13 @@
                                         </td>
 
                                         <td class="align-middle  text-secondary text-xs font-weight-bold">
-                                            {{ $biayas->jurusans->name ?? '-' }}
+                                            @if ($biayas->jurusans?->name != null && $biayas->program_belajar == 'S1')
+                                                {{ $biayas->jurusans->name }}
+                                            @elseif ($biayas->jurusans?->name == null && $biayas->program_belajar == 'KURSUS')
+                                                {{ $biayas->kursus->name }}
+                                            @elseif ($biayas->jurusans?->name == null)
+                                                Semua Jurusan
+                                            @endif
 
                                         </td>
                                         <td class="align-middle  text-secondary text-xs font-weight-bold">
@@ -133,8 +144,17 @@
                                         </td>
                                     </tr>
                                 @endforeach
+
                             </tbody>
                         </table>
+                    </div>
+                    <div class="d-flex ms-4 mb-4 mt-3">
+                        <input type="checkbox" id="select_all_ids" class="chek me-2">
+                        <a href="#" id="ClikKabeh" class="text-secondary">Pilih Semua</a>
+                        <div class=" ms-4">
+                            <i class="fas fa-trash me-1 cursor-pointer" style="color: #ff0000;" id="deleteAll"></i>
+                            <a href="#" class="text-secondary" id="All">Hapus</a>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -186,6 +206,88 @@
         const dataTableBasic = new simpleDatatables.DataTable("#templateTable", {
             searchable: true,
             fixedHeight: true,
+        });
+    </script>
+    <script>
+        function check() {
+            // document.getElementByClassName('.checksAll').checked = true;
+            var checkbox = document.getElementById("select_all_ids");
+            checkbox.checked = !checkbox.checked;
+        }
+    </script>
+    <script>
+        $(function(e) {
+            $("#ClikKabeh").click(function() {
+                $('.checksAll, #select_all_ids').prop('checked', function() {
+                    return !$(this).prop("checked");
+                });
+            });
+            $("#select_all_ids").click(function() {
+                $('.checksAll').prop('checked', $(this).prop('checked'));
+            });
+            $("#All").click(function() {
+                $('#deleteAll').click();
+            });
+
+            $("#deleteAll").click(function(e) {
+                e.preventDefault();
+                var all_ids = [];
+
+                $('input:checkbox[name="ids"]:checked').each(function() {
+                    all_ids.push($(this).val());
+                });
+                if ($('.checksAll').is(':checked')) {
+                    Swal.fire({
+                        title: "Apakah Anda Yakin Ingin Menghapus Tagihan?",
+                        text: "You won't be able to revert this!",
+                        icon: "warning",
+                        showCancelButton: true,
+                        confirmButtonColor: "#3085d6",
+                        cancelButtonColor: "#d33",
+                        confirmButtonText: "Yes, delete it!"
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            $.ajax({
+                                url: "{{ route('admin.tagihan.deletes') }}",
+                                type: "DELETE",
+                                data: {
+                                    ids: all_ids
+                                },
+                                headers: {
+                                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr(
+                                        'content')
+                                },
+                                success: function(response) {
+                                    // Handle response jika diperlukan
+                                    // Misalnya, menampilkan pesan sukses
+                                    // Lakukan reload halaman setelah permintaan AJAX selesai
+                                },
+                                error: function(xhr, status, error) {
+                                    // Handle error jika diperlukan
+
+                                }
+                            });
+                            Swal.fire({
+                                title: "Deleted!",
+                                text: "Your file has been deleted.",
+                                icon: "success"
+                            }).then((result) => {
+                                if (result.isConfirmed) {
+                                    location.reload();
+                                }
+                            });
+                        }
+                    });
+                }
+                if (!$('.checksAll').is(':checked')) {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Oops...',
+                        text: 'Pilih Minimal 1!',
+                    })
+                }
+
+            });
         });
     </script>
 @endpush

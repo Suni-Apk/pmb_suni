@@ -305,7 +305,6 @@
                                 <label for="tanggal">Tanggal</label>
                                 <input type="date" name="tanggal" id="tanggal" class="form-control">
                             </div>
-
                                 <button type="submit" class="btn btn-success">Submit</button>
                                 <button type="button" class="btn btn-warning" data-bs-dismiss="modal">Batal</button>
                             </form>

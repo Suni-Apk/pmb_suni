@@ -24,7 +24,6 @@ class IpaymuController extends Controller
 
         $transaction = Transaksi::with('user')->where('no_invoice', $sid)->first();
         if ($status == 'berhasil') {
-
             if ($transaction->jenis_tagihan != 'Daftar Ulang Cicilan' && $transaction->jenis_tagihan != 'DaftarUlang') {
                 $transaction->update([
                     'status' => $status,

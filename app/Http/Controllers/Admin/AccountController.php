@@ -9,6 +9,7 @@ use App\Models\Administrasi;
 use App\Models\Biaya;
 use App\Models\Biodata;
 use App\Models\Cicilan;
+use App\Models\Tagihan;
 use App\Models\TagihanDetail;
 use App\Models\TahunAjaran;
 use App\Models\Transaksi;
@@ -379,5 +380,24 @@ class AccountController extends Controller
 
     public function pendaftar_delete()
     {
+    }
+    public function deleteAll(Request $request)
+    {
+        $ids = $request->ids;
+        $user = User::where('role', 'Mahasiswa')->whereIn('id', $ids);
+        $biodata = Biodata::whereIn('user_id', $ids);
+        $tagihanDetail =  TagihanDetail::whereIn('id_users', $ids);
+        $tagihanDetailGet =  TagihanDetail::whereIn('id_users', $ids)->get();
+
+        foreach ($tagihanDetailGet as $value) {
+            $cicilan = Cicilan::whereIn('id_tagihan_details', $value->id);
+            $cicilan->delete();
+        }
+
+        $tagihanDetail->delete();
+        $biodata->delete();
+        $user->delete();
+
+        return redirect()->back();
     }
 }

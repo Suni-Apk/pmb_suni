@@ -3,222 +3,117 @@
 @section('title', 'Detail Transaction')
 
 @section('content')
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
+            <li class="breadcrumb-item text-sm"><a class="opacity-5 text-dark" href="{{ route('dashboard') }}">Pages</a>
+            </li>
+            <li class="breadcrumb-item text-sm text-dark active" aria-current="page">Transactions</li>
+        </ol>
+        <h6 class="font-weight-bolder mb-0">Detail Transaction {{$transaksi->jenis_tagihan}}</h6>
+    </nav>
+    <div class="card h-100 mt-4">
+        <div class="card-body p-3">
+            <div class="shadow-sm mb-3">
+                <div class="table-responsive p-0">
+                    <table class="table align-items-center mb-0">
+                        <thead class="table-dark">
+                            <tr>
+                                <th>Transaction Information</th>
+                            </tr>
 
-    @if ($transaksi->jenis_tagihan == 'Routine')
-        <nav aria-label="breadcrumb">
-            <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
-                <li class="breadcrumb-item text-sm"><a class="opacity-5 text-dark" href="{{ route('dashboard') }}">Pages</a>
-                </li>
-                <li class="breadcrumb-item text-sm text-dark active" aria-current="page">Transactions</li>
-            </ol>
-            <h6 class="font-weight-bolder mb-0">Detail Transaction Spp</h6>
-        </nav>
-        <div class="card h-100 mt-4">
-            <div class="card-body p-3">
-                <div class="shadow-sm mb-3">
-                    <div class="table-responsive p-0">
-                        <table class="table align-items-center mb-0">
-                            <thead class="table-dark">
-                                <tr>
-                                    <th>Transaction Information</th>
-                                </tr>
+                        </thead>
+                        <tbody class="table-border-bottom-0">
+                            <tr>
+                                <td class="text-sm">Nama Pembayaran : <strong>{{$transaksi->jenis_tagihan}}</strong></td>
+                            </tr>
+                            <tr>
+                                <td class="text-sm">Nama Pembayar : <strong>{{$transaksi->user->name}}</strong></td>
+                            </tr>
+                            <tr>
+                                <form action="{{ route('admin.invoice.download',$transaksi->id) }}" method="POST">
+                                    @csrf
+                                    @method('POST')
+                                    <td class="text-sm">Invoice Tagihan : <button name="jenis_tagihan" value="{{$transaksi->jenis_tagihan}}"
+                                        class="btn btn-success py-2 px-3 ms-2 mb-0"> <i class="fas fa-file-invoice"></i>
+                                        Cetak</button></td>
+                                </form>
+                            </tr>
+                            <tr>
+                                <td class="text-sm">Total Pembayaran : <strong>Rp {{ number_format($transaksi->total) }}</strong></td>
+                            </tr>
+                            <tr>
+                                <td class="text-sm">Tanggal Pembayaran : <strong>{{ $transaksi->created_at->format('d F Y') }}</strong></td>
+                            </tr>
 
-                            </thead>
-                            <tbody class="table-border-bottom-0">
-                                <tr>
-                                    <td class="text-sm">Nama Pembayaran : <strong>Spp Tahun 2022 / 2023</strong></td>
-                                </tr>
-                                <tr>
-                                    <td class="text-sm">Nama Pembayar : <strong>Asep Mine</strong></td>
-                                </tr>
-                                <tr>
-                                    <td class="text-sm">Invoice Tagihan : <a href="#"
-                                            class="btn btn-success py-2 px-3 ms-2 mb-0"> <i class="fas fa-file-invoice"></i>
-                                            Cetak</a></td>
-                                </tr>
-                                <tr>
-                                    <td class="text-sm">Total Pembayaran : <strong>Rp 400.000</strong></td>
-                                </tr>
-                                <tr>
-                                    <td class="text-sm">Tanggal Pembayaran : <strong>28/10/2023</strong></td>
-                                </tr>
-
-                            </tbody>
-                        </table>
-                    </div>
+                        </tbody>
+                    </table>
                 </div>
-                <div class="shadow-sm">
-                    <div class="table-responsive mb-3 p-0">
-                        <table class="table table-border align-items-center mb-0 " id="templateTable">
-                            <thead class="table-dark">
-                                <tr>
-                                    <th class="text-uppercase text-sm font-weight-bolder text-center" colspan="3">Tagihan
-                                        yang
-                                        dibayarkan</th>
-                                </tr>
-                                <tr>
-                                    <th class="text-uppercase text-sm font-weight-bolder">No</th>
-                                    <th class="text-uppercase text-sm font-weight-bolder">Nama Tagihan</th>
-                                    <th class="text-uppercase text-sm font-weight-bolder">Total harga</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td class="">1</td>
-                                    <td class="">Agustus</td>
-                                    <td class="">Rp 200.000</td>
-                                </tr>
-                                <tr>
-                                    <td class="">2</td>
-                                    <td class="">September</td>
-                                    <td class="">Rp 200.000</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-                <a href="{{ route('admin.transaksi.index') }}" class="btn btn-warning"><i class="fas fa-backward"></i>
-                    Back</a>
             </div>
-
-        </div>
-    @endif
-    @if ($transaksi->jenis_tagihan == 'Tidakroutine')
-        <nav aria-label="breadcrumb">
-            <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
-                <li class="breadcrumb-item text-sm"><a class="opacity-5 text-dark" href="{{ route('dashboard') }}">Pages</a>
-                </li>
-                <li class="breadcrumb-item text-sm text-dark active" aria-current="page">Transactions</li>
-            </ol>
-            <h6 class="font-weight-bolder mb-0">Detail Tagihan Jas</h6>
-        </nav>
-        <div class="card h-100 mt-4">
-            <div class="card-body p-3">
-                <div class="shadow-sm mb-3">
-                    <div class="table-responsive p-0">
-                        <table class="table align-items-center mb-0">
-                            <thead class="table-dark">
-                                <tr>
-                                    <th>Transaction Information</th>
-                                </tr>
-
-                            </thead>
-                            <tbody class="table-border-bottom-0">
-                                <tr>
-                                    <td class="text-sm">Nama Pembayaran : <strong>Tagihan Jas</strong></td>
-                                </tr>
-                                <tr>
-                                    <td class="text-sm">Nama Pembayar : <strong>Bopak Kastelo</strong></td>
-                                </tr>
-                                <tr>
-                                    <td class="text-sm">Invoice Tagihan : <a href="#"
-                                            class="btn btn-success py-2 px-3 ms-2 mb-0"> <i class="fas fa-file-invoice"></i>
-                                            Cetak</a></td>
-                                </tr>
-                                <tr>
-                                    <td class="text-sm">Total Pembayaran : <strong>Rp 400.000</strong></td>
-                                </tr>
-                                <tr>
-                                    <td class="text-sm">Tanggal Pembayaran : <strong>28/10/2023</strong></td>
-                                </tr>
-
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-                <div class="shadow-sm">
-                    <div class="table-responsive mb-3 p-0">
-                        <table class="table table-border align-items-center mb-0 " id="templateTable">
-                            <thead class="table-dark">
-                                <tr>
-                                    <th class="text-uppercase text-sm font-weight-bolder" colspan="3">Tagihan
-                                        yang
-                                        dibayarkan</th>
-                                </tr>
-                                <tr>
-                                    <th class="text-uppercase text-sm font-weight-bolder">No</th>
-                                    <th class="text-uppercase text-sm font-weight-bolder">Nama Tagihan</th>
-                                    <th class="text-uppercase text-sm font-weight-bolder">Total harga</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td class="">1</td>
-                                    <td class="">Tagihan Jas</td>
-                                    <td class="">Rp 400.000</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-                <a href="{{ route('admin.transaksi.index') }}" class="btn btn-warning"><i class="fas fa-backward"></i>
-                    Back</a>
-            </div>
-        </div>
-    @endif
-    @if ($transaksi->jenis_tagihan == 'Administrasi')
-        <nav aria-label="breadcrumb">
-            <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
-                <li class="breadcrumb-item text-sm"><a class="opacity-5 text-dark" href="{{ route('dashboard') }}">Pages</a>
-                </li>
-                <li class="breadcrumb-item text-sm text-dark active" aria-current="page">Transactions</li>
-            </ol>
-            <h6 class="font-weight-bolder mb-0">Detail Tagihan Administrasi</h6>
-        </nav>
-        <div class="card h-100 mt-4">
-            <div class="card-body p-3">
-                <div class="shadow-sm mb-3">
-                    <div class="table-responsive p-0">
-                        <table class="table align-items-center mb-0">
-                            <thead class="table-dark">
-                                <tr>
-                                    <th>Transaction Information</th>
-                                </tr>
-
-                            </thead>
-                            <tbody class="table-border-bottom-0">
-                                <tr>
-                                    <td class="text-sm">Nama Tagihan : <strong>Administrasi</strong></td>
-                                </tr>
-                                <tr>
-                                    <td class="text-sm">Nama Pembayar :
-                                        <strong>{{ $transaksi->user->name ?? 'User not available' }}</strong></td>
-                                </tr>
-                                <tr>
-                                    <td class="text-sm">Invoice Tagihan : <a href="#"
-                                            class="btn btn-success py-2 px-3 ms-2 mb-0"> <i
-                                                class="fas fa-file-invoice"></i>
-                                            Cetak</a></td>
-                                </tr>
-                                <tr>
-                                    <td class="text-sm">Total Pembayaran : <strong>Rp
-                                            {{ number_format($transaksi->total) }}</strong></td>
-                                </tr>
-                                <tr>
-                                    <td class="text-sm">Tanggal Pembayaran:
-                                        <strong>{{ $transaksi->created_at->format('d F Y') }}</strong></td>
-                                </tr>
-
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-                <div class="shadow-sm">
-                    <div class="table-responsive mb-3 p-0">
-                        <table class="table table-border align-items-center mb-0 " id="templateTable">
-                            <thead class="table-dark">
-                                <tr>
-                                    <th class="text-uppercase text-sm font-weight-bolder" colspan="3">Tagihan
-                                        yang
-                                        dibayarkan</th>
-                                </tr>
-                                <tr>
-                                    <th class="text-uppercase text-sm font-weight-bolder">No</th>
-                                    <th class="text-uppercase text-sm font-weight-bolder">Nama Tagihan</th>
-                                    <th class="text-uppercase text-sm font-weight-bolder">Total harga</th>
-                                </tr>
-                            </thead>
-                            <tbody>
+            <div class="shadow-sm">
+                <div class="table-responsive mb-3 p-0">
+                    <table class="table table-border align-items-center mb-0 " id="templateTable">
+                        <thead class="table-dark">
+                            <tr>
+                                <th class="text-uppercase text-sm font-weight-bolder text-center" colspan="3">Tagihan
+                                    yang
+                                    dibayarkan</th>
+                            </tr>
+                            <tr>
+                                <th class="text-uppercase text-sm font-weight-bolder">No</th>
+                                <th class="text-uppercase text-sm font-weight-bolder">Nama Tagihan</th>
+                                <th class="text-uppercase text-sm font-weight-bolder">Total harga</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @if ($transaksi->jenis_tagihan == 'Administrasi')
+                                @if ($transaksi->status == 'berhasil')
+                                    <tr>
+                                        <td class="">{{ 1 }}</td>
+                                        <td class="">{{ $transaksi->jenis_tagihan ?? '' }}</td>
+                                        <td class="">Rp {{ number_format($transaksi->total) }}</td>
+                                    </tr>
+                                @else
+                                    <tr>
+                                        <td colspan="3" class="text-center">Tidak Ada Yang Di Bayarkan</td>
+                                    </tr>
+                                @endif
+                            @elseif($transaksi->jenis_tagihan == 'Daftar Ulang Cicilan')
+                                @php
+                                    $biaya = App\Models\Biaya::where('program_belajar', 'S1')->where('jenis_biaya', 'DaftarUlang')->latest()->first();
+                                    $tagihan = App\Models\TagihanDetail::where('id_biayas', $biaya->id)->latest()->first();
+                                    $transaksiCicilan = App\Models\Cicilan::where('id_tagihan_details',$tagihan->id)->where('status','LUNAS')
+                                    ->get();
+                                    $berhasil = App\Models\Transaksi::where('status','berhasil')->where('jenis_tagihan','Daftar Ulang Cicilan')->get();
+                                    @endphp
+                                @foreach ($transaksiCicilan as $cicilan)
+                                @php
+                                    $nomor = 1;
+                                    $transaksi = App\Models\Transaksi::where('id_cicilans', $cicilan->id)->get();
+                                @endphp
+                            
+                                @foreach ($transaksi as $transaksiItem)
+                                    <tr>
+                                        <td class="">{{ $loop->parent->iteration }}</td>
+                                        <td class="">{{ $transaksiItem->jenis_tagihan }} {{ $loop->parent->iteration }}</td>
+                                        <td class="">Rp {{ number_format($transaksiItem->total) }}</td>
+                                    </tr>
+                                @endforeach
+                            @endforeach
+                            
+                            
+                            @elseif($transaksi->jenis_tagihan == 'DaftarUlang')
+                                    @if ($transaksi->status == 'berhasil')
+                                        <tr>
+                                            <td class="">{{ 1 }}</td>
+                                            <td class="">{{ $transaksi->jenis_tagihan ?? '' }}</td>
+                                            <td class="">Rp {{ number_format($transaksi->total) }}</td>
+                                        </tr>
+                                    @else
+                                        <tr>
+                                            <td colspan="3">Tidak Ada Yang Di Bayarkan</td>
+                                        </tr>
+                                    @endif
+                            @elseif ($transaksi->jenis_tagihan == 'Routine')
                                 @foreach ($transaksi->tagihanDetails as $index => $transaksis)
                                     <tr>
                                         <td class="">{{ $index + 1 }}</td>
@@ -226,165 +121,28 @@
                                         <td class="">Rp anjay</td>
                                     </tr>
                                 @endforeach
-                            </tbody>
-                        </table>
-                    </div>
+                            @elseif ($transaksi->jenis_tagihan == 'TidakRoutine')
+                                @if ($transaksi->status == 'berhasil')
+                                    <tr>
+                                        <td class="">{{ 1 }}</td>
+                                        <td class="">{{ $transaksi->jenis_tagihan ?? '' }}</td>
+                                        <td class="">Rp {{ number_format($transaksi->total) }}</td>
+                                    </tr>
+                                @else
+                                    <tr>
+                                        <td colspan="3">Tidak Ada Yang Di Bayarkan</td>
+                                    </tr>
+                                @endif
+                            @endif
+                        </tbody>
+                    </table>
                 </div>
-                <a href="{{ route('admin.transaksi.index') }}" class="btn btn-warning"><i class="fas fa-backward"></i>
-                    Back</a>
             </div>
+            <a href="{{ route('admin.transaksi.index') }}" class="btn btn-warning"><i class="fas fa-backward"></i>
+                Back</a>
         </div>
-    @endif
-    @if ($transaksi->jenis_tagihan == 'DaftarUlang')
-        <nav aria-label="breadcrumb">
-            <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
-                <li class="breadcrumb-item text-sm"><a class="opacity-5 text-dark"
-                        href="{{ route('dashboard') }}">Pages</a>
-                </li>
-                <li class="breadcrumb-item text-sm text-dark active" aria-current="page">Transactions</li>
-            </ol>
-            <h6 class="font-weight-bolder mb-0">Detail Daftar Ulang</h6>
-        </nav>
-        <div class="card h-100 mt-4">
-            <div class="card-body p-3">
-                <div class="shadow-sm mb-3">
-                    <div class="table-responsive p-0">
-                        <table class="table align-items-center mb-0">
-                            <thead class="table-dark">
-                                <tr>
-                                    <th>Transaction Information</th>
-                                </tr>
 
-                            </thead>
-                            <tbody class="table-border-bottom-0">
-                                <tr>
-                                    <td class="text-sm">Nama Pembayaran : <strong>Daftar Ulang 2022/2023</strong></td>
-                                </tr>
-                                <tr>
-                                    <td class="text-sm">Nama Pembayar : <strong>Cahyono</strong></td>
-                                </tr>
-                                <tr>
-                                    <td class="text-sm">Invoice Tagihan : <a href="#"
-                                            class="btn btn-success py-2 px-3 ms-2 mb-0"> <i
-                                                class="fas fa-file-invoice"></i>
-                                            Cetak</a></td>
-                                </tr>
-                                <tr>
-                                    <td class="text-sm">Total Pembayaran : <strong>Rp 400.000</strong></td>
-                                </tr>
-                                <tr>
-                                    <td class="text-sm">Tanggal Pembayaran : <strong>28/10/2023</strong></td>
-                                </tr>
-
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-                <div class="shadow-sm">
-                    <div class="table-responsive mb-3 p-0">
-                        <table class="table table-border align-items-center mb-0 " id="templateTable">
-                            <thead class="table-dark">
-                                <tr>
-                                    <th class="text-uppercase text-sm font-weight-bolder" colspan="3">Tagihan
-                                        yang
-                                        dibayarkan</th>
-                                </tr>
-                                <tr>
-                                    <th class="text-uppercase text-sm font-weight-bolder">No</th>
-                                    <th class="text-uppercase text-sm font-weight-bolder">Nama Tagihan</th>
-                                    <th class="text-uppercase text-sm font-weight-bolder">Total harga</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td class="">1</td>
-                                    <td class="">Cicilan 1</td>
-                                    <td class="">Rp 400.000</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-                <a href="{{ route('admin.transaksi.index') }}" class="btn btn-warning"><i class="fas fa-backward"></i>
-                    Back</a>
-            </div>
-        </div>
-    @endif
-    @if ($transaksi->jenis_tagihan == 'Tingkatan')
-        <nav aria-label="breadcrumb">
-            <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
-                <li class="breadcrumb-item text-sm"><a class="opacity-5 text-dark"
-                        href="{{ route('dashboard') }}">Pages</a>
-                </li>
-                <li class="breadcrumb-item text-sm text-dark active" aria-current="page">Transactions</li>
-            </ol>
-            <h6 class="font-weight-bolder mb-0">Detail Transaction</h6>
-        </nav>
-        <div class="card h-100 mt-4">
-            <div class="card-body p-3">
-                <div class="shadow-sm mb-3">
-                    <div class="table-responsive p-0">
-                        <table class="table align-items-center mb-0">
-                            <thead class="table-dark">
-                                <tr>
-                                    <th>Transaction Information</th>
-                                </tr>
-
-                            </thead>
-                            <tbody class="table-border-bottom-0">
-                                <tr>
-                                    <td class="text-sm">Nama Pembayaran : <strong>Tingkatan</strong></td>
-                                </tr>
-                                <tr>
-                                    <td class="text-sm">Nama Pembayar : <strong>Bopak Kastelo</strong></td>
-                                </tr>
-                                <tr>
-                                    <td class="text-sm">Invoice Tagihan : <a href="#"
-                                            class="btn btn-success py-2 px-3 ms-2 mb-0"> <i
-                                                class="fas fa-file-invoice"></i>
-                                            Cetak</a></td>
-                                </tr>
-                                <tr>
-                                    <td class="text-sm">Total Pembayaran : <strong>Rp 400.000</strong></td>
-                                </tr>
-                                <tr>
-                                    <td class="text-sm">Tanggal Pembayaran : <strong>28/10/2023</strong></td>
-                                </tr>
-
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-                <div class="shadow-sm">
-                    <div class="table-responsive mb-3 p-0">
-                        <table class="table table-border align-items-center mb-0 " id="templateTable">
-                            <thead class="table-dark">
-                                <tr>
-                                    <th class="text-uppercase text-sm font-weight-bolder" colspan="3">Tagihan
-                                        yang
-                                        dibayarkan</th>
-                                </tr>
-                                <tr>
-                                    <th class="text-uppercase text-sm font-weight-bolder">No</th>
-                                    <th class="text-uppercase text-sm font-weight-bolder">Nama Tagihan</th>
-                                    <th class="text-uppercase text-sm font-weight-bolder">Total harga</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td class="">1</td>
-                                    <td class="">Mubtadai'</td>
-                                    <td class="">Rp 400.000</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-                <a href="{{ route('admin.transaksi.index') }}" class="btn btn-warning"><i class="fas fa-backward"></i>
-                    Back</a>
-            </div>
-        </div>
-    @endif
+    </div>
 @endsection
 
 @push('scripts')
