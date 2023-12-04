@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Exports\AdminExport;
 use App\Exports\MahasiswaExport;
 use App\Http\Controllers\Controller;
+use App\Models\Administrasi;
 use App\Models\Biaya;
 use App\Models\Biodata;
 use App\Models\Cicilan;
@@ -12,6 +13,7 @@ use App\Models\TagihanDetail;
 use App\Models\TahunAjaran;
 use App\Models\Transaksi;
 use App\Models\User;
+use App\Traits\Ipaymu;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -19,6 +21,7 @@ use Maatwebsite\Excel\Facades\Excel;
 
 class AccountController extends Controller
 {
+    use Ipaymu;
     public function admin()
     {
         // Dapatkan admin yang sedang login saat ini
@@ -137,16 +140,22 @@ class AccountController extends Controller
     public function mahasiswa(Request $request)
     {
         $tahun_ajaran = TahunAjaran::all();
+        $mahasiswaAll = User::where('role', 'Mahasiswa')->get();
         $tahunAjaran = $request->input('angkatan_id');
 
-        $mahasiswa = Biodata::when($tahunAjaran, function ($query) use ($tahunAjaran) {
-            $query->whereHas('user', function ($query) use ($tahunAjaran) {
+        if ($tahunAjaran) {
+            $mahasiswa = User::whereHas('biodata', function ($query) use ($tahunAjaran) {
                 $query->where('angkatan_id', $tahunAjaran);
-            });
-        })->get();
+            })->where('role', 'Mahasiswa')->get();
+        } else {
+            $mahasiswa = $mahasiswaAll;
+        }
 
-        return view('admin.account.mahasiswa.index', compact('mahasiswa', 'tahun_ajaran', 'tahunAjaran'));
+        return view('admin.account.mahasiswa.index', compact('mahasiswa', 'tahun_ajaran', 'tahunAjaran', 'mahasiswaAll'));
     }
+
+
+
 
 
     public function mahasiswa_create()
@@ -184,7 +193,41 @@ class AccountController extends Controller
         $data['role'] = 'Mahasiswa';
         $data['angkatan_id'] = TahunAjaran::latest()->where('status', 'Active')->first();
 
-        User::create($data);
+        $user = User::create($data);
+        $id = $user->id;
+        $adminstrasiKursus = Administrasi::where('program_belajar', 'KURSUS')->first();
+        $adminstrasiS1 = Administrasi::where('program_belajar', 'S1')->first();
+        $program = $request->program;
+
+        if($program == 'S1'){
+            $payment = json_decode(json_encode($this->redirect_payment($id,$program,$adminstrasiS1,$adminstrasiKursus)), true);
+                    // dd($payment);
+            $transaksi = Transaksi::create([
+                'user_id' => $user->id,
+                'no_invoice' => $payment['Data']['SessionID'],
+                'jenis_tagihan' => 'Administrasi',
+                'jenis_pembayaran' => 'cash',
+                'program_belajar' => 'S1',
+                'status' => 'pending',
+                'total' => $adminstrasiS1->amount,
+                'payment_link' => $payment['Data']['Url'],
+            ]);
+        }else{
+            $payment = json_decode(json_encode($this->redirect_payment($id,$program,$adminstrasiS1,$adminstrasiKursus)), true);
+                    // dd($payment);
+            $transaksi = Transaksi::create([
+                'user_id' => $user->id,
+                'no_invoice' => $payment['Data']['SessionID'],
+                'jenis_tagihan' => 'Administrasi',
+                'jenis_pembayaran' => 'cash',
+                'program_belajar' => 'KURSUS',
+                'status' => 'pending',
+                'total' => $adminstrasiKursus->amount,
+                'payment_link' => $payment['Data']['Url'],
+            ]);
+        }
+
+
 
         return redirect()->route('admin.mahasiswa.index')->with('success', 'Berhasil Menambahkan Akun Mahasiswa');
     }
@@ -302,12 +345,27 @@ class AccountController extends Controller
 
     public function exportMahasiswa(Request $request)
     {
-        return Excel::download(new MahasiswaExport, 'dataMahasiswa.xlsx');
+        $tahunAjaran = $request->input('angkatan_id');
+        $mahasiswa = User::when($tahunAjaran, function ($query) use ($tahunAjaran) {
+            $query->whereHas('biodata', function ($query) use ($tahunAjaran) {
+                $query->where('angkatan_id', $tahunAjaran);
+            });
+        })->where('role', 'Mahasiswa')->get();
+
+        $export = new MahasiswaExport($mahasiswa);
+        return Excel::download($export, 'dataMahasiswa.xlsx');
     }
+
 
     public function pendaftar()
     {
-        $mahasiswa = User::where('role', 'Mahasiswa')->get();
+        $mahasiswa = User::where('role', 'Mahasiswa')
+            ->whereHas('biodata', function ($query) {
+                $query->whereHas('angkatan', function ($subQuery) {
+                    $subQuery->where('status', 'Active');
+                });
+            })
+            ->get();
         return view('admin.account.pendaftar.index', compact('mahasiswa'));
     }
 

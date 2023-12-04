@@ -42,11 +42,11 @@
                                                 id="daftar_ulang" value="DaftarUlang">
                                             <label class="custom-control-label" for="daftar_ulang">Daftar Ulang</label>
                                         </div>
-                                        {{-- <div class="form-check mb-3">
+                                        <div class="form-check mb-3">
                                             <input class="form-check-input" type="radio" name="jenis_tagihan"
                                                 id="tingkatan" value="Tingkatan">
                                             <label class="custom-control-label" for="tingkatan">Tingkatan</label>
-                                        </div> --}}
+                                        </div>
                                     </div>
                                     <div class="modal-footer">
                                         {{-- <button type="button" class="btn bg-gradient-secondary"

@@ -10,7 +10,9 @@ class Course extends Model
     use HasFactory;
 
     protected $fillable = [
-        'name'
+        'name',
+        'desc',
+        'notes'
     ];
 
     public function biodata()

@@ -18,7 +18,7 @@ class TahunAjaran extends Model
 
     public function jurusans()
     {
-        return $this->hasMany(Jurusan::class);
+        return $this->hasMany(Jurusan::class, 'id_tahun_ajarans');
     }
 
     public function users()
@@ -28,7 +28,7 @@ class TahunAjaran extends Model
 
     public function biodatas()
     {
-        return $this->hasMany(Biodata::class);
+        return $this->hasMany(Biodata::class, 'angkatan_id');
     }
 
     public function links()

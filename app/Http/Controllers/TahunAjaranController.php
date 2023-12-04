@@ -70,9 +70,10 @@ class TahunAjaranController extends Controller
     {
         $angkatan = TahunAjaran::findOrFail($id);
         $jurusan = Jurusan::all();
+        $jurusans = $angkatan->jurusans;
         $links = Link::get();
 
-        return view('admin.tahun_ajaran.detail', compact('angkatan', 'links', 'jurusan'));
+        return view('admin.tahun_ajaran.detail', compact('angkatan', 'links', 'jurusan', 'jurusans'));
     }
 
     /**

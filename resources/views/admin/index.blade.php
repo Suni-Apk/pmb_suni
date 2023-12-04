@@ -89,97 +89,108 @@
 
 
 @push('scripts')
-    <script>
-        var ctx2 = document.getElementById("chart-line").getContext("2d");
+<script>
+    var ctx2 = document.getElementById("chart-line").getContext("2d");
 
-        var gradientStroke1 = ctx2.createLinearGradient(0, 230, 0, 50);
+    var gradientStroke1 = ctx2.createLinearGradient(0, 230, 0, 50);
+    gradientStroke1.addColorStop(1, 'rgba(19, 169, 95,0.2)');
+    gradientStroke1.addColorStop(0.2, 'rgba(72,72,176,0.0)');
+    gradientStroke1.addColorStop(0, 'rgba(203,12,159,0)');
 
-        gradientStroke1.addColorStop(1, 'rgba(19, 169, 95,0.2)');
-        gradientStroke1.addColorStop(0.2, 'rgba(72,72,176,0.0)');
-        gradientStroke1.addColorStop(0, 'rgba(203,12,159,0)');
+    var gradientStroke2 = ctx2.createLinearGradient(0, 230, 0, 50);
+    gradientStroke2.addColorStop(1, 'rgba(20,23,39,0.2)');
+    gradientStroke2.addColorStop(0.2, 'rgba(72,72,176,0.0)');
+    gradientStroke2.addColorStop(0, 'rgba(20,23,39,0)');
 
-        var gradientStroke2 = ctx2.createLinearGradient(0, 230, 0, 50);
-
-        gradientStroke2.addColorStop(1, 'rgba(20,23,39,0.2)');
-        gradientStroke2.addColorStop(0.2, 'rgba(72,72,176,0.0)');
-        gradientStroke2.addColorStop(0, 'rgba(20,23,39,0)');
-
-        new Chart(ctx2, {
-            type: "line",
-            data: {
-                labels: [
-				],
-                datasets: [{
-                    label: "Admin",
-                    tension: 0.4,
-                    borderWidth: 0,
-                    pointRadius: 0,
-                    borderColor: "#3C9D9B",
-                    borderWidth: 3,
-                    backgroundColor: gradientStroke1,
-                    fill: true,
-                    data: [
-                    ],
-                    maxBarThickness: 6
-                }, ],
+    new Chart(ctx2, {
+        type: "line",
+        data: {
+            labels: ['Januari','Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'],  // Ganti dengan nilai-nilai yang sesuai
+            datasets: [
+				{
+                label: "Admin",
+                tension: 0.4,
+                borderWidth: 0,
+                pointRadius: 0,
+                borderColor: "#3C9D9B",
+                borderWidth: 3,
+                backgroundColor: gradientStroke1,
+                fill: true,
+                data: [10, 50, 200, 40, 90, 100, 10, 20, 180, 190, 200, 20],  // Ganti dengan nilai-nilai yang sesuai
+                maxBarThickness: 6
             },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                plugins: {
-                    legend: {
-                        display: false,
+			{
+                label: "Pendaftar",
+                tension: 0.4,
+                borderWidth: 0,
+                pointRadius: 0,
+                borderColor: "#A9A9A9", // Ganti dengan warna yang sesuai
+                borderWidth: 3,
+                backgroundColor: gradientStroke2,
+                fill: true,
+                data: [30, 60, 150, 80, 70, 120, 30, 50, 160, 170, 180, 30], // Ganti dengan nilai-nilai yang sesuai
+                maxBarThickness: 6
+            }
+		],
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: {
+                    display: false,
+                }
+            },
+            interaction: {
+                intersect: false,
+                mode: 'index',
+            },
+            scales: {
+                y: {
+                    grid: {
+                        drawBorder: false,
+                        display: true,
+                        drawOnChartArea: true,
+                        drawTicks: false,
+                        borderDash: [5, 5]
+                    },
+                    ticks: {
+                        display: true,
+                        padding: 10,
+                        color: '#b2b9bf',
+                        font: {
+                            size: 11,
+                            family: "Open Sans",
+                            style: 'normal',
+                            lineHeight: 2
+                        },
                     }
                 },
-                interaction: {
-                    intersect: false,
-                    mode: 'index',
-                },
-                scales: {
-                    y: {
-                        grid: {
-                            drawBorder: false,
-                            display: true,
-                            drawOnChartArea: true,
-                            drawTicks: false,
-                            borderDash: [5, 5]
-                        },
-                        ticks: {
-                            display: true,
-                            padding: 10,
-                            color: '#b2b9bf',
-                            font: {
-                                size: 11,
-                                family: "Open Sans",
-                                style: 'normal',
-                                lineHeight: 2
-                            },
-                        }
+                x: {
+                    grid: {
+                        drawBorder: false,
+                        display: false,
+                        drawOnChartArea: false,
+                        drawTicks: false,
+                        borderDash: [5, 5]
                     },
-                    x: {
-                        grid: {
-                            drawBorder: false,
-                            display: false,
-                            drawOnChartArea: false,
-                            drawTicks: false,
-                            borderDash: [5, 5]
+                    ticks: {
+                        display: true,
+                        color: '#b2b9bf',
+                        padding: 20,
+                        font: {
+                            size: 11,
+                            family: "Open Sans",
+                            style: 'normal',
+                            lineHeight: 2
                         },
-                        ticks: {
-                            display: true,
-                            color: '#b2b9bf',
-                            padding: 20,
-                            font: {
-                                size: 11,
-                                family: "Open Sans",
-                                style: 'normal',
-                                lineHeight: 2
-                            },
-                        }
-                    },
+                    }
                 },
             },
-        });
-    </script>
+        },
+    });
+</script>
+
 @endpush
 
 @section('content')
@@ -523,49 +534,37 @@
 								</tr>
 							</thead>
 							<tbody>
-								<tr>
-									<td>
-									<div class="d-flex px-2 py-1">
-										<div>
-											<img src="/assets/img/small-logos/logo-xd.svg" class="avatar avatar-sm me-3" alt="xd">
+								@foreach ($mahasiswaBaru as $mahasiswas)
+									<tr>
+										<td>
+										<div class="d-flex px-2 py-1">
+											<div class="d-flex flex-column justify-content-center">
+												<h6 class="mb-0 text-sm">{{ $mahasiswas->name }}</h6>
+											</div>
 										</div>
-										<div class="d-flex flex-column justify-content-center">
-											<h6 class="mb-0 text-sm">Soft UI XD Version</h6>
-										</div>
-									</div>
-									</td>
-									<td>
-									<div class="avatar-group mt-2">
-										<a href="" class="avatar avatar-xs rounded-circle" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Ryan Tompson">
-											<img src="/assets/img/team-1.jpg" alt="team1">
-										</a>
-										<a href="" class="avatar avatar-xs rounded-circle" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Romina Hadid">
-											<img src="/assets/img/team-2.jpg" alt="team2">
-										</a>
-										<a href="" class="avatar avatar-xs rounded-circle" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Alexander Smith">
-											<img src="/assets/img/team-3.jpg" alt="team3">
-										</a>
-										<a href="" class="avatar avatar-xs rounded-circle" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Jessica Doe">
-											<img src="/assets/img/team-4.jpg" alt="team4">
-										</a>
-									</div>
-									</td>
-									<td class="align-middle text-center text-sm">
-									<span class="text-xs font-weight-bold"> $14,000 </span>
-									</td>
-									<td class="align-middle">
-										<div class="progress-wrapper w-75 mx-auto">
-											<div class="progress-info">
-												<div class="progress-percentage">
-												<span class="text-xs font-weight-bold">60%</span>
+										</td>
+										<td>
+											<div class="d-flex flex-column justify-content-center">
+												<h6 class="mb-0 text-sm">{{ $mahasiswas->phone }}</h6>
+											</div>
+										</td>
+										<td class="align-middle text-center text-sm">
+										<span class="text-xs font-weight-bold"> $14,000 </span>
+										</td>
+										<td class="align-middle">
+											<div class="progress-wrapper w-75 mx-auto">
+												<div class="progress-info">
+													<div class="progress-percentage">
+													<span class="text-xs font-weight-bold">60%</span>
+													</div>
+												</div>
+												<div class="progress">
+													<div class="progress-bar bg-gradient-info w-60" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"></div>
 												</div>
 											</div>
-											<div class="progress">
-												<div class="progress-bar bg-gradient-info w-60" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"></div>
-											</div>
-										</div>
-									</td>
-								</tr>
+										</td>
+									</tr>
+								@endforeach
 							</tbody>
 						</table>
 					</div>

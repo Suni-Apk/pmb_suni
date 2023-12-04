@@ -100,6 +100,10 @@
 	</head>
 
 	<body>
+		@php
+			$general = App\Models\General::first();
+			$nama = Auth::user();
+		@endphp
 		<div class="invoice-box">
 			<table cellpadding="0" cellspacing="0">
 				<tr class="top">
@@ -107,12 +111,12 @@
 						<table>
 							<tr>
                 <td>
-                  <img src="" alt="">
+                  <img src="{{$general->image}}" alt="">
                 </td>
 
 								<td>
-									Data Atas Nama #: <br />
-									Created: <br />
+									Data Atas Nama {{$nama->name}}: <br />
+									Created {{date('Y - m - d')}}: <br />
 								</td>
 							</tr>
 						</table>
@@ -124,9 +128,8 @@
 						<table>
 							<tr>
 								<td>
-									PPDB Al-Romusa, Inc.<br />
-									Yogyakarta<br />
-									Pondok Informatika Al-madinah
+									{{$general->title}}.<br />
+									{{$general->name}}
 								</td>
 
 								<td>
@@ -150,9 +153,10 @@
 					$user = Auth::user();
 					$tagihan = App\Models\TagihanDetail::where('id_biayas', $biaya->id)->where('id_users', $user->id)->latest()->first();
 
-					// Menghitung total pembayaran yang telah dilakukan
 					$transaksiCicilan = App\Models\Cicilan::where('id_tagihan_details',$tagihan->id)->where('status','LUNAS')
-						->get();
+					->get();
+					// Menghitung total pembayaran yang telah dilakukan
+					$transaksi = App\Models\Transaksi::where('user_id',$user->id)->where('id_cicilans',$transaksiCicilan->id)->get();
 					// $transaksiCash = App\Models\Transaksi::where('user_id',Auth::user()->id)->where('jenis_pembayaran','cash')->where('status','berhasil')->first();
 					$transaksiCash = App\Models\Transaksi::where('user_id', $user->id)
                                 ->where('tagihan_detail_id', $tagihan->id)
@@ -162,14 +166,19 @@
 				@endphp
 
 				@if (!$transaksiCash && $transaksiCicilan)
+				{{-- @dd($transaksiCicilan) --}}
 					@foreach ($transaksiCicilan as $item)
-						<tr class="details">
-							<td>Cicilan {{$loop->iteration}}: </td>
-
-							<td>Rp. {{number_format(round($item->harga),0,'','.')}},-</td>
-						</tr>
+							<tr class="details">
+								<td>Cicilan {{$loop->iteration}}: </td>
+	
+								<td>Rp. {{number_format(round($item->total),0,'','.')}},-</td>
+							</tr>
+							<tr>
+								<td>No Invoice</td>
+								<td>{{$item->no_invoice}}</td>
+							</tr>
 					@endforeach
-				@elseif(!$transaksiCicilan && $transaksiCash)
+				@elseif($transaksiCash && !$transaksiCicilan)
 					<tr class="details">
 						<td>Daftar Ulang Cash: </td>
 
@@ -204,28 +213,27 @@
                             $tagihan = App\Models\TagihanDetail::where('id_biayas', $biaya->id)->where('id_users', $user->id)->latest()->first();
 
                             // Menghitung total pembayaran yang telah dilakukan
-							$total_pembayaranCicilan = round(App\Models\Cicilan::where('id_tagihan_details',$tagihan->id)->where('status','LUNAS')
-                                ->sum('harga'));
-                            $total_pembayaranCash = round(App\Models\Transaksi::where('user_id', $user->id)
-                                ->where('tagihan_detail_id', $tagihan->id)
-                                ->where('jenis_tagihan', $biaya->jenis_biaya)
+							$total_pembayaranCicilan = ceil(App\Models\Cicilan::where('id_tagihan_details', $tagihan->id)
+							->where('status', 'LUNAS')
+							->sum('harga') / 2) * 2;
+
+                            $total_pembayaranCash = App\Models\Transaksi::where('user_id', $user->id)
+                                ->where('jenis_tagihan', 'DaftarUlang')
+								->where('program_belajar','S1')
                                 ->where('status', 'berhasil')
-                                ->where('jenis_pembayaran','cicil')
-                                ->sum('total'));
+								->where('total',$tagihan->amount)
+								->first();
+							// dd($tagihan->amount);
+							// dd($total_pembayaranCicilan);
                         @endphp
-                        @if (!$total_pembayaranCicilan)
-							
-						@else
+                        @if ($total_pembayaranCicilan && !$total_pembayaranCash)
 							@if ($total_pembayaranCicilan != $tagihan->amount)
 								Belum Lunas
 							@else
 								Lunas
-							@endif			
-						@endif
-						@if (!$total_pembayaranCash)
-							
-						@else
-							@if ($total_pembayaranCash != $tagihan->amount)
+							@endif	
+						@elseif($total_pembayaranCash && !$total_pembayaranCicilan)
+							@if (round($total_pembayaranCash->amount) != $tagihan->amount)
 								Belum Lunas
 							@else
 								Lunas

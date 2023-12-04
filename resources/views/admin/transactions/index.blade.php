@@ -40,9 +40,6 @@
                                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                         ID
                                     </th>
-                                    <th class=" text-uppercase text-secondary text-xxs  font-weight-bolder opacity-7">
-                                        Nama Tagihan
-                                    </th>
                                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                         Tanggal Pembayaran
                                     </th>
@@ -74,13 +71,10 @@
                                             {{ $index + 1 }}
                                         </td>
                                         <td class="align-middle text-secondary text-xs font-weight-bold">
-                                            SPP misalkan
-                                        </td>
-                                        <td class="align-middle text-secondary text-xs font-weight-bold">
                                             {{ \Carbon\Carbon::parse($transactions->created_at)->isoFormat('D MMMM YYYY') }}
                                         </td>
                                         <td class="align-middle  text-secondary text-xs font-weight-bold">
-                                            {{ $transactions->user->name }}
+                                            {{ $transactions->user->name ?? 'User not available' }}
                                         </td>
                                         <td class="align-middle text-secondary text-xs font-weight-bold">
                                             Rp. {{ number_format($transactions->total) }},-
@@ -113,12 +107,12 @@
                                             @endif
                                         </td>
                                         <td>
-                                            <p class="text-xs font-weight-bold mb-0">Tidak Rutin</p>
+                                            <p class="text-xs font-weight-bold mb-0">{{ $transactions->jenis_tagihan }}</p>
                                             <p class="text-xs text-uppercase text-secondary mb-0">
                                                 {{ $transactions->jenis_pembayaran }}</p>
                                         </td>
                                         <td class="align-middle text-center">
-                                            <a href="{{ route('admin.transaksi.show', 'DaftarUlang', $transactions->id) }}"
+                                            <a href="{{ route('admin.transaksi.show', $transactions->id) }}"
                                                 class="badge badge-sm bg-gradient-info font-weight-bold text-xxs mx-1"
                                                 data-toggle="tooltip" data-original-title="detail">
                                                 Detail

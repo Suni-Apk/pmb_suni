@@ -165,33 +165,32 @@
                             <div class="py-2">
                                 <div class="card">
                                     <div class="card-header pb-0">
-                                        <h6>Tambah Link</h6>
+                                        <h6>Tambah Link Baru</h6>
                                     </div>
                                     <div class="card-body">
-                                        <form action="{{ route('admin.link.create.process') }}" method="POST">
+                                        <form action="{{ route('admin.link.create.process') }}" method="post">
                                             @csrf
                                             @method('POST')
-                                            <input type="number" name="id_jurusans" value="{{ $jurusan->id }}" class="d-none">
-                                            <div class="form-group mb-3">
-                                                <label for="name">Nama</label>
+                                            <div class="form-group">
+                                                <label for="">Nama</label>
                                                 <small class="text-danger" style="font-size: 12px">*</small>
-                                                <input type="text" name="name" id="name" class="form-control" placeholder="Masukkan Nama linknya Disini">
+                                                <input type="text" class="form-control" name="name" id="name" value="{{ old('name') }}">
                                             </div>
-                                            <div class="form-group mb-3">
-                                                <label for="url">URL Link</label>
+                                            <div class="form-group">
+                                                <label for="">Url Link</label>
                                                 <small class="text-danger" style="font-size: 12px">*</small>
-                                                <input type="url" name="url" id="url" class="form-control" placeholder="Masukkan URL linknya Disini">
+                                                <input type="url" class="form-control" name="url" id="url" value="{{ old('url') }}">
                                             </div>
                                             <div class="form-group mb-3">
                                                 <label>Tipe Link</label>
                                                 <small class="text-danger" style="font-size: 12px">*</small>
                                                 <div class="form-check">
-                                                    <input type="radio" name="type" id="Whatsapp" class="form-check-input" value="Whatsapp">
-                                                    <label class="form-check-label" for="Whatsapp">Whatsapp</label>
+                                                    <input type="radio" name="type" id="whatsapp" class="form-check-input" value="whatsapp">
+                                                    <label class="form-check-label" for="whatsapp">Whatsapp</label>
                                                 </div>
                                                 <div class="form-check">
-                                                    <input type="radio" name="type" id="Zoom" class="form-check-input" value="Zoom">
-                                                    <label class="form-check-label" for="Zoom">Zoom</label>
+                                                    <input type="radio" name="type" id="zoom" class="form-check-input" value="zoom">
+                                                    <label class="form-check-label" for="zoom">Zoom</label>
                                                 </div>
                                             </div>
                                             <div class="form-group mb-3">
@@ -199,14 +198,14 @@
                                                 <small class="text-danger" style="font-size: 12px">*</small>
                                                 <div class="form-check">
                                                     <input class="form-check-input" type="radio" name="gender" id="ikhwan"
-                                                        value="ikhwan">
+                                                        value="Laki-Laki">
                                                     <label class="form-check-label" for="ikhwan">
                                                         Ikhwan
                                                     </label>
                                                 </div>
                                                 <div class="form-check">
                                                     <input class="form-check-input" type="radio" name="gender" id="akhwat"
-                                                        value="akhwat">
+                                                        value="Perempuan">
                                                     <label class="form-check-label" for="akhwat">
                                                         Akhwat
                                                     </label>
@@ -229,11 +228,29 @@
                                                     @endforeach
                                                 </select>
                                             </div>
-                                            
-                                            <button type="submit" class="btn btn-success">Submit</button>
-                                            <a href="javascript:location.reload()">
-                                                <button type="button" class="btn btn-warning">Back</button>
-                                            </a>
+                                            <div class="form-group">
+                                                <label for="id_jurusans">Jurusan</label>
+                                                <select name="id_jurusans" id="id_jurusans" class="form-select">
+                                                    <option selected disabled>-----------</option>
+                                                    @foreach ($jurusanAll as $item)
+                                                        <option value="{{ $item->id }}">{{ $item->name }}</option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="id_courses">Kursus</label>
+                                                <small class="text-info" style="font-size: 10px">Diisi ketika ingin menambahkan link untuk Kursus</small>
+                                                <select name="id_courses" id="id_courses" class="form-select">
+                                                    <option selected disabled value="">-----------</option>
+                                                    @foreach ($kursus as $item)
+                                                        <option value="{{ $item->id }}">{{ $item->name }}</option>
+                                                    @endforeach
+                                                </select>
+                                            </div>                    
+                                            <div class="form-group">
+                                                <button type="submit" class="btn btn-primary">Submit</button>
+                                                <a href="javascript:location.reload()" class="btn btn-warning">Reset</a>
+                                            </div>
                                         </form>
                                     </div>
                                 </div>

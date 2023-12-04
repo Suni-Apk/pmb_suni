@@ -84,8 +84,8 @@
                             @endif
                         </td>
                         <td>
-                          <p class="text-xs text-uppercase text-secondary font-weight-bold mb-0">{{$item->created_at->format('d M Y')}}</p>
-                          <p class="text-xxs text-uppercase text-secondary mb-0">{{$item->created_at->format('H:i:s')}}</p>
+                          <p class="text-xs text-uppercase text-secondary font-weight-bold mb-0 text-center">{{$item->created_at->format('d M Y')}}</p>
+                          <p class="text-xxs text-uppercase text-secondary mb-0 text-center">{{$item->created_at->format('H:i:s')}}</p>
                         </td>
                         <td class="text-center"> 
                             <a style="letter-spacing: .02rem" href="{{ route('admin.mahasiswa.show',$item->id) }}" class="badge badge-sm bg-gradient-info font-weight-bolder text-xxs" data-toggle="tooltip" data-original-title="detail">

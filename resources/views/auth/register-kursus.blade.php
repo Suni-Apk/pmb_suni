@@ -33,7 +33,7 @@
                                             <label for="" class="form-label">Nama Lengkap <strong
                                                     class="text-danger">*</strong></label>
                                             <input type="text" name="name"
-                                                class="form-control @error('name') is-invalid @enderror" placeholder="Name">
+                                                class="form-control @error('name') is-invalid @enderror" placeholder="Name" value="{{ old('name') }}">
                                             @error('name')
                                                 <label for="" class="text-danger">{{ $message }}</label>
                                             @enderror
@@ -43,7 +43,7 @@
                                                     class="text-danger">*</strong></label>
                                             <input type="text" name="phone"
                                                 class="form-control @error('phone') is-invalid @enderror"
-                                                placeholder="Enter Your Phone">
+                                                placeholder="Enter Your Phone" value="{{ old('phone') }}">
                                             @error('phone')
                                                 <label for="" class="text-danger">{{ $message }}</label>
                                             @enderror
@@ -53,7 +53,7 @@
                                                     class="text-danger">*</strong></label>
                                             <input type="password" name="password"
                                                 class="form-control @error('password') is-invalid @enderror"
-                                                placeholder="Password">
+                                                placeholder="Password" value="{{ old('password') }}">
                                             @error('password')
                                                 <label for="" class="text-danger">{{ $message }}</label>
                                             @enderror
@@ -73,7 +73,7 @@
                                                     class="text-danger">*</strong></label>
                                             <input type="text" name="email"
                                                 class="form-control @error('email') is-invalid @enderror"
-                                                placeholder="Enter Your Phone">
+                                                placeholder="Enter Your Phone" value="{{ old('email') }}">
                                             @error('email')
                                                 <label for="" class="text-danger">{{ $message }}</label>
                                             @enderror
@@ -109,7 +109,7 @@
                                                     class="text-danger">*</strong></label>
                                             <input type="password" name="password_confirmation"
                                                 class="form-control @error('password_confirmation') is-invalid @enderror"
-                                                placeholder="Password" aria-label="Password">
+                                                placeholder="Password" aria-label="Password" value="{{ old('password_confirmation') }}">
                                             @error('password_confirmation')
                                                 <label for="" class="text-danger">{{ $message }}</label>
                                             @enderror
