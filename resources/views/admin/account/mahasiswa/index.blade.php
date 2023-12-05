@@ -102,8 +102,8 @@
                                             Ubah
                                         </a>
 
-                                            <form action="{{ route('admin.mahasiswa.delete', $item->id) }}"
-                                                class="d-inline" id="form1" method="POST">
+                                            <form action="{{ route('admin.mahasiswa.delete', $item->id) }}" class="d-inline"
+                                                id="form1" method="POST">
                                                 @csrf
                                                 @method('DELETE')
                                                 <button type="button"
@@ -161,14 +161,6 @@
                             </tbody>
                         </table>
                     </div>
-                    <div class="d-flex ms-4 mb-4 mt-3">
-                        <input type="checkbox" id="select_all_ids" class="chek me-2">
-                        <a href="#ClikKabeh" id="ClikKabeh" class="text-secondary">Pilih Semua</a>
-                        <div class=" ms-4">
-                            <i class="fas fa-trash me-1 cursor-pointer" style="color: #ff0000;" id="deleteAll"></i>
-                            <a href="#" class="text-secondary" id="All">Hapus</a>
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>
@@ -177,14 +169,6 @@
 @endsection
 
 @push('scripts')
-    <script src="https://code.jquery.com/jquery-3.7.1.min.js"
-        integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"
-        integrity="sha512-VEd+nq25CkR676O+pLBnDW09R7VQX9Mdiij052gVCp5yVH3jGtH70Ho/UUv4mJDsEdTvqRCFZg0NKGiojGnUCw=="
-        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css"
-        integrity="sha512-3pIirOrwegjM6erE5gPSwkUzO+3cTjpnV9lexlNZqvupR64iZBnOOTiiLPb9M36zpMScbmUNIcHUqKD47M719g=="
-        crossorigin="anonymous" referrerpolicy="no-referrer" />
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     @if (session('success'))
         <script>
@@ -199,81 +183,6 @@
         const dataTableSearch = new simpleDatatables.DataTable("#table", {
             searchable: true,
             fixedHeight: true,
-        });
-    </script>
-    <script>
-        $(function(e) {
-            $("#ClikKabeh").click(function() {
-                $('.checksAll, #select_all_ids').prop('checked', function() {
-                    return !$(this).prop("checked");
-                });
-            });
-            $("#select_all_ids").click(function() {
-                $('.checksAll').prop('checked', $(this).prop('checked'));
-            });
-            $("#All").click(function() {
-                $('#deleteAll').click();
-            });
-
-            $("#deleteAll").click(function(e) {
-                e.preventDefault();
-                var all_ids = [];
-
-                $('input:checkbox[name="ids"]:checked').each(function() {
-                    all_ids.push($(this).val());
-                });
-                if ($('.checksAll').is(':checked')) {
-                    Swal.fire({
-                        title: "Apakah Anda Yakin Ingin Menghapus Tagihan?",
-                        text: "You won't be able to revert this!",
-                        icon: "warning",
-                        showCancelButton: true,
-                        confirmButtonColor: "#3085d6",
-                        cancelButtonColor: "#d33",
-                        confirmButtonText: "Yes, delete it!"
-                    }).then((result) => {
-                        if (result.isConfirmed) {
-                            $.ajax({
-                                url: "{{ route('admin.mahasiswa.delete.all') }}",
-                                type: "DELETE",
-                                data: {
-                                    ids: all_ids
-                                },
-                                headers: {
-                                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr(
-                                        'content')
-                                },
-                                success: function(response) {
-                                    // Handle response jika diperlukan
-                                    // Misalnya, menampilkan pesan sukses
-                                    // Lakukan reload halaman setelah permintaan AJAX selesai
-
-                                },
-                                error: function(xhr, status, error) {
-                                    // Handle error jika diperlukan
-
-                                }
-                            });
-                            setTimeout(() => {
-                                location.reload();
-                            }, 1000);
-                            Swal.fire({
-                                title: "Deleted!",
-                                text: "Your file has been deleted.",
-                                icon: "success"
-                            }).then((result) => {});
-                        }
-                    });
-                }
-                if (!$('.checksAll').is(':checked')) {
-                    Swal.fire({
-                        icon: 'error',
-                        title: 'Oops...',
-                        text: 'Pilih Minimal 1!',
-                    })
-                }
-
-            });
         });
     </script>
 @endpush

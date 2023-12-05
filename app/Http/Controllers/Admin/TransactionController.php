@@ -11,6 +11,7 @@ use App\Models\Tagihan;
 use App\Models\TagihanDetail;
 use App\Models\Transaksi;
 use App\Models\User;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
 
@@ -441,5 +442,13 @@ class TransactionController extends Controller
             }
         }
         return redirect()->route('admin.mahasiswa.show', $id)->with('success', 'Selamat anda berhasil menbayar');
+    }
+
+    public function invoice(Request $request,$id)
+    {
+        $transaction = Transaksi::find($id);
+        $user = $transaction->user;
+        $pdf = Pdf::loadView('admin.transactions.invoice', compact('transaction', 'user'));
+        return $pdf->download("$request->jenis_tagihan - INVOICE - $user->name.pdf");
     }
 }

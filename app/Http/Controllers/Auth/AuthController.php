@@ -242,7 +242,7 @@ class AuthController extends Controller
                         'user_id' => $user->id,
                         'no_invoice' => $payment['Data']['SessionID'],
                         'jenis_tagihan' => 'Administrasi',
-                        'jenis_pembayaran' => 'Ipaymu',
+                        'jenis_pembayaran' => 'cash',
                         'program_belajar' => 'S1',
                         'status' => 'pending',
                         'total' => $adminstrasiS1->amount,
@@ -269,7 +269,7 @@ class AuthController extends Controller
                         'user_id' => $user->id,
                         'no_invoice' => $payment['Data']['SessionID'],
                         'jenis_tagihan' => 'Administrasi',
-                        'jenis_pembayaran' => 'Ipaymu',
+                        'jenis_pembayaran' => 'cash',
                         'program_belajar' => 'KURSUS',
                         'status' => 'pending',
                         'total' => $adminstrasiKursus->amount,
@@ -320,9 +320,9 @@ class AuthController extends Controller
             return Redirect::to($adminstrasiS1Pending->payment_link);
         } elseif ($transaksiS1->status == 'berhasil') {
             if (!$biodataS1 && !$user->document) {
-                return redirect()->route('mahasiswa.dashboard')->with('success', 'Silahkan Lengkapi Biodata Dan Document Anda');
+                return redirect()->route('mahasiswa.dashboard')->with('eror', 'Silahkan Lengkapi Biodata Dan Document Anda');
             } elseif ($biodataS1 && !$user->document) {
-                return redirect()->route('mahasiswa.dashboard')->with('success', 'Silahkan Lengakpi Document Anda');
+                return redirect()->route('mahasiswa.dashboard')->with('eror', 'Silahkan Lengakpi Document Anda');
             } else {
                 return redirect()->route('mahasiswa.dashboard')->with("success','Selamat Datang Di Dashboard S1 . $user->name");
             }

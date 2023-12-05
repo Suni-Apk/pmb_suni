@@ -45,6 +45,7 @@ class LinkController extends Controller
      */
     public function store(Request $request)
     {
+        // dd($request->all());
         $data = $request->validate([
             'name' => 'required|min:3|max:255|string',
             'url' => 'required',
@@ -55,7 +56,7 @@ class LinkController extends Controller
             'id_courses' => 'nullable'
         ]);
 
-        // dd($data);
+        dd($data);
         Link::create($data);
         if ( $request->type == 'whatsapp' ) {
             return redirect()->route('admin.link.whatsapp')->with('success', "Link Berhasil Di Buat!!");

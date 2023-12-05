@@ -28,7 +28,7 @@
                         {{ Auth::user()->name }}
                     </h5>
                     <p class="mb-0 font-weight-bold text-sm">
-                        {{ Auth::user()->role }}
+                        Kursus
                     </p>
                 </div>
             </div>

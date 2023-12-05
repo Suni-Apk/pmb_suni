@@ -56,7 +56,7 @@
                                             <label for="" class="form-label">Nama Lengkap <strong
                                                     class="text-danger">*</strong></label>
                                             <input type="text" name="name"
-                                                class="form-control @error('name') is-invalid @enderror" placeholder="Name">
+                                                class="form-control @error('name') is-invalid @enderror" placeholder="Name" value="{{ old('name') }}">
                                             @error('name')
                                                 <label for="" class="text-danger">{{ $message }}</label>
                                             @enderror
@@ -66,7 +66,7 @@
                                                     class="text-danger">*</strong></label>
                                             <input type="text" name="phone"
                                                 class="form-control @error('phone') is-invalid @enderror"
-                                                placeholder="Enter Your Phone">
+                                                placeholder="Enter Your Phone" value="{{ old('phone') }}">
                                             @error('phone')
                                                 <label for="" class="text-danger">{{ $message }}</label>
                                             @enderror
@@ -76,7 +76,7 @@
                                                     class="text-danger">*</strong></label>
                                             <input type="password" name="password"
                                                 class="form-control @error('password') is-invalid @enderror"
-                                                placeholder="Password">
+                                                placeholder="Password" value="{{ old('password') }}">
                                             @error('password')
                                                 <label for="" class="text-danger">{{ $message }}</label>
                                             @enderror
@@ -98,7 +98,7 @@
                                                     class="text-danger">*</strong></label>
                                             <input type="text" name="email"
                                                 class="form-control @error('email') is-invalid @enderror"
-                                                placeholder="Enter Your Phone">
+                                                placeholder="Enter Your Phone" value="{{ old('email') }}">
                                             @error('email')
                                                 <label for="" class="text-danger">{{ $message }}</label>
                                             @enderror
@@ -124,24 +124,26 @@
                                                 <option value="" disabled selected>Pilih Program Akademik</option>
                                                 <option value="S1">S1</option>
                                                 <option value="KURSUS" selected>KURSUS</option>
-                                                {{-- @php
+                                                @php
                                                     $courses = App\Models\Course::get();
                                                 @endphp
                                                 @foreach ($courses as $item)
                                                     <option value="{{ $item->keyword }}">{{ $item->name }}</option>
-                                                @endforeach --}}
+                                                @endforeach
                                             </select>
                                             @error('program_belajar')
                                                 <label for="" class="text-danger">{{ $message }}</label>
                                             @enderror
                                         </div>
-                                        <div class="form-check form-check-info text-left">
-                                            <input class="form-check-input" type="checkbox" value="" id="checkBill"
-                                                checked>
-                                            <label class="form-check-label" for="checkBill">
-                                                I agree the <a href="" class="text-dark font-weight-bolder">Terms and
-                                                    Conditions</a>
-                                            </label>
+                                        <div class="mb-3">
+                                            <label for="birthdate" class="form-label">Ulangi Password <strong
+                                                    class="text-danger">*</strong></label>
+                                            <input type="password" name="password_confirmation"
+                                                class="form-control @error('password_confirmation') is-invalid @enderror"
+                                                placeholder="Password" aria-label="Password" value="{{ old('password_confirmation') }}">
+                                            @error('password_confirmation')
+                                                <label for="" class="text-danger">{{ $message }}</label>
+                                            @enderror
                                         </div>
                                     </div>
                                 </div>

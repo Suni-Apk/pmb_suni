@@ -153,7 +153,7 @@
                 </div>
             @else
                 <div class="col-3 col-md-2 text-center">
-                    <a href="{{ route('mahasiswa.matkul') }}"
+                    <a href="{{ route('kursus.mapel') }}"
                         class="icon icon-shape p-0 bg-primary shadow text-center border-radius-md cursor-pointer"
                         data-bs-toggle="tooltip" data-bs-placement="top" title="Mata Kuliah">
                         <i class="ni ni-archive-2 text-lg opacity-10" aria-hidden="true"></i>
@@ -161,7 +161,7 @@
                     <span class="d-block mt-2" style="font-size: 13px;">Mata Kuliah</span>
                 </div>
                 <div class="col-3 col-md-2 text-center">
-                    <a href="{{ route('mahasiswa.tagihan.index') }}"
+                    <a href="{{ route('kursus.tagihan.index') }}"
                         class="icon icon-shape p-0 bg-primary shadow text-center border-radius-md cursor-pointer"
                         data-bs-toggle="tooltip" data-bs-placement="top" title="Tagihan">
                         <i class="ni ni-archive-2 text-lg opacity-10" aria-hidden="true"></i>
@@ -170,7 +170,7 @@
                 </div>
             @endif
             <div class="col-3 col-md-2 text-center">
-                <a href="{{ route('mahasiswa.profile.index') }}"
+                <a href="{{ route('kursus.profile.index') }}"
                     class="icon icon-shape p-0 bg-yellow shadow text-center border-radius-md cursor-pointer"
                     data-bs-toggle="tooltip" data-bs-placement="top" title="Profile">
                     <i class="fas fa-user-alt text-lg opacity-10" aria-hidden="true"></i>

@@ -544,9 +544,38 @@
                     $tagihan = App\Models\TagihanDetail::where('id_biayas',$biaya->id)->where('id_users',$user->id)->latest()->first();
                     // $bagi3 = $tagihan->amount / 3;
                     // dd($bagi3);
-                    $transaction = round(App\Models\Transaksi::where('user_id',$user->id)->where('tagihan_detail_id',$tagihan->id)->where('jenis_tagihan',$biaya->jenis_biaya)->where('status','berhasil')->sum('total'));
+                    $transactionCicil = ceil(App\Models\Cicilan::where('id_tagihan_details', $tagihan->id)
+							->where('status', 'LUNAS')
+							->sum('harga') / 2) * 2;
+                    $transactionCash = round(App\Models\Transaksi::where('user_id',$user->id)->where('tagihan_detail_id',$tagihan->id)->where('status','berhasil')->where('program_belajar','S1')->sum('total'));
                 @endphp
-                    @if ($transaction != $tagihan->amount)
+                    @if ($transactionCicil == $tagihan->amount)
+                    {{-- academy --}}
+                    <li class="nav-item">
+                        <ul class="nav-link pb-0 mb-0">
+                            <span class="sidenav-mini-icon d-none d-xl-block" style="color:rgb(196, 196, 196)"><i
+                                    class="fas fa-university"></i></span>
+                            <span class="sidenav-normal text-uppercase text-xs ms-2 font-weight-bolder"> academy
+                            </span>
+                        </ul>
+                    </li>
+
+                    <!-- matkul -->
+                    <li class="nav-item">
+                        <a href="{{ route('mahasiswa.matkul') }}"
+                            class="nav-link {{ Route::is('mahasiswa.matkul') ? 'active' : '' }}">
+                            <div
+                                class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center d-flex align-items-center justify-content-center  me-2">
+                                <i class="ni ni-hat-3"></i>
+                            </div>
+                            <span class="nav-link-text ms-1"> Mata Kuliah </span>
+                        </a>
+                    </li>
+                    @else
+                        
+                    @endif
+
+                    @if ($transactionCash != $tagihan->amount)
                         
                     @else
                         {{-- academy --}}

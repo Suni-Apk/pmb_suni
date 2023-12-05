@@ -17,11 +17,11 @@ class KursusMiddleware
      */
     public function handle(Request $request, Closure $next): Response
     {
-        $transaksi = Transaksi::where('program_belajar','KURSUS')->where('jenis_tagihan','Administrasi')->where('user_id',Auth::user()->id)->first();
-        if(Auth::check() && $transaksi && $transaksi->status == 'pending'){
-            return redirect()->route('login')->withErrors(['phone' => 'Kamu Belum Membayar']);
-        } else {
+        $transaksi = Transaksi::where('program_belajar','KURSUS')->where('jenis_tagihan','Administrasi')->where('status','berhasil')->where('user_id',Auth::user()->id)->first();
+        if(Auth::check() && $transaksi){
             return $next($request);
-        }        
+        } else {
+            return redirect()->route('login')->withErrors(['phone' => 'Kamu Belum Membayar']);
+        }
     }
 }
