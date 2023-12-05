@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Document;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class DocumentController extends Controller
@@ -11,7 +13,9 @@ class DocumentController extends Controller
      */
     public function index()
     {
-        return view('admin.dokumen.index');
+        $documents = Document::get();
+        $users = User::get();
+        return view('admin.dokumen.index', compact('documents', 'users'));
     }
 
     /**
@@ -20,6 +24,28 @@ class DocumentController extends Controller
     public function create()
     {
         return view('admin.dokumen.create');
+    }
+
+    public function verify(string $id)
+    {
+        $document = Document::find($id);
+        return view('admin.dokumen.verify', compact('document'));
+    }
+
+    public function verify_process(Request $request, string $id)
+    {
+        $document = Document::find($id);
+        $data = $request->status;
+
+        if ($data == 'accept') {
+            $document->update([
+                'status' => $data
+            ]);
+
+            return redirect()->route('admin.document.verify');
+        } else {
+            return redirect()->back();
+        }
     }
 
     /**

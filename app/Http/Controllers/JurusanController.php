@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Exports\JurusanExport;
+use App\Models\Course;
 use App\Models\Jurusan;
 use App\Models\Link;
 use App\Models\Matkuls;
@@ -19,8 +20,8 @@ class JurusanController extends Controller
     public function index()
     {
         $jurusan = Jurusan::all();
-        return view('admin.jurusan.index', compact('jurusan'));
-        return view('admin.jurusan.index', compact('jurusan'));
+        $tahun_ajaran = TahunAjaran::all();
+        return view('admin.jurusan.index', compact('jurusan', 'tahun_ajaran')); 
     }
 
 
@@ -69,7 +70,8 @@ class JurusanController extends Controller
         $semesterGrouped = Semester::with('jurusan')->get()->groupBy('id_jurusans');
         $tahun_ajaran = TahunAjaran::get();
         $links = Link::get();
-        return view('admin.jurusan.detail', compact('semester', 'jurusan', 'matkuls', 'jurusanAll', 'semesterGrouped', 'links', 'tahun_ajaran'));
+        $kursus = Course::all();
+        return view('admin.jurusan.detail', compact('semester', 'jurusan', 'matkuls', 'jurusanAll', 'semesterGrouped', 'links', 'tahun_ajaran','kursus'));
     }
 
     /**
@@ -103,6 +105,17 @@ class JurusanController extends Controller
     public function destroy(string $id)
     {
         $jurusan = Jurusan::findOrFail($id);
+
+        if ($jurusan->matkuls) {
+            $jurusan->matkuls->delete();
+        }
+        if ($jurusan->semesters) {
+            $jurusan->semesters->delete();
+        }
+        if ($jurusan->links) {
+            $jurusan->links->delete();
+        }
+
         $jurusan->delete();
         return redirect()->route('admin.jurusan.index');
     }

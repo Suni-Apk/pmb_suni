@@ -32,16 +32,17 @@ class DashboardController extends Controller
         $banner = Banner::where('type', 'DASHBOARD')->get();
         $mahasiswa = Auth::user();
         $biodata = Biodata::where('program_belajar','KURSUS')->where('user_id',$mahasiswa->id)->first();
+        // Retrieve the user's selected course
         $kursusBiodata = Biodata::where('user_id', $mahasiswa->id)
         ->where('program_belajar', 'KURSUS')
-        ->with('course') 
+        ->with('course') // Eager load the associated course
         ->first();
 
         if(!$kursusBiodata){ 
             $linkKursus = Link::where('gender',$mahasiswa->gender)->get();
             $kursus = Course::all();
         }else{
-        
+            // Retrieve links related to the selected course
             $linkKursus = Link::where('id_courses', $kursusBiodata->course->id)
             ->where('gender', $mahasiswa->gender)
             ->get();

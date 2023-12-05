@@ -170,12 +170,14 @@ class TagihanController extends Controller
                     'nama_biaya' => 'required',
                     'program_belajar' => 'required',
                     'end_date' => 'required',
+                    'id_kursus' => 'required',
                     'mounth' => 'nullable',
                     'amount' => 'required|string|min:6',
                     'status' => 'nullable',
                 ]);
                 $biaya = Biaya::create([
                     'id_angkatans' => $data['id_angkatans'],
+                    'id_kursus' => $data['id_kursus'],
                     'jenis_biaya' => 'Tidakroutine',
                     'nama_biaya' => $data['nama_biaya'],
                     'program_belajar' => $data['program_belajar'],
@@ -196,14 +198,16 @@ class TagihanController extends Controller
                 foreach ($mahasiswa as $index => $value) {
                     $end_date = strtotime('-10 days', strtotime($dateEnd));
                     $end_dates = date('Y-m-d', $end_date);
-                    TagihanDetail::create([
-                        'id_biayas' => $biaya->id,
-                        'id_tagihans' => $tagihanCreate->id,
-                        'id_users' => $value->user->id,
-                        'end_date' => $dateEnd,
-                        'amount' => $replace_amount,
-                        'status' => 'BELUM',
-                    ]);
+                    if ($value->user->status == 'on') {
+                        TagihanDetail::create([
+                            'id_biayas' => $biaya->id,
+                            'id_tagihans' => $tagihanCreate->id,
+                            'id_users' => $value->user->id,
+                            'end_date' => $dateEnd,
+                            'amount' => $replace_amount,
+                            'status' => 'BELUM',
+                        ]);
+                    }
                 }
                 return redirect()->route('admin.tagihan.index')->with('success', 'Berhasil Membuat tagihan ' . $biaya->nama_biaya);
             }
@@ -216,7 +220,7 @@ class TagihanController extends Controller
                 'status' => 'nullable',
             ]);
             $tahunAjaran = TahunAjaran::where('id', $data['id_angkatans'])->first();
-            $biodata = Biodata::where('angkatan_id', $data['id_angkatans'])->first();
+            $biodata = Biodata::where('angkatan_id', $data['id_angkatans'])->where('program_belajar', 'S1')->first();
             if (!$biodata) {
                 $biaya = Biaya::create([
                     'id_angkatans' => $data['id_angkatans'],
@@ -440,6 +444,24 @@ class TagihanController extends Controller
     /**
      * Remove the specified resource from storage.
      */
+
+    public function deleteAll(Request $request)
+    {
+        //
+        $sid = $request->ids;
+        $biaya = Biaya::whereIn('id', $sid);
+        $tagihans = Tagihan::whereIn('id_biayas', $sid)->get();
+        $tagihan = Tagihan::whereIn('id_biayas', $sid);
+
+        foreach ($tagihans as $tagihanDelete) {
+            $detail = TagihanDetail::where('id_tagihans', $tagihanDelete->id);
+            $detail->delete();
+        }
+        $tagihan->delete();
+        $biaya->delete();
+
+        return redirect()->back()->with('success', 'Berhasil menghapus biaya yang terpilih');
+    }
     public function destroy($id)
     {
         //

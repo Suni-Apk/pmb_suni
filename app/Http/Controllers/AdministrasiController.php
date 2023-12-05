@@ -21,7 +21,6 @@ class AdministrasiController extends Controller
         ]);
 
         $administrasi = Administrasi::find($id);
-        // dd($administrasi);
         $replace_amount = str_replace('.', '', $request->amount);
         $tahunAjaran = TahunAjaran::where('status', 'Active')->orderBy('id', 'desc')->first();
         $administrasi->update([
@@ -30,6 +29,10 @@ class AdministrasiController extends Controller
             'id_tahunAjaran' => $tahunAjaran->id,
         ]);
 
-        return redirect()->route('admin.administrasi');
+        if ($administrasi->course) {
+            return redirect()->route('admin.administrasi')->with('update', 'Anda berhasil mengubah biaya administrasi <b>' . strtoupper($administrasi->program_belajar . ' ' . $administrasi->course->name) . '</b>');
+        } else {
+            return redirect()->route('admin.administrasi')->with('update', 'Anda berhasil mengubah biaya administrasi <b>' . strtoupper($administrasi->program_belajar) . '</b>');
+        }
     }
 }

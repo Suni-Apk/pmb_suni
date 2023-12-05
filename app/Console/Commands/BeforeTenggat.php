@@ -36,8 +36,7 @@ class BeforeTenggat extends Command
             $end_dates = date('Y-m-d', $end_date);
             if ($end_dates == date('Y-m-d') && $value->status == 'BELUM') {
                 if ($value->users->biodata->program_belajar == 'S1') {
-                    // Log::info($value->users->phone);
-
+                    // Log::info($value->users->phone); 
                     $this->send_message($value->users->phone, 'Ada tagihan yang harus dibayar sebelum ' .  route('mahasiswa.tagihan.index'));
                 } else if ($value->users->biodata->program_belajar == 'KURSUS') {
                     // Log::info($value->users->phone);

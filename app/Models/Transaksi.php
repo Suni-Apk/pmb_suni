@@ -24,11 +24,19 @@ class Transaksi extends Model
 
     public function user()
     {
-        return $this->belongsTo(User::class, 'user_id');
+        return $this->belongsTo(User::class);
     }
 
     public function tagihanDetails()
     {
-        return $this->hasMany(TagihanDetail::class, 'id_transactions');
+        return $this->belongsTo(TagihanDetail::class, 'tagihan_detail_id');
+    }
+    public function cicilan()
+    {
+        return $this->belongsTo(Cicilan::class, 'id_cicilans');
+    }
+    public function cicilans()
+    {
+        return $this->hasMany(Cicilan::class);
     }
 }

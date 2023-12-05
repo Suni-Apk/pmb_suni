@@ -5,12 +5,16 @@ namespace App\Http\Controllers\Admin;
 use App\Exports\AdminExport;
 use App\Exports\MahasiswaExport;
 use App\Http\Controllers\Controller;
+use App\Models\Administrasi;
 use App\Models\Biaya;
 use App\Models\Biodata;
+use App\Models\Cicilan;
+use App\Models\Tagihan;
 use App\Models\TagihanDetail;
 use App\Models\TahunAjaran;
 use App\Models\Transaksi;
 use App\Models\User;
+use App\Traits\Ipaymu;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -18,6 +22,7 @@ use Maatwebsite\Excel\Facades\Excel;
 
 class AccountController extends Controller
 {
+    use Ipaymu;
     public function admin()
     {
         // Dapatkan admin yang sedang login saat ini
@@ -27,6 +32,13 @@ class AccountController extends Controller
         $admin = User::where('role', 'Admin')->get();
 
         return view('admin.account.admin.index', compact('admin'));
+    }
+
+    public function admin_show(string $id)
+    {
+        $data = User::find($id);
+
+        return view('admin.account.admin.detail', compact('data'));
     }
 
     public function admin_create()
@@ -132,27 +144,24 @@ class AccountController extends Controller
         return Excel::download(new AdminExport, 'dataAdmin.xlsx');
     }
 
-
     public function mahasiswa(Request $request)
     {
         $tahun_ajaran = TahunAjaran::all();
         $mahasiswaAll = User::where('role', 'Mahasiswa')->get();
         $tahunAjaran = $request->input('angkatan_id');
 
-        if ($tahunAjaran) {
-            $mahasiswa = User::whereHas('biodata', function ($query) use ($tahunAjaran) {
-                $query->where('angkatan_id', $tahunAjaran);
-            })->where('role', 'Mahasiswa')->get();
+        if ($request->input('angkatan_id')) {
+            $mahasiswa = User::when($tahunAjaran, function ($query) use ($tahunAjaran) {
+                $query->whereHas('biodata', function ($query) use ($tahunAjaran) {
+                    $query->where('angkatan_id', $tahunAjaran);
+                });
+            })->latest()->get();
         } else {
-            $mahasiswa = $mahasiswaAll;
+            $mahasiswa = User::where('role', 'Mahasiswa')->latest()->get();
         }
 
         return view('admin.account.mahasiswa.index', compact('mahasiswa', 'tahun_ajaran', 'tahunAjaran', 'mahasiswaAll'));
     }
-
-
-
-
 
     public function mahasiswa_create()
     {
@@ -189,7 +198,41 @@ class AccountController extends Controller
         $data['role'] = 'Mahasiswa';
         $data['angkatan_id'] = TahunAjaran::latest()->where('status', 'Active')->first();
 
-        User::create($data);
+        $user = User::create($data);
+        $id = $user->id;
+        $adminstrasiKursus = Administrasi::where('program_belajar', 'KURSUS')->first();
+        $adminstrasiS1 = Administrasi::where('program_belajar', 'S1')->first();
+        $program = $request->program;
+
+        if($program == 'S1'){
+            $payment = json_decode(json_encode($this->redirect_payment($id,$program,$adminstrasiS1,$adminstrasiKursus)), true);
+                    // dd($payment);
+            $transaksi = Transaksi::create([
+                'user_id' => $user->id,
+                'no_invoice' => $payment['Data']['SessionID'],
+                'jenis_tagihan' => 'Administrasi',
+                'jenis_pembayaran' => 'cash',
+                'program_belajar' => 'S1',
+                'status' => 'pending',
+                'total' => $adminstrasiS1->amount,
+                'payment_link' => $payment['Data']['Url'],
+            ]);
+        }else{
+            $payment = json_decode(json_encode($this->redirect_payment($id,$program,$adminstrasiS1,$adminstrasiKursus)), true);
+                    // dd($payment);
+            $transaksi = Transaksi::create([
+                'user_id' => $user->id,
+                'no_invoice' => $payment['Data']['SessionID'],
+                'jenis_tagihan' => 'Administrasi',
+                'jenis_pembayaran' => 'cash',
+                'program_belajar' => 'KURSUS',
+                'status' => 'pending',
+                'total' => $adminstrasiKursus->amount,
+                'payment_link' => $payment['Data']['Url'],
+            ]);
+        }
+
+
 
         return redirect()->route('admin.mahasiswa.index')->with('success', 'Berhasil Menambahkan Akun Mahasiswa');
     }
@@ -265,8 +308,8 @@ class AccountController extends Controller
         $biodata = Biodata::where('user_id', $mahasiswa->id)->get();
         $biaya = Biaya::get();
         $biayaAll = Biaya::all();
-
-        return view('admin.account.mahasiswa.detail', compact('biodata', 'mahasiswa', 'biaya', 'biayaAll'));
+        $cicilanAll = Cicilan::all();
+        return view('admin.account.mahasiswa.detail', compact('biodata', 'mahasiswa', 'biaya', 'biayaAll', 'cicilanAll'));
     }
     public function mahasiswa_bayar(Request $request, $id)
     {
@@ -321,25 +364,28 @@ class AccountController extends Controller
 
     public function pendaftar()
     {
-        $mahasiswa = User::where('role', 'Mahasiswa')
-            ->whereHas('biodata', function ($query) {
-                $query->whereHas('angkatan', function ($subQuery) {
-                    $subQuery->where('status', 'Active');
-                });
-            })
-            ->get();
+        $mahasiswa = User::where('role', 'Mahasiswa')->latest()->get();
+
         return view('admin.account.pendaftar.index', compact('mahasiswa'));
     }
 
-    public function pendaftar_edit()
+    public function deleteAll(Request $request)
     {
-    }
+        $ids = $request->ids;
+        $user = User::where('role', 'Mahasiswa')->whereIn('id', $ids);
+        $biodata = Biodata::whereIn('user_id', $ids);
+        $tagihanDetail =  TagihanDetail::whereIn('id_users', $ids);
+        $tagihanDetailGet =  TagihanDetail::whereIn('id_users', $ids)->get();
 
-    public function pendaftar_edit_process()
-    {
-    }
+        foreach ($tagihanDetailGet as $value) {
+            $cicilan = Cicilan::whereIn('id_tagihan_details', $value->id);
+            $cicilan->delete();
+        }
 
-    public function pendaftar_delete()
-    {
+        $tagihanDetail->delete();
+        $biodata->delete();
+        $user->delete();
+
+        return redirect()->back();
     }
 }

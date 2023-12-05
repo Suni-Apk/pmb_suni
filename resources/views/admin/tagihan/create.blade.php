@@ -4,8 +4,23 @@
 
 @section('content')
 
+@error('error')
+    {{ $message }}
+@enderror
+
     @if ($jenis_tagihan == 'Routine')
-        <div class="card h-100">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
+                <li class="breadcrumb-item text-sm"><a class="opacity-5 text-dark" href="{{ route('dashboard') }}">Pages</a>
+                </li>
+                <li class="breadcrumb-item text-sm text-dark active" aria-current="page">Tagihan</li>
+            </ol>
+            <h6 class="font-weight-bolder mb-0">Buat Tagihan Spp</h6>
+        </nav>
+        <div class="card h-100 mt-4">
+            <div class="card-header">
+                <h6>Buat Tagihan</h6>
+            </div>
             <div class="card-body p-3">
                 <label for="">Isi semua harga</label>
                 <form onsubmit="return false">
@@ -99,8 +114,19 @@
         </div>
     @endif
     @if ($jenis_tagihan == 'Tidakroutine')
-        <h3 class="font-weight-bolder">Buat Tagihan</h3>
-        <div class="card h-100">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
+                <li class="breadcrumb-item text-sm"><a class="opacity-5 text-dark"
+                        href="{{ route('dashboard') }}">Pages</a>
+                </li>
+                <li class="breadcrumb-item text-sm text-dark active" aria-current="page">Tagihan</li>
+            </ol>
+            <h6 class="font-weight-bolder mb-0">Buat Tagihan Biaya Lain</h6>
+        </nav>
+        <div class="card h-100 mt-4">
+            <div class="card-header">
+                <h6>Buat Tagihan</h6>
+            </div>
             <div class="card-body p-3">
                 <form action="{{ route('admin.tagihan.store') }}" method="POST">
                     @csrf
@@ -169,19 +195,19 @@
                         <!--Jenis Kursus-->
                         <div class="form-group d-none" id="kursus">
                             <label for="id_course">Jenis Kursus</label>
-                            <select name="id_courses" id="id_course"
-                                class="form-select @error('id_courses')
+                            <select name="id_kursus" id="id_kursus"
+                                class="form-select @error('id_kursus')
                             is-invalid
                         @enderror">
                                 <option disabled selected>-- Pilih Kursus --</option>
                                 @foreach ($course as $value)
                                     <option value="{{ $value->id }}"
-                                        {{ old('id_courses') == $value->id ? 'selected' : '' }}>
+                                        {{ old('id_kursus') == $value->id ? 'selected' : '' }}>
                                         {{ $value->name }}
                                     </option>
                                 @endforeach
                             </select>
-                            @error('id_courses')
+                            @error('id_kursus')
                                 <div id="validationServer03Feedback" class="invalid-feedback">
                                     {{ $message }}
                                 </div>
@@ -311,7 +337,7 @@
                             </thead>
                             <tbody>
                                 @php
-                                    $tingkatan = ["Mubtadi'", "Muttawassith", "Mutaqaddim"];
+                                    $tingkatan = ["Mubtadi'", 'Muttawassith', 'Mutaqaddim'];
                                 @endphp
                                 @foreach ($tingkatan as $key => $tingkatans)
                                     <tr>
@@ -444,13 +470,13 @@
                 document.getElementById("jurusans").classList.remove('d-none');
                 document.getElementById("kursus").classList.add('d-none');
                 document.getElementById("id_jurusans").setAttribute('name', 'id_jurusans');
-                document.getElementById("id_course").removeAttribute('name');
+                document.getElementById("id_kursus").removeAttribute('name');
 
             } else if (program.value == "Kursus") {
                 document.getElementById("angkatans").classList.remove('d-none');
                 document.getElementById("kursus").classList.remove('d-none');
                 document.getElementById("jurusans").classList.add('d-none');
-                document.getElementById("id_course").setAttribute('name', 'id_courses');
+                document.getElementById("id_kursus").setAttribute('name', 'id_kursus');
                 document.getElementById("id_jurusans").removeAttribute('name');
 
 

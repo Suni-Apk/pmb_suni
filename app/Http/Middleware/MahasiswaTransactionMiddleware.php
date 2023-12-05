@@ -23,16 +23,16 @@ class MahasiswaTransactionMiddleware
             'id' => 'required'
         ]);
         $ids = $request->id;
-
         // $mahasiswa = User::findOrFail($userId);
         foreach ($ids as $idTagih) {
+            // dd($idTagih);
             $tagihanDetail = TagihanDetail::where('id', $idTagih)->get();
             foreach ($tagihanDetail as $value) {
                 $transaction = Transaksi::all();
                 foreach ($transaction as $transactions) {
-                    if (!isset($value->id_transactions) == $transactions->id && $transactions->status == 'berhasil') {
+                    if ($transactions->status != 'berhasil') {
                         return $next($request);
-                    } else {
+                    } else if ($value->id_transactions == $transactions->id && $transactions->status == 'berhasil' && $value->status == 'LUNAS') {
                         return redirect()->route('mahasiswa.tagihan.index')->with('error', 'Maaf, anda sudah membayar !');
                     }
                 }

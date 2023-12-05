@@ -2,22 +2,18 @@
 
 namespace App\Console\Commands;
 
-use App\Models\Biaya;
-use App\Models\Biodata;
-use App\Models\Document;
-use App\Models\Tagihan;
-use App\Models\Transaksi;
+use App\Models\Cicilan;
 use Illuminate\Console\Command;
-use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 
-class TagihanDetail extends Command
+class TenggatCicilan extends Command
 {
     /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    protected $signature = 'app:tagihan-detail';
+    protected $signature = 'app:tenggat-cicilan';
 
     /**
      * The console command description.
@@ -31,6 +27,9 @@ class TagihanDetail extends Command
      */
     public function handle()
     {
-        //
+        $cicilan = Cicilan::where('end_date', date('Y-m-d'))->where('status', 'belum')->get();
+        foreach ($cicilan as $cicilans) {
+            Log::info($cicilans->tagihanDetail->users->phone);
+        }
     }
 }

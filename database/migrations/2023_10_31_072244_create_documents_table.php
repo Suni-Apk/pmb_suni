@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('kk');
             $table->string('ijazah');
             $table->string('transkrip_nilai')->nullable();
+            $table->string('status')->default('deny')->nullable(); // accept & deny
             $table->timestamps();
         });
     }

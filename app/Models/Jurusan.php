@@ -14,11 +14,6 @@ class Jurusan extends Model
         'code'
     ];
 
-    public function tahunAjaran()
-    {
-        return $this->belongsTo(TahunAjaran::class, 'id_tahun_ajarans');
-    }
-
     public function semesters()
     {
         return $this->hasMany(Semester::class, 'id_tahun_ajarans');
@@ -36,6 +31,6 @@ class Jurusan extends Model
 
     public function links()
     {
-        return $this->hasMany(Links::class);
+        return $this->hasMany(Link::class, 'id_jurusans');
     }
 }

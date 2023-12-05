@@ -49,19 +49,19 @@
                                         <td class="align text-center">
                                             <span class="text-secondary text-xs font-weight-bold"><strong>{{ $mapels->hari }}</strong></span>
                                         </td>
-                                            <td class="d-flex align-items-center justify-content-center">
-                                                <a href="{{ route('admin.mapel.show', $mapels->id) }}" class="btn btn-sm bg-gradient-success font-weight-bold text-xs mx-2 mt-3">
-                                                    <strong>Detail</strong>
-                                                </a>
+                                        <td class="text-center">
+                                            <a href="{{ route('admin.mapel.show', $mapels->id) }}" class="badge badge-sm bg-gradient-info font-weight-bold text-xxs">
+                                                <strong>Detail</strong>
+                                            </a>
 
-                                                <a href="{{ route('admin.mapel.edit', $mapels->id) }}" class="btn btn-sm bg-gradient-secondary font-weight-bold text-xs mx-2 mt-3">
-                                                    <strong>Edit</strong>
-                                                </a>
+                                            <a href="{{ route('admin.mapel.edit', $mapels->id) }}" class="badge badge-sm bg-gradient-secondary font-weight-bold text-xxs mx-1">
+                                                <strong>Edit</strong>
+                                            </a>
 
-                                            <form action="{{ Route('admin.mapel.destroy' , $mapels->id) }}" method="POST">
+                                            <form action="{{ Route('admin.mapel.destroy' , $mapels->id) }}" method="POST" class="d-inline">
                                                 @csrf
                                                 @method('DELETE')
-                                                <button type="submit" class="btn btn-sm bg-gradient-danger font-weight-bold text-xs mx-2 mt-3 show_confirm"
+                                                <button type="submit" class="badge badge-sm border-0 bg-gradient-danger font-weight-bold text-xxs show_confirm"
                                                 data-toggle="tooltip" data-original-title="hapus">
                                                     Hapus
                                                 </button>

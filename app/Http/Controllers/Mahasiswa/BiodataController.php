@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Mahasiswa;
 use App\Http\Controllers\Controller;
 use App\Models\Biaya;
 use App\Models\Biodata;
+use App\Models\Document;
 use App\Models\Jurusan;
 use App\Models\Notify;
 use App\Models\Tagihan;
@@ -28,7 +29,7 @@ class BiodataController extends Controller
     {
         $user = Auth::user()->id;
         $notif = Notify::where('id', 1)->first();
-        $angkatan = TahunAjaran::where('status', 'Active')->first();
+        $angkatan = TahunAjaran::where('status', 'Active')->latest()->first();
         $data = $request->validate([
             'birthdate' => 'required|date',
             'birthplace' => 'required',
@@ -68,37 +69,14 @@ class BiodataController extends Controller
                     ]);
                 }
             }
-            // if ($biayas->id_angkatans == $biodata->angkatan_id && $biayas->id_jurusans == $biodata->jurusan_id && $biayas->program_belajar == $biodata->program_belajar) {
-            //     $tagihan = Tagihan::where('id_biayas', $biayas->id)->get();
-
-            //     foreach ($tagihan as $key => $tagihans) {
-            //         $tagihanDetail = TagihanDetail::create([
-            //             'id_biayas' => $biayas->id,
-            //             'id_tagihans' => $tagihans->id,
-            //             'id_users' => $biodata->user->id,
-            //             'end_date' => $tagihans->end_date,
-            //             'amount' => $tagihans->amount,
-            //             'status' => 'BELUM',
-            //         ]);
-            //     }
-            // } else if ($biayas->id_angkatans == $biodata->angkatan_id && $biayas->program_belajar == $biodata->program_belajar) {
-            //     $tagihan = Tagihan::where('id_biayas', $biayas->id)->get();
-            //     foreach ($tagihan as $key => $tagihans) {
-            //         $tagihanDetail = TagihanDetail::create([
-            //             'id_biayas' => $biayas->id,
-            //             'id_tagihans' => $tagihans->id,
-            //             'id_users' => $biodata->user->id,
-            //             'end_date' => $tagihans->end_date,
-            //             'amount' => $tagihans->amount,
-            //             'status' => 'BELUM',
-            //         ]);
-            //     }
-            // }
         }
-        // $pesan = $notif->notif_isi_biodata_formal . $user->name;
 
-        // $this->send_message($user->phone, $pesan);
+        if(is_object($user) && property_exists($user, 'document') && !$user->document) {
+            return redirect()->route('mahasiswa.pendaftaran.document')->with('success', 'Kamu Telah melengkapi Biodata Silahkan Lengkapi Dokument');
+        } else {
+            return redirect()->route('mahasiswa.dashboard')->with('success', 'Kamu Telah melengkapi Semua Yang Di Butuhkan');
+        }
+        
 
-        return redirect()->route('mahasiswa.pendaftaran.document')->with('success', 'Kamu Telah melengkapi Biodata Silahkan Lengkapi Dokument');
     }
 }

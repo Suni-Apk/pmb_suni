@@ -38,7 +38,7 @@
             </div>
             <div>
                 <h5 class="" style="margin-top: 130px; width:350px; text-align: right;">Jadwal Mata Kuliah Jurusan {{ $jurusan->name }}</h5>
-            </div>        
+            </div>
         </div>
 
         <table class="table table-bordered">

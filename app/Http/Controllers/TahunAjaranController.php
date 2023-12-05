@@ -38,7 +38,7 @@ class TahunAjaranController extends Controller
             'end_at' => 'required',
         ]);
         TahunAjaran::create($data);
-        return redirect()->route('admin.tahun_ajaran.index')->with('success', "Tahun Ajaran Berhasil Di Buat!!");
+        return redirect()->route('admin.tahun-ajaran.index')->with('success', "Tahun Ajaran Berhasil Di Buat!!");
     }
 
 
@@ -49,13 +49,13 @@ class TahunAjaranController extends Controller
         $activeTahunAjaranCount = TahunAjaran::where('status', 'Active')->count();
         
         if ($tahun_ajaran->status == 'nonActive' && $activeTahunAjaranCount > 0) {
-            return redirect()->route('admin.tahun_ajaran.index')->with('pesan', "Tidak dapat mengaktifkan tahun ajaran lain ketika sudah ada yang aktif");
+            return redirect()->route('admin.tahun-ajaran.index')->with('pesan', "Tidak dapat mengaktifkan tahun ajaran lain ketika sudah ada yang aktif");
         }
 
         $data['status'] = $tahun_ajaran->status === 'Active' ? 'nonActive' : 'Active';
 
         $tahun_ajaran->update($data);
-        return redirect()->route('admin.tahun_ajaran.index')->with('success', "Status Tahun Ajaran Berhasil Diubah");
+        return redirect()->route('admin.tahun-ajaran.index')->with('success', "Status Tahun Ajaran Berhasil Diubah");
     }
     /**
      * Display the specified resource.
@@ -92,7 +92,18 @@ class TahunAjaranController extends Controller
     public function destroy(string $id)
     {
         $data = TahunAjaran::findOrFail($id);
+
+        if ($data->users) {
+            $data->users->delete();
+        }
+        if ($data->biodatas) {
+            $data->biodatas->delete();
+        }
+        if ($data->links) {
+            $data->links->delete();
+        }
+
         $data->delete();
-        return redirect()->route('admin.tahun_ajaran.index');
+        return redirect()->route('admin.tahun-ajaran.index');
     }
 }

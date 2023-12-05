@@ -8,7 +8,7 @@
             <div class="card mb-4">
                 <div class="card-header pb-0 d-flex justify-content-between">
                     <h6>Daftar Tahun Ajaran</h6>
-                    <a href="{{route('admin.tahun_ajaran.create')}}" class="btn bg-gradient-primary float-end">Tambah + </a>
+                    <a href="{{route('admin.tahun-ajaran.create')}}" class="btn bg-gradient-primary float-end">Tambah + </a>
                 </div>
                 <div class="card-body px-0 pt-0 pb-2">
                     <div class="table-responsive p-0">
@@ -49,28 +49,28 @@
                                         <button type="button" class="badge badge-sm border-0 bg-gradient-info" data-bs-toggle="modal" data-bs-target="#modalLink{{ $angkatans->id }}"
                                         >Link <i class="fas fa-link ms-1"></i></button>
 
-                                        <a href="{{ route('admin.tahun_ajaran.detail', $angkatans->id) }}" class="badge badge-sm bg-gradient-warning text-xxs font-weight-bolder ms-1">Detail</a>
-
-                                        <form action="{{ route('admin.tahun_ajaran.active',$angkatans->id) }}" method="POST" class="d-inline">
-                                            @csrf
-                                            @if($angkatans->status == 'nonActive')
-                                                <button type="submit" class="badge border-0 badge-sm bg-gradient-success font-weight-bold text-xxs mx-1">
-                                                    <strong>On</strong>
-                                                </button>
-                                            @else
-                                                <button type="submit" class="badge border-0 badge-sm bg-gradient-secondary font-weight-bold text-xxs mx-1">
-                                                    <strong>Off</strong>
-                                                </button>
-                                            @endif
-                                        </form>
+                                        <a href="{{ route('admin.tahun-ajaran.detail', $angkatans->id) }}" class="badge badge-sm bg-gradient-secondary text-xxs font-weight-bolder ms-1">Detail</a>
                                         
-                                        <form action="{{ route('admin.tahun_ajaran.destroy',$angkatans->id) }}" method="POST" class="d-inline">
+                                        <form action="{{ route('admin.tahun-ajaran.destroy',$angkatans->id) }}" method="POST" class="d-inline">
                                             @csrf
                                             @method('DELETE')
                                             <button type="submit" style="letter-spacing: .02rem"
-                                                class="badge badge-sm bg-gradient-danger font-weight-bolder text-xxs show_confirm border-0" data-toggle="tooltip" data-original-title="Hapus">
+                                                class="badge badge-sm bg-gradient-danger font-weight-bolder text-xxs show_confirm border-0 mx-1" data-toggle="tooltip" data-original-title="Hapus">
                                                 Hapus
                                             </button>
+                                        </form>
+
+                                        <form action="{{ route('admin.tahun-ajaran.active',$angkatans->id) }}" method="POST" class="d-inline">
+                                            @csrf
+                                            @if($angkatans->status == 'nonActive')
+                                                <button type="submit" class="badge border-0 badge-sm bg-gradient-success font-weight-bold text-xxs">
+                                                    <strong>On</strong>
+                                                </button>
+                                            @else
+                                                <button type="submit" class="badge border-0 badge-sm bg-gradient-dark font-weight-bold text-xxs">
+                                                    <strong>Off</strong>
+                                                </button>
+                                            @endif
                                         </form>
                                         
                                         {{-- modal --}}
@@ -100,11 +100,11 @@
                                                                 <label>Tipe Link</label>
                                                                 <small class="text-danger" style="font-size: 12px">*</small>
                                                                 <div class="form-check">
-                                                                    <input type="radio" name="type" id="Whatsapp" class="form-check-input" value="Whatsapp">
+                                                                    <input type="radio" name="type" id="Whatsapp" class="form-check-input" value="whatsapp">
                                                                     <label class="form-check-label" for="Whatsapp">Whatsapp</label>
                                                                 </div>
                                                                 <div class="form-check">
-                                                                    <input type="radio" name="type" id="Zoom" class="form-check-input" value="Zoom">
+                                                                    <input type="radio" name="type" id="Zoom" class="form-check-input" value="zoom">
                                                                     <label class="form-check-label" for="Zoom">Zoom</label>
                                                                 </div>
                                                             </div>

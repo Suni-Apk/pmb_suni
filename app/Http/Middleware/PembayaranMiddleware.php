@@ -28,13 +28,19 @@ class PembayaranMiddleware
         foreach ($ids as $idTagih) {
             $tagihanDetail = TagihanDetail::where('id', $idTagih)->get();
             foreach ($tagihanDetail as $value) {
-                $transaction = Transaksi::all();
-                foreach ($transaction as $transactions) {
-                    if (!isset($value->id_transactions) == $transactions->id && $transactions->status == 'berhasil') {
-                        return $next($request);
-                    } else {
-                        return redirect()->route('admin.mahasiswa.show', $userId)->with('error', 'Maaf, anda sudah membayar !');
+                // dd($value->id_transactions);
+                if ($value->id_transactions) {
+                    $transaction = Transaksi::where('id', $value->id_transactions)->get();
+                    foreach ($transaction as $transactions) {
+                        // print_r($transactions->id);
+                        if ($transactions->id == $value->id_transactions && $value->status == 'LUNAS') {
+                            return redirect()->route('admin.mahasiswa.show', $userId)->with('error', 'Maaf, anda sudah membayar !');
+                        } else {
+                            return $next($request);
+                        }
                     }
+                } else {
+                    return $next($request);
                 }
             }
         }
