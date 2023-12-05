@@ -37,7 +37,7 @@ class DashboardController extends Controller
         ->with('course') 
         ->first();
 
-        if(!$kursusBiodata){
+        if(!$kursusBiodata){ 
             $linkKursus = Link::where('gender',$mahasiswa->gender)->get();
             $kursus = Course::all();
         }else{
@@ -51,12 +51,11 @@ class DashboardController extends Controller
         }
 
 
+        $linkKursus =  Link::where('id_courses', $kursusBiodata->id)->where('gender', $mahasiswa->gender)->get();   
         return view('kursus.index', compact('hijriDateday', 'hijriDatedayArabic', 'hijriDatemonth', 'hijriDateyear', 'biodata', 'banner', 'kursusBiodata',
             (!$kursusBiodata) ? ['linkKursus','kursus'] : ['linkKursus', 'kursus'],
             'mahasiswa'
         ));
-        $kursus = Course::where('id', '!=', $kursusBiodata->id)->get();
-        $linkKursus =  Link::where('id_courses', $kursusBiodata->id)->where('gender', $mahasiswa->gender)->get();   
         return view('kursus.index',compact('hijriDateday', 'hijriDatedayArabic','hijriDatemonth','hijriDateyear','biodata', 'kursus', 'banner', 'kursusBiodata', 'linkKursus', 'mahasiswa'));
         // return view('kursus.index',compact('hijriDateday', 'hijriDatedayArabic','hijriDatemonth','hijriDateyear','biodata',  'banner',  'mahasiswa'));
     }

@@ -8,7 +8,9 @@
 @section('content')
     @foreach ($biodata as $item)
     <div class="row">
-        <h4 class="ms-2">{{ $item->course->name }}</h4>
+        <h4 class="ms-2">{{ $item->course->name }}
+        
+        {{  $item->id }}</h4>
         <div class="col-12 col-lg-12">
             <div class="card mb-4">
                 <div class="card-header pb-0 d-flex justify-content-between">
@@ -16,9 +18,9 @@
                         <h6>Mata Pelajaran</h6>
                     </div>
                     <div class="flex-row d-flex">
-                        <a href="" class="btn btn-secondary fs-6 p-2 px-3 ms-2">
+                        <a href="{{ route('kursus.downloadMapels', ['id_kursus' => $item->course->id]) }}" class="btn btn-secondary fs-6 p-2 px-3 ms-2">
                             <i class="fas fa-file-download"></i>
-                        </a>
+                        </a>                        
                     </div>
                 </div>
                 <div class="card-body px-0 pt-0 pb-2">

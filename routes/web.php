@@ -244,6 +244,11 @@ Route::prefix('/kursus')->middleware(['auth', 'kursus'])->name('kursus.')->group
     //mata pelajaran
     Route::get('/mata-pelajaran', [MataPelajaranController::class, 'index'])->name('mapel');
 
+    //jadwal mapels
+    // Route::match(['get', 'post'],'/download/{id}/', [MahasiswaMatkulController::class, 'downloadMatkuls'])->name('downloadMatkuls');
+    Route::get('/mapelsPreview/{id_kursus}', [MataPelajaranController::class, 'mapelsPreview'])->name('mapelsPreview');
+    Route::get('/downloadMapels/{id_kursus}', [MataPelajaranController::class, 'downloadMapels'])->name('downloadMapels');
+
     //tagihan kursus
     Route::prefix('/tagihan')->name('tagihan.')->group(function () {
         Route::get('/', [KursusTagihanController::class, 'index'])->name('index');

@@ -198,16 +198,16 @@
                                                 <label>Gender</label>
                                                 <small class="text-danger" style="font-size: 12px">*</small>
                                                 <div class="form-check">
-                                                    <input class="form-check-input" type="radio" name="gender" id="ikhwan"
-                                                        value="ikhwan">
-                                                    <label class="form-check-label" for="ikhwan">
+                                                    <input class="form-check-input" type="radio" name="gender" id="Laki-Laki"
+                                                        value="Laki-Laki">
+                                                    <label class="form-check-label" for="Laki-Laki">
                                                         Ikhwan
                                                     </label>
                                                 </div>
                                                 <div class="form-check">
-                                                    <input class="form-check-input" type="radio" name="gender" id="akhwat"
-                                                        value="akhwat">
-                                                    <label class="form-check-label" for="akhwat">
+                                                    <input class="form-check-input" type="radio" name="gender" id="Perempuan"
+                                                        value="Perempuan">
+                                                    <label class="form-check-label" for="Perempuan">
                                                         Akhwat
                                                     </label>
                                                 </div>
@@ -285,10 +285,18 @@
                                 <input type="time" name="selesai" id="selesai" class="form-control">
                             </div>
                             <div class="form-group mb-3">
-                                <label for="tanggal">Tanggal</label>
-                                <input type="date" name="tanggal" id="tanggal" class="form-control">
+                                <label for="hari">Hari</label>
+                                <select name="hari" id="hari" class="form-control" required>
+                                    <option hidden selected>-----------</option>
+                                    <option value="Senin">Senin</option> 
+                                    <option value="Selasa">Selasa</option> 
+                                    <option value="Rabu">Rabu</option> 
+                                    <option value="Kamis">Kamis</option> 
+                                    <option value="Jumat">Jumat</option> 
+                                    <option value="Sabtu">Sabtu</option> 
+                                    <option value="Ahad">Ahad</option> 
+                                </select>
                             </div>
-
                                 <button type="submit" class="btn btn-success">Submit</button>
                                 <button type="button" class="btn btn-warning" data-bs-dismiss="modal">Batal</button>
                             </form>

@@ -221,14 +221,20 @@
                                     title="Bayar Registrasi">
                                     <span>Bayar Registrasi</span>
                                 </button>
-                                <button class="multisteps-form__progress-btn js-active" type="button"
-                                    title="Mengisi Biodata">
-                                    <span>Mengisi Biodata</span>
-                                </button>
-                                <button class="multisteps-form__progress-btn js-active" type="button"
-                                    title="Bayar Pra-Kuliah">
-                                    <span>Selesai!</span>
-                                </button>
+                                @if (!$biodata)
+                                    <button class="multisteps-form__progress-btn" type="button" title="Mengisi Biodata">
+                                        <span>Mengisi Biodata</span>
+                                    </button>
+                                @else
+                                    <button class="multisteps-form__progress-btn js-active" type="button"
+                                        title="Mengisi Biodata">
+                                        <span>Mengisi Biodata</span>
+                                    </button>
+                                    <button class="multisteps-form__progress-btn js-active" type="button"
+                                        title="Bayar Pra-Kuliah">
+                                        <span>Selesai!</span>
+                                    </button>
+                                @endif
                             </div>
                         </div>
                     </div>
@@ -442,7 +448,8 @@
                         <div class="card">
                             <div class="card-body">
                                 <div class="table-responsive text-nowrap">
-                                    <form action="{{route('kursus.pendaftaran.kursus.process')}}" method="POST" enctype="multipart/form-data">
+                                    <form action="{{ route('kursus.pendaftaran.kursus.process') }}" method="POST"
+                                        enctype="multipart/form-data">
                                         @csrf
                                         @method('POST')
                                         <div class="form-group mb-3">
@@ -470,11 +477,13 @@
                                         <div class="form-group mb-3">
                                             <label for="">Bisa Baca Al-Qur'an?</label>
                                             <div class="d-block">
-                                                <input type="radio" name="baca_quran" id="bisa" class="form-radio" value="Bisa">
+                                                <input type="radio" name="baca_quran" id="bisa"
+                                                    class="form-radio" value="Bisa">
                                                 <label for="bisa">Bisa</label>
                                             </div>
                                             <div class="d-block">
-                                                <input type="radio" name="baca_quran" id="tidakBisa" class="form-radio" value="Tidak Bisa">
+                                                <input type="radio" name="baca_quran" id="tidakBisa"
+                                                    class="form-radio" value="Tidak Bisa">
                                                 <label for="tidakBisa">Tidak Bisa</label>
                                             </div>
                                         </div>
@@ -486,7 +495,8 @@
 
                                         <div class="form-group mb-3">
                                             <label for="birthplace">Tempat Lahir</label>
-                                            <input type="text" name="birthplace" id="birthplace" class="form-control" placeholder="Masukkan Tempat Lahir Anda">
+                                            <input type="text" name="birthplace" id="birthplace" class="form-control"
+                                                placeholder="Masukkan Tempat Lahir Anda">
                                         </div>
 
                                         <div class="form-group mb-3">
@@ -496,7 +506,8 @@
                                                 <!-- Data Provinsi dari API bisa dimasukkan di sini -->
                                             </select>
                                             <select name="kota" id="kota" class="form-control mt-2">
-                                                <option value="" disabled selected>--- Pilih Kabupaten / Kota ---</option>
+                                                <option value="" disabled selected>--- Pilih Kabupaten / Kota ---
+                                                </option>
                                                 <!-- Data Kabupaten dari API bisa dimasukkan di sini -->
                                             </select>
                                             <select name="kecamatan" id="kecamatan" class="form-control mt-2">
@@ -570,109 +581,115 @@
     @else
         <div class="row" style="max-height: 500px; overflow-y: auto;">
             @foreach ($kursus as $kursuss)
-            <div class="col-sm-6 mb-3 mb-sm-0 mt-3">
-                <div class="card mb-4">
-                    <div class="card-body">
-                        <h5 class="card-title">{{ $kursuss->name }}</h5>
-                        <label for="">Mapel : @foreach ($kursuss->mapel as $item)
-                            <strong>{{$item->name}} , </strong>
-                        @endforeach</label>
-                        <p class="card-text">
-                            @if(strlen($kursuss->desc) > 80)
-                                <span class="short-desc">{{ substr($kursuss->desc, 0, 80) }}...</span>
-                                <span class="full-desc" style="display: none;">{{ $kursuss->desc }}</span>
-                                <a href="#" class="read-more">Lihat Selengkapnya</a>
-                            @else
-                                {{ $kursuss->desc }}
-                            @endif
-                        </p>                                              
-                        <a href="{{ route('kursus.pendaftaran.kursus') }}" class="btn btn-primary">Daftar Sekarang!!</a>
+                <div class="col-sm-6 mb-3 mb-sm-0 mt-3">
+                    <div class="card mb-4">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ $kursuss->name }}</h5>
+                            <label for="">Mapel : @foreach ($kursuss->mapel as $item)
+                                    <strong>{{ $item->name }} , </strong>
+                                @endforeach
+                            </label>
+
+                            <p class="card-text">
+                                @if (strlen($kursuss->desc) > 80)
+                                    <span class="short-desc">{{ substr($kursuss->desc, 0, 80) }}...</span>
+                                    <span class="full-desc" style="display: none;">{{ $kursuss->desc }}</span>
+                                    <a href="#" class="read-more">Lihat Selengkapnya</a>
+                                    <a href="#" class="read-less" style="display: none;">Lihat Lebih Sedikit</a>
+                                @else
+                                    {{ $kursuss->desc }}
+                                @endif
+                            </p>
+                            <a href="{{ route('kursus.pendaftaran.kursus') }}" class="btn btn-primary">Daftar
+                                Sekarang!!</a>
+                        </div>
                     </div>
                 </div>
-            </div>
             @endforeach
         </div>
-    <div class="row my-4">
-        <div class="col-lg-8 col-md-6 mb-md-0 mb-4">
-            <div class="card">
-                <div class="card-header pb-0">
-                    <div class="row">
-                        <div class="col-lg-6 col-7">
-                            <h6>Daftar Tagihan</h6>
-                            <p class="text-sm mb-0">
-                                <i class="fa fa-check text-info" aria-hidden="true"></i>
-                                Daftar tagihan yang harus dibayarkan
-                            </p>
-                        </div>
-                        <div class="col-lg-6 col-5 my-auto text-end">
-                            <div class="dropdown float-lg-end pe-4">
-                                <a class="cursor-pointer" id="dropdownTable" data-bs-toggle="dropdown"
-                                    aria-expanded="false">
-                                    <i class="fa fa-ellipsis-v text-secondary"></i>
-                                </a>
-                                <ul class="dropdown-menu px-2 py-3 ms-sm-n4 ms-n5" aria-labelledby="dropdownTable">
-                                    <li>
-                                        <a class="dropdown-item border-radius-md" href="javascript:;">Action</a>
-                                    </li>
-                                    <li>
-                                        <a class="dropdown-item border-radius-md" href="javascript:;">Another action</a>
-                                    </li>
-                                    <li>
-                                        <a class="dropdown-item border-radius-md" href="javascript:;">Something else
-                                            here</a>
-                                    </li>
-                                </ul>
+        <div class="row my-4">
+            <div class="col-lg-8 col-md-6 mb-md-0 mb-4">
+                <div class="card">
+                    <div class="card-header pb-0">
+                        <div class="row">
+                            <div class="col-lg-6 col-7">
+                                <h6>Daftar Tagihan</h6>
+                                <p class="text-sm mb-0">
+                                    <i class="fa fa-check text-info" aria-hidden="true"></i>
+                                    Daftar tagihan yang harus dibayarkan
+                                </p>
+                            </div>
+                            <div class="col-lg-6 col-5 my-auto text-end">
+                                <div class="dropdown float-lg-end pe-4">
+                                    <a class="cursor-pointer" id="dropdownTable" data-bs-toggle="dropdown"
+                                        aria-expanded="false">
+                                        <i class="fa fa-ellipsis-v text-secondary"></i>
+                                    </a>
+                                    <ul class="dropdown-menu px-2 py-3 ms-sm-n4 ms-n5" aria-labelledby="dropdownTable">
+                                        <li>
+                                            <a class="dropdown-item border-radius-md" href="javascript:;">Action</a>
+                                        </li>
+                                        <li>
+                                            <a class="dropdown-item border-radius-md" href="javascript:;">Another
+                                                action</a>
+                                        </li>
+                                        <li>
+                                            <a class="dropdown-item border-radius-md" href="javascript:;">Something else
+                                                here</a>
+                                        </li>
+                                    </ul>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="card-body px-0 pb-2">
-                    <div class="table-responsive">
-                        <table class="table align-items-center mb-0">
-                            <thead>
-                                <tr>
-                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                        Companies</th>
-                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
-                                        Members</th>
-                                    <th
-                                        class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                        Budget</th>
-                                    <th
-                                        class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                        Completion</th>
-                                </tr>
-                            </thead>
-                            <tbody>
+                    <div class="card-body px-0 pb-2">
+                        <div class="table-responsive">
+                            <table class="table align-items-center mb-0">
+                                <thead>
+                                    <tr>
+                                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                            Companies</th>
+                                        <th
+                                            class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
+                                            Members</th>
+                                        <th
+                                            class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                            Budget</th>
+                                        <th
+                                            class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                            Completion</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
 
-                            </tbody>
-                        </table>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6">
+                <div class="card h-100">
+                    <div class="card-header pb-0">
+                        <h3>Daftar Link</h3>
+                        <p class="text-sm">
+                            <i class="fas fa-link text-success" aria-hidden="true"></i>
+                            Daftar link yang diikuti
+                        </p>
+                    </div>
+                    <div class="container mb-3" style="max-height: 340px; overflow-y: auto;">
+                        @foreach ($linkKursus as $item)
+                            <div class="card border mb-3">
+                                <div class="card-body">
+                                    <h5 class="card-title">{{ $item->name }}</h5>
+                                    <a href="{{ $item->url }}" class="btn btn-primary mt-3">Klik Untuk Bergabung</a>
+                                </div>
+                            </div>
+                        @endforeach
                     </div>
                 </div>
             </div>
         </div>
-        <div class="col-lg-4 col-md-6">
-            <div class="card h-100">
-                <div class="card-header pb-0">
-                    <h3>Daftar Link</h3>
-                    <p class="text-sm">
-                        <i class="fas fa-link text-success" aria-hidden="true"></i>
-                        Daftar link yang diikuti
-                    </p>
-                </div>
-                <div class="container mb-3" style="max-height: 340px; overflow-y: auto;">
-                    @foreach ($linkKursus as $item)
-                        <div class="card border mb-3">
-                            <div class="card-body">
-                                <h5 class="card-title">{{ $item->name }}</h5>
-                                <a href="{{ $item->url }}" class="btn btn-primary mt-3">Klik Untuk Bergabung</a>
-                            </div>
-                        </div>
-                    @endforeach
-                </div>
-            </div>
-        </div>
-    </div>
     @endif
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <script>
