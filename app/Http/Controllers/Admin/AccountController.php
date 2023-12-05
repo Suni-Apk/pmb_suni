@@ -129,6 +129,19 @@ class AccountController extends Controller
         return redirect()->route('admin.admin.index')->with("success", "Berhasil Menghapus Akun Admin $admin->name");
     }
 
+
+    public function deleteAllAdmin(Request $request)
+    {
+        $ids = $request->ids;
+        $admin = User::where('role', 'Admin')->whereIn('id', $ids);
+        $admins = User::where('role', 'Admin')->where('id', $ids)->first();
+
+        if ($admins == Auth::user()) {
+            return redirect()->route('admin.admin.index')->with("error", "Ada user yang sedang dipakai");
+        }
+        $admin->delete();
+        return redirect()->route('admin.admin.index')->with("success", "Berhasil Menghapus Akun Admin");
+    }
     public function export(Request $request)
     {
         return Excel::download(new AdminExport, 'dataAdmin.xlsx');
@@ -251,6 +264,7 @@ class AccountController extends Controller
         $user = User::where('role', 'Mahasiswa')->find($id);
         if ($user->biodata) {
             $user->biodata->delete();
+            $user->tagihanDetail->delete();
             $user->delete();
         } else {
             $user->delete();

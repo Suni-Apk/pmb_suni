@@ -227,7 +227,7 @@
                 });
                 if ($('.checksAll').is(':checked')) {
                     Swal.fire({
-                        title: "Apakah Anda Yakin Ingin Menghapus Tagihan?",
+                        title: "Apakah Anda Yakin Ingin Menghapus data mahasiswa?",
                         text: "You won't be able to revert this!",
                         icon: "warning",
                         showCancelButton: true,

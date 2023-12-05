@@ -79,7 +79,7 @@
                                             {{ $index + 1 }}
                                         </td>
                                         <td class="align-middle text-secondary text-xs font-weight-bold">
-                                            {{$transactions->jenis_tagihan}}
+                                            {{ $transactions->jenis_tagihan }}
                                         </td>
                                         <td class="align-middle text-secondary text-xs font-weight-bold">
                                             {{ \Carbon\Carbon::parse($transactions->created_at)->isoFormat('D MMMM YYYY') }}
@@ -224,7 +224,7 @@
                 });
                 if ($('.checksAll').is(':checked')) {
                     Swal.fire({
-                        title: "Apakah Anda Yakin Ingin Menghapus Tagihan?",
+                        title: "Apakah Anda Yakin Ingin Menghapus Transaction?",
                         text: "You won't be able to revert this!",
                         icon: "warning",
                         showCancelButton: true,

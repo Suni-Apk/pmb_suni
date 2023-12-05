@@ -48,12 +48,12 @@ class TahunAjaranController extends Controller
 
         $activeTahunAjaranCount = TahunAjaran::where('status', 'Active')->count();
 
-        
+
         // if ($tahun_ajaran->status == 'Active' && $activeTahunAjaranCount <= 1) {
         //     return redirect()->route('admin.tahun_ajaran.index')->with('pesan', "Tidak dapat menonaktifkan satu-satunya tahun ajaran yang aktif");
         // }
 
-        
+
         if ($tahun_ajaran->status == 'nonActive' && $activeTahunAjaranCount > 0) {
             return redirect()->route('admin.tahun_ajaran.index')->with('pesan', "Tidak dapat mengaktifkan tahun ajaran lain ketika sudah ada yang aktif");
         }
@@ -99,5 +99,13 @@ class TahunAjaranController extends Controller
         $data = TahunAjaran::findOrFail($id);
         $data->delete();
         return redirect()->route('admin.tahun_ajaran.index');
+    }
+
+    public function deleteAll(Request $request)
+    {
+        $ids = $request->ids;
+        $data = TahunAjaran::whereIn('id', $ids);
+        $data->delete();
+        return redirect()->route('admin.tahun_ajaran.index')->with('success', 'Kamu telah berhasil menghapus tahun ajaran');
     }
 }

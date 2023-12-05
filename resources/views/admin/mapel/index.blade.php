@@ -15,17 +15,35 @@
                         <table class="table align-items-center mb-0" id="table">
                             <thead>
                                 <tr>
-                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 text-center">No</th>
-                                    <th class="text-uppercase text-secondary text-xxs px-2 font-weight-bolder opacity-7 text-center">Nama Mata Pelajaran</th>
-                                    <th class="text-uppercase text-secondary text-xxs px-2 font-weight-bolder opacity-7 text-center">Nama Kursus</th>
-                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2 text-center">Mulai - Selesai</th>
-                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2 text-center">Hari</th>
-                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Aksi</th>
+                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                        Pilih</th>
+                                    <th
+                                        class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 text-center">
+                                        No</th>
+                                    <th
+                                        class="text-uppercase text-secondary text-xxs px-2 font-weight-bolder opacity-7 text-center">
+                                        Nama Mata Pelajaran</th>
+                                    <th
+                                        class="text-uppercase text-secondary text-xxs px-2 font-weight-bolder opacity-7 text-center">
+                                        Nama Kursus</th>
+                                    <th
+                                        class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2 text-center">
+                                        Mulai - Selesai</th>
+                                    <th
+                                        class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2 text-center">
+                                        Hari</th>
+                                    <th
+                                        class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                        Aksi</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @foreach ($mapel as $index => $mapels)
                                     <tr>
+                                        <td class="align-middle text-sm">
+                                            <input type="checkbox" name="ids" id="" class="checksAll"
+                                                value="{{ $mapels->id }}">
+                                        </td>
                                         <td class="align-middle text-center text-sm">
                                             <span class="text-bold">{{ $index + 1 }}</span>
                                         </td>
@@ -33,28 +51,33 @@
                                             <span class="text-bold">{{ $mapels->name }}</span>
                                         </td>
                                         <td class="align-middle text-center text-sm">
-                                            <span class="text-bold">{{ $mapels->kursus->name  }}</span>
+                                            <span class="text-bold">{{ $mapels->kursus->name }}</span>
                                         </td>
                                         <td class="align text-center">
-                                            <span class="text-secondary text-xs font-weight-bold"><strong>{{ $mapels->mulai }} WIB</strong> - <strong>{{ $mapels->selesai }} WIB</strong> </span>
+                                            <span class="text-secondary text-xs font-weight-bold"><strong>{{ $mapels->mulai }}
+                                                    WIB</strong> - <strong>{{ $mapels->selesai }} WIB</strong> </span>
                                         </td>
                                         <td class="align text-center">
-                                            <span class="text-secondary text-xs font-weight-bold"><strong>{{ $mapels->hari }}</strong></span>
+                                            <span
+                                                class="text-secondary text-xs font-weight-bold"><strong>{{ $mapels->hari }}</strong></span>
                                         </td>
-                                            <td class="d-flex align-items-center justify-content-center">
-                                                <a href="{{ route('admin.mapel.show', $mapels->id) }}" class="btn btn-sm bg-gradient-success font-weight-bold text-xs mx-2 mt-3">
-                                                    <strong>Detail</strong>
-                                                </a>
+                                        <td class="d-flex align-items-center justify-content-center">
+                                            <a href="{{ route('admin.mapel.show', $mapels->id) }}"
+                                                class="btn btn-sm bg-gradient-success font-weight-bold text-xs mx-2 mt-3">
+                                                <strong>Detail</strong>
+                                            </a>
 
-                                                <a href="{{ route('admin.mapel.edit', $mapels->id) }}" class="btn btn-sm bg-gradient-secondary font-weight-bold text-xs mx-2 mt-3">
-                                                    <strong>Edit</strong>
-                                                </a>
+                                            <a href="{{ route('admin.mapel.edit', $mapels->id) }}"
+                                                class="btn btn-sm bg-gradient-secondary font-weight-bold text-xs mx-2 mt-3">
+                                                <strong>Edit</strong>
+                                            </a>
 
-                                            <form action="{{ Route('admin.mapel.destroy' , $mapels->id) }}" method="POST">
+                                            <form action="{{ Route('admin.mapel.destroy', $mapels->id) }}" method="POST">
                                                 @csrf
                                                 @method('DELETE')
-                                                <button type="submit" class="btn btn-sm bg-gradient-danger font-weight-bold text-xs mx-2 mt-3 show_confirm"
-                                                data-toggle="tooltip" data-original-title="hapus">
+                                                <button type="submit"
+                                                    class="btn btn-sm bg-gradient-danger font-weight-bold text-xs mx-2 mt-3 show_confirm"
+                                                    data-toggle="tooltip" data-original-title="hapus">
                                                     Hapus
                                                 </button>
                                             </form>
@@ -63,6 +86,14 @@
                                 @endforeach
                             </tbody>
                         </table>
+                    </div>
+                    <div class="d-flex ms-4 mb-4 mt-3">
+                        <input type="checkbox" id="select_all_ids" class="chek me-2">
+                        <a href="#ClikKabeh" id="ClikKabeh" class="text-secondary">Pilih Semua</a>
+                        <div class=" ms-4">
+                            <i class="fas fa-trash me-1 cursor-pointer" style="color: #ff0000;" id="deleteAll"></i>
+                            <a href="#" class="text-secondary" id="All">Hapus</a>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -121,6 +152,81 @@
                         'success'
                     )
                 }
+            });
+        });
+    </script>
+    <script>
+        $(function(e) {
+            $("#ClikKabeh").click(function() {
+                $('.checksAll, #select_all_ids').prop('checked', function() {
+                    return !$(this).prop("checked");
+                });
+            });
+            $("#select_all_ids").click(function() {
+                $('.checksAll').prop('checked', $(this).prop('checked'));
+            });
+            $("#All").click(function() {
+                $('#deleteAll').click();
+            });
+
+            $("#deleteAll").click(function(e) {
+                e.preventDefault();
+                var all_ids = [];
+
+                $('input:checkbox[name="ids"]:checked').each(function() {
+                    all_ids.push($(this).val());
+                });
+                if ($('.checksAll').is(':checked')) {
+                    Swal.fire({
+                        title: "Apakah Anda Yakin Ingin Menghapus data mata pelajaran?",
+                        text: "You won't be able to revert this!",
+                        icon: "warning",
+                        showCancelButton: true,
+                        confirmButtonColor: "#3085d6",
+                        cancelButtonColor: "#d33",
+                        confirmButtonText: "Yes, delete it!"
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            $.ajax({
+                                url: "{{ route('admin.mapel.delete.all') }}",
+                                type: "DELETE",
+                                data: {
+                                    ids: all_ids
+                                },
+                                headers: {
+                                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr(
+                                        'content')
+                                },
+                                success: function(response) {
+                                    // Handle response jika diperlukan
+                                    // Misalnya, menampilkan pesan sukses
+                                    // Lakukan reload halaman setelah permintaan AJAX selesai
+
+                                },
+                                error: function(xhr, status, error) {
+                                    // Handle error jika diperlukan
+
+                                }
+                            });
+                            setTimeout(() => {
+                                location.reload();
+                            }, 1000);
+                            Swal.fire({
+                                title: "Deleted!",
+                                text: "Your file has been deleted.",
+                                icon: "success"
+                            }).then((result) => {});
+                        }
+                    });
+                }
+                if (!$('.checksAll').is(':checked')) {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Oops...',
+                        text: 'Pilih Minimal 1!',
+                    })
+                }
+
             });
         });
     </script>

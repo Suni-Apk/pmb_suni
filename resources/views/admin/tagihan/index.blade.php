@@ -89,28 +89,43 @@
                             <tbody>
                                 @foreach ($biaya as $key => $biayas)
                                     <tr>
-                                        <td><input type="checkbox" name="ids" id="" class="checksAll"
-                                                value="{{ $biayas->id }}"></td>
-                                        <td class="align-middle text-xs font-weight-bold">{{ $key + 1 }}</td>
-                                        <td class="align-middle  text-secondary text-xs font-weight-bold">
-                                            <strong>{{ $biayas->nama_biaya }}</strong>
+                                        <td>
+                                            <div>
+                                                <input type="checkbox" name="ids" id="" class="checksAll"
+                                                    value="{{ $biayas->id }}">
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div>
+                                                <h6 class="mb-0 text-sm">{{ $key + 1 }}</h6>
+                                            </div>
                                         </td>
                                         <td class="align-middle  text-secondary text-xs font-weight-bold">
-                                            {{ $biayas->tahunAjaran->year }}
+                                            <div>
+                                                <strong>{{ $biayas->nama_biaya }}</strong>
+                                            </div>
+                                        </td>
+                                        <td class="align-middle  text-secondary text-xs font-weight-bold">
+                                            <div>
+                                                {{ $biayas->tahunAjaran->year }}
+                                            </div>
                                         </td>
 
                                         <td class="align-middle  text-secondary text-xs font-weight-bold">
-                                            @if ($biayas->jurusans?->name != null && $biayas->program_belajar == 'S1')
-                                                {{ $biayas->jurusans->name }}
-                                            @elseif ($biayas->jurusans?->name == null && $biayas->program_belajar == 'KURSUS')
-                                                {{ $biayas->kursus->name }}
-                                            @elseif ($biayas->jurusans?->name == null)
-                                                Semua Jurusan
-                                            @endif
-
+                                            <div>
+                                                @if ($biayas->jurusans?->name != null && $biayas->program_belajar == 'S1')
+                                                    {{ $biayas->jurusans->name }}
+                                                @elseif ($biayas->jurusans?->name == null && $biayas->program_belajar == 'KURSUS')
+                                                    {{ $biayas->kursus->name }}
+                                                @elseif ($biayas->jurusans?->name == null)
+                                                    Semua Jurusan
+                                                @endif
+                                            </div>
                                         </td>
                                         <td class="align-middle  text-secondary text-xs font-weight-bold">
-                                            <strong>{{ $biayas->program_belajar }}</strong>
+                                            <div>
+                                                <strong>{{ $biayas->program_belajar }}</strong>
+                                            </div>
                                         </td>
                                         <td class="align-middle  text-secondary text-xs font-weight-bold">
                                             {{ \Carbon\Carbon::parse($biayas->created_at)->format('d/m/Y H:i:s') }}
@@ -267,15 +282,14 @@
 
                                 }
                             });
+                            setTimeout(() => {
+                                location.reload();
+                            }, 1000);
                             Swal.fire({
                                 title: "Deleted!",
                                 text: "Your file has been deleted.",
                                 icon: "success"
-                            }).then((result) => {
-                                if (result.isConfirmed) {
-                                    location.reload();
-                                }
-                            });
+                            }).then((result) => {});
                         }
                     });
                 }
