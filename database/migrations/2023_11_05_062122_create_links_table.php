@@ -19,7 +19,7 @@ return new class extends Migration
             $table->foreignId('id_jurusans')->nullable();
             $table->foreignId('id_courses')->nullable();
             $table->enum('type', ['whatsapp', 'zoom']);
-            $table->enum('gender', ['ikhwan', 'akhwat', 'all']);
+            $table->enum('gender', ['Laki-Laki', 'Perempuan', 'all']);
             $table->timestamps();
         });
     }

@@ -26,7 +26,7 @@
                                 @enderror
                             </div>
 
-                            {{-- <div class="form-group mb-3">
+                            <div class="form-group mb-3">
                                 <label for="">Biaya Administrasi</label>
                                 <div class="input-group">
                                     <span class="input-group-text text-bolder">Rp. </span>
@@ -35,7 +35,7 @@
                                 @error('amount')
                                     <div class="text-danger text-sm">{{ $message }}</div>
                                 @enderror
-                            </div> --}}
+                            </div>
 
                             <div class="form-group mb-3">
                                 <div class="d-flex justify-content-between mb-2">
@@ -99,13 +99,16 @@
                             <div class="form-group mb-3">
                                 <label for="">Deskripsi</label>
                                 <textarea name="desc" id="desc" class="form-control min-height-200">{{ old('desc') }}</textarea>
+                                @error('desc') <!-- Perubahan disini -->
+                                    <div class="text-danger">{{ $message }}</div>
+                                @enderror
                             </div>
                             
                             <button type="submit" class="btn btn-success">Submit</button>
                             <a href="{{ route('admin.course.index') }}">
                                 <button type="button" class="btn btn-warning">Back</button>
                             </a>
-                        </form>
+                        </form>                        
                     </div>
                 </div>
             </div>

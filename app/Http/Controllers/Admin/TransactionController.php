@@ -106,7 +106,21 @@ class TransactionController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $transaksi = Transaksi::find($id);
+        $data = $request->validate([
+            'status' => 'required|string',
+        ]);
+
+        if ($transaksi->jenis_pembayaran == 'Ipaymu') {
+            return redirect()->back()
+            ->with('bayar', 'Chat dengan <a class="fw-bolder text-capitalize text-white" href="https://api.whatsapp.com/send?phone=' . $transaksi->user->phone . '">' . $transaksi->user->name . '</a> untuk segera melakukan pembayaran.');
+        } elseif ($transaksi->jenis_pembayaran == 'cash') {
+            $transaksi->update($data);
+            return redirect()->route('admin.transaksi.index')
+            ->with('update', 'Anda berhasil mengubah status transaksi dari ' . $transaksi->status . ' menjadi ' . $request->status . '.');
+        } else {
+            return redirect()->back()->with('notfound', 'Anda tidak bisa mengubah status transaksi');
+        }
     }
 
     /**

@@ -36,7 +36,6 @@ class Course extends Model
         return $this->hasMany(Biodata::class);
     }
 
-
     public function biaya()
     {
         return $this->hasMany(biaya::class);

@@ -10,19 +10,13 @@ class Jurusan extends Model
     use HasFactory;
 
     protected $fillable = [
-        'id_tahun_ajarans',
         'name',
         'code'
     ];
 
-    public function tahunAjaran()
-    {
-        return $this->belongsTo(TahunAjaran::class, 'id_tahun_ajarans');
-    }
-
     public function semesters()
     {
-        return $this->hasMany(Semester::class);
+        return $this->hasMany(Semester::class, 'id_tahun_ajarans');
     }
 
     public function matkuls()

@@ -320,6 +320,7 @@ class AccountController extends Controller
     public function pendaftar()
     {
         $mahasiswa = User::where('role', 'Mahasiswa')->latest()->get();
+
         return view('admin.account.pendaftar.index', compact('mahasiswa'));
     }
 }

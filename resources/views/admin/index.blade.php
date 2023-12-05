@@ -358,15 +358,17 @@
                 <div class="carousel-inner">
                     <div class="carousel-item active">
                         <div class="row flex-column justify-content-center height-300"
-                        style="background-image: url('/assets/img/curved-images/curved14.jpg'); background-size: cover; background-position: center;">
+                        style="
+						background-image: url('https://c0.wallpaperflare.com/path/196/594/379/quran-book-97f792a4ef76b251052800f9f56a4c0b.jpg'); 
+						background-size: cover; background-position: center;">
                             <span class="mask bg-gradient-dark opacity-6"></span>
                             <div class="d-flex justify-content-center flex-column align-items-center text-white text-center z-index-1">
                                 <h4 class="font-weight-bold mb-0 p-3 pb-0 text-white">
                                     Selamat Datang 
                                     <b class="font-weight-bolder">{{ $user->name }}</b>!
                                 </h4>
-                                <p class="mb-0 mx-2">
-                                    Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ut, voluptate?
+                                <p class="mb-0 px-4 px-sm-6">
+                                    Sudah melakukan kebaikan apa kamu hari ini?
                                 </p>
                             </div>
                         </div>
@@ -382,7 +384,7 @@
                                 <h4 class="font-weight-bold mb-0 p-3 pb-0 text-white">
                                     {{ $item->title }}
                                 </h4>
-                                <p class="mb-0 mx-2">
+                                <p class="mb-0 px-4 px-sm-6">
                                     {{ $item->desc }}
                                 </p>
                             </div>
@@ -563,118 +565,128 @@
 							  </tr>
 							</thead>
 							<tbody>
-							  @forelse ($users->where('role', 'Mahasiswa')->take(20) as $index => $item)
-								<tr>
-									<td>
-									  <style>
-										.wa-hover:hover {
-										  color: #434c5a!important;
-										  transition: .2s ease;
-										}
-									  </style>
-									  <p class="text-xs font-weight-bold text-dark mb-0">{{$item->name}}</p>
-									  <a class="text-secondary text-xs d-block wa-hover"
-									  href="https://api.whatsapp.com/send?phone={{ $item->phone }}&text=Hai!%20Kami%20dari%20{{ App\Models\General::first()->name }}">{{$item->phone}}</a>
-									</td>
-									<td>
-									  <p class="text-xs font-weight-bold mb-0">{{$item->gender}}</p>
-									  <p class="text-xs text-uppercase text-secondary mb-0">{{$item->role}}</p>
-									</td>
-									{{-- status biodata --}}
-									<td class="text-secondary text-xs font-weight-bold text-center">
-										@if ($item->biodata)
-										<span class="badge rounded-pill bg-gradient-success">Lengkap <i class="fas fa-plus ms-1"></i></span> 
-										@else
-										<span class="badge rounded-pill bg-gradient-danger">Tidak Ada <i class="fas fa-times ms-1"></i></span> 
-										@endif
-									</td>
-									{{-- status dokumen --}}
-									<td class="text-secondary text-xs font-weight-bold text-center">
-										@if ($item->document)
-										<span class="badge rounded-pill bg-gradient-success">Lengkap <i class="fas fa-plus ms-1"></i></span> 
-										@else
-										<span class="badge rounded-pill bg-gradient-danger">Tidak Ada <i class="fas fa-times ms-1"></i></span> 
-										@endif
-									</td>
-									{{-- status administrasi --}}
-									<td class="text-secondary text-xs font-weight-bold text-center">
-										@if ($item->biodata)
-										<span class="badge rounded-pill bg-gradient-success">Lunas <i class="fas fa-plus ms-1"></i></span> 
-										@else
-										<span class="badge rounded-pill bg-gradient-danger">Belum dibayar <i class="fas fa-times ms-1"></i></span> 
-										@endif
-									</td>
-									{{-- status pra-kuliah / daftar ulang --}}
-									<td class="text-secondary text-xs font-weight-bold text-center">
-										@if ($item->biodata)
-										  @if ($item->biodata->address) {{-- kalau udah selesai --}}
-											<span class="badge rounded-pill bg-gradient-success">Lunas <i class="fas fa-plus ms-1"></i></span>
-										  @elseif ($item->biodata->angkatan) {{-- kalau masih nyicil --}}
-											<span class="badge rounded-pill bg-gradient-warning">Cicil <i class="fas fa-circle ms-1"></i></span>
-										  @endif
-										@else {{-- kalau belum blas --}}
-										<span class="badge rounded-pill bg-gradient-danger">Belum dibayar <i class="fas fa-times ms-1"></i></span>
-										@endif
-									</td>
-									<td>
-									  <p class="text-xs text-uppercase text-secondary font-weight-bold mb-0">{{$item->created_at->format('d M Y')}}</p>
-									  <p class="text-xxs text-uppercase text-secondary mb-0">{{$item->created_at->format('H:i:s')}}</p>
-									</td>
-									<td class="text-center"> 
-										<a style="letter-spacing: .02rem" href="{{ route('admin.mahasiswa.show',$item->id) }}" class="badge badge-sm bg-gradient-info font-weight-bolder text-xxs" data-toggle="tooltip" data-original-title="detail">
-											Detail
-										</a>
-			
-										<a style="letter-spacing: .02rem" href="{{route('admin.mahasiswa.edit',$item->id)}}" class="badge badge-sm bg-gradient-secondary font-weight-bolder text-xxs mx-1" data-toggle="tooltip" data-original-title="edit">
-											Ubah
-										</a>
-			
-										<form action="{{route('admin.mahasiswa.delete',$item->id)}}" class="d-inline" id="form1" method="POST">
-										  @csrf
-										  @method('DELETE')
-										  <button type="button" class="badge badge-sm bg-gradient-danger font-weight-bolder text-xxs border-0" data-bs-toggle="modal" data-bs-target="#exampleModal">Delete</button>
-			
-										  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-											<div class="modal-dialog modal-dialog-centered">
-											  <div class="modal-content">
-												<div class="modal-header">
-												  <h1 class="modal-title fs-5" id="exampleModalLabel">
-													Peringatan! <i class="fas fa-exclamation-circle fa-xl text-danger"></i>
-												  </h1>
-												  <button type="button" class="btn-close border rounded-circle p-1 fs-3 lh-1 text-dark" data-bs-dismiss="modal" aria-label="Close">&times;</button>
+								@forelse ($users->where('role', 'Mahasiswa')->take(20) as $index => $item)
+									<tr>
+										<td>
+										<style>
+											.wa-hover:hover {
+											color: #434c5a!important;
+											transition: .2s ease;
+											}
+										</style>
+										<p class="text-xs font-weight-bold text-dark mb-0">{{$item->name}}</p>
+										<a class="text-secondary text-xs d-block wa-hover"
+										href="https://api.whatsapp.com/send?phone={{ $item->phone }}&text=Hai!%20Kami%20dari%20{{ App\Models\General::first()->name }}">{{$item->phone}}</a>
+										</td>
+										<td>
+										<p class="text-xs font-weight-bold mb-0">{{$item->gender}}</p>
+										<p class="text-xs text-uppercase text-secondary mb-0">{{$item->role}}</p>
+										</td>
+										{{-- status biodata --}}
+										<td class="text-secondary text-xs font-weight-bold text-center">
+											@if ($item->biodata)
+											<span class="badge rounded-pill bg-gradient-success">Lengkap <i class="fas fa-plus ms-1"></i></span> 
+											@else
+											<span class="badge rounded-pill bg-gradient-danger">Tidak Ada <i class="fas fa-times ms-1"></i></span> 
+											@endif
+										</td>
+										{{-- status dokumen --}}
+										<td class="text-secondary text-xs font-weight-bold text-center">
+											@if ($item->document)
+											<span class="badge rounded-pill bg-gradient-success">Lengkap <i class="fas fa-plus ms-1"></i></span> 
+											@else
+											<span class="badge rounded-pill bg-gradient-danger">Tidak Ada <i class="fas fa-times ms-1"></i></span> 
+											@endif
+										</td>
+										{{-- status administrasi --}}
+										<td class="text-secondary text-xs font-weight-bold text-center">
+											@forelse ($item->transaksi->where('jenis_tagihan', 'Administrasi')->take(1) as $key)
+												@if ($key->status == 'berhasil')
+													<span class="badge rounded-pill bg-gradient-success">Lunas <i class="fas fa-check ms-1"></i></span> 
+												@elseif ($key->status == 'expired')
+													<span class="badge rounded-pill bg-gradient-danger">Gagal <i class="fas fa-times ms-1"></i></span> 
+												@else
+													<span class="badge rounded-pill bg-gradient-warning">Belum dibayar</span> 
+												@endif
+											@empty
+												<span class="badge rounded-pill bg-gradient-warning">Tidak ada</span>
+											@endforelse
+										</td>
+										{{-- status pra-kuliah / daftar ulang --}}
+										<td class="text-secondary text-xs font-weight-bold text-center">
+											@forelse ($item->transaksi->where('jenis_tagihan', 'DaftarUlang')->take(1) as $key)
+												@if ($key->status == 'berhasil')
+													<span class="badge rounded-pill bg-gradient-success">Lunas <i class="fas fa-check ms-1"></i></span>
+												@elseif ($key->status == 'expired')
+													<span class="badge rounded-pill bg-gradient-danger">Gagal <i class="fas fa-times ms-1"></i></span>
+												@else
+													<span class="badge rounded-pill bg-gradient-warning">Belum dibayar</span>
+												@endif
+											@empty
+												<span class="badge rounded-pill bg-gradient-warning">Tidak ada</span>
+											@endforelse
+										</td>
+										<td>
+										<p class="text-xs text-uppercase text-secondary font-weight-bold mb-0">{{$item->created_at->format('d M Y')}}</p>
+										<p class="text-xxs text-uppercase text-secondary mb-0">{{$item->created_at->format('H:i:s')}}</p>
+										</td>
+										<td class="text-center"> 
+											<a style="letter-spacing: .02rem" href="{{ route('admin.mahasiswa.show',$item->id) }}" class="badge badge-sm bg-gradient-info font-weight-bolder text-xxs" data-toggle="tooltip" data-original-title="detail">
+												Detail
+											</a>
+				
+											<a style="letter-spacing: .02rem" href="{{route('admin.mahasiswa.edit',$item->id)}}" class="badge badge-sm bg-gradient-secondary font-weight-bolder text-xxs mx-1" data-toggle="tooltip" data-original-title="edit">
+												Ubah
+											</a>
+				
+											<form action="{{route('admin.mahasiswa.delete',$item->id)}}" class="d-inline" id="form1" method="POST">
+											@csrf
+											@method('DELETE')
+											<button type="button" class="badge badge-sm bg-gradient-danger font-weight-bolder text-xxs border-0" data-bs-toggle="modal" data-bs-target="#exampleModal">Delete</button>
+				
+											<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+												<div class="modal-dialog modal-dialog-centered">
+												<div class="modal-content">
+													<div class="modal-header">
+													<h1 class="modal-title fs-5" id="exampleModalLabel">
+														Peringatan! <i class="fas fa-exclamation-circle fa-xl text-danger"></i>
+													</h1>
+													<button type="button" class="btn-close border rounded-circle p-1 fs-3 lh-1 text-dark" data-bs-dismiss="modal" aria-label="Close">&times;</button>
+													</div>
+													<div class="modal-body h6 mb-0">
+													<i class="fas fa-exclamation-circle fa-xl text-danger"></i>
+													Apakah anda yakin ingin menghapus data pendaftar?
+													</div>
+													<div class="modal-footer">
+													<button type="submit" class="btn bg-gradient-primary">Lanjut</button>
+													</div>
 												</div>
-												<div class="modal-body h6 mb-0">
-												  <i class="fas fa-exclamation-circle fa-xl text-danger"></i>
-												  Apakah anda yakin ingin menghapus data pendaftar?
 												</div>
-												<div class="modal-footer">
-												  <button type="submit" class="btn bg-gradient-primary">Lanjut</button>
-												</div>
-											  </div>
 											</div>
-										  </div>
-										</form>
-			
-										<form action="{{route('admin.mahasiswa.status',$item->id)}}" method="POST" class="d-inline">
-										  @csrf
-										  @method('PUT')
-										  @if ($item->status == 'on')
-											<input type="hidden" name="status" value="off">
-											<button class="badge badge-sm bg-gradient-dark font-weight-bolder text-xxs ms-1 border-0" type="submit">
-											  OFF
-											</button>
-										  @elseif($item->status == 'off')
-											<input type="hidden" name="status" value="on">
-											<button class="badge badge-sm bg-teal font-weight-bolder text-xxs ms-1 border-0" type="submit">
-											  ON
-											</button>
-										  @endif
-										</form>
-									</td>
-								</tr>
-							  @empty
-								  
-							  @endforelse
+											</form>
+				
+											<form action="{{route('admin.mahasiswa.status',$item->id)}}" method="POST" class="d-inline">
+											@csrf
+											@method('PUT')
+											@if ($item->status == 'on')
+												<input type="hidden" name="status" value="off">
+												<button class="badge badge-sm bg-gradient-dark font-weight-bolder text-xxs ms-1 border-0" type="submit">
+												OFF
+												</button>
+											@elseif($item->status == 'off')
+												<input type="hidden" name="status" value="on">
+												<button class="badge badge-sm bg-teal font-weight-bolder text-xxs ms-1 border-0" type="submit">
+												ON
+												</button>
+											@endif
+											</form>
+										</td>
+									</tr>
+								@empty
+									<div class="text-center pt-4 fst-italic text-sm">
+										~ tidak ada pendaftar terbaru ~
+									</div> 
+								@endforelse
 							</tbody>
 						  </table>
 					</div>
@@ -690,7 +702,7 @@
 					</div>
 				</div>
 				<div class="card-body p-3">
-					@foreach ($transaksi->take(20) as $item)
+					@forelse ($transaksi->take(20) as $item)
 					<div class="timeline timeline-one-side">
 						<div class="timeline-block mb-2">
 							<span class="timeline-step">
@@ -714,7 +726,11 @@
 							</div>
 						</div>
 					</div>
-					@endforeach
+					@empty
+					<div class="text-center pt-4 fst-italic text-sm">
+						~ tidak ada transaksi yang dilakukan ~
+					</div>
+					@endforelse
 				</div>
 			</div>
 		</div>

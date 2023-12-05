@@ -160,7 +160,7 @@ class AuthController extends Controller
         $user = User::where('phone', $credentials)->first();
 
         if ($user->active == 0) {
-        $program = $request->program_belajar;
+            $program = $request->program_belajar;
             return view('auth.verify',compact('user','program'))->with('gagal', 'Kamu Harus Mengisi Kode OTP Yang Dikirim');
         } elseif ($user->status == 'off') {
             return redirect()->route('login')->withErrors(['phone' => 'Nomor Kamu Di NonAktifkan']);
@@ -182,18 +182,18 @@ class AuthController extends Controller
         if (auth()->user()->role == 'Mahasiswa') {
             if($administrasiS1 && !$administrasiKURSUS){
                 if($administrasiS1->status == 'berhasil'){
-                    return redirect()->route('mahasiswa.dashboard')->with('success',"Halo, Selamat Datang $user->name");
+                    return redirect()->route('mahasiswa.dashboard')->with('success',"Halo, Selamat Datang $user->name!");
                 }elseif($administrasiS1->status == 'pending'){
                     return redirect($administrasiS1->payment_link);
                 }
             }elseif($administrasiKURSUS && !$administrasiS1){
                 if($administrasiKURSUS->status == 'berhasil'){
-                    return redirect()->route('kursus.dashboard')->with('success',"Halo, Selamat Datang $user->name");
+                    return redirect()->route('kursus.dashboard')->with('success',"Halo, Selamat Datang $user->name!");
                 }elseif($administrasiKURSUS->status == 'pending'){
                     return redirect($administrasiKURSUS->payment_link);
                 }
             }elseif($administrasiS1 && $administrasiKURSUS){
-                return redirect()->route('mahasiswa.dashboard')->with('success',"Halo, Selamat Datang $user->name");
+                return redirect()->route('mahasiswa.dashboard')->with('success',"Halo, Selamat Datang $user->name!");
             } else {
                 return back()->withErrors(['phone' => 'Silahkan hubungi Admin']);
             }

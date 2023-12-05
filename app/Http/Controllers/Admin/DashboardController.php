@@ -33,7 +33,7 @@ class DashboardController extends Controller
 
         // chart resources
         $users = User::orderBy('id', 'desc')->get();
-        $pemasukan = Transaksi::sum('total');
+        $pemasukan = Transaksi::where('status', 'berhasil')->sum('total');
         $jurusan = Jurusan::get();
         $matkul = Matkuls::get();
         $banner = Banner::where('type', 'DASHBOARD')->get();

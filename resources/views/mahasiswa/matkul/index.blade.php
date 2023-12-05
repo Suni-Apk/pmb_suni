@@ -23,9 +23,9 @@
                                 <h6>{{ $semesters->name }}</h6>
                             </div>
                             <div class="flex-row d-flex">
-                                {{-- <a href="" class="btn btn-secondary fs-6 p-2 px-3 ms-2">
+                                <a href="{{ route('mahasiswa.downloadMatkuls', $semesters->id) }}" class="btn btn-secondary fs-6 p-2 px-3 ms-2">
                                     <i class="fas fa-file-download"></i>
-                                </a> --}}
+                                </a>
                             </div>
                         </div>
                         <div class="card-body px-0 pt-0 pb-2">
@@ -55,6 +55,7 @@
                                         <tr>
                                             <td>
                                                 <div class="d-flex px-2 py-1">
+                                                    {{-- {{ $semesters->id }} --}}
                                                     <div class="d-flex flex-column justify-content-center">
                                                         <h6 class="mb-0 text-sm ms-2">{{ $matkul->nama_matkuls }}</h6>
                                                     </div>

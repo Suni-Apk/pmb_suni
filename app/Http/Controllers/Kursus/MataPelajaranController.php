@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Kursus;
 
 use App\Http\Controllers\Controller;
 use App\Models\Biodata;
+use App\Models\Course;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -12,18 +13,10 @@ class MataPelajaranController extends Controller
 
     public function index()
     {
-        $biodata = Biodata::where('program_belajar', 'KURSUS')->where('user_id', Auth::user()->id)->first();
+        $biodata = Biodata::where('program_belajar', 'KURSUS')->where('user_id', Auth::user()->id)->with('course')->get();
 
         if ($biodata) {
-            $course = $biodata->course;
-
-            if ($course) {
-                $mapels = $course->mapel;
-
-                return view('kursus.pelajaran.index', compact('biodata', 'mapels'));
-            } else {
-                return view('kursus.pelajaran.index')->with(['error' => 'Kamu Belum Memilih Kursus!.']);
-            }
+            return view('kursus.pelajaran.index', compact('biodata',));
         } else {
             return view('kursus.pelajaran.index')->with(['error' => 'Kamu Belum Memilih Kursus!.']);
         }

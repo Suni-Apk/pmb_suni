@@ -552,10 +552,8 @@
                         {{-- academy --}}
                         <li class="nav-item">
                             <ul class="nav-link pb-0 mb-0">
-                                <span class="sidenav-mini-icon d-none d-xl-block" style="color:rgb(196, 196, 196)"><i
-                                        class="fas fa-university"></i></span>
-                                <span class="sidenav-normal text-uppercase text-xs ms-2 font-weight-bolder"> academy
-                                </span>
+                                <span class="sidenav-mini-icon d-none d-xl-block" style="color:rgb(196, 196, 196)"><i class="fas fa-university"></i></span>
+                                <span class="sidenav-normal text-uppercase text-xs ms-2 font-weight-bolder"> academy </span>
                             </ul>
                         </li>
 

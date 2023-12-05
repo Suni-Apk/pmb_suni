@@ -14,7 +14,7 @@ use App\Http\Controllers\Kursus\ProfileController as KursusProfileController;
 use App\Http\Controllers\Kursus\TagihanController as KursusTagihanController;
 use App\Http\Controllers\Kursus\DashboardController as KursusDashboardController;
 use App\Http\Controllers\Kursus\TransactionController as KursusTransactionController;
-use App\Http\Controllers\Mahasiswa\MatkulController;
+use App\Http\Controllers\Mahasiswa\MatkulController as MahasiswaMatkulController;
 use App\Http\Controllers\Mahasiswa\BiodataController;
 use App\Http\Controllers\Mahasiswa\TagihanController;
 use App\Http\Controllers\Mahasiswa\DocumentController;
@@ -175,6 +175,17 @@ Route::prefix('/admin')->middleware(['admin', 'auth'])->name('admin.')->group(fu
     // resources management
     Route::resource('/matkul', ControllersMatkulController::class);
     Route::resource('/mapel', MapelsController::class);
+    Route::prefix('mapel')->name('mapel.')->group( function() {
+        Route::get('/', [MapelsController::class, 'index'])->name('index');
+        Route::get('/create', [MapelsController::class, 'create'])->name('create');
+        Route::post('/create/process', [MapelsController::class, 'store'])->name('create.process');
+        Route::get('/detail/{id}', [MapelsController::class, 'show'])->name('detail');
+        Route::post('/active/{id}', [MapelsController::class, 'active'])->name('active');
+        Route::get('edit/{id}', [MapelsController::class, 'edit'])->name('edit');
+        Route::post('edit/{id}', [MapelsController::class, 'update'])->name('edit.process');
+        Route::post('/active/{id}', [MapelsController::class, 'active'])->name('active');
+        Route::delete('delete/{id}', [MapelsController::class, 'destroy'])->name('destroy');
+    });
     Route::resource('/jurusan', JurusanController::class);
     Route::get('/exportJurusan', [JurusanController::class, 'exportJurusan'])->name('exportJurusan');
     Route::resource('/transaksi', TransactionController::class);
@@ -226,6 +237,7 @@ Route::prefix('/kursus')->middleware(['auth', 'kursus'])->name('kursus.')->group
     //biodata
     Route::prefix('/biodata')->name('pendaftaran.')->group(function () {
         Route::get('/', [KursusBiodataController::class, 'pendaftaran_kursus'])->name('kursus');
+        // Route::get('/pendaftaran-kursus/{kursus_id}', [KursusBiodataController::class, 'showPendaftaranForm'])->name('form');
         Route::post('/process', [KursusBiodataController::class, 'pendaftaran_kursus_process'])->name('kursus.process');
         Route::get('/edit/{id}', [KursusProfileController::class, 'edit_biodata'])->name('s1.edit');
         Route::put('/edit/process/{id}', [KursusProfileController::class, 'edit_biodata_process'])->name('s1.edit.process');
@@ -311,7 +323,9 @@ Route::prefix('/mahasiswa')->middleware(['auth', 'mahasiswa', 's1'])->name('maha
     });
 
     //matkul mahasiswa
-    Route::get('/matkul', [MatkulController::class, 'index'])->name('matkul');
+    Route::get('/matkul', [MahasiswaMatkulController::class, 'index'])->name('matkul');
+    Route::match(['get', 'post'],'/downloadMatkuls/{id}/', [MahasiswaMatkulController::class, 'downloadMatkuls'])->name('downloadMatkuls');
+    Route::get('/JadwalPreview/{id}', [MahasiswaMatkulController::class, 'JadwalPreview'])->name('JadwalPreview');
 
     //tagihan mahasiswa
     Route::prefix('tagihan')->name('tagihan.')->group(function () {

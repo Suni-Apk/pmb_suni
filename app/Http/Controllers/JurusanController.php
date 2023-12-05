@@ -39,7 +39,6 @@ class JurusanController extends Controller
     public function store(Request $request)
     {
         $data = $request->validate([
-            'id_tahun_ajaran' => 'required',
             'name' => 'required',
             'code' => 'required'
         ]);
@@ -49,7 +48,7 @@ class JurusanController extends Controller
 
         foreach ($semester as $key => $item) {
             Semester::create([
-                // 'id_jurusan' => $jurusan->id,
+                'id_jurusans' => $jurusan->id,
                 'name' => $item
             ]);
         }
@@ -104,6 +103,17 @@ class JurusanController extends Controller
     public function destroy(string $id)
     {
         $jurusan = Jurusan::findOrFail($id);
+
+        if ($jurusan->matkuls) {
+            $jurusan->matkuls->delete();
+        }
+        if ($jurusan->semesters) {
+            $jurusan->semesters->delete();
+        }
+        if ($jurusan->links) {
+            $jurusan->links->delete();
+        }
+
         $jurusan->delete();
         return redirect()->route('admin.jurusan.index');
     }

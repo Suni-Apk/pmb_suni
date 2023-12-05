@@ -26,7 +26,6 @@
                             <thead>
                                 <tr>
                                     <th class="text-uppercase text-start text-secondary text-xxs font-weight-bolder opacity-7">Nama</th>
-                                    <th class="text-uppercase text-start text-secondary text-xxs font-weight-bolder opacity-7">Tahun Ajaran</th>
                                     <th class="text-uppercase text-start text-secondary text-xxs font-weight-bolder opacity-7">Kode</th>
                                     <th class="text-uppercase text-center text-secondary text-xxs font-weight-bolder opacity-7">Aksi</th>
                                 </tr>
@@ -45,13 +44,13 @@
                                             data-bs-toggle="modal" data-bs-target="#modalLink{{ $jurusans->id }}">Link <i class="fas fa-link ms-1"></i></button>
                                             
                                             <a href="{{ route('admin.jurusan.show', $jurusans->id) }}"
-                                                class="badge badge-sm bg-gradient-warning font-weight-bold text-xxs"
+                                                class="badge badge-sm bg-gradient-warning font-weight-bolder text-xxs"
                                                 data-toggle="tooltip" data-original-title="detail">
                                                 Detail
                                             </a>
 
                                             <a href="{{ route('admin.jurusan.edit', $jurusans->id) }}"
-                                                class="badge badge-sm bg-gradient-secondary font-weight-bold text-xxs mx-1"
+                                                class="badge badge-sm bg-gradient-secondary font-weight-bolder text-xxs mx-1"
                                                 data-toggle="tooltip" data-original-title="edit">
                                                 Edit
                                             </a>
@@ -132,8 +131,7 @@
                                                                         <select name="id_tahun_ajarans" id="id_tahun_ajarans" class="form-select" required>
                                                                             <option disabled selected>-----------</option>
                                                                             @foreach ($tahun_ajaran as $item)
-                                                                                <option value="{{ $item->id }}" {{ $jurusans->tahunAjaran->id == $item->id ? 
-                                                                                'selected' : '' }}>{{ $item->year }}</option>
+                                                                                <option value="{{ $item->id }}" @selected(old('id_tahun_ajarans'))>{{ $item->year }}</option>
                                                                             @endforeach
                                                                         </select>
                                                                     </div>

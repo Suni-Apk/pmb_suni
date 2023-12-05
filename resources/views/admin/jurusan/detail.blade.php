@@ -86,7 +86,7 @@
                     <div class="list-group list-group-horizontal" id="list-tab" role="tablist">
                         <a id="list-sarjana-list" data-bs-toggle="list" href="#list-sarjana" role="tab" aria-controls="list-sarjana"
                             class="list-group-item list-group-item-action border-0 shadow text-center active" 
-                        >Jurusan</a>
+                        >Detail Jurusan</a>
                         <a id="list-kursus-list" data-bs-toggle="list" href="#list-kursus" role="tab" aria-controls="list-kursus"
                         class="list-group-item list-group-item-action border-0 shadow text-center" 
                         >Link</a>
@@ -159,6 +159,79 @@
                                     </div>
                                 </div>
                                 @endforeach
+                                @if ($jurusan->links)
+                                    <div class="col-12 p-2">
+                                        <div class="card">
+                                            <div class="card-header pb-0">
+                                                <h5>Daftar Link</h5>
+                                            </div>
+                                            <div class="card-body pt-0 px-0">
+                                                <div class="table-responsive p-0">
+                                                    <table class="table align-items-center mb-0" id="table">
+                                                        <thead>
+                                                            <tr>
+                                                                <th class="text-uppercase text-secondary text-xxs px-2 font-weight-bolder opacity-7">Nama Link</th>
+                                                                <th class="text-uppercase text-secondary text-xxs px-2 font-weight-bolder opacity-7">Url</th>
+                                                                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2 text-center">Tahun Ajaran / Jurusan</th>
+                                                                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2 text-center">Gender</th>
+                                                                <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Aksi</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            @foreach ($links->where('id_jurusans', $jurusan->id) as $index => $item)
+                                                                <tr>
+                                                                    <td class="text-sm">
+                                                                        <span class="text-bold">{{ $item->name }}</span>
+                                                                    </td>
+                                                                    <td class="text-xs">
+                                                                        <span class="text-bold">{{ $item->url }}</span>
+                                                                    </td>
+                                                                    <td>
+                                                                        <div class="d-flex">
+                                                                            <div class="d-flex flex-column justify-content-center">
+                                                                                @if ($item->jurusan)
+                                                                                <h6 class="mb-0 text-xs text-uppercase"> {{ $item->jurusan->name }} </h6>
+                                                                                @else
+                                                                                <h6 class="mb-0 text-xs"> Semua jurusan </h6>
+                                                                                @endif
+                                                                                <h6 class="text-xxs text-uppercase text-secondary mb-0">{{ $item->tahunAjaran->year }}</h6>
+                                                                            </div>
+                                                                        </div>
+                                                                    </td>
+                                                                    <td class="align text-center">
+                                                                        <span class="text-secondary text-xs font-weight-bold">
+                                                                            @if ($item->gender == 'all')
+                                                                                Semua
+                                                                            @else
+                                                                                {{ $item->gender }}
+                                                                            @endif
+                                                                        </span>
+                                                                    </td>
+                                                                    <td class="align-center">
+                                                                        <a href="{{ route('admin.link.detail', $item->id) }}" class="badge badge-sm bg-gradient-info font-weight-bold text-xxs">
+                                                                            <strong>Detail</strong>
+                                                                        </a>
+                                                                        <a href="{{ route('admin.link.edit', ['type' => $item->type, 'id' => $item->id]) }}" class="badge badge-sm bg-gradient-secondary font-weight-bold text-xxs mx-1">
+                                                                            <strong>Edit</strong>
+                                                                        </a>
+                            
+                                                                        <form action="{{ route('admin.link.destroy', $item->id) }}" method="POST" class="d-inline">
+                                                                            @csrf
+                                                                            @method('DELETE')
+                                                                            <button type="submit" class="badge badge-sm bg-gradient-danger font-weight-bold text-xxs border-0 show_confirm">
+                                                                                <strong>Hapus</strong>
+                                                                            </button>
+                                                                        </form>
+                                                                    </td>
+                                                                </tr>
+                                                            @endforeach
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                @endif
                             </div>
                         </div>
                         <div class="tab-pane fade" id="list-kursus" role="tabpanel" aria-labelledby="list-kursus-list">

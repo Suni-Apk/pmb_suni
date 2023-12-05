@@ -19,6 +19,7 @@
                                     <th class="text-uppercase text-secondary text-xxs px-2 font-weight-bolder opacity-7 text-center">Nama Mata Pelajaran</th>
                                     <th class="text-uppercase text-secondary text-xxs px-2 font-weight-bolder opacity-7 text-center">Nama Kursus</th>
                                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2 text-center">Mulai - Selesai</th>
+                                    <th class="text-uppercase text-secondary text-xxs px-2 font-weight-bolder opacity-7 text-center">Status</th>
                                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2 text-center">Hari</th>
                                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Aksi</th>
                                 </tr>
@@ -37,6 +38,13 @@
                                         </td>
                                         <td class="align text-center">
                                             <span class="text-secondary text-xs font-weight-bold"><strong>{{ $mapels->mulai }} WIB</strong> - <strong>{{ $mapels->selesai }} WIB</strong> </span>
+                                        </td>
+                                        <td class="align-middle text-center">
+                                            @if ($mapels->status == 'nonActive')
+                                                <span class="text-uppercase badge badge-sm bg-gradient-danger">{{ $mapels->status }}</span>
+                                            @else
+                                                <span class="text-uppercase badge badge-sm bg-gradient-success">{{ $mapels->status }}</span>
+                                            @endif
                                         </td>
                                         <td class="align text-center">
                                             <span class="text-secondary text-xs font-weight-bold"><strong>{{ $mapels->hari }}</strong></span>
@@ -57,6 +65,19 @@
                                                 data-toggle="tooltip" data-original-title="hapus">
                                                     Hapus
                                                 </button>
+                                            </form>
+
+                                            <form action="{{ route('admin.mapel.active',$mapels->id) }}" method="POST" class="d-inline">
+                                                @csrf
+                                                @if($mapels->status == 'nonActive')
+                                                    <button type="submit" class="btn btn-sm bg-gradient-success font-weight-bold text-xxs mt-3">
+                                                        <strong>On</strong>
+                                                    </button>
+                                                @else
+                                                    <button type="submit" class="btn btn-sm bg-gradient-secondary font-weight-bold text-xxs mt-3">
+                                                        <strong>Off</strong>
+                                                    </button>
+                                                @endif
                                             </form>
                                         </td>
                                     </tr>

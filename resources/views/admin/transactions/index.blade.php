@@ -6,6 +6,22 @@
 @endpush
 
 @section('content')
+    @if (session('bayar'))
+        <div class="alert alert-info text-white alert-dismissible fade show" role="alert">
+            <strong>Pemberitahuan.</strong> {!! session('bayar') !!}
+            <button type="button" class="btn-close border rounded-circle p-1 fs-3 lh-1 mt-2 me-2" data-bs-dismiss="alert" aria-label="Close">&times;</button>
+        </div>
+    @elseif (session('update'))
+        <div class="alert alert-success text-white alert-dismissible fade show" role="alert">
+            <strong>Selamat!</strong> {!! session('update') !!}
+            <button type="button" class="btn-close border rounded-circle p-1 fs-3 lh-1 mt-2 me-2" data-bs-dismiss="alert" aria-label="Close">&times;</button>
+        </div>
+    @elseif (session('notfound'))
+        <div class="alert alert-warning text-white alert-dismissible fade show" role="alert">
+            <strong>Sayangnya.</strong> {!! session('notfound') !!}
+            <button type="button" class="btn-close border rounded-circle p-1 fs-3 lh-1 mt-2 me-2" data-bs-dismiss="alert" aria-label="Close">&times;</button>
+        </div>
+    @endif
     <div class="row">
         <div class="col-12">
             <div class="card">
@@ -18,7 +34,6 @@
                                 <i class='bx bxs-file-export me-1'></i> Export
                             </button>
                         </form>                    
-                        {{-- <a href="{{ route('admin.transaksi.create') }}" class="btn bg-gradient-primary">Tambah +</a> --}}
                     </div>
                 </div>
                 <form action="{{ route('admin.transaksi.index') }}" method="GET">
@@ -44,7 +59,7 @@
                                         Tanggal Pembayaran
                                     </th>
                                     <th class=" text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                        Pembayar
+                                        Pembayar / Invoice
                                     </th>
                                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                         Total Pembayaran
@@ -69,9 +84,9 @@
                                 <tr>
                                     <td class="align-middle text-secondary text-xs font-weight-bold">
                                         @if ($item->tagihanDetails)
-                                        {{$item->tagihanDetails->biayasDetail->nama_biaya}}
+                                            {{$item->tagihanDetails->biayasDetail->nama_biaya}}
                                         @else
-                                        {{ $item->jenis_tagihan }}
+                                            {{ $item->jenis_tagihan }}
                                         @endif
                                     </td>
                                     <td class="align-middle  text-secondary text-xs font-weight-bold">
@@ -80,6 +95,9 @@
                                     </td>
                                     <td class="align-middle  text-secondary text-xs font-weight-bold">
                                         {{ $item->user->name }}
+                                        <span class="d-block fw-light text-truncate" style="max-width: 130px;">
+                                            {{ $item->no_invoice }}
+                                        </span>
                                     </td>
                                     <td class="align-middle text-secondary text-xs font-weight-bold">
                                         Rp. {{ number_format($item->total,0,'','.') }},-
@@ -102,16 +120,46 @@
                                     </td>
                                     <td class="align-middle text-center">
                                         <a href="{{ route('admin.transaksi.show', $item->id) }}"
-                                            class="badge badge-sm bg-gradient-info font-weight-bold text-xxs mx-1"
+                                            class="badge badge-sm bg-gradient-info font-weight-bolder text-xxs"
                                             data-toggle="tooltip" data-original-title="detail">
                                             Detail
                                         </a>
+
+                                        <button class="border-0 badge badge-sm text-xxs font-weight-bolder bg-gradient-secondary mx-1" role="button" data-bs-toggle="modal" data-bs-target="#modalEditStatus">Edit</button>
+
+                                        {{-- modal edit status --}}
+                                        <div class="modal fade" id="modalEditStatus" tabindex="-1" role="dialog"
+                                            aria-labelledby="modalEditStatusLabel" aria-hidden="true">
+                                            <div class="modal-dialog modal-dialog-centered" role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-header border-0">
+                                                        <h5 class="modal-title" id="modalEditStatusLabel">Edit Status Transaksi</h5>
+                                                        <button type="button" class="btn-close border rounded-circle p-1 fs-3 lh-1 text-dark" data-bs-dismiss="modal" aria-label="Close">&times;</button>
+                                                    </div>
+                                                    <div class="modal-body pt-0">
+                                                        <form action="{{ route('admin.transaksi.update', $item->id) }}" method="POST" class="form-group">
+                                                            @csrf
+                                                            @method('PUT')
+                                                            <label for="status" class="w-100 text-start">Status Transaksi</label>
+                                                            <select name="status" id="status" class="form-select">
+                                                                <option disabled>Ubah status transaksi</option>
+                                                                <option value="berhasil" @selected($item->status == 'berhasil')>BERHASIL</option>
+                                                                <option value="pending" @selected($item->status == 'pending')>PENDING</option>
+                                                                <option value="expired" @selected($item->status == 'expired')>EXPIRED</option>
+                                                            </select>
+                                                            <hr class="horizontal dark">
+                                                            <button type="submit" class="btn bg-gradient-primary float-end">Update <i class="fas fa-check ms-1"></i></button>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
 
                                         <form action="{{ route('admin.transaksi.destroy', $item->id) }}" method="post" class="d-inline">
                                             @csrf
                                             @method('DELETE')
                                             <button type="button" 
-                                                class="badge badge-sm border-0 bg-gradient-danger font-weight-bold text-xxs show_confirm"
+                                                class="badge badge-sm border-0 bg-gradient-danger font-weight-bolder text-xxs show_confirm"
                                                 data-toggle="tooltip" data-original-title="hapus">
                                                 Hapus
                                             </button>

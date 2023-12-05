@@ -102,7 +102,7 @@
                                             @endif
                                         @endif
                                         <li class="list-group-item text-sm lh-sm">
-                                            Hubungi Kami : <a href="">{{ App\Models\General::first()->phone }}</a>
+                                            Hubungi Kami : <a href="https://api.whatsapp.com/send?phone={{ App\Models\General::first()->phone }}">{{ App\Models\General::first()->phone }}</a>
                                         </li>
                                     </ul>
                                 </div>

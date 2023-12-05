@@ -1,6 +1,6 @@
 @extends('layouts.master')
 
-@section('title', 'Detail Transaction')
+@section('title', 'Detail Transaksi')
 
 @section('content')
     <div class="row">
@@ -65,7 +65,7 @@
                             <div class="modal-dialog modal-dialog-centered" role="document">
                                 <div class="modal-content">
                                     <div class="modal-header border-0">
-                                        <h5 class="modal-title" id="modalTagihanLabel">Pilih Jenis Tagihan</h5>
+                                        <h5 class="modal-title" id="modalTagihanLabel">Invoice Transaksi</h5>
                                         <button type="button" class="btn-close border rounded-circle p-1 fs-3 lh-1 text-dark" data-bs-dismiss="modal" aria-label="Close">&times;</button>
                                     </div>
                                     <div class="modal-body pt-0 pb-5">

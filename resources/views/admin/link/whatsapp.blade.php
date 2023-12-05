@@ -42,7 +42,9 @@
                                             <div class="d-flex">
                                                 <div class="d-flex flex-column justify-content-center">
                                                     @if ($links->jurusan)
-                                                    <h6 class="mb-0 text-xs text-uppercase"> {{ $links->jurusan->name }} </h6>
+                                                    <p class="text-xxs text-uppercase text-secondary mb-0"> {{ $links->jurusan->name }} </p>
+                                                    @elseif ($links->kursus)
+                                                    <p class="text-xxs text-uppercase text-secondary mb-0"> {{ $links->kursus->name }} </p>
                                                     @else
                                                     <h6 class="mb-0 text-xs"> Tidak untuk jurusan tertentu </h6>
                                                     @endif

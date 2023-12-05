@@ -154,9 +154,20 @@ class CourseController extends Controller
         if ($course->descProgram) {
             $course->descProgram->delete();
         }
-
         if ($course->administrasi) {
             $course->administrasi->delete();
+        }
+        if ($course->biaya) {
+            $course->biaya->delete();
+        }
+        if ($course->mapel) {
+            $course->mapel->delete();
+        }
+        if ($course->links) {
+            $course->links->delete();
+        }
+        if ($course->biodata) {
+            $course->biodata->delete();
         }
         
         $course->delete();
