@@ -11,6 +11,7 @@ use Maatwebsite\Excel\Facades\Excel;
 
 class LaporanController extends Controller
 {
+    
     public function index()
     {
         $mahasiswa = User::where('role', 'Mahasiswa')->get();

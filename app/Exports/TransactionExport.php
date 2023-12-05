@@ -7,10 +7,25 @@ use Illuminate\Http\Request;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\WithHeadings;
 use Maatwebsite\Excel\Concerns\FromView;
+use Maatwebsite\Excel\Concerns\WithColumnWidths;
 
-class TransactionExport implements FromCollection, WithHeadings
+class TransactionExport implements FromCollection, WithHeadings,WithColumnWidths
 {
     protected $programBelajar;
+
+    public function columnWidths(): array
+    {
+        return [
+            'A' => 5,
+            'B' => 15,
+            'C' => 15,
+            'D' => 15,
+            'E' => 15,
+            'F' => 15,
+            'G' => 15,
+            'H' => 15,
+        ];
+    }
 
     public function __construct(Request $request)
     {

@@ -6,12 +6,26 @@ use App\Models\Biodata;
 use App\Models\User;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\WithHeadings;
-use Maatwebsite\Excel\Concerns\FromArray;
+use Maatwebsite\Excel\Concerns\WithColumnWidths;
 
-class MahasiswaLaporanExport implements FromCollection, WithHeadings
+class MahasiswaLaporanExport implements FromCollection, WithHeadings,WithColumnWidths
 {
 
     protected $mahasiswa;
+
+    public function columnWidths(): array
+    {
+        return [
+            'A' => 5,
+            'B' => 15,
+            'C' => 15,
+            'D' => 15,
+            'E' => 15,
+            'F' => 15,
+            'G' => 15,
+            'H' => 15,
+        ];
+    }
 
     public function __construct($mahasiswa)
     {

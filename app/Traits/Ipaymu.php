@@ -74,7 +74,7 @@ trait Ipaymu {
         }
         $body['referenceId']     = 'ID-PPDB-'.rand(1111,9999);
         $body['returnUrl']       = route('callback.return');
-        $body['notifyUrl']       = 'https://a107-139-192-164-152.ngrok-free.app/callback/notify';
+        $body['notifyUrl']       = 'https://a915-139-192-164-152.ngrok-free.app/callback/notify';
         $body['cancelUrl']       = route('callback.cancel');
         $body['paymentChannel']  = 'qris';
         $body['expired']         = 24;
@@ -111,7 +111,7 @@ trait Ipaymu {
         $body['price'][]         = $total;
         $body['referenceId']     = 'ID-PPDB-'.rand(1111,9999);
         $body['returnUrl']       = route('callback.return');
-        $body['notifyUrl']       = 'https://a107-139-192-164-152.ngrok-free.app/callback/notify';
+        $body['notifyUrl']       = 'https://a915-139-192-164-152.ngrok-free.app/callback/notify';
         $body['cancelUrl']       = route('callback.cancel');
         $body['paymentChannel']  = 'qris';
         $body['expired']         = 24;
@@ -149,7 +149,7 @@ trait Ipaymu {
         $body['price'][]         = $total;
         $body['referenceId']     = 'ID-PPDB-'.rand(1111,9999);
         $body['returnUrl']       = route('callback.return');
-        $body['notifyUrl']       = 'https://a107-139-192-164-152.ngrok-free.app/callback/notify';
+        $body['notifyUrl']       = 'https://a915-139-192-164-152.ngrok-free.app/callback/notify';
         $body['cancelUrl']       = route('callback.cancel');
         $body['paymentChannel']  = 'qris';
         $body['expired']         = 24;
