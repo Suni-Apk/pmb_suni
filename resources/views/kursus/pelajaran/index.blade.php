@@ -8,9 +8,7 @@
 @section('content')
     @foreach ($biodata as $item)
     <div class="row">
-        <h4 class="ms-2">{{ $item->course->name }}
-        
-        {{  $item->id }}</h4>
+        <h4 class="ms-2">{{ $item->course->name }}</h4>
         <div class="col-12 col-lg-12">
             <div class="card mb-4">
                 <div class="card-header pb-0 d-flex justify-content-between">

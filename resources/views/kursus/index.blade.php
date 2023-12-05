@@ -265,9 +265,10 @@
                                     Selamat Datang
                                     <b class="font-weight-bolder">{{ $mahasiswa->name }}</b>!
                                 </h4>
-                                <p class="mb-0 mx-2">
-                                    Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ut, voluptate?
+                                <p class="mb-1 mt-2">
+                                    أُطْلُبُوا الْعِلْمَ مِنَ الْمَهْدِ اِلىَ اللَّهْدِ
                                 </p>
+                                <p>"Tuntutlah ilmu dari buaian sampai ke liang lahat,"</p>
                             </div>
                         </div>
                     </div>
