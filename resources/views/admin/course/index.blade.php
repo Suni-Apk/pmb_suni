@@ -36,11 +36,17 @@
                                         <td class="align-middle">
                                             <span class="text-secondary text-xs font-weight-normal">
                                                 <ul class="mb-0">
-                                                    @forelse ($value->notes as $item)
-                                                    <li>{{ $item }}</li>
-                                                    @empty
+                                                    @if (empty($value->notes))
                                                         ~ Tidak ada catatan ~
-                                                    @endforelse
+                                                    @else
+                                                        @foreach ($value->notes as $item)
+                                                            @if (!is_null($item))
+                                                                <li>{{ $item }}</li>
+                                                            @else
+                                                                <p class="mb-0 text-xs text-center">~ Tidak ada catatan ~</p>
+                                                            @endif
+                                                        @endforeach
+                                                    @endif
                                                 </ul>
                                             </span>
                                         </td>
@@ -183,7 +189,7 @@
         crossorigin="anonymous" referrerpolicy="no-referrer" />
     <script>
         const dataTableSearch = new simpleDatatables.DataTable("#templateTable", {
-            searchable: false,
+            searchable: true,
             fixedHeight: true,
         });
     </script>

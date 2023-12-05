@@ -331,7 +331,7 @@
 						<div class="col">
 							<h6 class="card-title text-uppercase text-muted mb-0">Pemasukan</h6>
 							<span class="h2 lh-1 font-weight-bold mb-0" id="pemasukan">
-								<span>{{number_format($pemasukan,0,'','.')}}</span><small class="fs-5 font-weight-normal">rupiah</small>
+								<span>{{number_format($pemasukan,0,'','.')}}</span>&nbsp;<small class="fs-5 font-weight-normal">rupiah</small>
 							</span>
 						</div>
 						<div class="col-auto">
@@ -467,7 +467,7 @@
 					<span class="d-block mt-2" style="font-size: 13px;">Link</span>
 				</div>
 				<div class="col-3 col-md-2 text-center">
-					<a href="" class="icon icon-shape p-0 bg-orange shadow text-center border-radius-md cursor-pointer"
+					<a href="{{ route('admin.laporan.index') }}" class="icon icon-shape p-0 bg-orange shadow text-center border-radius-md cursor-pointer"
 						data-bs-toggle="tooltip" data-bs-placement="top" title="Laporan">
 						<i class="fas fa-flag text-lg opacity-10" aria-hidden="true"></i>
 					</a>
