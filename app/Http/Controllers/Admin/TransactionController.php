@@ -128,13 +128,98 @@ class TransactionController extends Controller
      */
     public function destroy(string $id)
     {
-        $data = Transaksi::find($id);
+        // $sid = $request->sid;
+        $transaksi = Transaksi::find($id);
 
-        $data->delete();
 
-        return redirect()->route('admin.transaksi.index')->with('delete', 'Anda berhasil menghapus data');
+        $tagihanDetail = TagihanDetail::where('id_transactions', $transaksi->id)->get();
+        $tagihanDetailTransaksi = TagihanDetail::where('id_transactions', $transaksi->id);
+
+        foreach ($tagihanDetail as $value) {
+            print_r($value->status);
+        }
+
+        $tagihanDetailTransaksi->update([
+            'status' => 'BELUM',
+            'id_transactions' => null
+        ]);
+
+        $cicilan = Cicilan::where('id_transactions', $id)->first();
+        if ($cicilan) {
+            $cicilan->update(['status' => 'BELUM', 'id_transactions' => null]);
+
+            $tagihanDetails = TagihanDetail::where('id', $cicilan->id_tagihan_details);
+            $tagihanDetails->update(['status' => 'BELUM']);
+            $cicilans = Cicilan::where('id_tagihan_details', $cicilan->id_tagihan_details)->where('status', 'LUNAS')->get();
+
+            if ($cicilans->count() == 0) {
+                $tagihan = TagihanDetail::where('id_users', $transaksi->user_id)->get();
+                foreach ($tagihan as $tagihans) {
+                    if ($tagihans->biayasDetail->jenis_biaya != 'DaftarUlang' && $tagihans->biayasDetail->program_belajar == 'S1') {
+                        $tagihanDelete = TagihanDetail::where('id', $tagihans->id);
+                        $tagihanDelete->delete();
+                        // print_r($tagihans->id);
+                        // print_r($tagihans);
+                    }
+                }
+            }
+        }
+        $transaksi->delete();
+        return redirect()->back();
+
+
+        // $cicilan = Cicilan::whereIn('id_transactions', $value->id);
+        // $cicilans = $cicilan->update(['status' => 'belum']);
+        // if ($cicilans) {
+        //     $cicilanGet = Cicilan::where('id', $cicilans->id)->get();
+        //     foreach ($cicilanGet as $nilai) {
+        //         $tagihanDetails = TagihanDetail::whereIn('id', $nilai->id_tagihan_details);
+        //         // $tagihanDetails->update(['status' => 'BELUM']);
+        //     }
+        // }
     }
 
+    public function deleteAll(Request $request)
+    {
+        //
+
+        $sid = $request->ids;
+        $transaksi = Transaksi::whereIn('id', $sid);
+
+        $transaksiGet = Transaksi::whereIn('id', $sid)->get();
+
+        foreach ($transaksiGet as $value) {
+            $tagihanDetail = TagihanDetail::where('id_transactions', $value->id);
+            $tagihanDetail->update([
+                'status' => 'BELUM',
+                'id_transactions' => null
+            ]);
+
+            $cicilan = Cicilan::whereIn('id_transactions', $sid)->get();
+            foreach ($cicilan as $nilai) {
+                if ($nilai) {
+                    $nilai->update(['status' => 'BELUM', 'id_transactions' => null]);
+                    $tagihanDetails = TagihanDetail::where('id', $nilai->id_tagihan_details);
+                    $tagihanDetails->update(['status' => 'BELUM']);
+                    $cicilans = Cicilan::where('id_tagihan_details', $nilai->id_tagihan_details)->where('status', 'LUNAS')->get();
+
+                    if ($cicilans->count() == 0) {
+                        $tagihan = TagihanDetail::where('id_users', $value->user_id)->get();
+                        foreach ($tagihan as $tagihans) {
+                            if ($tagihans->biayasDetail->jenis_biaya != 'DaftarUlang' && $tagihans->biayasDetail->program_belajar == 'S1') {
+                                $tagihanDelete = TagihanDetail::where('id', $tagihans->id);
+                                $tagihanDelete->delete();
+                                // print_r($tagihans->id);
+                                // print_r($tagihans);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        $transaksi->delete();
+        return redirect()->back();
+    }
     public function DaftarUlang(string $id, Request $request)
     {
         $user = User::find($id);
@@ -205,7 +290,7 @@ class TransactionController extends Controller
             'total' => $tagihan->harga,
             'payment_link' => 'dasdafassadas',
             'jenis_pembayaran' => 'cicilan',
-            'jenis_tagihan' => 'DaftarUlang',
+            'jenis_tagihan' => 'Daftar Ulang Cicilan',
             'no_invoice' => rand(111111, 999999),
             'user_id' => $mahasiswa->id,
             'id_cicilans' => $tagihan->id,

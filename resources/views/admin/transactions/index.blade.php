@@ -52,6 +52,9 @@
                         <table class="table mb-0" id="templateTable">
                             <thead>
                                 <tr>
+                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                        Pilih
+                                    </th>
                                     <th class=" text-uppercase text-secondary text-xxs  font-weight-bolder opacity-7">
                                         Nama Tagihan
                                     </th>
@@ -82,6 +85,9 @@
                                 @foreach ($transactions as $item)
                                  
                                 <tr>
+                                    <td>
+                                        <input type="checkbox" name="ids" id="" class="checksAll" value="{{ $item->id }}">
+                                    </td>
                                     <td class="align-middle text-secondary text-xs font-weight-bold">
                                         @if ($item->tagihanDetails)
                                             {{$item->tagihanDetails->biayasDetail->nama_biaya}}
@@ -94,7 +100,7 @@
                                         <p class="mb-0 text-xs">{{ $item->created_at->format('H:i:s') }}</p>
                                     </td>
                                     <td class="align-middle  text-secondary text-xs font-weight-bold">
-                                        {{ $item->user->name }}
+                                        {{ $item->user?->name }}
                                         <span class="d-block fw-light text-truncate" style="max-width: 130px;">
                                             {{ $item->no_invoice }}
                                         </span>
@@ -106,12 +112,19 @@
                                         {{ $item->program_belajar }}
                                     </td>
                                     <td class="align-middle  text-secondary font-weight-bold">
-                                        @if ($item->status == 'berhasil')
+                                        @if (strtolower($item->status) == 'berhasil')
                                         <span class="badge text-uppercase badge-sm rounded-pill bg-gradient-success">{{ $item->status }}</span>
-                                        @elseif ($item->status == 'pending')
-                                        <span class="badge text-uppercase badge-sm rounded-pill bg-gradient-warning">{{ $item->status }}</span>
-                                        @else
-                                        <span class="badge text-uppercase badge-sm rounded-pill bg-gradient-danger">{{ $item->status }}</span>
+                                        @elseif (strtolower($item->status) == 'pending')
+                                            @php
+                                                $now = now();
+                                                $created_at = \Carbon\Carbon::parse($item->created_at);
+                                                $expired = $created_at->addHours(24);
+                                            @endphp
+                                            @if ($now->greaterThan($expired))
+                                                <span class="badge text-uppercase badge-sm rounded-pill bg-gradient-danger">expired</span>
+                                            @else
+                                                <span class="badge text-uppercase badge-sm rounded-pill bg-gradient-warning">{{ $item->status }}</span>
+                                            @endif
                                         @endif
                                     </td>
                                     <td>
@@ -125,15 +138,15 @@
                                             Detail
                                         </a>
 
-                                        <button class="border-0 badge badge-sm text-xxs font-weight-bolder bg-gradient-secondary mx-1" role="button" data-bs-toggle="modal" data-bs-target="#modalEditStatus">Edit</button>
+                                        <button class="border-0 badge badge-sm text-xxs font-weight-bolder bg-gradient-secondary mx-1" role="button" data-bs-toggle="modal" data-bs-target="#modalEditStatus{{ $item->id }}">Edit</button>
 
                                         {{-- modal edit status --}}
-                                        <div class="modal fade" id="modalEditStatus" tabindex="-1" role="dialog"
-                                            aria-labelledby="modalEditStatusLabel" aria-hidden="true">
+                                        <div class="modal fade" id="modalEditStatus{{ $item->id }}" tabindex="-1" role="dialog"
+                                            aria-labelledby="modalEditStatus{{ $item->id }}Label" aria-hidden="true">
                                             <div class="modal-dialog modal-dialog-centered" role="document">
                                                 <div class="modal-content">
                                                     <div class="modal-header border-0">
-                                                        <h5 class="modal-title" id="modalEditStatusLabel">Edit Status Transaksi</h5>
+                                                        <h5 class="modal-title" id="modalEditStatus{{ $item->id }}Label">Edit Status Transaksi</h5>
                                                         <button type="button" class="btn-close border rounded-circle p-1 fs-3 lh-1 text-dark" data-bs-dismiss="modal" aria-label="Close">&times;</button>
                                                     </div>
                                                     <div class="modal-body pt-0">
@@ -170,6 +183,14 @@
                             </tbody>
                         </table>
                     </div>
+                    <div class="d-flex ms-4 mb-4 mt-3">
+                        <input type="checkbox" id="select_all_ids" class="chek me-2">
+                        <a href="#ClikKabeh" id="ClikKabeh" class="text-secondary">Pilih Semua</a>
+                        <div class=" ms-4">
+                            <i class="fas fa-trash me-1 cursor-pointer" style="color: #ff0000;" id="deleteAll"></i>
+                            <a href="#" class="text-secondary" id="All">Hapus</a>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -177,6 +198,14 @@
 @endsection
 
 @push('scripts')
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+        integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"
+        integrity="sha512-VEd+nq25CkR676O+pLBnDW09R7VQX9Mdiij052gVCp5yVH3jGtH70Ho/UUv4mJDsEdTvqRCFZg0NKGiojGnUCw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css"
+        integrity="sha512-3pIirOrwegjM6erE5gPSwkUzO+3cTjpnV9lexlNZqvupR64iZBnOOTiiLPb9M36zpMScbmUNIcHUqKD47M719g=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
     <script>
         const dataTableBasic = new simpleDatatables.DataTable("#templateTable", {
             searchable: true,
@@ -206,6 +235,81 @@
                         'success'
                     )
                 }
+            });
+        });
+    </script>
+    <script>
+        $(function(e) {
+            $("#ClikKabeh").click(function() {
+                $('.checksAll, #select_all_ids').prop('checked', function() {
+                    return !$(this).prop("checked");
+                });
+            });
+            $("#select_all_ids").click(function() {
+                $('.checksAll').prop('checked', $(this).prop('checked'));
+            });
+            $("#All").click(function() {
+                $('#deleteAll').click();
+            });
+
+            $("#deleteAll").click(function(e) {
+                e.preventDefault();
+                var all_ids = [];
+
+                $('input:checkbox[name="ids"]:checked').each(function() {
+                    all_ids.push($(this).val());
+                });
+                if ($('.checksAll').is(':checked')) {
+                    Swal.fire({
+                        title: "Apakah Anda Yakin Ingin Menghapus Tagihan?",
+                        text: "You won't be able to revert this!",
+                        icon: "warning",
+                        showCancelButton: true,
+                        confirmButtonColor: "#3085d6",
+                        cancelButtonColor: "#d33",
+                        confirmButtonText: "Yes, delete it!"
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            $.ajax({
+                                url: "{{ route('admin.transaksi.delete.all') }}",
+                                type: "DELETE",
+                                data: {
+                                    ids: all_ids
+                                },
+                                headers: {
+                                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr(
+                                        'content')
+                                },
+                                success: function(response) {
+                                    // Handle response jika diperlukan
+                                    // Misalnya, menampilkan pesan sukses
+                                    // Lakukan reload halaman setelah permintaan AJAX selesai
+
+                                },
+                                error: function(xhr, status, error) {
+                                    // Handle error jika diperlukan
+
+                                }
+                            });
+                            setTimeout(() => {
+                                location.reload();
+                            }, 1000);
+                            Swal.fire({
+                                title: "Deleted!",
+                                text: "Your file has been deleted.",
+                                icon: "success"
+                            }).then((result) => {});
+                        }
+                    });
+                }
+                if (!$('.checksAll').is(':checked')) {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Oops...',
+                        text: 'Pilih Minimal 1!',
+                    })
+                }
+
             });
         });
     </script>

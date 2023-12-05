@@ -1,6 +1,6 @@
 @extends('layouts.master')
 
-@section('title', 'table template')
+@section('title', 'Daftar Admin')
 
 @push('styles')
 
@@ -60,7 +60,7 @@
                             @endif
                         </td>
                         <td class="text-center"> 
-                          <a style="letter-spacing: .02rem" href="" class="badge badge-sm bg-gradient-info font-weight-bolder text-xxs" data-toggle="tooltip" data-original-title="detail">
+                          <a style="letter-spacing: .02rem" href="{{ route('admin.admin.show',$item->id) }}" class="badge badge-sm bg-gradient-info font-weight-bolder text-xxs" data-toggle="tooltip" data-original-title="detail">
                               Detail
                           </a>
 
@@ -68,29 +68,31 @@
                               Ubah
                           </a>
                           
-                          <form action="{{route('admin.admin.delete',$item->id)}}" class="d-inline" id="form1" method="POST">
-                            @csrf
-                            @method('DELETE')
-                            <button type="button" class="badge badge-sm bg-red font-weight-bolder text-xxs ms-1 border-0" data-bs-toggle="modal" data-bs-target="#exampleModal">Delete</button>
-                            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                              <div class="modal-dialog modal-dialog-centered">
-                                <div class="modal-content">
-                                  <div class="modal-header">
-                                    <h1 class="modal-title fs-5" id="exampleModalLabel">Warning!!!! <i class="fas fa-exclamation-circle fa-xl text-danger"></i></h1>
-                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                  </div>
-                                  <div class="modal-body">
-                                    <i class="fas fa-exclamation-circle fa-xl text-danger"></i>
-                                    Apakah Anda Yakin Ingin Melakukan Penghapusan Admin?
-                                  </div>
-                                  <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
-                                    <button type="submit" class="btn btn-primary">Lanjut</button>
+                          @if (Auth::user()->id !== $item->id)
+                            <form action="{{route('admin.admin.delete',$item->id)}}" class="d-inline" id="form1" method="POST">
+                              @csrf
+                              @method('DELETE')
+                              <button type="button" class="badge badge-sm bg-red font-weight-bolder text-xxs ms-1 border-0" data-bs-toggle="modal" data-bs-target="#exampleModal{{ $item->id }}">Delete</button>
+                              <div class="modal fade" id="exampleModal{{ $item->id }}" tabindex="-1" aria-labelledby="exampleModal{{ $item->id }}Label" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered">
+                                  <div class="modal-content">
+                                    <div class="modal-header">
+                                      <h1 class="modal-title fs-5" id="exampleModal{{ $item->id }}Label">Peringatan! <i class="fas fa-exclamation-circle fa-xl text-danger"></i></h1>
+                                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                      <i class="fas fa-exclamation-circle fa-xl text-danger"></i>
+                                      Apakah anda yakin ingin menghapus data admin?
+                                    </div>
+                                    <div class="modal-footer">
+                                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                                      <button type="submit" class="btn btn-primary">Ya, Hapus</button>
+                                    </div>
                                   </div>
                                 </div>
                               </div>
-                            </div>
-                          </form>
+                            </form>
+                          @endif
 
                           @if (Auth::user()->id !== $item->id)
                             <form action="{{route('admin.admin.status',$item->id)}}" method="POST" class="d-inline">

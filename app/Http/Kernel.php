@@ -73,5 +73,6 @@ class Kernel extends HttpKernel
         'Pembayaran' => \App\Http\Middleware\PembayaranMiddleware::class,
         'MahasiswaTransactions' => \App\Http\Middleware\MahasiswaTransactionMiddleware::class,
         'KursusTransactions' => \App\Http\Middleware\KursusTransactionMiddleware::class,
+        'DaftarUlang' => \App\Http\Middleware\DaftarUlangMiddleware::class,
     ];
 }

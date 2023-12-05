@@ -38,7 +38,8 @@
                                     </tr>
 
                                     <tr>
-                                        <td class="text-sm">Total Pembayaran : <strong>Rp 2000.000</strong></td>
+                                        <td class="text-sm">Total Pembayaran : <strong>Rp
+                                                {{ number_format($total, 0, '', '.') }}</strong></td>
                                     </tr>
                                     <tr>
                                         <td class="text-sm">Tanggal Pembayaran : <strong>28/10/2023</strong></td>

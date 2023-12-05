@@ -12,8 +12,8 @@
                 <div class="card-header pb-0 d-flex justify-content-between">
                     <h6>Tagihan table</h6>
                     <!-- Button trigger modal -->
-                    <button type="button" class="btn bg-gradient-primary" data-bs-toggle="modal" data-bs-target="#modalTagihan"
-                    >Tambah <i class="fas fa-plus me-1"></i></button>
+                    <button type="button" class="btn bg-gradient-primary" data-bs-toggle="modal"
+                        data-bs-target="#modalTagihan">Tambah <i class="fas fa-plus me-1"></i></button>
 
                     <!-- Modal -->
                     <div class="modal fade" id="modalTagihan" tabindex="-1" role="dialog"
@@ -22,7 +22,8 @@
                             <div class="modal-content">
                                 <div class="modal-header">
                                     <h5 class="modal-title" id="modalTagihanLabel">Pilih Jenis Tagihan</h5>
-                                    <button type="button" class="btn-close border rounded-circle p-1 fs-3 lh-1 text-dark" data-bs-dismiss="modal" aria-label="Close">&times;</button>
+                                    <button type="button" class="btn-close border rounded-circle p-1 fs-3 lh-1 text-dark"
+                                        data-bs-dismiss="modal" aria-label="Close">&times;</button>
                                 </div>
                                 <form action="{{ route('admin.tagihan.next') }}" method="GET">
                                     <div class="modal-body">
@@ -63,6 +64,7 @@
                         <table class="table align-items-center mb-0" id="templateTable">
                             <thead>
                                 <tr>
+                                    <th class="d-flex text-uppercase text-secondary text-xs font-weight-bolder opacity-8">Pilih</th>
                                     <th class=" text-uppercase text-secondary text-xxs font-weight-bolder opacity-8">Nama Tagihan</th>
                                     <th class="text-uppercase text-secondary text-xxs px-2 font-weight-bolder opacity-8">Tahun / Angkatan</th>
                                     <th class=" text-uppercase text-secondary text-xxs font-weight-bolder opacity-8">Jurusan / Prodi</th>
@@ -75,6 +77,9 @@
                             <tbody>
                                 @foreach ($biaya as $key => $biayas)
                                     <tr>
+                                        <td>
+                                            <input type="checkbox" name="ids" id="" class="checksAll" value="{{ $biayas->id }}">
+                                        </td>
                                         <td class="align-middle  text-secondary text-xs font-weight-bold">
                                             <strong>{{ $biayas->nama_biaya }}</strong>
                                         </td>
@@ -83,7 +88,13 @@
                                         </td>
 
                                         <td class="align-middle  text-secondary text-xs font-weight-bold">
-                                            {{ $biayas->jurusans->name ?? 'Tidak Ada Jurusan' }}
+                                            @if ($biayas->jurusans?->name != null && $biayas->program_belajar == 'S1')
+                                                {{ $biayas->jurusans->name }}
+                                            @elseif ($biayas->jurusans?->name == null && $biayas->program_belajar == 'KURSUS')
+                                                {{ $biayas->kursus->name }}
+                                            @elseif ($biayas->jurusans?->name == null)
+                                                Semua Jurusan
+                                            @endif
 
                                         </td>
                                         <td class="align-middle  text-secondary text-xs font-weight-bold">
@@ -108,8 +119,8 @@
                                                 data-toggle="tooltip" data-original-title="Edit">
                                                 Ubah
                                             </a>
-                                            <form action="{{ route('admin.tagihan.destroy', $biayas->id) }}"
-                                                method="POST" class="d-inline">
+                                            <form action="{{ route('admin.tagihan.destroy', $biayas->id) }}" method="POST"
+                                                class="d-inline">
                                                 @csrf
                                                 @method('DELETE')
                                                 <button
@@ -121,8 +132,17 @@
                                         </td>
                                     </tr>
                                 @endforeach
+
                             </tbody>
                         </table>
+                    </div>
+                    <div class="d-flex ms-4 mb-4 mt-3">
+                        <input type="checkbox" id="select_all_ids" class="chek me-2">
+                        <a href="#" id="ClikKabeh" class="text-secondary">Pilih Semua</a>
+                        <div class=" ms-4">
+                            <i class="fas fa-trash me-1 cursor-pointer" style="color: #ff0000;" id="deleteAll"></i>
+                            <a href="#" class="text-secondary" id="All">Hapus</a>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -174,6 +194,88 @@
         const dataTableBasic = new simpleDatatables.DataTable("#templateTable", {
             searchable: true,
             fixedHeight: true,
+        });
+    </script>
+    <script>
+        function check() {
+            // document.getElementByClassName('.checksAll').checked = true;
+            var checkbox = document.getElementById("select_all_ids");
+            checkbox.checked = !checkbox.checked;
+        }
+    </script>
+    <script>
+        $(function(e) {
+            $("#ClikKabeh").click(function() {
+                $('.checksAll, #select_all_ids').prop('checked', function() {
+                    return !$(this).prop("checked");
+                });
+            });
+            $("#select_all_ids").click(function() {
+                $('.checksAll').prop('checked', $(this).prop('checked'));
+            });
+            $("#All").click(function() {
+                $('#deleteAll').click();
+            });
+
+            $("#deleteAll").click(function(e) {
+                e.preventDefault();
+                var all_ids = [];
+
+                $('input:checkbox[name="ids"]:checked').each(function() {
+                    all_ids.push($(this).val());
+                });
+                if ($('.checksAll').is(':checked')) {
+                    Swal.fire({
+                        title: "Apakah Anda Yakin Ingin Menghapus Tagihan?",
+                        text: "You won't be able to revert this!",
+                        icon: "warning",
+                        showCancelButton: true,
+                        confirmButtonColor: "#3085d6",
+                        cancelButtonColor: "#d33",
+                        confirmButtonText: "Yes, delete it!"
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            $.ajax({
+                                url: "{{ route('admin.tagihan.deletes') }}",
+                                type: "DELETE",
+                                data: {
+                                    ids: all_ids
+                                },
+                                headers: {
+                                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr(
+                                        'content')
+                                },
+                                success: function(response) {
+                                    // Handle response jika diperlukan
+                                    // Misalnya, menampilkan pesan sukses
+                                    // Lakukan reload halaman setelah permintaan AJAX selesai
+                                },
+                                error: function(xhr, status, error) {
+                                    // Handle error jika diperlukan
+
+                                }
+                            });
+                            Swal.fire({
+                                title: "Deleted!",
+                                text: "Your file has been deleted.",
+                                icon: "success"
+                            }).then((result) => {
+                                if (result.isConfirmed) {
+                                    location.reload();
+                                }
+                            });
+                        }
+                    });
+                }
+                if (!$('.checksAll').is(':checked')) {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Oops...',
+                        text: 'Pilih Minimal 1!',
+                    })
+                }
+
+            });
         });
     </script>
 @endpush

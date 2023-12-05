@@ -8,6 +8,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Biaya;
 use App\Models\Biodata;
 use App\Models\Cicilan;
+use App\Models\Tagihan;
 use App\Models\TagihanDetail;
 use App\Models\TahunAjaran;
 use App\Models\Transaksi;
@@ -28,6 +29,13 @@ class AccountController extends Controller
         $admin = User::where('role', 'Admin')->get();
 
         return view('admin.account.admin.index', compact('admin'));
+    }
+
+    public function admin_show(string $id)
+    {
+        $data = User::find($id);
+
+        return view('admin.account.admin.detail', compact('data'));
     }
 
     public function admin_create()
@@ -149,7 +157,7 @@ class AccountController extends Controller
             $mahasiswa = User::where('role', 'Mahasiswa')->latest()->get();
         }
 
-        return view('admin.account.mahasiswa.index', compact('mahasiswa', 'tahun_ajaran', 'tahunAjaran'));
+        return view('admin.account.mahasiswa.index', compact('mahasiswa', 'tahun_ajaran', 'tahunAjaran', 'mahasiswaAll'));
     }
 
     public function mahasiswa_create()
@@ -322,5 +330,25 @@ class AccountController extends Controller
         $mahasiswa = User::where('role', 'Mahasiswa')->latest()->get();
 
         return view('admin.account.pendaftar.index', compact('mahasiswa'));
+    }
+
+    public function deleteAll(Request $request)
+    {
+        $ids = $request->ids;
+        $user = User::where('role', 'Mahasiswa')->whereIn('id', $ids);
+        $biodata = Biodata::whereIn('user_id', $ids);
+        $tagihanDetail =  TagihanDetail::whereIn('id_users', $ids);
+        $tagihanDetailGet =  TagihanDetail::whereIn('id_users', $ids)->get();
+
+        foreach ($tagihanDetailGet as $value) {
+            $cicilan = Cicilan::whereIn('id_tagihan_details', $value->id);
+            $cicilan->delete();
+        }
+
+        $tagihanDetail->delete();
+        $biodata->delete();
+        $user->delete();
+
+        return redirect()->back();
     }
 }
