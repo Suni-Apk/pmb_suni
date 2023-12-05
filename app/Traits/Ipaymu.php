@@ -80,7 +80,7 @@ trait Ipaymu {
 
         $body['referenceId']     = 'ID-' . strtoupper(str_replace(' ', '', General::first()->title)) . '-'.rand(1111,9999);
         $body['returnUrl']       = route('callback.return');
-        $body['notifyUrl']       = 'https://32e0-139-192-158-139.ngrok-free.app/callback/notify';
+        $body['notifyUrl']       = route('welcome') . '/callback/notify';
         $body['cancelUrl']       = route('callback.cancel');
         $body['paymentChannel']  = 'qris';
         $body['expired']         = 24;
@@ -115,9 +115,9 @@ trait Ipaymu {
         $body['product'][]       = $nama_product;
         $body['qty'][]           = 1;
         $body['price'][]         = $total;
-        $body['referenceId']     = 'ID-PPDB-'.rand(1111,9999);
+        $body['referenceId']     = 'ID-' . strtoupper(str_replace(' ', '', General::first()->title)) . '-'.rand(1111,9999);
         $body['returnUrl']       = route('callback.return');
-        $body['notifyUrl']       = 'https://a107-139-192-164-152.ngrok-free.app/callback/notify';
+        $body['notifyUrl']       = route('welcome') . '/callback/notify';
         $body['cancelUrl']       = route('callback.cancel');
         $body['paymentChannel']  = 'qris';
         $body['expired']         = 24;
@@ -153,9 +153,9 @@ trait Ipaymu {
         $body['product'][]       = $nama_product;
         $body['qty'][]           = 1;
         $body['price'][]         = $total;
-        $body['referenceId']     = 'ID-PPDB-'.rand(1111,9999);
+        $body['referenceId']     = 'ID-' . strtoupper(str_replace(' ', '', General::first()->title)) . '-'.rand(1111,9999);
         $body['returnUrl']       = route('callback.return');
-        $body['notifyUrl']       = 'https://a107-139-192-164-152.ngrok-free.app/callback/notify';
+        $body['notifyUrl']       = route('welcome') . '/callback/notify';
         $body['cancelUrl']       = route('callback.cancel');
         $body['paymentChannel']  = 'qris';
         $body['expired']         = 24;
