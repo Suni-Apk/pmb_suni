@@ -82,48 +82,50 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($transactions as $item)
-                                 
-                                <tr>
-                                    <td>
-                                        <input type="checkbox" name="ids" id="" class="checksAll" value="{{ $item->id }}">
-                                    </td>
-                                    <td class="align-middle text-secondary text-xs font-weight-bold">
-                                        @if ($item->tagihanDetails)
-                                            {{$item->tagihanDetails->biayasDetail->nama_biaya}}
-                                        @else
-                                            {{ $item->jenis_tagihan }}
-                                        @endif
-                                    </td>
-                                    <td class="align-middle  text-secondary text-xs font-weight-bold">
-                                        <h6 class="mb-0 text-xs">{{ $item->created_at->format('d F Y') }}</h6>
-                                        <p class="mb-0 text-xs">{{ $item->created_at->format('H:i:s') }}</p>
-                                    </td>
-                                    <td class="align-middle  text-secondary text-xs font-weight-bold">
-                                        {{ $item->user?->name }}
-                                        <span class="d-block fw-light text-truncate" style="max-width: 130px;">
-                                            {{ $item->no_invoice }}
-                                        </span>
-                                    </td>
-                                    <td class="align-middle text-secondary text-xs font-weight-bold">
-                                        Rp. {{ number_format($item->total,0,'','.') }},-
-                                    </td>
-                                    <td class="align-middle  text-secondary text-xs font-weight-bold">
-                                        {{ $item->program_belajar }}
-                                    </td>
-                                    <td class="align-middle  text-secondary font-weight-bold">
-                                        @if (strtolower($item->status) == 'berhasil')
-                                        <span class="badge text-uppercase badge-sm rounded-pill bg-gradient-success">{{ $item->status }}</span>
-                                        @elseif (strtolower($item->status) == 'pending')
-                                            @php
-                                                $now = now();
-                                                $created_at = \Carbon\Carbon::parse($item->created_at);
-                                                $expired = $created_at->addHours(24);
-                                            @endphp
-                                            @if ($now->greaterThan($expired))
-                                                <span class="badge text-uppercase badge-sm rounded-pill bg-gradient-danger">expired</span>
-                                            @else
-                                                <span class="badge text-uppercase badge-sm rounded-pill bg-gradient-warning">{{ $item->status }}</span>
+                                @foreach ($transaction as $index => $transactions)
+                                    <tr>
+                                        <td><input type="checkbox" name="ids" id="" class="checksAll"
+                                                value="{{ $transactions->id }}"></td>
+                                        <td class="align-middle text-xs font-weight-bold">
+                                            {{ $index + 1 }}
+                                        </td>
+                                        <td class="align-middle text-secondary text-xs font-weight-bold">
+                                            {{ $transactions->jenis_tagihan }}
+                                        </td>
+                                        <td class="align-middle text-secondary text-xs font-weight-bold">
+                                            {{ \Carbon\Carbon::parse($transactions->created_at)->isoFormat('D MMMM YYYY') }}
+                                        </td>
+                                        <td class="align-middle  text-secondary text-xs font-weight-bold">
+                                            {{ $transactions->user->name ?? 'User Sudah tidak ada' }}
+                                        </td>
+                                        <td class="align-middle text-secondary text-xs font-weight-bold">
+                                            Rp. {{ number_format($transactions->total) }},-
+                                        </td>
+                                        <td class="align-middle  text-secondary text-xs font-weight-bold">
+                                            {{ $transactions->program_belajar }}
+                                        </td>
+                                        <td class="align-middle  text-secondary font-weight-bold">
+                                            @if (strtolower($transactions->status) === 'berhasil')
+                                                <span class="badge text-uppercase badge-sm bg-gradient-success">
+                                                    SUCCESS
+                                                </span>
+                                            @elseif ($transactions->status == 'pending')
+                                                @php
+                                                    $now = now();
+                                                    $paymentTime = \Carbon\Carbon::parse($transactions->created_at); // Gantilah 'payment_time' dengan kolom waktu pembayaran yang sesuai
+                                                    $expirationTime = $paymentTime->addHours(24);
+
+                                                    if ($now->greaterThan($expirationTime)) {
+                                                        $status = 'EXPIRED';
+                                                        $badgeClass = 'bg-gradient-danger';
+                                                    } else {
+                                                        $status = 'PENDING';
+                                                        $badgeClass = 'bg-gradient-warning';
+                                                    }
+                                                @endphp
+                                                <span class="badge text-uppercase badge-sm {{ $badgeClass }}">
+                                                    {{ $status }}
+                                                </span>
                                             @endif
                                         @endif
                                     </td>
@@ -219,6 +221,81 @@
                         'success'
                     )
                 }
+            });
+        });
+    </script>
+    <script>
+        $(function(e) {
+            $("#ClikKabeh").click(function() {
+                $('.checksAll, #select_all_ids').prop('checked', function() {
+                    return !$(this).prop("checked");
+                });
+            });
+            $("#select_all_ids").click(function() {
+                $('.checksAll').prop('checked', $(this).prop('checked'));
+            });
+            $("#All").click(function() {
+                $('#deleteAll').click();
+            });
+
+            $("#deleteAll").click(function(e) {
+                e.preventDefault();
+                var all_ids = [];
+
+                $('input:checkbox[name="ids"]:checked').each(function() {
+                    all_ids.push($(this).val());
+                });
+                if ($('.checksAll').is(':checked')) {
+                    Swal.fire({
+                        title: "Apakah Anda Yakin Ingin Menghapus Transaction?",
+                        text: "You won't be able to revert this!",
+                        icon: "warning",
+                        showCancelButton: true,
+                        confirmButtonColor: "#3085d6",
+                        cancelButtonColor: "#d33",
+                        confirmButtonText: "Yes, delete it!"
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            $.ajax({
+                                url: "{{ route('admin.transaksi.delete.all') }}",
+                                type: "DELETE",
+                                data: {
+                                    ids: all_ids
+                                },
+                                headers: {
+                                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr(
+                                        'content')
+                                },
+                                success: function(response) {
+                                    // Handle response jika diperlukan
+                                    // Misalnya, menampilkan pesan sukses
+                                    // Lakukan reload halaman setelah permintaan AJAX selesai
+
+                                },
+                                error: function(xhr, status, error) {
+                                    // Handle error jika diperlukan
+
+                                }
+                            });
+                            setTimeout(() => {
+                                location.reload();
+                            }, 1000);
+                            Swal.fire({
+                                title: "Deleted!",
+                                text: "Your file has been deleted.",
+                                icon: "success"
+                            }).then((result) => {});
+                        }
+                    });
+                }
+                if (!$('.checksAll').is(':checked')) {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Oops...',
+                        text: 'Pilih Minimal 1!',
+                    })
+                }
+
             });
         });
     </script>

@@ -108,4 +108,11 @@ class MapelsController extends Controller
         $mapel->delete();
         return redirect()->route('admin.mapel.index')->with('success', "Mata Pelajaran Berhasil Di Hapus!!");
     }
+    public function deleteAll(Request $request)
+    {
+        $ids = $request->ids;
+        $mapel = Mapels::whereIn('id', $ids);
+        $mapel->delete();
+        return redirect()->route('admin.mapel.index')->with('success', "Mata Pelajaran Berhasil Di Hapus!!");
+    }
 }

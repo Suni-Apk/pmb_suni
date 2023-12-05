@@ -20,8 +20,7 @@ class JurusanController extends Controller
     public function index()
     {
         $jurusan = Jurusan::all();
-        $tahun_ajaran = TahunAjaran::all();
-        return view('admin.jurusan.index', compact('jurusan', 'tahun_ajaran')); 
+        return view('admin.jurusan.index', compact('jurusan'));
     }
 
 
@@ -123,5 +122,12 @@ class JurusanController extends Controller
     public function exportJurusan(Request $request)
     {
         return Excel::download(new JurusanExport($request), 'dataJurusan.xlsx');
+    }
+    public function deleteAll(Request $request)
+    {
+        $ids = $request->ids;
+        $jurusan = Jurusan::whereIn('id', $ids);
+        $jurusan->delete();
+        return redirect()->route('admin.jurusan.index');
     }
 }

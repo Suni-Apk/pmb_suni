@@ -106,4 +106,12 @@ class TahunAjaranController extends Controller
         $data->delete();
         return redirect()->route('admin.tahun-ajaran.index');
     }
+
+    public function deleteAll(Request $request)
+    {
+        $ids = $request->ids;
+        $data = TahunAjaran::whereIn('id', $ids);
+        $data->delete();
+        return redirect()->route('admin.tahun_ajaran.index')->with('success', 'Kamu telah berhasil menghapus tahun ajaran');
+    }
 }
