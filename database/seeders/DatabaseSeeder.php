@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
+use App\Models\Jurusan;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -59,6 +60,7 @@ class DatabaseSeeder extends Seeder
             CourseSeeder::class,
             NotifySeeder::class,
             GeneralSeeder::class,
+            JurusanSeeder::class,
             TahunAjaranSeeder::class,
             AdministrasiSeeder::class,
             DescProgramBelajarSeeder::class,

@@ -50,7 +50,6 @@ class DashboardController extends Controller
             // Retrieve available courses excluding the selected course
             $kursus = Course::where('id', '!=', $kursusBiodata->course->id)->get();
         }
-
         
         return view('kursus.index', compact('hijriDateday', 'hijriDatedayArabic', 'hijriDatemonth', 'hijriDateyear', 'biodata', 'banner', 'kursusBiodata',
             (!$kursusBiodata) ? ['linkKursus','kursus'] : ['linkKursus', 'kursus'],

@@ -344,15 +344,34 @@ class AuthController extends Controller
     {
         $user = Auth::user();
         auth()->login($user);
+
+        $id = $user->id;
+
+        $request->validate([
+            'program' => 'required',
+        ], [
+            'program.required' => 'Anda wajib memilih program yang ingin diikuti',
+        ]);
+
+        $program = $request->program;
+        $course = Course::where('keyword', $program)->first();
+        // dd($course);
+
         $biodataKursus = Biodata::where('user_id', $user->id)->where('program_belajar', 'KURSUS')->first();
         $transaksiKursus = Transaksi::where('user_id', $user->id)->where('program_belajar', 'KURSUS')->where('jenis_tagihan', 'Administrasi')->first();
-        $id = $user->id;
-        $program = "KURSUS";
-        $adminstrasiS1 = Administrasi::where('program_belajar', 'S1')->first();
-        $adminstrasiKursus = Administrasi::where('program_belajar', 'KURSUS')->first();
-        if (!$transaksiKursus) {
-            $adminstrasiKursus = Administrasi::where('program_belajar', 'KURSUS')->first();
 
+
+        $adminstrasiS1 = Administrasi::where('program_belajar', 'S1')->first();
+
+        // program kursus
+        $adminstrasiKursus = Administrasi::where('program_belajar', 'KURSUS');
+        if ($course !== null) {
+            $adminstrasiKursus->where('course_id', $course->id);
+        }
+        $adminstrasiKursus = $adminstrasiKursus->first();
+        // dd($adminstrasiKursus);
+
+        if (!$transaksiKursus) {
             $payment = json_decode(json_encode($this->redirect_payment($id,$program,$adminstrasiS1,$adminstrasiKursus)), true);
             $transaksi = Transaksi::create([
                 'user_id' => $user->id,

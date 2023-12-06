@@ -32,8 +32,8 @@
                 <tbody>
                   @forelse ($mahasiswa as $index => $item)
                     <tr>
-                        <td>
-                            <input type="checkbox" name="ids" id="" class="checksAll"
+                        <td class="">
+                            <input type="checkbox" name="ids" id="" class="checksAll" class="form-check-input"
                                 value="{{ $item->id }}">
                         </td>
                         <td>
@@ -52,7 +52,7 @@
                           <p class="text-xs text-uppercase text-secondary mb-0">{{$item->role}}</p>
                         </td>
                         {{-- status biodata --}}
-                        <td class="text-secondary text-xs font-weight-bold">
+                        <td class="text-center text-xs font-weight-bold">
                             @if ($item->biodata)
                             <span class="badge rounded-pill bg-gradient-success">Lengkap <i class="fas fa-plus ms-1"></i></span> 
                             @else
@@ -60,7 +60,7 @@
                             @endif
                         </td>
                         {{-- status dokumen --}}
-                        <td class="text-secondary text-xs font-weight-bold">
+                        <td class="text-center text-xs font-weight-bold">
                             @if ($item->document)
                             <span class="badge rounded-pill bg-gradient-success">Lengkap <i class="fas fa-plus ms-1"></i></span> 
                             @else
@@ -68,23 +68,40 @@
                             @endif
                         </td>
                         {{-- status administrasi --}}
-                        <td class="text-secondary text-xs font-weight-bold">
-                            @if ($item->biodata)
-                            <span class="badge rounded-pill bg-gradient-success">Lunas <i class="fas fa-plus ms-1"></i></span> 
+                        @php
+                          $transaksi = App\Models\Transaksi::where('user_id', $item->id)->where('jenis_tagihan', 'Administrasi')->latest()->first();
+                        @endphp
+                        <td class="text-center text-xs font-weight-bold">
+                            @if ($transaksi)
+                              @if ($transaksi->status == 'berhasil')
+                                <span class="badge rounded-pill bg-gradient-success">Lunas <i class="fas fa-plus ms-1"></i></span> 
+                              @elseif ($transaksi->status == 'pending')
+                                <span class="badge rounded-pill bg-gradient-secondary">belum lunas <i class="fas fa-circle ms-1"></i></span> 
+                              @elseif ($transaksi->status == 'expired')
+                                <span class="badge rounded-pill bg-gradient-warning">nunggak <i class="fas fa-square ms-1"></i></span> 
+                              @endif
                             @else
-                            <span class="badge rounded-pill bg-gradient-danger">Belum dibayar <i class="fas fa-times ms-1"></i></span> 
+                            <span class="badge rounded-pill bg-gradient-danger">tidak ada <i class="fas fa-times ms-1"></i></span> 
                             @endif
                         </td>
                         {{-- status pra-kuliah / daftar ulang --}}
-                        <td class="text-secondary text-xs font-weight-bold">
-                            @if ($item->biodata)
-                              @if ($item->biodata->address) {{-- kalau udah selesai --}}
+                        @php
+                          $daftarUlang = App\Models\Transaksi::where('user_id', $item->id)->where('jenis_tagihan', 'DaftarUlang')->latest()->first();
+                          $daftarUlangCicilan = App\Models\Transaksi::where('user_id', $item->id)->where('jenis_tagihan', 'Daftar Ulang Cicilan')->latest()->first();
+                        @endphp
+                        <td class="text-center text-xs font-weight-bold">
+                            @if ($daftarUlang)
+                              @if ($daftarUlang->status == 'berhasil') {{-- kalau udah selesai --}}
                                 <span class="badge rounded-pill bg-gradient-success">Lunas <i class="fas fa-plus ms-1"></i></span>
-                              @elseif ($item->biodata->angkatan) {{-- kalau masih nyicil --}}
-                                <span class="badge rounded-pill bg-gradient-warning">Cicil <i class="fas fa-circle ms-1"></i></span>
+                              @elseif ($daftarUlang->status == 'pending') {{-- kalau udah selesai --}}
+                                <span class="badge rounded-pill bg-gradient-secondary">belum lunas <i class="fas fa-circle ms-1"></i></span>
+                              @elseif ($daftarUlang->status == 'expired') {{-- kalau udah selesai --}}
+                                <span class="badge rounded-pill bg-gradient-warning">nunggak <i class="fas fa-square ms-1"></i></span>
                               @endif
+                            @elseif ($daftarUlangCicilan) {{-- kalau masih nyicil --}}
+                              <span class="badge rounded-pill bg-gradient-warning">Cicil <i class="fas fa-circle ms-1"></i></span>
                             @else {{-- kalau belum blas --}}
-                            <span class="badge rounded-pill bg-gradient-danger">Belum dibayar <i class="fas fa-times ms-1"></i></span>
+                              <span class="badge rounded-pill bg-gradient-danger">tidak ada <i class="fas fa-times ms-1"></i></span>
                             @endif
                         </td>
                         <td>
@@ -134,6 +151,14 @@
                 </tbody>
               </table>
             </div>
+            <div class="d-flex ms-4 mb-4 mt-3">
+              <input type="checkbox" id="select_all_ids" class="chek me-2">
+              <a href="#" id="ClikKabeh" class="text-secondary">Pilih Semua</a>
+              <div class=" ms-4">
+                  <i class="fas fa-trash me-1 cursor-pointer" style="color: #ff0000;" id="deleteAll"></i>
+                  <a href="#" class="text-secondary" id="All">Hapus</a>
+              </div>
+          </div>
           </div>
         </div>
       </div>

@@ -83,7 +83,7 @@
                 <div class="carousel-inner">
                     <div class="carousel-item active">
                         <div class="row flex-column justify-content-center height-300"
-                        style="background-image: url('/assets/img/curved-images/curved14.jpg'); background-size: cover; background-position: center;">
+                        style="background-image: url('https://c0.wallpaperflare.com/path/196/594/379/quran-book-97f792a4ef76b251052800f9f56a4c0b.jpg'); background-size: cover; background-position: center;">
                             <span class="mask bg-gradient-dark opacity-6"></span>
                             <div class="d-flex justify-content-center flex-column align-items-center text-white text-center z-index-1">
                                 <h4 class="font-weight-bold mb-0 p-3 pb-0 text-white">
@@ -209,35 +209,78 @@
                 ->where('program_belajar', 'S1')
                 ->first();
             $documentS1 = App\Models\Document::where('user_id',$user->id)->first();
-            $biodataKURSUS = App\Models\Biodata::where('user_id', $user->id)
-                ->where('program_belajar', 'KURSUS')
-                ->first();
             $jurusan = App\Models\Jurusan::all();
+
+            $transaksiS1 = App\Models\Transaksi::where('program_belajar', 'S1');
+            $transaksiKursus = App\Models\Transaksi::where('program_belajar', 'KURSUS')->where('user_id', $user->id)->first();
         @endphp
-        @if ($biodataS1 && $biodataKURSUS)
+        @if ($transaksiS1 && $transaksiKursus)
             <div class="col-12 mt-4" id="informasi">
                 <div class="list-group list-group-horizontal" id="list-tab" role="tablist">
-                    <a id="list-sarjana-list" data-bs-toggle="list" href="#list-sarjana" role="tab"
-                        aria-controls="list-sarjana"
-                        class="list-group-item list-group-item-action border-0 shadow text-center active">Program Kuliah S1</a>
-                    <a id="list-kursus-list" data-bs-toggle="list" href="#list-kursus" role="tab"
-                        aria-controls="list-kursus"
-                        class="list-group-item list-group-item-action border-0 shadow text-center">Program Kursus</a>
+                    <a href="{{ route('mahasiswa.dashboard') }}" class="list-group-item list-group-item-action border-0 shadow text-center active">
+                        Program Formal (S1)
+                    </a>
+                    <a href="{{ route('kursus.dashboard') }}" class="list-group-item list-group-item-action border-0 shadow text-center">
+                        Program Non Formal
+                    </a>
                 </div>
             </div>
-        @else
-        <div class="col-12 mt-4" id="informasi">
-            <div class="list-group list-group-horizontal" id="list-tab" role="tablist">
-                <a id="list-sarjana-list" data-bs-toggle="list" href="#list-sarjana" role="tab"
-                    aria-controls="list-sarjana"
-                    class="list-group-item list-group-item-action border-0 shadow text-center active w-50">Program Kuliah S1</a>
-        
-                <form id="form-kursus" action="{{ route('administrasiKursus', ['id' => Auth::id()]) }}" class="w-50" method="POST">
-                    @csrf
-                    <a id="list-kursus-list" href="#" onclick="event.preventDefault(); document.getElementById('form-kursus').submit();" role="tab" aria-controls="list-kursus" class="list-group-item list-group-item-action border-0 shadow text-center">Program Kursus</a>
-                </form>
+        @elseif (!$transaksiKursus)
+            <div class="col-12 mt-4" id="informasi">
+                <div class="list-group list-group-horizontal" id="list-tab" role="tablist">
+                    <a id="list-sarjana-list" data-bs-toggle="list" href="#list-sarjana" role="tab" aria-controls="list-sarjana" class="list-group-item list-group-item-action border-0 shadow text-center active">
+                        Program Formal (S1)
+                    </a>
+
+                    <a id="list-kursus-list" href="#" role="tab" aria-controls="list-kursus" class="list-group-item list-group-item-action border-0 shadow text-center" role="button" data-bs-toggle="modal" data-bs-target="#modalDaftarKursus">
+                        Program Non Formal (Gabung)
+                    </a>
+                </div>
             </div>
-        </div>    
+            @error('program')
+                <div class="alert alert-warning alert-dismissible mt-3 fade show" role="alert">
+                    <strong>Hai!</strong> {{ $message }}
+                    <button type="button" class="btn-close border rounded-circle p-1 fs-3 lh-1 mt-2 me-2" data-bs-dismiss="alert" aria-label="Close">&times;</button>
+                </div>
+            @enderror
+            
+            <!-- Modal -->
+            <div class="modal fade" id="modalDaftarKursus" tabindex="-1" role="dialog"
+            aria-labelledby="modalDaftarKursusLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="modalDaftarKursusLabel">Konfirmasi Pendaftaran</h5>
+                            <button type="button" class="btn-close border rounded-circle p-1 fs-3 lh-1 text-dark" data-bs-dismiss="modal" aria-label="Close">&times;</button>
+                        </div>
+                        <form action="{{ route('administrasiKursus', ['id' => Auth::id()]) }}" method="post">
+                            @csrf
+                            <div class="modal-body text-center">
+                                <h6>Pendaftaran Program Non Formal</h6>
+                                <p class="mt-0">dengan menekan tombol "Ya, Saya Yakin", maka anda akan melakukan pendaftaran untuk program non formal</p>
+                                <hr class="horizontal dark mt-0">
+                                <div class="form-group">
+                                    <label for="program">Program Non Formal</label>
+                                    <select name="program" id="program" class="form-select">
+                                        <option disabled selected>Pilih program non formal</option>
+                                        @php
+                                            $course = App\Models\Course::get();
+                                        @endphp
+                                        @forelse ($course as $item)
+                                            <option value="{{ $item->keyword }}">{{ $item->name }}</option>
+                                        @empty
+                                            <option>Maaf, tidak ada program non formal yang tersedia saat ini.</option>
+                                        @endforelse
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="submit" class="btn bg-gradient-primary">Ya, Saya Yakin</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
         @endif
         
         {{-- jika belum ada biodata maka bisa isi di dalam halaman dashboard --}}
@@ -408,135 +451,102 @@
                         </div>
                     </div>
                 </div>
-            @else
-                <div class="row my-4">
-                    <div class="col-lg-8 col-md-6 mb-md-0 mb-4">
-                        <div class="card">
-                            <div class="card-header pb-0">
-                                <div class="row">
-                                    <div class="col-lg-6 col-7">
-                                        <h6>Daftar Tagihan</h6>
-                                        <p class="text-sm mb-0">
-                                            <i class="fa fa-check text-info" aria-hidden="true"></i>
-                                            Daftar tagihan yang harus dibayarkan
-                                        </p>
-                                    </div>
-                                    <div class="col-lg-6 col-5 my-auto text-end">
-                                        <a href="" class="btn btn-sm btn-white text-secondary px-3">Show All</a>
-                                    </div>
+            @endif
+            <div class="row my-4">
+                <div class="col-lg-8 col-md-6 mb-md-0 mb-4">
+                    <div class="card">
+                        <div class="card-header pb-0">
+                            <div class="row">
+                                <div class="col-lg-6 col-7">
+                                    <h6>Daftar Tagihan</h6>
+                                    <p class="text-sm mb-0">
+                                        <i class="fa fa-check text-info" aria-hidden="true"></i>
+                                        Daftar tagihan yang harus dibayarkan
+                                    </p>
                                 </div>
-                            </div>
-                            <div class="card-body px-0 pb-2">
-                                <div class="table-responsive">
-                                    <table class="table align-items-center mb-0">
-                                        <thead>
-                                            <tr>
-                                                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Nama Tagihan</th>
-                                                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Batas Tenggat</th>
-                                                <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Total</th>
-                                                <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Aksi</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            @foreach ($biayas->where('id_angkatans', Auth::user()->biodata->angkatan_id) as $item)
-                                            <tr>
-                                                <td>
-                                                    <div class="ps-3 text-sm">
-                                                        {{ $item->nama_biaya }}
-                                                    </div>
-                                                </td>
-                                                <td>
-                                                    <div class="ps-3 text-sm">
-                                                        {{ $item->id }}
-                                                    </div>
-                                                </td>
-                                                <td class="text-center ">
-                                                    {{-- Rp. {{ number_format($tagihans->amount, 0, '', '.') }},- --}}
-                                                </td>
-                                                <td class="text-center ">
-                                                    <a href="{{ route('mahasiswa.tagihan.index') }}" class="badge badge-sm bg-gradient-info text-xxs">Detail</a>
-                                                </td>
-                                            </tr>
-                                            @endforeach
-                                        </tbody>
-                                    </table>
+                                <div class="col-lg-6 col-5 my-auto text-end">
+                                    <a href="" class="btn btn-sm btn-white text-secondary px-3">Show All</a>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-lg-4 col-md-6">
-                        <div class="card h-100">
-                            <div class="card-header pb-0">
-                                <h6>Daftar Link</h6>
-                                <p class="text-sm">
-                                    <i class="fas fa-link text-success" aria-hidden="true"></i>
-                                    Daftar link yang diikuti
-                                </p>
-                            </div>
-                            <div class="card-body p-3">
-                                <div class="timeline timeline-one-side">
-                                    @php
-                                        $gender = $user->gender;
-                                        $gen = ($gender == 'Laki-Laki') ? 'ikhwan' : 'akhwat';
-                                    @endphp
-                                    @foreach ($links->filter(function ($item) use ($gen) {
-                                        return $item->gender == $gen || $item->gender == 'all';
-                                    }) as $item)
-                                        <div class="timeline-block mb-3">
-                                            <span class="timeline-step">
-                                                <i class="ni ni-bell-55 text-success text-gradient"></i>
-                                            </span>
-                                            <div class="timeline-content">
-                                                <a href="{{ $item->url }}" class="text-dark text-sm font-weight-bold mb-0">
-                                                    {{ $item->jurusan->code }} . {{ $item->tahunAjaran->year }},
-                                                    <span class="font-weight-normal">
-                                                        {{ $item->url }}
-                                                    </span>
-                                                </a>
-                                                <p class="text-secondary font-weight-bold text-xs mt-1 mb-0">
-                                                    {{ $item->created_at->format('d M Y') }}, link {{ $item->type }}
-                                                </p>
-                                            </div>
-                                        </div>
-                                    @endforeach
-                                </div>
+                        <div class="card-body px-0 pb-2">
+                            <div class="table-responsive">
+                                <table class="table align-items-center mb-0">
+                                    <thead>
+                                        <tr>
+                                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Nama Tagihan</th>
+                                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Batas Tenggat</th>
+                                            <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Total</th>
+                                            <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Aksi</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach ($biayas->where('id_angkatans', Auth::user()->biodata->angkatan_id) as $item)
+                                        <tr>
+                                            <td>
+                                                <div class="ps-3 text-sm">
+                                                    {{ $item->nama_biaya }}
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="ps-3 text-sm">
+                                                    {{ $item->id }}
+                                                </div>
+                                            </td>
+                                            <td class="text-center ">
+                                                Rp. {{ number_format($item->tagihanDetail->amount, 0, '', '.') }},-
+                                            </td>
+                                            <td class="text-center ">
+                                                <a href="{{ route('mahasiswa.tagihan.index') }}" class="badge badge-sm bg-gradient-info text-xxs">Detail</a>
+                                            </td>
+                                        </tr>
+                                        @endforeach
+                                    </tbody>
+                                </table>
                             </div>
                         </div>
                     </div>
                 </div>
-            @endif
+                <div class="col-lg-4 col-md-6">
+                    <div class="card h-100">
+                        <div class="card-header pb-0">
+                            <h6>Daftar Link</h6>
+                            <p class="text-sm">
+                                <i class="fas fa-link text-success" aria-hidden="true"></i>
+                                Daftar link yang diikuti
+                            </p>
+                        </div>
+                        <div class="card-body p-3">
+                            <div class="timeline timeline-one-side">
+                                @php
+                                    $gender = $user->gender;
+                                    $gen = ($gender == 'Laki-Laki') ? 'ikhwan' : 'akhwat';
+                                @endphp
+                                @foreach ($links->filter(function ($item) use ($gen) {
+                                    return $item->gender == $gen || $item->gender == 'all';
+                                }) as $item)
+                                    <div class="timeline-block mb-3">
+                                        <span class="timeline-step">
+                                            <i class="ni ni-bell-55 text-success text-gradient"></i>
+                                        </span>
+                                        <div class="timeline-content">
+                                            <a href="{{ $item->url }}" class="text-dark text-sm font-weight-bold mb-0">
+                                                {{ $item->jurusan->code }} . {{ $item->tahunAjaran->year }},
+                                                <span class="font-weight-normal">
+                                                    {{ $item->url }}
+                                                </span>
+                                            </a>
+                                            <p class="text-secondary font-weight-bold text-xs mt-1 mb-0">
+                                                {{ $item->created_at->format('d M Y') }}, link {{ $item->type }}
+                                            </p>
+                                        </div>
+                                    </div>
+                                @endforeach
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         @endif
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-    <script>
-        $(document).ready(function() {
-            // Menangani perubahan tab
-            $('#list-tab a').on('click', function(e) {
-                e.preventDefault();
-
-                // Mendapatkan target tab yang diklik
-                var target = $(this).attr('href');
-
-                // Menampilkan atau menyembunyikan bagian dashboard berdasarkan tab yang dipilih
-                if (target === "#list-sarjana") {
-                    // Logika untuk menampilkan dashboard Sarjana
-                    $("#dashboard-sarjana").show();
-                    $("#dashboard-kursus").hide();
-                } else if (target === "#list-kursus") {
-                    // Logika untuk menampilkan dashboard Kursus
-                    $("#dashboard-kursus").show();
-                    $("#dashboard-sarjana").hide();
-                }
-
-                // Mengarahkan pengguna ke rute yang sesuai
-                if (target === "#list-sarjana") {
-                    window.location.href = "{{ route('mahasiswa.dashboard') }}";
-                } else if (target === "#list-kursus") {
-                    window.location.href = "{{ route('kursus.dashboard') }}";
-                }
-
-                // Menandai tab yang aktif
-                $(this).tab('show');
-            });
-        });
-    </script>
 @endsection

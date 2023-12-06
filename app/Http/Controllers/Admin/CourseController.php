@@ -45,6 +45,8 @@ class CourseController extends Controller
 
         $data['notes'] = $request->notes;
 
+        // dd($data);
+
         $course = Course::create($data);
 
         if ($course) {
@@ -56,7 +58,7 @@ class CourseController extends Controller
                 'desc'      => $request->desc,
             ]);
 
-            $amount = $course->amount ? $course->amount : '';
+            $amount = $request->amount ? $request->amount : '';
 
             $admin = Administrasi::create([
                 'program_belajar' => 'Kursus',
