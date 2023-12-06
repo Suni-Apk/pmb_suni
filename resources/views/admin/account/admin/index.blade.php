@@ -121,6 +121,14 @@
                 </tbody>
               </table>
             </div>
+            <div class="d-flex ms-4 mb-4 mt-3">
+                <input type="checkbox" id="select_all_ids" class="chek me-2">
+                <a href="#" id="ClikKabeh" class="text-secondary">Pilih Semua</a>
+                <div class=" ms-4">
+                    <i class="fas fa-trash me-1 cursor-pointer" style="color: #ff0000;" id="deleteAll"></i>
+                    <a href="#" class="text-secondary" id="All">Hapus</a>
+                </div>
+            </div>
           </div>
         </div>
       </div>

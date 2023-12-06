@@ -74,7 +74,7 @@
                         <td class="text-center text-xs font-weight-bold">
                             @if ($transaksi)
                               @if ($transaksi->status == 'berhasil')
-                                <span class="badge rounded-pill bg-gradient-success">Lunas <i class="fas fa-plus ms-1"></i></span> 
+                                <span class="badge rounded-pill bg-gradient-success">Lunas <i class="fas fa-check ms-1"></i></span> 
                               @elseif ($transaksi->status == 'pending')
                                 <span class="badge rounded-pill bg-gradient-secondary">belum lunas <i class="fas fa-circle ms-1"></i></span> 
                               @elseif ($transaksi->status == 'expired')
@@ -92,7 +92,7 @@
                         <td class="text-center text-xs font-weight-bold">
                             @if ($daftarUlang)
                               @if ($daftarUlang->status == 'berhasil') {{-- kalau udah selesai --}}
-                                <span class="badge rounded-pill bg-gradient-success">Lunas <i class="fas fa-plus ms-1"></i></span>
+                                <span class="badge rounded-pill bg-gradient-success">Lunas <i class="fas fa-check ms-1"></i></span>
                               @elseif ($daftarUlang->status == 'pending') {{-- kalau udah selesai --}}
                                 <span class="badge rounded-pill bg-gradient-secondary">belum lunas <i class="fas fa-circle ms-1"></i></span>
                               @elseif ($daftarUlang->status == 'expired') {{-- kalau udah selesai --}}

@@ -277,7 +277,7 @@
                     }).then((result) => {
                         if (result.isConfirmed) {
                             $.ajax({
-                                url: "{{ route('admin.tahun_ajaran.delete.all') }}",
+                                url: "{{ route('admin.tahun-ajaran.delete.all') }}",
                                 type: "DELETE",
                                 data: {
                                     ids: all_ids
