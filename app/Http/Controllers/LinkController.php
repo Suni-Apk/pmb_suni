@@ -58,12 +58,11 @@ class LinkController extends Controller
 
         dd($data);
         Link::create($data);
-        if ( $request->type == 'whatsapp' ) {
+        if ($request->type == 'whatsapp') {
             return redirect()->route('admin.link.whatsapp')->with('success', "Link Berhasil Di Buat!!");
-        } elseif ( $request->type == 'zoom' ) {
+        } elseif ($request->type == 'zoom') {
             return redirect()->route('admin.link.zoom')->with('success', "Link Berhasil Di Buat!!");
         } else {
-
         }
     }
 
@@ -104,9 +103,9 @@ class LinkController extends Controller
 
         // dd($data);
         $link->update($data);
-        if ( $request->type == 'Whatsapp' ) {
+        if ($request->type == 'Whatsapp') {
             return redirect()->route('admin.link.whatsapp')->with('success', "Link Berhasil Di Ubah!!");
-        } elseif ( $request->type == 'Zoom' ) {
+        } elseif ($request->type == 'Zoom') {
             return redirect()->route('admin.link.zoom')->with('success', "Link Berhasil Di Ubah!!");
         } else {
             return false;
@@ -119,12 +118,28 @@ class LinkController extends Controller
     public function destroy(string $id)
     {
         $link = Link::find($id);
-        
-        if ( $link->type == 'Whatsapp' || $link->type == 'whatsapp' ) {
+
+        if ($link->type == 'Whatsapp' || $link->type == 'whatsapp') {
             $link->delete();
             return redirect()->route('admin.link.whatsapp')->with('success', "Link Berhasil Di Ubah!!");
-        } elseif ( $link->type == 'Zoom' || $link->type == 'zoom' ) {
+        } elseif ($link->type == 'Zoom' || $link->type == 'zoom') {
             $link->delete();
+            return redirect()->route('admin.link.zoom')->with('success', "Link Berhasil Di Ubah!!");
+        } else {
+            return false;
+        }
+    }
+    public function deleteAll(Request $request)
+    {
+        $ids = $request->ids;
+        $link = Link::where('id', $ids)->first();
+        $links = Link::whereIn('id', $ids);
+
+        if ($link->type == 'Whatsapp' || $link->type == 'whatsapp') {
+            $links->delete();
+            return redirect()->route('admin.link.whatsapp')->with('success', "Link Berhasil Di Ubah!!");
+        } elseif ($link->type == 'Zoom' || $link->type == 'zoom') {
+            $links->delete();
             return redirect()->route('admin.link.zoom')->with('success', "Link Berhasil Di Ubah!!");
         } else {
             return false;

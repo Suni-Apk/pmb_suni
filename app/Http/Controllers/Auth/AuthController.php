@@ -204,9 +204,10 @@ class AuthController extends Controller
         }
     }
 
-    public function verify()
+    public function verify(Request $request)
     {
-        return view('auth.verify');
+        $program = $request->program;
+        return view('auth.verify', $program);
     }
 
     public function verify_otp(Request $request)
@@ -221,7 +222,9 @@ class AuthController extends Controller
             ]);
             // Setelah mengupdate status aktif, kita akan mencoba masuk
             $program = $request->program;
+            // dd($program);
             $course = Course::where('keyword', $program)->first();
+            // dd($course);
             auth()->login($user);
 
             $biayaAdministrasiS1 = Administrasi::where('program_belajar', 'S1')->value('amount');
@@ -229,9 +232,17 @@ class AuthController extends Controller
             $transaksiS1 = Transaksi::where('user_id', $user->id)->where('program_belajar', 'S1')->where('jenis_tagihan', 'Administrasi')->first();
             
             $biodataKursus = Biodata::where('user_id', $user->id)->where('program_belajar', 'KURSUS')->first();
-            $biayaAdministrasiKursus = Administrasi::where('program_belajar', 'Kursus')->value('amount');
+            $biayaAdministrasiKursus = Administrasi::where('program_belajar', 'KURSUS')->value('amount');
             $transaksiKursus = Transaksi::where('user_id', $user->id)->where('program_belajar', 'KURSUS')->where('jenis_tagihan', 'Administrasi')->first();
-            $adminstrasiKursus = Administrasi::where('program_belajar', 'KURSUS')->where('course_id', $course->id)->first();
+
+            // $adminstrasiKursus = Administrasi::where('program_belajar', 'KURSUS')->where('course_id', $course->id)->first();
+            $adminstrasiKursus = Administrasi::where('program_belajar', 'KURSUS');
+            if ($course !== null) {
+                $adminstrasiKursus->where('course_id', $course->id);
+            }
+            $adminstrasiKursus = $adminstrasiKursus->first();
+            // dd($adminstrasiKursus);
+
             $adminstrasiS1 = Administrasi::where('program_belajar', 'S1')->first();
             if ($request->program == 'S1') {
                 if (!$transaksiS1) {
@@ -338,9 +349,9 @@ class AuthController extends Controller
         $id = $user->id;
         $program = "KURSUS";
         $adminstrasiS1 = Administrasi::where('program_belajar', 'S1')->first();
-        $adminstrasiKursus = Administrasi::where('program_belajar', 'Kursus')->first();
+        $adminstrasiKursus = Administrasi::where('program_belajar', 'KURSUS')->first();
         if (!$transaksiKursus) {
-            $adminstrasiKursus = Administrasi::where('program_belajar', 'Kursus')->first();
+            $adminstrasiKursus = Administrasi::where('program_belajar', 'KURSUS')->first();
 
             $payment = json_decode(json_encode($this->redirect_payment($id,$program,$adminstrasiS1,$adminstrasiKursus)), true);
             $transaksi = Transaksi::create([

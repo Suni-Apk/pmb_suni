@@ -185,4 +185,79 @@
             fixedHeight: true,
         });
     </script>
+    <script>
+        $(function(e) {
+            $("#ClikKabeh").click(function() {
+                $('.checksAll, #select_all_ids').prop('checked', function() {
+                    return !$(this).prop("checked");
+                });
+            });
+            $("#select_all_ids").click(function() {
+                $('.checksAll').prop('checked', $(this).prop('checked'));
+            });
+            $("#All").click(function() {
+                $('#deleteAll').click();
+            });
+
+            $("#deleteAll").click(function(e) {
+                e.preventDefault();
+                var all_ids = [];
+
+                $('input:checkbox[name="ids"]:checked').each(function() {
+                    all_ids.push($(this).val());
+                });
+                if ($('.checksAll').is(':checked')) {
+                    Swal.fire({
+                        title: "Apakah Anda Yakin Ingin Menghapus data mahasiswa?",
+                        text: "Kamu tidak bisa mengembalikan perubahan ini!",
+                        icon: "warning",
+                        showCancelButton: true,
+                        confirmButtonColor: "#3085d6",
+                        cancelButtonColor: "#d33",
+                        confirmButtonText: "Yes, delete it!"
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            $.ajax({
+                                url: "{{ route('admin.mahasiswa.delete.all') }}",
+                                type: "DELETE",
+                                data: {
+                                    ids: all_ids
+                                },
+                                headers: {
+                                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr(
+                                        'content')
+                                },
+                                success: function(response) {
+                                    // Handle response jika diperlukan
+                                    // Misalnya, menampilkan pesan sukses
+                                    // Lakukan reload halaman setelah permintaan AJAX selesai
+
+                                },
+                                error: function(xhr, status, error) {
+                                    // Handle error jika diperlukan
+
+                                }
+                            });
+                            setTimeout(() => {
+                                location.reload();
+                            }, 1000);
+                            Swal.fire({
+                                title: "Deleted!",
+                                text: "Your file has been deleted.",
+                                icon: "success"
+                            }).then((result) => {});
+                        }
+                    });
+                }
+                if (!$('.checksAll').is(':checked')) {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Oops...',
+                        text: 'Pilih Minimal 1!',
+                    })
+                }
+
+            });
+        });
+    </script>
 @endpush

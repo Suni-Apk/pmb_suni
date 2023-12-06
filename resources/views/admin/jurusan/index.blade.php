@@ -16,7 +16,7 @@
                             <button class="btn btn-success ms-2 d-flex align-items-center">
                                 <i class='bx bxs-file-export me-1'></i> Export
                             </button>
-                        </form>     
+                        </form>
                         <a href="{{ route('admin.jurusan.create') }}" class="btn bg-gradient-primary float-end">Tambah + </a>
                     </div>
                 </div>
@@ -25,6 +25,7 @@
                         <table class="table align-items-center mb-0" id="table">
                             <thead>
                                 <tr>
+                                    <th class="text-uppercase text-start text-secondary text-xxs font-weight-bolder opacity-7">Pilih</th>
                                     <th class="text-uppercase text-start text-secondary text-xxs font-weight-bolder opacity-7">Nama</th>
                                     <th class="text-uppercase text-start text-secondary text-xxs font-weight-bolder opacity-7">Kode</th>
                                     <th class="text-uppercase text-center text-secondary text-xxs font-weight-bolder opacity-7">Aksi</th>
@@ -33,6 +34,9 @@
                             <tbody>
                                 @foreach ($jurusan as $index => $jurusans)
                                     <tr>
+                                        <td>
+                                            <input type="checkbox" name="ids" id="" class="checksAll" value="{{ $jurusans->id }}">
+                                        </td>
                                         <td class="text-sm">
                                             <span class="text-bold">{{ $jurusans->name }}</span>
                                         </td>
@@ -55,11 +59,12 @@
                                                 Edit
                                             </a>
 
-                                            <form action="{{ route('admin.jurusan.destroy', $jurusans->id) }}" class="d-inline"
-                                                method="POST">
+                                            <form action="{{ route('admin.jurusan.destroy', $jurusans->id) }}"
+                                                class="d-inline" method="POST">
                                                 @csrf
                                                 @method('DELETE')
-                                                <button type="submit" class="badge badge-sm border-0 bg-gradient-danger font-weight-bold text-xxs">
+                                                <button type="submit"
+                                                    class="badge badge-sm border-0 bg-gradient-danger font-weight-bold text-xxs">
                                                     <strong>Hapus</strong>
                                                 </button>
                                             </form>
@@ -162,6 +167,14 @@
                             </tbody>
                         </table>
                     </div>
+                    <div class="d-flex ms-4 mb-4 mt-3">
+                        <input type="checkbox" id="select_all_ids" class="chek me-2">
+                        <a href="#" id="ClikKabeh" class="text-secondary">Pilih Semua</a>
+                        <div class=" ms-4">
+                            <i class="fas fa-trash me-1 cursor-pointer" style="color: #ff0000;" id="deleteAll"></i>
+                            <a href="#" class="text-secondary" id="All">Hapus</a>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -187,22 +200,22 @@
     <script>
         @if (Session::has('success'))
             toastr.options = {
-                    "closeButton": true,
-                    "debug": false,
-                    "newestOnTop": false,
-                    "progressBar": false,
-                    "positionClass": "toast-top-right",
-                    "preventDuplicates": false,
-                    "onclick": null,
-                    "showDuration": "300",
-                    "hideDuration": "1000",
-                    "timeOut": "5000",
-                    "extendedTimeOut": "1000",
-                    "showEasing": "swing",
-                    "hideEasing": "linear",
-                    "showMethod": "fadeIn",
-                    "hideMethod": "fadeOut"
-                }
+                "closeButton": true,
+                "debug": false,
+                "newestOnTop": false,
+                "progressBar": false,
+                "positionClass": "toast-top-right",
+                "preventDuplicates": false,
+                "onclick": null,
+                "showDuration": "300",
+                "hideDuration": "1000",
+                "timeOut": "5000",
+                "extendedTimeOut": "1000",
+                "showEasing": "swing",
+                "hideEasing": "linear",
+                "showMethod": "fadeIn",
+                "hideMethod": "fadeOut"
+            }
             toastr.success("{{ Session::get('success') }}")
         @endif
         @if (Session::has('delete'))
@@ -250,6 +263,80 @@
                         'success'
                     )
                 }
+            });
+        });
+    </script>
+    <script>
+        $(function(e) {
+            $("#ClikKabeh").click(function() {
+                $('.checksAll, #select_all_ids').prop('checked', function() {
+                    return !$(this).prop("checked");
+                });
+            });
+            $("#select_all_ids").click(function() {
+                $('.checksAll').prop('checked', $(this).prop('checked'));
+            });
+            $("#All").click(function() {
+                $('#deleteAll').click();
+            });
+
+            $("#deleteAll").click(function(e) {
+                e.preventDefault();
+                var all_ids = [];
+
+                $('input:checkbox[name="ids"]:checked').each(function() {
+                    all_ids.push($(this).val());
+                });
+                if ($('.checksAll').is(':checked')) {
+                    Swal.fire({
+                        title: "Apakah Anda Yakin Ingin Menghapus Tagihan?",
+                        text: "You won't be able to revert this!",
+                        icon: "warning",
+                        showCancelButton: true,
+                        confirmButtonColor: "#3085d6",
+                        cancelButtonColor: "#d33",
+                        confirmButtonText: "Yes, delete it!"
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            $.ajax({
+                                url: "{{ route('admin.jurusan.delete.all') }}",
+                                type: "DELETE",
+                                data: {
+                                    ids: all_ids
+                                },
+                                headers: {
+                                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr(
+                                        'content')
+                                },
+                                success: function(response) {
+                                    // Handle response jika diperlukan
+                                    // Misalnya, menampilkan pesan sukses
+                                    // Lakukan reload halaman setelah permintaan AJAX selesai
+                                },
+                                error: function(xhr, status, error) {
+                                    // Handle error jika diperlukan
+
+                                }
+                            });
+                            setTimeout(() => {
+                                location.reload();
+                            }, 1000);
+                            Swal.fire({
+                                title: "Deleted!",
+                                text: "Your file has been deleted.",
+                                icon: "success"
+                            }).then((result) => {});
+                        }
+                    });
+                }
+                if (!$('.checksAll').is(':checked')) {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Oops...',
+                        text: 'Pilih Minimal 1!',
+                    })
+                }
+
             });
         });
     </script>

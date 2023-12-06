@@ -95,7 +95,6 @@
                                             @elseif ($biayas->jurusans?->name == null)
                                                 Semua Jurusan
                                             @endif
-
                                         </td>
                                         <td class="align-middle  text-secondary text-xs font-weight-bold">
                                             <strong>{{ $biayas->program_belajar }}</strong>
@@ -105,7 +104,6 @@
                                         </td>
                                         <td class="align-middle  text-secondary text-xs font-weight-bold">
                                             <strong>{{ $biayas->jenis_biaya }}</strong>
-
                                         </td>
                                         <td class="align-middle text-center">
                                             <a href="{{ route('admin.tagihan.show', $biayas->id) }}"
@@ -255,15 +253,14 @@
 
                                 }
                             });
+                            setTimeout(() => {
+                                location.reload();
+                            }, 1000);
                             Swal.fire({
                                 title: "Deleted!",
                                 text: "Your file has been deleted.",
                                 icon: "success"
-                            }).then((result) => {
-                                if (result.isConfirmed) {
-                                    location.reload();
-                                }
-                            });
+                            }).then((result) => {});
                         }
                     });
                 }

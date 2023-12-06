@@ -108,6 +108,12 @@ Route::prefix('/admin')->middleware(['admin', 'auth'])->name('admin.')->group(fu
         Route::put('/change-status/{id}', [AccountController::class, 'admin_status'])->name('status');
         Route::delete('/delete/{id}', [AccountController::class, 'admin_delete'])->name('delete');
         Route::get('/exportAdmin', [AccountController::class, 'export'])->name('exportAdmin');
+        Route::delete('/deleteAllAdmin', [AccountController::class, 'deleteAllAdmin'])->name('delete.all');
+    });
+    
+    // data pendaftar
+    Route::prefix('pendaftar/account')->name('pendaftar.')->group(function () {
+        Route::get('/', [AccountController::class, 'pendaftar'])->name('index');
     });
     
     // data pendaftar
@@ -141,6 +147,7 @@ Route::prefix('/admin')->middleware(['admin', 'auth'])->name('admin.')->group(fu
     Route::prefix('link')->name('link.')->group(function () {
         Route::get('/whatsapp', [LinkController::class, 'whatsapp'])->name('whatsapp');
         Route::get('/zoom', [LinkController::class, 'zoom'])->name('zoom');
+        Route::delete('/deleteAllLink', [LinkController::class, 'deleteAll'])->name('delete.all');
         Route::get('/create', [LinkController::class, 'create'])->name('create');
         Route::post('/create/process', [LinkController::class, 'store'])->name('create.process');
         Route::get('/{type}/edit/{id}', [LinkController::class, 'edit'])->name('edit');
@@ -157,6 +164,7 @@ Route::prefix('/admin')->middleware(['admin', 'auth'])->name('admin.')->group(fu
         Route::get('/detail/{id}', [TahunAjaranController::class, 'show'])->name('detail');
         Route::post('/active/{id}', [TahunAjaranController::class, 'active'])->name('active');
         Route::delete('/delete/{id}', [TahunAjaranController::class, 'destroy'])->name('destroy');
+        Route::delete('/deleteAll-tahunAjaran', [TahunAjaranController::class, 'deleteAll'])->name('delete.all');
     });
     
     // proses transaksi
@@ -172,6 +180,7 @@ Route::prefix('/admin')->middleware(['admin', 'auth'])->name('admin.')->group(fu
     
     // resources management
     Route::resource('/matkul', ControllersMatkulController::class);
+    Route::delete('/matkulDeleteAll', [ControllersMatkulController::class, 'deleteAll'])->name('matkul.delete.all');
     Route::resource('/mapel', MapelsController::class);
     Route::prefix('mapel')->name('mapel.')->group( function() {
         Route::get('/', [MapelsController::class, 'index'])->name('index');
@@ -184,7 +193,9 @@ Route::prefix('/admin')->middleware(['admin', 'auth'])->name('admin.')->group(fu
         Route::post('/active/{id}', [MapelsController::class, 'active'])->name('active');
         Route::delete('delete/{id}', [MapelsController::class, 'destroy'])->name('destroy');
     });
+    Route::delete('/mapelDeleteAll', [MapelsController::class, 'deleteAll'])->name('mapel.delete.all');
     Route::resource('/jurusan', JurusanController::class);
+    Route::delete('/DeleteJurusan', [JurusanController::class, 'deleteAll'])->name('jurusan.delete.all');
     Route::get('/exportJurusan', [JurusanController::class, 'exportJurusan'])->name('exportJurusan');
     Route::resource('/transaksi', TransactionController::class);
     Route::post('/invoice/{id}',[TransactionController::class,'invoice'])->name('invoice.download');

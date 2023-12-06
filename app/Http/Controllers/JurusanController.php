@@ -124,4 +124,11 @@ class JurusanController extends Controller
     {
         return Excel::download(new JurusanExport($request), 'dataJurusan.xlsx');
     }
+    public function deleteAll(Request $request)
+    {
+        $ids = $request->ids;
+        $jurusan = Jurusan::whereIn('id', $ids);
+        $jurusan->delete();
+        return redirect()->route('admin.jurusan.index');
+    }
 }
