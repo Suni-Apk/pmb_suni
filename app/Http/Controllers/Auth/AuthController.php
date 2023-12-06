@@ -64,6 +64,7 @@ class AuthController extends Controller
             'email' => 'required|email|unique:users,email',
             'gender' => 'required|string',
             'password' => 'required|confirmed|min:8',
+            'program_belajar' => 'required|string'
         ], $messages);
         $data['phone'] = $request->phone;
         $data['role'] = 'Mahasiswa';
@@ -84,51 +85,6 @@ class AuthController extends Controller
         }
     }
 
-    /*public function register_process(Request $request)
-    {
-        $phone = $request->phone;
-        if (Str::startsWith($phone, '0')) {
-            $phone = '62' . substr($phone, 1);
-        }
-        $existingUser = User::where('phone', $phone)->first();
-        if ($existingUser) {
-            return redirect()->back()->withErrors(['phone' => 'Nomor Sudah Terpakai']);
-        }
-        $messages = [
-            'name.required' => 'Nama Lengkap Wajib Diisi',
-            'name.min:3' => 'Masukkan Minimal 3 Huruf',
-            'name.max:255' => 'Batas hanya 255 karakter',
-            'phone.required' => 'Nomor Whatsapp Wajib Diisi',
-            'phone.min' => 'Nomor Whatsapp Minimal 12 Angka',
-            'phone.max' => 'Nomor Whatsapp Maksimal 13 Angka',
-            'gender.required' => 'Gender Wajib Diisi',
-            'password.required' => 'Password Wajib Diisi',
-            'password.confirmed' => 'Password Harus Sama',
-            'password.min:8' => 'Password Wajib 8 Angka / Huruf'
-        ];
-        $data = $request->validate([
-            'name' => 'required|min:3|max:255|string',
-            'phone' => 'required|min:11|max:13|unique:users,phone',
-            'email' => 'required|email|unique:users,email',
-            'gender' => 'required|string',
-            'password' => 'required|confirmed|min:8',
-        ], $messages);
-        $data['phone'] = $phone;
-        $data['role'] = 'Mahasiswa';
-        $data['token'] = rand(111111, 999999);
-
-        $angkatan = TahunAjaran::latest()->where('status', 'Active')->first();
-
-        $data['angkatan_id'] = $angkatan;
-        
-        $user = User::create($data);
-        $notif = Notify::where('id', 1)->first();
-        $messages =  $notif->notif_otp . ' ' . $user->token;
-
-        $this->send_message($user->phone, $messages);
-
-        return redirect()->route('verify');
-    }*/
 
     public function login()
     {
@@ -224,12 +180,13 @@ class AuthController extends Controller
             $course = Course::where('keyword', $program)->first();
             auth()->login($user);
 
+            // dd($course);
             $biayaAdministrasiS1 = Administrasi::where('program_belajar', 'S1')->value('amount');
             $biodataS1 = Biodata::where('user_id', $user->id)->where('program_belajar', 'S1')->first();
             $transaksiS1 = Transaksi::where('user_id', $user->id)->where('program_belajar', 'S1')->where('jenis_tagihan', 'Administrasi')->first();
             
             $biodataKursus = Biodata::where('user_id', $user->id)->where('program_belajar', 'KURSUS')->first();
-            $biayaAdministrasiKursus = Administrasi::where('program_belajar', 'Kursus')->value('amount');
+            $biayaAdministrasiKursus = Administrasi::where('program_belajar', 'KURSUS')->value('amount');
             $transaksiKursus = Transaksi::where('user_id', $user->id)->where('program_belajar', 'KURSUS')->where('jenis_tagihan', 'Administrasi')->first();
             $adminstrasiKursus = Administrasi::where('program_belajar', 'KURSUS')->where('course_id', $course->id)->first();
             $adminstrasiS1 = Administrasi::where('program_belajar', 'S1')->first();
@@ -237,7 +194,6 @@ class AuthController extends Controller
                 if (!$transaksiS1) {
                     $id = $user->id;
                     $payment = json_decode(json_encode($this->redirect_payment($id,$program,$adminstrasiS1,$adminstrasiKursus)), true);
-                    // dd($payment);
                     $transaksi = Transaksi::create([
                         'user_id' => $user->id,
                         'no_invoice' => $payment['Data']['SessionID'],

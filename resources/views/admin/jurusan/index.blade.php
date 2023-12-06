@@ -126,7 +126,7 @@
                                                                     </div>
                                                                 </div>
                                                                 <div class="row">
-                                                                    <div class="form-group col-6">
+                                                                    {{-- <div class="form-group col-6">
                                                                         <label for="id_tahun_ajarans">Tahun Ajaran</label>
                                                                         <small class="text-danger" style="font-size: 12px">*</small>
                                                                         <select name="id_tahun_ajarans" id="id_tahun_ajarans" class="form-select" required>
@@ -135,7 +135,7 @@
                                                                                 <option value="{{ $item->id }}" @selected(old('id_tahun_ajarans'))>{{ $item->year }}</option>
                                                                             @endforeach
                                                                         </select>
-                                                                    </div>
+                                                                    </div> --}}
                                                                     <div class="form-group col-6">
                                                                         <label for="id_jurusans">Jurusan</label>
                                                                         <small class="text-danger" style="font-size: 12px">*</small>

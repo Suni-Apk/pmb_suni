@@ -46,9 +46,9 @@ class DashboardController extends Controller
             $linkKursus = Link::where('id_courses', $kursusBiodata->course->id)
             ->where('gender', $mahasiswa->gender)
             ->get();
+            $kursus = Course::where('id', '!=', $kursusBiodata->course->id)->get();
         }
         
-        $kursus = Course::where('id', '!=', $kursusBiodata->course->id)->get();
         // dd($kursus);
 
         $linkKursus =  Link::where('id_courses', $kursusBiodata->id)->where('gender', $mahasiswa->gender)->get();   
@@ -56,7 +56,5 @@ class DashboardController extends Controller
             (!$kursusBiodata) ? ['linkKursus','kursus'] : ['linkKursus', 'kursus'],
             'mahasiswa'
         ));
-        // return view('kursus.index',compact('hijriDateday', 'hijriDatedayArabic','hijriDatemonth','hijriDateyear','biodata', 'kursus', 'banner', 'kursusBiodata', 'linkKursus', 'mahasiswa'));
-        // return view('kursus.index',compact('hijriDateday', 'hijriDatedayArabic','hijriDatemonth','hijriDateyear','biodata',  'banner',  'mahasiswa'));
     }
 }
