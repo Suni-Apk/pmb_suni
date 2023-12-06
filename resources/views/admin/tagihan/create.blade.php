@@ -234,14 +234,6 @@
                                 </div>
                             @enderror
                         </div>
-                        <div class="form-group d-none" id="jurusans">
-                            <label for="jurusans">Jurusan</label>
-                            <select name="id_jurusans" id="id_jurusans"
-                                class="form-select @error('id_jurusans')
-                                is-invalid
-                            @enderror">
-                            </select>
-                        </div>
                     </ul>
 
                     <div class="form-group">
@@ -401,48 +393,6 @@
     <script>
         $('.rupiah').mask("#.##0", {
             reverse: true
-        });
-    </script>
-    <script>
-        const angkatanSelect = document.getElementById('id_angkatans');
-        const jurusanSelect = document.getElementById('id_jurusans');
-
-        const jurusanGrouped = @json($jurusanGrouped);
-        const jurusans = @json($jurusans);
-        angkatanSelect.addEventListener('change', () => {
-            const angkatanId = angkatanSelect.value;
-            const jurusanOptions = jurusanGrouped[angkatanId] || [];
-
-            if (jurusanGrouped[angkatanId]) {
-                jurusanSelect.innerHTML = '<option value="">Pilih Jurusan</option>';
-            } else {
-                jurusanSelect.innerHTML =
-                    '<option value="">Data Jurusan Kosong : Silahkan buat data jurusan terlebih dahulu !</option>';
-            }
-
-            jurusanOptions.forEach(jurusan => {
-                const option = document.createElement('option');
-                option.value = jurusan.id;
-                option.textContent = jurusan.name;
-                jurusanSelect.appendChild(option);
-            });
-        });
-        angkatanSelect.dispatchEvent(new Event('change'));
-        const angkatanId = angkatanSelect.value;
-        const jurusanOptions = jurusanGrouped[angkatanId] || [];
-
-        if (jurusanGrouped[angkatanId]) {
-            jurusanSelect.innerHTML = '<option value="">Pilih Jurusan</option>';
-        } else {
-            jurusanSelect.innerHTML =
-                '<option value="">Data Jurusan Kosong : Pilih tahun ajaran terlebih dahulu !</option>';
-        }
-
-        jurusanOptions.forEach(jurusan => {
-            const option = document.createElement('option');
-            option.value = jurusan.id;
-            option.textContent = jurusan.name;
-            jurusanSelect.appendChild(option);
         });
     </script>
     <script type="text/javascript">

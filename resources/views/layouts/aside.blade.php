@@ -537,8 +537,7 @@
                     </li>
                 @else
                 @php
-                    $biaya = App\Models\Biaya::where('program_belajar','S1')->where('jenis_biaya','DaftarUlang')->latest()->first();
-      
+                    // $biaya = App\Models\Biaya::where('program_belajar','S1')->where('jenis_biaya','DaftarUlang')->latest()->first();
                     $user = Auth::user();
                     // dd($user);
                     $tagihan = App\Models\TagihanDetail::where('id_biayas',$biaya->id)->where('id_users',$user->id)->latest()->first();
