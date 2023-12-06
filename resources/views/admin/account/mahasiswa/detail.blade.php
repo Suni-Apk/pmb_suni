@@ -903,6 +903,7 @@
                                             <th class="text-sm">Nama Tagihan</th>
                                             <th class="text-sm">Tanggal Tagihan</th>
                                             <th class="text-sm">Status</th>
+                                            <th class="text-sm">Jenis kursus</th>
                                             <th class="text-sm">Total tagihan</th>
                                             <th class="text-sm d-flex align-items-center"><input
                                                     type="checkbox" name="" id="select_all_ids3"
@@ -932,6 +933,9 @@
                                                             <td class="text-sm">
                                                                 <span
                                                                     class="badge badge-sm {{ $tagihans->status == 'LUNAS' ? 'bg-gradient-success' : 'bg-gradient-danger' }}">{{ $tagihans->status }}</span>
+                                                            </td>
+                                                            <td class="text-sm">
+                                                                {{ $biayas->kursus->name }}
                                                             </td>
                                                             <td class="text-sm">Rp
                                                                 {{ number_format($tagihans->amount, 0, '', '.') }}
