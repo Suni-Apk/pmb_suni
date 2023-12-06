@@ -73,11 +73,16 @@
                             </div>
 
                             <div class="form-group">
-                                <label for="" class="mb-3">Program Belajar (Untuk Administrasi) <strong class="text-danger">*</strong></label>
+                                <label for="" class="mb-3">Program Belajar<strong class="text-danger">*</strong></label>
                                 <select class="form-select" name="program">
                                     <option selected disabled>Pilih Program Belajar</option>
                                     <option value="S1">S1</option>
-                                    <option value="KURSUS">KURSUS</option>
+                                    @php
+                                        $course = App\Models\Course::get();
+                                    @endphp
+                                    @foreach ($course as $item)
+                                        <option value="{{ $item->keyword }}">{{ $item->name }}</option>
+                                    @endforeach
                                   </select>
                             </div>
 

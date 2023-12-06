@@ -18,24 +18,12 @@
                         <table class="table align-items-center mb-0" id="table">
                             <thead>
                                 <tr>
-                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Pilih
-                                    </th>
-                                    <th
-                                        class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 text-center">
-                                        No</th>
-                                    <th class="text-uppercase text-secondary text-xxs px-2 font-weight-bolder opacity-7">
-                                        Nama Link</th>
-                                    <th class="text-uppercase text-secondary text-xxs px-2 font-weight-bolder opacity-7">Url
-                                    </th>
-                                    <th
-                                        class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2 text-center">
-                                        Tahun Ajaran /Jurusan</th>
-                                    <th
-                                        class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2 text-center">
-                                        Gender</th>
-                                    <th
-                                        class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                        Aksi</th>
+                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Pilih</th>
+                                    <th class="text-uppercase text-secondary text-xxs px-2 font-weight-bolder opacity-7">Nama Link</th>
+                                    <th class="text-uppercase text-secondary text-xxs px-2 font-weight-bolder opacity-7">Url</th>
+                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2 text-center">Tahun Ajaran /Jurusan</th>
+                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2 text-center">Gender</th>
+                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Aksi</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -44,9 +32,6 @@
                                         <td class="align-middle text-sm">
                                             <input type="checkbox" name="ids" id="" class="checksAll"
                                                 value="{{ $links->id }}">
-                                        </td>
-                                        <td class="align-middle text-center text-sm">
-                                            <span class="text-bold">{{ $index + 1 }}</span>
                                         </td>
                                         <td class="text-sm">
                                             <span class="text-bold">{{ $links->name }}</span>

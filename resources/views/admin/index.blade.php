@@ -467,7 +467,7 @@
 					<span class="d-block mt-2" style="font-size: 13px;">Link</span>
 				</div>
 				<div class="col-3 col-md-2 text-center">
-					<a href="" class="icon icon-shape p-0 bg-orange shadow text-center border-radius-md cursor-pointer"
+					<a href="{{ route('admin.laporan.index') }}" class="icon icon-shape p-0 bg-orange shadow text-center border-radius-md cursor-pointer"
 						data-bs-toggle="tooltip" data-bs-placement="top" title="Laporan">
 						<i class="fas fa-flag text-lg opacity-10" aria-hidden="true"></i>
 					</a>

@@ -78,49 +78,32 @@
                                 @foreach ($biaya as $key => $biayas)
                                     <tr>
                                         <td>
-                                            <div>
-                                                <input type="checkbox" name="ids" id="" class="checksAll"
-                                                    value="{{ $biayas->id }}">
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div>
-                                                <h6 class="mb-0 text-sm">{{ $key + 1 }}</h6>
-                                            </div>
+                                            <input type="checkbox" name="ids" id="" class="checksAll" value="{{ $biayas->id }}">
                                         </td>
                                         <td class="align-middle  text-secondary text-xs font-weight-bold">
-                                            <div>
-                                                <strong>{{ $biayas->nama_biaya }}</strong>
-                                            </div>
+                                            <strong>{{ $biayas->nama_biaya }}</strong>
                                         </td>
                                         <td class="align-middle  text-secondary text-xs font-weight-bold">
-                                            <div>
-                                                {{ $biayas->tahunAjaran->year }}
-                                            </div>
+                                            {{ $biayas->tahunAjaran->year }}
                                         </td>
 
                                         <td class="align-middle  text-secondary text-xs font-weight-bold">
-                                            <div>
-                                                @if ($biayas->jurusans?->name != null && $biayas->program_belajar == 'S1')
-                                                    {{ $biayas->jurusans->name }}
-                                                @elseif ($biayas->jurusans?->name == null && $biayas->program_belajar == 'KURSUS')
-                                                    {{ $biayas->kursus->name }}
-                                                @elseif ($biayas->jurusans?->name == null)
-                                                    Semua Jurusan
-                                                @endif
-                                            </div>
+                                            @if ($biayas->jurusans?->name != null && $biayas->program_belajar == 'S1')
+                                                {{ $biayas->jurusans->name }}
+                                            @elseif ($biayas->jurusans?->name == null && $biayas->program_belajar == 'KURSUS')
+                                                {{ $biayas->kursus->name }}
+                                            @elseif ($biayas->jurusans?->name == null)
+                                                Semua Jurusan
+                                            @endif
                                         </td>
                                         <td class="align-middle  text-secondary text-xs font-weight-bold">
-                                            <div>
-                                                <strong>{{ $biayas->program_belajar }}</strong>
-                                            </div>
+                                            <strong>{{ $biayas->program_belajar }}</strong>
                                         </td>
                                         <td class="align-middle  text-secondary text-xs font-weight-bold">
                                             {{ \Carbon\Carbon::parse($biayas->created_at)->format('d/m/Y H:i:s') }}
                                         </td>
                                         <td class="align-middle  text-secondary text-xs font-weight-bold">
                                             <strong>{{ $biayas->jenis_biaya }}</strong>
-
                                         </td>
                                         <td class="align-middle text-center">
                                             <a href="{{ route('admin.tagihan.show', $biayas->id) }}"

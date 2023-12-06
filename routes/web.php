@@ -115,6 +115,11 @@ Route::prefix('/admin')->middleware(['admin', 'auth'])->name('admin.')->group(fu
     Route::prefix('pendaftar/account')->name('pendaftar.')->group(function () {
         Route::get('/', [AccountController::class, 'pendaftar'])->name('index');
     });
+    
+    // data pendaftar
+    Route::prefix('pendaftar/account')->name('pendaftar.')->group(function () {
+        Route::get('/', [AccountController::class, 'pendaftar'])->name('index');
+    });
 
     // data mahasiswa
     Route::prefix('mahasiswa/account')->name('mahasiswa.')->group(function () {

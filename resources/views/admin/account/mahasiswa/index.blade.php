@@ -209,7 +209,7 @@
                 if ($('.checksAll').is(':checked')) {
                     Swal.fire({
                         title: "Apakah Anda Yakin Ingin Menghapus data mahasiswa?",
-                        text: "You won't be able to revert this!",
+                        text: "Kamu tidak bisa mengembalikan perubahan ini!",
                         icon: "warning",
                         showCancelButton: true,
                         confirmButtonColor: "#3085d6",

@@ -15,7 +15,7 @@
                         <table class="table align-items-center mb-0" id="table">
                             <thead>
                                 <tr>
-                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 text-center">No</th>
+                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Pilih</th>
                                     <th class="text-uppercase text-secondary text-xxs px-2 font-weight-bolder opacity-7 text-center">Nama Mata Pelajaran</th>
                                     <th class="text-uppercase text-secondary text-xxs px-2 font-weight-bolder opacity-7 text-center">Nama Kursus</th>
                                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2 text-center">Mulai - Selesai</th>
@@ -28,11 +28,7 @@
                                 @foreach ($mapel as $index => $mapels)
                                     <tr>
                                         <td class="align-middle text-sm">
-                                            <input type="checkbox" name="ids" id="" class="checksAll"
-                                                value="{{ $mapels->id }}">
-                                        </td>
-                                        <td class="align-middle text-center text-sm">
-                                            <span class="text-bold">{{ $index + 1 }}</span>
+                                            <input type="checkbox" name="ids" id="" class="checksAll" value="{{ $mapels->id }}">
                                         </td>
                                         <td class="align-middle text-center text-sm">
                                             <span class="text-bold">{{ $mapels->name }}</span>
@@ -41,8 +37,7 @@
                                             <span class="text-bold">{{ $mapels->kursus->name }}</span>
                                         </td>
                                         <td class="align text-center">
-                                            <span class="text-secondary text-xs font-weight-bold"><strong>{{ $mapels->mulai }}
-                                                    WIB</strong> - <strong>{{ $mapels->selesai }} WIB</strong> </span>
+                                            <span class="text-secondary text-xs font-weight-bold"><strong>{{ $mapels->mulai }} WIB</strong> - <strong>{{ $mapels->selesai }} WIB</strong> </span>
                                         </td>
                                         <td class="align-middle text-center">
                                             @if ($mapels->status == 'nonActive')

@@ -82,50 +82,48 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($transaction as $index => $transactions)
-                                    <tr>
-                                        <td><input type="checkbox" name="ids" id="" class="checksAll"
-                                                value="{{ $transactions->id }}"></td>
-                                        <td class="align-middle text-xs font-weight-bold">
-                                            {{ $index + 1 }}
-                                        </td>
-                                        <td class="align-middle text-secondary text-xs font-weight-bold">
-                                            {{ $transactions->jenis_tagihan }}
-                                        </td>
-                                        <td class="align-middle text-secondary text-xs font-weight-bold">
-                                            {{ \Carbon\Carbon::parse($transactions->created_at)->isoFormat('D MMMM YYYY') }}
-                                        </td>
-                                        <td class="align-middle  text-secondary text-xs font-weight-bold">
-                                            {{ $transactions->user->name ?? 'User Sudah tidak ada' }}
-                                        </td>
-                                        <td class="align-middle text-secondary text-xs font-weight-bold">
-                                            Rp. {{ number_format($transactions->total) }},-
-                                        </td>
-                                        <td class="align-middle  text-secondary text-xs font-weight-bold">
-                                            {{ $transactions->program_belajar }}
-                                        </td>
-                                        <td class="align-middle  text-secondary font-weight-bold">
-                                            @if (strtolower($transactions->status) === 'berhasil')
-                                                <span class="badge text-uppercase badge-sm bg-gradient-success">
-                                                    SUCCESS
-                                                </span>
-                                            @elseif ($transactions->status == 'pending')
-                                                @php
-                                                    $now = now();
-                                                    $paymentTime = \Carbon\Carbon::parse($transactions->created_at); // Gantilah 'payment_time' dengan kolom waktu pembayaran yang sesuai
-                                                    $expirationTime = $paymentTime->addHours(24);
-
-                                                    if ($now->greaterThan($expirationTime)) {
-                                                        $status = 'EXPIRED';
-                                                        $badgeClass = 'bg-gradient-danger';
-                                                    } else {
-                                                        $status = 'PENDING';
-                                                        $badgeClass = 'bg-gradient-warning';
-                                                    }
-                                                @endphp
-                                                <span class="badge text-uppercase badge-sm {{ $badgeClass }}">
-                                                    {{ $status }}
-                                                </span>
+                                @foreach ($transactions as $item)
+                                 
+                                <tr>
+                                    <td>
+                                        <input type="checkbox" name="ids" id="" class="checksAll" value="{{ $item->id }}">
+                                    </td>
+                                    <td class="align-middle text-secondary text-xs font-weight-bold">
+                                        @if ($item->tagihanDetails)
+                                            {{$item->tagihanDetails->biayasDetail->nama_biaya}}
+                                        @else
+                                            {{ $item->jenis_tagihan }}
+                                        @endif
+                                    </td>
+                                    <td class="align-middle  text-secondary text-xs font-weight-bold">
+                                        <h6 class="mb-0 text-xs">{{ $item->created_at->format('d F Y') }}</h6>
+                                        <p class="mb-0 text-xs">{{ $item->created_at->format('H:i:s') }}</p>
+                                    </td>
+                                    <td class="align-middle  text-secondary text-xs font-weight-bold">
+                                        {{ $item->user?->name }}
+                                        <span class="d-block fw-light text-truncate" style="max-width: 130px;">
+                                            {{ $item->no_invoice }}
+                                        </span>
+                                    </td>
+                                    <td class="align-middle text-secondary text-xs font-weight-bold">
+                                        Rp. {{ number_format($item->total,0,'','.') }},-
+                                    </td>
+                                    <td class="align-middle  text-secondary text-xs font-weight-bold">
+                                        {{ $item->program_belajar }}
+                                    </td>
+                                    <td class="align-middle  text-secondary font-weight-bold">
+                                        @if (strtolower($item->status) == 'berhasil')
+                                        <span class="badge text-uppercase badge-sm rounded-pill bg-gradient-success">{{ $item->status }}</span>
+                                        @elseif (strtolower($item->status) == 'pending')
+                                            @php
+                                                $now = now();
+                                                $created_at = \Carbon\Carbon::parse($item->created_at);
+                                                $expired = $created_at->addHours(24);
+                                            @endphp
+                                            @if ($now->greaterThan($expired))
+                                                <span class="badge text-uppercase badge-sm rounded-pill bg-gradient-danger">expired</span>
+                                            @else
+                                                <span class="badge text-uppercase badge-sm rounded-pill bg-gradient-warning">{{ $item->status }}</span>
                                             @endif
                                         @endif
                                     </td>
@@ -184,6 +182,14 @@
                                 @endforeach
                             </tbody>
                         </table>
+                    </div>
+                    <div class="d-flex ms-4 mb-4 mt-3">
+                        <input type="checkbox" id="select_all_ids" class="chek me-2">
+                        <a href="#ClikKabeh" id="ClikKabeh" class="text-secondary">Pilih Semua</a>
+                        <div class=" ms-4">
+                            <i class="fas fa-trash me-1 cursor-pointer" style="color: #ff0000;" id="deleteAll"></i>
+                            <a href="#" class="text-secondary" id="All">Hapus</a>
+                        </div>
                     </div>
                 </div>
             </div>

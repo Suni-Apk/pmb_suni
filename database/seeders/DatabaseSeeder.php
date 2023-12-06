@@ -18,23 +18,38 @@ class DatabaseSeeder extends Seeder
         \App\Models\User::factory()->create([
             'name' => 'Admin',
             'email' => 'admin@example.com',
-            'password' => '12345678',
+            'password' => bcrypt('12345678'),
             'token' => rand(11111, 9999),
             'active' => 1,
-            'phone' => '082346739790',
+            // 'phone' => '082346739790',
+            'phone' => '012345678901',
             'gender' => 'Laki-Laki',
             'role' => 'Admin',
             'status' => 'on'
         ]);
 
         \App\Models\User::factory()->create([
-            'name' => 'Mahasiswa',
+            'name' => 'Asep Kastelo',
             'email' => 'mahasiswa@example.com',
-            'password' => 'password',
+            'password' => bcrypt('12345678'),
             'token' => rand(11111, 9999),
             'active' => 1,
-            'phone' => '089608494411',
+            // 'phone' => '089608494411',
+            'phone' => '012345678902',
             'gender' => 'Laki-Laki',
+            'role' => 'Mahasiswa',
+            'status' => 'on',
+        ]);
+
+        \App\Models\User::factory()->create([
+            'name' => 'Anisa Rostiana',
+            'email' => 'peserta@example.com',
+            'password' => bcrypt('12345678'),
+            'token' => rand(11111, 9999),
+            'active' => 1,
+            // 'phone' => '089608494411',
+            'phone' => '012345678903',
+            'gender' => 'Perempuan',
             'role' => 'Mahasiswa',
             'status' => 'on',
         ]);

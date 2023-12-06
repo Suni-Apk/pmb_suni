@@ -58,7 +58,7 @@
         </div>
     </div>
 
-    <div class="container py-5">
+    <div class="p-5">
         <div class="row flex-column justify-content-center align-items-start w-100">
             <div class="col-12" id="informasi">
                 <div class="list-group list-group-horizontal" id="list-tab" role="tablist">
@@ -92,10 +92,12 @@
                                         @else
                                             @if ($item->course)
                                                 @foreach ($item->course->notes as $note)
-                                                <li class="list-group-item text-sm lh-sm">
-                                                    {{ $note }}
-                                                    @endforeach
-                                                </li>
+                                                    @if ($note !== null)
+                                                        <li class="list-group-item text-sm lh-sm">
+                                                            {{ $note }}
+                                                        </li>
+                                                    @endif
+                                                @endforeach
                                                 <li class="list-group-item text-sm lh-sm">
                                                     Biaya Administrasi : Rp. {{ number_format($item->course->administrasi->amount,0,'','.') }},-
                                                 </li>

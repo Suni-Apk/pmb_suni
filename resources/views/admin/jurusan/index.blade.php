@@ -25,6 +25,7 @@
                         <table class="table align-items-center mb-0" id="table">
                             <thead>
                                 <tr>
+                                    <th class="text-uppercase text-start text-secondary text-xxs font-weight-bolder opacity-7">Pilih</th>
                                     <th class="text-uppercase text-start text-secondary text-xxs font-weight-bolder opacity-7">Nama</th>
                                     <th class="text-uppercase text-start text-secondary text-xxs font-weight-bolder opacity-7">Kode</th>
                                     <th class="text-uppercase text-center text-secondary text-xxs font-weight-bolder opacity-7">Aksi</th>
@@ -33,6 +34,9 @@
                             <tbody>
                                 @foreach ($jurusan as $index => $jurusans)
                                     <tr>
+                                        <td>
+                                            <input type="checkbox" name="ids" id="" class="checksAll" value="{{ $jurusans->id }}">
+                                        </td>
                                         <td class="text-sm">
                                             <span class="text-bold">{{ $jurusans->name }}</span>
                                         </td>

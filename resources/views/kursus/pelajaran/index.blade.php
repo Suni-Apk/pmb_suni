@@ -15,10 +15,18 @@
                     <div>
                         <h6>Mata Pelajaran</h6>
                     </div>
-                    <div class="flex-row d-flex">
-                        <a href="{{ route('kursus.downloadMapels', ['id_kursus' => $item->course->id]) }}" class="btn btn-secondary fs-6 p-2 px-3 ms-2">
+                    <div class="flex-row d-flex gap-2">
+                        <a href="" class="btn btn-secondary fs-6 p-2 px-3 ms-2">
                             <i class="fas fa-file-download"></i>
-                        </a>                        
+                        </a>
+                        @php
+                            $links = App\Models\Link::where('course_id', $item->course->id)->where('id_tahun_ajarans', $item->angkatan->id)->where('gender', 'all')->first();
+                        @endphp
+                        @if ($links)
+                            <a href="{{ $links->url }}" target="_blank" class="btn btn-primary fs-4 p-2 px-3">
+                                <i class="fab fa-whatsapp"></i>
+                            </a>
+                        @endif
                     </div>
                 </div>
                 <div class="card-body px-0 pt-0 pb-2">
