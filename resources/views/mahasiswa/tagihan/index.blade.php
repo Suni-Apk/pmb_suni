@@ -35,7 +35,7 @@
                     ->sum('harga'),
             );
             $setengah_jumlah_daftar_ulang = round(($tagihan->amount * 2) / 3);
-        }else {
+        } else {
             # code...
         }
     @endphp
