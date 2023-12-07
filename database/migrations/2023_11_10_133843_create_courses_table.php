@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
 
             $table->string('name');
-            $table->string('keyword')->unique()->nullable();
+            $table->string('keyword')->nullable();
             $table->json('notes')->nullable();
             
             $table->timestamps();

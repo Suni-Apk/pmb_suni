@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
+use App\Models\Jurusan;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -33,8 +34,7 @@ class DatabaseSeeder extends Seeder
             'email' => 'mahasiswa@example.com',
             'password' => bcrypt('12345678'),
             'token' => rand(11111, 9999),
-            'active' => 1,
-            // 'phone' => '089608494411',
+            'active' => 0,
             'phone' => '012345678902',
             'gender' => 'Laki-Laki',
             'role' => 'Mahasiswa',
@@ -46,8 +46,7 @@ class DatabaseSeeder extends Seeder
             'email' => 'peserta@example.com',
             'password' => bcrypt('12345678'),
             'token' => rand(11111, 9999),
-            'active' => 1,
-            // 'phone' => '089608494411',
+            'active' => 0,
             'phone' => '012345678903',
             'gender' => 'Perempuan',
             'role' => 'Mahasiswa',
@@ -59,6 +58,7 @@ class DatabaseSeeder extends Seeder
             CourseSeeder::class,
             NotifySeeder::class,
             GeneralSeeder::class,
+            JurusanSeeder::class,
             TahunAjaranSeeder::class,
             AdministrasiSeeder::class,
             DescProgramBelajarSeeder::class,

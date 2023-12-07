@@ -3,20 +3,11 @@
 @section('title', 'Profile')
 
 @section('content')
-
-@error('error')
-    {{ $message }}
-@enderror
+    @error('error')
+        {{ $message }}
+    @enderror
 
     @if ($jenis_tagihan == 'Routine')
-        <nav aria-label="breadcrumb">
-            <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
-                <li class="breadcrumb-item text-sm"><a class="opacity-5 text-dark" href="{{ route('dashboard') }}">Pages</a>
-                </li>
-                <li class="breadcrumb-item text-sm text-dark active" aria-current="page">Tagihan</li>
-            </ol>
-            <h6 class="font-weight-bolder mb-0">Buat Tagihan Spp</h6>
-        </nav>
         <div class="card h-100 mt-4">
             <div class="card-header">
                 <h6>Buat Tagihan</h6>
@@ -94,7 +85,6 @@
                             class="form-select @error('id_angkatans.*')
                         is-invalid
                     @enderror">
-
                             <option selected>-- Pilih Angkatan --</option>
                             @foreach ($onlyTahunAjaran as $key => $angkatanOnly)
                                 <option value="{{ $angkatanOnly->id }}">{{ $angkatanOnly->year }}</option>
@@ -114,15 +104,6 @@
         </div>
     @endif
     @if ($jenis_tagihan == 'Tidakroutine')
-        <nav aria-label="breadcrumb">
-            <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
-                <li class="breadcrumb-item text-sm"><a class="opacity-5 text-dark"
-                        href="{{ route('dashboard') }}">Pages</a>
-                </li>
-                <li class="breadcrumb-item text-sm text-dark active" aria-current="page">Tagihan</li>
-            </ol>
-            <h6 class="font-weight-bolder mb-0">Buat Tagihan Biaya Lain</h6>
-        </nav>
         <div class="card h-100 mt-4">
             <div class="card-header">
                 <h6>Buat Tagihan</h6>
@@ -237,11 +218,14 @@
                     </ul>
 
                     <div class="form-group">
-                        <button type="submit" class="btn btn-primary end-0"><i class="fas fa-plus">
-                            </i> Tambah</button>
-                        <a href="{{ route('admin.tagihan.index') }}" class="btn btn-warning"><i
-                                class="fas fa-backward"></i>
-                            Back</a>
+                        <button type="submit" class="btn btn-primary end-0">
+                            <i class="fas fa-plus me-1"></i>
+                            Tambah
+                        </button>
+                        <a href="{{ route('admin.tagihan.index') }}" class="btn btn-warning">
+                            <i class="fas fa-backward me-1"></i>
+                            Back
+                        </a>
                     </div>
                 </form>
             </div>
@@ -377,11 +361,14 @@
                     </div>
 
                     <div class="form-group">
-                        <button type="submit" class="btn btn-primary end-0"><i class="fas fa-plus">
-                            </i> Tambah</button>
-                        <a href="{{ route('admin.tagihan.index') }}" class="btn btn-warning"><i
-                                class="fas fa-backward"></i>
-                            Back</a>
+                        <button type="submit" class="btn btn-primary end-0">
+                            <i class="fas fa-plus"></i>
+                            Tambah
+                        </button>
+                        <a href="{{ route('admin.tagihan.index') }}" class="btn btn-warning">
+                            <i class="fas fa-backward"></i>
+                            Back
+                        </a>
                     </div>
                 </form>
             </div>
