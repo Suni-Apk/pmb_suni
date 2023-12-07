@@ -64,14 +64,25 @@
                         <table class="table align-items-center mb-0" id="templateTable">
                             <thead>
                                 <tr>
-                                    <th class="d-flex text-uppercase text-secondary text-xs font-weight-bolder opacity-8">Pilih</th>
-                                    <th class=" text-uppercase text-secondary text-xxs font-weight-bolder opacity-8">Nama Tagihan</th>
-                                    <th class="text-uppercase text-secondary text-xxs px-2 font-weight-bolder opacity-8">Tahun / Angkatan</th>
-                                    <th class=" text-uppercase text-secondary text-xxs font-weight-bolder opacity-8">Jurusan / Prodi</th>
-                                    <th class=" text-uppercase text-secondary text-xxs font-weight-bolder opacity-8">Program Belajar</th>
-                                    <th class=" text-uppercase text-secondary text-xxs font-weight-bolder opacity-8">Created at</th>
-                                    <th class=" text-uppercase text-secondary text-xxs font-weight-bolder opacity-8">Jenis tagihan</th>
-                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-8">Aksi</th>
+                                    <th class=" text-uppercase text-secondary text-xs font-weight-bolder opacity-8">
+                                        Pilih</th>
+                                    <th class=" text-uppercase text-secondary text-xxs font-weight-bolder opacity-8">
+                                        No</th>
+                                    <th class=" text-uppercase text-secondary text-xxs font-weight-bolder opacity-8">Nama
+                                        Tagihan</th>
+                                    <th class="text-uppercase text-secondary text-xxs px-2 font-weight-bolder opacity-8">
+                                        Tahun / Angkatan</th>
+                                    <th class=" text-uppercase text-secondary text-xxs font-weight-bolder opacity-8">Jurusan
+                                        / Prodi</th>
+                                    <th class=" text-uppercase text-secondary text-xxs font-weight-bolder opacity-8">Program
+                                        Belajar</th>
+                                    <th class=" text-uppercase text-secondary text-xxs font-weight-bolder opacity-8">Created
+                                        at</th>
+                                    <th class=" text-uppercase text-secondary text-xxs font-weight-bolder opacity-8">Jenis
+                                        tagihan</th>
+                                    <th
+                                        class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-8">
+                                        Aksi</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -175,6 +186,24 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css"
         integrity="sha512-3pIirOrwegjM6erE5gPSwkUzO+3cTjpnV9lexlNZqvupR64iZBnOOTiiLPb9M36zpMScbmUNIcHUqKD47M719g=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
+    @if (session('success'))
+        <script>
+            Swal.fire(
+                'Berhasil!',
+                "{{ session('success') }}", // Menggunakan session('success') untuk mengambil pesan
+                'success'
+            )
+        </script>
+    @endif
+    @if (session('error'))
+        <script>
+            Swal.fire(
+                'Gagal!',
+                "{{ session('error') }}", // Menggunakan session('success') untuk mengambil pesan
+                'error'
+            )
+        </script>
+    @endif
     <script>
         @if (Session::has('success'))
             toastr.options = {
@@ -270,14 +299,7 @@
 
                                 }
                             });
-                            setTimeout(() => {
-                                location.reload();
-                            }, 1000);
-                            Swal.fire({
-                                title: "Deleted!",
-                                text: "Your file has been deleted.",
-                                icon: "success"
-                            }).then((result) => {});
+                            location.reload();
                         }
                     });
                 }

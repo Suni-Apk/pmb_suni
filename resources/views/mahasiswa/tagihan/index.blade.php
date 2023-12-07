@@ -20,25 +20,25 @@
             ->first();
 
         $user = Auth::user();
-        $tagihan = App\Models\TagihanDetail::where('id_biayas', $biaya->id)
+        $tagihan = App\Models\TagihanDetail::where('id_biayas', $biaya?->id)
             ->where('id_users', $user->id)
             ->latest()
             ->first();
         if ($tagihan) {
-            $cicilans = App\Models\Cicilan::where('id_tagihan_details', $tagihan->id)->first();
-            $cicilan2 = App\Models\Cicilan::where('id_tagihan_details', $tagihan->id)
+            $cicilans = App\Models\Cicilan::where('id_tagihan_details', $tagihan?->id)->first();
+            $cicilan2 = App\Models\Cicilan::where('id_tagihan_details', $tagihan?->id)
                 ->where('status', 'LUNAS')
                 ->get();
             $total_pembayaran = round(
-                App\Models\Cicilan::where('id_tagihan_details', $tagihan->id)
+                App\Models\Cicilan::where('id_tagihan_details', $tagihan?->id)
                     ->where('status', 'belum')
                     ->sum('harga'),
             );
-            $setengah_jumlah_daftar_ulang = round(($tagihan->amount * 2) / 3);
+            $setengah_jumlah_daftar_ulang = round(($tagihan?->amount * 2) / 3);
         }
 
     @endphp
-    @if (!isset($cicilans) && !isset($transactionDaftar))
+    @if (!isset($cicilans) && !isset($transactionDaftar) && $tagihan)
         <div class="col-12 text-center mb-4">
             <div class="card">
                 <h3 class="mt-3">Tagihan</h3>
@@ -50,7 +50,7 @@
                             @csrf
                             @method('GET')
                             <div class="col-6 col-sm-4">
-                                <input type="hidden" name="id" value="{{ $tagihan->id }}">
+                                <input type="hidden" name="id" value="{{ $tagihan?->id }}">
                                 <button name="jenis_pembayaran" value="cash" type="submit"
                                     class="btn bg-gradient-primary sm:w-50">
                                     Cash
@@ -67,6 +67,8 @@
                 </div>
             </div>
         </div>
+    @elseif (!isset($tagihan))
+        Belum ada apa apa !
     @elseif($cicilans)
         @php
             $biaya = App\Models\Biaya::where('program_belajar', 'S1')
@@ -76,7 +78,7 @@
                 ->first();
 
             $user = Auth::user();
-            $tagihan = App\Models\TagihanDetail::where('id_biayas', $biaya->id)
+            $tagihan = App\Models\TagihanDetail::where('id_biayas', $biaya?->id)
                 ->where('id_users', $user->id)
                 ->latest()
                 ->first();
@@ -84,14 +86,14 @@
             // Menghitung total pembayaran yang telah dilakukan
             $total_pembayaran = round(
                 App\Models\Transaksi::where('user_id', $user->id)
-                    ->where('tagihan_detail_id', $tagihan->id)
-                    ->where('jenis_tagihan', $biaya->jenis_biaya)
+                    ->where('tagihan_detail_id', $tagihan?->id)
+                    ->where('jenis_tagihan', $biaya?->jenis_biaya)
                     ->where('status', 'berhasil')
                     ->where('jenis_pembayaran', 'cicil')
                     ->sum('total'),
             );
-            $cicilannya = App\Models\Cicilan::where('id_tagihan_details', $tagihan->id)->get();
-            $cicilan1 = App\Models\Cicilan::where('id_tagihan_details', $tagihan->id)
+            $cicilannya = App\Models\Cicilan::where('id_tagihan_details', $tagihan?->id)->get();
+            $cicilan1 = App\Models\Cicilan::where('id_tagihan_details', $tagihan?->id)
                 ->where('status', 'LUNAS')
                 ->first();
 
@@ -630,9 +632,9 @@
                             @break
                         @endif
                     @endforeach
-                    @if ($biayaHeadCount > 0 || $biayaHeadCount1 > 0)   
+                    @if ($biayaHeadCount > 0 || $biayaHeadCount1 > 0)
                     @else
-                    <p class="text-center">Belum ada tagihan</p>
+                        <p class="text-center">Belum ada tagihan</p>
                         {{-- Code to execute when there is no biaya head with jenis_biaya equal to 'Routine' --}}
                         {{-- @dump('asdasd') --}}
                     @endif

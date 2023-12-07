@@ -129,24 +129,24 @@
                             ->where('jenis_biaya', 'DaftarUlang')
                             ->where('id_angkatans', $biodatas->angkatan_id)
                             ->latest()
-                            ->firstOrFail();
+                            ->first();
 
-                        $tagihan = App\Models\TagihanDetail::where('id_biayas', $biaya1->id)
+                        $tagihan = App\Models\TagihanDetail::where('id_biayas', $biaya1?->id)
                             ->where('id_users', $biodatas->user_id)
                             ->latest()
-                            ->firstOrFail();
-                        $cicilans = App\Models\Cicilan::where('id_tagihan_details', $tagihan->id)->first();
-                        $cicilan2 = App\Models\Cicilan::where('id_tagihan_details', $tagihan->id)
+                            ->first();
+                        $cicilans = App\Models\Cicilan::where('id_tagihan_details', $tagihan?->id)->first();
+                        $cicilan2 = App\Models\Cicilan::where('id_tagihan_details', $tagihan?->id)
                             ->where('status', 'LUNAS')
                             ->get();
                         $transactions = App\Models\Transaksi::where('user_id', $biodatas->user_id)
-                            ->where('tagihan_detail_id', $tagihan->id)
-                            ->where('jenis_tagihan', $biaya1->jenis_biaya)
+                            ->where('tagihan_detail_id', $tagihan?->id)
+                            ->where('jenis_tagihan', $biaya1?->jenis_biaya)
                             ->where('status', 'berhasil')
                             ->first();
 
                     @endphp
-                    @if (!isset($cicilans) && !isset($transactionDaftar))
+                    @if (!isset($cicilans) && !isset($transactionDaftar) && $tagihan)
                         <div class="col-12 text-center mb-4 shadow-ms">
                             <div class="card">
                                 <h3 class="mt-3">Silahkan Pilih metode pembayaran Daftar ulang !</h3>
@@ -174,28 +174,30 @@
                                 </div>
                             </div>
                         </div>
+                    @elseif (!isset($tagihan))
+                        
                     @elseif($cicilans)
                         @php
                             $biaya1 = App\Models\Biaya::where('program_belajar', 'S1')
                                 ->where('jenis_biaya', 'DaftarUlang')
                                 ->where('id_angkatans', $biodatas->angkatan_id)
                                 ->latest()
-                                ->firstOrfail();
+                                ->first();
 
                             $tagihan = App\Models\TagihanDetail::where('id_biayas', $biaya1->id)
                                 ->where('id_users', $biodatas->user_id)
                                 ->latest()
-                                ->firstOrFail();
+                                ->first();
 
                             // Menghitung total pembayaran yang telah dilakukan
                             $total_pembayaran = App\Models\Transaksi::where('user_id', $biodatas->user_id)
-                                ->where('tagihan_detail_id', $tagihan->id)
-                                ->where('jenis_tagihan', $biaya1->jenis_biaya)
+                                ->where('tagihan_detail_id', $tagihan?->id)
+                                ->where('jenis_tagihan', $biaya1?->jenis_biaya)
                                 ->where('status', 'berhasil')
                                 ->where('jenis_pembayaran', 'cicil')
                                 ->sum('total');
-                            $cicilannya = App\Models\Cicilan::where('id_tagihan_details', $tagihan->id)->get();
-                            $cicilan1 = App\Models\Cicilan::where('id_tagihan_details', $tagihan->id)
+                            $cicilannya = App\Models\Cicilan::where('id_tagihan_details', $tagihan?->id)->get();
+                            $cicilan1 = App\Models\Cicilan::where('id_tagihan_details', $tagihan?->id)
                                 ->where('status', 'LUNAS')
                                 ->first();
 
@@ -552,7 +554,7 @@
                 </div> --}}
 
             @endif
-            @if (!$transactions)
+            @if (!isset($transactions))
             @else
                 <div class="row">
                     <div class="col-12">
@@ -914,8 +916,7 @@
                                             <th class="text-sm">Jenis kursus</th>
                                             <th class="text-sm">Total tagihan</th>
                                             <th class="text-sm d-flex align-items-center"><input
-                                                    type="checkbox" name=""
-                                                    id="select_all_ids{{ $keyss }}"
+                                                    type="checkbox" name="" id="select_all_ids"
                                                     class="me-2"> Pilih
                                             </th>
                                         </tr>
@@ -960,7 +961,7 @@
                                                                     <input type="checkbox" name="id[]"
                                                                         id=""
                                                                         value="{{ $tagihans->id }}"
-                                                                        class="checksAll{{ $keyss }}">
+                                                                        class="checksAll">
                                                                 @endif
 
 

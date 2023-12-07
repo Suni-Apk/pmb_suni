@@ -221,7 +221,7 @@ class TagihanController extends Controller
             ]);
             $tahunAjaran = TahunAjaran::where('id', $data['id_angkatans'])->first();
             $biodata = Biodata::where('angkatan_id', $data['id_angkatans'])->where('program_belajar', 'S1')->first();
-            if (!$biodata) {
+            if ($biodata) {
                 $biaya = Biaya::create([
                     'id_angkatans' => $data['id_angkatans'],
                     'jenis_biaya' => 'DaftarUlang',
@@ -256,7 +256,6 @@ class TagihanController extends Controller
                 $angkatan = TahunAjaran::find($data['id_angkatans']);
                 return redirect()->back()->with('error', 'Maaf sudah ada murid di angkatan ' . $angkatan->year);
             }
-
             // } else if ($request->jenis_biaya == 'Tingkatan') {
             //     $data = $request->validate([
             //         'id_angkatans' => 'required',
@@ -452,11 +451,16 @@ class TagihanController extends Controller
         $biaya = Biaya::whereIn('id', $sid);
         $tagihans = Tagihan::whereIn('id_biayas', $sid)->get();
         $tagihan = Tagihan::whereIn('id_biayas', $sid);
-
+        $biayas = Biaya::whereIn('id', $sid)->first();
+        $biodata = Biodata::where('program_belajar', 'S1')->where('angkatan_id', $biayas->id_angkatans)->first();
+        if ($biodata) {
+            return redirect()->back()->with('error', 'Gagal Menghapus tagihan daftar ulang karena masih terdapat biodata ' . $biayas->tahunAjaran->year . ' Silahkan menghapus user yang ada biodata ' . $biayas->tahunAjaran->year);
+        }
         foreach ($tagihans as $tagihanDelete) {
             $detail = TagihanDetail::where('id_tagihans', $tagihanDelete->id);
             $detail->delete();
         }
+
         $tagihan->delete();
         $biaya->delete();
 
@@ -467,9 +471,13 @@ class TagihanController extends Controller
         //
 
         $biaya = Biaya::find($id);
+        $biodata = Biodata::where('angkatan_id', $biaya->id_angkatans)->where('program_belajar', 'S1')->first();
         $tagihan = Tagihan::where('id_biayas', $id);
         $tagihanGet = Tagihan::where('id_biayas', $id)->get();
 
+        if ($biodata) {
+            return redirect()->route('admin.tagihan.index')->with('error', 'Gagal Menghapus tagihan daftar ulang karena masih terdapat biodata ' . $biaya->tahunAjaran->year . ' Silahkan menghapus user yang ada biodata ' . $biaya->tahunAjaran->year);
+        }
         foreach ($tagihanGet as $value) {
             TagihanDetail::where('id_tagihans', $value->id)->delete();
         }

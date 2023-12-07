@@ -266,7 +266,8 @@
 
     {{-- jika belum ada biodata maka bisa isi di dalam halaman dashboard --}}
 
-    @if (!$biodataS1)
+
+    @if (!$biodataS1 && $tagihan)
         <div class="row mt-5">
             <div class="col-12">
                 <div class="card mb-4">
