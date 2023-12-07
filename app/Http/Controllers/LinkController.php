@@ -56,7 +56,7 @@ class LinkController extends Controller
             'id_courses' => 'nullable'
         ]);
 
-        dd($data);
+        // dd($data);
         Link::create($data);
         if ($request->type == 'whatsapp') {
             return redirect()->route('admin.link.whatsapp')->with('success', "Link Berhasil Di Buat!!");
@@ -82,8 +82,9 @@ class LinkController extends Controller
     {
         $link = Link::find($id);
         $jurusans = Jurusan::get();
+        $kursus = Course::get();
         $tahun_ajarans = TahunAjaran::get();
-        return view("admin.link.edit", compact("link", "jurusans", "tahun_ajarans"));
+        return view("admin.link.edit", compact("link", "jurusans", "tahun_ajarans", "kursus"));
     }
 
     /**
@@ -97,8 +98,9 @@ class LinkController extends Controller
             'url' => 'required',
             'type' => 'required',
             'id_tahun_ajarans' => 'string',
-            'id_jurusans' => 'string',
-            'gender' => 'required'
+            'id_jurusans' => 'nullable',
+            'id_courses' => 'nullable',
+            'gender' => 'required',
         ]);
 
         // dd($data);

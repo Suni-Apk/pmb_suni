@@ -504,30 +504,31 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach ($biayas->where('id_angkatans', Auth::user()->biodata->angkatan_id) as $item)
-                                        <tr>
-                                            <td>
-                                                <div class="ps-3 text-sm">
-                                                    {{ $item->nama_biaya }}
-                                                </div>
-                                            </td>
-                                            <td>
-                                                <div class="ps-3 text-sm">
-                                                    {{ $item->id }}
-                                                </div>
-                                            </td>
-                                            <td class="text-center ">
-                                                Rp. {{ number_format($item->tagihanDetail->amount, 0, '', '.') }},-
-                                            </td>
-                                            <td class="text-center ">
-                                                <a href="{{ route('mahasiswa.tagihan.index') }}" class="badge badge-sm bg-gradient-info text-xxs">Detail</a>
-                                            </td>
-                                        </tr>
+                                        @foreach ($tagihan_detail as $item)
+                                            @if ($item->biayasDetail->program_belajar == 'S1') 
+                                                <tr>
+                                                    <td>
+                                                        <div class="ps-3 text-sm">
+                                                            {{ $item->biayasDetail->nama_biaya }}
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="ps-3 text-sm">
+                                                            {{ $item->end_date }}
+                                                        </div>
+                                                    </td>
+                                                    <td class="text-center ">
+                                                        Rp. {{ number_format($item->amount, 0, '', '.') }},-
+                                                    </td>
+                                                    <td class="text-center ">
+                                                        <a href="{{ route('mahasiswa.tagihan.index') }}" class="badge badge-sm bg-gradient-info text-xxs">Detail</a>
+                                                    </td>
+                                                </tr>
+                                            @endif
                                         @endforeach
                                     </tbody>
                                 </table>
                             </div>
-                            {{-- @endforeach --}}
                         </div>
                     </div>
                 </div>
@@ -542,12 +543,8 @@
                         </div>
                         <div class="card-body p-3">
                             <div class="timeline timeline-one-side">
-                                @php
-                                    $gender = $user->gender;
-                                    $gen = ($gender == 'Laki-Laki') ? 'ikhwan' : 'akhwat';
-                                @endphp
-                                @foreach ($links->filter(function ($item) use ($gen) {
-                                    return $item->gender == $gen || $item->gender == 'all';
+                                @foreach ($links->filter(function ($item) use ($user) {
+                                    return $item->gender == $user->gender || $item->gender == 'all';
                                 }) as $item)
                                     <div class="timeline-block mb-3">
                                         <span class="timeline-step">
@@ -555,18 +552,22 @@
                                         </span>
                                         <div class="timeline-content">
                                             <a href="{{ $item->url }}" class="text-dark text-sm font-weight-bold mb-0">
-                                                {{ $item->jurusan->code }} . {{ $item->tahunAjaran->year }},
-                                                <span class="font-weight-normal">
-                                                    {{ $item->url }}
-                                                </span>
-                                            </a>
+                                                @if ($item->jurusan)
+                                                    {{ $item->jurusan->code }} . {{ $item->tahunAjaran->year }},
+                                                @else
+                                                    -
+                                                    <span class="font-weight-normal">
+                                                        {{ $item->tahunAjaran->year }},
+                                                    </span>
+                                                @endif
+                                            </a>                                            
                                             <p class="text-secondary font-weight-bold text-xs mt-1 mb-0">
                                                 {{ $item->created_at->format('d M Y') }}, link {{ $item->type }}
                                             </p>
                                         </div>
                                     </div>
                                 @endforeach
-                            </div>
+                            </div>                            
                         </div>
                     </div>
                 </div>

@@ -8,6 +8,7 @@ use App\Models\Biaya;
 use App\Models\Biodata;
 use App\Models\Cicilan;
 use App\Models\Link;
+use App\Models\TagihanDetail;
 use App\Models\User;
 use GuzzleHttp\Client;
 use Illuminate\Http\Request;
@@ -31,18 +32,18 @@ class DashboardController extends Controller
         $hijriDatedayArabic = $data['data']['hijri']['weekday']['ar'];
         $hijriDatemonth = $data['data']['hijri']['month']['ar'];
         $hijriDateyear = $data['data']['hijri']['year'];
-        
+
         $biayas = Biaya::get();
         $cicilanAll = Cicilan::all();
         $user = Auth::user();
         $banner = Banner::where('type', 'DASHBOARD')->get();
-        $biodata = Biodata::where('program_belajar','S1')->where('user_id',$user->id)->first();
+        $biodata = Biodata::where('program_belajar', 'S1')->where('user_id', $user->id)->first();
         if ($user->biodata) {
+            $tagihan_detail = TagihanDetail::where('status', 'BELUM')->where('id_users', $biodata->user_id)->get();
             $links = Link::where('id_tahun_ajarans', $user->biodata->angkatan_id)->latest()->get();
-            return view('mahasiswa.index',compact('hijriDateday','hijriDatedayArabic','hijriDatemonth','hijriDateyear', 'user', 'biodata', 'banner', 'biayas', 'cicilanAll', 'links'));
+            return view('mahasiswa.index', compact('hijriDateday', 'hijriDatedayArabic', 'hijriDatemonth', 'hijriDateyear', 'user', 'biodata', 'banner', 'biayas', 'cicilanAll', 'tagihan_detail', 'links'));
         } else {
-            return view('mahasiswa.index',compact('hijriDateday','hijriDatedayArabic','hijriDatemonth','hijriDateyear', 'user', 'biodata', 'banner', 'biayas', 'cicilanAll'));
+            return view('mahasiswa.index', compact('hijriDateday', 'hijriDatedayArabic', 'hijriDatemonth', 'hijriDateyear', 'user', 'biodata', 'banner', 'biayas', 'cicilanAll'));
         }
-
     }
 }

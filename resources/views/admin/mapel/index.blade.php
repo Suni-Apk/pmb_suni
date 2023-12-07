@@ -71,11 +71,11 @@
                                             <form action="{{ route('admin.mapel.active',$mapels->id) }}" method="POST" class="d-inline">
                                                 @csrf
                                                 @if($mapels->status == 'nonActive')
-                                                    <button type="submit" class="btn btn-sm bg-gradient-success font-weight-bold text-xxs mt-3">
+                                                    <button type="submit" class="badge badge-sm border-0 bg-gradient-success font-weight-bold text-xxs mt-3">
                                                         <strong>On</strong>
                                                     </button>
                                                 @else
-                                                    <button type="submit" class="btn btn-sm bg-gradient-secondary font-weight-bold text-xxs mt-3">
+                                                    <button type="submit" class="badge badge-sm border-0 bg-gradient-secondary font-weight-bold text-xxs mt-3">
                                                         <strong>Off</strong>
                                                     </button>
                                                 @endif

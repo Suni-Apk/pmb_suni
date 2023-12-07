@@ -84,10 +84,6 @@
                                     Selamat Datang
                                     <b class="font-weight-bolder">{{ $mahasiswa->name }}</b>!
                                 </h4>
-                                <p class="mb-1 mt-2">
-                                    أُطْلُبُوا الْعِلْمَ مِنَ الْمَهْدِ اِلىَ اللَّهْدِ
-                                </p>
-                                <p>"Tuntutlah ilmu dari buaian sampai ke liang lahat,"</p>
                             </div>
                         </div>
                     </div>
@@ -222,11 +218,10 @@
                 <div class="list-group list-group-horizontal" id="list-tab" role="tablist">
                     <a id="list-sarjana-list" data-bs-toggle="list" href="#list-sarjana" role="tab"
                         aria-controls="list-sarjana"
-                        class="list-group-item list-group-item-action border-0 shadow text-center">Program Kuliah S1</a>
+                        class="list-group-item list-group-item-action border-0 shadow text-center">Program Formal (S1)</a>
                     <a id="list-kursus-list" data-bs-toggle="list" href="#list-kursus" role="tab"
                         aria-controls="list-kursus"
-                        class="list-group-item list-group-item-action border-0 shadow text-center active">Program
-                        Kursus</a>
+                        class="list-group-item list-group-item-action border-0 shadow text-center active">Program Non Formal</a>
                 </div>
             </div>
         @else
@@ -239,7 +234,7 @@
                         <a id="list-S1-list" href="#"
                             onclick="event.preventDefault(); document.getElementById('form-S1').submit();" role="tab"
                             aria-controls="list-kursus"
-                            class="list-group-item list-group-item-action border-0 shadow text-center">Program S1</a>
+                            class="list-group-item list-group-item-action border-0 shadow text-center">Program Formal (S1)</a>
                     </form>
 
                     {{-- Ini buat misalkan ia mau daftar jadi KURSUS tinggal pencet Program KURSUS nanti ia akan disuruh membayar Administrasi Trus Lanjut ke Pendaftaran KURSUS --}}
@@ -249,8 +244,7 @@
                         <a id="list-kursus-list" href="#"
                             onclick="event.preventDefault(); document.getElementById('form-kursus').submit();"
                             role="tab" aria-controls="list-kursus"
-                            class="list-group-item list-group-item-action border-0 shadow text-center active">Program
-                            Kursus</a>
+                            class="list-group-item list-group-item-action border-0 shadow text-center active">Program Non Formal</a>
                     </form>
                 </div>
             </div>
@@ -496,15 +490,24 @@
                             Daftar link yang diikuti
                         </p>
                     </div>
-                    <div class="container mb-3" style="max-height: 340px; overflow-y: auto;">
-                        @foreach ($linkKursus as $item)
-                            <div class="card border mb-3">
-                                <div class="card-body">
-                                    <h5 class="card-title">{{ $item->name }}</h5>
-                                    <a href="{{ $item->url }}" class="btn btn-primary mt-3">Klik Untuk Bergabung</a>
+                    <div class="card-body p-3">
+                        <div class="timeline timeline-one-side">
+                            @foreach ($linkKursus as $item)
+                                <div class="timeline-block mb-3">
+                                    <span class="timeline-step">
+                                        <i class="ni ni-bell-55 text-success text-gradient"></i>
+                                    </span>
+                                    <div class="timeline-content">
+                                        <a href="{{ $item->url }}" class="text-dark text-sm font-weight-bold mb-0">
+                                            {{ $item->name }} 
+                                        </a>                                            
+                                        <p class="text-secondary font-weight-bold text-xs mt-1 mb-0">
+                                            {{ $item->created_at->format('d M Y') }}, link {{ $item->type }}
+                                        </p>
+                                    </div>
                                 </div>
-                            </div>
-                        @endforeach
+                            @endforeach
+                        </div>                            
                     </div>
                 </div>
             </div>

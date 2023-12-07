@@ -48,7 +48,7 @@
                                                     <p class="text-xxs text-uppercase text-secondary mb-0"> {{ $links->kursus->name }} </p>
                                                     @else
                                                     <h6 class="mb-0 text-xs"> Semua jurusan </h6>
-                                                    @endi
+                                                    @endif
                                                     <h6 class="text-xxs text-uppercase text-secondary mb-0">{{ $links->tahunAjaran->year }}</h6>
                                                 </div>
                                             </div>

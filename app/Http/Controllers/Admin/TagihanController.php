@@ -40,15 +40,15 @@ class TagihanController extends Controller
         $jenis_tagihan = $request->jenis_tagihan;
         $tahunAjaran = TahunAjaran::all();
         $course = Course::all();
-        $jurusanGrouped = Jurusan::with('tahunAjaran')->get()->groupBy('id_tahun_ajarans');
-        $jurusans = Jurusan::with('tahunAjaran')->first();
+        // $jurusanGrouped = Jurusan::with('tahunAjaran')->get()->groupBy('id_tahun_ajarans');
+        // $jurusans = Jurusan::with('tahunAjaran')->first();
         $biayaRoutine = Biaya::where('jenis_biaya', 'Routine')->pluck('id_angkatans');
         $biayaDaftarUlang = Biaya::where('jenis_biaya', 'DaftarUlang')->pluck('id_angkatans');
 
         $onlyTahunAjaran = $tahunAjaran->whereNotIn('id', $biayaRoutine);
         $onlyTahunAjaran2 = $tahunAjaran->whereNotIn('id', $biayaDaftarUlang);
 
-        return view('admin.tagihan.create', compact('jenis_tagihan', 'tahunAjaran', 'jurusanGrouped', 'jurusans', 'course', 'onlyTahunAjaran', 'onlyTahunAjaran2'));
+        return view('admin.tagihan.create', compact('jenis_tagihan', 'tahunAjaran',  'course', 'onlyTahunAjaran', 'onlyTahunAjaran2'));
     }
     /**
      * Store a newly created resource in storage.

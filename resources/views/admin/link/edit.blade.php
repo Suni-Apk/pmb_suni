@@ -20,7 +20,9 @@
     </div>
 
     <div class="card-body container-fluid pb-4 mt-n3">
-        <form action="" method="post">
+        <form action="{{route('admin.link.edit.process', $link->id)}}" method="POST">
+            @csrf
+            @method('PUT')
             <div class="form-group">
                 <label for="">Nama</label>
                 <small class="text-danger" style="font-size: 12px">*</small>
@@ -81,12 +83,25 @@
             <div class="form-group">
                 <label for="">Jurusan</label>
                 <select name="id_jurusans" id="id_jurusans" class="form-select">
-                    <option value="" selected>-----------</option>
+                    <option value="" diasbled selected>-----------</option>
                     @foreach ($jurusans as $item)
                         <option value="{{ $item->id }}" @selected(old('id_jurusans', $link->id_jurusans))>{{ $item->name }}</option>
                     @endforeach
                 </select>
             </div>
+            <div class="form-group">
+                <label for="id_courses">Kursus</label>
+                <small class="text-info" style="font-size: 10px">Diisi ketika ingin menambahkan link untuk Kursus</small>
+                <select name="id_courses" id="id_courses" class="form-select">
+                    <option disabled selected>-----------</option>
+                    @foreach ($kursus as $item)
+                        <option value="{{ $item->id }}" @selected(old('id_courses', $link->id_courses))>{{ $item->name }}</option>
+                    @endforeach
+                </select>
+                @error('id_courses')
+                    <label class="text-danger">{{$message}}</label>
+                @enderror
+            </div>       
             <div class="form-group">
                 <button type="submit" class="btn btn-primary">Submit</button>
                 <a href="javascript:location.reload()" class="btn btn-warning">Reset</a>
