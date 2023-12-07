@@ -56,7 +56,7 @@ class LinkController extends Controller
             'id_courses' => 'nullable'
         ]);
 
-        dd($data);
+        // dd($data);
         Link::create($data);
         if ($request->type == 'whatsapp') {
             return redirect()->route('admin.link.whatsapp')->with('success', "Link Berhasil Di Buat!!");

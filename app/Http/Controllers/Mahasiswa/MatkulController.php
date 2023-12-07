@@ -25,7 +25,7 @@ class MatkulController extends Controller
             if ($biodata->jurusan_id) {
                 $jurusan = Jurusan::find($biodata->jurusan_id);
 
-                $links = Link::where('id_jurusans', $jurusan->id)->where('id_tahun_ajarans', $jurusan->tahunAjaran->id)->where('gender', 'all')->first();
+                $links = Link::where('id_jurusans', $jurusan->id)->where('id_tahun_ajarans', $jurusan->tahunAjaran->id)->where('gender', 'all')->where('type', 'whatsapp')->first();
 
                 $semester = Semester::where('id_jurusans', $jurusan->id)->get();
 

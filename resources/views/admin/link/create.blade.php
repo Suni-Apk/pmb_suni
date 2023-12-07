@@ -76,7 +76,7 @@
                         <label for="id_tahun_ajarans">Tahun Ajaran</label>
                         <small class="text-danger" style="font-size: 12px">*</small>
                         <select name="id_tahun_ajarans" id="id_tahun_ajarans" class="form-select" required>
-                            <option disabled selected>-----------</option>
+                            <option value="" disabled selected>-----------</option>
                             @foreach ($tahun_ajarans as $item)
                                 <option value="{{ $item->id }}">{{ $item->year }}</option>
                             @endforeach
@@ -88,7 +88,7 @@
                     <div class="form-group">
                         <label for="id_jurusans">Jurusan</label>
                         <select name="id_jurusans" id="id_jurusans" class="form-select">
-                            <option selected>-----------</option>
+                            <option value="" selected>-----------</option>
                             @foreach ($jurusans as $item)
                                 <option value="{{ $item->id }}">{{ $item->name }}</option>
                             @endforeach
@@ -101,7 +101,7 @@
                         <label for="id_courses">Kursus</label>
                         <small class="text-info" style="font-size: 10px">Diisi ketika ingin menambahkan link untuk Kursus</small>
                         <select name="id_courses" id="id_courses" class="form-select">
-                            <option selected>-----------</option>
+                            <option value="" selected>-----------</option>
                             @foreach ($kursus as $item)
                                 <option value="{{ $item->id }}">{{ $item->name }}</option>
                             @endforeach

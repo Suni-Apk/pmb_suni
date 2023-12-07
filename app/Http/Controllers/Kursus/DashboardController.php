@@ -7,6 +7,7 @@ use App\Models\Banner;
 use App\Models\Biodata;
 use App\Models\Course;
 use App\Models\Link;
+use App\Models\TagihanDetail;
 use GuzzleHttp\Client;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -47,12 +48,14 @@ class DashboardController extends Controller
             ->where('gender', $mahasiswa->gender)
             ->get();
 
+            $tagihan_detail = TagihanDetail::where('status', 'BELUM')->where('id_users', $biodata->user_id)->get();
+
             // Retrieve available courses excluding the selected course
             $kursus = Course::where('id', '!=', $kursusBiodata->course->id)->get();
         }
         
         return view('kursus.index', compact('hijriDateday', 'hijriDatedayArabic', 'hijriDatemonth', 'hijriDateyear', 'biodata', 'banner', 'kursusBiodata',
-            (!$kursusBiodata) ? ['linkKursus','kursus'] : ['linkKursus', 'kursus'],
+            (!$kursusBiodata) ? ['linkKursus','kursus'] : ['linkKursus', 'kursus', 'tagihan_detail'],
             'mahasiswa'
         ));
 

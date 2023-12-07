@@ -410,87 +410,98 @@
             </div>
             @endforeach
         </div>
-    <div class="row my-4">
-        <div class="col-lg-8 col-md-6 mb-md-0 mb-4">
-            <div class="card">
-                <div class="card-header pb-0">
-                    <div class="row">
-                        <div class="col-lg-6 col-7">
-                            <h6>Daftar Tagihan</h6>
-                            <p class="text-sm mb-0">
-                                <i class="fa fa-check text-info" aria-hidden="true"></i>
-                                Daftar tagihan yang harus dibayarkan
-                            </p>
-                        </div>
-                        <div class="col-lg-6 col-5 my-auto text-end">
-                            <div class="dropdown float-lg-end pe-4">
-                                <a class="cursor-pointer" id="dropdownTable" data-bs-toggle="dropdown"
-                                    aria-expanded="false">
-                                    <i class="fa fa-ellipsis-v text-secondary"></i>
-                                </a>
-                                <ul class="dropdown-menu px-2 py-3 ms-sm-n4 ms-n5" aria-labelledby="dropdownTable">
-                                    <li>
-                                        <a class="dropdown-item border-radius-md" href="javascript:;">Action</a>
-                                    </li>
-                                    <li>
-                                        <a class="dropdown-item border-radius-md" href="javascript:;">Another action</a>
-                                    </li>
-                                    <li>
-                                        <a class="dropdown-item border-radius-md" href="javascript:;">Something else
-                                            here</a>
-                                    </li>
-                                </ul>
+        <div class="row my-4">
+            <div class="col-lg-8 col-md-6 mb-md-0 mb-4">
+                <div class="card">
+                    <div class="card-header pb-0">
+                        <div class="row">
+                            <div class="col-lg-6 col-7">
+                                <h6>Daftar Tagihan</h6>
+                                <p class="text-sm mb-0">
+                                    <i class="fa fa-check text-info" aria-hidden="true"></i>
+                                    Daftar tagihan yang harus dibayarkan
+                                </p>
+                            </div>
+                            <div class="col-lg-6 col-5 my-auto text-end">
+                                <div class="dropdown float-lg-end pe-4">
+                                    <a class="cursor-pointer" id="dropdownTable" data-bs-toggle="dropdown"
+                                        aria-expanded="false">
+                                        <i class="fa fa-ellipsis-v text-secondary"></i>
+                                    </a>
+                                    <ul class="dropdown-menu px-2 py-3 ms-sm-n4 ms-n5" aria-labelledby="dropdownTable">
+                                        <li>
+                                            <a class="dropdown-item border-radius-md" href="javascript:;">Action</a>
+                                        </li>
+                                        <li>
+                                            <a class="dropdown-item border-radius-md" href="javascript:;">Another action</a>
+                                        </li>
+                                        <li>
+                                            <a class="dropdown-item border-radius-md" href="javascript:;">Something else
+                                                here</a>
+                                        </li>
+                                    </ul>
+                                </div>
                             </div>
                         </div>
                     </div>
+                    <div class="card-body px-0 pb-2">
+                        <div class="table-responsive">
+                            <table class="table align-items-center mb-0">
+                                <thead>
+                                    <tr>
+                                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Nama Tagihan</th>
+                                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Batas Tenggat</th>
+                                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Total</th>
+                                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Aksi</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach ($tagihan_detail as $item)
+                                        @if ($item->biayasDetail->program_belajar == 'KURSUS') 
+                                            <tr>
+                                                <td class="ps-3 text-sm">
+                                                    {{ $item->biayasDetail->nama_biaya }}
+                                                </td>
+                                                <td class="ps-3 text-sm">
+                                                    {{ $item->end_date }}
+                                                </td>
+                                                <td class="text-center text-sm">
+                                                    Rp. {{ number_format($item->amount, 0, '', '.') }},-
+                                                </td>
+                                                <td class="text-center">
+                                                    <a href="{{ route('mahasiswa.tagihan.index') }}" class="badge badge-sm bg-gradient-info text-xxs">Detail</a>
+                                                </td>
+                                            </tr>
+                                        @endif
+                                    @endforeach
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
                 </div>
-                <div class="card-body px-0 pb-2">
-                    <div class="table-responsive">
-                        <table class="table align-items-center mb-0">
-                            <thead>
-                                <tr>
-                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                        Companies</th>
-                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
-                                        Members</th>
-                                    <th
-                                        class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                        Budget</th>
-                                    <th
-                                        class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                        Completion</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-
-                            </tbody>
-                        </table>
+            </div>
+            <div class="col-lg-4 col-md-6">
+                <div class="card h-100">
+                    <div class="card-header pb-0">
+                        <h3>Daftar Link</h3>
+                        <p class="text-sm">
+                            <i class="fas fa-link text-success" aria-hidden="true"></i>
+                            Daftar link yang diikuti
+                        </p>
+                    </div>
+                    <div class="container mb-3" style="max-height: 340px; overflow-y: auto;">
+                        @foreach ($linkKursus as $item)
+                            <div class="card border mb-3">
+                                <div class="card-body">
+                                    <h5 class="card-title">{{ $item->name }}</h5>
+                                    <a href="{{ $item->url }}" class="btn btn-primary mt-3">Klik Untuk Bergabung</a>
+                                </div>
+                            </div>
+                        @endforeach
                     </div>
                 </div>
             </div>
         </div>
-        <div class="col-lg-4 col-md-6">
-            <div class="card h-100">
-                <div class="card-header pb-0">
-                    <h3>Daftar Link</h3>
-                    <p class="text-sm">
-                        <i class="fas fa-link text-success" aria-hidden="true"></i>
-                        Daftar link yang diikuti
-                    </p>
-                </div>
-                <div class="container mb-3" style="max-height: 340px; overflow-y: auto;">
-                    @foreach ($linkKursus as $item)
-                        <div class="card border mb-3">
-                            <div class="card-body">
-                                <h5 class="card-title">{{ $item->name }}</h5>
-                                <a href="{{ $item->url }}" class="btn btn-primary mt-3">Klik Untuk Bergabung</a>
-                            </div>
-                        </div>
-                    @endforeach
-                </div>
-            </div>
-        </div>
-    </div>
     @endif
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <script>

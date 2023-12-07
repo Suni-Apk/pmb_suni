@@ -481,25 +481,23 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach ($biayas->where('id_angkatans', Auth::user()->biodata->angkatan_id) as $item)
-                                        <tr>
-                                            <td>
-                                                <div class="ps-3 text-sm">
-                                                    {{ $item->nama_biaya }}
-                                                </div>
-                                            </td>
-                                            <td>
-                                                <div class="ps-3 text-sm">
-                                                    {{ $item->id }}
-                                                </div>
-                                            </td>
-                                            <td class="text-center ">
-                                                Rp. {{ number_format($item->tagihanDetail->amount, 0, '', '.') }},-
-                                            </td>
-                                            <td class="text-center ">
-                                                <a href="{{ route('mahasiswa.tagihan.index') }}" class="badge badge-sm bg-gradient-info text-xxs">Detail</a>
-                                            </td>
-                                        </tr>
+                                        @foreach ($tagihan_detail as $item)
+                                            @if ($item->biayasDetail->program_belajar == 'S1') 
+                                                <tr>
+                                                    <td class="ps-3 text-sm">
+                                                        {{ $item->biayasDetail->nama_biaya }}
+                                                    </td>
+                                                    <td class="ps-3 text-sm">
+                                                        {{ $item->end_date }}
+                                                    </td>
+                                                    <td class="text-center text-sm">
+                                                        Rp. {{ number_format($item->amount, 0, '', '.') }},-
+                                                    </td>
+                                                    <td class="text-center ">
+                                                        <a href="{{ route('mahasiswa.tagihan.index') }}" class="badge badge-sm bg-gradient-info text-xxs">Detail</a>
+                                                    </td>
+                                                </tr>
+                                            @endif
                                         @endforeach
                                     </tbody>
                                 </table>

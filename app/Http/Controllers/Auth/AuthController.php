@@ -24,6 +24,7 @@ class AuthController extends Controller
 {
     use Ipaymu;
     use Fonnte;
+
     public function register($program = null)
     {
         $banner = Banner::get();
@@ -32,6 +33,15 @@ class AuthController extends Controller
 
     public function register_process_new(Request $request)
     {
+        $idTA = $request->tahunAjaran;
+
+        $tahun_ajaran = TahunAjaran::where('id', $idTA)->first();
+        // dd($tahun_ajaran);
+
+        if ($tahun_ajaran->status == 'nonActive') {
+            return redirect()->back()->with('noAccess', 'Pendaftaran sedang kami tutup.');
+        }
+
         $user = Auth::user();
         $phone = $request->phone;
         if (Str::startsWith($phone, '0')) {
@@ -45,7 +55,6 @@ class AuthController extends Controller
             'name.required' => 'Nama Lengkap Wajib Diisi',
             'name.min:3' => 'Nama Anda Minimal 3 Huruf!!',
             'name.max:255' => 'Nama Anda Kepanjangan',
-            'name.unique' => 'Nama Sudah Di Pakai',
             'phone.required' => 'Nomor Whatsapp Wajib Diisi',
             'phone.min' => 'Nomor Whatsapp Minimal 12 Angka!!',
             'phone.max' => 'Nomor Whatsapp Maksimal 13 Angka!!',
@@ -59,7 +68,7 @@ class AuthController extends Controller
             'password.min:8' => 'Password Wajib 8 Angka / Huruf!!!'
         ];
         $data = $request->validate([
-            'name' => 'required|min:3|max:255|string|unique:users,name',
+            'name' => 'required|min:3|max:255|string',
             'phone' => 'required|min:11|max:13|unique:users,phone',
             'email' => 'required|email|unique:users,email',
             'gender' => 'required|string',
