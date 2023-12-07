@@ -27,14 +27,14 @@ class Biodata extends Model
         'last_graduate'
     ];
 
+    public function angkatan()
+    {
+        return $this->belongsTo(TahunAjaran::class, 'angkatan_id');
+    }
+
     public function user()
     {
         return $this->belongsTo(User::class,'user_id');
-    }
-
-    public function angkatan()
-    {
-        return $this->belongsTo(TahunAjaran::class);
     }
 
     public function jurusan()
@@ -49,6 +49,6 @@ class Biodata extends Model
 
     public function course()
     {
-        return $this->belongsTo(Course::class);
+        return $this->belongsTo(Course::class, 'course_id');
     }
 }

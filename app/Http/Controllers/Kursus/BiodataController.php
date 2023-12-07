@@ -21,6 +21,12 @@ class BiodataController extends Controller
         return view('kursus.biodata.pendaftaran-kursus', compact('kursus'));
     }
 
+    public function showPendaftaranForm($kursus_id)
+    {
+        $kursus = Course::findOrFail($kursus_id);
+        return view('kursus.biodata.pendaftaran-kursus', compact('kursus'));
+    }
+
     public function pendaftaran_kursus_process(Request $request)
     {
         $user = Auth::user()->id;

@@ -15,6 +15,7 @@
                         <table class="table align-items-center mb-0" id="table">
                             <thead>
                                 <tr>
+<<<<<<< HEAD
                                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                         Pilih</th>
                                     <th
@@ -35,6 +36,15 @@
                                     <th
                                         class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                         Aksi</th>
+=======
+                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 text-center">No</th>
+                                    <th class="text-uppercase text-secondary text-xxs px-2 font-weight-bolder opacity-7 text-center">Nama Mata Pelajaran</th>
+                                    <th class="text-uppercase text-secondary text-xxs px-2 font-weight-bolder opacity-7 text-center">Nama Kursus</th>
+                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2 text-center">Mulai - Selesai</th>
+                                    <th class="text-uppercase text-secondary text-xxs px-2 font-weight-bolder opacity-7 text-center">Status</th>
+                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2 text-center">Hari</th>
+                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Aksi</th>
+>>>>>>> 0d08226d441fcd57e40b286245da9fa4abddfa4d
                                 </tr>
                             </thead>
                             <tbody>
@@ -57,10 +67,18 @@
                                             <span class="text-secondary text-xs font-weight-bold"><strong>{{ $mapels->mulai }}
                                                     WIB</strong> - <strong>{{ $mapels->selesai }} WIB</strong> </span>
                                         </td>
+                                        <td class="align-middle text-center">
+                                            @if ($mapels->status == 'nonActive')
+                                                <span class="text-uppercase badge badge-sm bg-gradient-danger">{{ $mapels->status }}</span>
+                                            @else
+                                                <span class="text-uppercase badge badge-sm bg-gradient-success">{{ $mapels->status }}</span>
+                                            @endif
+                                        </td>
                                         <td class="align text-center">
                                             <span
                                                 class="text-secondary text-xs font-weight-bold"><strong>{{ $mapels->hari }}</strong></span>
                                         </td>
+<<<<<<< HEAD
                                         <td class="d-flex align-items-center justify-content-center">
                                             <a href="{{ route('admin.mapel.show', $mapels->id) }}"
                                                 class="btn btn-sm bg-gradient-success font-weight-bold text-xs mx-2 mt-3">
@@ -78,8 +96,37 @@
                                                 <button type="submit"
                                                     class="btn btn-sm bg-gradient-danger font-weight-bold text-xs mx-2 mt-3 show_confirm"
                                                     data-toggle="tooltip" data-original-title="hapus">
+=======
+                                        <td class="text-center">
+                                            <a href="{{ route('admin.mapel.show', $mapels->id) }}" class="badge badge-sm bg-gradient-info font-weight-bold text-xxs">
+                                                <strong>Detail</strong>
+                                            </a>
+
+                                            <a href="{{ route('admin.mapel.edit', $mapels->id) }}" class="badge badge-sm bg-gradient-secondary font-weight-bold text-xxs mx-1">
+                                                <strong>Edit</strong>
+                                            </a>
+
+                                            <form action="{{ Route('admin.mapel.destroy' , $mapels->id) }}" method="POST" class="d-inline">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit" class="badge badge-sm border-0 bg-gradient-danger font-weight-bold text-xxs show_confirm"
+                                                data-toggle="tooltip" data-original-title="hapus">
+>>>>>>> 0d08226d441fcd57e40b286245da9fa4abddfa4d
                                                     Hapus
                                                 </button>
+                                            </form>
+
+                                            <form action="{{ route('admin.mapel.active',$mapels->id) }}" method="POST" class="d-inline">
+                                                @csrf
+                                                @if($mapels->status == 'nonActive')
+                                                    <button type="submit" class="btn btn-sm bg-gradient-success font-weight-bold text-xxs mt-3">
+                                                        <strong>On</strong>
+                                                    </button>
+                                                @else
+                                                    <button type="submit" class="btn btn-sm bg-gradient-secondary font-weight-bold text-xxs mt-3">
+                                                        <strong>Off</strong>
+                                                    </button>
+                                                @endif
                                             </form>
                                         </td>
                                     </tr>

@@ -416,7 +416,8 @@
 
                 <!-- report -->
                 <li class="nav-item">
-                    <a class="nav-link " href="">
+                    <a class="nav-link {{ Route::is('admin.laporan.*') ? 'active' : '' }}"
+                        href="{{ route('admin.laporan.index') }}">
                         <div
                             class="icon icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
                             <i class="fas fa-flag"></i>
@@ -482,70 +483,6 @@
                         </ul>
                     </div>
                 </li>
-
-                <!-- template -->
-                <li class="nav-item">
-                    <a data-bs-toggle="collapse" href="#template"
-                        class="nav-link {{ Route::is('template.*') ? 'active' : '' }}" aria-controls="template"
-                        role="button" aria-expanded="false">
-                        <div
-                            class="icon icon-sm shadow border-radius-md bg-white text-center d-flex align-items-center justify-content-center  me-2">
-                            <i class="fas fa-tools"></i>
-                        </div>
-                        <span class="nav-link-text ms-1">Template</span>
-                    </a>
-                    <div class="collapse {{ Route::is('template.*') ? 'show' : '' }}" id="template">
-                        <ul class="nav ms-4 ps-3">
-                            <li class="nav-item ">
-                                <a class="nav-link {{ Route::is('forgot') ? 'active' : '' }} "
-                                    href="{{ route('forgot') }}">
-                                    <span class="sidenav-mini-icon d-none d-xl-block"><i
-                                            class="fas fa-key"></i></span>
-                                    <span class="sidenav-normal"> Forgot Password </span>
-                                </a>
-                            </li>
-                            <li class="nav-item ">
-                                <a class="nav-link {{ Route::is('table') ? 'active' : '' }} "
-                                    href="{{ route('table') }}">
-                                    <span class="sidenav-mini-icon d-none d-xl-block"><i
-                                            class="fas fa-table"></i></span>
-                                    <span class="sidenav-normal"> Table </span>
-                                </a>
-                            </li>
-                            <li class="nav-item ">
-                                <a class="nav-link {{ Route::is('admin.profile') ? 'active' : '' }} "
-                                    href="{{ route('admin.profile') }}">
-                                    <span class="sidenav-mini-icon d-none d-xl-block"><i
-                                            class="fas fa-user-circle"></i></span>
-                                    <span class="sidenav-normal"> Profile </span>
-                                </a>
-                            </li>
-                            <li class="nav-item ">
-                                <a class="nav-link {{ Route::is('admin.profile') ? 'active' : '' }} "
-                                    href="{{ route('admin.profile') }}">
-                                    <span class="sidenav-mini-icon d-none d-xl-block"><i
-                                            class="fas fa-user-circle"></i></span>
-                                    <span class="sidenav-normal"> Edit Profile </span>
-                                </a>
-                            </li>
-                            <li class="nav-item ">
-                                <a class="nav-link {{ Route::is('form') ? 'active' : '' }} "
-                                    href="{{ route('form') }}">
-                                    <span class="sidenav-mini-icon"><i class="fas fa-align-right"></i></span>
-                                    <span class="sidenav-normal"> Form </span>
-                                </a>
-                            </li>
-                            <li class="nav-item ">
-                                <a class="nav-link {{ Route::is('billing') ? 'active' : '' }} "
-                                    href="{{ route('billing') }}">
-                                    <span class="sidenav-mini-icon d-none d-xl-block"><i
-                                            class="fas fa-money-bill"></i></span>
-                                    <span class="sidenav-normal"> Billing </span>
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                </li>
             </ul>
         </div>
         <div class="sidenav-footer mx-3 nav-item">
@@ -568,15 +505,6 @@
                         <span class="nav-link-text ms-1">Dashboard</span>
                     </a>
                 </li>
-                {{-- @php
-                $biaya = App\Models\Biaya::where('program_belajar','S1')->where('jenis_biaya','DaftarUlang')->where('id_angkatans',Auth::user()->biodata->angkatan_id)->latest()->first();
-                
-                $user = Auth::user();
-                $tagihan = App\Models\TagihanDetail::where('id_biayas',$biaya->id)->where('id_users',$user->id)->latest()->first();
-                // $bagi3 = $tagihan->amount / 3;
-                // dd($bagi3);
-                $transaction = round(App\Models\Transaksi::where('user_id',$user->id)->where('tagihan_detail_id',$tagihan->id)->where('jenis_tagihan',$biaya->jenis_biaya)->where('status','berhasil')->sum('total'));
-                @endphp --}}
                 @if (!$biodata && !Auth::user()->document)
                     <!-- biodata -->
                     <li class="nav-item">
@@ -653,7 +581,7 @@
                             ->where('jenis_biaya', 'DaftarUlang')
                             ->latest()
                             ->first();
-                            
+
                         $user = Auth::user();
                         // dd($user);
                         $tagihan = App\Models\TagihanDetail::where('id_biayas', $biaya->id)
@@ -662,15 +590,46 @@
                             ->first();
                         // $bagi3 = $tagihan->amount / 3;
                         // dd($bagi3);
-                        $transaction = round(
+                        $transactionCicil =
+                            ceil(
+                                App\Models\Cicilan::where('id_tagihan_details', $tagihan->id)
+                                    ->where('status', 'LUNAS')
+                                    ->sum('harga') / 2,
+                            ) * 2;
+                        $transactionCash = round(
                             App\Models\Transaksi::where('user_id', $user->id)
                                 ->where('tagihan_detail_id', $tagihan->id)
-                                ->where('jenis_tagihan', $biaya->jenis_biaya)
                                 ->where('status', 'berhasil')
+                                ->where('program_belajar', 'S1')
                                 ->sum('total'),
                         );
                     @endphp
-                    @if ($transaction != $tagihan->amount)
+                    @if ($transactionCicil == $tagihan->amount)
+                        {{-- academy --}}
+                        <li class="nav-item">
+                            <ul class="nav-link pb-0 mb-0">
+                                <span class="sidenav-mini-icon d-none d-xl-block" style="color:rgb(196, 196, 196)"><i
+                                        class="fas fa-university"></i></span>
+                                <span class="sidenav-normal text-uppercase text-xs ms-2 font-weight-bolder"> academy
+                                </span>
+                            </ul>
+                        </li>
+
+                        <!-- matkul -->
+                        <li class="nav-item">
+                            <a href="{{ route('mahasiswa.matkul') }}"
+                                class="nav-link {{ Route::is('mahasiswa.matkul') ? 'active' : '' }}">
+                                <div
+                                    class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center d-flex align-items-center justify-content-center  me-2">
+                                    <i class="ni ni-hat-3"></i>
+                                </div>
+                                <span class="nav-link-text ms-1"> Mata Kuliah </span>
+                            </a>
+                        </li>
+                    @else
+                    @endif
+
+                    @if ($transactionCash != $tagihan->amount)
                     @else
                         {{-- academy --}}
                         <li class="nav-item">

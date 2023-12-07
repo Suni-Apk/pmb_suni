@@ -40,8 +40,8 @@ class TagihanController extends Controller
         $jenis_tagihan = $request->jenis_tagihan;
         $tahunAjaran = TahunAjaran::all();
         $course = Course::all();
-        $jurusanGrouped = Jurusan::with('tahunAjaran')->get()->groupBy('id_tahun_ajarans');
-        $jurusans = Jurusan::with('tahunAjaran')->first();
+        $jurusanGrouped = Jurusan::get();
+        $jurusans = Jurusan::first();
         $biayaRoutine = Biaya::where('jenis_biaya', 'Routine')->pluck('id_angkatans');
         $biayaDaftarUlang = Biaya::where('jenis_biaya', 'DaftarUlang')->pluck('id_angkatans');
 
@@ -193,7 +193,7 @@ class TagihanController extends Controller
                     'end_date' => $dateEnd,
                 ]);
 
-                $mahasiswa = Biodata::where('angkatan_id', $biaya->id_angkatans)->where('program_belajar', $biaya->program_belajar)->get();
+                $mahasiswa = Biodata::where('angkatan_id', $biaya->id_angkatans)->where('program_belajar', $biaya->program_belajar)->where('course_id', $biaya->id_kursus)->get();
 
                 foreach ($mahasiswa as $index => $value) {
                     $end_date = strtotime('-10 days', strtotime($dateEnd));

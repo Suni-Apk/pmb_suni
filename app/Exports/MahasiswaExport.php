@@ -10,26 +10,32 @@ use Maatwebsite\Excel\Concerns\FromArray;
 
 class MahasiswaExport implements FromCollection, WithHeadings
 {
+
+    protected $mahasiswa;
+
+    public function __construct($mahasiswa)
+    {
+        $this->mahasiswa = $mahasiswa;
+    }
     /**
-    * @return \Illuminate\Support\Collection
-    */
+     * @return \Illuminate\Support\Collection
+     */
     public function collection()
     {
-        $mahasiswa = Biodata::all();
-
-        return $mahasiswa->map(function($mahasiswas){
+        return $this->mahasiswa->map(function ($mahasiswas) {
             return [
                 'NO' => $mahasiswas->id,
-                'NAMA' => $mahasiswas->user->name,
-                'NOMOR TELEPON' => $mahasiswas->user->phone,
-                'TAHUN AJARAN' => $mahasiswas->angkatan->year,
-                'EMAIL' => $mahasiswas->user->email,
-                'JENIS KELAMIN' => $mahasiswas->user->gender,
-                'ROLE' => $mahasiswas->user->role,
-                'STATUS' => $mahasiswas->user->status,
+                'NAMA' => $mahasiswas->name,
+                'NOMOR TELEPON' => $mahasiswas->phone,
+                'TAHUN AJARAN' => $mahasiswas->biodata->angkatan->year,
+                'EMAIL' => $mahasiswas->email,
+                'JENIS KELAMIN' => $mahasiswas->gender,
+                'ROLE' => $mahasiswas->role,
+                'STATUS' => $mahasiswas->status,
             ];
         });
     }
+
 
     public function headings(): array
     {

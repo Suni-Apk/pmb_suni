@@ -28,7 +28,7 @@
                                         <th class="text-white">Semester</th>
                                         <th class="text-white">Mulai</th>
                                         <th class="text-white">Selesai</th>
-                                        <th class="text-white d-flex">Tanggal</th>
+                                        <th class="text-white d-flex">Hari</th>
                                     </tr>
                                 </thead>
                                     <tbody>

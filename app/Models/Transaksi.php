@@ -29,7 +29,7 @@ class Transaksi extends Model
 
     public function tagihanDetails()
     {
-        return $this->hasMany(TagihanDetail::class, 'id_transactions');
+        return $this->belongsTo(TagihanDetail::class, 'tagihan_detail_id');
     }
     public function cicilan()
     {

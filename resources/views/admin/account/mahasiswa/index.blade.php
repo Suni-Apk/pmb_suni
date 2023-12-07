@@ -43,14 +43,14 @@
                                 <tr class="text-center">
                                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Pilih
                                     </th>
-                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">NO
-                                    </th>
                                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Nama
                                     </th>
                                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Nomor
                                         Telepon</th>
                                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Email
                                     </th>
+                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Tahun
+                                        Ajaran</th>
                                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Gender /
                                         Role</th>
                                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Status
@@ -61,12 +61,14 @@
                                 </tr>
                             </thead>
                             <tbody>
+                                {{-- @php
+                                    $mahasiswaData = $tahunAjaran ? $mahasiswa : $mahasiswaAll;
+                                @endphp --}}
                                 @foreach ($mahasiswa as $index => $item)
                                     <tr>
-                                        <td><input type="checkbox" name="ids" id="" class="checksAll"
-                                                value="{{ $item->id }}"></td>
                                         <td>
-                                            <h6 class="mb-0 text-sm">{{ $index + 1 }}</h6>
+                                            <input type="checkbox" name="ids" id="" class="checksAll"
+                                                value="{{ $item->id }}">
                                         </td>
                                         <td>
                                             <h6 class="mb-0 text-sm">{{ $item->name }}</h6>
@@ -75,8 +77,18 @@
                                             <span class="text-secondary text-xs font-weight-bold">{{ $item->phone }}</span>
                                         </td>
                                         <td>
-                                            <span
-                                                class="text-secondary text-xs font-weight-bold">{{ $item->email }}</span>
+                                            <span class="text-secondary text-xs font-weight-bold">{{ $item->email }}</span>
+                                        </td>
+                                        <td class="text-center text-secondary font-weight-bold">
+                                            @if ($item->biodata)
+                                                <span class="badge badge-sm rounded-pill bg-gradient-success">
+                                                    {{ $item->biodata->angkatan->year }}
+                                                </span>
+                                            @else
+                                                <span class="badge badge-sm rounded-pill bg-gradient-danger">
+                                                    biodata <i class="fas fa-times"></i>
+                                                </span>
+                                            @endif
                                         </td>
                                         <td>
                                             <p class="text-xs font-weight-bold mb-0">{{ $item->gender }}</p>
@@ -110,14 +122,17 @@
                                                 @method('DELETE')
                                                 <button type="button"
                                                     class="badge badge-sm bg-gradient-danger font-weight-bolder text-xxs border-0"
-                                                    data-bs-toggle="modal" data-bs-target="#exampleModal">Delete</button>
-                                                <div class="modal fade" id="exampleModal" tabindex="-1"
-                                                    aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                    data-bs-toggle="modal"
+                                                    data-bs-target="#exampleModal{{ $item->id }}">Delete</button>
+                                                <div class="modal fade" id="exampleModal{{ $item->id }}" tabindex="-1"
+                                                    aria-labelledby="exampleModal{{ $item->id }}Label"
+                                                    aria-hidden="true">
                                                     <div class="modal-dialog modal-dialog-centered">
                                                         <div class="modal-content">
                                                             <div class="modal-header">
-                                                                <h1 class="modal-title fs-5" id="exampleModalLabel">
-                                                                    Warning!!!! <i
+                                                                <h1 class="modal-title fs-5"
+                                                                    id="exampleModal{{ $item->id }}Label">
+                                                                    Peringatan! <i
                                                                         class="fas fa-exclamation-circle fa-xl text-danger"></i>
                                                                 </h1>
                                                                 <button type="button" class="btn-close"
@@ -125,13 +140,13 @@
                                                             </div>
                                                             <div class="modal-body">
                                                                 <i class="fas fa-exclamation-circle fa-xl text-danger"></i>
-                                                                Apakah Anda Yakin Ingin Melakukan Penghapusan Admin?
+                                                                Apakah Anda Yakin Ingin Menghapus data Mahasiswa?
                                                             </div>
                                                             <div class="modal-footer">
                                                                 <button type="button" class="btn btn-secondary"
                                                                     data-bs-dismiss="modal">Batal</button>
-                                                                <button type="submit"
-                                                                    class="btn btn-primary">Lanjut</button>
+                                                                <button type="submit" class="btn btn-primary">Ya,
+                                                                    Hapus</button>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -180,14 +195,6 @@
 @endsection
 
 @push('scripts')
-    <script src="https://code.jquery.com/jquery-3.7.1.min.js"
-        integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"
-        integrity="sha512-VEd+nq25CkR676O+pLBnDW09R7VQX9Mdiij052gVCp5yVH3jGtH70Ho/UUv4mJDsEdTvqRCFZg0NKGiojGnUCw=="
-        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css"
-        integrity="sha512-3pIirOrwegjM6erE5gPSwkUzO+3cTjpnV9lexlNZqvupR64iZBnOOTiiLPb9M36zpMScbmUNIcHUqKD47M719g=="
-        crossorigin="anonymous" referrerpolicy="no-referrer" />
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     @if (session('success'))
         <script>

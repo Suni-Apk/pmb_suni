@@ -64,22 +64,17 @@ class SettingController extends Controller
 
         if ($validator->fails()) {
             $data['uploaded'] = 0;
-            $data['error']['message'] = $validator->errors()->first('upload'); // error response
+            $data['error']['message'] = $validator->errors()->first('upload');
         } else {
             if ($request->file('upload')) {
                 $file = $request->file('upload');
                 $filename = time().'_'.$file->getClientOriginalName();
 
-                // file upload location
                 $location = 'storage/uploads';
-
-                // upload file
                 $file->move($location, $filename);
 
-                // file path
                 $filepath = url('storage/uploads/'.$filename);
 
-                // response
                 $data['fileName'] = $filename;
                 $data['uploaded'] = 1;
                 $data['url'] = $filepath;

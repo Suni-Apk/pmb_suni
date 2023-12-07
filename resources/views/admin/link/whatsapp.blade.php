@@ -57,14 +57,22 @@
                                         <td>
                                             <div class="d-flex">
                                                 <div class="d-flex flex-column justify-content-center">
-                                                    <h6 class="mb-0 text-xs">{{ $links->tahunAjaran->year }}</h6>
                                                     @if ($links->jurusan)
+<<<<<<< HEAD
                                                         <p class="text-xxs text-uppercase text-secondary mb-0">
                                                             {{ $links->jurusan->name }} </p>
                                                     @else
                                                         <p class="text-xxs text-lowercase text-secondary mb-0"> Tidak untuk
                                                             jurusan tertentu </p>
+=======
+                                                    <p class="text-xxs text-uppercase text-secondary mb-0"> {{ $links->jurusan->name }} </p>
+                                                    @elseif ($links->kursus)
+                                                    <p class="text-xxs text-uppercase text-secondary mb-0"> {{ $links->kursus->name }} </p>
+                                                    @else
+                                                    <h6 class="mb-0 text-xs"> Tidak untuk jurusan tertentu </h6>
+>>>>>>> 0d08226d441fcd57e40b286245da9fa4abddfa4d
                                                     @endif
+                                                    <h6 class="text-xxs text-uppercase text-secondary mb-0">{{ $links->tahunAjaran->year }}</h6>
                                                 </div>
                                             </div>
                                         </td>

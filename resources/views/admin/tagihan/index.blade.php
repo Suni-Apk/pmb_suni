@@ -42,11 +42,11 @@
                                                 id="daftar_ulang" value="DaftarUlang">
                                             <label class="custom-control-label" for="daftar_ulang">Daftar Ulang</label>
                                         </div>
-                                        <div class="form-check mb-3">
+                                        {{-- <div class="form-check mb-3">
                                             <input class="form-check-input" type="radio" name="jenis_tagihan"
                                                 id="tingkatan" value="Tingkatan">
                                             <label class="custom-control-label" for="tingkatan">Tingkatan</label>
-                                        </div>
+                                        </div> --}}
                                     </div>
                                     <div class="modal-footer">
                                         {{-- <button type="button" class="btn bg-gradient-secondary"
@@ -64,26 +64,14 @@
                         <table class="table align-items-center mb-0" id="templateTable">
                             <thead>
                                 <tr>
-                                    <th class="d-flex text-uppercase text-secondary text-xs font-weight-bolder opacity-8">
-                                        Pilih</th>
-                                    <th class="text-uppercase text-secondary text-xs font-weight-bolder opacity-8">No
-                                    </th>
-                                    <th class=" text-uppercase text-secondary text-xs font-weight-bolder opacity-8">
-                                        Nama
-                                        Tagihan</th>
-                                    <th class="text-uppercase text-secondary text-xs px-2 font-weight-bolder opacity-8">
-                                        Tahun / Angkatan</th>
-                                    <th class=" text-uppercase text-secondary text-xs font-weight-bolder opacity-8">
-                                        Jurusan / Kursus</th>
-                                    <th class=" text-uppercase text-secondary text-xs font-weight-bolder opacity-8">
-                                        Program Belajar</th>
-                                    <th class=" text-uppercase text-secondary text-xs font-weight-bolder opacity-8">
-                                        Created</th>
-                                    <th class=" text-uppercase text-secondary text-xs font-weight-bolder opacity-8">
-                                        Jenis tagihan</th>
-                                    <th
-                                        class="text-center text-uppercase text-secondary text-xs font-weight-bolder opacity-8">
-                                        Action</th>
+                                    <th class="d-flex text-uppercase text-secondary text-xs font-weight-bolder opacity-8">Pilih</th>
+                                    <th class=" text-uppercase text-secondary text-xxs font-weight-bolder opacity-8">Nama Tagihan</th>
+                                    <th class="text-uppercase text-secondary text-xxs px-2 font-weight-bolder opacity-8">Tahun / Angkatan</th>
+                                    <th class=" text-uppercase text-secondary text-xxs font-weight-bolder opacity-8">Jurusan / Prodi</th>
+                                    <th class=" text-uppercase text-secondary text-xxs font-weight-bolder opacity-8">Program Belajar</th>
+                                    <th class=" text-uppercase text-secondary text-xxs font-weight-bolder opacity-8">Created at</th>
+                                    <th class=" text-uppercase text-secondary text-xxs font-weight-bolder opacity-8">Jenis tagihan</th>
+                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-8">Aksi</th>
                                 </tr>
                             </thead>
                             <tbody>

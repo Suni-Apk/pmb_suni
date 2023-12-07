@@ -20,7 +20,7 @@
                             </span>
                         </button>
                         <div class="collapse navbar-collapse justify-content-end" id="navigation">
-                            <ul class="navbar-nav pt-3 pt-sm-0 me-lg-2">
+                            <ul class="navbar-nav pt-3 pt-sm-0 me-lg-2 flex-row">
                                 @if (Auth::user())
                                     @if (Auth::user()->role == 'Admin')
                                         <li class="nav-item mb-2 mb-sm-0">
@@ -41,9 +41,9 @@
                                         </a>
                                     </li>
                                 @else
-                                    <li class="nav-item mb-2 mb-sm-0">
-                                        <a class="btn btn-outline-dark me-2 rounded-pill mb-0" href="{{route('register')}}">
-                                            <i class="fas fa-user-circle opacity-6 text-dark me-1"></i>
+                                    <li class="nav-item me-2">
+                                        <a class="btn btn-outline-dark mb-0 rounded-pill" href="{{route('register')}}">
+                                            <i class="fas fa-user-circle opacity-7 text-dark me-1"></i>
                                             Daftar
                                         </a>
                                     </li>
@@ -54,19 +54,19 @@
                                         </button>
                                         <ul class="dropdown-menu" aria-labelledby="dropdownLogin">
                                             <li>
-                                                <a class="dropdown-item" href="{{ route('admin.login') }}">
-                                                    <i class="fas me-2 fa-user-cog"></i>
-                                                  Admin
-                                                </a>
-                                            </li>
-                                            <li>
                                                 <a class="dropdown-item" href="{{ route('login') }}">
                                                     <i class="fas me-3 fa-user"></i>
                                                   Mahasiswa
                                                 </a>
                                             </li>
+                                            <li>
+                                                <a class="dropdown-item" href="{{ route('admin.login') }}">
+                                                    <i class="fas me-2 fa-user-cog"></i>
+                                                  Admin
+                                                </a>
+                                            </li>
                                         </ul>
-                                      </div>
+                                    </div>
                                 @endif
                             </ul>
                         </div>

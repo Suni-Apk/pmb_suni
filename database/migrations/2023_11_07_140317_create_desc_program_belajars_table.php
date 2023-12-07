@@ -14,8 +14,10 @@ return new class extends Migration
         Schema::create('desc_program_belajars', function (Blueprint $table) {
             $table->id();
 
-            $table->text('s1');
-            $table->text('kursus');
+            $table->foreignId('course_id')->nullable();
+            $table->string('title')->nullable();
+            $table->string('keyword')->unique()->nullable();
+            $table->text('desc')->nullable();
 
             $table->timestamps();
         });

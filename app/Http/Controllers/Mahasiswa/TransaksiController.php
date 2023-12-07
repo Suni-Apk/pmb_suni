@@ -43,13 +43,10 @@ class TransaksiController extends Controller
             $ids = $request->id;
 
             // dd($ids);
-            // foreach ($ids as $idTagihan) {
             $tagihans = TagihanDetail::where('id', $ids)->get();
             foreach ($tagihans as $t) {
                 $jumlahBiaya[] = $t->amount;
             }
-            // }
-
 
             $total = array_sum($jumlahBiaya);
             $tagihan = TagihanDetail::where('id', $ids)->firstOrFail();
@@ -68,7 +65,7 @@ class TransaksiController extends Controller
                     'status' => 'belum',
                     'nama_cicilan' => 'Cicilan ke ' . $nilai,
                     'harga' => $cicil,
-                    'end_date' => $end_dates
+                    'end_date' => $end_dates,
                 ]);
             }
             // $transaction = Transaksi::create([
@@ -375,7 +372,8 @@ class TransaksiController extends Controller
     {
         $transaction = Transaksi::where('user_id', $id)->where('jenis_tagihan', $request->DaftarUlang)->where('status', 'berhasil')->get();
         $user = Auth::user();
-        $pdf = PDF::loadView('mahasiswa.invoice.index', compact('transaction', 'user'));
+        $pdf = Pdf::loadView('mahasiswa.invoice.index', compact('transaction', 'user'));
+
         return $pdf->download("$request->DaftarUlang - INVOICE - $user->name.pdf");
     }
     public function proses_bayar_cicilan(Request $request)

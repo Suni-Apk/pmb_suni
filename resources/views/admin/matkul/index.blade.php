@@ -64,6 +64,7 @@
                                             <span class="text-secondary text-xs font-weight-bold">
                                                 {{ $item->hari }}</span>
                                         </td>
+<<<<<<< HEAD
                                         <td class="d-flex align-items-center justify-content-center">
                                             <a href="{{ route('admin.matkul.show', $item->id) }}"
                                                 class="btn btn-sm bg-gradient-success font-weight-bold text-xs mx-2 mt-3">
@@ -87,6 +88,26 @@
                                             </form>
                                         </td>
                                     </tr>
+=======
+                                        <td class="text-center">
+                                            <a href="{{ route('admin.matkul.show' , $item->id) }}" class="badge badge-sm bg-gradient-info font-weight-bold text-xxs">
+                                                <strong>Detail</strong>
+                                            </a>
+
+                                            <a href="{{ route('admin.matkul.edit', $item->id) }}" class="badge badge-sm bg-gradient-secondary font-weight-bold text-xxs mx-1">
+                                                <strong>Edit</strong>
+                                            </a>
+
+                                        <form action="{{ route('admin.matkul.destroy', $item->id) }}" class="d-inline" method="POST">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="badge badge-sm border-0 bg-gradient-danger font-weight-bold text-xxs show_confirm" data-toggle="tooltip" data-original-title="hapus">
+                                                Hapus
+                                            </button>
+                                        </form>
+                                    </td>
+                                </tr>
+>>>>>>> 0d08226d441fcd57e40b286245da9fa4abddfa4d
                                 @endforeach
                             </tbody>
                         </table>

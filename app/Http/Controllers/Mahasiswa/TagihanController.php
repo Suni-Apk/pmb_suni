@@ -7,8 +7,6 @@ use App\Models\Biaya;
 use App\Models\Biodata;
 use App\Models\Cicilan;
 use App\Models\TagihanDetail;
-use App\Models\Transaksi;
-use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -21,6 +19,9 @@ class TagihanController extends Controller
         $biayas = Biaya::all();
         $biayaAll = Biaya::all();
         $cicilanAll = Cicilan::all();
+        // $biayaHeadCount = BiayaHead::where('jenis_biaya', 'Routine')
+        //     ->where('id_angkatans', $biodata->angkatan_id)
+        //     ->count();
 
         // return view('admin.account.mahasiswa.detail', compact('biodata');
         return view('mahasiswa.tagihan.index', compact('biodata', 'mahasiswa', 'biayas', 'biayaAll', 'cicilanAll'));

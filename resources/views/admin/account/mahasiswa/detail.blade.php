@@ -760,7 +760,8 @@
 <div class="col-12">
     <div class="card mb-4">
         <div class="card-header">
-            <h4>Tagihan Program Kursus <span class="text-danger">*</span></h4>
+            <h4>Tagihan Program Kursus {{ $biodatas->course->name }} <span class="text-danger">*</span>
+            </h4>
         </div>
         <div class="card-body">
             <div class="shadow-sm mb-3">
@@ -801,6 +802,12 @@
                                 <td class="text-sm">
                                     Program belajar :
                                     <strong>{{ $biodatas->program_belajar }}</strong>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="text-sm">
+                                    Jenis kursus :
+                                    <strong>{{ $biodatas->course->name }}</strong>
                                 </td>
                             </tr>
                         </tbody>
@@ -887,7 +894,8 @@
                 @if (
                     $biayaHead->jenis_biaya == 'Tidakroutine' &&
                         $biayaHead?->id_angkatans == $biodatas->angkatan_id &&
-                        $biayaHead?->program_belajar == $biodatas->program_belajar)
+                        $biayaHead?->program_belajar == $biodatas->program_belajar &&
+                        $biayaHead?->id_kursus == $biodatas->course_id)
                     <p class="text-bold">Tagihan Biaya lain</p>
                     <div class="table-responsive mb-3">
                         <form action="{{ route('admin.mahasiswa.bayar', $mahasiswa->id) }}"
@@ -906,7 +914,8 @@
                                             <th class="text-sm">Jenis kursus</th>
                                             <th class="text-sm">Total tagihan</th>
                                             <th class="text-sm d-flex align-items-center"><input
-                                                    type="checkbox" name="" id="select_all_ids3"
+                                                    type="checkbox" name=""
+                                                    id="select_all_ids{{ $keyss }}"
                                                     class="me-2"> Pilih
                                             </th>
                                         </tr>
@@ -920,7 +929,8 @@
                                             @if (
                                                 $biayas->jenis_biaya == 'Tidakroutine' &&
                                                     $biayas->id_angkatans == $biodatas->angkatan_id &&
-                                                    $biayas->program_belajar == $biodatas->program_belajar)
+                                                    $biayas->program_belajar == $biodatas->program_belajar &&
+                                                    $biayas?->id_kursus == $biodatas->course_id)
                                                 @foreach ($biayas->tagihanDetail as $key => $tagihans)
                                                     @if ($tagihans->id_users == $mahasiswa->id)
                                                         <tr>
@@ -950,7 +960,7 @@
                                                                     <input type="checkbox" name="id[]"
                                                                         id=""
                                                                         value="{{ $tagihans->id }}"
-                                                                        class="checksAll3">
+                                                                        class="checksAll{{ $keyss }}">
                                                                 @endif
 
 
@@ -970,6 +980,7 @@
             @endif
         @endforeach
     </div>
+</div>
 @endif
 @endforeach
 </div>
@@ -997,14 +1008,14 @@
 @endif
 <script>
     $(function(e) {
-        $("#select_all_ids").click(function() {
-            $('.checksAll').prop('checked', $(this).prop('checked'));
+        $("#select_all_ids0").click(function() {
+            $('.checksAll0').prop('checked', $(this).prop('checked'));
+        });
+        $("#select_all_ids1").click(function() {
+            $('.checksAll1').prop('checked', $(this).prop('checked'));
         });
         $("#select_all_ids2").click(function() {
             $('.checksAll2').prop('checked', $(this).prop('checked'));
-        });
-        $("#select_all_ids3").click(function() {
-            $('.checksAll3').prop('checked', $(this).prop('checked'));
         });
     });
 </script>

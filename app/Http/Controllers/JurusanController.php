@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Exports\JurusanExport;
+use App\Models\Course;
 use App\Models\Jurusan;
 use App\Models\Link;
 use App\Models\Matkuls;
@@ -19,7 +20,8 @@ class JurusanController extends Controller
     public function index()
     {
         $jurusan = Jurusan::all();
-        return view('admin.jurusan.index', compact('jurusan'));
+        $tahun_ajaran = TahunAjaran::all();
+        return view('admin.jurusan.index', compact('jurusan', 'tahun_ajaran'));
     }
 
 
@@ -38,22 +40,23 @@ class JurusanController extends Controller
     public function store(Request $request)
     {
         $data = $request->validate([
-            'id_tahun_ajarans' => '',
             'name' => 'required',
             'code' => 'required'
         ]);
         $jurusan = Jurusan::create($data);
+
         $semester = ['Semester 1', 'Semester 2', 'Semester 3', 'Semester 4', 'Semester 5', 'Semester 6', 'Semester 7', 'Semester 8'];
-        // $tanggal = ['', 'Semester 2', 'Semester 3', 'Semester 4', 'Semester 5', 'Semester 6', 'Semester 7', 'Semester 8'];      
+
         foreach ($semester as $key => $item) {
             Semester::create([
                 'id_jurusans' => $jurusan->id,
                 'name' => $item
-                // 'start_date' =>  $tanggals
             ]);
         }
+
         return redirect()->route('admin.jurusan.index')->with('success', "Jurusan Berhasil Di Buat!!");
     }
+
 
     /**
      * Display the specified resource.
@@ -91,7 +94,6 @@ class JurusanController extends Controller
             'name' => 'required',
             'code' => 'required'
         ]);
-
         $jurusan->update($data);
         return redirect()->route('admin.jurusan.index')->with('success', "Jurusan Berhasil Di Edit!!");
     }
@@ -102,6 +104,17 @@ class JurusanController extends Controller
     public function destroy(string $id)
     {
         $jurusan = Jurusan::findOrFail($id);
+
+        if ($jurusan->matkuls) {
+            $jurusan->matkuls->delete();
+        }
+        if ($jurusan->semesters) {
+            $jurusan->semesters->delete();
+        }
+        if ($jurusan->links) {
+            $jurusan->links->delete();
+        }
+
         $jurusan->delete();
         return redirect()->route('admin.jurusan.index');
     }

@@ -86,7 +86,7 @@
                     <div class="list-group list-group-horizontal" id="list-tab" role="tablist">
                         <a id="list-sarjana-list" data-bs-toggle="list" href="#list-sarjana" role="tab" aria-controls="list-sarjana"
                             class="list-group-item list-group-item-action border-0 shadow text-center active" 
-                        >Jurusan</a>
+                        >Detail Jurusan</a>
                         <a id="list-kursus-list" data-bs-toggle="list" href="#list-kursus" role="tab" aria-controls="list-kursus"
                         class="list-group-item list-group-item-action border-0 shadow text-center" 
                         >Link</a>
@@ -130,13 +130,13 @@
                                                         @foreach ($matkuls->where('id_semesters', $semesters->id) as $matkul)
                                                             <tr>
                                                                 <td>
-                                                                    <div class="d-flex px-2 py-1">
+                                                                    <div class="d-flex py-1">
                                                                         <div class="d-flex flex-column justify-content-center">
                                                                             <a href="{{ route('admin.matkul.show', $matkul->id) }}" class="title-item font-weight-bold mb-0 text-sm ms-2">{{ $matkul->nama_matkuls }}</a>
                                                                         </div>
                                                                     </div>
                                                                 </td>
-                                                                <td class="align-text-start">
+                                                                <td class="ps-4">
                                                                     <span class="text-secondary text-xs font-weight-bold"
                                                                     >{{ $matkul->nama_dosen }}</span>
                                                                 </td>
@@ -159,55 +159,127 @@
                                     </div>
                                 </div>
                                 @endforeach
+                                @if ($jurusan->links)
+                                    <div class="col-12 p-2">
+                                        <div class="card">
+                                            <div class="card-header pb-0">
+                                                <h5>Daftar Link</h5>
+                                            </div>
+                                            <div class="card-body pt-0 px-0">
+                                                <div class="table-responsive p-0">
+                                                    <table class="table align-items-center mb-0" id="table">
+                                                        <thead>
+                                                            <tr>
+                                                                <th class="text-uppercase text-secondary text-xxs px-2 font-weight-bolder opacity-7">Nama Link</th>
+                                                                <th class="text-uppercase text-secondary text-xxs px-2 font-weight-bolder opacity-7">Url</th>
+                                                                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2 text-center">Tahun Ajaran / Jurusan</th>
+                                                                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2 text-center">Gender</th>
+                                                                <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Aksi</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            @foreach ($links->where('id_jurusans', $jurusan->id) as $index => $item)
+                                                                <tr>
+                                                                    <td class="text-sm">
+                                                                        <span class="text-bold">{{ $item->name }}</span>
+                                                                    </td>
+                                                                    <td class="text-xs">
+                                                                        <span class="text-bold">{{ $item->url }}</span>
+                                                                    </td>
+                                                                    <td>
+                                                                        <div class="d-flex">
+                                                                            <div class="d-flex flex-column justify-content-center">
+                                                                                @if ($item->jurusan)
+                                                                                <h6 class="mb-0 text-xs text-uppercase"> {{ $item->jurusan->name }} </h6>
+                                                                                @else
+                                                                                <h6 class="mb-0 text-xs"> Semua jurusan </h6>
+                                                                                @endif
+                                                                                <h6 class="text-xxs text-uppercase text-secondary mb-0">{{ $item->tahunAjaran->year }}</h6>
+                                                                            </div>
+                                                                        </div>
+                                                                    </td>
+                                                                    <td class="align text-center">
+                                                                        <span class="text-secondary text-xs font-weight-bold">
+                                                                            @if ($item->gender == 'all')
+                                                                                Semua
+                                                                            @else
+                                                                                {{ $item->gender }}
+                                                                            @endif
+                                                                        </span>
+                                                                    </td>
+                                                                    <td class="align-center">
+                                                                        <a href="{{ route('admin.link.detail', $item->id) }}" class="badge badge-sm bg-gradient-info font-weight-bold text-xxs">
+                                                                            <strong>Detail</strong>
+                                                                        </a>
+                                                                        <a href="{{ route('admin.link.edit', ['type' => $item->type, 'id' => $item->id]) }}" class="badge badge-sm bg-gradient-secondary font-weight-bold text-xxs mx-1">
+                                                                            <strong>Edit</strong>
+                                                                        </a>
+                            
+                                                                        <form action="{{ route('admin.link.destroy', $item->id) }}" method="POST" class="d-inline">
+                                                                            @csrf
+                                                                            @method('DELETE')
+                                                                            <button type="submit" class="badge badge-sm bg-gradient-danger font-weight-bold text-xxs border-0 show_confirm">
+                                                                                <strong>Hapus</strong>
+                                                                            </button>
+                                                                        </form>
+                                                                    </td>
+                                                                </tr>
+                                                            @endforeach
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                @endif
                             </div>
                         </div>
                         <div class="tab-pane fade" id="list-kursus" role="tabpanel" aria-labelledby="list-kursus-list">
                             <div class="py-2">
                                 <div class="card">
                                     <div class="card-header pb-0">
-                                        <h6>Tambah Link</h6>
+                                        <h6>Tambah Link Baru</h6>
                                     </div>
                                     <div class="card-body">
-                                        <form action="{{ route('admin.link.create.process') }}" method="POST">
+                                        <form action="{{ route('admin.link.create.process') }}" method="post">
                                             @csrf
                                             @method('POST')
-                                            <input type="number" name="id_jurusans" value="{{ $jurusan->id }}" class="d-none">
-                                            <div class="form-group mb-3">
-                                                <label for="name">Nama</label>
+                                            <div class="form-group">
+                                                <label for="">Nama</label>
                                                 <small class="text-danger" style="font-size: 12px">*</small>
-                                                <input type="text" name="name" id="name" class="form-control" placeholder="Masukkan Nama linknya Disini">
+                                                <input type="text" class="form-control" name="name" id="name" value="{{ old('name') }}">
                                             </div>
-                                            <div class="form-group mb-3">
-                                                <label for="url">URL Link</label>
+                                            <div class="form-group">
+                                                <label for="">Url Link</label>
                                                 <small class="text-danger" style="font-size: 12px">*</small>
-                                                <input type="url" name="url" id="url" class="form-control" placeholder="Masukkan URL linknya Disini">
+                                                <input type="url" class="form-control" name="url" id="url" value="{{ old('url') }}">
                                             </div>
                                             <div class="form-group mb-3">
                                                 <label>Tipe Link</label>
                                                 <small class="text-danger" style="font-size: 12px">*</small>
                                                 <div class="form-check">
-                                                    <input type="radio" name="type" id="Whatsapp" class="form-check-input" value="Whatsapp">
-                                                    <label class="form-check-label" for="Whatsapp">Whatsapp</label>
+                                                    <input type="radio" name="type" id="whatsapp" class="form-check-input" value="whatsapp">
+                                                    <label class="form-check-label" for="whatsapp">Whatsapp</label>
                                                 </div>
                                                 <div class="form-check">
-                                                    <input type="radio" name="type" id="Zoom" class="form-check-input" value="Zoom">
-                                                    <label class="form-check-label" for="Zoom">Zoom</label>
+                                                    <input type="radio" name="type" id="zoom" class="form-check-input" value="zoom">
+                                                    <label class="form-check-label" for="zoom">Zoom</label>
                                                 </div>
                                             </div>
                                             <div class="form-group mb-3">
                                                 <label>Gender</label>
                                                 <small class="text-danger" style="font-size: 12px">*</small>
                                                 <div class="form-check">
-                                                    <input class="form-check-input" type="radio" name="gender" id="ikhwan"
-                                                        value="ikhwan">
-                                                    <label class="form-check-label" for="ikhwan">
+                                                    <input class="form-check-input" type="radio" name="gender" id="Laki-Laki"
+                                                        value="Laki-Laki">
+                                                    <label class="form-check-label" for="Laki-Laki">
                                                         Ikhwan
                                                     </label>
                                                 </div>
                                                 <div class="form-check">
-                                                    <input class="form-check-input" type="radio" name="gender" id="akhwat"
-                                                        value="akhwat">
-                                                    <label class="form-check-label" for="akhwat">
+                                                    <input class="form-check-input" type="radio" name="gender" id="Perempuan"
+                                                        value="Perempuan">
+                                                    <label class="form-check-label" for="Perempuan">
                                                         Akhwat
                                                     </label>
                                                 </div>
@@ -229,11 +301,29 @@
                                                     @endforeach
                                                 </select>
                                             </div>
-                                            
-                                            <button type="submit" class="btn btn-success">Submit</button>
-                                            <a href="javascript:location.reload()">
-                                                <button type="button" class="btn btn-warning">Back</button>
-                                            </a>
+                                            <div class="form-group">
+                                                <label for="id_jurusans">Jurusan</label>
+                                                <select name="id_jurusans" id="id_jurusans" class="form-select">
+                                                    <option selected disabled>-----------</option>
+                                                    @foreach ($jurusanAll as $item)
+                                                        <option value="{{ $item->id }}">{{ $item->name }}</option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="id_courses">Kursus</label>
+                                                <small class="text-info" style="font-size: 10px">Diisi ketika ingin menambahkan link untuk Kursus</small>
+                                                <select name="id_courses" id="id_courses" class="form-select">
+                                                    <option selected disabled value="">-----------</option>
+                                                    @foreach ($kursus as $item)
+                                                        <option value="{{ $item->id }}">{{ $item->name }}</option>
+                                                    @endforeach
+                                                </select>
+                                            </div>                    
+                                            <div class="form-group">
+                                                <button type="submit" class="btn btn-primary">Submit</button>
+                                                <a href="javascript:location.reload()" class="btn btn-warning">Reset</a>
+                                            </div>
                                         </form>
                                     </div>
                                 </div>
@@ -285,10 +375,18 @@
                                 <input type="time" name="selesai" id="selesai" class="form-control">
                             </div>
                             <div class="form-group mb-3">
-                                <label for="tanggal">Tanggal</label>
-                                <input type="date" name="tanggal" id="tanggal" class="form-control">
+                                <label for="hari">Hari</label>
+                                <select name="hari" id="hari" class="form-control" required>
+                                    <option hidden selected>-----------</option>
+                                    <option value="Senin">Senin</option> 
+                                    <option value="Selasa">Selasa</option> 
+                                    <option value="Rabu">Rabu</option> 
+                                    <option value="Kamis">Kamis</option> 
+                                    <option value="Jumat">Jumat</option> 
+                                    <option value="Sabtu">Sabtu</option> 
+                                    <option value="Ahad">Ahad</option> 
+                                </select>
                             </div>
-
                                 <button type="submit" class="btn btn-success">Submit</button>
                                 <button type="button" class="btn btn-warning" data-bs-dismiss="modal">Batal</button>
                             </form>

@@ -3,19 +3,21 @@
 namespace App\Traits;
 
 use App\Models\User;
-use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Http;
 
-trait Ipaymu {
+trait Ipaymu
+{
     public $va;
     public $apiKey;
 
     public function __construct()
     {
-        $this->va = config('Ipaymu.va');
-        $this->apiKey = config('Ipaymu.api_key');
+        $this->va = config('ipaymu.va');
+        $this->apiKey = config('ipaymu.api_key');
     }
-    public function signature($body,$method)
+
+    public function signature($body, $method)
     {
         $jsonBody     = json_encode($body, JSON_UNESCAPED_SLASHES);
         $requestBody  = strtolower(hash('sha256', $jsonBody));
@@ -26,12 +28,12 @@ trait Ipaymu {
     }
     protected function balance()
     {
-        $va           = $this->va; 
-        $url          = 'https://sandbox.ipaymu.com/api/v2/balance'; 
-        $method       = 'POST';  
+        $va           = $this->va;
+        $url          = 'https://sandbox.ipaymu.com/api/v2/balance';
+        $method       = 'POST';
         $timestamp    = Date('YmdHis');
         $body['account']    = $va;
-        $signature    = $this->signature($body,$method);
+        $signature    = $this->signature($body, $method);
 
         $headers = array(
             'Accept' => 'application/json',
@@ -52,31 +54,36 @@ trait Ipaymu {
         return $responser;
     }
 
-    public function redirect_payment($id)
+    public function redirect_payment($id, $program, $administrasiS1, $administrasiKursus)
     {
         $user         = User::find($id);
-
         $va           = $this->va; //get on iPaymu dashboard
         $url          = 'https://sandbox.ipaymu.com/api/v2/payment'; // for development mode     
         $method       = 'POST'; //method
         $timestamp    = Date('YmdHis');
 
-        $body['product'][]       = 'Pendaftaran';
+        if ($program == 'S1') {
+            $body['product'][]       = "Pendaftaran $program";
+        } else {
+            $body['product'][]       = "Pendaftaran $program";
+        }
         $body['qty'][]           = 1;
-        $body['price'][]         = 100000;
-        $body['referenceId']     = 'ID-PPDB-'.rand(1111,9999);
+        if ($program == 'S1') {
+            $body['price'][]         = $administrasiS1->amount;
+        } else {
+            $body['price'][]         = $administrasiKursus->amount;
+        }
+        $body['referenceId']     = 'ID-PPDB-' . rand(1111, 9999);
         $body['returnUrl']       = route('callback.return');
-        $body['notifyUrl']       = 'https://c61f-139-192-164-152.ngrok-free.app/callback/notify';
+        $body['notifyUrl']       = 'https://a915-139-192-164-152.ngrok-free.app/callback/notify';
         $body['cancelUrl']       = route('callback.cancel');
         $body['paymentChannel']  = 'qris';
         $body['expired']         = 24;
         $body['buyerName']       = $user->name;
         $body['buyerPhone']      = $user->phone;
-        if ($user->email) {
-            $body['buyerEmail']  = $user->email;
-        }
-        
-        $signature               = $this->signature($body,$method);
+        $body['buyerEmail']      = $user->email;
+
+        $signature               = $this->signature($body, $method);
 
         $headers = array(
             'Content-Type'       => 'application/json',
@@ -85,13 +92,13 @@ trait Ipaymu {
             'timestamp'          => $timestamp
         );
 
-        $data_request = Http::withHeaders($headers)->post($url,$body);
+        $data_request = Http::withHeaders($headers)->post($url, $body);
         $response     = $data_request->object();
 
         return $response;
     }
 
-    public function redirect_payment1($nama_product,$total, $id_tagihan)
+    public function redirect_payment1($nama_product, $total, $id_tagihan)
     {
         $user         = Auth::user();
 
@@ -103,9 +110,9 @@ trait Ipaymu {
         $body['product'][]       = $nama_product;
         $body['qty'][]           = 1;
         $body['price'][]         = $total;
-        $body['referenceId']     = 'ID-PPDB-'.rand(1111,9999);
+        $body['referenceId']     = 'ID-PPDB-' . rand(1111, 9999);
         $body['returnUrl']       = route('callback.return');
-        $body['notifyUrl']       = 'https://c61f-139-192-164-152.ngrok-free.app/callback/notify';
+        $body['notifyUrl']       = 'https://4e16-149-113-107-213.ngrok-free.app/callback/notify';
         $body['cancelUrl']       = route('callback.cancel');
         $body['paymentChannel']  = 'qris';
         $body['expired']         = 24;
@@ -114,8 +121,8 @@ trait Ipaymu {
         if ($user->email) {
             $body['buyerEmail']  = $user->email;
         }
-        
-        $signature               = $this->signature($body,$method);
+
+        $signature               = $this->signature($body, $method);
 
         $headers = array(
             'Content-Type'       => 'application/json',
@@ -124,7 +131,7 @@ trait Ipaymu {
             'timestamp'          => $timestamp
         );
 
-        $data_request = Http::withHeaders($headers)->post($url,$body);
+        $data_request = Http::withHeaders($headers)->post($url, $body);
         $response     = $data_request->object();
 
         return $response;
@@ -141,9 +148,9 @@ trait Ipaymu {
         $body['product'][]       = $nama_product;
         $body['qty'][]           = 1;
         $body['price'][]         = $total;
-        $body['referenceId']     = 'ID-PPDB-'.rand(1111,9999);
+        $body['referenceId']     = 'ID-PPDB-' . rand(1111, 9999);
         $body['returnUrl']       = route('callback.return');
-        $body['notifyUrl']       = 'https://c61f-139-192-164-152.ngrok-free.app/callback/notify';
+        $body['notifyUrl']       = 'https://4e16-149-113-107-213.ngrok-free.app/callback/notify';
         $body['cancelUrl']       = route('callback.cancel');
         $body['paymentChannel']  = 'qris';
         $body['expired']         = 24;
@@ -152,8 +159,8 @@ trait Ipaymu {
         if ($user->email) {
             $body['buyerEmail']  = $user->email;
         }
-        
-        $signature               = $this->signature($body,$method);
+
+        $signature               = $this->signature($body, $method);
 
         $headers = array(
             'Content-Type'       => 'application/json',
@@ -162,9 +169,9 @@ trait Ipaymu {
             'timestamp'          => $timestamp
         );
 
-        $data_request = Http::withHeaders($headers)->post($url,$body);
+        $data_request = Http::withHeaders($headers)->post($url, $body);
         $response     = $data_request->object();
 
-        return $response; 
+        return $response;
     }
 }

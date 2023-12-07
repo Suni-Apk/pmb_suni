@@ -23,6 +23,14 @@ class AdministrasiSeeder extends Seeder
             'program_belajar' => 'Kursus',
             'amount' => '850000',
             'id_tahunAjaran' => 1,
+            'course_id' => 1,
+        ]);
+
+        Administrasi::create([
+            'program_belajar' => 'Kursus',
+            'amount' => '500000',
+            'id_tahunAjaran' => 1,
+            'course_id' => 2,
         ]);
     }
 }

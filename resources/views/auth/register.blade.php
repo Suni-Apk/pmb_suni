@@ -4,19 +4,6 @@
 
 @section('content')
     <section class="min-vh-25">
-        {{-- <div class="page-header align-items-start min-vh-50 pt-5 pb-11 m-3 border-radius-lg"
-            style="background-image: url('/assets/img/curved-images/curved14.jpg');">
-            <span class="mask bg-gradient-dark opacity-6"></span>
-            <div class="container">
-                <div class="row justify-content-center">
-                    <div class="col-lg-5 text-center mx-auto">
-                        <h1 class="text-white mb-1 mt-6">Selamat Datang!</h1>
-                        <p class="letter-spacing-1 text-white">Harap isi formulir dibawah ini dengan benar.</p>
-                    </div>
-                </div>
-            </div>
-        </div> --}}
-
         <div id="carouselRegister" class="carousel slide page-header align-items-start height-500 pb-7 m-3 border-radius-lg z-index-1" data-bs-ride="carousel" data-bs-interval="3000">
             <div class="carousel-indicators" style="top: 5rem;">
                 @foreach ($banner->where('type', 'WELCOME') as $item)
@@ -60,16 +47,16 @@
                             <h5 class="mb-0">Daftar disini <i class="fas fa-arrow-down text-sm text-secondary"></i></h5>
                         </div>
                         <div class="card-body">
-                            <form role="form text-left" action="{{ route('register.process') }}" method="POST">
+                            <form role="form text-left" action="{{ route('register.process.new') }}" method="POST" id="registerForm">
                                 @csrf
                                 @method('POST')
                                 <div class="row">
-                                    <div class="col-6">
+                                    <div class="col-12 col-sm-6">
                                         <div class="mb-3">
                                             <label for="" class="form-label">Nama Lengkap <strong
                                                     class="text-danger">*</strong></label>
                                             <input type="text" name="name"
-                                                class="form-control @error('name') is-invalid @enderror" placeholder="Name">
+                                                class="form-control @error('name') is-invalid @enderror" placeholder="Name" value="{{ old('name') }}">
                                             @error('name')
                                                 <label for="" class="text-danger">{{ $message }}</label>
                                             @enderror
@@ -79,7 +66,7 @@
                                                     class="text-danger">*</strong></label>
                                             <input type="text" name="phone"
                                                 class="form-control @error('phone') is-invalid @enderror"
-                                                placeholder="Enter Your Phone">
+                                                placeholder="Enter Your Phone" value="{{ old('phone') }}">
                                             @error('phone')
                                                 <label for="" class="text-danger">{{ $message }}</label>
                                             @enderror
@@ -94,22 +81,24 @@
                                                 <label for="" class="text-danger">{{ $message }}</label>
                                             @enderror
                                         </div>
-                                        <div class="form-check form-check-info text-left">
-                                            <input class="form-check-input" type="checkbox" value="" id="checkBill"
-                                                checked>
-                                            <label class="form-check-label" for="checkBill">
-                                                I agree the <a href="" class="text-dark font-weight-bolder">Terms and
-                                                    Conditions</a>
-                                            </label>
+                                        <div class="mb-3">
+                                            <label for="birthdate" class="form-label">Ulangi Password <strong
+                                                    class="text-danger">*</strong></label>
+                                            <input type="password" name="password_confirmation"
+                                                class="form-control @error('password_confirmation') is-invalid @enderror"
+                                                placeholder="Password" aria-label="Password">
+                                            @error('password_confirmation')
+                                                <label for="" class="text-danger">{{ $message }}</label>
+                                            @enderror
                                         </div>
                                     </div>
-                                    <div class="col-6">
+                                    <div class="col-12 col-sm-6">
                                         <div class="mb-3">
                                             <label for="" class="form-label">Email <strong
                                                     class="text-danger">*</strong></label>
                                             <input type="text" name="email"
                                                 class="form-control @error('email') is-invalid @enderror"
-                                                placeholder="Enter Your Phone">
+                                                placeholder="Enter Your Phone" value="{{ old('email') }}">
                                             @error('email')
                                                 <label for="" class="text-danger">{{ $message }}</label>
                                             @enderror
@@ -120,22 +109,64 @@
                                             <select name="gender" id="gender"
                                                 class="form-select @error('gender') is-invalid @enderror">
                                                 <option value="" disabled selected>Pilih Gender Anda</option>
-                                                <option value="Laki-Laki">Laki-Laki</option>
-                                                <option value="Perempuan">Perempuan</option>
+                                                <option value="Laki-Laki" @selected(old('gender') == 'Laki-Laki')>Laki-Laki</option>
+                                                <option value="Perempuan" @selected(old('gender') == 'Laki-Laki')>Perempuan</option>
                                             </select>
                                             @error('gender')
                                                 <label for="" class="text-danger">{{ $message }}</label>
                                             @enderror
                                         </div>
                                         <div class="mb-3">
-                                            <label for="birthdate" class="form-label">Ulangi Password <strong
+                                            <label for="program" class="form-label">Program Akademik<strong
                                                     class="text-danger">*</strong></label>
-                                            <input type="password" name="password_confirmation"
-                                                class="form-control @error('password_confirmation') is-invalid @enderror"
-                                                placeholder="Password" aria-label="Password">
-                                            @error('password_confirmation')
+                                            <select name="program_belajar" id="programBelajar"
+                                                class="form-select @error('program_belajar') is-invalid @enderror">
+                                                <option value="" disabled selected>Pilih Program Akademik</option>
+                                                <option value="S1" @selected(old('program_belajar') == 'S1')>S1</option>
+                                                @php
+                                                    $courses = App\Models\Course::get();
+                                                @endphp
+                                                @foreach ($courses as $item)
+                                                    <option value="{{ $item->keyword }}" @selected(old('program_belajar') == $item->keyword)>{{ $item->name }}</option>
+                                                @endforeach
+                                            </select>
+                                            @error('program_belajar')
                                                 <label for="" class="text-danger">{{ $message }}</label>
                                             @enderror
+                                        </div>
+                                        <script>
+                                            document.addEventListener('DOMContentLoaded', function () {
+                                                var programBelajarDropdown = document.getElementById('programBelajar');
+                                                var registerForm = document.getElementById('registerForm');
+                                        
+                                                programBelajarDropdown.addEventListener('change', function () {
+                                                    var selectedProgram = programBelajarDropdown.value;
+                                                    var baseUrl = '{{ route('register') }}';
+                                                    
+                                                    // Perbarui URL tanpa mereload halaman
+                                                    history.pushState(null, null, baseUrl + '/' + selectedProgram);
+                                                });
+                                                
+                                                // Jika ada parameter program pada URL, pilih nilainya dalam dropdown
+                                                var currentProgram = window.location.pathname.split('/').pop();
+                                                if (currentProgram) {
+                                                    programBelajarDropdown.value = currentProgram;
+                                                }
+                                        
+                                                // Tangkap perubahan URL dan perbarui dropdown
+                                                window.addEventListener('popstate', function () {
+                                                    var currentProgram = window.location.pathname.split('/').pop();
+                                                    programBelajarDropdown.value = currentProgram;
+                                                });
+                                            });
+                                        </script>                                                                               
+                                        <div class="form-check form-check-info text-left">
+                                            <input class="form-check-input" type="checkbox" value="" id="checkBill"
+                                                checked>
+                                            <label class="form-check-label" for="checkBill">
+                                                I agree the <a href="" class="text-dark font-weight-bolder">Terms and
+                                                    Conditions</a>
+                                            </label>
                                         </div>
                                     </div>
                                 </div>

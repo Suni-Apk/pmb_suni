@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Banner;
 use App\Models\Jurusan;
 use App\Models\Matkuls;
 use App\Models\Transaksi;
@@ -23,8 +24,8 @@ class DashboardController extends Controller
         $client = new Client();
         $response = $client->get("http://api.aladhan.com/v1/gToH/$tanggal");
         $data = json_decode($response->getBody(), true); // Menggunakan true untuk mendapatkan array asosiatif
-
         // Mengambil tanggal Hijriah untuk indeks pertama (bulan ini).
+        $adminCount = User::where('role', 'Admin')->count();
         $hijriDateday = $data['data']['hijri']['day'];
         $hijriDatedayArabic = $data['data']['hijri']['weekday']['ar'];
         $hijriDatemonth = $data['data']['hijri']['month']['ar'];
@@ -32,11 +33,12 @@ class DashboardController extends Controller
 
         // chart resources
         $users = User::orderBy('id', 'desc')->get();
-        $pemasukan = Transaksi::sum('total');
+        $pemasukan = Transaksi::where('status', 'berhasil')->sum('total');
         $jurusan = Jurusan::get();
         $matkul = Matkuls::get();
-
-        return view('admin.index',compact('hijriDateday','hijriDatedayArabic','hijriDatemonth','hijriDateyear', 'user', 'users', 'pemasukan', 'jurusan', 'matkul'));
+        $banner = Banner::where('type', 'DASHBOARD')->get();
+        $transaksi = Transaksi::latest()->get();
+        return view('admin.index',compact('hijriDateday','hijriDatedayArabic','hijriDatemonth','hijriDateyear', 'user', 'users', 'pemasukan', 'jurusan', 'matkul', 'banner', 'transaksi'));
     }
 
     public function profile()

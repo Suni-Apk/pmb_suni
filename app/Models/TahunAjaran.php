@@ -16,19 +16,14 @@ class TahunAjaran extends Model
         'end_at'
     ];
 
-    public function jurusans()
-    {
-        return $this->hasMany(Jurusan::class);
-    }
-
     public function users()
     {
-        return $this->hasMany(User::class);
+        return $this->hasMany(User::class, 'angkatan_id');
     }
 
     public function biodatas()
     {
-        return $this->hasMany(Biodata::class);
+        return $this->hasMany(Biodata::class, 'angkatan_id');
     }
 
     public function links()
