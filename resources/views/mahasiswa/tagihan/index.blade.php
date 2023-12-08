@@ -20,25 +20,25 @@
             ->first();
 
         $user = Auth::user();
-        $tagihan = App\Models\TagihanDetail::where('id_biayas', $biaya->id)
+        $tagihan = App\Models\TagihanDetail::where('id_biayas', $biaya?->id)
             ->where('id_users', $user->id)
             ->latest()
             ->first();
         if ($tagihan) {
-            $cicilans = App\Models\Cicilan::where('id_tagihan_details', $tagihan->id)->first();
-            $cicilan2 = App\Models\Cicilan::where('id_tagihan_details', $tagihan->id)
+            $cicilans = App\Models\Cicilan::where('id_tagihan_details', $tagihan?->id)->first();
+            $cicilan2 = App\Models\Cicilan::where('id_tagihan_details', $tagihan?->id)
                 ->where('status', 'LUNAS')
                 ->get();
             $total_pembayaran = round(
-                App\Models\Cicilan::where('id_tagihan_details', $tagihan->id)
+                App\Models\Cicilan::where('id_tagihan_details', $tagihan?->id)
                     ->where('status', 'belum')
                     ->sum('harga'),
             );
-            $setengah_jumlah_daftar_ulang = round(($tagihan->amount * 2) / 3);
+            $setengah_jumlah_daftar_ulang = round(($tagihan?->amount * 2) / 3);
         }
 
     @endphp
-    @if (!isset($cicilans) && !isset($transactionDaftar))
+    @if (!isset($cicilans) && !isset($transactionDaftar) && $tagihan)
         <div class="col-12 text-center mb-4">
             <div class="card">
                 <h3 class="mt-3">Tagihan</h3>
@@ -50,7 +50,7 @@
                             @csrf
                             @method('GET')
                             <div class="col-6 col-sm-4">
-                                <input type="hidden" name="id" value="{{ $tagihan->id }}">
+                                <input type="hidden" name="id" value="{{ $tagihan?->id }}">
                                 <button name="jenis_pembayaran" value="cash" type="submit"
                                     class="btn bg-gradient-primary sm:w-50">
                                     Cash
@@ -67,6 +67,8 @@
                 </div>
             </div>
         </div>
+    @elseif (!isset($tagihan))
+        Belum ada apa apa !
     @elseif($cicilans)
         @php
             $biaya = App\Models\Biaya::where('program_belajar', 'S1')
@@ -76,7 +78,7 @@
                 ->first();
 
             $user = Auth::user();
-            $tagihan = App\Models\TagihanDetail::where('id_biayas', $biaya->id)
+            $tagihan = App\Models\TagihanDetail::where('id_biayas', $biaya?->id)
                 ->where('id_users', $user->id)
                 ->latest()
                 ->first();
@@ -84,14 +86,14 @@
             // Menghitung total pembayaran yang telah dilakukan
             $total_pembayaran = round(
                 App\Models\Transaksi::where('user_id', $user->id)
-                    ->where('tagihan_detail_id', $tagihan->id)
-                    ->where('jenis_tagihan', $biaya->jenis_biaya)
+                    ->where('tagihan_detail_id', $tagihan?->id)
+                    ->where('jenis_tagihan', $biaya?->jenis_biaya)
                     ->where('status', 'berhasil')
                     ->where('jenis_pembayaran', 'cicil')
                     ->sum('total'),
             );
-            $cicilannya = App\Models\Cicilan::where('id_tagihan_details', $tagihan->id)->get();
-            $cicilan1 = App\Models\Cicilan::where('id_tagihan_details', $tagihan->id)
+            $cicilannya = App\Models\Cicilan::where('id_tagihan_details', $tagihan?->id)->get();
+            $cicilan1 = App\Models\Cicilan::where('id_tagihan_details', $tagihan?->id)
                 ->where('status', 'LUNAS')
                 ->first();
 
@@ -226,10 +228,11 @@
             <div class="col-12 text-center mb-4">
                 <div class="card py-3">
                     <div class="d-flex align-items-start justify-content-start ms-2">
-                        <form action="{{route('mahasiswa.invoice.download',Auth::user()->id)}}" method="POST">
+                        <form action="{{ route('mahasiswa.invoice.download', Auth::user()->id) }}" method="POST">
                             @csrf
                             @method('POST')
-                            <button type="submit" class="btn btn-secondary" name="DaftarUlang" value="DaftarUlang"><i class="fas fa-file-download me-2"></i>Invoice</button>
+                            <button type="submit" class="btn btn-secondary" name="DaftarUlang" value="DaftarUlang"><i
+                                    class="fas fa-file-download me-2"></i>Invoice</button>
                         </form>
                     </div>
                     <h2 class="mt-3">Selamat !</h2>
@@ -459,7 +462,7 @@
         ->where('status', 'berhasil')
         ->where('jenis_pembayaran', 'cicil')
         ->sum('total');
-        
+
     $cicilannya = App\Models\Cicilan::where('id_tagihan_details', $tagihan->id);
     // Hitung setengah dari $jumlah_uang_daftar_ulang
     // $setengah_jumlah_daftar_ulang = ($tagihan->amount * 2) / 3;
@@ -478,10 +481,11 @@
 <div class="col-12 text-center mb-4">
     <div class="card py-3">
         <div class="d-flex align-items-start justify-content-start ms-2">
-            <form action="{{route('mahasiswa.invoice.download',Auth::user()->id)}}" method="POST">
+            <form action="{{ route('mahasiswa.invoice.download', Auth::user()->id) }}" method="POST">
                 @csrf
                 @method('POST')
-                <button type="submit" class="btn btn-secondary" name="DaftarUlang" value="DaftarUlang"><i class="fas fa-file-download me-2"></i>Invoice</button>
+                <button type="submit" class="btn btn-secondary" name="DaftarUlang" value="DaftarUlang"><i
+                        class="fas fa-file-download me-2"></i>Invoice</button>
             </form>
         </div>
         <h2 class="mt-3">Selamat !</h2>
@@ -495,44 +499,57 @@
         ->latest()
         ->first();
 
-        $user = Auth::user();
-        $tagihan = App\Models\TagihanDetail::where('id_biayas', $biaya->id)
-            ->where('id_users', $user->id)
-            ->latest()
-            ->first();
-        // $bagi3 = $tagihan->amount / 3;
-        // dd($bagi3);
-        $transaction = App\Models\Transaksi::where('user_id', $user->id)
-            ->where('tagihan_detail_id', $tagihan->id)
-            ->where('jenis_tagihan', $biaya->jenis_biaya)
-            ->where('status', 'berhasil')
-            ->where('jenis_pembayaran', 'cash')
-            ->first();
-    @endphp
-    @if (!$transaction)
-    @else
-        <div class="row">
-            @if ($biodata->program_belajar === 'S1')
-                <div class="col-12">
-                    <div class="card mb-4">
-                        <div class="card-header">
-                            @if ($errors->any())
-                                @foreach ($errors->all() as $error)
-                                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                                        <span class="alert-text">{{ $error }}</span>
-                                        <button type="button" class="btn-close" data-bs-dismiss="alert"
-                                            aria-label="Close">
-                                            <span aria-hidden="true">&times;</span>
-                                        </button>
-                                    </div>
-                                    <div></div>
-                                @endforeach
-                            @endif
-                            <h4>Tagihan Program S1 <span class="text-danger">*</span></h4>
-                        </div>
-                        <div class="card-body">
+    $user = Auth::user();
+    $tagihan = App\Models\TagihanDetail::where('id_biayas', $biaya->id)
+        ->where('id_users', $user->id)
+        ->latest()
+        ->first();
+    // $bagi3 = $tagihan->amount / 3;
+    // dd($bagi3);
+    $transaction = App\Models\Transaksi::where('user_id', $user->id)
+        ->where('tagihan_detail_id', $tagihan->id)
+        ->where('jenis_tagihan', $biaya->jenis_biaya)
+        ->where('status', 'berhasil')
+        ->where('jenis_pembayaran', 'cash')
+        ->first();
+    $biayaHeadCount = App\Models\Biaya::where('program_belajar', 'S1')
+        ->where('jenis_biaya', '=', 'Tidakroutine')
+        ->where('id_angkatans', $biodata->angkatan_id)
+        ->count();
+    $biayaHeadCount1 = App\Models\Biaya::where('program_belajar', 'S1')
+        ->where('jenis_biaya', '=', 'Routine')
+        ->where('id_angkatans', $biodata->angkatan_id)
+        ->count();
+    // print_r($biayaHeadCount);
 
+    // print_r($biayaHeadCount1);
+@endphp
+@if (!$transaction)
+@else
+    <div class="row">
+        @if ($biodata->program_belajar === 'S1')
+            <div class="col-12">
+                <div class="card mb-4">
+                    <div class="card-header">
+                        @if ($errors->any())
+                            @foreach ($errors->all() as $error)
+                                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                    <span class="alert-text">{{ $error }}</span>
+                                    <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                        aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div></div>
+                            @endforeach
+                        @endif
+                        <h4>Tagihan Program S1 <span class="text-danger">*</span></h4>
+                    </div>
+                    <div class="card-body">
                         <!--Routine-->
+                        @php
+
+                        @endphp
                         @foreach ($biayaAll as $biayaHead)
                             @if ($biayaHead->jenis_biaya == 'Routine' && $biayaHead->id_angkatans == $biodata->angkatan_id)
                                 <p class="text-bold">Tagihan Spp</p>
@@ -615,6 +632,13 @@
                             @break
                         @endif
                     @endforeach
+                    @if ($biayaHeadCount > 0 || $biayaHeadCount1 > 0)
+                    @else
+                        <p class="text-center">Belum ada tagihan</p>
+                        {{-- Code to execute when there is no biaya head with jenis_biaya equal to 'Routine' --}}
+                        {{-- @dump('asdasd') --}}
+                    @endif
+                    {{-- Copy code --}}
 
                     <!--Tidak routine / Biaya lain-->
                     @foreach ($biayaAll as $biayaHead)
@@ -707,16 +731,16 @@
                 <!--Daftar Ulang -->
             </div>
         </div>
-        @endif
-    @endif
+@endif
+@endif
 @endif
 @endsection
 
 @push('scripts')
 <script>
-	const dataTableSearch = new simpleDatatables.DataTable("#templateTableNoSearch", {
-      searchable: false,
-      fixedHeight: true,
+    const dataTableSearch = new simpleDatatables.DataTable("#templateTableNoSearch", {
+        searchable: false,
+        fixedHeight: true,
     });
 </script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>

@@ -129,24 +129,24 @@
                             ->where('jenis_biaya', 'DaftarUlang')
                             ->where('id_angkatans', $biodatas->angkatan_id)
                             ->latest()
-                            ->firstOrFail();
+                            ->first();
 
-                        $tagihan = App\Models\TagihanDetail::where('id_biayas', $biaya1->id)
+                        $tagihan = App\Models\TagihanDetail::where('id_biayas', $biaya1?->id)
                             ->where('id_users', $biodatas->user_id)
                             ->latest()
-                            ->firstOrFail();
-                        $cicilans = App\Models\Cicilan::where('id_tagihan_details', $tagihan->id)->first();
-                        $cicilan2 = App\Models\Cicilan::where('id_tagihan_details', $tagihan->id)
+                            ->first();
+                        $cicilans = App\Models\Cicilan::where('id_tagihan_details', $tagihan?->id)->first();
+                        $cicilan2 = App\Models\Cicilan::where('id_tagihan_details', $tagihan?->id)
                             ->where('status', 'LUNAS')
                             ->get();
                         $transactions = App\Models\Transaksi::where('user_id', $biodatas->user_id)
-                            ->where('tagihan_detail_id', $tagihan->id)
-                            ->where('jenis_tagihan', $biaya1->jenis_biaya)
+                            ->where('tagihan_detail_id', $tagihan?->id)
+                            ->where('jenis_tagihan', $biaya1?->jenis_biaya)
                             ->where('status', 'berhasil')
                             ->first();
 
                     @endphp
-                    @if (!isset($cicilans) && !isset($transactionDaftar))
+                    @if (!isset($cicilans) && !isset($transactionDaftar) && $tagihan)
                         <div class="col-12 text-center mb-4 shadow-ms">
                             <div class="card">
                                 <h3 class="mt-3">Silahkan Pilih metode pembayaran Daftar ulang !</h3>
@@ -174,28 +174,30 @@
                                 </div>
                             </div>
                         </div>
+                    @elseif (!isset($tagihan))
+                        
                     @elseif($cicilans)
                         @php
                             $biaya1 = App\Models\Biaya::where('program_belajar', 'S1')
                                 ->where('jenis_biaya', 'DaftarUlang')
                                 ->where('id_angkatans', $biodatas->angkatan_id)
                                 ->latest()
-                                ->firstOrfail();
+                                ->first();
 
                             $tagihan = App\Models\TagihanDetail::where('id_biayas', $biaya1->id)
                                 ->where('id_users', $biodatas->user_id)
                                 ->latest()
-                                ->firstOrFail();
+                                ->first();
 
                             // Menghitung total pembayaran yang telah dilakukan
                             $total_pembayaran = App\Models\Transaksi::where('user_id', $biodatas->user_id)
-                                ->where('tagihan_detail_id', $tagihan->id)
-                                ->where('jenis_tagihan', $biaya1->jenis_biaya)
+                                ->where('tagihan_detail_id', $tagihan?->id)
+                                ->where('jenis_tagihan', $biaya1?->jenis_biaya)
                                 ->where('status', 'berhasil')
                                 ->where('jenis_pembayaran', 'cicil')
                                 ->sum('total');
-                            $cicilannya = App\Models\Cicilan::where('id_tagihan_details', $tagihan->id)->get();
-                            $cicilan1 = App\Models\Cicilan::where('id_tagihan_details', $tagihan->id)
+                            $cicilannya = App\Models\Cicilan::where('id_tagihan_details', $tagihan?->id)->get();
+                            $cicilan1 = App\Models\Cicilan::where('id_tagihan_details', $tagihan?->id)
                                 ->where('status', 'LUNAS')
                                 ->first();
 
@@ -552,7 +554,7 @@
                 </div> --}}
 
             @endif
-            @if (!$transactions)
+            @if (!isset($transactions))
             @else
                 <div class="row">
                     <div class="col-12">
@@ -760,7 +762,8 @@
 <div class="col-12">
     <div class="card mb-4">
         <div class="card-header">
-            <h4>Tagihan Program Kursus <span class="text-danger">*</span></h4>
+            <h4>Tagihan Program Kursus {{ $biodatas->course->name }} <span class="text-danger">*</span>
+            </h4>
         </div>
         <div class="card-body">
             <div class="shadow-sm mb-3">
@@ -801,6 +804,12 @@
                                 <td class="text-sm">
                                     Program belajar :
                                     <strong>{{ $biodatas->program_belajar }}</strong>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="text-sm">
+                                    Jenis kursus :
+                                    <strong>{{ $biodatas->course->name }}</strong>
                                 </td>
                             </tr>
                         </tbody>
@@ -887,7 +896,8 @@
                 @if (
                     $biayaHead->jenis_biaya == 'Tidakroutine' &&
                         $biayaHead?->id_angkatans == $biodatas->angkatan_id &&
-                        $biayaHead?->program_belajar == $biodatas->program_belajar)
+                        $biayaHead?->program_belajar == $biodatas->program_belajar &&
+                        $biayaHead?->id_kursus == $biodatas->course_id)
                     <p class="text-bold">Tagihan Biaya lain</p>
                     <div class="table-responsive mb-3">
                         <form action="{{ route('admin.mahasiswa.bayar', $mahasiswa->id) }}"
@@ -903,9 +913,10 @@
                                             <th class="text-sm">Nama Tagihan</th>
                                             <th class="text-sm">Tanggal Tagihan</th>
                                             <th class="text-sm">Status</th>
+                                            <th class="text-sm">Jenis kursus</th>
                                             <th class="text-sm">Total tagihan</th>
                                             <th class="text-sm d-flex align-items-center"><input
-                                                    type="checkbox" name="" id="select_all_ids3"
+                                                    type="checkbox" name="" id="select_all_ids"
                                                     class="me-2"> Pilih
                                             </th>
                                         </tr>
@@ -919,7 +930,8 @@
                                             @if (
                                                 $biayas->jenis_biaya == 'Tidakroutine' &&
                                                     $biayas->id_angkatans == $biodatas->angkatan_id &&
-                                                    $biayas->program_belajar == $biodatas->program_belajar)
+                                                    $biayas->program_belajar == $biodatas->program_belajar &&
+                                                    $biayas?->id_kursus == $biodatas->course_id)
                                                 @foreach ($biayas->tagihanDetail as $key => $tagihans)
                                                     @if ($tagihans->id_users == $mahasiswa->id)
                                                         <tr>
@@ -932,6 +944,9 @@
                                                             <td class="text-sm">
                                                                 <span
                                                                     class="badge badge-sm {{ $tagihans->status == 'LUNAS' ? 'bg-gradient-success' : 'bg-gradient-danger' }}">{{ $tagihans->status }}</span>
+                                                            </td>
+                                                            <td class="text-sm">
+                                                                {{ $biayas->kursus->name }}
                                                             </td>
                                                             <td class="text-sm">Rp
                                                                 {{ number_format($tagihans->amount, 0, '', '.') }}
@@ -946,7 +961,7 @@
                                                                     <input type="checkbox" name="id[]"
                                                                         id=""
                                                                         value="{{ $tagihans->id }}"
-                                                                        class="checksAll3">
+                                                                        class="checksAll">
                                                                 @endif
 
 
@@ -966,6 +981,7 @@
             @endif
         @endforeach
     </div>
+</div>
 @endif
 @endforeach
 </div>
@@ -993,14 +1009,14 @@
 @endif
 <script>
     $(function(e) {
-        $("#select_all_ids").click(function() {
-            $('.checksAll').prop('checked', $(this).prop('checked'));
+        $("#select_all_ids0").click(function() {
+            $('.checksAll0').prop('checked', $(this).prop('checked'));
+        });
+        $("#select_all_ids1").click(function() {
+            $('.checksAll1').prop('checked', $(this).prop('checked'));
         });
         $("#select_all_ids2").click(function() {
             $('.checksAll2').prop('checked', $(this).prop('checked'));
-        });
-        $("#select_all_ids3").click(function() {
-            $('.checksAll3').prop('checked', $(this).prop('checked'));
         });
     });
 </script>

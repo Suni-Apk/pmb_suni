@@ -21,13 +21,13 @@
             )
         </script>
     @elseif(session('eror'))
-    <script>
-        Swal.fire({
-        icon: "error",
-        title: "Oops...",
-        text: "{{ session('eror') }}",
-        });
-    </script>
+        <script>
+            Swal.fire({
+                icon: "error",
+                title: "Oops...",
+                text: "{{ session('eror') }}",
+            });
+        </script>
     @endif
 @endpush
 
@@ -43,18 +43,21 @@
                                 <button class="multisteps-form__progress-btn js-active" type="button" title="Register">
                                     <span>Register</span>
                                 </button>
-                                <button class="multisteps-form__progress-btn js-active" type="button" title="Bayar Administrasi">
+                                <button class="multisteps-form__progress-btn js-active" type="button"
+                                    title="Bayar Administrasi">
                                     <span>Bayar Administrasi</span>
                                 </button>
                                 @if ($biodata && !Auth::user()->document)
-                                    <button class="multisteps-form__progress-btn js-active" type="button" title="Mengisi Biodata">
+                                    <button class="multisteps-form__progress-btn js-active" type="button"
+                                        title="Mengisi Biodata">
                                         <span>Mengisi Biodata</span>
                                     </button>
                                 @else
                                     <button class="multisteps-form__progress-btn" type="button" title="Mengisi Biodata">
                                         <span>Mengisi Biodata</span>
                                     </button>
-                                    <button class="multisteps-form__progress-btn js-active" type="button" title="Upload Dokumen">
+                                    <button class="multisteps-form__progress-btn js-active" type="button"
+                                        title="Upload Dokumen">
                                         <span>Upload Dokumen</span>
                                     </button>
                                 @endif
@@ -64,20 +67,23 @@
                                 <button class="multisteps-form__progress-btn" type="button" title="Selesai">
                                     <span>Selesai!</span>
                                 </button>
-                            </div>                            
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
         <div class="col-12 col-lg-8 mb-lg-0 mb-4">
-            <div id="carouselDashboard" data-bs-ride="carousel" data-bs-interval="3000" class="carousel slide page-header align-items-start height-300 pb-7 rounded-3">
+            <div id="carouselDashboard" data-bs-ride="carousel" data-bs-interval="3000"
+                class="carousel slide page-header align-items-start height-300 pb-7 rounded-3">
                 <div class="carousel-indicators">
-                    <button type="button" data-bs-target="#carouselDashboard" data-bs-slide-to="0" class="active" aria-current="true"></button>
+                    <button type="button" data-bs-target="#carouselDashboard" data-bs-slide-to="0" class="active"
+                        aria-current="true"></button>
                     @foreach ($banner->filter(function ($item) {
-                        return $item->target == 'MAHASISWA' || $item->target == 'SEMUA';
-                        }) as $item)
-                    <button type="button" data-bs-target="#carouselDashboard" data-bs-slide-to="{{ $loop->index+1 }}" class="" aria-current="true"></button>
+            return $item->target == 'MAHASISWA' || $item->target == 'SEMUA';
+        }) as $item)
+                        <button type="button" data-bs-target="#carouselDashboard" data-bs-slide-to="{{ $loop->index + 1 }}"
+                            class="" aria-current="true"></button>
                     @endforeach
                 </div>
                 <div class="carousel-inner">
@@ -85,97 +91,108 @@
                         <div class="row flex-column justify-content-center height-300"
                         style="background-image: url('https://c0.wallpaperflare.com/path/196/594/379/quran-book-97f792a4ef76b251052800f9f56a4c0b.jpg'); background-size: cover; background-position: center;">
                             <span class="mask bg-gradient-dark opacity-6"></span>
-                            <div class="d-flex justify-content-center flex-column align-items-center text-white text-center z-index-1">
+                            <div
+                                class="d-flex justify-content-center flex-column align-items-center text-white text-center z-index-1">
                                 <h4 class="font-weight-bold mb-0 p-3 pb-0 text-white">
                                     Selamat Datang
-                                    <b class="font-weight-bolder">{{ Auth::user()->name }}</b>!
+                                    <b class="font-weight-bolder">{{ $user->name }}</b>!
                                 </h4>
-                                <p class="mb-0 px-4 px-sm-6">
-                                    Sudah melakukan kebaikan apa kamu hari ini?
+                                <p class="mb-0 mx-2">
+                                    Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ut, voluptate?
                                 </p>
                             </div>
                         </div>
                     </div>
                     @foreach ($banner->filter(function ($item) {
-                        return $item->target == 'MAHASISWA' || $item->target == 'SEMUA';
-                        }) as $item)
-                    <div class="carousel-item">
-                        <div class="row flex-column justify-content-center height-300"
-                        style="background-image: url('{{ $item->image }}'); background-size: cover; background-position: center;">
-                            <span class="mask bg-gradient-dark opacity-6"></span>
-                            <div class="d-flex justify-content-center flex-column align-items-center text-white text-center z-index-1">
-                                <h4 class="font-weight-bold mb-0 p-3 pb-0 text-white">
-                                    {{ $item->title }}
-                                </h4>
-                                <p class="mb-0 px-4 px-sm-6">
-                                    {!! $item->desc !!}
-                                </p>
+            return $item->target == 'MAHASISWA' || $item->target == 'SEMUA';
+        }) as $item)
+                        <div class="carousel-item">
+                            <div class="row flex-column justify-content-center height-300"
+                                style="background-image: url('{{ $item->image }}'); background-size: cover; background-position: center;">
+                                <span class="mask bg-gradient-dark opacity-6"></span>
+                                <div
+                                    class="d-flex justify-content-center flex-column align-items-center text-white text-center z-index-1">
+                                    <h4 class="font-weight-bold mb-0 p-3 pb-0 text-white">
+                                        {{ $item->title }}
+                                    </h4>
+                                    <p class="mb-0 mx-2">
+                                        {{ $item->desc }}
+                                    </p>
+                                </div>
                             </div>
                         </div>
-                    </div>
                     @endforeach
                 </div>
-                <button class="carousel-control-prev" type="button" data-bs-target="#carouselDashboard" data-bs-slide="prev">
+                <button class="carousel-control-prev" type="button" data-bs-target="#carouselDashboard"
+                    data-bs-slide="prev">
                     <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                     <span class="visually-hidden">Previous</span>
                 </button>
-                <button class="carousel-control-next" type="button" data-bs-target="#carouselDashboard" data-bs-slide="next">
+                <button class="carousel-control-next" type="button" data-bs-target="#carouselDashboard"
+                    data-bs-slide="next">
                     <span class="carousel-control-next-icon" aria-hidden="true"></span>
                     <span class="visually-hidden">Next</span>
                 </button>
             </div>
         </div>
         <div class="col-12 mb-4 gy-3 g-lg-3 d-md-none row mx-auto justify-content-center">
-        @if (!$biodata && !Auth::user()->document)
+            @if (!$biodata && !Auth::user()->document)
+                <div class="col-3 col-md-2 text-center">
+                    <a href="{{ route('mahasiswa.pendaftaran.s1') }}"
+                        class="icon icon-shape p-0 bg-primary shadow text-center border-radius-md cursor-pointer"
+                        data-bs-toggle="tooltip" data-bs-placement="top" title="Isi Biodata">
+                        <i class="fas fa-user-shield text-lg opacity-10" aria-hidden="true"></i>
+                    </a>
+                    <span class="d-block mt-2" style="font-size: 13px;">Isi Biodata</span>
+                </div>
+                <div class="col-3 col-md-2 text-center">
+                    <a href="{{ route('mahasiswa.pendaftaran.document') }}"
+                        class="icon icon-shape p-0 bg-primary shadow text-center border-radius-md cursor-pointer"
+                        data-bs-toggle="tooltip" data-bs-placement="top" title="Upload Dokumen">
+                        <i class="fas fa-folder text-lg opacity-10" aria-hidden="true"></i>
+                    </a>
+                    <span class="d-block mt-2" style="font-size: 13px;">Upload Dokumen</span>
+                </div>
+            @elseif ($biodata && !Auth::user()->document)
+                <div class="col-3 col-md-2 text-center">
+                    <a href="{{ route('mahasiswa.pendaftaran.document') }}"
+                        class="icon icon-shape p-0 bg-primary shadow text-center border-radius-md cursor-pointer"
+                        data-bs-toggle="tooltip" data-bs-placement="top" title="Upload Dokumen">
+                        <i class="fas fa-folder text-lg opacity-10" aria-hidden="true"></i>
+                    </a>
+                    <span class="d-block mt-2" style="font-size: 13px;">Upload Dokumen</span>
+                </div>
+            @elseif (!$biodata && Auth::user()->document)
+                <div class="col-3 col-md-2 text-center">
+                    <a href="{{ route('mahasiswa.pendaftaran.s1') }}"
+                        class="icon icon-shape p-0 bg-primary shadow text-center border-radius-md cursor-pointer"
+                        data-bs-toggle="tooltip" data-bs-placement="top" title="Isi Biodata">
+                        <i class="fas fa-user-shield text-lg opacity-10" aria-hidden="true"></i>
+                    </a>
+                    <span class="d-block mt-2" style="font-size: 13px;">Isi Biodata</span>
+                </div>
+            @else
+                <div class="col-3 col-md-2 text-center">
+                    <a href="{{ route('mahasiswa.matkul') }}"
+                        class="icon icon-shape p-0 bg-primary shadow text-center border-radius-md cursor-pointer"
+                        data-bs-toggle="tooltip" data-bs-placement="top" title="Mata Kuliah">
+                        <i class="ni ni-archive-2 text-lg opacity-10" aria-hidden="true"></i>
+                    </a>
+                    <span class="d-block mt-2" style="font-size: 13px;">Mata Kuliah</span>
+                </div>
+                <div class="col-3 col-md-2 text-center">
+                    <a href="{{ route('mahasiswa.tagihan.index') }}"
+                        class="icon icon-shape p-0 bg-primary shadow text-center border-radius-md cursor-pointer"
+                        data-bs-toggle="tooltip" data-bs-placement="top" title="Tagihan">
+                        <i class="ni ni-archive-2 text-lg opacity-10" aria-hidden="true"></i>
+                    </a>
+                    <span class="d-block mt-2" style="font-size: 13px;">Tagihan</span>
+                </div>
+            @endif
             <div class="col-3 col-md-2 text-center">
-                <a href="{{ route('mahasiswa.pendaftaran.s1') }}" class="icon icon-shape p-0 bg-primary shadow text-center border-radius-md cursor-pointer"
-                    data-bs-toggle="tooltip" data-bs-placement="top" title="Isi Biodata">
-                    <i class="fas fa-user-shield text-lg opacity-10" aria-hidden="true"></i>
-                </a>
-                <span class="d-block mt-2" style="font-size: 13px;">Isi Biodata</span>
-            </div>
-            <div class="col-3 col-md-2 text-center">
-                <a href="{{ route('mahasiswa.pendaftaran.document') }}" class="icon icon-shape p-0 bg-primary shadow text-center border-radius-md cursor-pointer"
-                    data-bs-toggle="tooltip" data-bs-placement="top" title="Upload Dokumen">
-                    <i class="fas fa-folder text-lg opacity-10" aria-hidden="true"></i>
-                </a>
-                <span class="d-block mt-2" style="font-size: 13px;">Upload Dokumen</span>
-            </div>
-        @elseif ($biodata && !Auth::user()->document)
-            <div class="col-3 col-md-2 text-center">
-                <a href="{{ route('mahasiswa.pendaftaran.document') }}" class="icon icon-shape p-0 bg-primary shadow text-center border-radius-md cursor-pointer"
-                    data-bs-toggle="tooltip" data-bs-placement="top" title="Upload Dokumen">
-                    <i class="fas fa-folder text-lg opacity-10" aria-hidden="true"></i>
-                </a>
-                <span class="d-block mt-2" style="font-size: 13px;">Upload Dokumen</span>
-            </div>
-        @elseif (!$biodata && Auth::user()->document)
-            <div class="col-3 col-md-2 text-center">
-                <a href="{{ route('mahasiswa.pendaftaran.s1') }}" class="icon icon-shape p-0 bg-primary shadow text-center border-radius-md cursor-pointer"
-                    data-bs-toggle="tooltip" data-bs-placement="top" title="Isi Biodata">
-                    <i class="fas fa-user-shield text-lg opacity-10" aria-hidden="true"></i>
-                </a>
-                <span class="d-block mt-2" style="font-size: 13px;">Isi Biodata</span>
-            </div>
-        @else
-            <div class="col-3 col-md-2 text-center">
-                <a href="{{ route('mahasiswa.matkul') }}" class="icon icon-shape p-0 bg-primary shadow text-center border-radius-md cursor-pointer"
-                    data-bs-toggle="tooltip" data-bs-placement="top" title="Mata Kuliah">
-                    <i class="ni ni-archive-2 text-lg opacity-10" aria-hidden="true"></i>
-                </a>
-                <span class="d-block mt-2" style="font-size: 13px;">Mata Kuliah</span>
-            </div>
-            <div class="col-3 col-md-2 text-center">
-                <a href="{{ route('mahasiswa.tagihan.index') }}" class="icon icon-shape p-0 bg-primary shadow text-center border-radius-md cursor-pointer"
-                    data-bs-toggle="tooltip" data-bs-placement="top" title="Tagihan">
-                    <i class="ni ni-archive-2 text-lg opacity-10" aria-hidden="true"></i>
-                </a>
-                <span class="d-block mt-2" style="font-size: 13px;">Tagihan</span>
-            </div>
-        @endif
-            <div class="col-3 col-md-2 text-center">
-                <a href="{{ route('mahasiswa.profile.index') }}" class="icon icon-shape p-0 bg-yellow shadow text-center border-radius-md cursor-pointer"
-                data-bs-toggle="tooltip" data-bs-placement="top" title="Profile">
+                <a href="{{ route('mahasiswa.profile.index') }}"
+                    class="icon icon-shape p-0 bg-yellow shadow text-center border-radius-md cursor-pointer"
+                    data-bs-toggle="tooltip" data-bs-placement="top" title="Profile">
                     <i class="fas fa-user-alt text-lg opacity-10" aria-hidden="true"></i>
                 </a>
                 <span class="d-block mt-2" style="font-size: 13px;">Profile</span>
@@ -184,15 +201,17 @@
         <div class="col-12 col-lg-4">
             <div class="card h-100 p-3">
                 <div class="overflow-hidden position-relative border-radius-lg bg-cover h-100"
-                style="background-image: url('https://suniindonesia.com/wp-content/uploads/2022/10/masjid-pogung-dalangan-fQET4BjQmvc-unsplash.jpg');">
+                    style="background-image: url('https://suniindonesia.com/wp-content/uploads/2022/10/masjid-pogung-dalangan-fQET4BjQmvc-unsplash.jpg');">
                     <span class="mask bg-gradient-dark"></span>
                     <div class="card-body position-relative z-index-1 d-flex flex-column justify-content-center gap-2">
                         <p class="text-white w-100 mb-0 text-center">Kalender hari ini,</p>
                         <h5 class="text-white font-weight-bolder fs-1 d-flex justify-content-evenly w-100 mb-0">
                             <span>{{ $hijriDateday }}</span>
-                            <span class="text-green font-weight-normal" style="font-family: 'Rubik', sans-serif;">{{ $hijriDatemonth }}</span>
+                            <span class="text-green font-weight-normal"
+                                style="font-family: 'Rubik', sans-serif;">{{ $hijriDatemonth }}</span>
                         </h5>
-                        <h5 class="w-100 mb-0 text-center lh-1 text-green font-weight-light" style="font-family: 'Rubik', sans-serif;">
+                        <h5 class="w-100 mb-0 text-center lh-1 text-green font-weight-light"
+                            style="font-family: 'Rubik', sans-serif;">
                             {{ $hijriDatedayArabic }}
                         </h5>
                         <p class="text-white w-100 mb-0 text-center">
@@ -303,53 +322,55 @@
                                         <p class="text-muted mb-0">Allowed JPG, GIF or PNG. Max size of 2Mb</p>
                                     </div>
 
-                                    <div class="form-group mb-3">
-                                        <label for="alamat">Pilih Jurusan</label>
-                                        <select name="jurusan_id" class="form-control">
-                                            <option disabled selected>Pilih Jurusan</option>
-                                            @foreach ($jurusan as $index => $item)
-                                                <option value="{{ $item->id }}">{{ $item->name }}
+                                        <div class="form-group mb-3">
+                                            <label for="alamat">Pilih Jurusan</label>
+                                            <select name="jurusan_id" class="form-control">
+                                                <option value="" disabled selected>Pilih Jurusan</option>
+                                                @foreach ($jurusan as $index => $item)
+                                                    <option value="{{ $item->id }}">{{ $item->name }}
+                                                    </option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+
+                                        <div class="form-group mb-3">
+                                            <label for="birthdate">Tanggal Lahir</label>
+                                            <input type="date" name="birthdate" id="birthdate" class="form-control">
+                                        </div>
+
+                                        <div class="form-group mb-3">
+                                            <label for="birthplace">Tempat Lahir</label>
+                                            <input type="text" name="birthplace" id="birthplace" class="form-control"
+                                                placeholder="Masukkan Tempat Lahir Anda">
+                                        </div>
+
+                                        <div class="form-group mb-3">
+                                            <label for="alamat">Alamat Kamu</label>
+                                            <select name="provinsi" id="provinsi" class="form-control">
+                                                <option value="" disabled selected>Pilih Provinsi</option>
+                                                <!-- Data Provinsi dari API bisa dimasukkan di sini -->
+                                            </select>
+                                            <select name="kota" id="kota" class="form-control mt-2">
+                                                <option value="" disabled selected>--- Pilih Kabupaten / Kota ---
                                                 </option>
-                                            @endforeach
-                                        </select>
-                                    </div>
+                                                <!-- Data Kabupaten dari API bisa dimasukkan di sini -->
+                                            </select>
+                                            <select name="kecamatan" id="kecamatan" class="form-control mt-2">
+                                                <option value="" disabled selected>--- Pilih Kecamatan ---</option>
+                                                <!-- Data Kota dari API bisa dimasukkan di sini -->
+                                            </select>
+                                        </div>
 
-                                    <div class="form-group mb-3">
-                                        <label for="birthdate">Tanggal Lahir</label>
-                                        <input type="date" name="birthdate" id="birthdate" class="form-control">
-                                    </div>
+                                        <div class="form-group mb-3">
+                                            <label for="address">Jalan Dan Kode Pos</label>
+                                            <textarea name="address" id="address" class="form-control"></textarea>
+                                        </div>
 
-                                    <div class="form-group mb-3">
-                                        <label for="birthplace">Tempat Lahir</label>
-                                        <input type="text" name="birthplace" id="birthplace" class="form-control"
-                                            placeholder="Masukkan Tempat Lahir Anda">
-                                    </div>
-
-                                    <div class="form-group mb-3">
-                                        <label for="alamat">Alamat Kamu</label>
-                                        <select name="provinsi" id="provinsi" class="form-control">
-                                            <option value="" disabled selected>Pilih Provinsi</option>
-                                            <!-- Data Provinsi dari API bisa dimasukkan di sini -->
-                                        </select>
-                                        <select name="kota" id="kota" class="form-control mt-2">
-                                            <option value="" disabled selected>--- Pilih Kabupaten / Kota ---</option>
-                                            <!-- Data Kabupaten dari API bisa dimasukkan di sini -->
-                                        </select>
-                                        <select name="kecamatan" id="kecamatan" class="form-control mt-2">
-                                            <option value="" disabled selected>--- Pilih Kecamatan ---</option>
-                                            <!-- Data Kota dari API bisa dimasukkan di sini -->
-                                        </select>
-                                    </div>
-
-                                    <div class="form-group mb-3">
-                                        <label for="address">Jalan Dan Kode Pos</label>
-                                        <textarea name="address" id="address" class="form-control"></textarea>
-                                    </div>
-
-                                    <div class="form-group mb-3">
-                                        <label for="last_graduate">Pendidikan Terakhir</label>
-                                        <input type="text" name="last_graduate" id="last_graduate" class="form-control">
-                                    </div>
+                                        <div class="form-group mb-3">
+                                            <label for="last_graduate">Pendidikan Terakhir</label>
+                                            <input type="text" name="last_graduate" id="last_graduate"
+                                                class="form-control">
+                                        </div>
 
                                     <button type="submit" class="btn btn-success">Submit</button>
                                     <button type="reset" class="btn btn-warning">Reset</button>

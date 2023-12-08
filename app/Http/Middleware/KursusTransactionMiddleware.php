@@ -27,13 +27,17 @@ class KursusTransactionMiddleware
         foreach ($ids as $idTagih) {
             $tagihanDetail = TagihanDetail::where('id', $idTagih)->get();
             foreach ($tagihanDetail as $value) {
-                $transaction = Transaksi::all();
-                foreach ($transaction as $transactions) {
-                    if ($value->id_transactions == $transactions->id && $transactions->status != 'berhasil' && $value->status != 'LUNAS') {
-                        return $next($request);
-                    } else if ($value->id_transactions == $transactions->id && $transactions->status == 'berhasil' && $value->status == 'LUNAS') {
-                        return redirect()->route('kursus.tagihan.index')->with('error', 'Maaf, anda sudah membayar !');
+                if ($value->id_transactions) {
+                    $transaction = Transaksi::where('id', $value->id_transactions)->get();
+                    foreach ($transaction as $transactions) {
+                        if ($transactions->id == $value->id_transactions && $value->status == 'LUNAS') {
+                            return redirect()->route('kursus.tagihan.index')->with('error', 'Maaf, anda sudah membayar !');
+                        } else {
+                            return $next($request);
+                        }
                     }
+                } else {
+                    return $next($request);
                 }
             }
         }

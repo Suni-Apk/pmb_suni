@@ -270,16 +270,16 @@
                                                 <label>Gender</label>
                                                 <small class="text-danger" style="font-size: 12px">*</small>
                                                 <div class="form-check">
-                                                    <input class="form-check-input" type="radio" name="gender" id="ikhwan"
+                                                    <input class="form-check-input" type="radio" name="gender" id="Laki-Laki"
                                                         value="Laki-Laki">
-                                                    <label class="form-check-label" for="ikhwan">
+                                                    <label class="form-check-label" for="Laki-Laki">
                                                         Ikhwan
                                                     </label>
                                                 </div>
                                                 <div class="form-check">
-                                                    <input class="form-check-input" type="radio" name="gender" id="akhwat"
+                                                    <input class="form-check-input" type="radio" name="gender" id="Perempuan"
                                                         value="Perempuan">
-                                                    <label class="form-check-label" for="akhwat">
+                                                    <label class="form-check-label" for="Perempuan">
                                                         Akhwat
                                                     </label>
                                                 </div>

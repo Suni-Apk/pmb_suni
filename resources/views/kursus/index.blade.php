@@ -39,14 +39,20 @@
                                     title="Bayar Registrasi">
                                     <span>Bayar Registrasi</span>
                                 </button>
-                                <button class="multisteps-form__progress-btn js-active" type="button"
-                                    title="Mengisi Biodata">
-                                    <span>Mengisi Biodata</span>
-                                </button>
-                                <button class="multisteps-form__progress-btn js-active" type="button"
-                                    title="Bayar Pra-Kuliah">
-                                    <span>Selesai!</span>
-                                </button>
+                                @if (!$biodata)
+                                    <button class="multisteps-form__progress-btn" type="button" title="Mengisi Biodata">
+                                        <span>Mengisi Biodata</span>
+                                    </button>
+                                @else
+                                    <button class="multisteps-form__progress-btn js-active" type="button"
+                                        title="Mengisi Biodata">
+                                        <span>Mengisi Biodata</span>
+                                    </button>
+                                    <button class="multisteps-form__progress-btn js-active" type="button"
+                                        title="Bayar Pra-Kuliah">
+                                        <span>Selesai!</span>
+                                    </button>
+                                @endif
                             </div>
                         </div>
                     </div>
@@ -78,9 +84,10 @@
                                     Selamat Datang
                                     <b class="font-weight-bolder">{{ $mahasiswa->name }}</b>!
                                 </h4>
-                                <p class="mb-0 px-4 px-sm-6">
-                                    Sudah melakukan kebaikan apa kamu hari ini?
+                                <p class="mb-1 mt-2">
+                                    أُطْلُبُوا الْعِلْمَ مِنَ الْمَهْدِ اِلىَ اللَّهْدِ
                                 </p>
+                                <p>"Tuntutlah ilmu dari buaian sampai ke liang lahat,"</p>
                             </div>
                         </div>
                     </div>
@@ -260,7 +267,8 @@
                         <div class="card">
                             <div class="card-body">
                                 <div class="table-responsive text-nowrap">
-                                    <form action="{{route('kursus.pendaftaran.kursus.process')}}" method="POST" enctype="multipart/form-data">
+                                    <form action="{{ route('kursus.pendaftaran.kursus.process') }}" method="POST"
+                                        enctype="multipart/form-data">
                                         @csrf
                                         @method('POST')
                                         <div class="form-group mb-3">
@@ -288,11 +296,13 @@
                                         <div class="form-group mb-3">
                                             <label for="">Bisa Baca Al-Qur'an?</label>
                                             <div class="d-block">
-                                                <input type="radio" name="baca_quran" id="bisa" class="form-radio" value="Bisa">
+                                                <input type="radio" name="baca_quran" id="bisa"
+                                                    class="form-radio" value="Bisa">
                                                 <label for="bisa">Bisa</label>
                                             </div>
                                             <div class="d-block">
-                                                <input type="radio" name="baca_quran" id="tidakBisa" class="form-radio" value="Tidak Bisa">
+                                                <input type="radio" name="baca_quran" id="tidakBisa"
+                                                    class="form-radio" value="Tidak Bisa">
                                                 <label for="tidakBisa">Tidak Bisa</label>
                                             </div>
                                         </div>
@@ -304,7 +314,8 @@
 
                                         <div class="form-group mb-3">
                                             <label for="birthplace">Tempat Lahir</label>
-                                            <input type="text" name="birthplace" id="birthplace" class="form-control" placeholder="Masukkan Tempat Lahir Anda">
+                                            <input type="text" name="birthplace" id="birthplace" class="form-control"
+                                                placeholder="Masukkan Tempat Lahir Anda">
                                         </div>
 
                                         <div class="form-group mb-3">
@@ -314,7 +325,8 @@
                                                 <!-- Data Provinsi dari API bisa dimasukkan di sini -->
                                             </select>
                                             <select name="kota" id="kota" class="form-control mt-2">
-                                                <option value="" disabled selected>--- Pilih Kabupaten / Kota ---</option>
+                                                <option value="" disabled selected>--- Pilih Kabupaten / Kota ---
+                                                </option>
                                                 <!-- Data Kabupaten dari API bisa dimasukkan di sini -->
                                             </select>
                                             <select name="kecamatan" id="kecamatan" class="form-control mt-2">
@@ -388,26 +400,30 @@
     @else
         <div class="row" style="max-height: 500px; overflow-y: auto;">
             @foreach ($kursus as $kursuss)
-            <div class="col-sm-6 mb-3 mb-sm-0 mt-3">
-                <div class="card mb-4">
-                    <div class="card-body">
-                        <h5 class="card-title">{{ $kursuss->name }}</h5>
-                        <label for="">Mapel : @foreach ($kursuss->mapel as $item)
-                            <strong>{{$item->name}} , </strong>
-                        @endforeach</label>
-                        <p class="card-text">
-                            @if(strlen($kursuss->desc) > 80)
-                                <span class="short-desc">{{ substr($kursuss->desc, 0, 80) }}...</span>
-                                <span class="full-desc" style="display: none;">{{ $kursuss->desc }}</span>
-                                <a href="#" class="read-more">Lihat Selengkapnya</a>
-                            @else
-                                {{ $kursuss->desc }}
-                            @endif
-                        </p>                                              
-                        <a href="{{ route('kursus.pendaftaran.kursus') }}" class="btn btn-primary">Daftar Sekarang!!</a>
+                <div class="col-sm-6 mb-3 mb-sm-0 mt-3">
+                    <div class="card mb-4">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ $kursuss->name }}</h5>
+                            <label for="">Mapel : @foreach ($kursuss->mapel as $item)
+                                    <strong>{{ $item->name }} , </strong>
+                                @endforeach
+                            </label>
+
+                            <p class="card-text">
+                                @if (strlen($kursuss->desc) > 80)
+                                    <span class="short-desc">{{ substr($kursuss->desc, 0, 80) }}...</span>
+                                    <span class="full-desc" style="display: none;">{{ $kursuss->desc }}</span>
+                                    <a href="#" class="read-more">Lihat Selengkapnya</a>
+                                    <a href="#" class="read-less" style="display: none;">Lihat Lebih Sedikit</a>
+                                @else
+                                    {{ $kursuss->desc }}
+                                @endif
+                            </p>
+                            <a href="{{ route('kursus.pendaftaran.kursus') }}" class="btn btn-primary">Daftar
+                                Sekarang!!</a>
+                        </div>
                     </div>
                 </div>
-            </div>
             @endforeach
         </div>
         <div class="row my-4">
@@ -430,14 +446,7 @@
                                     </a>
                                     <ul class="dropdown-menu px-2 py-3 ms-sm-n4 ms-n5" aria-labelledby="dropdownTable">
                                         <li>
-                                            <a class="dropdown-item border-radius-md" href="javascript:;">Action</a>
-                                        </li>
-                                        <li>
-                                            <a class="dropdown-item border-radius-md" href="javascript:;">Another action</a>
-                                        </li>
-                                        <li>
-                                            <a class="dropdown-item border-radius-md" href="javascript:;">Something else
-                                                here</a>
+                                            <a class="dropdown-item border-radius-md" href="">Show All</a>
                                         </li>
                                     </ul>
                                 </div>

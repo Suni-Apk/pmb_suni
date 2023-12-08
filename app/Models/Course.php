@@ -38,7 +38,7 @@ class Course extends Model
 
     public function biaya()
     {
-        return $this->hasMany(biaya::class);
+        return $this->hasMany(Biaya::class);
     }
 
     public function mapel()

@@ -51,9 +51,6 @@ class MapelsController extends Controller
 
         $activeMapelCount = Mapels::where('status', 'Active')->count();
         
-        if ($mapels->status == 'nonActive' && $activeMapelCount > 0) {
-            return redirect()->route('admin.tahun-ajaran.index')->with('pesan', "Tidak dapat mengaktifkan tahun ajaran lain ketika sudah ada yang aktif");
-        }
 
         $data['status'] = $mapels->status === 'Active' ? 'nonActive' : 'Active';
 

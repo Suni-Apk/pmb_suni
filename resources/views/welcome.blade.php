@@ -8,55 +8,60 @@
 @endphp
 
 @section('content')
-<section class="min-vh-25 mb-n4 overflow-x-hidden">
+    <section class="min-vh-25 mb-n4 overflow-x-hidden">
 
-    <div id="carouselWelcome" class="carousel slide page-header align-items-start height-600 pb-7 m-3 border-radius-lg" data-bs-ride="carousel" data-bs-interval="3000" style="background-color: #fff;">
-        <div class="carousel-indicators" style="top: 5rem;">
-            @foreach ($banner as $item)
-            <button type="button" data-bs-target="#carouselWelcome" data-bs-slide-to="{{ $loop->index }}" class="{{ $loop->first ? 'active' : '' }}" aria-current="true"></button>
-            @endforeach
-          </div>
-        <div class="carousel-inner">
-            @foreach ($banner as $item)
-            <div class="carousel-item {{ $loop->first ? 'active' : '' }}">
-                <div class="row flex-column justify-content-center height-600"
-                style="background-image: url('{{ $item->image }}'); background-size: cover; background-position: center;">
-                    <span class="mask bg-gradient-dark opacity-3 z-index-1"></span>
+        <div id="carouselWelcome" class="carousel slide page-header align-items-start height-600 pb-7 m-3 border-radius-lg"
+            data-bs-ride="carousel" data-bs-interval="3000" style="background-color: #fff;">
+            <div class="carousel-indicators" style="top: 5rem;">
+                @foreach ($banner as $item)
+                    <button type="button" data-bs-target="#carouselWelcome" data-bs-slide-to="{{ $loop->index }}"
+                        class="{{ $loop->first ? 'active' : '' }}" aria-current="true"></button>
+                @endforeach
+            </div>
+            <div class="carousel-inner">
+                @foreach ($banner as $item)
+                    <div class="carousel-item {{ $loop->first ? 'active' : '' }}">
+                        <div class="row flex-column justify-content-center height-600"
+                            style="background-image: url('{{ $item->image }}'); background-size: cover; background-position: center;">
+                            <span class="mask bg-gradient-dark opacity-3 z-index-1"></span>
+                        </div>
+                    </div>
+                @endforeach
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselWelcome" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselWelcome" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+        </div>
+
+        <div class="row mt-n11">
+            <div class="card col-9 col-lg-6 text-center mx-auto mb-2 mt-1 pt-5 pb-3 z-index-3 position-relative"
+                style="border-radius: 2rem; user-select: none;">
+                <span class="position-absolute start-50 rounded-circle bg-white shadow p-3"
+                    style="top: -3rem; transform: translateX(-50%);">
+                    <img src="{{ App\Models\General::first()->image }}" class="width-64-px">
+                </span>
+                <h4 class="mt-1 mt-sm-4">Selamat Datang di</h4>
+                <h3 class="text-white lh-1 py-1 mt-1 mb-2 bg-gradient-dark rounded-pill">Website Pendaftaran</h3>
+                <h1 class=" lh-1 text-uppercase">{{ App\Models\General::first()->name }}</h1>
+                <div class="mx-auto d-flex justify-content-center gap-2 mt-2 mt-sm-4">
+                    @if (!Auth::user())
+                        <div class="nav-item">
+                            <a class="btn bg-gradient-dark mb-0 rounded-pill" href="{{ route('register') }}">
+                                Daftar
+                            </a>
+                        </div>
+                    @endif
+                    <a href="#informasi" class="btn rounded-pill btn-outline-secondary" data-bs-toggle="tooltip"
+                        data-bs-placement="right" title="Butuh informasi?">Selengkapnya <i
+                            class="fas fa-arrow-down ms-1"></i></a>
                 </div>
             </div>
-            @endforeach
         </div>
-        <button class="carousel-control-prev" type="button" data-bs-target="#carouselWelcome" data-bs-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Previous</span>
-        </button>
-        <button class="carousel-control-next" type="button" data-bs-target="#carouselWelcome" data-bs-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Next</span>
-        </button>
-    </div>
-
-    <div class="row mt-n11">
-        <div class="card col-9 col-lg-6 text-center mx-auto mb-2 mt-1 pt-5 pb-3 z-index-3 position-relative" style="border-radius: 2rem; user-select: none;">
-            <span class="position-absolute start-50 rounded-circle bg-white shadow p-3" style="top: -3rem; transform: translateX(-50%);">
-                <img src="{{ App\Models\General::first()->image }}" class="width-64-px">
-            </span>
-            <h4 class="mt-1 mt-sm-4">Selamat Datang di</h4>
-            <h3 class="text-white lh-1 py-1 mt-1 mb-2 bg-gradient-dark rounded-pill">Website Pendaftaran</h3>
-            <h1 class=" lh-1 text-uppercase">{{ App\Models\General::first()->name }}</h1>
-            <div class="mx-auto d-flex justify-content-center gap-2 mt-2 mt-sm-4">
-                @if (!Auth::user())
-                <div class="nav-item">
-                    <a class="btn bg-gradient-dark mb-0 rounded-pill" href="{{route('register')}}">
-                        Daftar
-                    </a>
-                </div>
-                @endif
-                <a href="#informasi" class="btn rounded-pill btn-outline-secondary" 
-                data-bs-toggle="tooltip" data-bs-placement="right" title="Butuh informasi?">Selengkapnya <i class="fas fa-arrow-down ms-1"></i></a>
-            </div>
-        </div>
-    </div>
 
     <div class="p-5">
         <div class="row flex-column justify-content-center align-items-start w-100">

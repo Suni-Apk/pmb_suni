@@ -44,9 +44,10 @@
                                             <span class="font-weight-bold">{{ $jurusans->code }}</span>
                                         </td>
                                         <td class="text-center">
-                                            <button type="button" class="badge badge-sm border-0 bg-gradient-info me-1" 
-                                            data-bs-toggle="modal" data-bs-target="#modalLink{{ $jurusans->id }}">Link <i class="fas fa-link ms-1"></i></button>
-                                            
+                                            <button type="button" class="badge badge-sm border-0 bg-gradient-info me-1"
+                                                data-bs-toggle="modal" data-bs-target="#modalLink{{ $jurusans->id }}">Link
+                                                <i class="fas fa-link ms-1"></i></button>
+
                                             <a href="{{ route('admin.jurusan.show', $jurusans->id) }}"
                                                 class="badge badge-sm bg-gradient-warning font-weight-bolder text-xxs"
                                                 data-toggle="tooltip" data-original-title="detail">
@@ -70,60 +71,80 @@
                                             </form>
 
                                             {{-- modal --}}
-                                            <div class="modal fade text-start" id="modalLink{{ $jurusans->id }}" tabindex="-1" role="dialog"
-                                            aria-labelledby="modalLinkLabel" aria-hidden="true">
-                                                <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" role="document">
+                                            <div class="modal fade text-start" id="modalLink{{ $jurusans->id }}"
+                                                tabindex="-1" role="dialog" aria-labelledby="modalLinkLabel"
+                                                aria-hidden="true">
+                                                <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable"
+                                                    role="document">
                                                     <div class="modal-content">
                                                         <div class="modal-header">
                                                             <h5 class="modal-title" id="modalLinkLabel">Tambah Link</h5>
-                                                            <button type="button" class="btn-close border rounded-circle p-1 fs-3 lh-1 text-dark" data-bs-dismiss="modal" aria-label="Close">&times;</button>
+                                                            <button type="button"
+                                                                class="btn-close border rounded-circle p-1 fs-3 lh-1 text-dark"
+                                                                data-bs-dismiss="modal" aria-label="Close">&times;</button>
                                                         </div>
-                                                        <form action="{{ route('admin.link.create.process') }}" method="POST">
+                                                        <form action="{{ route('admin.link.create.process') }}"
+                                                            method="POST">
                                                             @csrf
                                                             @method('POST')
                                                             <div class="modal-body">
                                                                 <div class="form-group">
                                                                     <label for="name">Nama</label>
-                                                                    <small class="text-danger" style="font-size: 12px">*</small>
-                                                                    <input type="text" name="name" id="name" class="form-control" placeholder="Masukkan Nama linknya Disini" value="{{ old('name') }}">
+                                                                    <small class="text-danger"
+                                                                        style="font-size: 12px">*</small>
+                                                                    <input type="text" name="name" id="name"
+                                                                        class="form-control"
+                                                                        placeholder="Masukkan Nama linknya Disini"
+                                                                        value="{{ old('name') }}">
                                                                 </div>
                                                                 <div class="form-group">
                                                                     <label for="url">URL Link</label>
-                                                                    <small class="text-danger" style="font-size: 12px">*</small>
-                                                                    <input type="url" name="url" id="url" class="form-control" placeholder="Masukkan URL linknya Disini" {{ old('url') }}>
+                                                                    <small class="text-danger"
+                                                                        style="font-size: 12px">*</small>
+                                                                    <input type="url" name="url" id="url"
+                                                                        class="form-control"
+                                                                        placeholder="Masukkan URL linknya Disini"
+                                                                        {{ old('url') }}>
                                                                 </div>
                                                                 <div class="form-group">
                                                                     <label>Tipe Link</label>
-                                                                    <small class="text-danger" style="font-size: 12px">*</small>
+                                                                    <small class="text-danger"
+                                                                        style="font-size: 12px">*</small>
                                                                     <div class="form-check">
-                                                                        <input type="radio" name="type" id="Whatsapp" class="form-check-input" value="whatsapp">
-                                                                        <label class="form-check-label" for="Whatsapp">Whatsapp</label>
+                                                                        <input type="radio" name="type" id="Whatsapp"
+                                                                            class="form-check-input" value="whatsapp">
+                                                                        <label class="form-check-label"
+                                                                            for="Whatsapp">Whatsapp</label>
                                                                     </div>
                                                                     <div class="form-check">
-                                                                        <input type="radio" name="type" id="Zoom" class="form-check-input" value="zoom">
-                                                                        <label class="form-check-label" for="Zoom">Zoom</label>
+                                                                        <input type="radio" name="type"
+                                                                            id="Zoom" class="form-check-input"
+                                                                            value="zoom">
+                                                                        <label class="form-check-label"
+                                                                            for="Zoom">Zoom</label>
                                                                     </div>
                                                                 </div>
                                                                 <div class="form-group">
                                                                     <label>Gender</label>
-                                                                    <small class="text-danger" style="font-size: 12px">*</small>
+                                                                    <small class="text-danger"
+                                                                        style="font-size: 12px">*</small>
                                                                     <div class="form-check">
-                                                                        <input class="form-check-input" type="radio" name="gender" id="ikhwan"
-                                                                            value="ikhwan">
+                                                                        <input class="form-check-input" type="radio"
+                                                                            name="gender" id="ikhwan" value="ikhwan">
                                                                         <label class="form-check-label" for="ikhwan">
                                                                             Ikhwan
                                                                         </label>
                                                                     </div>
                                                                     <div class="form-check">
-                                                                        <input class="form-check-input" type="radio" name="gender" id="akhwat"
-                                                                            value="akhwat">
+                                                                        <input class="form-check-input" type="radio"
+                                                                            name="gender" id="akhwat" value="akhwat">
                                                                         <label class="form-check-label" for="akhwat">
                                                                             Akhwat
                                                                         </label>
                                                                     </div>
                                                                     <div class="form-check">
-                                                                        <input class="form-check-input" type="radio" name="gender" id="all"
-                                                                            value="all">
+                                                                        <input class="form-check-input" type="radio"
+                                                                            name="gender" id="all" value="all">
                                                                         <label class="form-check-label" for="all">
                                                                             Semua (ditujukan untuk seluruh mahasiswa)
                                                                         </label>
@@ -132,21 +153,30 @@
                                                                 <div class="row">
                                                                     <div class="form-group col-6">
                                                                         <label for="id_tahun_ajarans">Tahun Ajaran</label>
-                                                                        <small class="text-danger" style="font-size: 12px">*</small>
-                                                                        <select name="id_tahun_ajarans" id="id_tahun_ajarans" class="form-select" required>
+                                                                        <small class="text-danger"
+                                                                            style="font-size: 12px">*</small>
+                                                                        <select name="id_tahun_ajarans"
+                                                                            id="id_tahun_ajarans" class="form-select"
+                                                                            required>
                                                                             <option disabled selected>-----------</option>
                                                                             @foreach ($tahun_ajaran as $item)
-                                                                                <option value="{{ $item->id }}" @selected(old('id_tahun_ajarans'))>{{ $item->year }}</option>
+                                                                                <option value="{{ $item->id }}"
+                                                                                    @selected(old('id_tahun_ajarans'))>
+                                                                                    {{ $item->year }}</option>
                                                                             @endforeach
                                                                         </select>
                                                                     </div>
                                                                     <div class="form-group col-6">
                                                                         <label for="id_jurusans">Jurusan</label>
-                                                                        <small class="text-danger" style="font-size: 12px">*</small>
-                                                                        <select name="id_jurusans" id="id_jurusans" class="form-select" required>
+                                                                        <small class="text-danger"
+                                                                            style="font-size: 12px">*</small>
+                                                                        <select name="id_jurusans" id="id_jurusans"
+                                                                            class="form-select" required>
                                                                             <option disabled selected>-----------</option>
                                                                             @foreach ($jurusan as $item)
-                                                                                <option value="{{ $item->id }}" {{ $jurusans->id == $item->id ? 'selected' : '' }}>{{ $item->name }}</option>
+                                                                                <option value="{{ $item->id }}"
+                                                                                    {{ $jurusans->id == $item->id ? 'selected' : '' }}>
+                                                                                    {{ $item->name }}</option>
                                                                             @endforeach
                                                                         </select>
                                                                     </div>
