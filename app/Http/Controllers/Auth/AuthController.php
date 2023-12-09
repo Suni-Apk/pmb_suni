@@ -79,6 +79,7 @@ class AuthController extends Controller
             'email' => 'required|email|unique:users,email',
             'gender' => 'required|string',
             'password' => 'required|confirmed|min:8',
+            'program_belajar' => 'required|string'
         ], $messages);
         $data['phone'] = $request->phone;
         $data['role'] = 'Mahasiswa';
@@ -270,7 +271,7 @@ class AuthController extends Controller
                         'user_id' => $user->id,
                         'no_invoice' => $payment['Data']['SessionID'],
                         'jenis_tagihan' => 'Administrasi',
-                        'jenis_pembayaran' => 'cash',
+                        'jenis_pembayaran' => 'Ipaymu',
                         'program_belajar' => 'S1',
                         'status' => 'pending',
                         'total' => $adminstrasiS1->amount,
@@ -297,7 +298,7 @@ class AuthController extends Controller
                         'user_id' => $user->id,
                         'no_invoice' => $payment['Data']['SessionID'],
                         'jenis_tagihan' => 'Administrasi',
-                        'jenis_pembayaran' => 'cash',
+                        'jenis_pembayaran' => 'Ipaymu',
                         'program_belajar' => 'KURSUS',
                         'status' => 'pending',
                         'total' => $adminstrasiKursus->amount,

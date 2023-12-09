@@ -21,17 +21,22 @@
             )
         </script>
     @elseif(session('eror'))
-        <script>
-            Swal.fire({
-                icon: "error",
-                title: "Oops...",
-                text: "{{ session('eror') }}",
-            });
-        </script>
+    <script>
+        Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "{{ session('eror') }}",
+        });
+    </script>
     @endif
 @endpush
 
 @section('content')
+    @if (session('noDaftarUlang'))
+        <div class="alert fade alert-warning" role="alert">
+            {{ session('noDaftarUlang') }}
+        </div>
+    @endif
     <div class="row">
         <div class="col-12 text-center mb-4">
             <div class="card">
@@ -43,8 +48,7 @@
                                 <button class="multisteps-form__progress-btn js-active" type="button" title="Register">
                                     <span>Register</span>
                                 </button>
-                                <button class="multisteps-form__progress-btn js-active" type="button"
-                                    title="Bayar Administrasi">
+                                <button class="multisteps-form__progress-btn js-active" type="button" title="Bayar Administrasi">
                                     <span>Bayar Administrasi</span>
                                 </button>
                                 @if ($biodata && !Auth::user()->document)
@@ -74,16 +78,13 @@
             </div>
         </div>
         <div class="col-12 col-lg-8 mb-lg-0 mb-4">
-            <div id="carouselDashboard" data-bs-ride="carousel" data-bs-interval="3000"
-                class="carousel slide page-header align-items-start height-300 pb-7 rounded-3">
+            <div id="carouselDashboard" data-bs-ride="carousel" data-bs-interval="3000" class="carousel slide page-header align-items-start height-300 pb-7 rounded-3">
                 <div class="carousel-indicators">
-                    <button type="button" data-bs-target="#carouselDashboard" data-bs-slide-to="0" class="active"
-                        aria-current="true"></button>
+                    <button type="button" data-bs-target="#carouselDashboard" data-bs-slide-to="0" class="active" aria-current="true"></button>
                     @foreach ($banner->filter(function ($item) {
-            return $item->target == 'MAHASISWA' || $item->target == 'SEMUA';
-        }) as $item)
-                        <button type="button" data-bs-target="#carouselDashboard" data-bs-slide-to="{{ $loop->index + 1 }}"
-                            class="" aria-current="true"></button>
+                        return $item->target == 'MAHASISWA' || $item->target == 'SEMUA';
+                        }) as $item)
+                    <button type="button" data-bs-target="#carouselDashboard" data-bs-slide-to="{{ $loop->index+1 }}" class="" aria-current="true"></button>
                     @endforeach
                 </div>
                 <div class="carousel-inner">
@@ -91,10 +92,9 @@
                         <div class="row flex-column justify-content-center height-300"
                         style="background-image: url('https://c0.wallpaperflare.com/path/196/594/379/quran-book-97f792a4ef76b251052800f9f56a4c0b.jpg'); background-size: cover; background-position: center;">
                             <span class="mask bg-gradient-dark opacity-6"></span>
-                            <div
-                                class="d-flex justify-content-center flex-column align-items-center text-white text-center z-index-1">
+                            <div class="d-flex justify-content-center flex-column align-items-center text-white text-center z-index-1">
                                 <h4 class="font-weight-bold mb-0 p-3 pb-0 text-white">
-                                    Selamat Datang
+                                    Selamat Datang 
                                     <b class="font-weight-bolder">{{ $user->name }}</b>!
                                 </h4>
                                 <p class="mb-0 mx-2">
@@ -123,76 +123,67 @@
                         </div>
                     @endforeach
                 </div>
-                <button class="carousel-control-prev" type="button" data-bs-target="#carouselDashboard"
-                    data-bs-slide="prev">
+                <button class="carousel-control-prev" type="button" data-bs-target="#carouselDashboard" data-bs-slide="prev">
                     <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                     <span class="visually-hidden">Previous</span>
                 </button>
-                <button class="carousel-control-next" type="button" data-bs-target="#carouselDashboard"
-                    data-bs-slide="next">
+                <button class="carousel-control-next" type="button" data-bs-target="#carouselDashboard" data-bs-slide="next">
                     <span class="carousel-control-next-icon" aria-hidden="true"></span>
                     <span class="visually-hidden">Next</span>
                 </button>
             </div>
         </div>
         <div class="col-12 mb-4 gy-3 g-lg-3 d-md-none row mx-auto justify-content-center">
-            @if (!$biodata && !Auth::user()->document)
-                <div class="col-3 col-md-2 text-center">
-                    <a href="{{ route('mahasiswa.pendaftaran.s1') }}"
-                        class="icon icon-shape p-0 bg-primary shadow text-center border-radius-md cursor-pointer"
-                        data-bs-toggle="tooltip" data-bs-placement="top" title="Isi Biodata">
-                        <i class="fas fa-user-shield text-lg opacity-10" aria-hidden="true"></i>
-                    </a>
-                    <span class="d-block mt-2" style="font-size: 13px;">Isi Biodata</span>
-                </div>
-                <div class="col-3 col-md-2 text-center">
-                    <a href="{{ route('mahasiswa.pendaftaran.document') }}"
-                        class="icon icon-shape p-0 bg-primary shadow text-center border-radius-md cursor-pointer"
-                        data-bs-toggle="tooltip" data-bs-placement="top" title="Upload Dokumen">
-                        <i class="fas fa-folder text-lg opacity-10" aria-hidden="true"></i>
-                    </a>
-                    <span class="d-block mt-2" style="font-size: 13px;">Upload Dokumen</span>
-                </div>
-            @elseif ($biodata && !Auth::user()->document)
-                <div class="col-3 col-md-2 text-center">
-                    <a href="{{ route('mahasiswa.pendaftaran.document') }}"
-                        class="icon icon-shape p-0 bg-primary shadow text-center border-radius-md cursor-pointer"
-                        data-bs-toggle="tooltip" data-bs-placement="top" title="Upload Dokumen">
-                        <i class="fas fa-folder text-lg opacity-10" aria-hidden="true"></i>
-                    </a>
-                    <span class="d-block mt-2" style="font-size: 13px;">Upload Dokumen</span>
-                </div>
-            @elseif (!$biodata && Auth::user()->document)
-                <div class="col-3 col-md-2 text-center">
-                    <a href="{{ route('mahasiswa.pendaftaran.s1') }}"
-                        class="icon icon-shape p-0 bg-primary shadow text-center border-radius-md cursor-pointer"
-                        data-bs-toggle="tooltip" data-bs-placement="top" title="Isi Biodata">
-                        <i class="fas fa-user-shield text-lg opacity-10" aria-hidden="true"></i>
-                    </a>
-                    <span class="d-block mt-2" style="font-size: 13px;">Isi Biodata</span>
-                </div>
-            @else
-                <div class="col-3 col-md-2 text-center">
-                    <a href="{{ route('mahasiswa.matkul') }}"
-                        class="icon icon-shape p-0 bg-primary shadow text-center border-radius-md cursor-pointer"
-                        data-bs-toggle="tooltip" data-bs-placement="top" title="Mata Kuliah">
-                        <i class="ni ni-archive-2 text-lg opacity-10" aria-hidden="true"></i>
-                    </a>
-                    <span class="d-block mt-2" style="font-size: 13px;">Mata Kuliah</span>
-                </div>
-                <div class="col-3 col-md-2 text-center">
-                    <a href="{{ route('mahasiswa.tagihan.index') }}"
-                        class="icon icon-shape p-0 bg-primary shadow text-center border-radius-md cursor-pointer"
-                        data-bs-toggle="tooltip" data-bs-placement="top" title="Tagihan">
-                        <i class="ni ni-archive-2 text-lg opacity-10" aria-hidden="true"></i>
-                    </a>
-                    <span class="d-block mt-2" style="font-size: 13px;">Tagihan</span>
-                </div>
-            @endif
+        @if (!$biodata && !Auth::user()->document)
             <div class="col-3 col-md-2 text-center">
-                <a href="{{ route('mahasiswa.profile.index') }}"
-                    class="icon icon-shape p-0 bg-yellow shadow text-center border-radius-md cursor-pointer"
-                    data-bs-toggle="tooltip" data-bs-placement="top" title="Profile">
+                <a href="{{ route('mahasiswa.pendaftaran.s1') }}" class="icon icon-shape p-0 bg-primary shadow text-center border-radius-md cursor-pointer"
+                    data-bs-toggle="tooltip" data-bs-placement="top" title="Isi Biodata">
+                    <i class="fas fa-user-shield text-lg opacity-10" aria-hidden="true"></i>
+                </a>
+                <span class="d-block mt-2" style="font-size: 13px;">Isi Biodata</span>
+            </div>
+            <div class="col-3 col-md-2 text-center">
+                <a href="{{ route('mahasiswa.pendaftaran.document') }}" class="icon icon-shape p-0 bg-primary shadow text-center border-radius-md cursor-pointer"
+                    data-bs-toggle="tooltip" data-bs-placement="top" title="Upload Dokumen">
+                    <i class="fas fa-folder text-lg opacity-10" aria-hidden="true"></i>
+                </a>
+                <span class="d-block mt-2" style="font-size: 13px;">Upload Dokumen</span>
+            </div>
+        @elseif ($biodata && !Auth::user()->document)
+            <div class="col-3 col-md-2 text-center">
+                <a href="{{ route('mahasiswa.pendaftaran.document') }}" class="icon icon-shape p-0 bg-primary shadow text-center border-radius-md cursor-pointer"
+                    data-bs-toggle="tooltip" data-bs-placement="top" title="Upload Dokumen">
+                    <i class="fas fa-folder text-lg opacity-10" aria-hidden="true"></i>
+                </a>
+                <span class="d-block mt-2" style="font-size: 13px;">Upload Dokumen</span>
+            </div>
+        @elseif (!$biodata && Auth::user()->document)
+            <div class="col-3 col-md-2 text-center">
+                <a href="{{ route('mahasiswa.pendaftaran.s1') }}" class="icon icon-shape p-0 bg-primary shadow text-center border-radius-md cursor-pointer"
+                    data-bs-toggle="tooltip" data-bs-placement="top" title="Isi Biodata">
+                    <i class="fas fa-user-shield text-lg opacity-10" aria-hidden="true"></i>
+                </a>
+                <span class="d-block mt-2" style="font-size: 13px;">Isi Biodata</span>
+            </div>
+        @else
+            <div class="col-3 col-md-2 text-center">
+                <a href="{{ route('mahasiswa.matkul') }}" class="icon icon-shape p-0 bg-primary shadow text-center border-radius-md cursor-pointer"
+                    data-bs-toggle="tooltip" data-bs-placement="top" title="Mata Kuliah">
+                    <i class="ni ni-archive-2 text-lg opacity-10" aria-hidden="true"></i>
+                </a>
+                <span class="d-block mt-2" style="font-size: 13px;">Mata Kuliah</span>
+            </div>
+            <div class="col-3 col-md-2 text-center">
+                <a href="{{ route('mahasiswa.tagihan.index') }}" class="icon icon-shape p-0 bg-primary shadow text-center border-radius-md cursor-pointer"
+                    data-bs-toggle="tooltip" data-bs-placement="top" title="Tagihan">
+                    <i class="ni ni-archive-2 text-lg opacity-10" aria-hidden="true"></i>
+                </a>
+                <span class="d-block mt-2" style="font-size: 13px;">Tagihan</span>
+            </div>
+        @endif
+            <div class="col-3 col-md-2 text-center">
+                <a href="{{ route('mahasiswa.profile.index') }}" class="icon icon-shape p-0 bg-yellow shadow text-center border-radius-md cursor-pointer"
+                data-bs-toggle="tooltip" data-bs-placement="top" title="Profile">
                     <i class="fas fa-user-alt text-lg opacity-10" aria-hidden="true"></i>
                 </a>
                 <span class="d-block mt-2" style="font-size: 13px;">Profile</span>
@@ -201,17 +192,15 @@
         <div class="col-12 col-lg-4">
             <div class="card h-100 p-3">
                 <div class="overflow-hidden position-relative border-radius-lg bg-cover h-100"
-                    style="background-image: url('https://suniindonesia.com/wp-content/uploads/2022/10/masjid-pogung-dalangan-fQET4BjQmvc-unsplash.jpg');">
+                style="background-image: url('https://suniindonesia.com/wp-content/uploads/2022/10/masjid-pogung-dalangan-fQET4BjQmvc-unsplash.jpg');">
                     <span class="mask bg-gradient-dark"></span>
                     <div class="card-body position-relative z-index-1 d-flex flex-column justify-content-center gap-2">
                         <p class="text-white w-100 mb-0 text-center">Kalender hari ini,</p>
                         <h5 class="text-white font-weight-bolder fs-1 d-flex justify-content-evenly w-100 mb-0">
                             <span>{{ $hijriDateday }}</span>
-                            <span class="text-green font-weight-normal"
-                                style="font-family: 'Rubik', sans-serif;">{{ $hijriDatemonth }}</span>
+                            <span class="text-green font-weight-normal" style="font-family: 'Rubik', sans-serif;">{{ $hijriDatemonth }}</span>
                         </h5>
-                        <h5 class="w-100 mb-0 text-center lh-1 text-green font-weight-light"
-                            style="font-family: 'Rubik', sans-serif;">
+                        <h5 class="w-100 mb-0 text-center lh-1 text-green font-weight-light" style="font-family: 'Rubik', sans-serif;">
                             {{ $hijriDatedayArabic }}
                         </h5>
                         <p class="text-white w-100 mb-0 text-center">
@@ -303,12 +292,13 @@
         @endif
         
         {{-- jika belum ada biodata maka bisa isi di dalam halaman dashboard --}}
+
         @if (!$biodataS1)
             <div class="row mt-5">
                 <div class="col-12">
                     <div class="card mb-4">
                         <div class="card-header pb-0">
-                            <h5>Formulir Biodata</h5>
+                            <h6>Form Page</h6>
                         </div>
                         <div class="card-body pt-0">
                             <div class="table-responsive text-nowrap">
@@ -537,12 +527,8 @@
                         </div>
                         <div class="card-body p-3">
                             <div class="timeline timeline-one-side">
-                                @php
-                                    $gender = $user->gender;
-                                    $gen = ($gender == 'Laki-Laki') ? 'ikhwan' : 'akhwat';
-                                @endphp
-                                @foreach ($links->filter(function ($item) use ($gen) {
-                                    return $item->gender == $gen || $item->gender == 'all';
+                                @foreach ($links->filter(function ($item) use ($user) {
+                                    return $item->gender == $user->gender || $item->gender == 'all';
                                 }) as $item)
                                     <div class="timeline-block mb-3">
                                         <span class="timeline-step">
@@ -550,18 +536,22 @@
                                         </span>
                                         <div class="timeline-content">
                                             <a href="{{ $item->url }}" class="text-dark text-sm font-weight-bold mb-0">
-                                                {{ $item->jurusan->code }} . {{ $item->tahunAjaran->year }},
-                                                <span class="font-weight-normal">
-                                                    {{ $item->url }}
-                                                </span>
-                                            </a>
+                                                @if ($item->jurusan)
+                                                    {{ $item->jurusan->code }} . {{ $item->tahunAjaran->year }},
+                                                @else
+                                                    -
+                                                    <span class="font-weight-normal">
+                                                        {{ $item->tahunAjaran->year }},
+                                                    </span>
+                                                @endif
+                                            </a>                                            
                                             <p class="text-secondary font-weight-bold text-xs mt-1 mb-0">
                                                 {{ $item->created_at->format('d M Y') }}, link {{ $item->type }}
                                             </p>
                                         </div>
                                     </div>
                                 @endforeach
-                            </div>
+                            </div>                            
                         </div>
                     </div>
                 </div>

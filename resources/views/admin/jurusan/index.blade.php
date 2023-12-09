@@ -151,7 +151,7 @@
                                                                     </div>
                                                                 </div>
                                                                 <div class="row">
-                                                                    <div class="form-group col-6">
+                                                                    {{-- <div class="form-group col-6">
                                                                         <label for="id_tahun_ajarans">Tahun Ajaran</label>
                                                                         <small class="text-danger"
                                                                             style="font-size: 12px">*</small>
@@ -165,7 +165,7 @@
                                                                                     {{ $item->year }}</option>
                                                                             @endforeach
                                                                         </select>
-                                                                    </div>
+                                                                    </div> --}}
                                                                     <div class="form-group col-6">
                                                                         <label for="id_jurusans">Jurusan</label>
                                                                         <small class="text-danger"

@@ -33,6 +33,7 @@ use App\Http\Controllers\PembayaranUserController;
 use App\Http\Controllers\DocumentController as AdminDocumentController;
 use App\Http\Controllers\MatkulController as ControllersMatkulController;
 use App\Http\Controllers\Auth\ForgotPasswordController;
+use App\Http\Controllers\OtherController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -282,6 +283,8 @@ Route::prefix('/kursus')->middleware(['auth', 'kursus'])->name('kursus.')->group
         Route::put('/change-password/process', [KursusProfileController::class, 'change_password_process'])->name('change_password.process');
     });
     Route::get('/bayar/{id}', [KursusTagihanController::class, 'bayar'])->name('tagihan.bayar');
+    
+    Route::get('/info/n', [OtherController::class, 'krs_index'])->name('info.krs');
 
     Route::prefix('/transaksi')->name('transactions.')->group(function () {
         Route::post('/proses_bayar', [KursusTransactionController::class, 'proses_bayar'])->middleware('KursusTransactions')->name('proses_bayar');
@@ -331,6 +334,8 @@ Route::prefix('/mahasiswa')->middleware(['auth', 'mahasiswa', 's1'])->name('maha
         Route::get('/edit/{id}', [MahasiswaProfileController::class, 'edit_document'])->name('document.edit');
         Route::put('/edit/process/{id}', [MahasiswaProfileController::class, 'edit_document_process'])->name('document.edit.process');
     });
+
+    Route::get('/info/f', [OtherController::class, 'mhs_index'])->name('info.mhs');
 
     //profile
     Route::prefix('/profile')->name('profile.')->group(function () {

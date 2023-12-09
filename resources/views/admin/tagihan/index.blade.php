@@ -1,6 +1,6 @@
 @extends('layouts.master')
 
-@section('title', 'Tagihan')
+@section('title', 'Daftar Tagihan')
 
 @push('styles')
 @endpush
@@ -10,7 +10,7 @@
         <div class="col-12">
             <div class="card">
                 <div class="card-header pb-0 d-flex justify-content-between">
-                    <h6>Tagihan table</h6>
+                    <h6>Daftar Tagihan</h6>
                     <!-- Button trigger modal -->
                     <button type="button" class="btn bg-gradient-primary" data-bs-toggle="modal"
                         data-bs-target="#modalTagihan">Tambah <i class="fas fa-plus me-1"></i></button>
@@ -64,25 +64,14 @@
                         <table class="table align-items-center mb-0" id="templateTable">
                             <thead>
                                 <tr>
-                                    <th class=" text-uppercase text-secondary text-xs font-weight-bolder opacity-8">
-                                        Pilih</th>
-                                    <th class=" text-uppercase text-secondary text-xxs font-weight-bolder opacity-8">
-                                        No</th>
-                                    <th class=" text-uppercase text-secondary text-xxs font-weight-bolder opacity-8">Nama
-                                        Tagihan</th>
-                                    <th class="text-uppercase text-secondary text-xxs px-2 font-weight-bolder opacity-8">
-                                        Tahun / Angkatan</th>
-                                    <th class=" text-uppercase text-secondary text-xxs font-weight-bolder opacity-8">Jurusan
-                                        / Prodi</th>
-                                    <th class=" text-uppercase text-secondary text-xxs font-weight-bolder opacity-8">Program
-                                        Belajar</th>
-                                    <th class=" text-uppercase text-secondary text-xxs font-weight-bolder opacity-8">Created
-                                        at</th>
-                                    <th class=" text-uppercase text-secondary text-xxs font-weight-bolder opacity-8">Jenis
-                                        tagihan</th>
-                                    <th
-                                        class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-8">
-                                        Aksi</th>
+                                    <th class=" text-uppercase text-secondary text-xs font-weight-bolder opacity-8">Pilih</th>
+                                    <th class=" text-uppercase text-secondary text-xxs font-weight-bolder opacity-8">Nama Tagihan</th>
+                                    <th class="text-uppercase text-secondary text-xxs px-2 font-weight-bolder opacity-8">Tahun / Angkatan</th>
+                                    <th class=" text-uppercase text-secondary text-xxs font-weight-bolder opacity-8">Jurusan / Prodi</th>
+                                    <th class=" text-uppercase text-secondary text-xxs font-weight-bolder opacity-8">Program Belajar</th>
+                                    <th class=" text-uppercase text-secondary text-xxs font-weight-bolder opacity-8">Created at</th>
+                                    <th class=" text-uppercase text-secondary text-xxs font-weight-bolder opacity-8">Jenis tagihan</th>
+                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-8">Aksi</th>
                                 </tr>
                             </thead>
                             <tbody>

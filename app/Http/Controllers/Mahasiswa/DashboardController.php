@@ -40,15 +40,19 @@ class DashboardController extends Controller
         $banner = Banner::where('type', 'DASHBOARD')->get();
         $biodata = Biodata::where('program_belajar', 'S1')->where('user_id', $user->id)->first();
         $angkatans = TahunAjaran::where('status', 'Active')->first();
+        
         $biaya = Biaya::where('program_belajar', 'S1')->where('jenis_biaya', 'DaftarUlang')->where('id_angkatans', $angkatans->id)->first();
 
         $tagihan = TagihanDetail::where('id_biayas', $biaya->id)->where('id_users', $user->id)->first();
         if ($user->biodata) {
             $tagihan_detail = TagihanDetail::where('status', 'BELUM')->where('id_users', $biodata->user_id)->get();
+            $tagihan_detail = TagihanDetail::where('status', 'BELUM')->where('id_users', $biodata->user_id)->get();
             $links = Link::where('id_tahun_ajarans', $user->biodata->angkatan_id)->latest()->get();
             return view('mahasiswa.index',compact('hijriDateday','hijriDatedayArabic','hijriDatemonth','hijriDateyear', 'user', 'biodata', 'banner', 'biayas', 'cicilanAll', 'tagihan_detail', 'links'));
+        } elseif (!$tagihan) {
+            return view('mahasiswa.index', compact('hijriDateday', 'hijriDatedayArabic', 'hijriDatemonth', 'hijriDateyear', 'user', 'biodata', 'banner', 'biayas', 'cicilanAll', 'tagihan'))->with('noDaftarUlang', 'Maaf, ada kesalahan teknis dari admin.');
         } else {
-            return view('mahasiswa.index', compact('hijriDateday', 'tagihan', 'hijriDatedayArabic', 'hijriDatemonth', 'hijriDateyear', 'user', 'biodata', 'banner', 'biayas', 'cicilanAll'));
+            return view('mahasiswa.index', compact('hijriDateday', 'hijriDatedayArabic', 'hijriDatemonth', 'hijriDateyear', 'user', 'biodata', 'banner', 'biayas', 'cicilanAll', 'tagihan'));
         }
     }
 }

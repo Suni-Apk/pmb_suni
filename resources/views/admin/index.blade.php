@@ -332,7 +332,7 @@
 						<div class="col">
 							<h6 class="card-title text-uppercase text-muted mb-0">Pemasukan</h6>
 							<span class="h2 lh-1 font-weight-bold mb-0" id="pemasukan">
-								<span>{{number_format($pemasukan,0,'','.')}}</span>&nbsp;<small class="fs-5 font-weight-normal">rupiah</small>
+								<span>{{number_format($pemasukan,0,'','.')}}</span> <small class="fs-5 font-weight-normal">rupiah</small>
 							</span>
 						</div>
 						<div class="col-auto">

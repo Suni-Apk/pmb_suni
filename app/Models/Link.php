@@ -14,6 +14,7 @@ class Link extends Model
     protected $fillable = [
         'name', //nama linknya
         'url', // link URL nya
+        'program',
         'id_tahun_ajarans', // relasi ke angkatan berapa
         'id_jurusans', // relasi ke jurusan apa // nullable
         'id_courses', // untuk bikin link untuk kursus yg mana // nullable

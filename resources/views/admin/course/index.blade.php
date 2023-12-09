@@ -1,6 +1,6 @@
 @extends('layouts.master')
 
-@section('title', 'table template')
+@section('title', 'Daftar Kursus')
 
 @push('styles')
 @endpush

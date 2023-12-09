@@ -56,6 +56,12 @@ class LinkController extends Controller
             'id_courses' => 'nullable'
         ]);
 
+        if ($request->id_courses) {
+            $data['program'] = 'KURSUS';
+        } else {
+            $data['program'] = 'S1';
+        }
+
         // dd($data);
         Link::create($data);
         if ($request->type == 'whatsapp') {
@@ -82,8 +88,9 @@ class LinkController extends Controller
     {
         $link = Link::find($id);
         $jurusans = Jurusan::get();
+        $kursus = Course::get();
         $tahun_ajarans = TahunAjaran::get();
-        return view("admin.link.edit", compact("link", "jurusans", "tahun_ajarans"));
+        return view("admin.link.edit", compact("link", "jurusans", "tahun_ajarans", "kursus"));
     }
 
     /**
@@ -97,15 +104,16 @@ class LinkController extends Controller
             'url' => 'required',
             'type' => 'required',
             'id_tahun_ajarans' => 'string',
-            'id_jurusans' => 'string',
-            'gender' => 'required'
+            'id_jurusans' => 'nullable',
+            'id_courses' => 'nullable',
+            'gender' => 'required',
         ]);
 
         // dd($data);
         $link->update($data);
-        if ($request->type == 'Whatsapp') {
+        if ($request->type == 'whatsapp') {
             return redirect()->route('admin.link.whatsapp')->with('success', "Link Berhasil Di Ubah!!");
-        } elseif ($request->type == 'Zoom') {
+        } elseif ($request->type == 'zoom') {
             return redirect()->route('admin.link.zoom')->with('success', "Link Berhasil Di Ubah!!");
         } else {
             return false;

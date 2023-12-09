@@ -296,6 +296,7 @@
                     </ul>
                 </li>
 
+                <!-- tagihan -->
                 <li class="nav-item">
                     <a class="nav-link {{ Route::is('admin.tagihan.*') ? 'active' : '' }}"
                         href="{{ route('admin.tagihan.index') }}">
@@ -303,28 +304,8 @@
                             class="icon icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
                             <i class="fas fa-wallet"></i>
                         </div>
-                        <span class="nav-link-text ms-1">Biaya Tagihan</span>
+                        <span class="nav-link-text ms-1">Tagihan</span>
                     </a>
-                    <div class="collapse {{ Route::is('admin.tagihan.*') ? 'show' : '' }}" id="billing">
-                        <ul class="nav ms-4 ps-3">
-                            <li class="nav-item">
-                                <a class="nav-link {{ Route::is('admin.tagihan.index') ? 'active' : '' }}"
-                                    href="{{ route('admin.tagihan.index') }}">
-                                    <span class="sidenav-mini-icon d-none d-xl-block"><i
-                                            class="fas fa-border-all"></i></span>
-                                    <span class="sidenav-normal"> Daftar Biaya Tagihan </span>
-                                </a>
-                            </li>
-                            <li class="nav-item ">
-                                <a class="nav-link {{ Route::is('admin.tagihan.create') ? 'active' : '' }}"
-                                    href="{{ route('admin.tagihan.create') }}">
-                                    <span class="sidenav-mini-icon d-none d-xl-block"><i
-                                            class="fas fa-plus"></i></span>
-                                    <span class="sidenav-normal"> Tambah Biaya Tagihan </span>
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
                 </li>
 
                 <!-- transaction -->
@@ -348,37 +329,16 @@
                     </ul>
                 </li>
 
-                <!-- document -->
+                <!-- dokumen -->
                 <li class="nav-item">
-                    <a data-bs-toggle="collapse" href="#document"
-                        class="nav-link {{ Route::is('admin.dokumen.*') ? 'active' : '' }}" aria-controls="document"
-                        role="button" aria-expanded="false">
+                    <a class="nav-link {{ Route::is('admin.dokumen.*') ? 'active' : '' }}"
+                        href="{{ route('admin.dokumen.index') }}">
                         <div
-                            class="icon icon-sm shadow border-radius-md bg-white text-center d-flex align-items-center justify-content-center  me-2">
+                            class="icon icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
                             <i class="fas fa-folder-open"></i>
                         </div>
                         <span class="nav-link-text ms-1"> Dokumen </span>
                     </a>
-                    <div class="collapse {{ Route::is('admin.dokumen.*') ? 'show' : '' }}" id="document">
-                        <ul class="nav ms-4 ps-3">
-                            <li class="nav-item ">
-                                <a class="nav-link {{ Route::is('admin.dokumen.index') ? 'active' : '' }}"
-                                    href="{{ route('admin.dokumen.index') }}">
-                                    <span class="sidenav-mini-icon d-none d-xl-block"><i
-                                            class="fas fa-border-all"></i></span>
-                                    <span class="sidenav-normal"> Daftar Dokumen </span>
-                                </a>
-                            </li>
-                            <li class="nav-item ">
-                                <a class="nav-link {{ Route::is('admin.dokumen.create') ? 'active' : '' }}"
-                                    href="{{ route('admin.dokumen.create') }}">
-                                    <span class="sidenav-mini-icon d-none d-xl-block"><i
-                                            class="fas fa-plus"></i></span>
-                                    <span class="sidenav-normal"> Tambah Dokumen </span>
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
                 </li>
 
                 <!-- link -->
@@ -505,8 +465,35 @@
                         <span class="nav-link-text ms-1">Dashboard</span>
                     </a>
                 </li>
-                @if (!$biodata && !Auth::user()->document)
+                @if (!$biodata)
                     <!-- biodata -->
+                    <li class="nav-item">
+                        <a class="nav-link {{ Route::is('mahasiswa.pendaftaran.s1') ? 'active' : '' }}"
+                            href="{{ route('mahasiswa.pendaftaran.s1') }}">
+                            <div
+                                class="icon icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
+                                <i class="fas fa-user-shield"></i>
+                            </div>
+                            <span class="nav-link-text ms-1">Isi Biodata</span>
+                        </a>
+                    </li>
+                @endif
+                @if (!Auth::user()->document)
+                    <!-- document -->
+                    <li class="nav-item">
+                        <a class="nav-link {{ Route::is('mahasiswa.pendaftaran.document') ? 'active' : '' }}"
+                            href="{{ route('mahasiswa.pendaftaran.document') }}">
+                            <div
+                                class="icon icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
+                                <i class="fas fa-folder"></i>
+                            </div>
+                            <span class="nav-link-text ms-1">Upload Dokumen</span>
+                        </a>
+                    </li>
+                @endif
+
+                @if (!$biodata && !Auth::user()->document)
+                    {{-- <!-- biodata -->
                     <li class="nav-item">
                         <a class="nav-link {{ Route::is('mahasiswa.pendaftaran.s1') ? 'active' : '' }}"
                             href="{{ route('mahasiswa.pendaftaran.s1') }}">
@@ -528,54 +515,54 @@
                             <span class="nav-link-text ms-1">Upload Dokumen</span>
                         </a>
                     </li>
-                @elseif ($biodata && !Auth::user()->document)
-                    <!-- dcoment -->
-                    <li class="nav-item">
-                        <a class="nav-link {{ Route::is('mahasiswa.pendaftaran.document') ? 'active' : '' }}"
-                            href="{{ route('mahasiswa.pendaftaran.document') }}">
-                            <div
-                                class="icon icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
-                                <i class="fas fa-folder"></i>
-                            </div>
-                            <span class="nav-link-text ms-1">Upload Dokumen</span>
-                        </a>
-                    </li>
+                    @elseif ($biodata && !Auth::user()->document)
+                        <!-- dcoment -->
+                        <li class="nav-item">
+                            <a class="nav-link {{ Route::is('mahasiswa.pendaftaran.document') ? 'active' : '' }}"
+                                href="{{ route('mahasiswa.pendaftaran.document') }}">
+                                <div
+                                    class="icon icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
+                                    <i class="fas fa-folder"></i>
+                                </div>
+                                <span class="nav-link-text ms-1">Upload Dokumen</span>
+                            </a>
+                        </li>
 
-                    {{-- payment --}}
-                    <li class="nav-item">
-                        <ul class="nav-link pb-0 mb-0">
-                            <span class="sidenav-mini-icon d-none d-xl-block" style="color:rgb(196, 196, 196)"><i
-                                    class="ni ni-credit-card"></i></span>
-                            <span class="sidenav-normal text-uppercase text-xs ms-2 font-weight-bolder"> payment
-                            </span>
-                        </ul>
-                    </li>
+                        <!-- payment -->
+                        <li class="nav-item">
+                            <ul class="nav-link pb-0 mb-0">
+                                <span class="sidenav-mini-icon d-none d-xl-block" style="color:rgb(196, 196, 196)"><i
+                                        class="ni ni-credit-card"></i></span>
+                                <span class="sidenav-normal text-uppercase text-xs ms-2 font-weight-bolder"> payment
+                                </span>
+                            </ul>
+                        </li>
 
-                    <!-- billing -->
-                    <li class="nav-item">
-                        <a href="{{ route('mahasiswa.tagihan.index') }}"
-                            class="nav-link {{ Route::is('mahasiswa.tagihan.*') ? 'active' : '' }}"
-                            aria-controls="billing" role="button" aria-expanded="false">
-                            <div
-                                class="icon icon-sm shadow border-radius-md bg-white text-center d-flex align-items-center justify-content-center  me-2">
-                                <i class="fas fa-wallet"></i>
-                            </div>
-                            <span class="nav-link-text ms-1"> Tagihan </span>
-                        </a>
-                    </li>
-                @elseif(!$biodata && Auth::user()->document)
-                    <!-- biodata -->
-                    <li class="nav-item">
-                        <a class="nav-link {{ Route::is('mahasiswa.pendaftaran.s1') ? 'active' : '' }}"
-                            href="{{ route('mahasiswa.pendaftaran.s1') }}">
-                            <div
-                                class="icon icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
-                                <i class="fas fa-user-shield"></i>
-                            </div>
-                            <span class="nav-link-text ms-1">Isi Biodata</span>
-                        </a>
-                    </li>
-                @else
+                        <!-- billing -->
+                        <li class="nav-item">
+                            <a href="{{ route('mahasiswa.tagihan.index') }}"
+                                class="nav-link {{ Route::is('mahasiswa.tagihan.*') ? 'active' : '' }}"
+                                aria-controls="billing" role="button" aria-expanded="false">
+                                <div
+                                    class="icon icon-sm shadow border-radius-md bg-white text-center d-flex align-items-center justify-content-center  me-2">
+                                    <i class="fas fa-wallet"></i>
+                                </div>
+                                <span class="nav-link-text ms-1"> Tagihan </span>
+                            </a>
+                        </li>
+                    @elseif(!$biodata && Auth::user()->document)
+                        <!-- biodata -->
+                        <li class="nav-item">
+                            <a class="nav-link {{ Route::is('mahasiswa.pendaftaran.s1') ? 'active' : '' }}"
+                                href="{{ route('mahasiswa.pendaftaran.s1') }}">
+                                <div
+                                    class="icon icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
+                                    <i class="fas fa-user-shield"></i>
+                                </div>
+                                <span class="nav-link-text ms-1">Isi Biodata</span>
+                            </a>
+                        </li> --}}
+                @elseif ($biodata && (!Auth::user()->document || Auth::user()->document))
                     @php
                         $biaya = App\Models\Biaya::where('program_belajar','S1')->where('jenis_biaya','DaftarUlang')->latest()->first();
         
@@ -611,11 +598,9 @@
                                 <span class="nav-link-text ms-1"> Mata Kuliah </span>
                             </a>
                         </li>
-                    @else
                     @endif
                         
                     @if ($transactionCash != $tagihan->amount)
-
                     @else
                         {{-- academy --}}
                         <li class="nav-item">
@@ -639,6 +624,7 @@
                             </a>
                         </li>
                     @endif
+
                     {{-- payment --}}
                     <li class="nav-item">
                         <ul class="nav-link pb-0 mb-0">
@@ -661,16 +647,29 @@
                             <span class="nav-link-text ms-1"> Tagihan </span>
                         </a>
                     </li>
-                @endif
 
-                {{-- other --}}
-                <li class="nav-item">
-                    <ul class="nav-link pb-0 mb-0">
-                        <span class="sidenav-mini-icon d-none d-xl-block" style="color:rgb(196, 196, 196)"><i
-                                class="fas fa-sliders-h"></i></span>
-                        <span class="sidenav-normal text-uppercase text-xs ms-2 font-weight-bolder"> other </span>
-                    </ul>
-                </li>
+                    {{-- other --}}
+                    <li class="nav-item">
+                        <ul class="nav-link pb-0 mb-0">
+                            <span class="sidenav-mini-icon d-none d-xl-block" style="color:rgb(196, 196, 196)"><i
+                                    class="fas fa-sliders-h"></i></span>
+                            <span class="sidenav-normal text-uppercase text-xs ms-2 font-weight-bolder"> other </span>
+                        </ul>
+                    </li>
+
+                    <!-- billing -->
+                    <li class="nav-item">
+                        <a href="{{ route('mahasiswa.info.mhs') }}"
+                            class="nav-link {{ Route::is('mahasiswa.info.mhs') ? 'active' : '' }}"
+                            aria-controls="billing" role="button" aria-expanded="false">
+                            <div
+                                class="icon icon-sm shadow border-radius-md bg-white text-center d-flex align-items-center justify-content-center  me-2">
+                                <i class="fas fa-wallet"></i>
+                            </div>
+                            <span class="nav-link-text ms-1"> Tabel Informasi </span>
+                        </a>
+                    </li>
+                @endif
 
                 <!-- profile -->
                 <li class="nav-item">

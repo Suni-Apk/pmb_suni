@@ -3,6 +3,7 @@
 namespace App\Traits;
 
 use App\Models\User;
+use App\Models\General;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Http;
 
@@ -73,7 +74,7 @@ trait Ipaymu
         } else {
             $body['price'][]         = $administrasiKursus->amount;
         }
-        $body['referenceId']     = 'ID-PPDB-' . rand(1111, 9999);
+        $body['referenceId']     = 'ID-' . strtoupper(str_replace(' ', '', General::first()->title)) . '-'.rand(1111,9999);
         $body['returnUrl']       = route('callback.return');
         $body['notifyUrl']       = route('welcome') . '/callback/notify';
         $body['cancelUrl']       = route('callback.cancel');

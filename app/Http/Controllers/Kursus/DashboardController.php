@@ -59,7 +59,5 @@ class DashboardController extends Controller
             (!$kursusBiodata) ? ['linkKursus','kursus'] : ['linkKursus', 'kursus', 'tagihan_detail'],
             'mahasiswa'
         ));
-        // return view('kursus.index',compact('hijriDateday', 'hijriDatedayArabic','hijriDatemonth','hijriDateyear','biodata', 'kursus', 'banner', 'kursusBiodata', 'linkKursus', 'mahasiswa'));
-        // return view('kursus.index',compact('hijriDateday', 'hijriDatedayArabic','hijriDatemonth','hijriDateyear','biodata',  'banner',  'mahasiswa'));
     }
 }

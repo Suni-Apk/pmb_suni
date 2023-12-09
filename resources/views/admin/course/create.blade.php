@@ -1,6 +1,6 @@
 @extends('layouts.master')
 
-@section('title', 'Create Course')
+@section('title', 'Tambah Kursus')
 
 @push('styles')
 @endpush

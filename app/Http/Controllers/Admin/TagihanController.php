@@ -41,17 +41,14 @@ class TagihanController extends Controller
         $tahunAjaran = TahunAjaran::all();
         $course = Course::all();
         // $jurusanGrouped = Jurusan::with('tahunAjaran')->get()->groupBy('id_tahun_ajarans');
-        $jurusans = Jurusan::first();
-        $jurusan = Jurusan::get();
-        // dd($jurusans);
+        // $jurusans = Jurusan::with('tahunAjaran')->first();
         $biayaRoutine = Biaya::where('jenis_biaya', 'Routine')->pluck('id_angkatans');
         $biayaDaftarUlang = Biaya::where('jenis_biaya', 'DaftarUlang')->pluck('id_angkatans');
 
         $onlyTahunAjaran = $tahunAjaran->whereNotIn('id', $biayaRoutine);
         $onlyTahunAjaran2 = $tahunAjaran->whereNotIn('id', $biayaDaftarUlang);
 
-        // return view('admin.tagihan.create', compact('jenis_tagihan', 'tahunAjaran', 'jurusanGrouped', 'jurusan', 'jurusans', 'course', 'onlyTahunAjaran', 'onlyTahunAjaran2'));
-        return view('admin.tagihan.create', compact('jenis_tagihan', 'tahunAjaran', 'jurusan', 'course', 'onlyTahunAjaran', 'onlyTahunAjaran2'));
+        return view('admin.tagihan.create', compact('jenis_tagihan', 'tahunAjaran',  'course', 'onlyTahunAjaran', 'onlyTahunAjaran2'));
     }
     /**
      * Store a newly created resource in storage.
@@ -120,7 +117,6 @@ class TagihanController extends Controller
             if ($request->program_belajar == 'S1') {
                 $data = $request->validate([
                     'id_angkatans' => 'required',
-                    'id_jurusans' => 'required',
                     'jenis_biaya' => 'required',
                     'nama_biaya' => 'required',
                     'program_belajar' => 'required',
@@ -131,7 +127,6 @@ class TagihanController extends Controller
                 ]);
                 $biaya = Biaya::create([
                     'id_angkatans' => $data['id_angkatans'],
-                    'id_jurusans' => $request->id_jurusans,
                     'jenis_biaya' => 'Tidakroutine',
                     'nama_biaya' => $data['nama_biaya'],
                     'program_belajar' => $data['program_belajar'],
@@ -146,7 +141,10 @@ class TagihanController extends Controller
                     'end_date' => $dateEnd,
                 ]);
 
-                $mahasiswa = Biodata::where('jurusan_id', $biaya->id_jurusans)->where('angkatan_id', $biaya->id_angkatans)->where('program_belajar', $biaya->program_belajar)->get();
+                $mahasiswa = Biodata::where('angkatan_id', $biaya->id_angkatans)
+                ->where('program_belajar', $biaya->program_belajar)
+                ->get();
+
 
                 foreach ($mahasiswa as $index => $value) {
                     $transaction = Transaksi::where('user_id', $value->user_id)->where('program_belajar', $value->program_belajar)->where('jenis_tagihan', 'DaftarUlang')->where('status', 'berhasil')->get();
@@ -224,7 +222,7 @@ class TagihanController extends Controller
             ]);
             $tahunAjaran = TahunAjaran::where('id', $data['id_angkatans'])->first();
             $biodata = Biodata::where('angkatan_id', $data['id_angkatans'])->where('program_belajar', 'S1')->first();
-            if ($biodata) {
+            if (!$biodata) {
                 $biaya = Biaya::create([
                     'id_angkatans' => $data['id_angkatans'],
                     'jenis_biaya' => 'DaftarUlang',

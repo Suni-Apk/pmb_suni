@@ -136,7 +136,7 @@
                                                 <option value="S1" @selected(old('program_belajar') == 'S1')>S1</option>
                                                 @php
                                                     $courses = App\Models\Course::get();
-                                                @endphp
+                                                @endphp 
                                                 @foreach ($courses as $item)
                                                     <option value="{{ $item->keyword }}" @selected(old('program_belajar') == $item->keyword)>{{ $item->name }}</option>
                                                 @endforeach

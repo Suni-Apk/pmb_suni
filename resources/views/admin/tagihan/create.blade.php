@@ -6,6 +6,10 @@
     @error('error')
         {{ $message }}
     @enderror
+    
+    @if (session('error'))
+        <h5 class="text-danger">{{ session('error') }}</h5>
+    @endif
 
     @if ($jenis_tagihan == 'Routine')
         <div class="card h-100 mt-4">
@@ -215,17 +219,6 @@
                                 </div>
                             @enderror
                         </div>
-                        <div class="form-group d-none" id="jurusans">
-                            <label for="jurusans">Jurusan</label>
-                            <select name="id_jurusans" id="id_jurusans" class="form-select @error('id_jurusans') is-invalid @enderror">
-                                <option selected disabled>Pilih Jurusan</option>
-                                @forelse ($jurusan as $item)
-                                    <option value="{{ $item->id }}">{{ $item->name }}</option>
-                                @empty
-                                    <option selected disabled>Data Jurusan Kosong : Silahkan buat data jurusan terlebih dahulu</option>
-                                @endforelse
-                            </select>
-                        </div>
                     </ul>
 
                     <div class="form-group">
@@ -393,48 +386,6 @@
             reverse: true
         });
     </script>
-    {{-- <script>
-        const angkatanSelect = document.getElementById('id_angkatans');
-        const jurusanSelect = document.getElementById('id_jurusans');
-
-        const jurusanGrouped = @json($jurusanGrouped);
-        const jurusans = @json($jurusans);
-        angkatanSelect.addEventListener('change', () => {
-            const angkatanId = angkatanSelect.value;
-            const jurusanOptions = jurusanGrouped[angkatanId] || [];
-
-            if (jurusanGrouped[angkatanId]) {
-                jurusanSelect.innerHTML = '<option value="">Pilih Jurusan</option>';
-            } else {
-                jurusanSelect.innerHTML =
-                    '<option value="">Data Jurusan Kosong : Silahkan buat data jurusan terlebih dahulu !</option>';
-            }
-
-            jurusanOptions.forEach(jurusan => {
-                const option = document.createElement('option');
-                option.value = jurusan.id;
-                option.textContent = jurusan.name;
-                jurusanSelect.appendChild(option);
-            });
-        });
-        angkatanSelect.dispatchEvent(new Event('change'));
-        const angkatanId = angkatanSelect.value;
-        const jurusanOptions = jurusanGrouped[angkatanId] || [];
-
-        if (jurusanGrouped[angkatanId]) {
-            jurusanSelect.innerHTML = '<option value="">Pilih Jurusan</option>';
-        } else {
-            jurusanSelect.innerHTML =
-                '<option value="">Data Jurusan Kosong : Pilih tahun ajaran terlebih dahulu !</option>';
-        }
-
-        jurusanOptions.forEach(jurusan => {
-            const option = document.createElement('option');
-            option.value = jurusan.id;
-            option.textContent = jurusan.name;
-            jurusanSelect.appendChild(option);
-        });
-    </script> --}}
     <script type="text/javascript">
         document.getElementById("tombol_form").addEventListener("click", tampilkan_nilai_form);
 

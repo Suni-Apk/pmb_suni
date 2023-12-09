@@ -16,7 +16,7 @@
                         <h6>Mata Pelajaran</h6>
                     </div>
                     <div class="flex-row d-flex gap-2">
-                        <a href="" class="btn btn-secondary fs-6 p-2 px-3 ms-2">
+                        <a href="{{ route('kursus.downloadMapels', ['id_kursus' => $item->course->id]) }}" class="btn btn-secondary fs-6 p-2 px-3 ms-2">
                             <i class="fas fa-file-download"></i>
                         </a>
                         @php
@@ -73,5 +73,5 @@
         </div>
     </div>
     @endforeach
-    
+
 @endsection

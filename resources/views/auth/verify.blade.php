@@ -26,7 +26,7 @@
                         {{-- @dd($program) --}}
                         <div class="d-flex align-items-center justify-content-between mt-2">
                             <input type="text" name="token" maxlength="6" class="form-control text-center" placeholder="" style="letter-spacing:1rem">
-                        </div> 
+                        </div>
                     </div>  
     
                     <button type="submit" class="btn btn-primary submit_btn my-4">Submit</button> 

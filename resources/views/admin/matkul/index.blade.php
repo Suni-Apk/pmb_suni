@@ -17,9 +17,6 @@
                                 <tr>
                                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                         Pilih</th>
-                                    <th
-                                        class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 text-center">
-                                        No</th>
                                     <th class="text-uppercase text-secondary text-xxs px-2 font-weight-bolder opacity-7">
                                         Nama Matkul</th>
                                     <th class="text-uppercase text-secondary text-xxs px-2 font-weight-bolder opacity-7">
@@ -41,9 +38,6 @@
                                         <td class="align-middle text-sm">
                                             <input type="checkbox" name="ids" id="" class="checksAll"
                                                 value="{{ $item->id }}">
-                                        </td>
-                                        <td class="align-middle text-center text-sm">
-                                            <span class="text-bold">{{ $index + 1 }}</span>
                                         </td>
                                         <td class="text-sm">
                                             <span class="text-bold">{{ $item->nama_matkuls }}</span>
