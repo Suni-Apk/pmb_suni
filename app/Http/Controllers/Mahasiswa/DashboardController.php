@@ -42,7 +42,7 @@ class DashboardController extends Controller
         $angkatans = TahunAjaran::where('status', 'Active')->first();
         $biaya = Biaya::where('program_belajar', 'S1')->where('jenis_biaya', 'DaftarUlang')->where('id_angkatans', $angkatans->id)->first();
 
-        $tagihan = TagihanDetail::where('id_biayas', $biaya->id)->where('id_users', $user->id)->first();
+        $tagihan = TagihanDetail::where('id_biayas', $biaya?->id)->where('id_users', $user->id)->first();
         if ($user->biodata) {
             $links = Link::where('id_tahun_ajarans', $user->biodata->angkatan_id)->latest()->get();
             return view('mahasiswa.index', compact('hijriDateday', 'tagihan', 'hijriDatedayArabic', 'hijriDatemonth', 'hijriDateyear', 'user', 'biodata', 'banner', 'biayas', 'cicilanAll', 'links'));
