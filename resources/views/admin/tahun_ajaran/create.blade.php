@@ -20,7 +20,7 @@
                             @method('POST')
                             <div class="form-group mb-3">
                                 <label for="year">Tahun Ajaran</label>
-                                <input type="number" name="year" id="year" class="form-control">
+                                <input type="text" name="year" id="year" class="form-control">
                             </div>
 
                             <div class="form-group mb-3">
