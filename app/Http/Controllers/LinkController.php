@@ -109,6 +109,12 @@ class LinkController extends Controller
             'gender' => 'required',
         ]);
 
+        if ($request->id_courses) {
+            $data['program'] = 'KURSUS';
+        } else {
+            $data['program'] = 'S1';
+        }
+
         // dd($data);
         $link->update($data);
         if ($request->type == 'whatsapp') {
