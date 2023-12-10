@@ -58,6 +58,7 @@
                             <span class="nav-link-text ms-1">Isi Biodata</span>
                         </a>
                     </li>
+                    
                     {{-- other --}}
                     <li class="nav-item">
                         <ul class="nav-link pb-0 mb-0">
@@ -66,7 +67,7 @@
                             <span class="sidenav-normal text-uppercase text-xs ms-2 font-weight-bolder"> other </span>
                         </ul>
                     </li>
-    
+                    
                     <!-- profile -->
                     <li class="nav-item">
                         <a class="nav-link {{ Route::is('kursus.profile.*') ? 'active' : '' }}"
@@ -108,6 +109,7 @@
                             <span class="sidenav-normal text-uppercase text-xs ms-2 font-weight-bolder"> payment </span>
                         </ul>
                     </li>
+
                     <!-- billing -->
                     <li class="nav-item">
                         <a href="{{ route('kursus.tagihan.index') }}"
@@ -120,6 +122,7 @@
                             <span class="nav-link-text ms-1"> Tagihan </span>
                         </a>
                     </li>
+                    
                     {{-- other --}}
                     <li class="nav-item">
                         <ul class="nav-link pb-0 mb-0">
@@ -127,6 +130,19 @@
                                     class="fas fa-sliders-h"></i></span>
                             <span class="sidenav-normal text-uppercase text-xs ms-2 font-weight-bolder"> other </span>
                         </ul>
+                    </li>
+                    
+                    <!-- inform -->
+                    <li class="nav-item">
+                        <a href="{{ route('kursus.info.krs') }}"
+                            class="nav-link {{ Route::is('kursus.info.krs') ? 'active' : '' }}"
+                            aria-controls="billing" role="button" aria-expanded="false">
+                            <div
+                                class="icon icon-sm shadow border-radius-md bg-white text-center d-flex align-items-center justify-content-center  me-2">
+                                <i class="fas fa-wallet"></i>
+                            </div>
+                            <span class="nav-link-text ms-1"> Tabel Informasi </span>
+                        </a>
                     </li>
 
                     <!-- profile -->

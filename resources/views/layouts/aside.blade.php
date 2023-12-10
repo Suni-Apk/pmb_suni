@@ -657,7 +657,7 @@
                         </ul>
                     </li>
 
-                    <!-- billing -->
+                    <!-- inform -->
                     <li class="nav-item">
                         <a href="{{ route('mahasiswa.info.mhs') }}"
                             class="nav-link {{ Route::is('mahasiswa.info.mhs') ? 'active' : '' }}"
