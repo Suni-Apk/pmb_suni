@@ -24,16 +24,18 @@
             ->where('id_users', $user->id)
             ->latest()
             ->first();
-        $cicilans = App\Models\Cicilan::where('id_tagihan_details', $tagihan->id)->first();
-        $cicilan2 = App\Models\Cicilan::where('id_tagihan_details', $tagihan->id)
-            ->where('status', 'LUNAS')
-            ->get();
-        $total_pembayaran = round(
-            App\Models\Cicilan::where('id_tagihan_details', $tagihan->id)
-                ->where('status', 'belum')
-                ->sum('harga'),
-        );
-        $setengah_jumlah_daftar_ulang = round(($tagihan->amount * 2) / 3);
+        if ($tagihan) {
+            $cicilans = App\Models\Cicilan::where('id_tagihan_details', $tagihan->id)->first();
+            $cicilan2 = App\Models\Cicilan::where('id_tagihan_details', $tagihan->id)
+                ->where('status', 'LUNAS')
+                ->get();
+            $total_pembayaran = round(
+                App\Models\Cicilan::where('id_tagihan_details', $tagihan->id)
+                    ->where('status', 'belum')
+                    ->sum('harga'),
+            );
+            $setengah_jumlah_daftar_ulang = round(($tagihan->amount * 2) / 3);
+        }
 
     @endphp
     @if (!isset($cicilans) && !isset($transactionDaftar))
@@ -227,7 +229,7 @@
                         <form action="{{route('mahasiswa.invoice.download',Auth::user()->id)}}" method="POST">
                             @csrf
                             @method('POST')
-                            <button type="submit" class="btn btn-secondary" name="DaftarUlang" value="DaftarUlang"><i class="fas fa-file-download me-2"></i>Invoice</button>
+                            <button type="submit" class="btn btn-secondary" name="invoice" value="DaftarUlang"><i class="fas fa-file-download me-2"></i>Invoice</button>
                         </form>
                     </div>
                     <h2 class="mt-3">Selamat !</h2>
@@ -255,7 +257,14 @@
                                         <div></div>
                                     @endforeach
                                 @endif
-                                <h4>Tagihan Program S1 <span class="text-danger">*</span></h4>
+                                <div class="d-flex align-items-center justify-content-between ms-2">
+                                    <h4>Tagihan Program S1 <span class="text-danger">*</span></h4>
+                                    <form action="{{route('mahasiswa.invoice.download',Auth::user()->id)}}" method="POST">
+                                        @csrf
+                                        @method('POST')
+                                        <button type="submit" class="btn btn-secondary" name="invoice" value="Routine"><i class="fas fa-file-download me-2"></i>Invoice</button>
+                                    </form>
+                                </div>  
                             </div>
                             <div class="card-body">
 
@@ -479,7 +488,7 @@
             <form action="{{route('mahasiswa.invoice.download',Auth::user()->id)}}" method="POST">
                 @csrf
                 @method('POST')
-                <button type="submit" class="btn btn-secondary" name="DaftarUlang" value="DaftarUlang"><i class="fas fa-file-download me-2"></i>Invoice</button>
+                <button type="submit" class="btn btn-secondary" name="invoice" value="DaftarUlang"><i class="fas fa-file-download me-2"></i>Invoice</button>
             </form>
         </div>
         <h2 class="mt-3">Selamat !</h2>
@@ -493,42 +502,49 @@
         ->latest()
         ->first();
 
-    $user = Auth::user();
-    $tagihan = App\Models\TagihanDetail::where('id_biayas', $biaya->id)
-        ->where('id_users', $user->id)
-        ->latest()
-        ->first();
-    // $bagi3 = $tagihan->amount / 3;
-    // dd($bagi3);
-    $transaction = App\Models\Transaksi::where('user_id', $user->id)
-        ->where('tagihan_detail_id', $tagihan->id)
-        ->where('jenis_tagihan', $biaya->jenis_biaya)
-        ->where('status', 'berhasil')
-        ->where('jenis_pembayaran', 'cash')
-        ->first();
-@endphp
-@if (!$transaction)
-@else
-    <div class="row">
-        @if ($biodata->program_belajar === 'S1')
-            <div class="col-12">
-                <div class="card mb-4">
-                    <div class="card-header">
-                        @if ($errors->any())
-                            @foreach ($errors->all() as $error)
-                                <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                                    <span class="alert-text">{{ $error }}</span>
-                                    <button type="button" class="btn-close" data-bs-dismiss="alert"
-                                        aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                </div>
-                                <div></div>
-                            @endforeach
-                        @endif
-                        <h4>Tagihan Program S1 <span class="text-danger">*</span></h4>
-                    </div>
-                    <div class="card-body">
+        $user = Auth::user();
+        $tagihan = App\Models\TagihanDetail::where('id_biayas', $biaya->id)
+            ->where('id_users', $user->id)
+            ->latest()
+            ->first();
+        // $bagi3 = $tagihan->amount / 3;
+        // dd($bagi3);
+        $transaction = App\Models\Transaksi::where('user_id', $user->id)
+            ->where('tagihan_detail_id', $tagihan->id)
+            ->where('jenis_tagihan', $biaya->jenis_biaya)
+            ->where('status', 'berhasil')
+            ->where('jenis_pembayaran', 'cash')
+            ->first();
+    @endphp
+    @if (!$transaction)
+    @else
+        <div class="row">
+            @if ($biodata->program_belajar === 'S1')
+                <div class="col-12">
+                    <div class="card mb-4">
+                        <div class="card-header">
+                            @if ($errors->any())
+                                @foreach ($errors->all() as $error)
+                                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                        <span class="alert-text">{{ $error }}</span>
+                                        <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                            aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div></div>
+                                @endforeach
+                            @endif
+                            <div class="d-flex align-items-center justify-content-between ms-2">
+                                <h4>Tagihan Program S1 <span class="text-danger">*</span></h4>
+                                <form action="{{route('mahasiswa.invoice.download',Auth::user()->id)}}" method="POST">
+                                    @csrf
+                                    @method('POST')
+                                    <button type="submit" class="btn btn-secondary" name="invoice" value="Routine"><i class="fas fa-file-download me-2"></i>Invoice</button>
+                                </form>
+                            </div>  
+                        </div>
+                        <div class="card-body">
 
                         <!--Routine-->
                         @foreach ($biayaAll as $biayaHead)
@@ -705,15 +721,18 @@
                 <!--Daftar Ulang -->
             </div>
         </div>
+        @endif
+    @endif
 @endif
-@endif
-@endif
-
-
-
 @endsection
 
 @push('scripts')
+<script>
+	const dataTableSearch = new simpleDatatables.DataTable("#templateTableNoSearch", {
+      searchable: false,
+      fixedHeight: true,
+    });
+</script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 @if (session('success'))
 <script>

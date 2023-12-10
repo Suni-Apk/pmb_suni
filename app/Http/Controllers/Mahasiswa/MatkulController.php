@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Biodata;
 use App\Models\General;
 use App\Models\Jurusan;
+use App\Models\Link;
 use App\Models\Matkuls;
 use App\Models\Semester;
 use Barryvdh\DomPDF\Facade\Pdf;
@@ -23,13 +24,18 @@ class MatkulController extends Controller
         if ($biodata) {
             if ($biodata->jurusan_id) {
                 $jurusan = Jurusan::find($biodata->jurusan_id);
-
+                $linkPatokan = Link::get();
+                if($linkPatokan == NULL){
+                    $links = Link::get();
+                }else{
+                    $links = Link::where('id_jurusans', $jurusan->id)->where('gender', 'all')->first();
+                }
                 
                 $semester = Semester::where('id_jurusans', $jurusan->id)->get();
 
                 $matkuls = Matkuls::where('id_jurusans', $jurusan->id)->get();
 
-                return view('mahasiswa.matkul.index', compact('jurusan', 'semester', 'matkuls'));
+                return view('mahasiswa.matkul.index', compact('jurusan', 'semester', 'matkuls', 'links'));
             } else {
                 return redirect()->route('mahasiswa.index')->with('error', 'Anda belum memilih jurusan.');
             }

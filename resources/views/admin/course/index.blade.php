@@ -20,6 +20,7 @@
                                 <tr>
                                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 text-center">No</th>
                                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 text-center">Nama Kursus</th>
+                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 text-center">Catatan</th>
                                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 text-center">Action</th>
                                 </tr>
                             </thead>
@@ -32,9 +33,28 @@
                                         <td class="align-middle text-center">
                                             <span class="text-secondary text-xs font-weight-bold">{{ $value->name }}</span>
                                         </td>
+                                        <td class="align-middle">
+                                            <span class="text-secondary text-xs font-weight-normal">
+                                                <ul class="mb-0">
+                                                    @forelse ($value->notes as $item)
+                                                    <li>{{ $item }}</li>
+                                                    @empty
+                                                        ~ Tidak ada catatan ~
+                                                    @endforelse
+                                                </ul>
+                                            </span>
+                                        </td>
                                         <td class="align-middle text-center">
+                                            <button type="button" class="badge badge-sm border-0 bg-gradient-info me-1 font-weight-bolder" 
+                                            data-bs-toggle="modal" data-bs-target="#modalLink{{ $value->id }}">Link <i class="fas fa-link ms-1"></i></button>
+
+                                            <a href="{{ route('admin.course.show', $value->id) }}"
+                                                class="badge badge-sm bg-gradient-warning font-weight-bolder text-xxs me-1"
+                                                data-toggle="tooltip" data-original-title="Edit user">
+                                                Detail
+                                            </a>
                                             <a href="{{ route('admin.course.edit', $value->id) }}"
-                                                class="badge badge-sm bg-gradient-success font-weight-bold text-xs mx-2"
+                                                class="badge badge-sm bg-gradient-secondary font-weight-bolder text-xxs me-1"
                                                 data-toggle="tooltip" data-original-title="Edit user">
                                                 Edit
                                             </a>
@@ -43,9 +63,101 @@
                                                 @csrf
                                                 @method('DELETE')
                                                 <button type="submit"
-                                                    class="btn badge badge-sm bg-gradient-danger font-weight-bold text-xs mx-2"
+                                                    class="btn badge badge-sm bg-gradient-danger font-weight-bolder text-xxs"
                                                     data-toggle="tooltip" data-original-title="Delete">Delete</button>
                                             </form>
+
+                                            <div class="modal fade text-start" id="modalLink{{ $value->id }}" tabindex="-1" role="dialog"
+                                            aria-labelledby="modalLinkLabel" aria-hidden="true">
+                                                <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" role="document">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title" id="modalLinkLabel">Tambah Link</h5>
+                                                            <button type="button" class="btn-close border rounded-circle p-1 fs-3 lh-1 text-dark" data-bs-dismiss="modal" aria-label="Close">&times;</button>
+                                                        </div>
+                                                        <form action="{{ route('admin.link.create.process') }}" method="POST">
+                                                            @csrf
+                                                            @method('POST')
+                                                            <div class="modal-body">
+                                                                <div class="form-group">
+                                                                    <label for="name">Nama</label>
+                                                                    <small class="text-danger" style="font-size: 12px">*</small>
+                                                                    <input type="text" name="name" id="name" class="form-control" placeholder="Masukkan Nama linknya Disini" value="{{ old('name') }}">
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label for="url">URL Link</label>
+                                                                    <small class="text-danger" style="font-size: 12px">*</small>
+                                                                    <input type="url" name="url" id="url" class="form-control" placeholder="Masukkan URL linknya Disini" {{ old('url') }}>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label>Tipe Link</label>
+                                                                    <small class="text-danger" style="font-size: 12px">*</small>
+                                                                    <div class="form-check">
+                                                                        <input type="radio" name="type" id="Whatsapp" class="form-check-input" value="whatsapp">
+                                                                        <label class="form-check-label" for="Whatsapp">Whatsapp</label>
+                                                                    </div>
+                                                                    <div class="form-check">
+                                                                        <input type="radio" name="type" id="Zoom" class="form-check-input" value="zoom">
+                                                                        <label class="form-check-label" for="Zoom">Zoom</label>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label>Gender</label>
+                                                                    <small class="text-danger" style="font-size: 12px">*</small>
+                                                                    <div class="form-check">
+                                                                        <input class="form-check-input" type="radio" name="gender" id="ikhwan"
+                                                                            value="ikhwan">
+                                                                        <label class="form-check-label" for="ikhwan">
+                                                                            Ikhwan
+                                                                        </label>
+                                                                    </div>
+                                                                    <div class="form-check">
+                                                                        <input class="form-check-input" type="radio" name="gender" id="akhwat"
+                                                                            value="akhwat">
+                                                                        <label class="form-check-label" for="akhwat">
+                                                                            Akhwat
+                                                                        </label>
+                                                                    </div>
+                                                                    <div class="form-check">
+                                                                        <input class="form-check-input" type="radio" name="gender" id="all"
+                                                                            value="all">
+                                                                        <label class="form-check-label" for="all">
+                                                                            Semua (ditujukan untuk seluruh mahasiswa)
+                                                                        </label>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="row">
+                                                                    <div class="form-group col-6">
+                                                                        <label for="id_tahun_ajarans">Tahun Ajaran</label>
+                                                                        <small class="text-danger" style="font-size: 12px">*</small>
+                                                                        <select name="id_tahun_ajarans" id="id_tahun_ajarans" class="form-select" required>
+                                                                            <option disabled selected>-----------</option>
+                                                                            @foreach ($tahun_ajaran as $item)
+                                                                                <option value="{{ $item->id }}">{{ $item->year }}</option>
+                                                                            @endforeach
+                                                                        </select>
+                                                                    </div>
+                                                                    <div class="form-group col-6">
+                                                                        <label for="id_courses">Kursus</label>
+                                                                        <small class="text-danger" style="font-size: 12px">*</small>
+                                                                        <select name="id_courses" id="id_courses" class="form-select" required>
+                                                                            <option disabled selected>-----------</option>
+                                                                            @foreach ($course as $item)
+                                                                                <option value="{{ $item->id }}" {{ $value->id == $item->id ? 'selected' : '' }}>{{ $item->name }}</option>
+                                                                            @endforeach
+                                                                        </select>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <button class="btn bg-gradient-primary" type="submit">
+                                                                    Submit <i class="fas fa-arrow-circle-right ms-1"></i>
+                                                                </button>
+                                                            </div>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </td>
                                     </tr>
                                 @endforeach

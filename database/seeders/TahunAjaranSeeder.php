@@ -17,15 +17,7 @@ class TahunAjaranSeeder extends Seeder
 
         foreach (range(1, $numberOfYears) as $index) {
             $year = 2020 + $index; // Ganti tahun awal sesuai kebutuhan
-        
-            // Tambah tahun ajaran dengan status nonAktif
-            DB::table('tahun_ajarans')->insert([
-                'year' => $year . '/' . ($year + 1),
-                'status' => 'nonActive', // Status nonaktif
-                'start_at' => now()->subDays(rand(1, 365)), // Tanggal mulai acak dalam satu tahun terakhir
-                'end_at' => now()->addDays(rand(1, 365)), // Tanggal selesai acak dalam satu tahun mendatang
-            ]);
-        
+            
             // Tambah tahun ajaran dengan status Aktif
             DB::table('tahun_ajarans')->insert([
                 'year' => $year . '/' . ($year + 1),

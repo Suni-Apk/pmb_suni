@@ -14,7 +14,8 @@ class Document extends Model
         'ktp',
         'kk',
         'ijazah',
-        'transkrip_nilai'
+        'transkrip_nilai',
+        'status'
     ];
 
     public function user()

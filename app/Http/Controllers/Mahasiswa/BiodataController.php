@@ -29,7 +29,7 @@ class BiodataController extends Controller
     {
         $user = Auth::user()->id;
         $notif = Notify::where('id', 1)->first();
-        $angkatan = TahunAjaran::where('status', 'Active')->first();
+        $angkatan = TahunAjaran::where('status', 'Active')->latest()->first();
         $data = $request->validate([
             'birthdate' => 'required|date',
             'birthplace' => 'required',

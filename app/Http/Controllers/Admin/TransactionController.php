@@ -13,7 +13,6 @@ use App\Models\Transaksi;
 use App\Models\User;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use Maatwebsite\Excel\Facades\Excel;
 
 class TransactionController extends Controller
@@ -24,10 +23,15 @@ class TransactionController extends Controller
     public function index(Request $request)
     {
         $programBelajar = $request->input('program_belajar');
-        $transaction = Transaksi::when($programBelajar, function ($query) use ($programBelajar) {
-            return $query->where('program_belajar', $programBelajar);
-        })->get();
-        return view('admin.transactions.index', compact('transaction', 'programBelajar'));
+
+        if ($programBelajar) {
+            $transactions = Transaksi::when($programBelajar, function ($query) use ($programBelajar) {
+                return $query->where('program_belajar', $programBelajar);
+            })->latest()->get();
+        } else {
+            $transactions = Transaksi::latest()->get();
+        }
+        return view('admin.transactions.index', compact('transactions', 'programBelajar'));
     }
 
     //Cash Transaction
@@ -81,7 +85,7 @@ class TransactionController extends Controller
      */
     public function show(string $id)
     {
-        $transaksi = Transaksi::find($id); 
+        $transaksi = Transaksi::find($id);
         return view('admin.transactions.detail', compact('transaksi'));
     }
 
@@ -103,7 +107,21 @@ class TransactionController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $transaksi = Transaksi::find($id);
+        $data = $request->validate([
+            'status' => 'required|string',
+        ]);
+
+        if ($transaksi->jenis_pembayaran == 'Ipaymu') {
+            return redirect()->back()
+            ->with('bayar', 'Chat dengan <a class="fw-bolder text-capitalize text-white" href="https://api.whatsapp.com/send?phone=' . $transaksi->user->phone . '">' . $transaksi->user->name . '</a> untuk segera melakukan pembayaran.');
+        } elseif ($transaksi->jenis_pembayaran == 'cash') {
+            $transaksi->update($data);
+            return redirect()->route('admin.transaksi.index')
+            ->with('update', 'Anda berhasil mengubah status transaksi dari ' . $transaksi->status . ' menjadi ' . $request->status . '.');
+        } else {
+            return redirect()->back()->with('notfound', 'Anda tidak bisa mengubah status transaksi');
+        }
     }
 
     /**
@@ -287,7 +305,7 @@ class TransactionController extends Controller
         $biaya = Biaya::where('program_belajar', 'S1')->where('jenis_biaya', 'DaftarUlang')->where('id_angkatans', $userId->biodata->angkatan_id)->latest()->first();
 
         $tagihanDetail = TagihanDetail::where('id_biayas', $biaya->id)->where('id_users', $userId->id)->latest()->first();
-
+        
         $transaksi = Transaksi::where('user_id', $userId->id)->where('no_invoice', $invoice)->first();
 
         // dd($transaksi);

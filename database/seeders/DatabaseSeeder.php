@@ -41,6 +41,7 @@ class DatabaseSeeder extends Seeder
 
         $this->call([
             BannerSeeder::class,
+            CourseSeeder::class,
             NotifySeeder::class,
             GeneralSeeder::class,
             TahunAjaranSeeder::class,

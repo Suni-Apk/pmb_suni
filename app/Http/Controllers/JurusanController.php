@@ -20,8 +20,8 @@ class JurusanController extends Controller
     public function index()
     {
         $jurusan = Jurusan::all();
-        return view('admin.jurusan.index', compact('jurusan'));
-        return view('admin.jurusan.index', compact('jurusan'));
+        $tahun_ajaran = TahunAjaran::all();
+        return view('admin.jurusan.index', compact('jurusan', 'tahun_ajaran')); 
     }
 
 
@@ -40,7 +40,6 @@ class JurusanController extends Controller
     public function store(Request $request)
     {
         $data = $request->validate([
-            'id_tahun_ajarans' => '',
             'name' => 'required',
             'code' => 'required'
         ]);
@@ -106,6 +105,17 @@ class JurusanController extends Controller
     public function destroy(string $id)
     {
         $jurusan = Jurusan::findOrFail($id);
+
+        if ($jurusan->matkuls) {
+            $jurusan->matkuls->delete();
+        }
+        if ($jurusan->semesters) {
+            $jurusan->semesters->delete();
+        }
+        if ($jurusan->links) {
+            $jurusan->links->delete();
+        }
+
         $jurusan->delete();
         return redirect()->route('admin.jurusan.index');
     }

@@ -50,13 +50,12 @@ class LinkController extends Controller
             'name' => 'required|min:3|max:255|string',
             'url' => 'required',
             'type' => 'required',
-            'id_tahun_ajarans' => 'string',
+            'id_tahun_ajarans' => 'required',
             'id_jurusans' => 'nullable',
             'gender' => 'required',
             'id_courses' => 'nullable'
         ]);
 
-        dd($data);
         Link::create($data);
         if ( $request->type == 'whatsapp' ) {
             return redirect()->route('admin.link.whatsapp')->with('success', "Link Berhasil Di Buat!!");

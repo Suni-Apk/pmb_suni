@@ -4,6 +4,10 @@
 
 @section('content')
 
+@error('error')
+    {{ $message }}
+@enderror
+
     @if ($jenis_tagihan == 'Routine')
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
@@ -399,7 +403,7 @@
             reverse: true
         });
     </script>
-    <script>
+    {{-- <script>
         const angkatanSelect = document.getElementById('id_angkatans');
         const jurusanSelect = document.getElementById('id_jurusans');
 
@@ -440,7 +444,7 @@
             option.textContent = jurusan.name;
             jurusanSelect.appendChild(option);
         });
-    </script>
+    </script> --}}
     <script type="text/javascript">
         document.getElementById("tombol_form").addEventListener("click", tampilkan_nilai_form);
 

@@ -34,6 +34,13 @@ class AccountController extends Controller
         return view('admin.account.admin.index', compact('admin'));
     }
 
+    public function admin_show(string $id)
+    {
+        $data = User::find($id);
+
+        return view('admin.account.admin.detail', compact('data'));
+    }
+
     public function admin_create()
     {
         return view('admin.account.admin.create');
@@ -137,27 +144,24 @@ class AccountController extends Controller
         return Excel::download(new AdminExport, 'dataAdmin.xlsx');
     }
 
-
     public function mahasiswa(Request $request)
     {
         $tahun_ajaran = TahunAjaran::all();
         $mahasiswaAll = User::where('role', 'Mahasiswa')->get();
         $tahunAjaran = $request->input('angkatan_id');
 
-        if ($tahunAjaran) {
-            $mahasiswa = User::whereHas('biodata', function ($query) use ($tahunAjaran) {
-                $query->where('angkatan_id', $tahunAjaran);
-            })->where('role', 'Mahasiswa')->get();
+        if ($request->input('angkatan_id')) {
+            $mahasiswa = User::when($tahunAjaran, function ($query) use ($tahunAjaran) {
+                $query->whereHas('biodata', function ($query) use ($tahunAjaran) {
+                    $query->where('angkatan_id', $tahunAjaran);
+                });
+            })->latest()->get();
         } else {
-            $mahasiswa = $mahasiswaAll;
+            $mahasiswa = User::where('role', 'Mahasiswa')->latest()->get();
         }
 
         return view('admin.account.mahasiswa.index', compact('mahasiswa', 'tahun_ajaran', 'tahunAjaran', 'mahasiswaAll'));
     }
-
-
-
-
 
     public function mahasiswa_create()
     {
@@ -360,27 +364,11 @@ class AccountController extends Controller
 
     public function pendaftar()
     {
-        $mahasiswa = User::where('role', 'Mahasiswa')
-            ->whereHas('biodata', function ($query) {
-                $query->whereHas('angkatan', function ($subQuery) {
-                    $subQuery->where('status', 'Active');
-                });
-            })
-            ->get();
+        $mahasiswa = User::where('role', 'Mahasiswa')->latest()->get();
+
         return view('admin.account.pendaftar.index', compact('mahasiswa'));
     }
 
-    public function pendaftar_edit()
-    {
-    }
-
-    public function pendaftar_edit_process()
-    {
-    }
-
-    public function pendaftar_delete()
-    {
-    }
     public function deleteAll(Request $request)
     {
         $ids = $request->ids;

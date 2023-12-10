@@ -13,7 +13,7 @@ class MapelsController extends Controller
      */
     public function index()
     {
-        $mapel = Mapels::all();
+        $mapel = Mapels::orderBy('id', 'DESC')->get();
         return view('admin.mapel.index', compact('mapel'));
     }
 
@@ -43,6 +43,19 @@ class MapelsController extends Controller
         // dd($data);
         Mapels::create($data);
         return redirect()->route('admin.mapel.index')->with('success', "Mata Pelajaran Berhasil Di Buat!!");
+    }
+
+    public function active(Request $request, string $id)
+    {
+        $mapels = Mapels::find($id);
+
+        $activeMapelCount = Mapels::where('status', 'Active')->count();
+        
+
+        $data['status'] = $mapels->status === 'Active' ? 'nonActive' : 'Active';
+
+        $mapels->update($data);
+        return redirect()->route('admin.mapel.index')->with('success', "Status Mata Pelajaran Berhasil Diubah");
     }
 
     /**

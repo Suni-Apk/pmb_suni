@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('name');
             $table->string('description')->nullable();
             $table->string('guru');
+            $table->enum('status', ['Active', 'nonActive'])->default('nonActive');
             $table->string('mulai')->nullable();
             $table->string('selesai')->nullable();
             $table->string('hari')->nullable();

@@ -483,14 +483,14 @@
                                 </p>
                             </div>
                             <div class="container mb-3" style="max-height: 340px; overflow-y: auto;">
-                                {{-- @foreach ($linkKursus as $item) --}}
+                                @foreach ($links as $item)
                                     <div class="card border mb-3">
                                         <div class="card-body">
-                                            <h5 class="card-title">Hukum Ekonomi Syariah</h5>
-                                            <a href="#" class="btn btn-primary mt-3">Klik Untuk Bergabung</a>
+                                            <h5 class="card-title">{{$item->name}}</h5>
+                                            <a href="{{$item->url}}" class="btn btn-primary mt-3">Klik Untuk Bergabung</a>
                                         </div>
                                     </div>
-                                {{-- @endforeach --}}
+                                @endforeach
                             </div>
                         </div>
                     </div>

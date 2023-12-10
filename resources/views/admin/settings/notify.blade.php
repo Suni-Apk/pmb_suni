@@ -58,9 +58,101 @@
                         </div>
                     </div>
                 </form>
-                
             </div>
         </div>
+
+        {{-- <div class="col-6 px-2 py-1">
+            <div class="card mb-4">
+                <div class="card-header">
+                    <h6>Notifikasi Pendaftaran</h6>
+                </div>
+                <hr class="horizontal dark m-0">
+                <div class="card-body">
+                    <div class="form-group">
+                        <label for="">Pesan Notifikasi OTP</label>
+                        <textarea name="" id="" rows="3" style="min-height: 43px" class="form-control"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="">Pesan Notifikasi Akun Ditangguhkan</label>
+                        <textarea name="" id="" rows="3" style="min-height: 43px" class="form-control"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="">Pesan Notifikasi Akun Dihapus</label>
+                        <textarea name="" id="" rows="3" style="min-height: 43px" class="form-control"></textarea>
+                    </div>
+                    <button class="btn btn-primary">Save & Submit</button>
+                </div>
+            </div>
+        </div>
+        <div class="col-6 px-2 py-1">
+            <div class="card mb-4">
+                <div class="card-header">
+                    <h6>Notifikasi Pembayaran</h6>
+                </div>
+                <hr class="horizontal dark m-0">
+                <div class="card-body">
+                    <div class="form-group">
+                        <label for="">Pesan Notifikasi Pembayaran Berhasil</label>
+                        <textarea name="" id="" rows="3" style="min-height: 43px" class="form-control"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="">Pesan Notifikasi Pembayaran Gagal</label>
+                        <textarea name="" id="" rows="3" style="min-height: 43px" class="form-control"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="">Pesan Notifikasi Perintah Pembayaran</label>
+                        <textarea name="" id="" rows="3" style="min-height: 43px" class="form-control"></textarea>
+                    </div>
+                    <button class="btn btn-primary">Save & Submit</button>
+                </div>
+            </div>
+        </div>
+        <div class="col-6 px-2 py-1">
+            <div class="card mb-4">
+                <div class="card-header">
+                    <h6>Notifikasi Program Formal</h6>
+                </div>
+                <hr class="horizontal dark m-0">
+                <div class="card-body">
+                    <div class="form-group">
+                        <label for="">Pesan Notifikasi</label>
+                        <textarea name="" id="" rows="3" style="min-height: 43px" class="form-control"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="">Pesan Notifikasi</label>
+                        <textarea name="" id="" rows="3" style="min-height: 43px" class="form-control"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="">Pesan Notifikasi</label>
+                        <textarea name="" id="" rows="3" style="min-height: 43px" class="form-control"></textarea>
+                    </div>
+                    <button class="btn btn-primary">Save & Submit</button>
+                </div>
+            </div>
+        </div>
+        <div class="col-6 px-2 py-1">
+            <div class="card mb-4">
+                <div class="card-header">
+                    <h6>Notifikasi Program Nonformal</h6>
+                </div>
+                <hr class="horizontal dark m-0">
+                <div class="card-body">
+                    <div class="form-group">
+                        <label for="">Pesan Notifikasi</label>
+                        <textarea name="" id="" rows="3" style="min-height: 43px" class="form-control"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="">Pesan Notifikasi</label>
+                        <textarea name="" id="" rows="3" style="min-height: 43px" class="form-control"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="">Pesan Notifikasi</label>
+                        <textarea name="" id="" rows="3" style="min-height: 43px" class="form-control"></textarea>
+                    </div>
+                    <button class="btn btn-primary">Save & Submit</button>
+                </div>
+            </div>
+        </div> --}}
     </div>
 @endsection
 @push('scripts')

@@ -13,8 +13,8 @@ class BannerSeeder extends Seeder
     public function run(): void
     {
         \App\Models\Banner::create([
-            'title' => 'Banner Welcome',
-            'image' => 'https://r4.wallpaperflare.com/wallpaper/681/554/339/abstract-planet-space-purple-wallpaper-6970a84df14a9dbb16f7683f30a186ad.jpg',
+            'image' => 'https://c0.wallpaperflare.com/path/196/594/379/quran-book-97f792a4ef76b251052800f9f56a4c0b.jpg',
+            'title' => 'Ini Contoh Banner Welcome',
             'type' => 'WELCOME',
             'author' => 1,
             'desc'  => NULL,
@@ -22,11 +22,11 @@ class BannerSeeder extends Seeder
         ]);
 
         \App\Models\Banner::create([
-            'title' => 'Banner Dashboard',
-            'image' => 'https://r4.wallpaperflare.com/wallpaper/681/554/339/abstract-planet-space-purple-wallpaper-6970a84df14a9dbb16f7683f30a186ad.jpg',
+            'image' => 'https://c0.wallpaperflare.com/path/196/594/379/quran-book-97f792a4ef76b251052800f9f56a4c0b.jpg',
+            'title' => 'Hai, ini contoh Banner Dashboard',
             'type' => 'DASHBOARD',
             'author' => 1,
-            'desc'  => 'lorem ipsum dolor sit amet, consectetur adipiscing elit',
+            'desc'  => 'Untuk memberikan informasi baik kesemua orang, maupun target tertentu.',
             'target' => 'SEMUA',
         ]);
     }

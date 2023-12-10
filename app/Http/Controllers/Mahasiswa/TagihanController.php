@@ -7,8 +7,6 @@ use App\Models\Biaya;
 use App\Models\Biodata;
 use App\Models\Cicilan;
 use App\Models\TagihanDetail;
-use App\Models\Transaksi;
-use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 

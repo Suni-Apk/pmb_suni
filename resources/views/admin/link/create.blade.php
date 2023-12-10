@@ -17,11 +17,17 @@
                         <label for="">Nama</label>
                         <small class="text-danger" style="font-size: 12px">*</small>
                         <input type="text" class="form-control" name="name" id="name" value="{{ old('name') }}">
+                        @error('name')
+                            <label class="text-danger">{{$message}}</label>
+                        @enderror
                     </div>
                     <div class="form-group">
                         <label for="">Url Link</label>
                         <small class="text-danger" style="font-size: 12px">*</small>
                         <input type="url" class="form-control" name="url" id="url" value="{{ old('url') }}">
+                        @error('url')
+                            <label class="text-danger">{{$message}}</label>
+                        @enderror
                     </div>
                     <div class="form-group mb-3">
                         <label>Tipe Link</label>
@@ -34,6 +40,9 @@
                             <input type="radio" name="type" id="zoom" class="form-check-input" value="zoom">
                             <label class="form-check-label" for="zoom">Zoom</label>
                         </div>
+                        @error('type')
+                            <label class="text-danger">{{$message}}</label>
+                        @enderror
                     </div>
                     <div class="form-group mb-3">
                         <label>Gender</label>
@@ -59,6 +68,9 @@
                                 Semua (ditujukan untuk seluruh mahasiswa)
                             </label>
                         </div>
+                        @error('gender')
+                            <label class="text-danger">{{$message}}</label>
+                        @enderror
                     </div>
                     <div class="form-group mb-4">
                         <label for="id_tahun_ajarans">Tahun Ajaran</label>
@@ -69,6 +81,9 @@
                                 <option value="{{ $item->id }}">{{ $item->year }}</option>
                             @endforeach
                         </select>
+                        @error('id_tahun_ajarans')
+                            <label class="text-danger">{{$message}}</label>
+                        @enderror
                     </div>
                     <div class="form-group">
                         <label for="id_jurusans">Jurusan</label>
@@ -78,16 +93,22 @@
                                 <option value="{{ $item->id }}">{{ $item->name }}</option>
                             @endforeach
                         </select>
+                        @error('id_jurusans')
+                            <label class="text-danger">{{$message}}</label>
+                        @enderror
                     </div>
                     <div class="form-group">
                         <label for="id_courses">Kursus</label>
                         <small class="text-info" style="font-size: 10px">Diisi ketika ingin menambahkan link untuk Kursus</small>
                         <select name="id_courses" id="id_courses" class="form-select">
-                            <option selected disabled value="">-----------</option>
+                            <option selected disabled>-----------</option>
                             @foreach ($kursus as $item)
                                 <option value="{{ $item->id }}">{{ $item->name }}</option>
                             @endforeach
                         </select>
+                        @error('id_courses')
+                            <label class="text-danger">{{$message}}</label>
+                        @enderror
                     </div>                    
                     <div class="form-group">
                         <button type="submit" class="btn btn-primary">Submit</button>

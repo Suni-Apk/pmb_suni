@@ -96,6 +96,10 @@
 			.invoice-box.rtl table tr td:nth-child(2) {
 				text-align: left;
 			}
+
+			.border{
+				border:#333 3px;
+			}
 		</style>
 	</head>
 
@@ -164,9 +168,16 @@
                                 ->where('jenis_tagihan', $biaya->jenis_biaya)
                                 ->where('status', 'berhasil')
                                 ->first();
+					
+					$angkatan = App\Models\Biodata::where('user_id',$user->id)->where('program_belajar','S1')->first();
+					$biaya = App\Models\Biaya::where('id_angkatans',$angkatan->id)->where('jenis_biaya','Routine')->first();
+					$transaksiRoutine = App\Models\TagihanDetail::where('id_biayas', $biaya->id)
+						->where('id_users', $user->id)
+						->where('status', 'LUNAS')
+						->get();
 				@endphp
-
-				@if (!$transaksiCash && $transaksis)
+				@if ($invoicecek == 'DaftarUlang')
+					@if (!$transaksiCash && $transaksis)
 					@php
 						$nomor = 1;
 					@endphp
@@ -186,22 +197,36 @@
 									<td>{{ $value->no_invoice }}</td>
 								</tr>
 						@endforeach
-					@endforeach
-					{{-- @foreach ($transaksi as $item)
+						@endforeach
+						{{-- @foreach ($transaksi as $item)
+							<tr class="details">
+								<td>Cicilan {{$loop->iteration}}: </td>
+								<td>Rp. {{number_format(round($item->total), 0, '', '.')}},-</td>
+							</tr>
+							<tr>
+								<td>No Invoice</td>
+								<td>{{ optional($item->transaction)->no_invoice }}</td>
+							</tr>
+						@endforeach --}}
+					@elseif($transaksiCash && !$transaksis)
 						<tr class="details">
-							<td>Cicilan {{$loop->iteration}}: </td>
-							<td>Rp. {{number_format(round($item->total), 0, '', '.')}},-</td>
+							<td>Daftar Ulang Cash: </td>
+							<td>Rp. {{number_format(round($transaksiCash->total),0,'','.')}},-</td>
 						</tr>
-						<tr>
-							<td>No Invoice</td>
-							<td>{{ optional($item->transaction)->no_invoice }}</td>
+					@endif
+				@elseif($invoicecek == 'Routine')
+					@foreach ($transaksiRoutine as $item)
+						<tr class="border">
+							<tr>
+								<td>Pembayaran Bulan {{$item->tagihans->mounth}}: </td>
+								<td>Rp. {{number_format(round($item->amount), 0, '', '.')}},-</td>
+							</tr>
+							<tr>
+								<td>No Invoice</td>
+								<td>{{ optional($item->transaction)->no_invoice }}</td>
+							</tr>
 						</tr>
-					@endforeach --}}
-				@elseif($transaksiCash && !$transaksis)
-					<tr class="details">
-						<td>Daftar Ulang Cash: </td>
-						<td>Rp. {{number_format(round($transaksiCash->total),0,'','.')}},-</td>
-					</tr>
+					@endforeach
 				@endif
 
 
@@ -211,14 +236,44 @@
 					
 					<td>#Check</td>
 				</tr>
+				@php
+					$angkatan = App\Models\Biodata::where('user_id',$user->id)->where('program_belajar','S1')->first();
+					$biaya = App\Models\Biaya::where('id_angkatans',$angkatan->id)->where('jenis_biaya','Routine')->first();
+					$sppTagihan = App\Models\TagihanDetail::where('id_biayas',$biaya->id)->sum('amount');
+					$total_routine = App\Models\TagihanDetail::where('id_biayas', $biaya->id)
+						->where('id_users', $user->id)
+						->where('status', 'LUNAS')
+						->sum('amount');
+					$sisaBelum = $sppTagihan - $total_routine;
+				@endphp
+				@if ($invoicecek == 'DaftarUlang')
+					<tr class="item">
+						<td>Total : </td>
 
-				<tr class="item">
-					<td>Total : </td>
+						<td>
+							Rp. {{number_format($transaction->sum('total'),0,'','.')}},-
+						</td>
+					</tr>
+				@elseif($invoicecek == 'Routine')
+					
+					@if ($sppTagihan != $total_routine)
+						<tr class="item">
+							<td>Total : </td>
 
-					<td>
-                        Rp. {{number_format($transaction->sum('total'),0,'','.')}},-
-                    </td>
-				</tr>
+							<td>
+								Rp. - {{number_format($sisaBelum,0,'','.')}},-
+							</td>
+						</tr>
+					@else
+						<tr class="item">
+							<td>Total : </td>
+
+							<td>
+								Rp. {{number_format($total_routine,0,'','.')}},-
+							</td>
+						</tr>
+					@endif
+				@endif
 
 
                 <tr class="item">
@@ -242,21 +297,36 @@
                                 ->where('status', 'berhasil')
 								->where('total',$tagihan->amount)
 								->first();
+							$angkatan = App\Models\Biodata::where('user_id',$user->id)->where('program_belajar','S1')->first();
+							$biaya = App\Models\Biaya::where('id_angkatans',$angkatan->id)->where('jenis_biaya','Routine')->first();
+							$sppTagihan = App\Models\TagihanDetail::where('id_biayas',$biaya->id)->sum('amount');
+							$total_routine = App\Models\TagihanDetail::where('id_biayas', $biaya->id)
+								->where('id_users', $user->id)
+								->where('status', 'LUNAS')
+								->sum('amount');
 							// dd($tagihan->amount);
 							// dd($total_pembayaranCicilan);
                         @endphp
-                        @if ($total_pembayaranCicilan && !$total_pembayaranCash)
-							@if ($total_pembayaranCicilan != $tagihan->amount)
+						@if ($invoicecek == 'DaftarUlang')
+							@if ($total_pembayaranCicilan && !$total_pembayaranCash)
+								@if ($total_pembayaranCicilan != $tagihan->amount)
+									Belum Lunas
+								@else
+									Lunas
+								@endif	
+							@elseif($total_pembayaranCash && !$total_pembayaranCicilan)
+								@if (round($total_pembayaranCash->amount) != $tagihan->amount)
+									Belum Lunas
+								@else
+									Lunas
+								@endif
+							@endif
+						@elseif($invoicecek == 'Routine')
+							@if ($sppTagihan != $total_routine)
 								Belum Lunas
 							@else
 								Lunas
-							@endif	
-						@elseif($total_pembayaranCash && !$total_pembayaranCicilan)
-							@if (round($total_pembayaranCash->amount) != $tagihan->amount)
-								Belum Lunas
-							@else
-								Lunas
-							@endif	
+							@endif
 						@endif
                     </td>
 				</tr>

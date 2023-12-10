@@ -4,7 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Exports\MahasiswaLaporanExport;
 use App\Exports\PendaftarExport;
+use App\Models\Jurusan;
+use App\Models\Matkuls;
 use App\Models\TahunAjaran;
+use App\Models\Transaksi;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
@@ -16,7 +19,12 @@ class LaporanController extends Controller
     {
         $mahasiswa = User::where('role', 'Mahasiswa')->get();
         $tahunAjaran = TahunAjaran::with('biodatas.user')->get();
-        return view('admin.laporan.index', compact('mahasiswa', 'tahunAjaran'));
+        $users = User::orderBy('id', 'desc')->get();
+        $pemasukan = Transaksi::sum('total');
+        $jurusan = Jurusan::get();
+        $matkul = Matkuls::get();
+        $transaksi = Transaksi::latest()->get();
+        return view('admin.laporan.index', compact('mahasiswa', 'tahunAjaran', 'users','pemasukan', 'jurusan', 'matkul', 'transaksi'));
     }
 
     public function exportMahasiswaLaporan($tahunAjaran)

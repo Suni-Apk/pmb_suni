@@ -38,24 +38,23 @@ class DashboardController extends Controller
         ->with('course') // Eager load the associated course
         ->first();
 
-        if(!$kursusBiodata){
+        if(!$kursusBiodata){ 
             $linkKursus = Link::where('gender',$mahasiswa->gender)->get();
             $kursus = Course::all();
         }else{
             // Retrieve links related to the selected course
-            $linkKursus = Link::where('id_courses', $kursusBiodata->course->id)
-            ->where('gender', $mahasiswa->gender)
-            ->get();
-
-            // Retrieve available courses excluding the selected course
-            $kursus = Course::where('id', '!=', $kursusBiodata->course->id)->get();
+            $kursus = Course::where('id', '!==', $kursusBiodata->course->id)->get();
+            $userCourseIds = Biodata::where('user_id', Auth::id())->pluck('course_id')->toArray();
+            $linkKursus = Link::whereIn('id_courses', $userCourseIds)
+                    ->where('gender', $mahasiswa->gender)
+                    ->get();
         }
-
         
         return view('kursus.index', compact('hijriDateday', 'hijriDatedayArabic', 'hijriDatemonth', 'hijriDateyear', 'biodata', 'banner', 'kursusBiodata',
             (!$kursusBiodata) ? ['linkKursus','kursus'] : ['linkKursus', 'kursus'],
             'mahasiswa'
         ));
-
+        // return view('kursus.index',compact('hijriDateday', 'hijriDatedayArabic','hijriDatemonth','hijriDateyear','biodata', 'kursus', 'banner', 'kursusBiodata', 'linkKursus', 'mahasiswa'));
+        // return view('kursus.index',compact('hijriDateday', 'hijriDatedayArabic','hijriDatemonth','hijriDateyear','biodata',  'banner',  'mahasiswa'));
     }
 }

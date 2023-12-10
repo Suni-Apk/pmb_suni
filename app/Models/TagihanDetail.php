@@ -38,6 +38,7 @@ class TagihanDetail extends Model
     {
         return $this->hasMany(Cicilan::class);
     }
+    
     public function transaction()
     {
         return $this->belongsTo(Transaksi::class, 'id_transactions');
