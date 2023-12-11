@@ -16,9 +16,10 @@
                             <h6>Mata Pelajaran</h6>
                         </div>
                         <div class="flex-row d-flex gap-2">
-                            <a href="{{ route('kursus.downloadMapels', ['id_kursus' => $item->course->id]) }}" class="btn btn-secondary fs-4 p-2 px-3">
+                            <a href="{{ route('kursus.downloadMapels', ['id_kursus' => $item->course->id]) }}"
+                                class="btn btn-secondary fs-4 p-2 px-3">
                                 <i class="fas fa-file-download"></i>
-                            </a>   
+                            </a>
                             @php
                                 $links = App\Models\Link::where('id_courses', $item->course_id)
                                     ->where('id_tahun_ajarans', $item->angkatan->id)
@@ -52,25 +53,28 @@
                                 </thead>
                                 <tbody>
                                     @foreach ($item->course->mapel as $mapel)
-                                        <tr>
-                                            <td>
-                                                <div class="d-flex px-2 py-1">
-                                                    <div class="d-flex flex-column justify-content-center">
-                                                        <h6 class="mb-0 text-sm ms-2">{{ $mapel->name }}</h6>
+                                        @if ($mapel->status == 'Active')
+                                            <tr>
+                                                <td>
+                                                    <div class="d-flex px-2 py-1">
+                                                        <div class="d-flex flex-column justify-content-center">
+                                                            <h6 class="mb-0 text-sm ms-2">{{ $mapel->name }}</h6>
+                                                        </div>
                                                     </div>
-                                                </div>
-                                            </td>
-                                            <td class="align-text-start">
-                                                <span class="text-secondary text-xs font-weight-bold">{{ $mapel->mulai }}
-                                                    WIB</span>
-                                            </td>
-                                            <td>
-                                                <p class="text-xs font-weight-bold mb-0">{{ $mapel->selesai }} WIB</p>
-                                            </td>
-                                            <td class="align-text-center text-sm">
-                                                <p class="text-xs font-weight-bold mb-0 ms-3">{{ $mapel->hari }}</p>
-                                            </td>
-                                        </tr>
+                                                </td>
+                                                <td class="align-text-start">
+                                                    <span
+                                                        class="text-secondary text-xs font-weight-bold">{{ $mapel->mulai }}
+                                                        WIB</span>
+                                                </td>
+                                                <td>
+                                                    <p class="text-xs font-weight-bold mb-0">{{ $mapel->selesai }} WIB</p>
+                                                </td>
+                                                <td class="align-text-center text-sm">
+                                                    <p class="text-xs font-weight-bold mb-0 ms-3">{{ $mapel->hari }}</p>
+                                                </td>
+                                            </tr>
+                                        @endif
                                     @endforeach
                                 </tbody>
                             </table>
