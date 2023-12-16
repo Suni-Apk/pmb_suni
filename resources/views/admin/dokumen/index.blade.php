@@ -3,36 +3,6 @@
 @section('title', 'Daftar Dokumen')
 
 @section('content')
-<<<<<<< HEAD
-    <div class="row">
-        <div class="col-12">
-            <div class="card">
-                <div class="card-header pb-0 d-flex justify-content-between">
-                    <h6>Daftar Dokumen</h6>
-                    <a href="{{ route('admin.dokumen.create') }}" class="btn bg-gradient-primary float-end">Tambah + </a>
-                </div>
-                <div class="card-body px-0 pt-0 pb-2">
-                    <div class="table-responsive p-0">
-                        <table class="table align-items-center mb-0" id="table">
-                            <thead>
-                                <tr class="text-center">
-                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Pilih
-                                    </th>
-                                    <th
-                                        class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 text-center">
-                                        ID</th>
-                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Nama
-                                    </th>
-                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">uploaded
-                                        by</th>
-                                    <th
-                                        class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                        Aksi</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {{-- @forelse ($admin as $index => $item) --}}
-=======
 <div class="row">
     <div class="col-12">
         <div class="card">
@@ -54,7 +24,6 @@
                         </thead>
                         <tbody>
                             @foreach ($documents as $index => $item)
->>>>>>> 0d08226d441fcd57e40b286245da9fa4abddfa4d
                                 <tr>
                                     <td>
                                         <div class="row">
@@ -109,20 +78,7 @@
                                         </div>
                                     </td>
                                     <td>
-<<<<<<< HEAD
-                                        <div>
-                                            <h6 class="mb-0 text-sm">1</h6>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div class="d-flex justify-content-start align-items-center gap-3">
-                                            <embed src="{{ asset('soft-ui-dashboard-main/Akte Haidar.pdf') }}"
-                                                type="application/pdf" height="150">
-                                            <h6 class="mb-0 text-sm">IJAZAH</h6>
-                                        </div>
-=======
                                         <span class="text-secondary text-xs font-weight-bold">{{ $item->user->name }}</span>
->>>>>>> 0d08226d441fcd57e40b286245da9fa4abddfa4d
                                     </td>
                                     <td>
                                         @if ($item->status == 'deny')
@@ -132,33 +88,15 @@
                                         @endif
                                     </td>
                                     <td class="text-center">
-<<<<<<< HEAD
-                                        <a style="letter-spacing: .02rem" href=""
-                                            class="badge badge-sm bg-gradient-info font-weight-bolder text-xxs me-1"
-                                            data-toggle="tooltip" data-original-title="detail">
-                                            Verify
-                                        </a>
-
-                                        <a style="letter-spacing: .02rem" href="{{ route('admin.dokumen.destroy', 1) }}"
-                                            class="badge badge-sm bg-gradient-danger font-weight-bolder text-xxs"
-                                            data-toggle="tooltip" data-original-title="hapus">
-=======
                                         <a href="{{ route('admin.document.verify', $item->id) }}" class="badge badge-sm bg-gradient-info font-weight-bolder text-xxs me-1" data-toggle="tooltip" data-original-title="detail">
                                             Verify
                                         </a>
                                         <a href="{{route('admin.dokumen.destroy', $item->id)}}" class="badge badge-sm bg-gradient-danger font-weight-bolder text-xxs" data-toggle="tooltip" data-original-title="hapus">
->>>>>>> 0d08226d441fcd57e40b286245da9fa4abddfa4d
                                             Hapus
                                         </a>
                                     </td>
                                 </tr>
-<<<<<<< HEAD
-                                {{-- @empty
-                                
-                            @endforelse --}}
-=======
                             @endforeach
->>>>>>> 0d08226d441fcd57e40b286245da9fa4abddfa4d
                             </tbody>
                         </table>
                     </div>

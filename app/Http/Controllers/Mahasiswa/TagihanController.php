@@ -18,6 +18,8 @@ class TagihanController extends Controller
         $mahasiswa = Auth::user();
         $biayas = Biaya::all();
         $biayaAll = Biaya::all();
+
+        // $tagihan = TagihanDetail::where('id_users',Auth::user()->id)->where*
         $cicilanAll = Cicilan::all();
         // $biayaHeadCount = BiayaHead::where('jenis_biaya', 'Routine')
         //     ->where('id_angkatans', $biodata->angkatan_id)

@@ -24,24 +24,31 @@
                                         <tr>
                                             <td class="text-sm">
                                                 Nama :
-                                                {{ $mahasiswa->name }}</td>
+                                                <strong> {{ $mahasiswa->name }}</strong>
+                                            </td>
                                         </tr>
                                         <tr>
                                             <td class="text-sm">
                                                 Nomor Telepon :
-                                                {{ $mahasiswa->phone }}
+                                                <strong>
+                                                    {{ $mahasiswa->phone }}
+                                                </strong>
                                             </td>
                                         </tr>
                                         <tr>
                                             <td class="text-sm">
                                                 Email :
-                                                {{ $mahasiswa->email }}
+                                                <strong>
+                                                    {{ $mahasiswa->email }}
+                                                </strong>
                                             </td>
                                         </tr>
                                         <tr>
                                             <td class="text-sm">
                                                 Gender :
-                                                {{ $mahasiswa->gender }}
+                                                <strong>
+                                                    {{ $mahasiswa->gender }}
+                                                </strong>
                                             </td>
                                         </tr>
                                     </tbody>
@@ -175,7 +182,7 @@
                             </div>
                         </div>
                     @elseif (!isset($tagihan))
-                        
+
                     @elseif($cicilans)
                         @php
                             $biaya1 = App\Models\Biaya::where('program_belajar', 'S1')
@@ -269,7 +276,7 @@
                                                                         @php
                                                                             $no = 1;
                                                                         @endphp
-                                                                        @foreach ($cicilanAll as $key => $value)
+                                                                        @foreach ($cicilannya as $key => $value)
                                                                             @if ($value->id_tagihan_details == $tagihan->id)
                                                                                 <tr>
                                                                                     <td class="text-sm">
@@ -302,7 +309,7 @@
 
                                                                                         @if ($key > 0)
                                                                                             @php
-                                                                                                $previousStatus = $cicilanAll[$key - 1]['status'];
+                                                                                                $previousStatus = $cicilannya[$key - 1]['status'];
                                                                                             @endphp
 
                                                                                             @if ($previousStatus != 'LUNAS')
@@ -458,7 +465,7 @@
                                             @if (
                                                 $biayaHead?->jenis_biaya == 'Tidakroutine' &&
                                                     $biayaHead?->id_jurusans == $biodatas->jurusan_id &&
-                                                    $biodatas->angkatan_id)
+                                                    $biodatas->angkatan_id == $biayaHead?->id_angkatans)
                                                 <div class="table-responsive mb-3">
                                                     <p class="text-bold">Tagihan Biaya Lain</p>
                                                     <form

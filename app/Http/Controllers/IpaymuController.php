@@ -98,6 +98,12 @@ class IpaymuController extends Controller
                 }
             } else if ($transaction->jenis_tagihan == 'Daftar Ulang Cicilan') {
                 $cicilan = Cicilan::where('id_transactions', $transaction->id)->first();
+                $transaction->update([
+                    'status' => $status,
+                    'user_id' => $transaction->user->id,
+                    'update_at' => now()
+                ]);
+                
                 $cicilan->update([
                     'status' => 'LUNAS',
                 ]);

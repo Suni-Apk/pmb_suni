@@ -727,8 +727,8 @@
                                                 </div>
                                             </form>
 
-                                            <form action="{{ route('admin.mahasiswa.status', $item->id) }}" method="POST"
-                                                class="d-inline">
+                                            <form action="{{ route('admin.mahasiswa.status', $item->id) }}"
+                                                method="POST" class="d-inline">
                                                 @csrf
                                                 @method('PUT')
                                                 @if ($item->status == 'on')
@@ -790,8 +790,7 @@
                                     </a>
                                     <p class="text-secondary font-weight-normal text-xs mt-1 mb-0">
                                         {{ $item->created_at->format('d M y H:i:s') }} -
-                                        <a
-                                            href="{{ route('admin.mahasiswa.show', $item->user->id) }}">{{ $item->user->name }}</a>
+                   
                                     </p>
                                 </div>
                             </div>

@@ -1,30 +1,11 @@
 @extends('layouts.master')
 
-@section('title', 'Transaksi')
+@section('title', 'Tagihan')
 
 @push('styles')
 @endpush
 
 @section('content')
-    @if (session('bayar'))
-        <div class="alert alert-info text-white alert-dismissible fade show" role="alert">
-            <strong>Pemberitahuan.</strong> {!! session('bayar') !!}
-            <button type="button" class="btn-close border rounded-circle p-1 fs-3 lh-1 mt-2 me-2" data-bs-dismiss="alert"
-                aria-label="Close">&times;</button>
-        </div>
-    @elseif (session('update'))
-        <div class="alert alert-success text-white alert-dismissible fade show" role="alert">
-            <strong>Selamat!</strong> {!! session('update') !!}
-            <button type="button" class="btn-close border rounded-circle p-1 fs-3 lh-1 mt-2 me-2" data-bs-dismiss="alert"
-                aria-label="Close">&times;</button>
-        </div>
-    @elseif (session('notfound'))
-        <div class="alert alert-warning text-white alert-dismissible fade show" role="alert">
-            <strong>Sayangnya.</strong> {!! session('notfound') !!}
-            <button type="button" class="btn-close border rounded-circle p-1 fs-3 lh-1 mt-2 me-2" data-bs-dismiss="alert"
-                aria-label="Close">&times;</button>
-        </div>
-    @endif
     <div class="row">
         <div class="col-12">
             <div class="card">
@@ -37,6 +18,7 @@
                                 <i class='bx bxs-file-export me-1'></i> Export
                             </button>
                         </form>
+                        <a href="{{ route('admin.transaksi.create') }}" class="btn bg-gradient-primary">Tambah +</a>
                     </div>
                 </div>
                 <form action="{{ route('admin.transaksi.index') }}" method="GET">
@@ -58,6 +40,9 @@
                                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                         Pilih
                                     </th>
+                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                        ID
+                                    </th>
                                     <th class=" text-uppercase text-secondary text-xxs  font-weight-bolder opacity-7">
                                         Nama Tagihan
                                     </th>
@@ -65,13 +50,13 @@
                                         Tanggal Pembayaran
                                     </th>
                                     <th class=" text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                        Pembayar / Invoice
+                                        Pembayar
                                     </th>
                                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                         Total Pembayaran
                                     </th>
                                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                        program
+                                        PROGRAM BELAJAR
                                     </th>
                                     <th class=" text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                         Status
@@ -86,124 +71,75 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($transactions as $item)
+                                @foreach ($transaction as $index => $transactions)
                                     <tr>
-                                        <td>
-                                            <input type="checkbox" name="ids" id="" class="checksAll"
-                                                value="{{ $item->id }}">
+                                        <td><input type="checkbox" name="ids" id="" class="checksAll"
+                                                value="{{ $transactions->id }}"></td>
+                                        <td class="align-middle text-xs font-weight-bold">
+                                            {{ $index + 1 }}
                                         </td>
                                         <td class="align-middle text-secondary text-xs font-weight-bold">
-                                            @if ($item->tagihanDetails)
-                                                {{ $item->tagihanDetails->biayasDetail->nama_biaya }}
-                                            @else
-                                                {{ $item->jenis_tagihan }}
-                                            @endif
-                                        </td>
-                                        <td class="align-middle  text-secondary text-xs font-weight-bold">
-                                            <h6 class="mb-0 text-xs">{{ $item->created_at->format('d F Y') }}</h6>
-                                            <p class="mb-0 text-xs">{{ $item->created_at->format('H:i:s') }}</p>
-                                        </td>
-                                        <td class="align-middle  text-secondary text-xs font-weight-bold">
-                                            {{ $item->user?->name }}
-                                            <span class="d-block fw-light text-truncate" style="max-width: 130px;">
-                                                {{ $item->no_invoice }}
-                                            </span>
+                                            {{ $transactions->jenis_tagihan }}
                                         </td>
                                         <td class="align-middle text-secondary text-xs font-weight-bold">
-                                            Rp. {{ number_format($item->total, 0, '', '.') }},-
+                                            {{ \Carbon\Carbon::parse($transactions->created_at)->isoFormat('D MMMM YYYY') }}
                                         </td>
                                         <td class="align-middle  text-secondary text-xs font-weight-bold">
-                                            {{ $item->program_belajar }}
+                                            {{ $transactions->user->name ?? 'User Sudah tidak ada' }}
+                                        </td>
+                                        <td class="align-middle text-secondary text-xs font-weight-bold">
+                                            Rp. {{ number_format($transactions->total) }},-
+                                        </td>
+                                        <td class="align-middle  text-secondary text-xs font-weight-bold">
+                                            {{ $transactions->program_belajar }}
                                         </td>
                                         <td class="align-middle  text-secondary font-weight-bold">
-                                            @if (strtolower($item->status) == 'berhasil')
-                                                <span
-                                                    class="badge text-uppercase badge-sm rounded-pill bg-gradient-success">{{ $item->status }}</span>
-                                            @elseif (strtolower($item->status) == 'pending')
+                                            @if (strtolower($transactions->status) === 'berhasil')
+                                                <span class="badge text-uppercase badge-sm bg-gradient-success">
+                                                    SUCCESS
+                                                </span>
+                                            @elseif ($transactions->status == 'pending')
                                                 @php
                                                     $now = now();
-                                                    $created_at = \Carbon\Carbon::parse($item->created_at);
-                                                    $expired = $created_at->addHours(24);
+                                                    $paymentTime = \Carbon\Carbon::parse($transactions->created_at); // Gantilah 'payment_time' dengan kolom waktu pembayaran yang sesuai
+                                                    $expirationTime = $paymentTime->addHours(24);
+
+                                                    if ($now->greaterThan($expirationTime)) {
+                                                        $status = 'EXPIRED';
+                                                        $badgeClass = 'bg-gradient-danger';
+                                                    } else {
+                                                        $status = 'PENDING';
+                                                        $badgeClass = 'bg-gradient-warning';
+                                                    }
                                                 @endphp
-                                                @if ($now->greaterThan($expired))
-                                                    <span
-                                                        class="badge text-uppercase badge-sm rounded-pill bg-gradient-danger">expired</span>
-                                                @else
-                                                    <span
-                                                        class="badge text-uppercase badge-sm rounded-pill bg-gradient-warning">{{ $item->status }}</span>
-                                                @endif
+                                                <span class="badge text-uppercase badge-sm {{ $badgeClass }}">
+                                                    {{ $status }}
+                                                </span>
                                             @endif
                                         </td>
                                         <td>
-                                            <p class="text-xs font-weight-bold mb-0">{{ $item->jenis_tagihan }}</p>
+                                            <p class="text-xs font-weight-bold mb-0">Tidak Rutin</p>
                                             <p class="text-xs text-uppercase text-secondary mb-0">
-                                                {{ $item->jenis_pembayaran }}</p>
+                                                {{ $transactions->jenis_pembayaran }}</p>
                                         </td>
                                         <td class="align-middle text-center">
-                                            <a href="{{ route('admin.transaksi.show', $item->id) }}"
-                                                class="badge badge-sm bg-gradient-info font-weight-bolder text-xxs"
+                                            <a href="{{ route('admin.transaksi.show', 'DaftarUlang', $transactions->id) }}"
+                                                class="badge badge-sm bg-gradient-info font-weight-bold text-xxs mx-1"
                                                 data-toggle="tooltip" data-original-title="detail">
                                                 Detail
                                             </a>
-
-                                            <button
-                                                class="border-0 badge badge-sm text-xxs font-weight-bolder bg-gradient-secondary mx-1"
-                                                role="button" data-bs-toggle="modal"
-                                                data-bs-target="#modalEditStatus{{ $item->id }}">Edit</button>
-
-                                            {{-- modal edit status --}}
-                                            <div class="modal fade" id="modalEditStatus{{ $item->id }}" tabindex="-1"
-                                                role="dialog" aria-labelledby="modalEditStatus{{ $item->id }}Label"
-                                                aria-hidden="true">
-                                                <div class="modal-dialog modal-dialog-centered" role="document">
-                                                    <div class="modal-content">
-                                                        <div class="modal-header border-0">
-                                                            <h5 class="modal-title"
-                                                                id="modalEditStatus{{ $item->id }}Label">Edit Status
-                                                                Transaksi</h5>
-                                                            <button type="button"
-                                                                class="btn-close border rounded-circle p-1 fs-3 lh-1 text-dark"
-                                                                data-bs-dismiss="modal"
-                                                                aria-label="Close">&times;</button>
-                                                        </div>
-                                                        <div class="modal-body pt-0">
-                                                            <form
-                                                                action="{{ route('admin.transaksi.update', $item->id) }}"
-                                                                method="POST" class="form-group">
-                                                                @csrf
-                                                                @method('PUT')
-                                                                <label for="status" class="w-100 text-start">Status
-                                                                    Transaksi</label>
-                                                                <select name="status" id="status"
-                                                                    class="form-select">
-                                                                    <option disabled>Ubah status transaksi</option>
-                                                                    <option value="berhasil" @selected($item->status == 'berhasil')>
-                                                                        BERHASIL</option>
-                                                                    <option value="pending" @selected($item->status == 'pending')>
-                                                                        PENDING</option>
-                                                                    <option value="expired" @selected($item->status == 'expired')>
-                                                                        EXPIRED</option>
-                                                                </select>
-                                                                <hr class="horizontal dark">
-                                                                <button type="submit"
-                                                                    class="btn bg-gradient-primary float-end">Update <i
-                                                                        class="fas fa-check ms-1"></i></button>
-                                                            </form>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <form action="{{ route('admin.transaksi.destroy', $item->id) }}"
-                                                method="post" class="d-inline">
+                                            <form action="{{ route('admin.transaksi.destroy', $transactions->id) }}"
+                                                method="POST" class="d-inline">
                                                 @csrf
                                                 @method('DELETE')
-                                                <button type="button"
-                                                    class="badge badge-sm border-0 bg-gradient-danger font-weight-bolder text-xxs show_confirm"
-                                                    data-toggle="tooltip" data-original-title="hapus">
-                                                    Hapus
-                                                </button>
+                                                <button type="submit"
+                                                    class="badge badge-sm bg-gradient-danger border-0 font-weight-bold text-xxs show_confirm">HAPUS</button>
                                             </form>
+                                            {{-- <a href=""
+                                                class="badge badge-sm bg-gradient-danger font-weight-bold text-xxs show_confirm"
+                                                data-toggle="tooltip" data-original-title="hapus">
+                                                Hapus
+                                            </a> --}}
                                         </td>
                                     </tr>
                                 @endforeach
@@ -225,6 +161,14 @@
 @endsection
 
 @push('scripts')
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+        integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"
+        integrity="sha512-VEd+nq25CkR676O+pLBnDW09R7VQX9Mdiij052gVCp5yVH3jGtH70Ho/UUv4mJDsEdTvqRCFZg0NKGiojGnUCw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css"
+        integrity="sha512-3pIirOrwegjM6erE5gPSwkUzO+3cTjpnV9lexlNZqvupR64iZBnOOTiiLPb9M36zpMScbmUNIcHUqKD47M719g=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
     <script>
         const dataTableBasic = new simpleDatatables.DataTable("#templateTable", {
             searchable: true,
@@ -257,7 +201,7 @@
             });
         });
     </script>
-    <<<<<<< HEAD <script>
+    <script>
         $(function(e) {
             $("#ClikKabeh").click(function() {
                 $('.checksAll, #select_all_ids').prop('checked', function() {
@@ -332,6 +276,4 @@
             });
         });
     </script>
-    =======
-    >>>>>>> 0d08226d441fcd57e40b286245da9fa4abddfa4d
 @endpush

@@ -20,25 +20,26 @@
             ->first();
 
         $user = Auth::user();
-        $tagihan = App\Models\TagihanDetail::where('id_biayas', $biaya?->id)
+        $tagihanDetaill = App\Models\TagihanDetail::where('id_biayas', $biaya?->id)
             ->where('id_users', $user->id)
             ->latest()
             ->first();
-        if ($tagihan) {
-            $cicilans = App\Models\Cicilan::where('id_tagihan_details', $tagihan?->id)->first();
-            $cicilan2 = App\Models\Cicilan::where('id_tagihan_details', $tagihan?->id)
+        if ($tagihanDetaill) {
+            $cicilans = App\Models\Cicilan::where('id_tagihan_details', $tagihanDetaill?->id)->first();
+            $cicilan2 = App\Models\Cicilan::where('id_tagihan_details', $tagihanDetaill?->id)
                 ->where('status', 'LUNAS')
                 ->get();
             $total_pembayaran = round(
-                App\Models\Cicilan::where('id_tagihan_details', $tagihan?->id)
+                App\Models\Cicilan::where('id_tagihan_details', $tagihanDetaill?->id)
                     ->where('status', 'belum')
                     ->sum('harga'),
             );
-            $setengah_jumlah_daftar_ulang = round(($tagihan?->amount * 2) / 3);
+            $setengah_jumlah_daftar_ulang = round(($tagihanDetaill?->amount * 2) / 3);
         }
+        $cicilanSemua = App\Models\Cicilan::where('id_tagihan_details', $tagihanDetaill?->id)->get();
 
     @endphp
-    @if (!isset($cicilans) && !isset($transactionDaftar) && $tagihan)
+    @if (!isset($cicilans) && !isset($transactionDaftar))
         <div class="col-12 text-center mb-4">
             <div class="card">
                 <h3 class="mt-3">Tagihan</h3>
@@ -50,7 +51,7 @@
                             @csrf
                             @method('GET')
                             <div class="col-6 col-sm-4">
-                                <input type="hidden" name="id" value="{{ $tagihan?->id }}">
+                                <input type="hidden" name="id" value="{{ $tagihanDetaill?->id }}">
                                 <button name="jenis_pembayaran" value="cash" type="submit"
                                     class="btn bg-gradient-primary sm:w-50">
                                     Cash
@@ -67,7 +68,7 @@
                 </div>
             </div>
         </div>
-    @elseif (!isset($tagihan))
+    @elseif (!isset($tagihanDetaill))
         Belum ada apa apa !
     @elseif($cicilans)
         @php
@@ -78,7 +79,7 @@
                 ->first();
 
             $user = Auth::user();
-            $tagihan = App\Models\TagihanDetail::where('id_biayas', $biaya?->id)
+            $tagihanDetaill = App\Models\TagihanDetail::where('id_biayas', $biaya?->id)
                 ->where('id_users', $user->id)
                 ->latest()
                 ->first();
@@ -86,14 +87,14 @@
             // Menghitung total pembayaran yang telah dilakukan
             $total_pembayaran = round(
                 App\Models\Transaksi::where('user_id', $user->id)
-                    ->where('tagihan_detail_id', $tagihan?->id)
+                    ->where('tagihan_detail_id', $tagihanDetaill?->id)
                     ->where('jenis_tagihan', $biaya?->jenis_biaya)
                     ->where('status', 'berhasil')
                     ->where('jenis_pembayaran', 'cicil')
                     ->sum('total'),
             );
-            $cicilannya = App\Models\Cicilan::where('id_tagihan_details', $tagihan?->id)->get();
-            $cicilan1 = App\Models\Cicilan::where('id_tagihan_details', $tagihan?->id)
+            $cicilannya = App\Models\Cicilan::where('id_tagihan_details', $tagihanDetaill?->id)->get();
+            $cicilan1 = App\Models\Cicilan::where('id_tagihan_details', $tagihanDetaill?->id)
                 ->where('status', 'LUNAS')
                 ->first();
 
@@ -133,8 +134,6 @@
                                 <h4>Tagihan Daftar Ulang <span class="text-danger">*</span></h4>
                             </div>
                             <div class="card-body">
-
-                                <!--Routine-->
                                 @foreach ($biayaAll as $biayaHead)
                                     @if ($biayaHead->jenis_biaya == 'DaftarUlang' && $biayaHead->id_angkatans == $biodata->angkatan_id)
                                         <p class="text-bold">Tagihan Daftar Ulang Cicil</p>
@@ -161,8 +160,12 @@
                                                             @php
                                                                 $no = 1;
                                                             @endphp
-                                                            @foreach ($cicilanAll as $key => $value)
-                                                                @if ($value->id_tagihan_details == $tagihan->id)
+                                                            @php
+                                                                $keysss = 0;
+                                                            @endphp
+                                                            @foreach ($cicilanSemua as $key => $value)
+                                                                {{-- {{$key}} --}}
+                                                                @if ($value->id_tagihan_details == $tagihanDetaill->id)
                                                                     <tr>
                                                                         <td class="text-sm">{{ $key + 1 }}</td>
                                                                         <td class="text-sm">
@@ -180,8 +183,9 @@
                                                                             {{ number_format(round($value->harga, -2), 0, '', '.') }}
                                                                         </td>
                                                                         <td>
-
+                                                                            {{-- {{ $cicilanAll[$keysss]['status'] }} --}}
                                                                             @if ($key == 0)
+                                                                                {{-- {{ $key }} --}}
                                                                                 <input type="radio" name="id[]"
                                                                                     id=""
                                                                                     value="{{ $value->id }}"
@@ -191,10 +195,12 @@
 
                                                                             @if ($key > 0)
                                                                                 @php
-                                                                                    $previousStatus = $cicilanAll[$key - 1]['status'];
+                                                                                    $previousStatus = $cicilanSemua[$key - 1]['status'];
                                                                                 @endphp
-
+                                                                                {{-- {{ $previousStatus }}
+                                                                                {{ $key }} --}}
                                                                                 @if ($previousStatus != 'LUNAS')
+                                                                                    {{-- {{$key}} --}}
                                                                                     <input type="radio" name="id[]"
                                                                                         id=""
                                                                                         value="{{ $value->id }}"
@@ -207,8 +213,12 @@
                                                                                         {{ $value->status == 'LUNAS' ? 'disabled' : '' }}>
                                                                                 @endif
                                                                             @endif
+                                                                            {{-- {{ $previousStatus }} --}}
                                                                         </td>
                                                                     </tr>
+                                                                    {{-- @php
+                                                                        $keysss++;
+                                                                    @endphp --}}
                                                                 @endif
                                                             @endforeach
                                                         </tbody>
@@ -353,7 +363,7 @@
                                 @if (
                                     $biayaHead?->jenis_biaya == 'Tidakroutine' &&
                                         $biayaHead?->id_jurusans == $biodata->jurusan_id &&
-                                        $biodata->angkatan_id)
+                                        $biodata->angkatan_id == $biayaHead?->id_angkatans)
                                     <div class="table-responsive mb-3">
                                         <p class="text-bold">Tagihan Biaya Lain</p>
 
