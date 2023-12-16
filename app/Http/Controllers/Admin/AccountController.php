@@ -310,14 +310,19 @@ class AccountController extends Controller
     public function mahasiswa_delete($id)
     {
         $user = User::where('role', 'Mahasiswa')->find($id);
+        
         if ($user->biodata) {
             $user->biodata->delete();
         } if ($user->document) {
             $user->document->delete();
-        } if ($user->transaksi) {
-            $user->transaksi->delete();
-        } if ($user->tagihanDetail) {
-            $user->tagihanDetail->delete();
+        } if ($user->transaksi->isNotEmpty()) {
+            foreach ($user->transaksi as $transaksi) {
+                $transaksi->delete();
+            }
+        } if ($user->tagihanDetail->isNotEmpty()) {
+            foreach ($user->tagihanDetail as $tagihanDetail) {
+                $tagihanDetail->delete();
+            }
         }
 
         $user->delete();

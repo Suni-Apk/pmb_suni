@@ -386,6 +386,18 @@
                     </a>
                 </li>
 
+                <!-- documentation -->
+                <li class="nav-item">
+                    <a class="nav-link {{ Route::is('admin.documentation') ? 'active' : '' }}"
+                        href="{{ route('admin.documentation') }}">
+                        <div
+                            class="icon icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
+                            <i class="fas fa-folder-open"></i>
+                        </div>
+                        <span class="nav-link-text ms-1">Panduan</span>
+                    </a>
+                </li>
+
                 <!-- profile -->
                 <li class="nav-item">
                     <a class="nav-link {{ Route::is('admin.profile') ? 'active' : '' }}"

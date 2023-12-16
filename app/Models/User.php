@@ -74,6 +74,6 @@ class User extends Authenticatable
 
     public function tagihanDetail()
     {
-        return $this->hasMany(TagihanDetail::class);
+        return $this->hasMany(TagihanDetail::class, 'id_users');
     }
 }

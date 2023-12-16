@@ -56,7 +56,7 @@ class MatkulController extends Controller
                     </div>
                     <div>
                         <h5 class='' style='margin-top: 10px; width:350px; text-align: end; '>Jadwal Mata Kuliah Jurusan " . $jurusan->name . "</h5>
-                    </div>        
+                    </div>
                 </div>
 
                 <table style='width: 100%; border-collapse: collapse;'>

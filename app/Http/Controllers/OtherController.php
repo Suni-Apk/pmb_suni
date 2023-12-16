@@ -41,4 +41,9 @@ class OtherController extends Controller
             return redirect()->back();
         }
     }
+
+    public function documentation()
+    {
+        return view('mahasiswa.other.documentation');
+    }
 }
