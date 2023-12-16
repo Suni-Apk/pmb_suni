@@ -33,7 +33,6 @@ class TagihanDetail extends Model
     {
         return $this->belongsTo(User::class, 'id_users');
     }
-
     public function cicilan()
     {
         return $this->hasMany(Cicilan::class);

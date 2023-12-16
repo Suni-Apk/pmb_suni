@@ -9,17 +9,20 @@
     @if (session('bayar'))
         <div class="alert alert-info text-white alert-dismissible fade show" role="alert">
             <strong>Pemberitahuan.</strong> {!! session('bayar') !!}
-            <button type="button" class="btn-close border rounded-circle p-1 fs-3 lh-1 mt-2 me-2" data-bs-dismiss="alert" aria-label="Close">&times;</button>
+            <button type="button" class="btn-close border rounded-circle p-1 fs-3 lh-1 mt-2 me-2" data-bs-dismiss="alert"
+                aria-label="Close">&times;</button>
         </div>
     @elseif (session('update'))
         <div class="alert alert-success text-white alert-dismissible fade show" role="alert">
             <strong>Selamat!</strong> {!! session('update') !!}
-            <button type="button" class="btn-close border rounded-circle p-1 fs-3 lh-1 mt-2 me-2" data-bs-dismiss="alert" aria-label="Close">&times;</button>
+            <button type="button" class="btn-close border rounded-circle p-1 fs-3 lh-1 mt-2 me-2" data-bs-dismiss="alert"
+                aria-label="Close">&times;</button>
         </div>
     @elseif (session('notfound'))
         <div class="alert alert-warning text-white alert-dismissible fade show" role="alert">
             <strong>Sayangnya.</strong> {!! session('notfound') !!}
-            <button type="button" class="btn-close border rounded-circle p-1 fs-3 lh-1 mt-2 me-2" data-bs-dismiss="alert" aria-label="Close">&times;</button>
+            <button type="button" class="btn-close border rounded-circle p-1 fs-3 lh-1 mt-2 me-2" data-bs-dismiss="alert"
+                aria-label="Close">&times;</button>
         </div>
     @endif
     <div class="row">
@@ -33,7 +36,7 @@
                             <button class="btn btn-success ms-2 d-flex align-items-center">
                                 <i class='bx bxs-file-export me-1'></i> Export
                             </button>
-                        </form>                    
+                        </form>
                     </div>
                 </div>
                 <form action="{{ route('admin.transaksi.index') }}" method="GET">
@@ -76,7 +79,8 @@
                                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                         Jenis Tagihan / Pembayaran
                                     </th>
-                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                    <th
+                                        class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                         Aksi
                                     </th>
                                 </tr>
@@ -138,50 +142,77 @@
                                             Detail
                                         </a>
 
-                                        <button class="border-0 badge badge-sm text-xxs font-weight-bolder bg-gradient-secondary mx-1" role="button" data-bs-toggle="modal" data-bs-target="#modalEditStatus{{ $item->id }}">Edit</button>
+                                            <button
+                                                class="border-0 badge badge-sm text-xxs font-weight-bolder bg-gradient-secondary mx-1"
+                                                role="button" data-bs-toggle="modal"
+                                                data-bs-target="#modalEditStatus{{ $item->id }}">Edit</button>
 
-                                        {{-- modal edit status --}}
-                                        <div class="modal fade" id="modalEditStatus{{ $item->id }}" tabindex="-1" role="dialog"
-                                            aria-labelledby="modalEditStatus{{ $item->id }}Label" aria-hidden="true">
-                                            <div class="modal-dialog modal-dialog-centered" role="document">
-                                                <div class="modal-content">
-                                                    <div class="modal-header border-0">
-                                                        <h5 class="modal-title" id="modalEditStatus{{ $item->id }}Label">Edit Status Transaksi</h5>
-                                                        <button type="button" class="btn-close border rounded-circle p-1 fs-3 lh-1 text-dark" data-bs-dismiss="modal" aria-label="Close">&times;</button>
-                                                    </div>
-                                                    <div class="modal-body pt-0">
-                                                        <form action="{{ route('admin.transaksi.update', $item->id) }}" method="POST" class="form-group">
-                                                            @csrf
-                                                            @method('PUT')
-                                                            <label for="status" class="w-100 text-start">Status Transaksi</label>
-                                                            <select name="status" id="status" class="form-select">
-                                                                <option disabled>Ubah status transaksi</option>
-                                                                <option value="berhasil" @selected($item->status == 'berhasil')>BERHASIL</option>
-                                                                <option value="pending" @selected($item->status == 'pending')>PENDING</option>
-                                                                <option value="expired" @selected($item->status == 'expired')>EXPIRED</option>
-                                                            </select>
-                                                            <hr class="horizontal dark">
-                                                            <button type="submit" class="btn bg-gradient-primary float-end">Update <i class="fas fa-check ms-1"></i></button>
-                                                        </form>
+                                            {{-- modal edit status --}}
+                                            <div class="modal fade" id="modalEditStatus{{ $item->id }}" tabindex="-1"
+                                                role="dialog" aria-labelledby="modalEditStatus{{ $item->id }}Label"
+                                                aria-hidden="true">
+                                                <div class="modal-dialog modal-dialog-centered" role="document">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header border-0">
+                                                            <h5 class="modal-title"
+                                                                id="modalEditStatus{{ $item->id }}Label">Edit Status
+                                                                Transaksi</h5>
+                                                            <button type="button"
+                                                                class="btn-close border rounded-circle p-1 fs-3 lh-1 text-dark"
+                                                                data-bs-dismiss="modal"
+                                                                aria-label="Close">&times;</button>
+                                                        </div>
+                                                        <div class="modal-body pt-0">
+                                                            <form
+                                                                action="{{ route('admin.transaksi.update', $item->id) }}"
+                                                                method="POST" class="form-group">
+                                                                @csrf
+                                                                @method('PUT')
+                                                                <label for="status" class="w-100 text-start">Status
+                                                                    Transaksi</label>
+                                                                <select name="status" id="status"
+                                                                    class="form-select">
+                                                                    <option disabled>Ubah status transaksi</option>
+                                                                    <option value="berhasil" @selected($item->status == 'berhasil')>
+                                                                        BERHASIL</option>
+                                                                    <option value="pending" @selected($item->status == 'pending')>
+                                                                        PENDING</option>
+                                                                    <option value="expired" @selected($item->status == 'expired')>
+                                                                        EXPIRED</option>
+                                                                </select>
+                                                                <hr class="horizontal dark">
+                                                                <button type="submit"
+                                                                    class="btn bg-gradient-primary float-end">Update <i
+                                                                        class="fas fa-check ms-1"></i></button>
+                                                            </form>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
 
-                                        <form action="{{ route('admin.transaksi.destroy', $item->id) }}" method="post" class="d-inline">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="button" 
-                                                class="badge badge-sm border-0 bg-gradient-danger font-weight-bolder text-xxs show_confirm"
-                                                data-toggle="tooltip" data-original-title="hapus">
-                                                Hapus
-                                            </button>
-                                        </form>
-                                    </td>
-                                </tr>
+                                            <form action="{{ route('admin.transaksi.destroy', $item->id) }}"
+                                                method="post" class="d-inline">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="button"
+                                                    class="badge badge-sm border-0 bg-gradient-danger font-weight-bolder text-xxs show_confirm"
+                                                    data-toggle="tooltip" data-original-title="hapus">
+                                                    Hapus
+                                                </button>
+                                            </form>
+                                        </td>
+                                    </tr>
                                 @endforeach
                             </tbody>
                         </table>
+                    </div>
+                    <div class="d-flex ms-4 mb-4 mt-3">
+                        <input type="checkbox" id="select_all_ids" class="chek me-2">
+                        <a href="#ClikKabeh" id="ClikKabeh" class="text-secondary">Pilih Semua</a>
+                        <div class=" ms-4">
+                            <i class="fas fa-trash me-1 cursor-pointer" style="color: #ff0000;" id="deleteAll"></i>
+                            <a href="#" class="text-secondary" id="All">Hapus</a>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -219,6 +250,81 @@
                         'success'
                     )
                 }
+            });
+        });
+    </script>
+    <script>
+        $(function(e) {
+            $("#ClikKabeh").click(function() {
+                $('.checksAll, #select_all_ids').prop('checked', function() {
+                    return !$(this).prop("checked");
+                });
+            });
+            $("#select_all_ids").click(function() {
+                $('.checksAll').prop('checked', $(this).prop('checked'));
+            });
+            $("#All").click(function() {
+                $('#deleteAll').click();
+            });
+
+            $("#deleteAll").click(function(e) {
+                e.preventDefault();
+                var all_ids = [];
+
+                $('input:checkbox[name="ids"]:checked').each(function() {
+                    all_ids.push($(this).val());
+                });
+                if ($('.checksAll').is(':checked')) {
+                    Swal.fire({
+                        title: "Apakah Anda Yakin Ingin Menghapus Transaction?",
+                        text: "You won't be able to revert this!",
+                        icon: "warning",
+                        showCancelButton: true,
+                        confirmButtonColor: "#3085d6",
+                        cancelButtonColor: "#d33",
+                        confirmButtonText: "Yes, delete it!"
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            $.ajax({
+                                url: "{{ route('admin.transaksi.delete.all') }}",
+                                type: "DELETE",
+                                data: {
+                                    ids: all_ids
+                                },
+                                headers: {
+                                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr(
+                                        'content')
+                                },
+                                success: function(response) {
+                                    // Handle response jika diperlukan
+                                    // Misalnya, menampilkan pesan sukses
+                                    // Lakukan reload halaman setelah permintaan AJAX selesai
+
+                                },
+                                error: function(xhr, status, error) {
+                                    // Handle error jika diperlukan
+
+                                }
+                            });
+                            setTimeout(() => {
+                                location.reload();
+                            }, 1000);
+                            Swal.fire({
+                                title: "Deleted!",
+                                text: "Your file has been deleted.",
+                                icon: "success"
+                            }).then((result) => {});
+                        }
+                    });
+                }
+                if (!$('.checksAll').is(':checked')) {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Oops...',
+                        text: 'Pilih Minimal 1!',
+                    })
+                }
+
             });
         });
     </script>

@@ -1,6 +1,6 @@
 @extends('layouts.master')
 
-@section('title', 'Tagihan')
+@section('title', 'Daftar Tagihan')
 
 @push('styles')
 @endpush
@@ -10,7 +10,7 @@
         <div class="col-12">
             <div class="card">
                 <div class="card-header pb-0 d-flex justify-content-between">
-                    <h6>Tagihan table</h6>
+                    <h6>Daftar Tagihan</h6>
                     <!-- Button trigger modal -->
                     <button type="button" class="btn bg-gradient-primary" data-bs-toggle="modal"
                         data-bs-target="#modalTagihan">Tambah <i class="fas fa-plus me-1"></i></button>
@@ -64,7 +64,7 @@
                         <table class="table align-items-center mb-0" id="templateTable">
                             <thead>
                                 <tr>
-                                    <th class="d-flex text-uppercase text-secondary text-xs font-weight-bolder opacity-8">Pilih</th>
+                                    <th class=" text-uppercase text-secondary text-xs font-weight-bolder opacity-8">Pilih</th>
                                     <th class=" text-uppercase text-secondary text-xxs font-weight-bolder opacity-8">Nama Tagihan</th>
                                     <th class="text-uppercase text-secondary text-xxs px-2 font-weight-bolder opacity-8">Tahun / Angkatan</th>
                                     <th class=" text-uppercase text-secondary text-xxs font-weight-bolder opacity-8">Jurusan / Prodi</th>
@@ -95,7 +95,6 @@
                                             @elseif ($biayas->jurusans?->name == null)
                                                 Semua Jurusan
                                             @endif
-
                                         </td>
                                         <td class="align-middle  text-secondary text-xs font-weight-bold">
                                             <strong>{{ $biayas->program_belajar }}</strong>
@@ -105,7 +104,6 @@
                                         </td>
                                         <td class="align-middle  text-secondary text-xs font-weight-bold">
                                             <strong>{{ $biayas->jenis_biaya }}</strong>
-
                                         </td>
                                         <td class="align-middle text-center">
                                             <a href="{{ route('admin.tagihan.show', $biayas->id) }}"
@@ -160,6 +158,24 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css"
         integrity="sha512-3pIirOrwegjM6erE5gPSwkUzO+3cTjpnV9lexlNZqvupR64iZBnOOTiiLPb9M36zpMScbmUNIcHUqKD47M719g=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
+    @if (session('success'))
+        <script>
+            Swal.fire(
+                'Berhasil!',
+                "{{ session('success') }}", // Menggunakan session('success') untuk mengambil pesan
+                'success'
+            )
+        </script>
+    @endif
+    @if (session('error'))
+        <script>
+            Swal.fire(
+                'Gagal!',
+                "{{ session('error') }}", // Menggunakan session('success') untuk mengambil pesan
+                'error'
+            )
+        </script>
+    @endif
     <script>
         @if (Session::has('success'))
             toastr.options = {
@@ -255,15 +271,7 @@
 
                                 }
                             });
-                            Swal.fire({
-                                title: "Deleted!",
-                                text: "Your file has been deleted.",
-                                icon: "success"
-                            }).then((result) => {
-                                if (result.isConfirmed) {
-                                    location.reload();
-                                }
-                            });
+                            location.reload();
                         }
                     });
                 }

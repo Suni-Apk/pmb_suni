@@ -26,7 +26,7 @@
                                 @enderror
                             </div>
 
-                            {{-- <div class="form-group mb-3">
+                            <div class="form-group mb-3">
                                 <label for="">Biaya Administrasi</label>
                                 <div class="input-group">
                                     <span class="input-group-text text-bolder">Rp. </span>
@@ -35,7 +35,7 @@
                                 @error('amount')
                                     <div class="text-danger text-sm">{{ $message }}</div>
                                 @enderror
-                            </div> --}}
+                            </div>
                             
                             @if ($course->notes)
                                 <div class="form-group mb-3">

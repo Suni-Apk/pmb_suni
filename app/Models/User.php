@@ -57,11 +57,6 @@ class User extends Authenticatable
         return $this->hasOne(Biodata::class, 'user_id');
     }
 
-    public function jurusan()
-    {
-        return $this->hasOne(Jurusan::class);
-    }
-
     public function document()
     {
         return $this->hasOne(Document::class);

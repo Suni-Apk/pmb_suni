@@ -1,6 +1,6 @@
 @extends('layouts.master')
 
-@section('title', 'Create Course')
+@section('title', 'Tambah Kursus')
 
 @push('styles')
 @endpush
@@ -30,7 +30,7 @@
                                 <label for="">Biaya Administrasi</label>
                                 <div class="input-group">
                                     <span class="input-group-text text-bolder">Rp. </span>
-                                    <input type="number" step="500" name="amount" id="amount" min="0" class="form-control" value="{{ old('amount') }}" required>
+                                    <input type="number" name="amount" id="amount" min="0" class="form-control" value="{{ old('amount') }}" required>
                                 </div>
                                 @error('amount')
                                     <div class="text-danger text-sm">{{ $message }}</div>

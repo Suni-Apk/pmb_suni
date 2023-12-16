@@ -1,12 +1,12 @@
 <aside
-    class="sidenav navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-3 overflow-x-hidden"
+    class="sidenav navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-3 bg-white overflow-hidden"
     id="sidenav-main">
     <div class="sidenav-header position-sticky">
         <i class="fas fa-times p-3 cursor-pointer text-secondary opacity-5 position-absolute end-0 top-0 d-none d-xl-none"
             aria-hidden="true" id="iconSidenav"></i>
-        <a class="navbar-brand m-0" href="">
+        <a class="navbar-brand text-center m-0" href="{{ route('welcome') }}">
             <img src="{{ App\Models\General::first()->image }}" class="navbar-brand-img h-100" alt="main_logo">
-            <span class="ms-1 font-weight-bold">PMB SUNI Indonesia</span>
+            <span class="ms-1 font-weight-bold">{{ App\Models\General::first()->name }}</span>
         </a>
     </div>
     <hr class="horizontal dark mt-0">
@@ -58,6 +58,7 @@
                             <span class="nav-link-text ms-1">Isi Biodata</span>
                         </a>
                     </li>
+                    
                     {{-- other --}}
                     <li class="nav-item">
                         <ul class="nav-link pb-0 mb-0">
@@ -66,7 +67,7 @@
                             <span class="sidenav-normal text-uppercase text-xs ms-2 font-weight-bolder"> other </span>
                         </ul>
                     </li>
-    
+                    
                     <!-- profile -->
                     <li class="nav-item">
                         <a class="nav-link {{ Route::is('kursus.profile.*') ? 'active' : '' }}"
@@ -108,6 +109,7 @@
                             <span class="sidenav-normal text-uppercase text-xs ms-2 font-weight-bolder"> payment </span>
                         </ul>
                     </li>
+
                     <!-- billing -->
                     <li class="nav-item">
                         <a href="{{ route('kursus.tagihan.index') }}"
@@ -120,6 +122,7 @@
                             <span class="nav-link-text ms-1"> Tagihan </span>
                         </a>
                     </li>
+                    
                     {{-- other --}}
                     <li class="nav-item">
                         <ul class="nav-link pb-0 mb-0">
@@ -127,6 +130,19 @@
                                     class="fas fa-sliders-h"></i></span>
                             <span class="sidenav-normal text-uppercase text-xs ms-2 font-weight-bolder"> other </span>
                         </ul>
+                    </li>
+                    
+                    <!-- inform -->
+                    <li class="nav-item">
+                        <a href="{{ route('kursus.info.krs') }}"
+                            class="nav-link {{ Route::is('kursus.info.krs') ? 'active' : '' }}"
+                            aria-controls="billing" role="button" aria-expanded="false">
+                            <div
+                                class="icon icon-sm shadow border-radius-md bg-white text-center d-flex align-items-center justify-content-center  me-2">
+                                <i class="fas fa-wallet"></i>
+                            </div>
+                            <span class="nav-link-text ms-1"> Tabel Informasi </span>
+                        </a>
                     </li>
 
                     <!-- profile -->

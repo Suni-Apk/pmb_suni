@@ -1,5 +1,7 @@
 @extends('auth.layouts.master')
 
+@section('title', 'Verification OTP')
+
 @section('content')
 <section>
     <div class="page-header min-vh-100">
@@ -20,11 +22,11 @@
     
                     <div class="otp_input text-start mb-2">
                         <label for="digit">Type your 6 digit security code</label>
-                        <input type="hidden" name="program" value="{{$program}}">
+                        <input type="hidden" name="program" value="{{ $program }}">
                         {{-- @dd($program) --}}
                         <div class="d-flex align-items-center justify-content-between mt-2">
                             <input type="text" name="token" maxlength="6" class="form-control text-center" placeholder="" style="letter-spacing:1rem">
-                        </div> 
+                        </div>
                     </div>  
     
                     <button type="submit" class="btn btn-primary submit_btn my-4">Submit</button> 

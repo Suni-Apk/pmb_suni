@@ -19,6 +19,9 @@ class TagihanController extends Controller
         $biayas = Biaya::all();
         $biayaAll = Biaya::all();
         $cicilanAll = Cicilan::all();
+        // $biayaHeadCount = BiayaHead::where('jenis_biaya', 'Routine')
+        //     ->where('id_angkatans', $biodata->angkatan_id)
+        //     ->count();
 
         // return view('admin.account.mahasiswa.detail', compact('biodata');
         return view('mahasiswa.tagihan.index', compact('biodata', 'mahasiswa', 'biayas', 'biayaAll', 'cicilanAll'));

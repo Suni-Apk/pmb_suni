@@ -78,7 +78,7 @@
                                 </span>
                             </li>
                             <li class="mb-1">
-                                <a class="dropdown-item border-radius-md" href="">
+                                <a class="dropdown-item border-radius-md" href="{{ route('kursus.profile.index') }}">
                                     <div class="d-flex">
                                         <p class="mb-0">Account Settings</p>
                                     </div>

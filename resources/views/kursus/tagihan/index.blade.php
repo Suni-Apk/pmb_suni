@@ -6,21 +6,20 @@
 @endpush
 
 @section('content')
-    @if ($biodatas->program_belajar == 'KURSUS')
-        <div class="col-12">
-            <div class="card mb-4">
-                <div class="card-header">
-                    <h4>Tagihan Program Kursus <span class="text-danger">*</span></h4>
-                </div>
-                <div class="card-body">
-                    <div class="shadow-sm mb-3">
+    @foreach ($biodata as $keyss => $biodatas)
+        @if ($biodatas->program_belajar == 'KURSUS')
+            <div class="col-12">
+                <div class="card mb-4">
+                    <div class="card-header">
+                        <h4>Tagihan Program Kursus {{ $biodatas->course->name }}<span class="text-danger">*</span></h4>
+                    </div>
+                    <div class="card-body">
                         <div class="table-responsive p-0">
-                            <table class="table align-items-center mb-0">
+                            <table class="table align-items-center mb-4 shadow-sm">
                                 <thead class="table-dark">
                                     <tr>
                                         <th>Mahasiswa Information</th>
                                     </tr>
-
                                 </thead>
                                 <tbody class="table-border-bottom-0">
                                     <tr>
@@ -53,11 +52,16 @@
                                             <strong>{{ $biodatas->program_belajar }}</strong>
                                         </td>
                                     </tr>
+                                    <tr>
+                                        <td class="text-sm">
+                                            Kursus :
+                                            <strong>{{ $biodatas->course?->name }}</strong>
+                                        </td>
+                                    </tr>
                                 </tbody>
                             </table>
                         </div>
-                    </div>
-                    {{-- @foreach ($biayaAll as $biayaHead)
+                        {{-- @foreach ($biayaAll as $biayaHead)
                     @if ($biayaHead->jenis_biaya == 'Tingkatan')
                         <p class="text-bold">Tagihan Tingkatan</p>
                         <div class="table-responsive">
@@ -133,20 +137,19 @@
                     @break
                 @endif
             @endforeach --}}
-                    @foreach ($biayaAll as $biayaHead)
-                        @if (
-                            $biayaHead->jenis_biaya == 'Tidakroutine' &&
-                                $biayaHead?->id_angkatans == $biodatas->angkatan_id &&
-                                $biayaHead?->program_belajar == $biodatas->program_belajar &&
-                                $biayaHead->id_kursus == $biodatas->course_id)
-                            <p class="text-bold">Tagihan Biaya lain</p>
-                            <div class="table-responsive mb-3">
-                                <form action="{{ route('kursus.tagihan.bayar', $mahasiswa->id) }}" method="GET">
-                                    @csrf
-                                    @method('GET')
-                                    <div class="shadow-sm mb-3">
+                        @foreach ($biayaAll as $biayaHead)
+                            @if (
+                                $biayaHead->jenis_biaya == 'Tidakroutine' &&
+                                    $biayaHead?->id_angkatans == $biodatas->angkatan_id &&
+                                    $biayaHead?->program_belajar == $biodatas->program_belajar &&
+                                    $biayaHead->id_kursus == $biodatas->course_id)
+                                <p class="text-bold">Tagihan Biaya lain</p>
+                                <div class="table-responsive mb-3">
+                                    <form action="{{ route('kursus.tagihan.bayar', $mahasiswa->id) }}" method="GET">
+                                        @csrf
+                                        @method('GET')
 
-                                        <table class="table">
+                                        <table class="table shadow-sm">
                                             <thead class="table-dark">
                                                 <tr>
                                                     <th class="text-sm">No</th>
@@ -206,15 +209,17 @@
                                                 @endforeach
                                             </tbody>
                                         </table>
-                                    </div>
-                                    <button class="btn btn-primary btn-sm" type="submit">Bayar</button>
-                                </form>
-                            </div>
-                        @break
-                    @endif
-                @endforeach
+                                        <button class="btn btn-primary btn-sm" type="submit">Bayar</button>
+                                    </form>
+                                </div>
+                            @break
+                        @endif
+                    @endforeach
+                </div>
             </div>
-@endif
+    @endif
+@endforeach
+
 </div>
 
 @endsection
@@ -229,6 +234,19 @@
     const dataTableBasic = new simpleDatatables.DataTable("#templateTable", {
         searchable: true,
         fixedHeight: true,
+    });
+</script>
+<script>
+    $(function(e) {
+        $("#select_all_ids").click(function() {
+            $('.checksAll').prop('checked', $(this).prop('checked'));
+        });
+        $("#select_all_ids2").click(function() {
+            $('.checksAll2').prop('checked', $(this).prop('checked'));
+        });
+        $("#select_all_ids3").click(function() {
+            $('.checksAll3').prop('checked', $(this).prop('checked'));
+        });
     });
 </script>
 @endpush

@@ -46,24 +46,51 @@
                                 <button class="multisteps-form__progress-btn js-active" type="button" title="Bayar Administrasi">
                                     <span>Bayar Administrasi</span>
                                 </button>
-                                @if ($biodata && !Auth::user()->document)
-                                    <button class="multisteps-form__progress-btn js-active" type="button" title="Mengisi Biodata">
+                                @if (!$biodata && !Auth::user()->document)
+                                    <button class="multisteps-form__progress-btn" type="button" title="Mengisi Biodata">
                                         <span>Mengisi Biodata</span>
                                     </button>
-                                @else
-                                    <button class="multisteps-form__progress-btn" type="button" title="Mengisi Biodata">
+                                    <button class="multisteps-form__progress-btn" type="button" title="Upload Dokumen">
+                                        <span>Upload Dokumen</span>
+                                    </button>
+                                @elseif($biodata && Auth::user()->document)
+                                    <button class="multisteps-form__progress-btn js-active" type="button" title="Mengisi Biodata">
                                         <span>Mengisi Biodata</span>
                                     </button>
                                     <button class="multisteps-form__progress-btn js-active" type="button" title="Upload Dokumen">
                                         <span>Upload Dokumen</span>
                                     </button>
+                                @elseif($biodata && !Auth::user()->document)
+                                    <button class="multisteps-form__progress-btn" type="button" title="Upload Dokumen">
+                                        <span>Upload Dokumen</span>
+                                    </button>
+                                @elseif(!$biodata && Auth::user()->document)
+                                <button class="multisteps-form__progress-btn" type="button" title="Mengisi Biodata">
+                                    <span>Mengisi Biodata</span>
+                                </button>
                                 @endif
-                                <button class="multisteps-form__progress-btn" type="button" title="Bayar Pra-Kuliah">
-                                    <span>Bayar Pra-Kuliah</span>
-                                </button>
-                                <button class="multisteps-form__progress-btn" type="button" title="Selesai">
-                                    <span>Selesai!</span>
-                                </button>
+                                @php
+                                   $biaya = App\Models\Biaya::where('jenis_biaya','DaftarUlang')->first();
+                                   $tagihan = App\Models\Tagihan::where('id_biayas',$biaya->id)->first();
+                                   $transaksiCash = App\Models\Transaksi::where('jenis_tagihan','DaftarUlang')->where('status','berhasil')->sum('total');
+                                //    $transaksiCicil = App\Models\Cicilan::where('jenis_tagihan','DaftarUlang')->sum('total');
+                                @endphp
+                                @if ($transaksiCash != $tagihan->amount)
+                                    <button class="multisteps-form__progress-btn" type="button" title="Selesai">
+                                        <span>Uang Prakuliah!</span>
+                                    </button>
+                                    <button class="multisteps-form__progress-btn" type="button" title="Selesai">
+                                        <span>Selesai!</span>
+                                    </button>
+                                @else
+                                    <button class="multisteps-form__progress-btn js-active" type="button" title="Selesai">
+                                        <span>Uang Prakuliah!</span>
+                                    </button>
+                                    <button class="multisteps-form__progress-btn js-active" type="button" title="Selesai">
+                                        <span>Selesai!</span>
+                                    </button>
+                                @endif
+                                
                             </div>                            
                         </div>
                     </div>

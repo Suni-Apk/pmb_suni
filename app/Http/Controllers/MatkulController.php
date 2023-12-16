@@ -15,17 +15,17 @@ class MatkulController extends Controller
     public function index()
     {
         $matkuls = Matkuls::all();
-        return view('admin.matkul.index' ,compact('matkuls'));
+        return view('admin.matkul.index', compact('matkuls'));
     }
 
     /**
      * Show the form for creating a new resource.
      */
     public function create()
-    {   
+    {
         $jurusan = Jurusan::all();
         $semesterGrouped = Semester::with('jurusan')->get()->groupBy('id_jurusans');
-        return view('admin.matkul.create' ,compact('jurusan', 'semesterGrouped'));
+        return view('admin.matkul.create', compact('jurusan', 'semesterGrouped'));
     }
 
     /**
@@ -73,10 +73,10 @@ class MatkulController extends Controller
     {
         $matkuls = Matkuls::findOrFail($id);
         $data = $request->validate([
-            'id_jurusans' => 'required',   
+            'id_jurusans' => 'required',
             'id_semesters' => 'required',
             'nama_matkuls' => 'required|min:3',
-            'nama_dosen' => 'required|min:3', 
+            'nama_dosen' => 'required|min:3',
             'mulai' => 'required',
             'selesai' => 'required',
             'hari' => 'required'
@@ -92,6 +92,14 @@ class MatkulController extends Controller
     public function destroy(string $id)
     {
         $matkuls = Matkuls::findOrFail($id);
+        $matkuls->delete();
+        return redirect()->route('admin.matkul.index');
+    }
+
+    public function deleteAll(Request $request)
+    {
+        $ids = $request->ids;
+        $matkuls = Matkuls::whereIn('id', $ids);
         $matkuls->delete();
         return redirect()->route('admin.matkul.index');
     }

@@ -11,10 +11,10 @@
 @php
     $timestampsTitle = date('M Y'); // Mendapatkan bulan dan tahun saat ini
     $currentTimeStamp = date('Y-m'); // Mendapatkan bulan dan tahun saat ini
-	
-	$timestampsTitleBack = date('Y-m', strtotime($timestampsTitle . " -1 year +1 month"));
-	$setahunkebelakang = date('Y-m', strtotime($currentTimeStamp . " -1 year +1 month"));
-	
+
+    $timestampsTitleBack = date('Y-m', strtotime($timestampsTitle . ' -1 year +1 month'));
+    $setahunkebelakang = date('Y-m', strtotime($currentTimeStamp . ' -1 year +1 month'));
+
     $timetitle = []; // Deklarasi array timestamps
     $rawTimestamps = []; // Deklarasi array timestamps
     for ($i = 0; $i < 12; $i++) {
@@ -22,306 +22,307 @@
         $rawTimestamps[] = date('Y-m', strtotime($setahunkebelakang . " +$i month"));
     }
 
-	$rawUsersChartAdmin = [];
-	$rawUsersChartMahasiswa = [];
-	foreach ($rawTimestamps as $key => $value) {
-		$rawUsersChartAdmin[] = App\Models\User::where('role', 'Admin')
-		->where(Illuminate\Support\Facades\DB::raw("DATE_FORMAT(created_at, '%Y-%m')"), $value)
-		->count();
+    $rawUsersChartAdmin = [];
+    $rawUsersChartMahasiswa = [];
+    foreach ($rawTimestamps as $key => $value) {
+        $rawUsersChartAdmin[] = App\Models\User::where('role', 'Admin')
+            ->where(Illuminate\Support\Facades\DB::raw("DATE_FORMAT(created_at, '%Y-%m')"), $value)
+            ->count();
 
-		$rawUsersChartMahasiswa[] = App\Models\User::where('role', 'Mahasiswa')
-		->where(Illuminate\Support\Facades\DB::raw("DATE_FORMAT(created_at, '%Y-%m')"), $value)
-		->count();
-	}
+        $rawUsersChartMahasiswa[] = App\Models\User::where('role', 'Mahasiswa')
+            ->where(Illuminate\Support\Facades\DB::raw("DATE_FORMAT(created_at, '%Y-%m')"), $value)
+            ->count();
+    }
 
-	$timetitles = json_encode($timetitle,JSON_NUMERIC_CHECK);
-	$timestamps = json_encode($rawTimestamps,JSON_NUMERIC_CHECK);
-	$usersChartAdmin = json_encode($rawUsersChartAdmin,JSON_NUMERIC_CHECK);
-	$usersChartMahasiswa = json_encode($rawUsersChartMahasiswa,JSON_NUMERIC_CHECK);
+    $timetitles = json_encode($timetitle, JSON_NUMERIC_CHECK);
+    $timestamps = json_encode($rawTimestamps, JSON_NUMERIC_CHECK);
+    $usersChartAdmin = json_encode($rawUsersChartAdmin, JSON_NUMERIC_CHECK);
+    $usersChartMahasiswa = json_encode($rawUsersChartMahasiswa, JSON_NUMERIC_CHECK);
 
-	// dump($timetitles);
-	// dump($timestamps);
-	// dd($usersChart);
+    // dump($timetitles);
+    // dump($timestamps);
+    // dd($usersChart);
+
 @endphp
 
 @push('scripts')
-	<script>
-		var ctx2 = document.getElementById("chart-line").getContext("2d");
+    <script>
+        var ctx2 = document.getElementById("chart-line").getContext("2d");
 
-		var gradientStroke1 = ctx2.createLinearGradient(0, 230, 0, 50);
-		gradientStroke1.addColorStop(1, 'rgba(19, 169, 95,0.2)');
-		gradientStroke1.addColorStop(0.2, 'rgba(72,72,176,0.0)');
-		gradientStroke1.addColorStop(0, 'rgba(203,12,159,0)');
+        var gradientStroke1 = ctx2.createLinearGradient(0, 230, 0, 50);
+        gradientStroke1.addColorStop(1, 'rgba(19, 169, 95,0.2)');
+        gradientStroke1.addColorStop(0.2, 'rgba(72,72,176,0.0)');
+        gradientStroke1.addColorStop(0, 'rgba(203,12,159,0)');
 
-		var gradientStroke2 = ctx2.createLinearGradient(0, 230, 0, 50);
-		gradientStroke2.addColorStop(1, 'rgba(20,23,39,0.2)');
-		gradientStroke2.addColorStop(0.2, 'rgba(72,72,176,0.0)');
-		gradientStroke2.addColorStop(0, 'rgba(20,23,39,0)');
+        var gradientStroke2 = ctx2.createLinearGradient(0, 230, 0, 50);
+        gradientStroke2.addColorStop(1, 'rgba(20,23,39,0.2)');
+        gradientStroke2.addColorStop(0.2, 'rgba(72,72,176,0.0)');
+        gradientStroke2.addColorStop(0, 'rgba(20,23,39,0)');
 
-		var usersAdmin = <?php echo $usersChartAdmin; ?>;
-		var usersMahasiswa = <?php echo $usersChartMahasiswa; ?>;
-		var titleTimestamps = <?php echo $timetitles; ?>;
-		var timestamps = <?php echo $timestamps; ?>;
+        var usersAdmin = <?php echo $usersChartAdmin; ?>;
+        var usersMahasiswa = <?php echo $usersChartMahasiswa; ?>;
+        var titleTimestamps = <?php echo $timetitles; ?>;
+        var timestamps = <?php echo $timestamps; ?>;
 
-		new Chart(ctx2, {
-			type: "line",
-			data: {
-				labels: titleTimestamps,  // Ganti dengan nilai-nilai yang sesuai
-				datasets: [
-					{
-					label: "Admin",
-					tension: 0.4,
-					borderWidth: 0,
-					pointRadius: 0,
-					borderColor: "#3C9D9B",
-					borderWidth: 3,
-					backgroundColor: gradientStroke1,
-					fill: true,
-					data: usersAdmin,  // Ganti dengan nilai-nilai yang sesuai
-					maxBarThickness: 6
-				},
-				{
-					label: "Pendaftar",
-					tension: 0.4,
-					borderWidth: 0,
-					pointRadius: 0,
-					borderColor: "#A9A9A9", // Ganti dengan warna yang sesuai
-					borderWidth: 3,
-					backgroundColor: gradientStroke2,
-					fill: true,
-					data: usersMahasiswa, // Ganti dengan nilai-nilai yang sesuai
-					maxBarThickness: 6
-				}
-			],
-			},
-			options: {
-				responsive: true,
-				maintainAspectRatio: false,
-				plugins: {
-					legend: {
-						display: false,
-					}
-				},
-				interaction: {
-					intersect: false,
-					mode: 'index',
-				},
-				scales: {
-					y: {
-						grid: {
-							drawBorder: false,
-							display: true,
-							drawOnChartArea: true,
-							drawTicks: false,
-							borderDash: [5, 5]
-						},
-						ticks: {
-							display: true,
-							padding: 10,
-							color: '#b2b9bf',
-							font: {
-								size: 11,
-								family: "Open Sans",
-								style: 'normal',
-								lineHeight: 2
-							},
-						}
-					},
-					x: {
-						grid: {
-							drawBorder: false,
-							display: false,
-							drawOnChartArea: false,
-							drawTicks: false,
-							borderDash: [5, 5]
-						},
-						ticks: {
-							display: true,
-							color: '#b2b9bf',
-							padding: 20,
-							font: {
-								size: 11,
-								family: "Open Sans",
-								style: 'normal',
-								lineHeight: 2
-							},
-						}
-					},
-				},
-			},
-		});
-	</script>
+        new Chart(ctx2, {
+            type: "line",
+            data: {
+                labels: titleTimestamps, // Ganti dengan nilai-nilai yang sesuai
+                datasets: [{
+                        label: "Admin",
+                        tension: 0.4,
+                        borderWidth: 0,
+                        pointRadius: 0,
+                        borderColor: "#3C9D9B",
+                        borderWidth: 3,
+                        backgroundColor: gradientStroke1,
+                        fill: true,
+                        data: usersAdmin, // Ganti dengan nilai-nilai yang sesuai
+                        maxBarThickness: 6
+                    },
+                    {
+                        label: "Pendaftar",
+                        tension: 0.4,
+                        borderWidth: 0,
+                        pointRadius: 0,
+                        borderColor: "#A9A9A9", // Ganti dengan warna yang sesuai
+                        borderWidth: 3,
+                        backgroundColor: gradientStroke2,
+                        fill: true,
+                        data: usersMahasiswa, // Ganti dengan nilai-nilai yang sesuai
+                        maxBarThickness: 6
+                    }
+                ],
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        display: false,
+                    }
+                },
+                interaction: {
+                    intersect: false,
+                    mode: 'index',
+                },
+                scales: {
+                    y: {
+                        grid: {
+                            drawBorder: false,
+                            display: true,
+                            drawOnChartArea: true,
+                            drawTicks: false,
+                            borderDash: [5, 5]
+                        },
+                        ticks: {
+                            display: true,
+                            padding: 10,
+                            color: '#b2b9bf',
+                            font: {
+                                size: 11,
+                                family: "Open Sans",
+                                style: 'normal',
+                                lineHeight: 2
+                            },
+                        }
+                    },
+                    x: {
+                        grid: {
+                            drawBorder: false,
+                            display: false,
+                            drawOnChartArea: false,
+                            drawTicks: false,
+                            borderDash: [5, 5]
+                        },
+                        ticks: {
+                            display: true,
+                            color: '#b2b9bf',
+                            padding: 20,
+                            font: {
+                                size: 11,
+                                family: "Open Sans",
+                                style: 'normal',
+                                lineHeight: 2
+                            },
+                        }
+                    },
+                },
+            },
+        });
+    </script>
 @endpush
 
 @section('content')
-	<div class="row">
-		{{-- total users --}}
-		<div class="col-xl-3 col-lg-4 col-sm-6 col-12 mb-3 mb-sm-4">
-			<div class="card card-stats mb-xl-0">
-				<div class="card-body" style="padding: 1rem 1.4rem;">
-					<div class="row align-items-center">
-						<div class="col">
-							<h6 class="card-title text-uppercase text-muted mb-0">Total User</h6>
-							<span class="h2 lh-1 font-weight-bold mb-0">{{ $users->count() }}</span>
-						</div>
-						<div class="col-auto">
-							<div class="icon icon-shape bg-danger text-white rounded-circle shadow text-center">
-								<i class="fas fa-users"></i>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
+    <div class="row">
+        {{-- total users --}}
+        <div class="col-xl-3 col-lg-4 col-sm-6 col-12 mb-3 mb-sm-4">
+            <div class="card card-stats mb-xl-0">
+                <div class="card-body" style="padding: 1rem 1.4rem;">
+                    <div class="row align-items-center">
+                        <div class="col">
+                            <h6 class="card-title text-uppercase text-muted mb-0">Total User</h6>
+                            <span class="h2 lh-1 font-weight-bold mb-0">{{ $users->count() }}</span>
+                        </div>
+                        <div class="col-auto">
+                            <div class="icon icon-shape bg-danger text-white rounded-circle shadow text-center">
+                                <i class="fas fa-users"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-		{{-- admin, mahasiswa, mata kuliah, jurusan for pc --}}
-		<div class="col-xl-3 col-lg-4 col-sm-6 col-12 mb-4 d-none d-sm-block">
-			<div class="card card-stats mb-xl-0">
-				<div class="card-body" style="padding: 1rem 1.4rem;">
-					<div class="row align-items-center">
-						<div class="col">
-							<h6 class="card-title text-uppercase text-muted mb-0">Admin</h6>
-							<span class="h2 lh-1 font-weight-bold mb-0">{{ $users->where('role', 'Admin')->count() }}</span>
-						</div>
-						<div class="col-auto">
-							<div class="icon icon-shape bg-orange text-white rounded-circle shadow text-center">
-								<i class="fas fa-user-cog"></i>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-		<div class="col-xl-3 col-lg-4 col-sm-6 col-12 mb-4 d-none d-sm-block">
-			<div class="card card-stats mb-xl-0">
-				<div class="card-body" style="padding: 1rem 1.4rem;">
-					<div class="row align-items-center">
-						<div class="col">
-							<h6 class="card-title text-uppercase text-muted mb-0">Mahasiswa</h6>
-							<span class="h2 lh-1 font-weight-bold mb-0">{{ $users->where('role', 'Mahasiswa')->count() }}</span>
-						</div>
-						<div class="col-auto">
-							<div class="icon icon-shape bg-warning text-white rounded-circle shadow text-center">
-								<i class="fas fa-user"></i>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-		<div class="col-xl-3 col-lg-4 col-sm-6 col-12 mb-4 d-none d-sm-block">
-			<div class="card card-stats mb-xl-0">
-				<div class="card-body" style="padding: 1rem 1.4rem;">
-					<div class="row align-items-center">
-						<div class="col">
-							<h6 class="card-title text-uppercase text-muted mb-0">Mata Kuliah</h6>
-							<span class="h2 lh-1 font-weight-bold mb-0">{{$matkul->count()}}</span>
-						</div>
-						<div class="col-auto">
-							<div class="icon icon-shape bg-green text-white rounded-circle shadow text-center">
-								<i class="ni ni-hat-3"></i>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-		<div class="col-xl-3 col-lg-4 col-sm-6 col-12 mb-4 d-none d-sm-block">
-			<div class="card card-stats mb-xl-0">
-				<div class="card-body" style="padding: 1rem 1.4rem;">
-					<div class="row align-items-center">
-						<div class="col">
-							<h6 class="card-title text-uppercase text-muted mb-0">Jurusan</h6>
-							<span class="h2 lh-1 font-weight-bold mb-0">{{$jurusan->count()}}</span>
-						</div>
-						<div class="col-auto">
-							<div class="icon icon-shape bg-teal text-white rounded-circle shadow text-center">
-								<i class="ni ni-paper-diploma"></i>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-		<div class="col-xl-3 col-lg-4 col-sm-6 col-12 mb-4 d-none d-sm-block">
-			<div class="card card-stats mb-xl-0">
-				<div class="card-body" style="padding: 1rem 1.4rem;">
-					<div class="row align-items-center">
-						<div class="col">
-							<h6 class="card-title text-uppercase text-muted mb-0">Mata Pelajaran</h6>
-							<span class="h2 lh-1 font-weight-bold mb-0">{{App\Models\Mapels::count()}}</span>
-						</div>
-						<div class="col-auto">
-							<div class="icon icon-shape bg-blue text-white rounded-circle shadow text-center">
-								<i class="fas fa-book-reader"></i>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-		
-		{{-- admin, mahasiswa, mata kuliah, jurusan for mobile --}}
-		<div class="col-6 mb-3 d-block d-sm-none">
-			<div class="card">
-				<div class="card-body p-3 text-center">
-					<div class="d-flex justify-content-center align-items-center gap-2">
-						<i class="fas fa-user-cog opacity-10 text-orange"></i>
-						<h6 class="text-center mb-0 text-uppercase text-muted">Admin</h6>
-					</div>
-					<hr class="horizontal dark my-1">
-					<h5 class="mb-0">{{ $users->where('role', 'Admin')->count() }}</h5>
-				</div>
-			</div>
-		</div>
-		<div class="col-6 mb-3 d-block d-sm-none">
-			<div class="card">
-				<div class="card-body p-3 text-center">
-					<div class="d-flex justify-content-center align-items-center gap-2">
-						<i class="fas fa-user opacity-10 text-warning"></i>
-						<h6 class="text-center mb-0 text-uppercase text-muted">Mahasiswa</h6>
-					</div>
-					<hr class="horizontal dark my-1">
-					<h5 class="mb-0">{{ $users->where('role', 'Mahasiswa')->count() }}</h5>
-				</div>
-			</div>
-		</div>
-		<div class="col-6 mb-3 d-block d-sm-none">
-			<div class="card">
-				<div class="card-body p-3 text-center">
-					<div class="d-flex justify-content-center align-items-center gap-2">
-						<i class="ni ni-hat-3 opacity-10 text-green"></i>
-						<h6 class="text-center mb-0 text-uppercase text-muted">Mata Kuliah</h6>
-					</div>
-					<hr class="horizontal dark my-1">
-					<h5 class="mb-0">{{ App\Models\Matkuls::count() }}</h5>
-				</div>
-			</div>
-		</div>
-		<div class="col-6 mb-3 d-block d-sm-none">
-			<div class="card">
-				<div class="card-body p-3 text-center">
-					<div class="d-flex justify-content-center align-items-center gap-2">
-						<i class="ni ni-paper-diploma opacity-10 text-teal"></i>
-						<h6 class="text-center mb-0 text-uppercase text-muted">Jurusan</h6>
-					</div>
-					<hr class="horizontal dark my-1">
-					<h5 class="mb-0">{{ App\Models\Jurusan::count() }}</h5>
-				</div>
-			</div>
-		</div>
-		<div class="col-12 mb-3 d-block d-sm-none">
-			<div class="card">
-				<div class="card-body p-3 text-center">
-					<div class="d-flex justify-content-center align-items-center gap-2">
-						<i class="fas fa-book-reader opacity-10 text-blue"></i>
-						<h6 class="text-center mb-0 text-uppercase text-muted">Mata Pelajaran</h6>
-					</div>
-					<hr class="horizontal dark my-1">
-					<h5 class="mb-0">{{ App\Models\Mapels::count() }}</h5>
-				</div>
-			</div>
-		</div>
+        {{-- admin, mahasiswa, mata kuliah, jurusan for pc --}}
+        <div class="col-xl-3 col-lg-4 col-sm-6 col-12 mb-4 d-none d-sm-block">
+            <div class="card card-stats mb-xl-0">
+                <div class="card-body" style="padding: 1rem 1.4rem;">
+                    <div class="row align-items-center">
+                        <div class="col">
+                            <h6 class="card-title text-uppercase text-muted mb-0">Admin</h6>
+                            <span class="h2 lh-1 font-weight-bold mb-0">{{ $users->where('role', 'Admin')->count() }}</span>
+                        </div>
+                        <div class="col-auto">
+                            <div class="icon icon-shape bg-orange text-white rounded-circle shadow text-center">
+                                <i class="fas fa-user-cog"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-3 col-lg-4 col-sm-6 col-12 mb-4 d-none d-sm-block">
+            <div class="card card-stats mb-xl-0">
+                <div class="card-body" style="padding: 1rem 1.4rem;">
+                    <div class="row align-items-center">
+                        <div class="col">
+                            <h6 class="card-title text-uppercase text-muted mb-0">Mahasiswa</h6>
+                            <span
+                                class="h2 lh-1 font-weight-bold mb-0">{{ $users->where('role', 'Mahasiswa')->count() }}</span>
+                        </div>
+                        <div class="col-auto">
+                            <div class="icon icon-shape bg-warning text-white rounded-circle shadow text-center">
+                                <i class="fas fa-user"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-3 col-lg-4 col-sm-6 col-12 mb-4 d-none d-sm-block">
+            <div class="card card-stats mb-xl-0">
+                <div class="card-body" style="padding: 1rem 1.4rem;">
+                    <div class="row align-items-center">
+                        <div class="col">
+                            <h6 class="card-title text-uppercase text-muted mb-0">Mata Kuliah</h6>
+                            <span class="h2 lh-1 font-weight-bold mb-0">{{ $matkul->count() }}</span>
+                        </div>
+                        <div class="col-auto">
+                            <div class="icon icon-shape bg-green text-white rounded-circle shadow text-center">
+                                <i class="ni ni-hat-3"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-3 col-lg-4 col-sm-6 col-12 mb-4 d-none d-sm-block">
+            <div class="card card-stats mb-xl-0">
+                <div class="card-body" style="padding: 1rem 1.4rem;">
+                    <div class="row align-items-center">
+                        <div class="col">
+                            <h6 class="card-title text-uppercase text-muted mb-0">Jurusan</h6>
+                            <span class="h2 lh-1 font-weight-bold mb-0">{{ $jurusan->count() }}</span>
+                        </div>
+                        <div class="col-auto">
+                            <div class="icon icon-shape bg-teal text-white rounded-circle shadow text-center">
+                                <i class="ni ni-paper-diploma"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-3 col-lg-4 col-sm-6 col-12 mb-4 d-none d-sm-block">
+            <div class="card card-stats mb-xl-0">
+                <div class="card-body" style="padding: 1rem 1.4rem;">
+                    <div class="row align-items-center">
+                        <div class="col">
+                            <h6 class="card-title text-uppercase text-muted mb-0">Mata Pelajaran</h6>
+                            <span class="h2 lh-1 font-weight-bold mb-0">{{ App\Models\Mapels::count() }}</span>
+                        </div>
+                        <div class="col-auto">
+                            <div class="icon icon-shape bg-blue text-white rounded-circle shadow text-center">
+                                <i class="fas fa-book-reader"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        {{-- admin, mahasiswa, mata kuliah, jurusan for mobile --}}
+        <div class="col-6 mb-3 d-block d-sm-none">
+            <div class="card">
+                <div class="card-body p-3 text-center">
+                    <div class="d-flex justify-content-center align-items-center gap-2">
+                        <i class="fas fa-user-cog opacity-10 text-orange"></i>
+                        <h6 class="text-center mb-0 text-uppercase text-muted">Admin</h6>
+                    </div>
+                    <hr class="horizontal dark my-1">
+                    <h5 class="mb-0">{{ $users->where('role', 'Admin')->count() }}</h5>
+                </div>
+            </div>
+        </div>
+        <div class="col-6 mb-3 d-block d-sm-none">
+            <div class="card">
+                <div class="card-body p-3 text-center">
+                    <div class="d-flex justify-content-center align-items-center gap-2">
+                        <i class="fas fa-user opacity-10 text-warning"></i>
+                        <h6 class="text-center mb-0 text-uppercase text-muted">Mahasiswa</h6>
+                    </div>
+                    <hr class="horizontal dark my-1">
+                    <h5 class="mb-0">{{ $users->where('role', 'Mahasiswa')->count() }}</h5>
+                </div>
+            </div>
+        </div>
+        <div class="col-6 mb-3 d-block d-sm-none">
+            <div class="card">
+                <div class="card-body p-3 text-center">
+                    <div class="d-flex justify-content-center align-items-center gap-2">
+                        <i class="ni ni-hat-3 opacity-10 text-green"></i>
+                        <h6 class="text-center mb-0 text-uppercase text-muted">Mata Kuliah</h6>
+                    </div>
+                    <hr class="horizontal dark my-1">
+                    <h5 class="mb-0">{{ App\Models\Matkuls::count() }}</h5>
+                </div>
+            </div>
+        </div>
+        <div class="col-6 mb-3 d-block d-sm-none">
+            <div class="card">
+                <div class="card-body p-3 text-center">
+                    <div class="d-flex justify-content-center align-items-center gap-2">
+                        <i class="ni ni-paper-diploma opacity-10 text-teal"></i>
+                        <h6 class="text-center mb-0 text-uppercase text-muted">Jurusan</h6>
+                    </div>
+                    <hr class="horizontal dark my-1">
+                    <h5 class="mb-0">{{ App\Models\Jurusan::count() }}</h5>
+                </div>
+            </div>
+        </div>
+        <div class="col-12 mb-3 d-block d-sm-none">
+            <div class="card">
+                <div class="card-body p-3 text-center">
+                    <div class="d-flex justify-content-center align-items-center gap-2">
+                        <i class="fas fa-book-reader opacity-10 text-blue"></i>
+                        <h6 class="text-center mb-0 text-uppercase text-muted">Mata Pelajaran</h6>
+                    </div>
+                    <hr class="horizontal dark my-1">
+                    <h5 class="mb-0">{{ App\Models\Mapels::count() }}</h5>
+                </div>
+            </div>
+        </div>
 
 		{{-- total pemasukan --}}
 		<div class="col-12 col-sm-6 mb-4">
@@ -331,7 +332,7 @@
 						<div class="col">
 							<h6 class="card-title text-uppercase text-muted mb-0">Pemasukan</h6>
 							<span class="h2 lh-1 font-weight-bold mb-0" id="pemasukan">
-								<span>{{number_format($pemasukan,0,'','.')}}</span><small class="fs-5 font-weight-normal">rupiah</small>
+								<span>{{number_format($pemasukan,0,'','.')}}</span> <small class="fs-5 font-weight-normal">rupiah</small>
 							</span>
 						</div>
 						<div class="col-auto">
@@ -348,23 +349,26 @@
 		<div class="col-12 col-lg-8 mb-lg-0 mb-4">
             <div id="carouselDashboard" data-bs-ride="carousel" data-bs-interval="3000" class="carousel slide page-header align-items-start height-300 pb-7 rounded-3">
                 <div class="carousel-indicators">
-                    <button type="button" data-bs-target="#carouselDashboard" data-bs-slide-to="0" class="active" aria-current="true"></button>
+                    <button type="button" data-bs-target="#carouselDashboard" data-bs-slide-to="0" class="active"
+                        aria-current="true"></button>
                     @foreach ($banner->filter(function ($item) {
-                        return $item->target == 'ADMIN' || $item->target == 'SEMUA';
-                        }) as $item)
-                    <button type="button" data-bs-target="#carouselDashboard" data-bs-slide-to="{{ $loop->index+1 }}" class="" aria-current="true"></button>
+            return $item->target == 'ADMIN' || $item->target == 'SEMUA';
+        }) as $item)
+                        <button type="button" data-bs-target="#carouselDashboard"
+                            data-bs-slide-to="{{ $loop->index + 1 }}" class="" aria-current="true"></button>
                     @endforeach
                 </div>
                 <div class="carousel-inner">
                     <div class="carousel-item active">
                         <div class="row flex-column justify-content-center height-300"
-                        style="
+                            style="
 						background-image: url('https://c0.wallpaperflare.com/path/196/594/379/quran-book-97f792a4ef76b251052800f9f56a4c0b.jpg'); 
 						background-size: cover; background-position: center;">
                             <span class="mask bg-gradient-dark opacity-6"></span>
-                            <div class="d-flex justify-content-center flex-column align-items-center text-white text-center z-index-1">
+                            <div
+                                class="d-flex justify-content-center flex-column align-items-center text-white text-center z-index-1">
                                 <h4 class="font-weight-bold mb-0 p-3 pb-0 text-white">
-                                    Selamat Datang 
+                                    Selamat Datang
                                     <b class="font-weight-bolder">{{ $user->name }}</b>!
                                 </h4>
                                 <p class="mb-0 px-4 px-sm-6">
@@ -374,29 +378,32 @@
                         </div>
                     </div>
                     @foreach ($banner->filter(function ($item) {
-                        return $item->target == 'MAHASISWA' || $item->target == 'SEMUA';
-                        }) as $item)
-                    <div class="carousel-item">
-                        <div class="row flex-column justify-content-center height-300"
-                        style="background-image: url('{{ $item->image }}'); background-size: cover; background-position: center;">
-                            <span class="mask bg-gradient-dark opacity-6"></span>
-                            <div class="d-flex justify-content-center flex-column align-items-center text-white text-center z-index-1">
-                                <h4 class="font-weight-bold mb-0 p-3 pb-0 text-white">
-                                    {{ $item->title }}
-                                </h4>
-                                <p class="mb-0 px-4 px-sm-6">
-                                    {{ $item->desc }}
-                                </p>
+            return $item->target == 'MAHASISWA' || $item->target == 'SEMUA';
+        }) as $item)
+                        <div class="carousel-item">
+                            <div class="row flex-column justify-content-center height-300"
+                                style="background-image: url('{{ $item->image }}'); background-size: cover; background-position: center;">
+                                <span class="mask bg-gradient-dark opacity-6"></span>
+                                <div
+                                    class="d-flex justify-content-center flex-column align-items-center text-white text-center z-index-1">
+                                    <h4 class="font-weight-bold mb-0 p-3 pb-0 text-white">
+                                        {{ $item->title }}
+                                    </h4>
+                                    <p class="mb-0 px-4 px-sm-6">
+                                        {{ $item->desc }}
+                                    </p>
+                                </div>
                             </div>
                         </div>
-                    </div>
                     @endforeach
                 </div>
-                <button class="carousel-control-prev" type="button" data-bs-target="#carouselDashboard" data-bs-slide="prev">
+                <button class="carousel-control-prev" type="button" data-bs-target="#carouselDashboard"
+                    data-bs-slide="prev">
                     <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                     <span class="visually-hidden">Previous</span>
                 </button>
-                <button class="carousel-control-next" type="button" data-bs-target="#carouselDashboard" data-bs-slide="next">
+                <button class="carousel-control-next" type="button" data-bs-target="#carouselDashboard"
+                    data-bs-slide="next">
                     <span class="carousel-control-next-icon" aria-hidden="true"></span>
                     <span class="visually-hidden">Next</span>
                 </button>
@@ -467,7 +474,7 @@
 					<span class="d-block mt-2" style="font-size: 13px;">Link</span>
 				</div>
 				<div class="col-3 col-md-2 text-center">
-					<a href="" class="icon icon-shape p-0 bg-orange shadow text-center border-radius-md cursor-pointer"
+					<a href="{{ route('admin.laporan.index') }}" class="icon icon-shape p-0 bg-orange shadow text-center border-radius-md cursor-pointer"
 						data-bs-toggle="tooltip" data-bs-placement="top" title="Laporan">
 						<i class="fas fa-flag text-lg opacity-10" aria-hidden="true"></i>
 					</a>

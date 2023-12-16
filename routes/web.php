@@ -33,6 +33,7 @@ use App\Http\Controllers\PembayaranUserController;
 use App\Http\Controllers\DocumentController as AdminDocumentController;
 use App\Http\Controllers\MatkulController as ControllersMatkulController;
 use App\Http\Controllers\Auth\ForgotPasswordController;
+use App\Http\Controllers\OtherController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -108,6 +109,12 @@ Route::prefix('/admin')->middleware(['admin', 'auth'])->name('admin.')->group(fu
         Route::put('/change-status/{id}', [AccountController::class, 'admin_status'])->name('status');
         Route::delete('/delete/{id}', [AccountController::class, 'admin_delete'])->name('delete');
         Route::get('/exportAdmin', [AccountController::class, 'export'])->name('exportAdmin');
+        Route::delete('/deleteAllAdmin', [AccountController::class, 'deleteAllAdmin'])->name('delete.all');
+    });
+
+    // data pendaftar
+    Route::prefix('pendaftar/account')->name('pendaftar.')->group(function () {
+        Route::get('/', [AccountController::class, 'pendaftar'])->name('index');
     });
     
     // data pendaftar
@@ -129,6 +136,7 @@ Route::prefix('/admin')->middleware(['admin', 'auth'])->name('admin.')->group(fu
         Route::get('/program/{id}', [AccountController::class, 'mahasiswa_program'])->name('program');
         Route::get('/exportMahasiswa', [AccountController::class, 'exportMahasiswa'])->name('exportMahasiswa');
         Route::delete('/DeleteAll', [AccountController::class, 'deleteAll'])->name('delete.all');
+        Route::get('/daftar-ulang/{id}', [TransactionController::class, 'DaftarUlang'])->name('daftar-ulang');
     });
 
     Route::prefix('demo')->group(function () {
@@ -136,42 +144,45 @@ Route::prefix('/admin')->middleware(['admin', 'auth'])->name('admin.')->group(fu
         Route::put('/bayar/{id}', [TransactionController::class, 'demo_bayar_cicilan_admin'])->name('transactions.cicilan.bayar');
         Route::put('/bayar-cash/{id}', [TransactionController::class, 'demo_bayar_cash'])->name('transactions.cash.bayar');
     });
-    
+
     // data link
     Route::prefix('link')->name('link.')->group(function () {
         Route::get('/whatsapp', [LinkController::class, 'whatsapp'])->name('whatsapp');
         Route::get('/zoom', [LinkController::class, 'zoom'])->name('zoom');
+        Route::delete('/deleteAllLink', [LinkController::class, 'deleteAll'])->name('delete.all');
         Route::get('/create', [LinkController::class, 'create'])->name('create');
         Route::post('/create/process', [LinkController::class, 'store'])->name('create.process');
         Route::get('/{type}/edit/{id}', [LinkController::class, 'edit'])->name('edit');
         Route::put('/{type}/edit/process', [LinkController::class, 'update'])->name('edit.process');
         Route::get('/detail/{id}', [LinkController::class, 'show'])->name('detail');
-        Route::delete('/delete/{id}', [LinkController::class,'destroy'])->name('destroy');
+        Route::delete('/delete/{id}', [LinkController::class, 'destroy'])->name('destroy');
     });
-    
+
     // data tahun ajaran
-    Route::prefix('tahun-ajaran')->name('tahun-ajaran.')->group( function(){
+    Route::prefix('tahun-ajaran')->name('tahun-ajaran.')->group(function () {
         Route::get('/', [TahunAjaranController::class, 'index'])->name('index');
         Route::get('/create', [TahunAjaranController::class, 'create'])->name('create');
         Route::post('/create/process', [TahunAjaranController::class, 'store'])->name('create.process');
         Route::get('/detail/{id}', [TahunAjaranController::class, 'show'])->name('detail');
         Route::post('/active/{id}', [TahunAjaranController::class, 'active'])->name('active');
         Route::delete('/delete/{id}', [TahunAjaranController::class, 'destroy'])->name('destroy');
+        Route::delete('/deleteAll-tahunAjaran', [TahunAjaranController::class, 'deleteAll'])->name('delete.all');
     });
-    
+
     // proses transaksi
     Route::prefix('transaksi')->name('transactions.')->group(function () {
         Route::post('/proses-bayar/{id}', [TransactionController::class, 'proses_bayar'])->middleware(['Pembayaran'])->name('proses_bayar');
     });
 
-    Route::prefix('laporan')->name('laporan.')->group( function() {
+    Route::prefix('laporan')->name('laporan.')->group(function () {
         Route::get('/', [LaporanController::class, 'index'])->name('index');
-        Route::get('/exportMahasiswaLaporan/{tahunAjaran}', [LaporanController::class, 'exportMahasiswaLaporan'])->name('exportMahasiswaLaporan');    
-        Route::get('/exporPendaftar', [LaporanController::class, 'exportPendaftar'])->name('exportPendaftar');    
+        Route::get('/exportMahasiswaLaporan/{tahunAjaran}', [LaporanController::class, 'exportMahasiswaLaporan'])->name('exportMahasiswaLaporan');
+        Route::get('/exporPendaftar', [LaporanController::class, 'exportPendaftar'])->name('exportPendaftar');
     });
-    
+
     // resources management
     Route::resource('/matkul', ControllersMatkulController::class);
+    Route::delete('/matkulDeleteAll', [ControllersMatkulController::class, 'deleteAll'])->name('matkul.delete.all');
     Route::resource('/mapel', MapelsController::class);
     Route::prefix('mapel')->name('mapel.')->group( function() {
         Route::get('/', [MapelsController::class, 'index'])->name('index');
@@ -184,23 +195,25 @@ Route::prefix('/admin')->middleware(['admin', 'auth'])->name('admin.')->group(fu
         Route::post('/active/{id}', [MapelsController::class, 'active'])->name('active');
         Route::delete('delete/{id}', [MapelsController::class, 'destroy'])->name('destroy');
     });
+    Route::delete('/mapelDeleteAll', [MapelsController::class, 'deleteAll'])->name('mapel.delete.all');
     Route::resource('/jurusan', JurusanController::class);
+    Route::delete('/DeleteJurusan', [JurusanController::class, 'deleteAll'])->name('jurusan.delete.all');
     Route::get('/exportJurusan', [JurusanController::class, 'exportJurusan'])->name('exportJurusan');
     Route::resource('/transaksi', TransactionController::class);
-    Route::post('/invoice/{id}',[TransactionController::class,'invoice'])->name('invoice.download');
+    Route::post('/invoice/{id}', [TransactionController::class, 'invoice'])->name('invoice.download');
     Route::delete('/DeleteAll-transaksi', [TransactionController::class, 'deleteAll'])->name('transaksi.delete.all');
 
     Route::get('/exportTransaction', [TransactionController::class, 'export'])->name('exportTransaction');
     // Route::resource('/tagihan', AdminTagihanController::class);
     Route::resource('/dokumen', AdminDocumentController::class);
-    Route::resource('/course',CourseController::class);
+    Route::resource('/course', CourseController::class);
     Route::resource('/tagihan', AdminTagihanController::class);
     Route::delete('/tagihanDeletes', [AdminTagihanController::class, 'deleteAll'])->name('tagihan.deletes');
     Route::get('/next', [AdminTagihanController::class, 'next'])->name('tagihan.next');
 
     Route::get('/dokumen/verify/{id}', [AdminDocumentController::class, 'verify'])->name('document.verify');
     Route::put('/dokumen/verify/process/{id}', [AdminDocumentController::class, 'verify'])->name('document.verify.process');
-    
+
     //data settings
     Route::prefix('settings')->group(function () {
         // data administrasi
@@ -212,7 +225,7 @@ Route::prefix('/admin')->middleware(['admin', 'auth'])->name('admin.')->group(fu
             Route::put('/edit/{id}', [SettingController::class, 'general_edit'])->name('general.edit');
             Route::put('/desc/edit/{id}', [SettingController::class, 'desc_edit'])->name('desc.edit');
             Route::post('/upload/desc', [SettingController::class, 'upload_file'])->name('upload.file');
-            
+
             Route::get('/notifikasi', [SettingController::class, 'notify_index'])->name('notifications');
             Route::put('/notifikasi/process/{id}', [SettingController::class, 'notify_edit'])->name('notifications.process');
 
@@ -270,6 +283,8 @@ Route::prefix('/kursus')->middleware(['auth', 'kursus'])->name('kursus.')->group
         Route::put('/change-password/process', [KursusProfileController::class, 'change_password_process'])->name('change_password.process');
     });
     Route::get('/bayar/{id}', [KursusTagihanController::class, 'bayar'])->name('tagihan.bayar');
+    
+    Route::get('/info/n', [OtherController::class, 'krs_index'])->name('info.krs');
 
     Route::prefix('/transaksi')->name('transactions.')->group(function () {
         Route::post('/proses_bayar', [KursusTransactionController::class, 'proses_bayar'])->middleware('KursusTransactions')->name('proses_bayar');
@@ -294,7 +309,7 @@ Route::prefix('/mahasiswa')->middleware(['auth', 'mahasiswa', 's1'])->name('maha
 
     //callback demo doang
     // Route::post('/change/status/{sid}',[AuthController::class,'demo_success'])->name('demo');
-    Route::put('/change-daftar-ulang/status/{sid}',[AuthController::class,'daftar_ulang_demo_success'])->name('daftar.ulang.demo');
+    Route::put('/change-daftar-ulang/status/{sid}', [AuthController::class, 'daftar_ulang_demo_success'])->name('daftar.ulang.demo');
 
     //biodata
     Route::prefix('/biodata')->name('pendaftaran.')->group(function () {
@@ -320,6 +335,8 @@ Route::prefix('/mahasiswa')->middleware(['auth', 'mahasiswa', 's1'])->name('maha
         Route::put('/edit/process/{id}', [MahasiswaProfileController::class, 'edit_document_process'])->name('document.edit.process');
     });
 
+    Route::get('/info/f', [OtherController::class, 'mhs_index'])->name('info.mhs');
+
     //profile
     Route::prefix('/profile')->name('profile.')->group(function () {
         Route::get('', [MahasiswaProfileController::class, 'profile'])->name('index');
@@ -331,7 +348,7 @@ Route::prefix('/mahasiswa')->middleware(['auth', 'mahasiswa', 's1'])->name('maha
 
     //matkul mahasiswa
     Route::get('/matkul', [MahasiswaMatkulController::class, 'index'])->name('matkul');
-    Route::match(['get', 'post'],'/downloadMatkuls/{id}/', [MahasiswaMatkulController::class, 'downloadMatkuls'])->name('downloadMatkuls');
+    Route::match(['get', 'post'], '/downloadMatkuls/{id}/', [MahasiswaMatkulController::class, 'downloadMatkuls'])->name('downloadMatkuls');
     Route::get('/JadwalPreview/{id}', [MahasiswaMatkulController::class, 'JadwalPreview'])->name('JadwalPreview');
 
     //tagihan mahasiswa

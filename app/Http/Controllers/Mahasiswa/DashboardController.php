@@ -8,6 +8,8 @@ use App\Models\Biaya;
 use App\Models\Biodata;
 use App\Models\Cicilan;
 use App\Models\Link;
+use App\Models\TagihanDetail;
+use App\Models\TahunAjaran;
 use App\Models\User;
 use GuzzleHttp\Client;
 use Illuminate\Http\Request;
@@ -31,7 +33,7 @@ class DashboardController extends Controller
         $hijriDatedayArabic = $data['data']['hijri']['weekday']['ar'];
         $hijriDatemonth = $data['data']['hijri']['month']['ar'];
         $hijriDateyear = $data['data']['hijri']['year'];
-        
+
         $biayas = Biaya::get();
         $cicilanAll = Cicilan::all();
         $user = Auth::user();
@@ -47,5 +49,16 @@ class DashboardController extends Controller
             return view('mahasiswa.index',compact('hijriDateday','hijriDatedayArabic','hijriDatemonth','hijriDateyear', 'user', 'biodata', 'banner', 'biayas', 'cicilanAll'));
         }
 
+        $tagihan = TagihanDetail::where('id_biayas', $biayas->id)->where('id_users', $user->id)->first();
+        if ($user->biodata) {
+            $tagihan_detail = TagihanDetail::where('status', 'BELUM')->where('id_users', $biodata->user_id)->get();
+            $tagihan_detail = TagihanDetail::where('status', 'BELUM')->where('id_users', $biodata->user_id)->get();
+            $links = Link::where('id_tahun_ajarans', $user->biodata->angkatan_id)->latest()->get();
+            return view('mahasiswa.index',compact('hijriDateday','hijriDatedayArabic','hijriDatemonth','hijriDateyear', 'user', 'biodata', 'banner', 'biayas', 'cicilanAll', 'tagihan_detail', 'links'));
+        } elseif (!$tagihan) {
+            return view('mahasiswa.index', compact('hijriDateday', 'hijriDatedayArabic', 'hijriDatemonth', 'hijriDateyear', 'user', 'biodata', 'banner', 'biayas', 'cicilanAll', 'tagihan'))->with('noDaftarUlang', 'Maaf, ada kesalahan teknis dari admin.');
+        } else {
+            return view('mahasiswa.index', compact('hijriDateday', 'hijriDatedayArabic', 'hijriDatemonth', 'hijriDateyear', 'user', 'biodata', 'banner', 'biayas', 'cicilanAll', 'tagihan'));
+        }
     }
 }

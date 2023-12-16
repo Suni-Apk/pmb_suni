@@ -18,7 +18,8 @@
                                 <i class='bx bxs-file-export me-1'></i> Export
                             </button>
                         </form>
-                        <a href="{{ route('admin.mahasiswa.create') }}" class="btn bg-gradient-primary float-end">Tambah + </a>
+                        <a href="{{ route('admin.mahasiswa.create') }}" class="btn bg-gradient-primary float-end">Tambah +
+                        </a>
                     </div>
                 </div>
                 <form action="{{ route('admin.mahasiswa.index') }}" method="GET">
@@ -40,14 +41,23 @@
                         <table class="table align-items-center mb-0" id="table">
                             <thead>
                                 <tr class="text-center">
-                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Pilih</th>
-                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Nama</th>
-                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Nomor Telepon</th>
-                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Email</th>
-                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Tahun Ajaran</th>
-                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Gender / Role</th>
-                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Status</th>
-                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 text-center">Aksi</th>
+                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Pilih
+                                    </th>
+                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Nama
+                                    </th>
+                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Nomor
+                                        Telepon</th>
+                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Email
+                                    </th>
+                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Tahun
+                                        Ajaran</th>
+                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Gender /
+                                        Role</th>
+                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Status
+                                    </th>
+                                    <th
+                                        class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 text-center">
+                                        Aksi</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -55,66 +65,73 @@
                                     $mahasiswaData = $tahunAjaran ? $mahasiswa : $mahasiswaAll;
                                 @endphp --}}
                                 @foreach ($mahasiswa as $index => $item)
-                                <tr>
-                                    <td>
-                                        <input type="checkbox" name="ids" id="" class="checksAll" value="{{ $item->id }}">
-                                    </td>
-                                    <td>
-                                        <h6 class="mb-0 text-sm">{{$item->name}}</h6>
-                                    </td>
-                                    <td>
-                                        <span class="text-secondary text-xs font-weight-bold">{{$item->phone}}</span>
-                                    </td>
-                                    <td>
-                                        <span class="text-secondary text-xs font-weight-bold">{{$item->email}}</span>
-                                    </td>
-                                    <td class="text-center text-secondary font-weight-bold">
-                                    @if ($item->biodata)
-                                    <span class="badge badge-sm rounded-pill bg-gradient-success">
-                                        {{ $item->biodata->angkatan->year }}
-                                    </span>
-                                    @else
-                                    <span class="badge badge-sm rounded-pill bg-gradient-danger">
-                                        biodata <i class="fas fa-times"></i>
-                                    </span>
-                                    @endif
-                                    </td>
-                                    <td>
-                                    <p class="text-xs font-weight-bold mb-0">{{$item->gender}}</p>
-                                    <p class="text-xs text-uppercase text-secondary mb-0">{{$item->role}}</p>
-                                    </td>
-                                    <td class="text-center">
-                                        @if ($item->status == 'on')
-                                        <span class="badge badge-sm bg-gradient-success">AKTIF</span>
-                                        @else
-                                        <span class="badge badge-sm bg-gradient-danger">OFF</span>
-                                        @endif
-                                    </td>
-                                    <td class="text-center"> 
-                                        <a style="letter-spacing: .02rem" href="{{ route('admin.mahasiswa.show',$item->id) }}" class="badge badge-sm bg-gradient-info font-weight-bolder text-xxs" data-toggle="tooltip" data-original-title="detail">
-                                            Detail
-                                        </a>
+                                    <tr>
+                                        <td>
+                                            <input type="checkbox" name="ids" id="" class="checksAll"
+                                                value="{{ $item->id }}">
+                                        </td>
+                                        <td>
+                                            <h6 class="mb-0 text-sm">{{ $item->name }}</h6>
+                                        </td>
+                                        <td>
+                                            <span class="text-secondary text-xs font-weight-bold">{{ $item->phone }}</span>
+                                        </td>
+                                        <td>
+                                            <span class="text-secondary text-xs font-weight-bold">{{ $item->email }}</span>
+                                        </td>
+                                        <td class="text-center text-secondary font-weight-bold">
+                                            @if ($item->biodata)
+                                                <span class="badge badge-sm rounded-pill bg-gradient-success">
+                                                    {{ $item->biodata->angkatan->year }}
+                                                </span>
+                                            @else
+                                                <span class="badge badge-sm rounded-pill bg-gradient-danger">
+                                                    biodata <i class="fas fa-times"></i>
+                                                </span>
+                                            @endif
+                                        </td>
+                                        <td>
+                                            <p class="text-xs font-weight-bold mb-0">{{ $item->gender }}</p>
+                                            <p class="text-xs text-uppercase text-secondary mb-0">{{ $item->role }}</p>
+                                        </td>
+                                        <td class="text-center">
+                                            @if ($item->status == 'on')
+                                                <span class="badge badge-sm bg-gradient-success">AKTIF</span>
+                                            @else
+                                                <span class="badge badge-sm bg-gradient-danger">OFF</span>
+                                            @endif
+                                        </td>
+                                        <td class="text-center">
+                                            <a style="letter-spacing: .02rem"
+                                                href="{{ route('admin.mahasiswa.show', $item->id) }}"
+                                                class="badge badge-sm bg-gradient-info font-weight-bolder text-xxs"
+                                                data-toggle="tooltip" data-original-title="detail">
+                                                Detail
+                                            </a>
 
-                                        <a style="letter-spacing: .02rem"
-                                            href="{{ route('admin.mahasiswa.edit', $item->id) }}"
-                                            class="badge badge-sm bg-gradient-secondary font-weight-bolder text-xxs mx-1"
-                                            data-toggle="tooltip" data-original-title="edit">
-                                            Ubah
-                                        </a>
+                                            <a style="letter-spacing: .02rem"
+                                                href="{{ route('admin.mahasiswa.edit', $item->id) }}"
+                                                class="badge badge-sm bg-gradient-secondary font-weight-bolder text-xxs mx-1"
+                                                data-toggle="tooltip" data-original-title="edit">
+                                                Ubah
+                                            </a>
 
-                                            <form action="{{ route('admin.mahasiswa.delete', $item->id) }}" class="d-inline"
-                                                id="form1" method="POST">
+                                            <form action="{{ route('admin.mahasiswa.delete', $item->id) }}"
+                                                class="d-inline" id="form1" method="POST">
                                                 @csrf
                                                 @method('DELETE')
                                                 <button type="button"
                                                     class="badge badge-sm bg-gradient-danger font-weight-bolder text-xxs border-0"
-                                                    data-bs-toggle="modal" data-bs-target="#exampleModal{{ $item->id }}">Delete</button>
+                                                    data-bs-toggle="modal"
+                                                    data-bs-target="#exampleModal{{ $item->id }}">Delete</button>
                                                 <div class="modal fade" id="exampleModal{{ $item->id }}" tabindex="-1"
-                                                    aria-labelledby="exampleModal{{ $item->id }}Label" aria-hidden="true">
+                                                    aria-labelledby="exampleModal{{ $item->id }}Label"
+                                                    aria-hidden="true">
                                                     <div class="modal-dialog modal-dialog-centered">
                                                         <div class="modal-content">
                                                             <div class="modal-header">
-                                                                <h1 class="modal-title fs-5" id="exampleModal{{ $item->id }}Label">
+                                                                <h1 class="modal-title fs-5"
+                                                                    id="exampleModal{{ $item->id }}Label">
                                                                     Peringatan! <i
                                                                         class="fas fa-exclamation-circle fa-xl text-danger"></i>
                                                                 </h1>
@@ -128,38 +145,47 @@
                                                             <div class="modal-footer">
                                                                 <button type="button" class="btn btn-secondary"
                                                                     data-bs-dismiss="modal">Batal</button>
-                                                                <button type="submit"
-                                                                    class="btn btn-primary">Ya, Hapus</button>
+                                                                <button type="submit" class="btn btn-primary">Ya,
+                                                                    Hapus</button>
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </form>
 
-                                        <form action="{{ route('admin.mahasiswa.status', $item->id) }}" method="POST" class="d-inline">
-                                            @csrf
-                                            @method('PUT')
-                                            @if ($item->status == 'on')
-                                                <input type="hidden" name="status" value="off">
-                                                <button
-                                                    class="badge badge-sm bg-gradient-dark font-weight-bolder text-xxs ms-1 border-0"
-                                                    type="submit">
-                                                    OFF
-                                                </button>
-                                            @elseif($item->status == 'off')
-                                                <input type="hidden" name="status" value="on">
-                                                <button
-                                                    class="badge badge-sm bg-teal font-weight-bolder text-xxs ms-1 border-0"
-                                                    type="submit">
-                                                    ON
-                                                </button>
-                                            @endif
-                                        </form>
-                                    </td>
-                                </tr>
+                                            <form action="{{ route('admin.mahasiswa.status', $item->id) }}" method="POST"
+                                                class="d-inline">
+                                                @csrf
+                                                @method('PUT')
+                                                @if ($item->status == 'on')
+                                                    <input type="hidden" name="status" value="off">
+                                                    <button
+                                                        class="badge badge-sm bg-gradient-dark font-weight-bolder text-xxs ms-1 border-0"
+                                                        type="submit">
+                                                        OFF
+                                                    </button>
+                                                @elseif($item->status == 'off')
+                                                    <input type="hidden" name="status" value="on">
+                                                    <button
+                                                        class="badge badge-sm bg-teal font-weight-bolder text-xxs ms-1 border-0"
+                                                        type="submit">
+                                                        ON
+                                                    </button>
+                                                @endif
+                                            </form>
+                                        </td>
+                                    </tr>
                                 @endforeach
                             </tbody>
                         </table>
+                    </div>
+                    <div class="d-flex ms-4 mb-4 mt-3">
+                        <input type="checkbox" id="select_all_ids" class="chek me-2">
+                        <a href="#ClikKabeh" id="ClikKabeh" class="text-secondary">Pilih Semua</a>
+                        <div class=" ms-4">
+                            <i class="fas fa-trash me-1 cursor-pointer" style="color: #ff0000;" id="deleteAll"></i>
+                            <a href="#" class="text-secondary" id="All">Hapus</a>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -169,6 +195,11 @@
 @endsection
 
 @push('scripts')
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+        integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"
+        integrity="sha512-VEd+nq25CkR676O+pLBnDW09R7VQX9Mdiij052gVCp5yVH3jGtH70Ho/UUv4mJDsEdTvqRCFZg0NKGiojGnUCw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     @if (session('success'))
         <script>
@@ -183,6 +214,81 @@
         const dataTableSearch = new simpleDatatables.DataTable("#table", {
             searchable: true,
             fixedHeight: true,
+        });
+    </script>
+    <script>
+        $(function(e) {
+            $("#ClikKabeh").click(function() {
+                $('.checksAll, #select_all_ids').prop('checked', function() {
+                    return !$(this).prop("checked");
+                });
+            });
+            $("#select_all_ids").click(function() {
+                $('.checksAll').prop('checked', $(this).prop('checked'));
+            });
+            $("#All").click(function() {
+                $('#deleteAll').click();
+            });
+
+            $("#deleteAll").click(function(e) {
+                e.preventDefault();
+                var all_ids = [];
+
+                $('input:checkbox[name="ids"]:checked').each(function() {
+                    all_ids.push($(this).val());
+                });
+                if ($('.checksAll').is(':checked')) {
+                    Swal.fire({
+                        title: "Apakah Anda Yakin Ingin Menghapus data mahasiswa?",
+                        text: "Kamu tidak bisa mengembalikan perubahan ini!",
+                        icon: "warning",
+                        showCancelButton: true,
+                        confirmButtonColor: "#3085d6",
+                        cancelButtonColor: "#d33",
+                        confirmButtonText: "Yes, delete it!"
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            $.ajax({
+                                url: "{{ route('admin.mahasiswa.delete.all') }}",
+                                type: "DELETE",
+                                data: {
+                                    ids: all_ids
+                                },
+                                headers: {
+                                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr(
+                                        'content')
+                                },
+                                success: function(response) {
+                                    // Handle response jika diperlukan
+                                    // Misalnya, menampilkan pesan sukses
+                                    // Lakukan reload halaman setelah permintaan AJAX selesai
+
+                                },
+                                error: function(xhr, status, error) {
+                                    // Handle error jika diperlukan
+
+                                }
+                            });
+                            setTimeout(() => {
+                                location.reload();
+                            }, 1000);
+                            Swal.fire({
+                                title: "Deleted!",
+                                text: "Your file has been deleted.",
+                                icon: "success"
+                            }).then((result) => {});
+                        }
+                    });
+                }
+                if (!$('.checksAll').is(':checked')) {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Oops...',
+                        text: 'Pilih Minimal 1!',
+                    })
+                }
+
+            });
         });
     </script>
 @endpush

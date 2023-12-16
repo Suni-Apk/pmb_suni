@@ -5,21 +5,23 @@
 @endphp
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+
 <head>
-    <meta charset="utf-8" />
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="icon" type="image/png" href="/assets/img/favicon.png">
-    
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="icon" type="image/png" href="{{ App\Models\General::first()->image }}">
+   
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>SUNI Indonesia | @yield('title')</title>
+    <title>{{ App\Models\General::first()->title }} | @yield('title')</title>
     
     @include('layouts.include')
     @stack('styles')
 </head>
 
-<body class="g-sidenav-show bg-gray-100 g-sidenav-hidden">
+<body class="g-sidenav-show bg-gray-100 overflow-x-hidden position-relative">
     @include('kursus.layouts.aside')
 
     <main class="main-content position-relative min-height-screen h-auto border-radius-lg">
@@ -44,4 +46,5 @@
     @include('layouts.script')
     @stack('scripts')
 </body>
+
 </html>

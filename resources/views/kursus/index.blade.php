@@ -84,10 +84,6 @@
                                     Selamat Datang
                                     <b class="font-weight-bolder">{{ $mahasiswa->name }}</b>!
                                 </h4>
-                                <p class="mb-1 mt-2">
-                                    أُطْلُبُوا الْعِلْمَ مِنَ الْمَهْدِ اِلىَ اللَّهْدِ
-                                </p>
-                                <p>"Tuntutlah ilmu dari buaian sampai ke liang lahat,"</p>
                             </div>
                         </div>
                     </div>
@@ -196,11 +192,10 @@
                 <div class="list-group list-group-horizontal" id="list-tab" role="tablist">
                     <a id="list-sarjana-list" data-bs-toggle="list" href="#list-sarjana" role="tab"
                         aria-controls="list-sarjana"
-                        class="list-group-item list-group-item-action border-0 shadow text-center">Program Kuliah S1</a>
+                        class="list-group-item list-group-item-action border-0 shadow text-center">Program Formal (S1)</a>
                     <a id="list-kursus-list" data-bs-toggle="list" href="#list-kursus" role="tab"
                         aria-controls="list-kursus"
-                        class="list-group-item list-group-item-action border-0 shadow text-center active">Program
-                        Kursus</a>
+                        class="list-group-item list-group-item-action border-0 shadow text-center active">Program Non Formal</a>
                 </div>
             </div>
         @else
@@ -213,7 +208,7 @@
                         <a id="list-S1-list" href="#"
                             onclick="event.preventDefault(); document.getElementById('form-S1').submit();" role="tab"
                             aria-controls="list-kursus"
-                            class="list-group-item list-group-item-action border-0 shadow text-center">Program S1</a>
+                            class="list-group-item list-group-item-action border-0 shadow text-center">Program Formal (S1)</a>
                     </form>
 
                     {{-- Ini buat misalkan ia mau daftar jadi KURSUS tinggal pencet Program KURSUS nanti ia akan disuruh membayar Administrasi Trus Lanjut ke Pendaftaran KURSUS --}}
@@ -223,8 +218,7 @@
                         <a id="list-kursus-list" href="#"
                             onclick="event.preventDefault(); document.getElementById('form-kursus').submit();"
                             role="tab" aria-controls="list-kursus"
-                            class="list-group-item list-group-item-action border-0 shadow text-center active">Program
-                            Kursus</a>
+                            class="list-group-item list-group-item-action border-0 shadow text-center active">Program Non Formal</a>
                     </form>
                 </div>
             </div>
@@ -420,15 +414,7 @@
                                     </a>
                                     <ul class="dropdown-menu px-2 py-3 ms-sm-n4 ms-n5" aria-labelledby="dropdownTable">
                                         <li>
-                                            <a class="dropdown-item border-radius-md" href="javascript:;">Action</a>
-                                        </li>
-                                        <li>
-                                            <a class="dropdown-item border-radius-md" href="javascript:;">Another
-                                                action</a>
-                                        </li>
-                                        <li>
-                                            <a class="dropdown-item border-radius-md" href="javascript:;">Something else
-                                                here</a>
+                                            <a class="dropdown-item border-radius-md" href="">Show All</a>
                                         </li>
                                     </ul>
                                 </div>
@@ -440,21 +426,31 @@
                             <table class="table align-items-center mb-0">
                                 <thead>
                                     <tr>
-                                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                            Companies</th>
-                                        <th
-                                            class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
-                                            Members</th>
-                                        <th
-                                            class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                            Budget</th>
-                                        <th
-                                            class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                            Completion</th>
+                                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Nama Tagihan</th>
+                                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Batas Tenggat</th>
+                                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Total</th>
+                                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Aksi</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-
+                                    @foreach ($tagihan_detail as $item)
+                                        @if ($item->biayasDetail->program_belajar == 'KURSUS') 
+                                            <tr>
+                                                <td class="ps-3 text-sm">
+                                                    {{ $item->biayasDetail->nama_biaya }}
+                                                </td>
+                                                <td class="ps-3 text-sm">
+                                                    {{ $item->end_date }}
+                                                </td>
+                                                <td class="text-center text-sm">
+                                                    Rp. {{ number_format($item->amount, 0, '', '.') }},-
+                                                </td>
+                                                <td class="text-center">
+                                                    <a href="{{ route('mahasiswa.tagihan.index') }}" class="badge badge-sm bg-gradient-info text-xxs">Detail</a>
+                                                </td>
+                                            </tr>
+                                        @endif
+                                    @endforeach
                                 </tbody>
                             </table>
                         </div>
@@ -470,15 +466,24 @@
                             Daftar link yang diikuti
                         </p>
                     </div>
-                    <div class="container mb-3" style="max-height: 340px; overflow-y: auto;">
-                        @foreach ($linkKursus as $item)
-                            <div class="card border mb-3">
-                                <div class="card-body">
-                                    <h5 class="card-title">{{ $item->name }}</h5>
-                                    <a href="{{ $item->url }}" class="btn btn-primary mt-3">Klik Untuk Bergabung</a>
+                    <div class="card-body p-3">
+                        <div class="timeline timeline-one-side">
+                            @foreach ($linkKursus as $item)
+                                <div class="timeline-block mb-3">
+                                    <span class="timeline-step">
+                                        <i class="ni ni-bell-55 text-success text-gradient"></i>
+                                    </span>
+                                    <div class="timeline-content">
+                                        <a href="{{ $item->url }}" class="text-dark text-sm font-weight-bold mb-0">
+                                            {{ $item->name }} 
+                                        </a>                                            
+                                        <p class="text-secondary font-weight-bold text-xs mt-1 mb-0">
+                                            {{ $item->created_at->format('d M Y') }}, link {{ $item->type }}
+                                        </p>
+                                    </div>
                                 </div>
-                            </div>
-                        @endforeach
+                            @endforeach
+                        </div>                            
                     </div>
                 </div>
             </div>

@@ -8,7 +8,6 @@
         <div class="card">
             <div class="card-header pb-0 d-flex justify-content-between">
                 <h6>Daftar Dokumen</h6>
-                {{-- <a href="{{route('admin.dokumen.create')}}" class="btn bg-gradient-primary float-end">Tambah + </a> --}}
             </div>
             <hr class="horizontal dark m-0">
             <div class="card-body px-0 pt-0 pb-2">
@@ -16,6 +15,7 @@
                     <table class="table align-items-center mb-0" id="table">
                         <thead>
                             <tr class="text-center">
+                                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Pilih</th>
                                 <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Item</th>
                                 <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">uploaded by</th>
                                 <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">status</th>
@@ -25,6 +25,11 @@
                         <tbody>
                             @foreach ($documents as $index => $item)
                                 <tr>
+                                    <td>
+                                        <div>
+                                            <h6 class="mb-0 text-sm"><input type="checkbox" name="" id="" class="form-check-input"></h6>
+                                        </div>
+                                    </td>
                                     <td>
                                         <div class="row">
                                             <div class="col-12 col-sm-3">
@@ -104,11 +109,11 @@
             </div>
         </div>
     </div>
-</div>
+    </div>
 @endsection
 
 @push('scripts')
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     @if (session('success'))
         <script>
             Swal.fire(
@@ -118,10 +123,10 @@
             )
         </script>
     @endif
-<script>
-	const dataTableSearch = new simpleDatatables.DataTable("#table", {
-      searchable: true,
-      fixedHeight: true,
-    });
-</script>
+    <script>
+        const dataTableSearch = new simpleDatatables.DataTable("#table", {
+            searchable: true,
+            fixedHeight: true,
+        });
+    </script>
 @endpush

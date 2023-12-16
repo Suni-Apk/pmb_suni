@@ -45,6 +45,8 @@ class CourseController extends Controller
 
         $data['notes'] = $request->notes;
 
+        // dd($data);
+
         $course = Course::create($data);
 
         if ($course) {
@@ -56,7 +58,7 @@ class CourseController extends Controller
                 'desc'      => $request->desc,
             ]);
 
-            $amount = $course->amount ? $course->amount : '';
+            $amount = $request->amount ? $request->amount : '';
 
             $admin = Administrasi::create([
                 'program_belajar' => 'Kursus',
@@ -119,7 +121,7 @@ class CourseController extends Controller
         if ($course) {
             $descProgram = DescProgramBelajar::where('course_id', $course->id)->first();
             $key = strtoupper(str_replace(' ', '', $course->name));
-            
+
             $desc = $descProgram->update([
                 'title'     => $course->name,
                 'keyword'   => $key,
@@ -169,7 +171,7 @@ class CourseController extends Controller
         if ($course->biodata) {
             $course->biodata->delete();
         }
-        
+
         $course->delete();
 
         return redirect()->route('admin.course.index')->with('success', 'Berhasil menghapus');

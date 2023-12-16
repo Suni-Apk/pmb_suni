@@ -15,39 +15,57 @@
                         <table class="table align-items-center mb-0" id="table">
                             <thead>
                                 <tr>
-                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 text-center">id</th>
-                                    <th class="text-uppercase text-secondary text-xxs px-2 font-weight-bolder opacity-7">angkatan</th>
-                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-3">Mulai</th>
-                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-3">Selesai</th>
-                                    <th class="text-uppercase text-secondary text-xxs px-2 font-weight-bolder opacity-7 text-center">Status</th>
-                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Aksi</th>
+                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 text-center">
+                                        Pilih
+                                    </th>
+                                    <th class="text-uppercase text-secondary text-xxs px-2 font-weight-bolder opacity-7">
+                                        angkatan
+                                    </th>
+                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-3">
+                                        Mulai
+                                    </th>
+                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-3">
+                                        Selesai
+                                    </th>
+                                    <th class="text-uppercase text-secondary text-xxs px-2 font-weight-bolder opacity-7 text-center">
+                                        Status
+                                    </th>
+                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                        Aksi
+                                    </th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @foreach ($tahun_ajaran as $index => $angkatans)
-                                <tr>
-                                    <td class="align-middle text-center text-sm">
-                                        <span class="text-bold">{{ $index + 1 }}</span>
-                                    </td>
-                                    <td class="align-middle text-start text-sm">
-                                        <span class="text-bold">{{ $angkatans->year }}</span>
-                                    </td>
-                                    <td class="text-sm">
-                                        <span class="text-bold">{{ \Carbon\Carbon::parse($angkatans->start_at)->format('d F') }}</span>
-                                    </td>
-                                    <td class="text-sm">
-                                        <span class="text-bold">{{ \Carbon\Carbon::parse($angkatans->end_at)->format('d F') }}</span>
-                                    </td>
-                                    <td class="align-middle text-center">
-                                        @if ($angkatans->status == 'nonActive')
-                                            <span class="text-uppercase badge badge-sm bg-gradient-danger">{{ $angkatans->status }}</span>
-                                        @else
-                                            <span class="text-uppercase badge badge-sm bg-gradient-success">{{ $angkatans->status }}</span>
-                                        @endif
-                                    </td>
-                                    <td class="align-middle text-center">
-                                        <button type="button" class="badge badge-sm border-0 bg-gradient-info" data-bs-toggle="modal" data-bs-target="#modalLink{{ $angkatans->id }}"
-                                        >Link <i class="fas fa-link ms-1"></i></button>
+                                    <tr>
+                                        <td class="align-middle text-center text-sm">
+                                            <input type="checkbox" name="ids" id="" class="checksAll"
+                                                value="{{ $angkatans->id }}">
+                                        </td>
+                                        <td class="align-middle text-start text-sm">
+                                            <span class="text-bold">{{ $angkatans->year }}</span>
+                                        </td>
+                                        <td class="text-sm">
+                                            <span
+                                                class="text-bold">{{ \Carbon\Carbon::parse($angkatans->start_at)->format('d F') }}</span>
+                                        </td>
+                                        <td class="text-sm">
+                                            <span
+                                                class="text-bold">{{ \Carbon\Carbon::parse($angkatans->end_at)->format('d F') }}</span>
+                                        </td>
+                                        <td class="align-middle text-center">
+                                            @if ($angkatans->status == 'nonActive')
+                                                <span
+                                                    class="text-uppercase badge badge-sm bg-gradient-danger">{{ $angkatans->status }}</span>
+                                            @else
+                                                <span
+                                                    class="text-uppercase badge badge-sm bg-gradient-success">{{ $angkatans->status }}</span>
+                                            @endif
+                                        </td>
+                                        <td class="align-middle text-center">
+                                            <button type="button" class="badge badge-sm border-0 bg-gradient-info"
+                                                data-bs-toggle="modal" data-bs-target="#modalLink{{ $angkatans->id }}">Link
+                                                <i class="fas fa-link ms-1"></i></button>
 
                                         <a href="{{ route('admin.tahun-ajaran.detail', $angkatans->id) }}" class="badge badge-sm bg-gradient-secondary text-xxs font-weight-bolder ms-1">Detail</a>
                                         
@@ -159,6 +177,14 @@
                             </tbody>
                         </table>
                     </div>
+                    <div class="d-flex ms-4 mb-4 mt-3">
+                        <input type="checkbox" id="select_all_ids" class="chek me-2">
+                        <a href="#" id="ClikKabeh" class="text-secondary">Pilih Semua</a>
+                        <div class=" ms-4">
+                            <i class="fas fa-trash me-1 cursor-pointer" style="color: #ff0000;" id="deleteAll"></i>
+                            <a href="#" class="text-secondary" id="All">Hapus</a>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -183,15 +209,15 @@
         crossorigin="anonymous" referrerpolicy="no-referrer" />
     <script>
         @if (Session::has('success'))
-            toastr.success('{{ Session::get("success") }}')
+            toastr.success('{{ Session::get('success') }}')
         @endif
 
         @if (Session::has('delete'))
-            toastr.success('{{ Session::get("success") }}')
+            toastr.success('{{ Session::get('success') }}')
         @endif
 
         @if (Session::has('pesan'))
-            toastr.error('{{ Session::get("pesan") }}')
+            toastr.error('{{ Session::get('pesan') }}')
         @endif
     </script>
     <script type="text/javascript">
@@ -215,6 +241,81 @@
                         'success'
                     )
                 }
+            });
+        });
+    </script>
+    <script>
+        $(function(e) {
+            $("#ClikKabeh").click(function() {
+                $('.checksAll, #select_all_ids').prop('checked', function() {
+                    return !$(this).prop("checked");
+                });
+            });
+            $("#select_all_ids").click(function() {
+                $('.checksAll').prop('checked', $(this).prop('checked'));
+            });
+            $("#All").click(function() {
+                $('#deleteAll').click();
+            });
+
+            $("#deleteAll").click(function(e) {
+                e.preventDefault();
+                var all_ids = [];
+
+                $('input:checkbox[name="ids"]:checked').each(function() {
+                    all_ids.push($(this).val());
+                });
+                if ($('.checksAll').is(':checked')) {
+                    Swal.fire({
+                        title: "Apakah Anda Yakin Ingin Menghapus Tahun Ajaran?",
+                        text: "You won't be able to revert this!",
+                        icon: "warning",
+                        showCancelButton: true,
+                        confirmButtonColor: "#3085d6",
+                        cancelButtonColor: "#d33",
+                        confirmButtonText: "Yes, delete it!"
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            $.ajax({
+                                url: "{{ route('admin.tahun-ajaran.delete.all') }}",
+                                type: "DELETE",
+                                data: {
+                                    ids: all_ids
+                                },
+                                headers: {
+                                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr(
+                                        'content')
+                                },
+                                success: function(response) {
+                                    // Handle response jika diperlukan
+                                    // Misalnya, menampilkan pesan sukses
+                                    // Lakukan reload halaman setelah permintaan AJAX selesai
+                                },
+                                error: function(xhr, status, error) {
+                                    // Handle error jika diperlukan
+
+                                }
+                            });
+                            Swal.fire({
+                                title: "Deleted!",
+                                text: "Your file has been deleted.",
+                                icon: "success"
+                            }).then((result) => {
+                                if (result.isConfirmed) {
+                                    location.reload();
+                                }
+                            });
+                        }
+                    });
+                }
+                if (!$('.checksAll').is(':checked')) {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Oops...',
+                        text: 'Pilih Minimal 1!',
+                    })
+                }
+
             });
         });
     </script>

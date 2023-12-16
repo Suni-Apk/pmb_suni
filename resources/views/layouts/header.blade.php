@@ -148,7 +148,7 @@
                             <li class="mb-1">
                                 <span class="dropdown-item border-radius-md">
                                     <div class="d-flex">
-                                        <p class="mb-0">Admin</p>
+                                        <p class="mb-0 text-capitalize">{{ Auth::user()->name }}</p>
                                     </div>
                                 </span>
                             </li>

@@ -45,13 +45,24 @@
                     <div class="card z-index-0">
                         <div class="card-header text-center pt-4">
                             <h5 class="mb-0">Daftar disini <i class="fas fa-arrow-down text-sm text-secondary"></i></h5>
+
+                            @if (session('noAccess'))
+                                <div class="alert alert-warning mb-0 mt-3 text-white alert-dismissible fade show" role="alert">
+                                    <strong>Maaf.</strong> {!! session('noAccess') !!}
+                                    <button type="button" class="btn-close border rounded-circle p-1 fs-3 lh-1 mt-2 me-2" data-bs-dismiss="alert" aria-label="Close">&times;</button>
+                                </div>
+                            @endif
                         </div>
-                        <div class="card-body">
+                        <div class="card-body pt-2">
                             <form role="form text-left" action="{{ route('register.process.new') }}" method="POST" id="registerForm">
                                 @csrf
                                 @method('POST')
                                 <div class="row">
                                     <div class="col-12 col-sm-6">
+                                        @php
+                                            $tahunAjaran = App\Models\TahunAjaran::latest()->first();
+                                        @endphp
+                                        <input type="hidden" name="tahunAjaran" value="{{ $tahunAjaran->id }}">
                                         <div class="mb-3">
                                             <label for="" class="form-label">Nama Lengkap <strong
                                                     class="text-danger">*</strong></label>
@@ -125,7 +136,7 @@
                                                 <option value="S1" @selected(old('program_belajar') == 'S1')>S1</option>
                                                 @php
                                                     $courses = App\Models\Course::get();
-                                                @endphp
+                                                @endphp 
                                                 @foreach ($courses as $item)
                                                     <option value="{{ $item->keyword }}" @selected(old('program_belajar') == $item->keyword)>{{ $item->name }}</option>
                                                 @endforeach

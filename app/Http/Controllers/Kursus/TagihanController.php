@@ -13,13 +13,13 @@ class TagihanController extends Controller
 {
     public function index()
     {
-        $biodatas = Biodata::where('program_belajar', 'KURSUS')->where('user_id', Auth::user()->id)->first();
+        $biodata = Biodata::where('program_belajar', 'KURSUS')->where('user_id', Auth::user()->id)->get();
         $mahasiswa = Auth::user();
         $biaya = Biaya::all();
         $biayaAll = Biaya::all();
 
         // return view('admin.account.mahasiswa.detail', compact('biodata');
-        return view('kursus.tagihan.index', compact('biodatas', 'mahasiswa', 'biaya', 'biayaAll'));
+        return view('kursus.tagihan.index', compact('biodata', 'mahasiswa', 'biaya', 'biayaAll'));
     }
     public function bayar(Request $request, $id)
     {

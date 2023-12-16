@@ -9,6 +9,7 @@ use App\Models\Administrasi;
 use App\Models\Biaya;
 use App\Models\Biodata;
 use App\Models\Cicilan;
+use App\Models\Course;
 use App\Models\Tagihan;
 use App\Models\TagihanDetail;
 use App\Models\TahunAjaran;
@@ -139,6 +140,19 @@ class AccountController extends Controller
         return redirect()->route('admin.admin.index')->with("success", "Berhasil Menghapus Akun Admin $admin->name");
     }
 
+
+    public function deleteAllAdmin(Request $request)
+    {
+        $ids = $request->ids;
+        $admin = User::where('role', 'Admin')->whereIn('id', $ids);
+        $admins = User::where('role', 'Admin')->where('id', $ids)->first();
+
+        if ($admins == Auth::user()) {
+            return redirect()->route('admin.admin.index')->with("error", "Ada user yang sedang dipakai");
+        }
+        $admin->delete();
+        return redirect()->route('admin.admin.index')->with("success", "Berhasil Menghapus Akun Admin");
+    }
     public function export(Request $request)
     {
         return Excel::download(new AdminExport, 'dataAdmin.xlsx');
@@ -200,13 +214,16 @@ class AccountController extends Controller
 
         $user = User::create($data);
         $id = $user->id;
-        $adminstrasiKursus = Administrasi::where('program_belajar', 'KURSUS')->first();
-        $adminstrasiS1 = Administrasi::where('program_belajar', 'S1')->first();
+        
         $program = $request->program;
+        $course = Course::where('keyword', $program)->first();
+
+        $adminstrasiKursus = Administrasi::where('program_belajar', 'KURSUS')->where('course_id', $course->id)->first();
+        $adminstrasiS1 = Administrasi::where('program_belajar', 'S1')->first();
 
         if($program == 'S1'){
             $payment = json_decode(json_encode($this->redirect_payment($id,$program,$adminstrasiS1,$adminstrasiKursus)), true);
-                    // dd($payment);
+            // dd($payment);
             $transaksi = Transaksi::create([
                 'user_id' => $user->id,
                 'no_invoice' => $payment['Data']['SessionID'],
@@ -219,7 +236,7 @@ class AccountController extends Controller
             ]);
         }else{
             $payment = json_decode(json_encode($this->redirect_payment($id,$program,$adminstrasiS1,$adminstrasiKursus)), true);
-                    // dd($payment);
+            // dd($payment);
             $transaksi = Transaksi::create([
                 'user_id' => $user->id,
                 'no_invoice' => $payment['Data']['SessionID'],
@@ -295,10 +312,16 @@ class AccountController extends Controller
         $user = User::where('role', 'Mahasiswa')->find($id);
         if ($user->biodata) {
             $user->biodata->delete();
-            $user->delete();
-        } else {
-            $user->delete();
+        } if ($user->document) {
+            $user->document->delete();
+        } if ($user->transaksi) {
+            $user->transaksi->delete();
+        } if ($user->tagihanDetail) {
+            $user->tagihanDetail->delete();
         }
+
+        $user->delete();
+
         return redirect()->route('admin.mahasiswa.index')->with("success", "Berhasil Melakukan Penghapusan Akun $user->name");
     }
 

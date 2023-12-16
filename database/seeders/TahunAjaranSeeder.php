@@ -21,7 +21,7 @@ class TahunAjaranSeeder extends Seeder
             // Tambah tahun ajaran dengan status Aktif
             DB::table('tahun_ajarans')->insert([
                 'year' => $year . '/' . ($year + 1),
-                'status' => 'Active', // Status aktif
+                'status' => 'nonActive', // Status aktif
                 'start_at' => now()->subDays(rand(2, 365)), // Tanggal mulai acak dalam satu tahun terakhir
                 'end_at' => now()->addDays(rand(2, 365)), // Tanggal selesai acak dalam satu tahun mendatang
             ]);
