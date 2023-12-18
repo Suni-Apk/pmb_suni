@@ -331,119 +331,119 @@ class TagihanController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
-    {
-        $biaya = Biaya::find($id);
-        if ($request->jenis_biaya == 'Routine') {
-            $data  = $request->validate([
-                'end_date.*' => 'required|date_format:Y-m-d',
-                'amount.*' => 'required|string|min:5',
-                'status.*' => 'nullable',
-            ]);
-            $dateEnd = request()->input('end_date');
-            $replace_amount = str_replace('.', '', request()->input('amount'));
-            $tagihan = Tagihan::where('id_biayas', '=', $biaya->id)->get();
-            foreach ($tagihan as $key => $tagihans) {
-                $tagihan = Tagihan::where('id', '=', $tagihans->id);
-                $tagihanUpdate =  $tagihan->update([
-                    'end_date' => $dateEnd[$key],
-                    'amount' => $replace_amount[$key],
-                ]);
+    // public function update(Request $request, string $id)
+    // {
+    //     $biaya = Biaya::find($id);
+    //     if ($request->jenis_biaya == 'Routine') {
+    //         $data  = $request->validate([
+    //             'end_date.*' => 'required|date_format:Y-m-d',
+    //             'amount.*' => 'required|string|min:5',
+    //             'status.*' => 'nullable',
+    //         ]);
+    //         $dateEnd = request()->input('end_date');
+    //         $replace_amount = str_replace('.', '', request()->input('amount'));
+    //         $tagihan = Tagihan::where('id_biayas', '=', $biaya->id)->get();
+    //         foreach ($tagihan as $key => $tagihans) {
+    //             $tagihan = Tagihan::where('id', '=', $tagihans->id);
+    //             $tagihanUpdate =  $tagihan->update([
+    //                 'end_date' => $dateEnd[$key],
+    //                 'amount' => $replace_amount[$key],
+    //             ]);
 
-                $tagihanGet = Tagihan::where('id', $tagihans->id)->get();
-                foreach ($tagihanGet as $index => $value) {
-                    $end_date = strtotime('-10 days', strtotime($dateEnd[$key]));
-                    $end_dates = date('Y-m-d', $end_date);
-                    TagihanDetail::where('id_tagihans', $value->id)->update([
-                        'end_date' => $dateEnd[$key],
-                        'amount' => $value->amount,
-                        'status' => 'BELUM',
-                        'before_end' => $end_dates,
-                    ]);
-                }
-            }
-            return redirect()->back()->with('success', 'Berhasil mengupdate data ' . $biaya->nama_biaya);
-        } else if ($request->jenis_biaya == 'Tidakroutine') {
-            $data  = $request->validate([
-                'end_date' => 'required|date_format:Y-m-d',
-                'amount' => 'required|string|min:6',
-                'status' => 'nullable',
-                'nama_biaya' => 'required'
-            ]);
-            $biaya->update([
-                'nama_biaya' => $data['nama_biaya'],
-            ]);
-            $dateEnd = request()->input('end_date');
-            $replace_amount = str_replace('.', '', request()->input('amount'));
-            $tagihan = Tagihan::where('id_biayas', '=', $biaya->id)->first();
-            $tagihans = Tagihan::where('id', '=', $tagihan->id)->first();
-            $tagihans->update([
-                'end_date' => $dateEnd,
-                'amount' => $replace_amount,
-            ]);
-            $tagihanGet = Tagihan::where('id', $tagihans->id)->get();
-            foreach ($tagihanGet as $index => $value) {
-                $end_date = strtotime('-10 days', strtotime($dateEnd));
-                $end_dates = date('Y-m-d', $end_date);
-                TagihanDetail::where('id_tagihans', $value->id)->update([
-                    'end_date' => $dateEnd,
-                    'amount' => $value->amount,
-                    'status' => 'BELUM',
-                    'before_end' => $end_dates,
-                ]);
-            }
-            return redirect()->back()->with('success', 'Berhasil mengupdate data ' . $biaya->nama_biaya);
-        } else if ($request->jenis_biaya == 'Tingkatan') {
-            $data  = $request->validate([
-                'end_date.*' => 'required|date_format:Y-m-d',
-                'amount.*' => 'required|string|min:6',
-                'status.*' => 'nullable',
-            ]);
-            $dateEnd = request()->input('end_date');
-            $replace_amount = str_replace('.', '', request()->input('amount'));
-            $tagihan = Tagihan::where('id_biayas', '=', $biaya->id)->get();
-            foreach ($tagihan as $key => $tagihans) {
-                $tagihan = Tagihan::where('id', '=', $tagihans->id);
-                $tagihan->update([
-                    'end_date' => $dateEnd[$key],
-                    'amount' => $replace_amount[$key],
-                ]);
+    //             $tagihanGet = Tagihan::where('id', $tagihans->id)->get();
+    //             foreach ($tagihanGet as $index => $value) {
+    //                 $end_date = strtotime('-10 days', strtotime($dateEnd[$key]));
+    //                 $end_dates = date('Y-m-d', $end_date);
+    //                 TagihanDetail::where('id_tagihans', $value->id)->update([
+    //                     'end_date' => $dateEnd[$key],
+    //                     'amount' => $value->amount,
+    //                     'status' => 'BELUM',
+    //                     'before_end' => $end_dates,
+    //                 ]);
+    //             }
+    //         }
+    //         return redirect()->back()->with('success', 'Berhasil mengupdate data ' . $biaya->nama_biaya);
+    //     } else if ($request->jenis_biaya == 'Tidakroutine') {
+    //         $data  = $request->validate([
+    //             'end_date' => 'required|date_format:Y-m-d',
+    //             'amount' => 'required|string|min:6',
+    //             'status' => 'nullable',
+    //             'nama_biaya' => 'required'
+    //         ]);
+    //         $biaya->update([
+    //             'nama_biaya' => $data['nama_biaya'],
+    //         ]);
+    //         $dateEnd = request()->input('end_date');
+    //         $replace_amount = str_replace('.', '', request()->input('amount'));
+    //         $tagihan = Tagihan::where('id_biayas', '=', $biaya->id)->first();
+    //         $tagihans = Tagihan::where('id', '=', $tagihan->id)->first();
+    //         $tagihans->update([
+    //             'end_date' => $dateEnd,
+    //             'amount' => $replace_amount,
+    //         ]);
+    //         $tagihanGet = Tagihan::where('id', $tagihans->id)->get();
+    //         foreach ($tagihanGet as $index => $value) {
+    //             $end_date = strtotime('-10 days', strtotime($dateEnd));
+    //             $end_dates = date('Y-m-d', $end_date);
+    //             TagihanDetail::where('id_tagihans', $value->id)->update([
+    //                 'end_date' => $dateEnd,
+    //                 'amount' => $value->amount,
+    //                 'status' => 'BELUM',
+    //                 'before_end' => $end_dates,
+    //             ]);
+    //         }
+    //         return redirect()->back()->with('success', 'Berhasil mengupdate data ' . $biaya->nama_biaya);
+    //     } else if ($request->jenis_biaya == 'Tingkatan') {
+    //         $data  = $request->validate([
+    //             'end_date.*' => 'required|date_format:Y-m-d',
+    //             'amount.*' => 'required|string|min:6',
+    //             'status.*' => 'nullable',
+    //         ]);
+    //         $dateEnd = request()->input('end_date');
+    //         $replace_amount = str_replace('.', '', request()->input('amount'));
+    //         $tagihan = Tagihan::where('id_biayas', '=', $biaya->id)->get();
+    //         foreach ($tagihan as $key => $tagihans) {
+    //             $tagihan = Tagihan::where('id', '=', $tagihans->id);
+    //             $tagihan->update([
+    //                 'end_date' => $dateEnd[$key],
+    //                 'amount' => $replace_amount[$key],
+    //             ]);
 
-                $tagihanGet = Tagihan::where('id', $tagihans->id)->get();
-                foreach ($tagihanGet as $index => $value) {
-                    TagihanDetail::where('id_tagihans', $value->id)->update([
-                        'end_date' => $dateEnd[$key],
-                        'amount' => $value->amount,
-                        'status' => 'BELUM',
-                    ]);
-                }
-            }
-            return redirect()->back()->with('success', 'Berhasil mengupdate data ' . $biaya->nama_biaya);
-        } else if ($request->jenis_biaya == 'DaftarUlang') {
-            $data  = $request->validate([
-                'end_date' => 'required|date_format:Y-m-d',
-                'amount' => 'required|string|min:6',
-            ]);
-            $dateEnd = request()->input('end_date');
-            $replace_amount = str_replace('.', '', request()->input('amount'));
-            $tagihan = Tagihan::where('id_biayas', '=', $biaya->id)->first();
-            $tagihans = Tagihan::where('id', '=', $tagihan->id)->first();
-            $tagihans->update([
-                'end_date' => $dateEnd,
-                'amount' => $replace_amount,
-            ]);
+    //             $tagihanGet = Tagihan::where('id', $tagihans->id)->get();
+    //             foreach ($tagihanGet as $index => $value) {
+    //                 TagihanDetail::where('id_tagihans', $value->id)->update([
+    //                     'end_date' => $dateEnd[$key],
+    //                     'amount' => $value->amount,
+    //                     'status' => 'BELUM',
+    //                 ]);
+    //             }
+    //         }
+    //         return redirect()->back()->with('success', 'Berhasil mengupdate data ' . $biaya->nama_biaya);
+    //     } else if ($request->jenis_biaya == 'DaftarUlang') {
+    //         $data  = $request->validate([
+    //             'end_date' => 'required|date_format:Y-m-d',
+    //             'amount' => 'required|string|min:6',
+    //         ]);
+    //         $dateEnd = request()->input('end_date');
+    //         $replace_amount = str_replace('.', '', request()->input('amount'));
+    //         $tagihan = Tagihan::where('id_biayas', '=', $biaya->id)->first();
+    //         $tagihans = Tagihan::where('id', '=', $tagihan->id)->first();
+    //         $tagihans->update([
+    //             'end_date' => $dateEnd,
+    //             'amount' => $replace_amount,
+    //         ]);
 
-            $tagihanGet = Tagihan::where('id', $tagihans->id)->get();
-            foreach ($tagihanGet as $index => $value) {
-                TagihanDetail::where('id_tagihans', $value->id)->update([
-                    'end_date' => $dateEnd,
-                    'amount' => $value->amount,
-                    'status' => 'BELUM',
-                ]);
-            }
-            return redirect()->back()->with('success', 'Berhasil mengupdate data ' . $biaya->nama_biaya);
-        }
-    }
+    //         $tagihanGet = Tagihan::where('id', $tagihans->id)->get();
+    //         foreach ($tagihanGet as $index => $value) {
+    //             TagihanDetail::where('id_tagihans', $value->id)->update([
+    //                 'end_date' => $dateEnd,
+    //                 'amount' => $value->amount,
+    //                 'status' => 'BELUM',
+    //             ]);
+    //         }
+    //         return redirect()->back()->with('success', 'Berhasil mengupdate data ' . $biaya->nama_biaya);
+    //     }
+    // }
 
     /**
      * Remove the specified resource from storage.

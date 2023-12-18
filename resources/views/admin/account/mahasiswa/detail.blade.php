@@ -376,7 +376,7 @@
                                         <div class="card-body">
                                             <!--Routine-->
                                             @foreach ($biayaAll as $biayaHead)
-                                                @if ($biayaHead->jenis_biaya == 'Routine' && $biayaHead->id_angkatans == $biodatas->angkatan_id)
+                                                @if ($biayaHead?->jenis_biaya == 'Routine' && $biayaHead?->id_angkatans == $biodatas?->angkatan_id)
                                                     <p class="text-bold">Tagihan Spp</p>
                                                     <div class="table-responsive mb-3">
                                                         <form
@@ -586,7 +586,7 @@
 
                                 <!--Routine-->
                                 @foreach ($biayaAll as $biayaHead)
-                                    @if ($biayaHead->jenis_biaya == 'Routine' && $biayaHead->id_angkatans == $biodatas->angkatan_id)
+                                    @if ($biayaHead?->jenis_biaya == 'Routine' && $biayaHead?->id_angkatans == $biodatas->angkatan_id)
                                         <p class="text-bold">Tagihan Spp</p>
 
                                         <div class="table-responsive mb-3">
@@ -674,7 +674,7 @@
                                 @if (
                                     $biayaHead?->jenis_biaya == 'Tidakroutine' &&
                                         $biayaHead?->id_jurusans == $biodatas->jurusan_id &&
-                                        $biodatas->angkatan_id)
+                                        $biodatas->angkatan_id == $biayaHead?->id_angkatans)
                                     <div class="table-responsive mb-3">
                                         <p class="text-bold">Tagihan Biaya Lain</p>
                                         <form action="{{ route('admin.mahasiswa.bayar', $mahasiswa->id) }}"
@@ -692,7 +692,7 @@
                                                         <th class="text-sm">Total tagihan</th>
                                                         <th class="text-sm d-flex align-items-center">
                                                             <input type="checkbox" name=""
-                                                                id="select_all_ids2" class="me-2">
+                                                                id="" class="me-2 select_all_ids2">
                                                             Pilih
                                                         </th>
                                                     </tr>
@@ -739,7 +739,7 @@
                                                                                     name="id[]"
                                                                                     id=""
                                                                                     value="{{ $tagihans->id }}"
-                                                                                    class="checksAll2">
+                                                                                    class="checksAll1">
                                                                             @endif
 
                                                                         </td>
@@ -923,8 +923,8 @@
                                             <th class="text-sm">Jenis kursus</th>
                                             <th class="text-sm">Total tagihan</th>
                                             <th class="text-sm d-flex align-items-center"><input
-                                                    type="checkbox" name="" id="select_all_ids"
-                                                    class="me-2"> Pilih
+                                                    type="checkbox" name="" id=""
+                                                    class="me-2 select_all_ids2"> Pilih
                                             </th>
                                         </tr>
                                     </thead>
@@ -968,7 +968,7 @@
                                                                     <input type="checkbox" name="id[]"
                                                                         id=""
                                                                         value="{{ $tagihans->id }}"
-                                                                        class="checksAll">
+                                                                        class="checksAll1">
                                                                 @endif
 
 
@@ -1016,10 +1016,10 @@
 @endif
 <script>
     $(function(e) {
-        $("#select_all_ids0").click(function() {
-            $('.checksAll0').prop('checked', $(this).prop('checked'));
+        $("#select_all_ids").click(function() {
+            $('.checksAll').prop('checked', $(this).prop('checked'));
         });
-        $("#select_all_ids1").click(function() {
+        $(".select_all_ids2").click(function() {
             $('.checksAll1').prop('checked', $(this).prop('checked'));
         });
         $("#select_all_ids2").click(function() {
