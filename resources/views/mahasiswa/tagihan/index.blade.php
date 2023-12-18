@@ -13,16 +13,16 @@
             ->where('status', 'berhasil')
             ->where('jenis_pembayaran', 'cash')
             ->first();
+        $biodatanya = App\Models\Biodata::where('user_id', Auth::user()->id)
+            ->where('program_belajar', 'S1')
+            ->first();
         $biaya = App\Models\Biaya::where('program_belajar', 'S1')
             ->where('jenis_biaya', 'DaftarUlang')
-            ->where('id_angkatans', Auth::user()->biodata->angkatan_id)
-            ->latest()
+            ->where('id_angkatans', $biodatanya->angkatan_id)
             ->first();
-
         $user = Auth::user();
         $tagihanDetaill = App\Models\TagihanDetail::where('id_biayas', $biaya?->id)
             ->where('id_users', $user->id)
-            ->latest()
             ->first();
         if ($tagihanDetaill) {
             $cicilans = App\Models\Cicilan::where('id_tagihan_details', $tagihanDetaill?->id)->first();
@@ -71,10 +71,14 @@
     @elseif (!isset($tagihanDetaill))
         Belum ada apa apa !
     @elseif($cicilans)
+        {{-- @dump($cicilans) --}}
         @php
+            $biodatanya = App\Models\Biodata::where('user_id', Auth::user()->id)
+                ->where('program_belajar', 'S1')
+                ->first();
             $biaya = App\Models\Biaya::where('program_belajar', 'S1')
                 ->where('jenis_biaya', 'DaftarUlang')
-                ->where('id_angkatans', Auth::user()->biodata->angkatan_id)
+                ->where('id_angkatans', $biodatanya->angkatan_id)
                 ->latest()
                 ->first();
 
@@ -97,6 +101,14 @@
             $cicilan1 = App\Models\Cicilan::where('id_tagihan_details', $tagihanDetaill?->id)
                 ->where('status', 'LUNAS')
                 ->first();
+            $biayaHeadCount = App\Models\Biaya::where('program_belajar', 'S1')
+                ->where('jenis_biaya', '=', 'Tidakroutine')
+                ->where('id_angkatans', $biodata->angkatan_id)
+                ->count();
+            $biayaHeadCount1 = App\Models\Biaya::where('program_belajar', 'S1')
+                ->where('jenis_biaya', '=', 'Routine')
+                ->where('id_angkatans', $biodata->angkatan_id)
+                ->count();
 
             // Hitung setengah dari $jumlah_uang_daftar_ulang
             // $setengah_jumlah_daftar_ulang = ($tagihan->amount * 2) / 3;
@@ -357,7 +369,12 @@
                                     @break
                                 @endif
                             @endforeach
-
+                            @if ($biayaHeadCount > 0 || $biayaHeadCount1 > 0)
+                            @else
+                                <p class="text-center">Belum ada tagihan</p>
+                                {{-- Code to execute when there is no biaya head with jenis_biaya equal to 'Routine' --}}
+                                {{-- @dump('asdasd') --}}
+                            @endif
                             <!--Tidak routine / Biaya lain-->
                             @foreach ($biayaAll as $biayaHead)
                                 @if (
@@ -453,9 +470,12 @@
 @endif
 @elseif ($transactionDaftar)
 @php
+    $biodatanya = App\Models\Biodata::where('user_id', Auth::user()->id)
+        ->where('program_belajar', 'S1')
+        ->first();
     $biaya = App\Models\Biaya::where('program_belajar', 'S1')
         ->where('jenis_biaya', 'DaftarUlang')
-        ->where('id_angkatans', Auth::user()->biodata->angkatan_id)
+        ->where('id_angkatans', $biodatanya->angkatan_id)
         ->latest()
         ->first();
 
@@ -643,8 +663,8 @@
                         @endif
                     @endforeach
                     @if ($biayaHeadCount > 0 || $biayaHeadCount1 > 0)
-                    @else
                         <p class="text-center">Belum ada tagihan</p>
+                    @else
                         {{-- Code to execute when there is no biaya head with jenis_biaya equal to 'Routine' --}}
                         {{-- @dump('asdasd') --}}
                     @endif
