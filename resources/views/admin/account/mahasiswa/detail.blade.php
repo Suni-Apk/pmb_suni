@@ -142,6 +142,11 @@
                             ->where('id_users', $biodatas->user_id)
                             ->latest()
                             ->first();
+                        $tagihanDetaillunas = App\Models\TagihanDetail::where('id_biayas', $biaya1?->id)
+                            ->where('id_users', $biodatas->user_id)
+                            ->where('status', 'LUNAS')
+                            ->where('id_transactions', '!=', null)
+                            ->first();
                         $cicilans = App\Models\Cicilan::where('id_tagihan_details', $tagihan?->id)->first();
                         $cicilan2 = App\Models\Cicilan::where('id_tagihan_details', $tagihan?->id)
                             ->where('status', 'LUNAS')
@@ -153,7 +158,7 @@
                             ->first();
 
                     @endphp
-                    @if (!isset($cicilans) && !isset($transactionDaftar) && $tagihan)
+                    @if (!isset($cicilans) && !isset($tagihanDetaillunas) && $tagihan)
                         <div class="col-12 text-center mb-4 shadow-ms">
                             <div class="card">
                                 <h3 class="mt-3">Silahkan Pilih metode pembayaran Daftar ulang !</h3>
@@ -552,7 +557,7 @@
                                 </div>
                             </div>
                 @endif
-            @elseif ($transactionDaftar)
+            @elseif ($tagihanDetaillunas)
                 {{-- <div class="col-12 text-center mb-4">
                     <div class="card py-3">
                         <h2 class="mt-3">Selamat !</h2>

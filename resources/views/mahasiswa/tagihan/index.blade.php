@@ -24,6 +24,11 @@
         $tagihanDetaill = App\Models\TagihanDetail::where('id_biayas', $biaya?->id)
             ->where('id_users', $user->id)
             ->first();
+        $tagihanDetaillunas = App\Models\TagihanDetail::where('id_biayas', $biaya?->id)
+            ->where('id_users', $user->id)
+            ->where('status', 'LUNAS')
+            ->where('id_transactions', '!=', null)
+            ->first();
         if ($tagihanDetaill) {
             $cicilans = App\Models\Cicilan::where('id_tagihan_details', $tagihanDetaill?->id)->first();
             $cicilan2 = App\Models\Cicilan::where('id_tagihan_details', $tagihanDetaill?->id)
@@ -39,7 +44,7 @@
         $cicilanSemua = App\Models\Cicilan::where('id_tagihan_details', $tagihanDetaill?->id)->get();
 
     @endphp
-    @if (!isset($cicilans) && !isset($transactionDaftar))
+    @if (!isset($cicilans) && !isset($tagihanDetailLunas))
         <div class="col-12 text-center mb-4">
             <div class="card">
                 <h3 class="mt-3">Tagihan</h3>
