@@ -160,6 +160,7 @@
                         $biayaHeadCount = App\Models\Biaya::where('program_belajar', 'S1')
                             ->where('jenis_biaya', '=', 'Tidakroutine')
                             ->where('id_angkatans', $biodatas->angkatan_id)
+                            ->where('id_jurusans', $biodatas->jurusan_id)
                             ->count();
                         $biayaHeadCount1 = App\Models\Biaya::where('program_belajar', 'S1')
                             ->where('jenis_biaya', '=', 'Routine')
@@ -579,7 +580,7 @@
                                             <div></div>
                                         @endforeach
                                     @endif
-                                    <h4>Tagihan Program S1 sdasd <span class="text-danger">*</span></h4>
+                                    <h4>Tagihan Program S1 <span class="text-danger">*</span></h4>
                                 </div>
                                 <div class="card-body">
 
