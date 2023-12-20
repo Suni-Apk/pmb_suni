@@ -25,9 +25,8 @@
             ->where('id_users', $user->id)
             ->first();
         $tagihanDetaillunas = App\Models\TagihanDetail::where('id_biayas', $biaya?->id)
-            ->where('id_users', $user->id)
+            ->where('id_users', $biodatanya->user_id)
             ->where('status', 'LUNAS')
-            ->where('id_transactions', '!=', null)
             ->first();
         if ($tagihanDetaill) {
             $cicilans = App\Models\Cicilan::where('id_tagihan_details', $tagihanDetaill?->id)->first();
@@ -44,7 +43,7 @@
         $cicilanSemua = App\Models\Cicilan::where('id_tagihan_details', $tagihanDetaill?->id)->get();
 
     @endphp
-    @if (!isset($cicilans) && !isset($tagihanDetailLunas))
+    @if (!isset($cicilans) && !isset($tagihanDetaillunas) && $tagihanDetaill)
         <div class="col-12 text-center mb-4">
             <div class="card">
                 <h3 class="mt-3">Tagihan</h3>
@@ -76,7 +75,6 @@
     @elseif (!isset($tagihanDetaill))
         Belum ada apa apa !
     @elseif($cicilans)
-        {{-- @dump($cicilans) --}}
         @php
             $biodatanya = App\Models\Biodata::where('user_id', Auth::user()->id)
                 ->where('program_belajar', 'S1')
@@ -473,7 +471,7 @@
                 </div>
         @endif
 @endif
-@elseif ($transactionDaftar)
+@elseif ($tagihanDetaillunas)
 @php
     $biodatanya = App\Models\Biodata::where('user_id', Auth::user()->id)
         ->where('program_belajar', 'S1')
@@ -499,19 +497,6 @@
         ->sum('total');
 
     $cicilannya = App\Models\Cicilan::where('id_tagihan_details', $tagihan->id);
-    // Hitung setengah dari $jumlah_uang_daftar_ulang
-    // $setengah_jumlah_daftar_ulang = ($tagihan->amount * 2) / 3;
-
-    // Hitung sepersepuluh dari $jumlah_uang_daftar_ulang
-    // $sepertiganya_jumlah_daftar_ulang = $tagihan->amount / 3;
-
-    // Mengecek apakah mahasiswa telah berhasil membayar cicilan pertama
-
-    // Mengecek apakah mahasiswa telah berhasil membayar cicilan kedua
-
-    // Mengecek apakah mahasiswa telah berhasil membayar cicilan ketiga
-
-    // dd($cicilan_pertama_terbayar, $cicilan_kedua_terbayar, $cicilan_ketiga_terbayar);
 @endphp
 <div class="col-12 text-center mb-4">
     <div class="card py-3">
@@ -555,9 +540,6 @@
         ->where('jenis_biaya', '=', 'Routine')
         ->where('id_angkatans', $biodata->angkatan_id)
         ->count();
-    // print_r($biayaHeadCount);
-
-    // print_r($biayaHeadCount1);
 @endphp
 @if (!$transaction)
 @else
@@ -668,8 +650,8 @@
                         @endif
                     @endforeach
                     @if ($biayaHeadCount > 0 || $biayaHeadCount1 > 0)
-                        <p class="text-center">Belum ada tagihan</p>
                     @else
+                        <p class="text-center">Belum ada tagihan</p>
                         {{-- Code to execute when there is no biaya head with jenis_biaya equal to 'Routine' --}}
                         {{-- @dump('asdasd') --}}
                     @endif
