@@ -459,7 +459,12 @@
                                                 @break
                                             @endif
                                         @endforeach
-
+                                        @if ($biayaHeadCount > 0 || $biayaHeadCount1 > 0)
+                                        @else
+                                            <p class="text-center">Belum ada tagihan</p>
+                                            {{-- Code to execute when there is no biaya head with jenis_biaya equal to 'Routine' --}}
+                                            {{-- @dump('asdasd') --}}
+                                        @endif
                                         <!--Tidak routine / Biaya lain-->
                                         @foreach ($biayaAll as $biayaHead)
                                             @if (
