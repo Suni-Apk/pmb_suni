@@ -33,7 +33,7 @@
                                 </div>
 
                                 <button type="submit" class="btn btn-success">Submit</button>
-                                <a href="{{ route('admin.tahun_ajaran.index') }}">
+                                <a href="{{ route('admin.tahun-ajaran.index') }}">
                                     <button type="button" class="btn btn-warning">Back</button>
                                 </a>
                             </form>
