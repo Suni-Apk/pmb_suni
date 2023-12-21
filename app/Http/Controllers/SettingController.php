@@ -45,7 +45,7 @@ class SettingController extends Controller
             $data['image'] = url($filepath);
         } elseif ($request->has('image_link')) {
             $data['image'] = $request->image_link;
-        } else {
+        } elseif (!$request->hasFile('image') && !$request->input('image_link')) {
             $data['image'] = $general->image;
         }
 
