@@ -56,13 +56,15 @@ class MataPelajaranController extends Controller
             </thead>
             <tbody>";
 
-        foreach ($mapel as $mapels) {
-            $html .= "<tr>
-                <td style='padding: 8px; border: 1px solid #ddd; text-align:center; '>" . $mapels->name . "</td>
-                <td style='padding: 8px; border: 1px solid #ddd; text-align:center; '>" . $mapels->hari . "</td>
-                <td style='padding: 8px; border: 1px solid #ddd; text-align:center; '>" . $mapels->mulai . " WIB - " . $mapels->selesai . " WIB</td>
-            </tr>";
-        }
+            foreach ($mapel as $mapels) {
+                if ($mapels->status == 'Active') {
+                    $html .= "<tr>
+                        <td style='padding: 8px; border: 1px solid #ddd; text-align:center; '>" . $mapels->name . "</td>
+                        <td style='padding: 8px; border: 1px solid #ddd; text-align:center; '>" . $mapels->hari . "</td>
+                        <td style='padding: 8px; border: 1px solid #ddd; text-align:center; '>" . $mapels->mulai . " WIB - " . $mapels->selesai . " WIB</td>
+                    </tr>";
+                }
+            }            
 
         $html .= "</tbody>
         </table>

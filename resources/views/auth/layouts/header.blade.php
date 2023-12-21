@@ -29,11 +29,21 @@
                                             </a>
                                         </li>
                                     @else
-                                        <li class="nav-item mb-2 mb-sm-0">
-                                            <a class="btn mt-2 mt-lg-0 bg-gradient-dark mb-0 rounded-pill letter-spacing-1" href="{{route('mahasiswa.dashboard')}}">
-                                                Dashboard
-                                            </a>
-                                        </li>
+                                        @if (Auth::user()->biodata)
+                                            @if (Auth::user()->biodata->program_belajar == 'S1')
+                                                <li class="nav-item mb-2 mb-sm-0">
+                                                    <a class="btn mt-2 mt-lg-0 bg-gradient-dark mb-0 rounded-pill letter-spacing-1" href="{{route('mahasiswa.dashboard')}}">
+                                                        Dashboard
+                                                    </a>
+                                                </li>
+                                            @else
+                                                <li class="nav-item mb-2 mb-sm-0">
+                                                    <a class="btn mt-2 mt-lg-0 bg-gradient-dark mb-0 rounded-pill letter-spacing-1" href="{{route('kursus.dashboard')}}">
+                                                        Dashboard
+                                                    </a>
+                                                </li>
+                                            @endif
+                                        @endif
                                     @endif
                                     <li class="nav-item mb-2 mb-sm-0">
                                         <a class="btn mt-2 mt-lg-0 btn-outline-dark ms-2 rounded-pill mb-0" href="{{route('logout')}}">

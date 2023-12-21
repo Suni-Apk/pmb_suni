@@ -135,38 +135,6 @@
                     </div>
                 </li>
 
-                <li class="nav-item">
-                    <a data-bs-toggle="collapse" href="#mapel"
-                        class="nav-link {{ Route::is('admin.mapel.*') ? 'active' : '' }}" aria-controls="matkul"
-                        role="button" aria-expanded="false">
-                        <div
-                            class="icon icon-sm shadow border-radius-md bg-white text-center d-flex align-items-center justify-content-center  me-2">
-                            <i class="fas fa-book-open"></i>
-                        </div>
-                        <span class="nav-link-text ms-1"> Mata Pelajaran </span>
-                    </a>
-                    <div class="collapse {{ Route::is('admin.mapel.*') ? 'show' : '' }}" id="mapel">
-                        <ul class="nav ms-4 ps-3">
-                            <li class="nav-item ">
-                                <a class="nav-link {{ Route::is('admin.mapel.index') ? 'active' : '' }} "
-                                    href="{{ route('admin.mapel.index') }}">
-                                    <span class="sidenav-mini-icon d-none d-xl-block"><i
-                                            class="fas fa-border-all"></i></span>
-                                    <span class="sidenav-normal"> Daftar Mata Pelajaran </span>
-                                </a>
-                            </li>
-                            <li class="nav-item ">
-                                <a class="nav-link {{ Route::is('admin.mapel.create') ? 'active' : '' }} "
-                                    href="{{ route('admin.mapel.create') }}">
-                                    <span class="sidenav-mini-icon d-none d-xl-block"><i
-                                            class="fas fa-plus"></i></span>
-                                    <span class="sidenav-normal"> Tambah Mata Kuliah </span>
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                </li>
-
                 <!-- Course -->
                 <li class="nav-item">
                     <a data-bs-toggle="collapse" href="#course"
@@ -194,6 +162,39 @@
                                     <span class="sidenav-mini-icon d-none d-xl-block"><i
                                             class="fas fa-plus"></i></span>
                                     <span class="sidenav-normal"> Tambah Kursus </span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+                
+                <!-- Mapel -->
+                <li class="nav-item">
+                    <a data-bs-toggle="collapse" href="#mapel"
+                        class="nav-link {{ Route::is('admin.mapel.*') ? 'active' : '' }}" aria-controls="matkul"
+                        role="button" aria-expanded="false">
+                        <div
+                            class="icon icon-sm shadow border-radius-md bg-white text-center d-flex align-items-center justify-content-center  me-2">
+                            <i class="fas fa-book-open"></i>
+                        </div>
+                        <span class="nav-link-text ms-1"> Mata Pelajaran </span>
+                    </a>
+                    <div class="collapse {{ Route::is('admin.mapel.*') ? 'show' : '' }}" id="mapel">
+                        <ul class="nav ms-4 ps-3">
+                            <li class="nav-item ">
+                                <a class="nav-link {{ Route::is('admin.mapel.index') ? 'active' : '' }} "
+                                    href="{{ route('admin.mapel.index') }}">
+                                    <span class="sidenav-mini-icon d-none d-xl-block"><i
+                                            class="fas fa-border-all"></i></span>
+                                    <span class="sidenav-normal"> Daftar Mata Pelajaran </span>
+                                </a>
+                            </li>
+                            <li class="nav-item ">
+                                <a class="nav-link {{ Route::is('admin.mapel.create') ? 'active' : '' }} "
+                                    href="{{ route('admin.mapel.create') }}">
+                                    <span class="sidenav-mini-icon d-none d-xl-block"><i
+                                            class="fas fa-plus"></i></span>
+                                    <span class="sidenav-normal"> Tambah Mata Kuliah </span>
                                 </a>
                             </li>
                         </ul>
@@ -386,18 +387,6 @@
                     </a>
                 </li>
 
-                <!-- documentation -->
-                <li class="nav-item">
-                    <a class="nav-link {{ Route::is('admin.documentation') ? 'active' : '' }}"
-                        href="{{ route('admin.documentation') }}">
-                        <div
-                            class="icon icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
-                            <i class="fas fa-folder-open"></i>
-                        </div>
-                        <span class="nav-link-text ms-1">Panduan</span>
-                    </a>
-                </li>
-
                 <!-- profile -->
                 <li class="nav-item">
                     <a class="nav-link {{ Route::is('admin.profile') ? 'active' : '' }}"
@@ -407,6 +396,18 @@
                             <i class="fas fa-user-alt"></i>
                         </div>
                         <span class="nav-link-text ms-1">Profile</span>
+                    </a>
+                </li>
+
+                <!-- documentation -->
+                <li class="nav-item">
+                    <a class="nav-link {{ Route::is('admin.documentation') ? 'active bg-gradient-primary text-white' : 'bg-gradient-light' }}"
+                        href="{{ route('admin.documentation') }}">
+                        <div
+                            class="icon icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
+                            <i class="fas fa-folder-open"></i>
+                        </div>
+                        <span class="nav-link-text ms-1">Panduan</span>
                     </a>
                 </li>
 

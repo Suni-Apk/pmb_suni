@@ -498,8 +498,10 @@
                                                     <td class="ps-3 text-sm">
                                                         {{ $item->biayasDetail->nama_biaya }}
                                                     </td>
-                                                    <td class="ps-3 text-sm">
-                                                        {{ $item->end_date }}
+                                                    <td>
+                                                        <div class="ps-3 text-sm">
+                                                            {{ Carbon\Carbon::parse($item->end_date)->format('d F Y') }}
+                                                        </div>
                                                     </td>
                                                     <td class="text-center text-sm">
                                                         Rp. {{ number_format($item->amount, 0, '', '.') }},-

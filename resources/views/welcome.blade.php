@@ -63,63 +63,75 @@
             </div>
         </div>
 
-    <div class="p-5">
-        <div class="row flex-column justify-content-center align-items-start w-100">
-            <div class="col-12" id="informasi">
-                <div class="list-group list-group-horizontal" id="list-tab" role="tablist">
-                    @foreach ($descProgram as $item)
-                    <a id="list-sarjana-list" data-bs-toggle="list" href="#{{ $item->keyword }}" role="tab" aria-controls="{{ $item->keyword }}"
-                        class="list-group-item list-group-item-action border-0 shadow text-center {{ $loop->first ? 'active' : '' }}" 
-                    >Program {{ $item->title }}</a>
-                    @endforeach
+        <div class="p-5">
+            <div class="row flex-column justify-content-center align-items-start w-100">
+                <div class="col-12" id="informasi">
+                    <div class="list-group list-group-horizontal" id="list-tab" role="tablist">
+                        @foreach ($descProgram as $item)
+                            <a id="list-sarjana-list" data-bs-toggle="list" href="#{{ $item->keyword }}" role="tab"
+                                aria-controls="{{ $item->keyword }}"
+                                class="list-group-item list-group-item-action border-0 shadow text-center {{ $loop->first ? 'active' : '' }}">Program
+                                {{ $item->title }}</a>
+                        @endforeach
+                    </div>
                 </div>
-            </div>
-            <div class="col-12 pt-3 px-3">
-                <div class="tab-content" id="nav-tabContent">
-                    @foreach ($descProgram as $item)
-                    <div class="tab-pane fade {{ $loop->first ? 'show active' : '' }}" id="{{ $item->keyword }}" role="tabpanel" aria-labelledby="{{ $item->keyword }}-list">
-                        <div class="card border">
-                            <div class="row flex-column-reverse flex-sm-row justify-content-between align-items-start card-body" 
-                            style="padding-left: 1.7rem; padding-right: 1.7rem;">
-                                <style> .desc-program img { max-width: 100%!important; height: auto } </style>
-                                <div class="col-12 col-sm-9 p-1 p-sm-2 desc-program">
-                                    {!! $item->desc !!}
-                                </div>
-                                <div class="col-12 col-sm-3 py-2 px-1 d-flex flex-column justify-content-start align-items-center">
-                                    <a href="{{ App\Models\General::first()->url }}" class="px-3 btn bg-gradient-info rounded-pill">
-                                        Informasi Lebih Lengkap <i class="fa fa-arrow-right ms-1"></i>
-                                    </a>
-                                    <ul class="list-group">
-                                        @if ($loop->first)
-                                        <li class="list-group-item text-sm lh-sm">
-                                            Biaya Administrasi : Rp. {{ number_format(App\Models\Administrasi::first()->amount,0,'','.') }},-
-                                        </li>
-                                        @else
-                                            @if ($item->course)
-                                                @foreach ($item->course->notes as $note)
-                                                    @if ($note !== null)
+                <div class="col-12 pt-3 px-3">
+                    <div class="tab-content" id="nav-tabContent">
+                        @foreach ($descProgram as $item)
+                            <div class="tab-pane fade {{ $loop->first ? 'show active' : '' }}" id="{{ $item->keyword }}"
+                                role="tabpanel" aria-labelledby="{{ $item->keyword }}-list">
+                                <div class="card border">
+                                    <div class="row flex-column-reverse flex-sm-row justify-content-between align-items-start card-body"
+                                        style="padding-left: 1.7rem; padding-right: 1.7rem;">
+                                        <style>
+                                            .desc-program img {
+                                                max-width: 100% !important;
+                                                height: auto
+                                            }
+                                        </style>
+                                        <div class="col-12 col-sm-9 p-1 p-sm-2 desc-program">
+                                            {!! $item->desc !!}
+                                        </div>
+                                        <div
+                                            class="col-12 col-sm-3 py-2 px-1 d-flex flex-column justify-content-start align-items-center">
+                                            <a href="{{ App\Models\General::first()->url }}"
+                                                class="px-3 btn bg-gradient-info rounded-pill">
+                                                Informasi Lebih Lengkap <i class="fa fa-arrow-right ms-1"></i>
+                                            </a>
+                                            <ul class="list-group">
+                                                @if ($loop->first)
+                                                    <li class="list-group-item text-sm lh-sm">
+                                                        Biaya Administrasi : Rp.
+                                                        {{ number_format(App\Models\Administrasi::first()->amount, 0, '', '.') }},-
+                                                    </li>
+                                                @else
+                                                    @if ($item->course)
+                                                        @foreach ($item->course->notes as $note)
+                                                            @if ($note !== null)
+                                                                <li class="list-group-item text-sm lh-sm">
+                                                                    {{ $note }}
+                                                                </li>
+                                                            @endif
+                                                        @endforeach
                                                         <li class="list-group-item text-sm lh-sm">
-                                                            {{ $note }}
+                                                            Biaya Administrasi : Rp.
+                                                            {{ number_format($item->course->administrasi->amount, 0, '', '.') }},-
                                                         </li>
                                                     @endif
-                                                @endforeach
+                                                @endif
                                                 <li class="list-group-item text-sm lh-sm">
-                                                    Biaya Administrasi : Rp. {{ number_format($item->course->administrasi->amount,0,'','.') }},-
+                                                    Hubungi Kami : <a
+                                                        href="https://api.whatsapp.com/send?phone={{ App\Models\General::first()->phone }}">{{ App\Models\General::first()->phone }}</a>
                                                 </li>
-                                            @endif
-                                        @endif
-                                        <li class="list-group-item text-sm lh-sm">
-                                            Hubungi Kami : <a href="https://api.whatsapp.com/send?phone={{ App\Models\General::first()->phone }}">{{ App\Models\General::first()->phone }}</a>
-                                        </li>
-                                    </ul>
+                                            </ul>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
+                        @endforeach
                     </div>
-                    @endforeach
                 </div>
             </div>
         </div>
-    </div>
-</section>
+    </section>
 @endsection

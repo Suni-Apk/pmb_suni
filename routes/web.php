@@ -89,7 +89,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
 Route::prefix('/admin')->middleware(['admin', 'auth'])->name('admin.')->group(function () {
     Route::get('/dashboard', [AdminDashboardController::class, 'index'])->name('dashboard');
 
-    Route::get('/documentation', [OtherController::class, 'documentation'])->name('documentation');
+    Route::get('/panduan-user', [OtherController::class, 'documentation'])->name('documentation');
 
     // profile
     Route::prefix('profile')->group(function () {
