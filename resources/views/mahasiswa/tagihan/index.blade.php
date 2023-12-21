@@ -13,32 +13,37 @@
             ->where('status', 'berhasil')
             ->where('jenis_pembayaran', 'cash')
             ->first();
+        $biodatanya = App\Models\Biodata::where('user_id', Auth::user()->id)
+            ->where('program_belajar', 'S1')
+            ->first();
         $biaya = App\Models\Biaya::where('program_belajar', 'S1')
             ->where('jenis_biaya', 'DaftarUlang')
-            ->where('id_angkatans', Auth::user()->biodata->angkatan_id)
-            ->latest()
+            ->where('id_angkatans', $biodatanya->angkatan_id)
             ->first();
-
         $user = Auth::user();
-        $tagihan = App\Models\TagihanDetail::where('id_biayas', $biaya?->id)
+        $tagihanDetaill = App\Models\TagihanDetail::where('id_biayas', $biaya?->id)
             ->where('id_users', $user->id)
-            ->latest()
             ->first();
-        if ($tagihan) {
-            $cicilans = App\Models\Cicilan::where('id_tagihan_details', $tagihan?->id)->first();
-            $cicilan2 = App\Models\Cicilan::where('id_tagihan_details', $tagihan?->id)
+        $tagihanDetaillunas = App\Models\TagihanDetail::where('id_biayas', $biaya?->id)
+            ->where('id_users', $biodatanya->user_id)
+            ->where('status', 'LUNAS')
+            ->first();
+        if ($tagihanDetaill) {
+            $cicilans = App\Models\Cicilan::where('id_tagihan_details', $tagihanDetaill?->id)->first();
+            $cicilan2 = App\Models\Cicilan::where('id_tagihan_details', $tagihanDetaill?->id)
                 ->where('status', 'LUNAS')
                 ->get();
             $total_pembayaran = round(
-                App\Models\Cicilan::where('id_tagihan_details', $tagihan?->id)
+                App\Models\Cicilan::where('id_tagihan_details', $tagihanDetaill?->id)
                     ->where('status', 'belum')
                     ->sum('harga'),
             );
-            $setengah_jumlah_daftar_ulang = round(($tagihan?->amount * 2) / 3);
+            $setengah_jumlah_daftar_ulang = round(($tagihanDetaill?->amount * 2) / 3);
         }
+        $cicilanSemua = App\Models\Cicilan::where('id_tagihan_details', $tagihanDetaill?->id)->get();
 
     @endphp
-    @if (!isset($cicilans) && !isset($transactionDaftar) && $tagihan)
+    @if (!isset($cicilans) && !isset($tagihanDetaillunas) && $tagihanDetaill)
         <div class="col-12 text-center mb-4">
             <div class="card">
                 <h3 class="mt-3">Tagihan</h3>
@@ -50,7 +55,7 @@
                             @csrf
                             @method('GET')
                             <div class="col-6 col-sm-4">
-                                <input type="hidden" name="id" value="{{ $tagihan?->id }}">
+                                <input type="hidden" name="id" value="{{ $tagihanDetaill?->id }}">
                                 <button name="jenis_pembayaran" value="cash" type="submit"
                                     class="btn bg-gradient-primary sm:w-50">
                                     Cash
@@ -67,18 +72,21 @@
                 </div>
             </div>
         </div>
-    @elseif (!isset($tagihan))
+    @elseif (!isset($tagihanDetaill))
         Belum ada apa apa !
     @elseif($cicilans)
         @php
+            $biodatanya = App\Models\Biodata::where('user_id', Auth::user()->id)
+                ->where('program_belajar', 'S1')
+                ->first();
             $biaya = App\Models\Biaya::where('program_belajar', 'S1')
                 ->where('jenis_biaya', 'DaftarUlang')
-                ->where('id_angkatans', Auth::user()->biodata->angkatan_id)
+                ->where('id_angkatans', $biodatanya->angkatan_id)
                 ->latest()
                 ->first();
 
             $user = Auth::user();
-            $tagihan = App\Models\TagihanDetail::where('id_biayas', $biaya?->id)
+            $tagihanDetaill = App\Models\TagihanDetail::where('id_biayas', $biaya?->id)
                 ->where('id_users', $user->id)
                 ->latest()
                 ->first();
@@ -86,16 +94,24 @@
             // Menghitung total pembayaran yang telah dilakukan
             $total_pembayaran = round(
                 App\Models\Transaksi::where('user_id', $user->id)
-                    ->where('tagihan_detail_id', $tagihan?->id)
+                    ->where('tagihan_detail_id', $tagihanDetaill?->id)
                     ->where('jenis_tagihan', $biaya?->jenis_biaya)
                     ->where('status', 'berhasil')
                     ->where('jenis_pembayaran', 'cicil')
                     ->sum('total'),
             );
-            $cicilannya = App\Models\Cicilan::where('id_tagihan_details', $tagihan?->id)->get();
-            $cicilan1 = App\Models\Cicilan::where('id_tagihan_details', $tagihan?->id)
+            $cicilannya = App\Models\Cicilan::where('id_tagihan_details', $tagihanDetaill?->id)->get();
+            $cicilan1 = App\Models\Cicilan::where('id_tagihan_details', $tagihanDetaill?->id)
                 ->where('status', 'LUNAS')
                 ->first();
+            $biayaHeadCount = App\Models\Biaya::where('program_belajar', 'S1')
+                ->where('jenis_biaya', '=', 'Tidakroutine')
+                ->where('id_angkatans', $biodata->angkatan_id)
+                ->count();
+            $biayaHeadCount1 = App\Models\Biaya::where('program_belajar', 'S1')
+                ->where('jenis_biaya', '=', 'Routine')
+                ->where('id_angkatans', $biodata->angkatan_id)
+                ->count();
 
             // Hitung setengah dari $jumlah_uang_daftar_ulang
             // $setengah_jumlah_daftar_ulang = ($tagihan->amount * 2) / 3;
@@ -133,8 +149,6 @@
                                 <h4>Tagihan Daftar Ulang <span class="text-danger">*</span></h4>
                             </div>
                             <div class="card-body">
-
-                                <!--Routine-->
                                 @foreach ($biayaAll as $biayaHead)
                                     @if ($biayaHead->jenis_biaya == 'DaftarUlang' && $biayaHead->id_angkatans == $biodata->angkatan_id)
                                         <p class="text-bold">Tagihan Daftar Ulang Cicil</p>
@@ -161,8 +175,12 @@
                                                             @php
                                                                 $no = 1;
                                                             @endphp
-                                                            @foreach ($cicilanAll as $key => $value)
-                                                                @if ($value->id_tagihan_details == $tagihan->id)
+                                                            @php
+                                                                $keysss = 0;
+                                                            @endphp
+                                                            @foreach ($cicilanSemua as $key => $value)
+                                                                {{-- {{$key}} --}}
+                                                                @if ($value->id_tagihan_details == $tagihanDetaill->id)
                                                                     <tr>
                                                                         <td class="text-sm">{{ $key + 1 }}</td>
                                                                         <td class="text-sm">
@@ -180,8 +198,9 @@
                                                                             {{ number_format(round($value->harga, -2), 0, '', '.') }}
                                                                         </td>
                                                                         <td>
-
+                                                                            {{-- {{ $cicilanAll[$keysss]['status'] }} --}}
                                                                             @if ($key == 0)
+                                                                                {{-- {{ $key }} --}}
                                                                                 <input type="radio" name="id[]"
                                                                                     id=""
                                                                                     value="{{ $value->id }}"
@@ -191,10 +210,12 @@
 
                                                                             @if ($key > 0)
                                                                                 @php
-                                                                                    $previousStatus = $cicilanAll[$key - 1]['status'];
+                                                                                    $previousStatus = $cicilanSemua[$key - 1]['status'];
                                                                                 @endphp
-
+                                                                                {{-- {{ $previousStatus }}
+                                                                                {{ $key }} --}}
                                                                                 @if ($previousStatus != 'LUNAS')
+                                                                                    {{-- {{$key}} --}}
                                                                                     <input type="radio" name="id[]"
                                                                                         id=""
                                                                                         value="{{ $value->id }}"
@@ -207,8 +228,12 @@
                                                                                         {{ $value->status == 'LUNAS' ? 'disabled' : '' }}>
                                                                                 @endif
                                                                             @endif
+                                                                            {{-- {{ $previousStatus }} --}}
                                                                         </td>
                                                                     </tr>
+                                                                    {{-- @php
+                                                                        $keysss++;
+                                                                    @endphp --}}
                                                                 @endif
                                                             @endforeach
                                                         </tbody>
@@ -347,13 +372,18 @@
                                     @break
                                 @endif
                             @endforeach
-
+                            @if ($biayaHeadCount > 0 || $biayaHeadCount1 > 0)
+                            @else
+                                <p class="text-center">Belum ada tagihan</p>
+                                {{-- Code to execute when there is no biaya head with jenis_biaya equal to 'Routine' --}}
+                                {{-- @dump('asdasd') --}}
+                            @endif
                             <!--Tidak routine / Biaya lain-->
                             @foreach ($biayaAll as $biayaHead)
                                 @if (
                                     $biayaHead?->jenis_biaya == 'Tidakroutine' &&
                                         $biayaHead?->id_jurusans == $biodata->jurusan_id &&
-                                        $biodata->angkatan_id)
+                                        $biodata->angkatan_id == $biayaHead?->id_angkatans)
                                     <div class="table-responsive mb-3">
                                         <p class="text-bold">Tagihan Biaya Lain</p>
 
@@ -441,11 +471,14 @@
                 </div>
         @endif
 @endif
-@elseif ($transactionDaftar)
+@elseif ($tagihanDetaillunas)
 @php
+    $biodatanya = App\Models\Biodata::where('user_id', Auth::user()->id)
+        ->where('program_belajar', 'S1')
+        ->first();
     $biaya = App\Models\Biaya::where('program_belajar', 'S1')
         ->where('jenis_biaya', 'DaftarUlang')
-        ->where('id_angkatans', Auth::user()->biodata->angkatan_id)
+        ->where('id_angkatans', $biodatanya->angkatan_id)
         ->latest()
         ->first();
 
@@ -464,19 +497,6 @@
         ->sum('total');
 
     $cicilannya = App\Models\Cicilan::where('id_tagihan_details', $tagihan->id);
-    // Hitung setengah dari $jumlah_uang_daftar_ulang
-    // $setengah_jumlah_daftar_ulang = ($tagihan->amount * 2) / 3;
-
-    // Hitung sepersepuluh dari $jumlah_uang_daftar_ulang
-    // $sepertiganya_jumlah_daftar_ulang = $tagihan->amount / 3;
-
-    // Mengecek apakah mahasiswa telah berhasil membayar cicilan pertama
-
-    // Mengecek apakah mahasiswa telah berhasil membayar cicilan kedua
-
-    // Mengecek apakah mahasiswa telah berhasil membayar cicilan ketiga
-
-    // dd($cicilan_pertama_terbayar, $cicilan_kedua_terbayar, $cicilan_ketiga_terbayar);
 @endphp
 <div class="col-12 text-center mb-4">
     <div class="card py-3">
@@ -520,9 +540,6 @@
         ->where('jenis_biaya', '=', 'Routine')
         ->where('id_angkatans', $biodata->angkatan_id)
         ->count();
-    // print_r($biayaHeadCount);
-
-    // print_r($biayaHeadCount1);
 @endphp
 @if (!$transaction)
 @else

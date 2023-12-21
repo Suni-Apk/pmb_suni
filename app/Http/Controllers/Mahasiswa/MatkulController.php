@@ -9,6 +9,7 @@ use App\Models\Jurusan;
 use App\Models\Link;
 use App\Models\Matkuls;
 use App\Models\Semester;
+use App\Models\TahunAjaran;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Dompdf\Dompdf;
 use Dompdf\Options;
@@ -24,8 +25,9 @@ class MatkulController extends Controller
         if ($biodata) {
             if ($biodata->jurusan_id) {
                 $jurusan = Jurusan::find($biodata->jurusan_id);
+                $tahunAjaran = TahunAjaran::find($biodata->angkatan_id);
 
-                $links = Link::where('id_jurusans', $jurusan->id)->where('id_tahun_ajarans', $jurusan->tahunAjaran->id)->where('gender', 'all')->where('type', 'whatsapp')->first();
+                $links = Link::where('id_jurusans', $jurusan->id)->where('id_tahun_ajarans', $tahunAjaran->id)->where('gender', 'all')->first();
 
                 $semester = Semester::where('id_jurusans', $jurusan->id)->get();
 
@@ -70,25 +72,25 @@ class MatkulController extends Controller
                     </thead>
                     <tbody>";
 
-                foreach ($matkuls as $matkul) {
-                    $html .= "<tr>
+        foreach ($matkuls as $matkul) {
+            $html .= "<tr>
                         <td style='padding: 8px; border: 1px solid #ddd; text-align:center; '>" . $matkul->nama_matkuls . "</td>
                         <td style='padding: 8px; border: 1px solid #ddd; text-align:center; '>" . $matkul->semesters->name . "</td>
                         <td style='padding: 8px; border: 1px solid #ddd; text-align:center; '>" . $matkul->hari . "</td>
                         <td style='padding: 8px; border: 1px solid #ddd; text-align:center; '>" . $matkul->mulai . " WIB - " . $matkul->selesai . " WIB</td>
                     </tr>";
-                }
+        }
 
-                $html .= "</tbody>
+        $html .= "</tbody>
                 </table>
             </div>
         </body>";
 
-                $options = new Options();
-                $options->set('isRemoteEnabled', true);
-                $dompdf = new Dompdf($options);
-                $pdf = Pdf::loadView('mahasiswa.pdf.matkuls', compact('instansi', 'matkuls', 'jurusan'));
-                $pdf->loadHtml($html)->setPaper('A4', 'portrait');
-                return $pdf->download('jadwal.pdf');
-            }
+        $options = new Options();
+        $options->set('isRemoteEnabled', true);
+        $dompdf = new Dompdf($options);
+        $pdf = Pdf::loadView('mahasiswa.pdf.matkuls', compact('instansi', 'matkuls', 'jurusan'));
+        $pdf->loadHtml($html)->setPaper('A4', 'portrait');
+        return $pdf->download('jadwal.pdf');
+    }
 }

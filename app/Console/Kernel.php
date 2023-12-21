@@ -20,8 +20,8 @@ class Kernel extends ConsoleKernel
     ];
     protected function schedule(Schedule $schedule): void
     {
-        $schedule->command('app:before-tenggat')->dailyAt('21:52');
-        $schedule->command('app:tenggat')->dailyAt('21:32');
+        $schedule->command('app:before-tenggat')->dailyAt('23:59');
+        $schedule->command('app:tenggat')->dailyAt('23:59');
         $schedule->command('app:after-tenggat')->everySecond();
         $schedule->command('app:ipaymu')->everySecond();
     }

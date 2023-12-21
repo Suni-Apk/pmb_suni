@@ -25,13 +25,13 @@ class TransactionController extends Controller
         $programBelajar = $request->input('program_belajar');
 
         if ($programBelajar) {
-            $transactions = Transaksi::when($programBelajar, function ($query) use ($programBelajar) {
+            $transaction = Transaksi::when($programBelajar, function ($query) use ($programBelajar) {
                 return $query->where('program_belajar', $programBelajar);
             })->latest()->get();
         } else {
-            $transactions = Transaksi::latest()->get();
+            $transaction = Transaksi::latest()->get();
         }
-        return view('admin.transactions.index', compact('transactions', 'programBelajar'));
+        return view('admin.transactions.index', compact('transaction', 'programBelajar'));
     }
 
     //Cash Transaction
@@ -114,11 +114,11 @@ class TransactionController extends Controller
 
         if ($transaksi->jenis_pembayaran == 'Ipaymu') {
             return redirect()->back()
-            ->with('bayar', 'Chat dengan <a class="fw-bolder text-capitalize text-white" href="https://api.whatsapp.com/send?phone=' . $transaksi->user->phone . '">' . $transaksi->user->name . '</a> untuk segera melakukan pembayaran.');
+                ->with('bayar', 'Chat dengan <a class="fw-bolder text-capitalize text-white" href="https://api.whatsapp.com/send?phone=' . $transaksi->user->phone . '">' . $transaksi->user->name . '</a> untuk segera melakukan pembayaran.');
         } elseif ($transaksi->jenis_pembayaran == 'cash') {
             $transaksi->update($data);
             return redirect()->route('admin.transaksi.index')
-            ->with('update', 'Anda berhasil mengubah status transaksi dari ' . $transaksi->status . ' menjadi ' . $request->status . '.');
+                ->with('update', 'Anda berhasil mengubah status transaksi dari ' . $transaksi->status . ' menjadi ' . $request->status . '.');
         } else {
             return redirect()->back()->with('notfound', 'Anda tidak bisa mengubah status transaksi');
         }
@@ -305,7 +305,7 @@ class TransactionController extends Controller
         $biaya = Biaya::where('program_belajar', 'S1')->where('jenis_biaya', 'DaftarUlang')->where('id_angkatans', $userId->biodata->angkatan_id)->latest()->first();
 
         $tagihanDetail = TagihanDetail::where('id_biayas', $biaya->id)->where('id_users', $userId->id)->latest()->first();
-        
+
         $transaksi = Transaksi::where('user_id', $userId->id)->where('no_invoice', $invoice)->first();
 
         // dd($transaksi);
@@ -444,7 +444,7 @@ class TransactionController extends Controller
         return redirect()->route('admin.mahasiswa.show', $id)->with('success', 'Selamat anda berhasil menbayar');
     }
 
-    public function invoice(Request $request,$id)
+    public function invoice(Request $request, $id)
     {
         $transaction = Transaksi::find($id);
         $user = $transaction->user;

@@ -112,11 +112,6 @@
                                                 Detail
                                             </a>
 
-                                            <a href="{{ route('admin.tagihan.edit', $biayas->id) }}"
-                                                class="badge text-uppercase badge-sm bg-gradient-secondary text-xxs mx-1"
-                                                data-toggle="tooltip" data-original-title="Edit">
-                                                Ubah
-                                            </a>
                                             <form action="{{ route('admin.tagihan.destroy', $biayas->id) }}" method="POST"
                                                 class="d-inline">
                                                 @csrf

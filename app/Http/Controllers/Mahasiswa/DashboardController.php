@@ -43,7 +43,7 @@ class DashboardController extends Controller
         
         $biaya = Biaya::where('program_belajar', 'S1')->where('jenis_biaya', 'DaftarUlang')->where('id_angkatans', $angkatans->id)->first();
 
-        $tagihan = TagihanDetail::where('id_biayas', $biaya->id)->where('id_users', $user->id)->first();
+        $tagihan = TagihanDetail::where('id_biayas', $biaya?->id)->where('id_users', $user->id)->first();
         if ($user->biodata) {
             $tagihan_detail = TagihanDetail::where('status', 'BELUM')->where('id_users', $biodata->user_id)->get();
             $tagihan_detail = TagihanDetail::where('status', 'BELUM')->where('id_users', $biodata->user_id)->get();

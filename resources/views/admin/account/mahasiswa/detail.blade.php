@@ -24,24 +24,31 @@
                                         <tr>
                                             <td class="text-sm">
                                                 Nama :
-                                                {{ $mahasiswa->name }}</td>
+                                                <strong> {{ $mahasiswa->name }}</strong>
+                                            </td>
                                         </tr>
                                         <tr>
                                             <td class="text-sm">
                                                 Nomor Telepon :
-                                                {{ $mahasiswa->phone }}
+                                                <strong>
+                                                    {{ $mahasiswa->phone }}
+                                                </strong>
                                             </td>
                                         </tr>
                                         <tr>
                                             <td class="text-sm">
                                                 Email :
-                                                {{ $mahasiswa->email }}
+                                                <strong>
+                                                    {{ $mahasiswa->email }}
+                                                </strong>
                                             </td>
                                         </tr>
                                         <tr>
                                             <td class="text-sm">
                                                 Gender :
-                                                {{ $mahasiswa->gender }}
+                                                <strong>
+                                                    {{ $mahasiswa->gender }}
+                                                </strong>
                                             </td>
                                         </tr>
                                     </tbody>
@@ -135,6 +142,11 @@
                             ->where('id_users', $biodatas->user_id)
                             ->latest()
                             ->first();
+                        $tagihanDetaillunas = App\Models\TagihanDetail::where('id_biayas', $biaya1?->id)
+                            ->where('id_users', $biodatas->user_id)
+                            ->where('status', 'LUNAS')
+                            ->where('id_transactions', '!=', null)
+                            ->first();
                         $cicilans = App\Models\Cicilan::where('id_tagihan_details', $tagihan?->id)->first();
                         $cicilan2 = App\Models\Cicilan::where('id_tagihan_details', $tagihan?->id)
                             ->where('status', 'LUNAS')
@@ -143,10 +155,20 @@
                             ->where('tagihan_detail_id', $tagihan?->id)
                             ->where('jenis_tagihan', $biaya1?->jenis_biaya)
                             ->where('status', 'berhasil')
+                            ->where('jenis_pembayaran', 'cash')
                             ->first();
+                        $biayaHeadCount = App\Models\Biaya::where('program_belajar', 'S1')
+                            ->where('jenis_biaya', '=', 'Tidakroutine')
+                            ->where('id_angkatans', $biodatas->angkatan_id)
+                            ->where('id_jurusans', $biodatas->jurusan_id)
+                            ->count();
+                        $biayaHeadCount1 = App\Models\Biaya::where('program_belajar', 'S1')
+                            ->where('jenis_biaya', '=', 'Routine')
+                            ->where('id_angkatans', $biodatas->angkatan_id)
+                            ->count();
 
                     @endphp
-                    @if (!isset($cicilans) && !isset($transactionDaftar) && $tagihan)
+                    @if (!isset($cicilans) && !isset($tagihanDetaillunas) && $tagihan)
                         <div class="col-12 text-center mb-4 shadow-ms">
                             <div class="card">
                                 <h3 class="mt-3">Silahkan Pilih metode pembayaran Daftar ulang !</h3>
@@ -175,7 +197,7 @@
                             </div>
                         </div>
                     @elseif (!isset($tagihan))
-                        
+
                     @elseif($cicilans)
                         @php
                             $biaya1 = App\Models\Biaya::where('program_belajar', 'S1')
@@ -200,20 +222,6 @@
                             $cicilan1 = App\Models\Cicilan::where('id_tagihan_details', $tagihan?->id)
                                 ->where('status', 'LUNAS')
                                 ->first();
-
-                            // Hitung setengah dari $jumlah_uang_daftar_ulang
-                            // $setengah_jumlah_daftar_ulang = ($tagihan->amount * 2) / 3;
-
-                            // Hitung sepersepuluh dari $jumlah_uang_daftar_ulang
-                            // $sepertiganya_jumlah_daftar_ulang = $tagihan->amount / 3;
-
-                            // Mengecek apakah mahasiswa telah berhasil membayar cicilan pertama
-
-                            // Mengecek apakah mahasiswa telah berhasil membayar cicilan kedua
-
-                            // Mengecek apakah mahasiswa telah berhasil membayar cicilan ketiga
-
-                            // dd($cicilan_pertama_terbayar, $cicilan_kedua_terbayar, $cicilan_ketiga_terbayar);
 
                         @endphp
                         @if ($cicilan2->count() != 3)
@@ -269,7 +277,7 @@
                                                                         @php
                                                                             $no = 1;
                                                                         @endphp
-                                                                        @foreach ($cicilanAll as $key => $value)
+                                                                        @foreach ($cicilannya as $key => $value)
                                                                             @if ($value->id_tagihan_details == $tagihan->id)
                                                                                 <tr>
                                                                                     <td class="text-sm">
@@ -302,7 +310,7 @@
 
                                                                                         @if ($key > 0)
                                                                                             @php
-                                                                                                $previousStatus = $cicilanAll[$key - 1]['status'];
+                                                                                                $previousStatus = $cicilannya[$key - 1]['status'];
                                                                                             @endphp
 
                                                                                             @if ($previousStatus != 'LUNAS')
@@ -369,7 +377,7 @@
                                         <div class="card-body">
                                             <!--Routine-->
                                             @foreach ($biayaAll as $biayaHead)
-                                                @if ($biayaHead->jenis_biaya == 'Routine' && $biayaHead->id_angkatans == $biodatas->angkatan_id)
+                                                @if ($biayaHead?->jenis_biaya == 'Routine' && $biayaHead?->id_angkatans == $biodatas?->angkatan_id)
                                                     <p class="text-bold">Tagihan Spp</p>
                                                     <div class="table-responsive mb-3">
                                                         <form
@@ -452,13 +460,18 @@
                                                 @break
                                             @endif
                                         @endforeach
-
+                                        @if ($biayaHeadCount > 0 || $biayaHeadCount1 > 0)
+                                        @else
+                                            <p class="text-center">Belum ada tagihan</p>
+                                            {{-- Code to execute when there is no biaya head with jenis_biaya equal to 'Routine' --}}
+                                            {{-- @dump('asdasd') --}}
+                                        @endif
                                         <!--Tidak routine / Biaya lain-->
                                         @foreach ($biayaAll as $biayaHead)
                                             @if (
                                                 $biayaHead?->jenis_biaya == 'Tidakroutine' &&
                                                     $biayaHead?->id_jurusans == $biodatas->jurusan_id &&
-                                                    $biodatas->angkatan_id)
+                                                    $biodatas->angkatan_id == $biayaHead?->id_angkatans)
                                                 <div class="table-responsive mb-3">
                                                     <p class="text-bold">Tagihan Biaya Lain</p>
                                                     <form
@@ -545,45 +558,134 @@
                                 </div>
                             </div>
                 @endif
-            @elseif ($transactionDaftar)
-                {{-- <div class="col-12 text-center mb-4">
-                    <div class="card py-3">
-                        <h2 class="mt-3">Selamat !</h2>
-                        <h5 class="text-secondary font-weight-normal">Tagihan Daftar Ulang Sudah Lunas</h5>
-                    </div>
-                </div> --}}
+            @elseif ($tagihanDetaillunas)
+                {{-- KONDISI SUDAH LUNAS DAFTAR ULANG --}}
 
-            @endif
-            @if (!isset($transactions))
-            @else
-                <div class="row">
-                    <div class="col-12">
-                        <div class="card mb-4">
-                            <div class="card-header">
-                                @if ($errors->any())
-                                    @foreach ($errors->all() as $error)
-                                        <div class="alert alert-danger alert-dismissible fade show"
-                                            role="alert">
-                                            <span class="alert-text">{{ $error }}</span>
-                                            <button type="button" class="btn-close" data-bs-dismiss="alert"
-                                                aria-label="Close">
-                                                <span aria-hidden="true">&times;</span>
-                                            </button>
-                                        </div>
-                                        <div></div>
-                                    @endforeach
+                @if (!$transactions)
+                @else
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="card mb-4">
+                                <div class="card-header">
+                                    @if ($errors->any())
+                                        @foreach ($errors->all() as $error)
+                                            <div class="alert alert-danger alert-dismissible fade show"
+                                                role="alert">
+                                                <span class="alert-text">{{ $error }}</span>
+                                                <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                                    aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <div></div>
+                                        @endforeach
+                                    @endif
+                                    <h4>Tagihan Program S1 <span class="text-danger">*</span></h4>
+                                </div>
+                                <div class="card-body">
+
+                                    <!--Routine-->
+                                    @foreach ($biayaAll as $biayaHead)
+                                        @if ($biayaHead?->jenis_biaya == 'Routine' && $biayaHead?->id_angkatans == $biodatas->angkatan_id)
+                                            <p class="text-bold">Tagihan Spp</p>
+
+                                            <div class="table-responsive mb-3">
+                                                <form
+                                                    action="{{ route('admin.mahasiswa.bayar', $mahasiswa->id) }}"
+                                                    method="GET">
+                                                    @csrf
+                                                    @method('GET')
+
+                                                    <table class="table shadow-sm">
+                                                        <thead class="table-dark">
+                                                            <tr>
+                                                                <th class="text-sm">No</th>
+                                                                <th class="text-sm">Nama Tagihan</th>
+                                                                <th class="text-sm">Bulan</th>
+                                                                <th class="text-sm">Tanggal Tagihan</th>
+                                                                <th class="text-sm">Status</th>
+                                                                <th class="text-sm">Total tagihan</th>
+                                                                <th class="text-sm d-flex align-items-center">
+                                                                    <input type="checkbox" name=""
+                                                                        id="select_all_ids" class="me-2">
+                                                                    Pilih
+                                                                </th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            @php
+                                                                $no = 1;
+                                                            @endphp
+                                                            @foreach ($biaya as $index => $biayas)
+                                                                @if ($biayas->jenis_biaya == 'Routine' && $biayas->id_angkatans == $biodatas->angkatan_id)
+                                                                    @foreach ($biayas->tagihanDetail as $key => $tagihans)
+                                                                        @if ($tagihans->id_users == $mahasiswa->id)
+                                                                            <tr>
+                                                                                <td class="text-sm">
+                                                                                    {{ $no++ }}
+                                                                                </td>
+                                                                                <td class="text-sm">
+                                                                                    {{ $biayas->nama_biaya }}
+                                                                                </td>
+                                                                                <td class="text-sm">
+                                                                                    {{ $tagihans->tagihans->mounth }}
+                                                                                </td>
+                                                                                <td class="text-sm">
+                                                                                    {{ \Carbon\Carbon::parse($tagihans->end_date)->format('d F Y') }}
+                                                                                </td>
+                                                                                <td class="text-sm">
+                                                                                    <span
+                                                                                        class="badge badge-sm {{ $tagihans->status == 'LUNAS' ? 'bg-gradient-success' : 'bg-gradient-danger' }}">{{ $tagihans->status }}</span>
+
+                                                                                </td>
+                                                                                <td class="text-sm">Rp
+                                                                                    {{ number_format($tagihans->amount, 0, '', '.') }}
+                                                                                </td>
+                                                                                <td>
+                                                                                    @if ($tagihans->status === 'LUNAS')
+                                                                                        <input type="checkbox"
+                                                                                            name="id[]"
+                                                                                            id=""
+                                                                                            value="{{ $tagihans->id }}"
+                                                                                            class=""
+                                                                                            disabled>
+                                                                                    @else
+                                                                                        <input type="checkbox"
+                                                                                            name="id[]"
+                                                                                            id=""
+                                                                                            value="{{ $tagihans->id }}"
+                                                                                            class="checksAll">
+                                                                                    @endif
+                                                                                </td>
+                                                                            </tr>
+                                                                        @endif
+                                                                    @endforeach
+                                                                @endif
+                                                            @endforeach
+                                                        </tbody>
+                                                    </table>
+                                            </div>
+                                            <button class="btn btn-primary btn-sm" type="submit">Bayar</button>
+                                            </form>
+                                        @break
+                                    @endif
+                                @endforeach
+                                @if ($biayaHeadCount > 0 || $biayaHeadCount1 > 0)
+                                @else
+                                    <p class="text-center">Belum ada tagihan</p>
+                                    {{-- Code to execute when there is no biaya head with jenis_biaya equal to 'Routine' --}}
+                                    {{-- @dump('asdasd') --}}
                                 @endif
-                                <h4>Tagihan Program S1 <span class="text-danger">*</span></h4>
-                            </div>
-                            <div class="card-body">
-
-                                <!--Routine-->
+                                <!--Tidak routine / Biaya lain-->
                                 @foreach ($biayaAll as $biayaHead)
-                                    @if ($biayaHead->jenis_biaya == 'Routine' && $biayaHead->id_angkatans == $biodatas->angkatan_id)
-                                        <p class="text-bold">Tagihan Spp</p>
-
+                                    @if (
+                                        $biayaHead?->jenis_biaya == 'Tidakroutine' &&
+                                            $biayaHead?->id_jurusans == $biodatas->jurusan_id &&
+                                            $biodatas->angkatan_id == $biayaHead?->id_angkatans)
                                         <div class="table-responsive mb-3">
-                                            <form action="{{ route('admin.mahasiswa.bayar', $mahasiswa->id) }}"
+                                            <p class="text-bold">Tagihan Biaya Lain</p>
+                                            <form
+                                                action="{{ route('admin.mahasiswa.bayar', $mahasiswa->id) }}"
                                                 method="GET">
                                                 @csrf
                                                 @method('GET')
@@ -593,13 +695,13 @@
                                                         <tr>
                                                             <th class="text-sm">No</th>
                                                             <th class="text-sm">Nama Tagihan</th>
-                                                            <th class="text-sm">Bulan</th>
                                                             <th class="text-sm">Tanggal Tagihan</th>
                                                             <th class="text-sm">Status</th>
                                                             <th class="text-sm">Total tagihan</th>
                                                             <th class="text-sm d-flex align-items-center">
                                                                 <input type="checkbox" name=""
-                                                                    id="select_all_ids" class="me-2">
+                                                                    id=""
+                                                                    class="me-2 select_all_ids2">
                                                                 Pilih
                                                             </th>
                                                         </tr>
@@ -609,18 +711,20 @@
                                                             $no = 1;
                                                         @endphp
                                                         @foreach ($biaya as $index => $biayas)
-                                                            @if ($biayas->jenis_biaya == 'Routine' && $biayas->id_angkatans == $biodatas->angkatan_id)
+                                                            @if (
+                                                                $biayas->jenis_biaya == 'Tidakroutine' &&
+                                                                    $biayas->id_angkatans == $biodatas->angkatan_id &&
+                                                                    $biayas->id_jurusans == $biodatas->jurusan_id &&
+                                                                    $biayas->program_belajar == $biodatas->program_belajar)
                                                                 @foreach ($biayas->tagihanDetail as $key => $tagihans)
                                                                     @if ($tagihans->id_users == $mahasiswa->id)
                                                                         <tr>
                                                                             <td class="text-sm">
                                                                                 {{ $no++ }}
                                                                             </td>
+
                                                                             <td class="text-sm">
                                                                                 {{ $biayas->nama_biaya }}
-                                                                            </td>
-                                                                            <td class="text-sm">
-                                                                                {{ $tagihans->tagihans->mounth }}
                                                                             </td>
                                                                             <td class="text-sm">
                                                                                 {{ \Carbon\Carbon::parse($tagihans->end_date)->format('d F Y') }}
@@ -628,7 +732,6 @@
                                                                             <td class="text-sm">
                                                                                 <span
                                                                                     class="badge badge-sm {{ $tagihans->status == 'LUNAS' ? 'bg-gradient-success' : 'bg-gradient-danger' }}">{{ $tagihans->status }}</span>
-
                                                                             </td>
                                                                             <td class="text-sm">Rp
                                                                                 {{ number_format($tagihans->amount, 0, '', '.') }}
@@ -639,14 +742,16 @@
                                                                                         name="id[]"
                                                                                         id=""
                                                                                         value="{{ $tagihans->id }}"
-                                                                                        class="" disabled>
+                                                                                        class=""
+                                                                                        disabled>
                                                                                 @else
                                                                                     <input type="checkbox"
                                                                                         name="id[]"
                                                                                         id=""
                                                                                         value="{{ $tagihans->id }}"
-                                                                                        class="checksAll">
+                                                                                        class="checksAll1">
                                                                                 @endif
+
                                                                             </td>
                                                                         </tr>
                                                                     @endif
@@ -655,108 +760,20 @@
                                                         @endforeach
                                                     </tbody>
                                                 </table>
+
+                                                <button class="btn btn-primary btn-sm"
+                                                    type="submit">Bayar</button>
+                                            </form>
                                         </div>
-                                        <button class="btn btn-primary btn-sm" type="submit">Bayar</button>
-                                        </form>
                                     @break
                                 @endif
                             @endforeach
-
-                            <!--Tidak routine / Biaya lain-->
-                            @foreach ($biayaAll as $biayaHead)
-                                @if (
-                                    $biayaHead?->jenis_biaya == 'Tidakroutine' &&
-                                        $biayaHead?->id_jurusans == $biodatas->jurusan_id &&
-                                        $biodatas->angkatan_id)
-                                    <div class="table-responsive mb-3">
-                                        <p class="text-bold">Tagihan Biaya Lain</p>
-                                        <form action="{{ route('admin.mahasiswa.bayar', $mahasiswa->id) }}"
-                                            method="GET">
-                                            @csrf
-                                            @method('GET')
-
-                                            <table class="table shadow-sm">
-                                                <thead class="table-dark">
-                                                    <tr>
-                                                        <th class="text-sm">No</th>
-                                                        <th class="text-sm">Nama Tagihan</th>
-                                                        <th class="text-sm">Tanggal Tagihan</th>
-                                                        <th class="text-sm">Status</th>
-                                                        <th class="text-sm">Total tagihan</th>
-                                                        <th class="text-sm d-flex align-items-center">
-                                                            <input type="checkbox" name=""
-                                                                id="select_all_ids2" class="me-2">
-                                                            Pilih
-                                                        </th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    @php
-                                                        $no = 1;
-                                                    @endphp
-                                                    @foreach ($biaya as $index => $biayas)
-                                                        @if (
-                                                            $biayas->jenis_biaya == 'Tidakroutine' &&
-                                                                $biayas->id_angkatans == $biodatas->angkatan_id &&
-                                                                $biayas->id_jurusans == $biodatas->jurusan_id &&
-                                                                $biayas->program_belajar == $biodatas->program_belajar)
-                                                            @foreach ($biayas->tagihanDetail as $key => $tagihans)
-                                                                @if ($tagihans->id_users == $mahasiswa->id)
-                                                                    <tr>
-                                                                        <td class="text-sm">
-                                                                            {{ $no++ }}
-                                                                        </td>
-
-                                                                        <td class="text-sm">
-                                                                            {{ $biayas->nama_biaya }}
-                                                                        </td>
-                                                                        <td class="text-sm">
-                                                                            {{ \Carbon\Carbon::parse($tagihans->end_date)->format('d F Y') }}
-                                                                        </td>
-                                                                        <td class="text-sm">
-                                                                            <span
-                                                                                class="badge badge-sm {{ $tagihans->status == 'LUNAS' ? 'bg-gradient-success' : 'bg-gradient-danger' }}">{{ $tagihans->status }}</span>
-                                                                        </td>
-                                                                        <td class="text-sm">Rp
-                                                                            {{ number_format($tagihans->amount, 0, '', '.') }}
-                                                                        </td>
-                                                                        <td>
-                                                                            @if ($tagihans->status === 'LUNAS')
-                                                                                <input type="checkbox"
-                                                                                    name="id[]"
-                                                                                    id=""
-                                                                                    value="{{ $tagihans->id }}"
-                                                                                    class="" disabled>
-                                                                            @else
-                                                                                <input type="checkbox"
-                                                                                    name="id[]"
-                                                                                    id=""
-                                                                                    value="{{ $tagihans->id }}"
-                                                                                    class="checksAll2">
-                                                                            @endif
-
-                                                                        </td>
-                                                                    </tr>
-                                                                @endif
-                                                            @endforeach
-                                                        @endif
-                                                    @endforeach
-                                                </tbody>
-                                            </table>
-
-                                            <button class="btn btn-primary btn-sm"
-                                                type="submit">Bayar</button>
-                                        </form>
-                                    </div>
-                                @break
-                            @endif
-                        @endforeach
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
+        @endif
     @endif
-
 @endif
 @if ($biodatas->program_belajar == 'KURSUS')
 <div class="col-12">
@@ -916,8 +933,8 @@
                                             <th class="text-sm">Jenis kursus</th>
                                             <th class="text-sm">Total tagihan</th>
                                             <th class="text-sm d-flex align-items-center"><input
-                                                    type="checkbox" name="" id="select_all_ids"
-                                                    class="me-2"> Pilih
+                                                    type="checkbox" name="" id=""
+                                                    class="me-2 select_all_ids2"> Pilih
                                             </th>
                                         </tr>
                                     </thead>
@@ -961,7 +978,7 @@
                                                                     <input type="checkbox" name="id[]"
                                                                         id=""
                                                                         value="{{ $tagihans->id }}"
-                                                                        class="checksAll">
+                                                                        class="checksAll1">
                                                                 @endif
 
 
@@ -1009,10 +1026,10 @@
 @endif
 <script>
     $(function(e) {
-        $("#select_all_ids0").click(function() {
-            $('.checksAll0').prop('checked', $(this).prop('checked'));
+        $("#select_all_ids").click(function() {
+            $('.checksAll').prop('checked', $(this).prop('checked'));
         });
-        $("#select_all_ids1").click(function() {
+        $(".select_all_ids2").click(function() {
             $('.checksAll1').prop('checked', $(this).prop('checked'));
         });
         $("#select_all_ids2").click(function() {

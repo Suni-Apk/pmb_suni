@@ -1,30 +1,11 @@
 @extends('layouts.master')
 
-@section('title', 'Transaksi')
+@section('title', 'Tagihan')
 
 @push('styles')
 @endpush
 
 @section('content')
-    @if (session('bayar'))
-        <div class="alert alert-info text-white alert-dismissible fade show" role="alert">
-            <strong>Pemberitahuan.</strong> {!! session('bayar') !!}
-            <button type="button" class="btn-close border rounded-circle p-1 fs-3 lh-1 mt-2 me-2" data-bs-dismiss="alert"
-                aria-label="Close">&times;</button>
-        </div>
-    @elseif (session('update'))
-        <div class="alert alert-success text-white alert-dismissible fade show" role="alert">
-            <strong>Selamat!</strong> {!! session('update') !!}
-            <button type="button" class="btn-close border rounded-circle p-1 fs-3 lh-1 mt-2 me-2" data-bs-dismiss="alert"
-                aria-label="Close">&times;</button>
-        </div>
-    @elseif (session('notfound'))
-        <div class="alert alert-warning text-white alert-dismissible fade show" role="alert">
-            <strong>Sayangnya.</strong> {!! session('notfound') !!}
-            <button type="button" class="btn-close border rounded-circle p-1 fs-3 lh-1 mt-2 me-2" data-bs-dismiss="alert"
-                aria-label="Close">&times;</button>
-        </div>
-    @endif
     <div class="row">
         <div class="col-12">
             <div class="card">
@@ -37,6 +18,7 @@
                                 <i class='bx bxs-file-export me-1'></i> Export
                             </button>
                         </form>
+                        <a href="{{ route('admin.transaksi.create') }}" class="btn bg-gradient-primary">Tambah +</a>
                     </div>
                 </div>
                 <form action="{{ route('admin.transaksi.index') }}" method="GET">
@@ -58,6 +40,9 @@
                                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                         Pilih
                                     </th>
+                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                        ID
+                                    </th>
                                     <th class=" text-uppercase text-secondary text-xxs  font-weight-bolder opacity-7">
                                         Nama Tagihan
                                     </th>
@@ -65,13 +50,13 @@
                                         Tanggal Pembayaran
                                     </th>
                                     <th class=" text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                        Pembayar / Invoice
+                                        Pembayar
                                     </th>
                                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                         Total Pembayaran
                                     </th>
                                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                        program
+                                        PROGRAM BELAJAR
                                     </th>
                                     <th class=" text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                         Status
@@ -194,12 +179,14 @@
                                                 method="post" class="d-inline">
                                                 @csrf
                                                 @method('DELETE')
-                                                <button type="button"
-                                                    class="badge badge-sm border-0 bg-gradient-danger font-weight-bolder text-xxs show_confirm"
-                                                    data-toggle="tooltip" data-original-title="hapus">
-                                                    Hapus
-                                                </button>
+                                                <button type="submit"
+                                                    class="badge badge-sm bg-gradient-danger border-0 font-weight-bold text-xxs show_confirm">HAPUS</button>
                                             </form>
+                                            {{-- <a href=""
+                                                class="badge badge-sm bg-gradient-danger font-weight-bold text-xxs show_confirm"
+                                                data-toggle="tooltip" data-original-title="hapus">
+                                                Hapus
+                                            </a> --}}
                                         </td>
                                     </tr>
                                 @endforeach
@@ -221,6 +208,14 @@
 @endsection
 
 @push('scripts')
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+        integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"
+        integrity="sha512-VEd+nq25CkR676O+pLBnDW09R7VQX9Mdiij052gVCp5yVH3jGtH70Ho/UUv4mJDsEdTvqRCFZg0NKGiojGnUCw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css"
+        integrity="sha512-3pIirOrwegjM6erE5gPSwkUzO+3cTjpnV9lexlNZqvupR64iZBnOOTiiLPb9M36zpMScbmUNIcHUqKD47M719g=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
     <script>
         const dataTableBasic = new simpleDatatables.DataTable("#templateTable", {
             searchable: true,

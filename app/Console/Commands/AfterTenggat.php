@@ -30,9 +30,9 @@ class AfterTenggat extends Command
      */
     public function handle()
     {
-        $tagihanDetail = TagihanDetail::all();
+        $tagihanDetail = TagihanDetail::where('status', 'BELUM')->get();
         foreach ($tagihanDetail as $keys => $value) {
-            if ($value->end_date < date('Y-m-d') && $value->status == 'BELUM') {
+            if ($value->end_date < date('Y-m-d')) {
                 if ($value->users->biodata->program_belajar == 'S1') {
                     $this->send_message($value->users->phone, 'Ada tagihan nunggak yang harus dibayar sebelum ' .  route('mahasiswa.tagihan.index'));
                     TagihanDetail::where('end_date', $value->end_date)->update([

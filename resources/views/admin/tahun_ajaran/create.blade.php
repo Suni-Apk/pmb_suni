@@ -23,23 +23,23 @@
                                 <input type="text" name="year" id="year" class="form-control">
                             </div>
 
-                            <div class="form-group mb-3">
-                                <label for="start_at">Mulai</label>
-                                <input type="date" name="start_at" id="start_at" class="form-control">
-                            </div>
-                            <div class="form-group mb-3">
-                                <label for="end_at">Selesai</label>
-                                <input type="date" name="end_at" id="end_at" class="form-control">
-                            </div>
+                                <div class="form-group mb-3">
+                                    <label for="start_at">Mulai</label>
+                                    <input type="date" name="start_at" id="start_at" class="form-control">
+                                </div>
+                                <div class="form-group mb-3">
+                                    <label for="end_at">Selesai</label>
+                                    <input type="date" name="end_at" id="end_at" class="form-control">
+                                </div>
 
-                            <button type="submit" class="btn btn-success">Submit</button>
-                            <a href="{{ route('admin.tahun-ajaran.index') }}">
-                                <button type="button" class="btn btn-warning">Back</button>
-                            </a>
-                        </form>
+                                <button type="submit" class="btn btn-success">Submit</button>
+                                <a href="{{ route('admin.tahun_ajaran.index') }}">
+                                    <button type="button" class="btn btn-warning">Back</button>
+                                </a>
+                            </form>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-@endsection
+    @endsection
