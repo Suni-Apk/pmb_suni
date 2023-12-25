@@ -183,7 +183,7 @@
                             <li class="nav-item ">
                                 <a class="nav-link {{ Route::is('admin.mapel.create') ? 'active' : '' }} " href="{{ route('admin.mapel.create') }}">
                                     <span class="sidenav-mini-icon d-none d-xl-block"><i class="fas fa-plus"></i></span>
-                                    <span class="sidenav-normal"> Tambah Mata Kuliah </span>
+                                    <span class="sidenav-normal">Tambah Mata Pelajaran</span>
                                 </a>
                             </li>
                         </ul>
