@@ -17,13 +17,15 @@ class Kernel extends ConsoleKernel
         Commands\Tenggat::class,
         Commands\AfterTenggat::class,
         Commands\Ipaymu::class,
+        Commands\TenggatCicilan::class,
     ];
     protected function schedule(Schedule $schedule): void
     {
-        $schedule->command('app:before-tenggat')->dailyAt('23:59');
+        $schedule->command('app:before-tenggat')->dailyAt('20:44');
         $schedule->command('app:tenggat')->dailyAt('23:59');
         $schedule->command('app:after-tenggat')->everySecond();
         $schedule->command('app:ipaymu')->everySecond();
+        $schedule->command('app:tenggat-cicilan')->everySecond();
     }
 
     /**

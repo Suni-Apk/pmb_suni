@@ -34,14 +34,14 @@ class AfterTenggat extends Command
         foreach ($tagihanDetail as $keys => $value) {
             if ($value->end_date < date('Y-m-d')) {
                 if ($value->users->biodata->program_belajar == 'S1') {
-                    $this->send_message($value->users->phone, 'Ada tagihan nunggak yang harus dibayar sebelum ' .  route('mahasiswa.tagihan.index'));
-                    TagihanDetail::where('end_date', $value->end_date)->update([
+                    $this->send_message($value->users->phone, 'Ada tagihan nunggak yang harus dibayar sebelum ' . $value->biayasDetail->nama_biaya . ' RP.' . $value->amount . ' ' .  route('mahasiswa.tagihan.index'));
+                    TagihanDetail::where('id', $value->id)->update([
                         'status' => 'NUNGGAK',
                     ]);
                     // Log::info($value->users->phone);
                 } else if ($value->users->biodata->program_belajar == 'KURSUS') {
-                    $this->send_message($value->users->phone, 'Ada tagihan nunggak yang harus dibayar sebelum ' .  route('kursus.tagihan.index'));
-                    TagihanDetail::where('end_date', $value->end_date)->update([
+                    $this->send_message($value->users->phone, 'Ada tagihan Kursus nunggak yang harus dibayar sebelum ' . $value->biayasDetail->nama_biaya . $value->amount .  route('kursus.tagihan.index'));
+                    TagihanDetail::where('id', $value->id)->update([
                         'status' => 'NUNGGAK',
                     ]);
                     // Log::info($value->users->phone);

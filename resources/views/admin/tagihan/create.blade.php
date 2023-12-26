@@ -139,7 +139,7 @@
                                 class="form-control @error('nama_biaya')
                             is-invalid
                         @enderror"
-                                name="nama_biaya" id="nama_biaya" placeholder="Spp Tahun 2022">
+                                name="nama_biaya" id="nama_biaya" placeholder="Biaya Baju">
                             @error('nama_biaya')
                                 <div id="validationServer03Feedback" class="invalid-feedback">
                                     {{ $message }}
@@ -152,7 +152,7 @@
                                 class="form-control @error('amount')
                             is-invalid
                         @enderror rupiah"
-                                name="amount" id="amount" placeholder="Spp Tahun 2022">
+                                name="amount" id="amount" placeholder="800.000">
                             @error('amount')
                                 <div id="validationServer03Feedback" class="invalid-feedback">
                                     {{ $message }}
@@ -263,8 +263,16 @@
         </div>
     @endif
     @if ($jenis_tagihan == 'DaftarUlang')
-        <h3 class="font-weight-bolder">Buat Tagihan</h3>
-        <div class="card h-100">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
+                <li class="breadcrumb-item text-sm"><a class="opacity-5 text-dark"
+                        href="{{ route('dashboard') }}">Pages</a>
+                </li>
+                <li class="breadcrumb-item text-sm text-dark active" aria-current="page">Tagihan</li>
+            </ol>
+            <h6 class="font-weight-bolder mb-0">Buat Tagihan Daftar Ulang</h6>
+        </nav>
+        <div class="card h-100 mt-4">
             <div class="card-body p-3">
                 <form action="{{ route('admin.tagihan.store') }}" method="POST">
                     @csrf
@@ -316,7 +324,7 @@
             </div>
         </div>
     @endif
-    @if ($jenis_tagihan == 'Tingkatan')
+    {{-- @if ($jenis_tagihan == 'Tingkatan')
         <h3 class="font-weight-bolder">Buat Tagihan</h3>
         <div class="card h-100">
             <div class="card-body p-3">
@@ -401,7 +409,7 @@
                 </form>
             </div>
         </div>
-    @endif
+    @endif --}}
 @endsection
 
 @push('scripts')

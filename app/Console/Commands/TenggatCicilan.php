@@ -27,7 +27,7 @@ class TenggatCicilan extends Command
      */
     public function handle()
     {
-        $cicilan = Cicilan::where('end_date', date('Y-m-d'))->where('status', 'belum')->get();
+        $cicilan = Cicilan::where('end_date', date('Y-m-d'))->where('status', 'BELUM')->get();
         foreach ($cicilan as $cicilans) {
             Log::info($cicilans->tagihanDetail->users->phone);
         }
